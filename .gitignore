@@ -1,0 +1,89 @@
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Arduino/PlatformIO
+.pio/
+.pioenvs/
+.piolibdeps/
+lib/
+.clang_complete
+.gcc-flags.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Docker
+.docker/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Configuration files that might contain sensitive data
+config.json
+secrets.json
+*.key
+*.pem
+
+# Build outputs
+*.hex
+*.bin
+*.elf
+
+# Wokwi simulation files (keep .toml but ignore simulation outputs)
+wokwi-project.txt
+diagram.json
+
+# Node modules (if any JavaScript tooling is used)
+node_modules/
+
+# Environment variables
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

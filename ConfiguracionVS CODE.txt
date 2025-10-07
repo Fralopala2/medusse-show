@@ -1,0 +1,28 @@
+1.- Para arduino/ESP32:
+- Instalar extensión "PlatformIO IDE"
+- Instalar extensión "Wokwi Simulator"
+- Crear proyecto PlatformIO (ESP32)
+- Añadir archivo wokwi.toml para simular en VS Code
+
+2. Para servicios (MQTT, InfluxDB, Grafana):
+- Instalar Docker Desktop
+- Crear docker-compose.yml en tu proyecto
+- Gestionar contenedores desde extensión Docker de VS Code
+
+3. Estructura proyecto sugerida:
+proyecto-iot/
+├── arduino/
+│   ├── platformio.ini
+│   ├── src/
+│   └── wokwi.toml
+├── gateway/
+│   └── scripts Python
+├── docker/
+│   └── docker-compose.yml
+└── docs/
+
+4. Workflow:
+Desarrollar firmware en PlatformIO
+Simular en Wokwi desde VS Code (F1 → "Wokwi: Start Simulator")
+Docker corriendo servicios en background
+Todo desde un único VS Code workspace
