@@ -1,0 +1,11 @@
+# Wokwi project config (minimal)
+# This file helps Wokwi and the Wokwi VS Code extension detect the project
+
+name = "Medusse ESP32 Node"
+platformio = true
+
+[board]
+name = "esp32dev"
+
+# Note: Edit this file to add components if you want Wokwi to simulate sensors or LoRa modules.
+# Example components are defined in the Wokwi online editor when you create a simulation.
