@@ -20,10 +20,27 @@ Archivos en este repo
 - `ConfiguracionVS CODE.txt` - Recomendaciones de herramientas y setup
 - `Esquema proyecto.png` - Diagrama del sistema
 
+Estado del Desarrollo
+
+✅ **Fase 1-2: Firmware ESP32** - Completado
+- Sensores DHT22, BME280, Gas funcionando
+- Simuladores múltiples nodos
+- Compilación PlatformIO exitosa
+
+✅ **Fase 3: Gateway** - Completado  
+- Procesamiento JSON → MQTT
+- Múltiples nodos simultáneos
+- 7+ mensajes/segundo throughput
+
+🔄 **Fase 4: Stack Docker** - En progreso
+- Mosquitto, InfluxDB, Grafana
+
 Cómo desarrollar localmente
 
-1. Instala Visual Studio Code y extiende con PlatformIO si vas a trabajar en firmware.
-2. Para servicios (broker MQTT, InfluxDB, Grafana) se recomienda usar Docker Desktop y ejecutar los servicios con `docker-compose` desde la carpeta `docker/`.
+1. **Firmware:** `cd arduino && platformio run`
+2. **Simuladores:** `python arduino/test_multiple_nodes.py`
+3. **Gateway:** `python gateway/gateway_direct.py`
+4. **Stack completa:** `docker-compose up -d` (próximamente)
 
 Contribuir
 
