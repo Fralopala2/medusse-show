@@ -1,8 +1,10 @@
 # Wokwi project config (minimal)
 # This file helps Wokwi and the Wokwi VS Code extension detect the project
 
+[wokwi]
 name = "Medusse ESP32 Node"
 platformio = true
+firmware = ".pio/build/esp32dev/firmware.elf"
 
 [board]
 name = "esp32dev"
