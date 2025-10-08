@@ -45,6 +45,12 @@ wheels/
 *.egg
 MANIFEST
 
+# Docker volumes and data
+docker/grafana/data/
+docker/influxdb/data/
+docker/mosquitto/data/
+docker/mosquitto/log/
+
 # Virtual environments
 .env
 .venv

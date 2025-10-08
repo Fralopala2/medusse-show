@@ -20,7 +20,7 @@ Archivos en este repo
 - `ConfiguracionVS CODE.txt` - Recomendaciones de herramientas y setup
 - `Esquema proyecto.png` - Diagrama del sistema
 
-Estado del Desarrollo
+## 🎉 Estado del Proyecto - COMPLETADO
 
 ✅ **Fase 1-2: Firmware ESP32** - Completado
 - Sensores DHT22, BME280, Gas funcionando
@@ -32,15 +32,42 @@ Estado del Desarrollo
 - Múltiples nodos simultáneos
 - 7+ mensajes/segundo throughput
 
-🔄 **Fase 4: Stack Docker** - En progreso
-- Mosquitto, InfluxDB, Grafana
+✅ **Fase 4: Stack Docker** - Completado
+- Mosquitto, InfluxDB, Grafana funcionando
+- Dashboard limpio con nombres claros
+- Pipeline completo end-to-end
 
-Cómo desarrollar localmente
+## 🚀 Inicio Rápido
 
-1. **Firmware:** `cd arduino && platformio run`
-2. **Simuladores:** `python arduino/test_multiple_nodes.py`
-3. **Gateway:** `python gateway/gateway_direct.py`
-4. **Stack completa:** `docker-compose up -d` (próximamente)
+### 1. Clonar y Setup
+```bash
+git clone <repo-url>
+cd proyecto-medusse
+pip install platformio paho-mqtt requests
+```
+
+### 2. Levantar Stack Completo
+```bash
+cd docker
+python start_stack.py
+```
+
+### 3. Ejecutar Gateway con Simuladores
+```bash
+cd gateway
+python medusse_gateway.py --broker localhost --source simulator
+```
+
+### 4. Ver Dashboard
+- **Grafana:** http://localhost:3000 (admin/medusse2025)
+- **Dashboard:** "Medusse IoT - Dashboard Limpio"
+
+## 📊 Resultados
+
+- **3 ubicaciones monitoreadas:** Aula 20, Aula 21, Laboratorio
+- **4 tipos de sensores:** Temperatura, Humedad, Presión, CO2
+- **Pipeline completo:** ESP32 → Gateway → MQTT → InfluxDB → Grafana
+- **Dashboard limpio** con nombres claros y colores diferenciados
 
 Contribuir
 

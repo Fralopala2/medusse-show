@@ -1,0 +1,26 @@
+# Grafana Datasource Configuration
+# Auto-provision InfluxDB connection
+
+apiVersion: 1
+
+datasources:
+  - name: InfluxDB-Medusse
+    type: influxdb
+    access: proxy
+    url: http://influxdb:8086
+    isDefault: true
+    
+    # InfluxDB v2 settings
+    jsonData:
+      version: Flux
+      organization: iescelia
+      defaultBucket: sensors
+      tlsSkipVerify: true
+      
+    # Authentication
+    secureJsonData:
+      token: medusse-admin-token-2025
+      
+    # Additional settings
+    editable: true
+    uid: influxdb-medusse

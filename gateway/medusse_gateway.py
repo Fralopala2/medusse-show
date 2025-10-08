@@ -32,7 +32,7 @@ class MedusseGateway:
     def connect_mqtt(self):
         """Conecta al broker MQTT"""
         try:
-            self.client = mqtt.Client()
+            self.client = mqtt.Client(callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
             self.client.on_connect = self._on_connect
             self.client.on_disconnect = self._on_disconnect
             self.client.connect(self.broker, self.port, 60)

@@ -1,37 +1,85 @@
 version: '3.8'
+
 services:
+  # MQTT Broker
   mosquitto:
     image: eclipse-mosquitto:2.0
     container_name: medusse_mosquitto
+    restart: unless-stopped
     ports:
       - "1883:1883"
-      - "9001:9001" # websocket (optional)
+      - "9001:9001"  # WebSocket
     volumes:
       - ./mosquitto/config:/mosquitto/config:ro
       - ./mosquitto/data:/mosquitto/data
       - ./mosquitto/log:/mosquitto/log
+    networks:
+      - medusse_network
 
+  # Time Series Database
   influxdb:
     image: influxdb:2.7
     container_name: medusse_influxdb
+    restart: unless-stopped
     environment:
-      - INFLUXDB_ADMIN_USER=admin
-      - INFLUXDB_ADMIN_PASSWORD=changeme
-      - INFLUXDB_DB=medusse
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=medusse2025
+      - DOCKER_INFLUXDB_INIT_ORG=iescelia
+      - DOCKER_INFLUXDB_INIT_BUCKET=sensors
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=medusse-admin-token-2025
     ports:
       - "8086:8086"
     volumes:
-      - ./influxdb:/var/lib/influxdb2
+      - ./influxdb/data:/var/lib/influxdb2
+      - ./influxdb/config:/etc/influxdb2
+    networks:
+      - medusse_network
 
+  # Data Pipeline (MQTT -> InfluxDB)
+  telegraf:
+    image: telegraf:1.28
+    container_name: medusse_telegraf
+    restart: unless-stopped
+    volumes:
+      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    depends_on:
+      - mosquitto
+      - influxdb
+    networks:
+      - medusse_network
+
+  # Visualization Dashboard
   grafana:
-    image: grafana/grafana:9.0
+    image: grafana/grafana:10.2.0
     container_name: medusse_grafana
+    restart: unless-stopped
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=medusse2025
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource
     ports:
       - "3000:3000"
     volumes:
-      - ./grafana:/var/lib/grafana
+      - ./grafana/data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+    depends_on:
+      - influxdb
+    networks:
+      - medusse_network
 
-# Notes:
-# - Create folders mosquitto/, influxdb/, grafana/ as needed.
-# - Update passwords and persistence volumes before using in production.
-# - Start services with: docker compose up -d (Windows: use PowerShell or cmd with Docker Desktop running)
+networks:
+  medusse_network:
+    driver: bridge
+
+volumes:
+  mosquitto_data:
+  influxdb_data:
+  grafana_data:
+
+# Quick Start:
+# 1. docker-compose up -d
+# 2. Access Grafana: http://localhost:3000 (admin/medusse2025)
+# 3. Access InfluxDB: http://localhost:8086 (admin/medusse2025)
+# 4. MQTT Broker: localhost:1883
