@@ -75,7 +75,7 @@ def main():
             
             i += 1
             print(f"\n--- Ciclo {i} completado ---\n")
-            time.sleep(5)  # Esperar 5 segundos entre ciclos
+            time.sleep(15)  # Esperar 15 segundos entre ciclos
             
     except KeyboardInterrupt:
         print("\n⏹️  Deteniendo simulador...")
