@@ -205,4 +205,4 @@ Para consultas de licencia o permisos, contacta al autor.
 
 ---
 
-_Proyecto desarrollado para IES Celia Viñas - Curso 2024/2025_
+_Proyecto desarrollado para IES José Rodrigo Botet - Curso 2025/2026_
