@@ -1,140 +1,191 @@
-# Quick Start - Proyecto Medusse
+# Quick Start - Proyecto Medusse IoT
 
-Guía rápida para ejecutar el proyecto completo en Windows.
+Guía rápida para ejecutar el **sistema IoT completo** en Windows.
 
-## 🚀 Instalación Rápida
+## 🎯 Proyecto Completado - Listo para Usar
 
-### 1. Clonar Repositorio
-```bash
-git clone <repo-url>
-cd Medusse
+**El proyecto Medusse IoT está 100% funcional.** Esta guía te permite ejecutarlo en **menos de 2 minutos**.
+
+## ⚡ Inicio Ultra Rápido
+
+### 1. Verificar Sistema
+
+```cmd
+verificar.bat
 ```
 
-### 2. Instalar Dependencias
-```bash
-# Python dependencies
-pip install platformio paho-mqtt
+**Resultado esperado:** ✅ Todos los servicios OK
 
-# Verificar instalación
-platformio --version
+### 2. Ejecutar Demo Completa
+
+```cmd
+demo.bat
 ```
 
-### 3. Compilar Firmware
-```bash
-cd arduino
-platformio run
+**Esto automáticamente:**
+
+- ✅ Inicia servicios Docker (MQTT, InfluxDB, Grafana, Telegraf)
+- ✅ Abre Grafana en el navegador
+- ✅ Ejecuta simulador de 3 ubicaciones
+- ✅ Muestra datos en tiempo real
+
+### 3. Acceder al Dashboard
+
+- **URL:** http://localhost:3000
+- **Usuario:** `admin`
+- **Contraseña:** `medusse2025`
+- **Dashboard:** "Medusse IoT - Dashboard Completo"
+
+## 📊 Qué Verás en el Dashboard
+
+### 5 Paneles en Tiempo Real:
+
+1. **🌡️ Temperatura** - Gráfico de líneas por ubicación
+2. **🫁 CO2** - Niveles con alertas por colores
+3. **🚨 CO2 Actual** - Gauges con umbrales
+4. **💧 Humedad** - Tendencias por ubicación
+5. **🌪️ Presión** - Datos barométricos
+
+### 3 Ubicaciones Monitoreadas:
+
+- **Aula 20** (rojo) - Temperatura base: 22°C
+- **Aula 21** (azul) - Temperatura base: 24°C
+- **Laboratorio** (verde) - Temperatura base: 21°C
+
+## 🔧 Uso Manual (Opcional)
+
+### Solo Verificar Sistema
+
+```cmd
+verificar.bat
 ```
 
-## 🧪 Testing Rápido
+### Solo Iniciar Servicios Docker
 
-### Simuladores ESP32
-```bash
-# Single node
-python arduino/simulate_serial.py
-
-# Multiple nodes (15 segundos)
-python arduino/test_limited.py 15
-
-# Multiple nodes (indefinido)
-python arduino/test_multiple_nodes.py
+```cmd
+docker compose -f docker/docker-compose.yml up -d
 ```
 
-### Gateway Funcionando
-```bash
-# Gateway directo (RECOMENDADO)
-python gateway/gateway_direct.py --duration 20
+### Solo Ejecutar Simulador
 
-# Test simple sin MQTT
-python gateway/test_simple.py
+```cmd
+python arduino/medusse_simulator.py
 ```
 
-## 📊 Resultados Esperados
+### Ver Logs de Servicios
 
-### Simuladores
-```
-[ESP32_NODE_01] {"node_id":"ESP32_NODE_01","location":"aula20",...}
-[ESP32_NODE_02] {"node_id":"ESP32_NODE_02","location":"aula21",...}
-[ESP32_NODE_03] {"node_id":"ESP32_NODE_03","location":"laboratorio",...}
-```
-
-### Gateway
-```
-📊 Procesando ESP32_NODE_01 @ aula20
-📤 [11:07:28] iescelia/aula20/temperature
-   {"value":26.1,"sensor":"dht22","node_id":"ESP32_NODE_01"}
-📤 [11:07:28] iescelia/aula20/co2
-   {"value":489,"sensor":"gas","node_id":"ESP32_NODE_01"}
+```cmd
+docker logs medusse_grafana
+docker logs medusse_influxdb
+docker logs medusse_telegraf
+docker logs medusse_mosquitto
 ```
 
-### Estadísticas
-```
-📊 Estadísticas finales:
-   Mensajes procesados: 18
-   Mensajes MQTT generados: 108
-   Promedio: 7.2 msg/s
-```
+## �1 Datos Generados
 
-## 🔧 Comandos Útiles
+### Formato de Datos del Simulador
 
-### Desarrollo
-```bash
-# Compilar firmware
-cd arduino && platformio run
-
-# Test gateway completo
-cd gateway && python test_simple.py
-
-# Debug simuladores
-cd gateway && python debug_simulator.py
-```
-
-### Estructura de Datos
 ```json
 {
+  "value": 24.5,
+  "sensor": "dht22",
   "node_id": "ESP32_NODE_01",
-  "location": "aula20",
-  "timestamp": 1759914448305,
-  "sensors": {
-    "dht22": {"temperature": 26.1, "humidity": 47.6},
-    "bme280": {"temperature": 25.5, "pressure": 1014.0},
-    "gas": {"co2_ppm": 489}
-  },
-  "system": {"free_heap": 236692, "uptime": 448305}
+  "timestamp": 1759948845541,
+  "location": "aula20"
 }
 ```
 
-## ✅ Estado Actual
+### Topics MQTT Generados
 
-- ✅ **Firmware ESP32** compilando
-- ✅ **Simuladores** generando datos realistas
-- ✅ **Gateway** procesando múltiples nodos
-- ✅ **Topics MQTT** estructurados
-- 🔄 **Stack Docker** (próximo paso)
-
-## 🆘 Troubleshooting
-
-### Error: platformio no encontrado
-```bash
-pip install platformio
+```
+📤 iescelia/aula20/temperature: {"value": 24.5, ...}
+📤 iescelia/aula20/humidity: {"value": 48.2, ...}
+📤 iescelia/aula20/co2: {"value": 456, ...}
+📤 iescelia/aula20/pressure: {"value": 1015.3, ...}
+📤 iescelia/aula21/temperature: {"value": 26.1, ...}
+📤 iescelia/laboratorio/temperature: {"value": 21.8, ...}
 ```
 
-### Error: No module 'paho'
-```bash
-pip install paho-mqtt
+## 🎛️ Configuración del Sistema
+
+### Servicios y Puertos
+
+| Servicio     | Puerto | Descripción        |
+| ------------ | ------ | ------------------ |
+| **Grafana**  | 3000   | Dashboard web      |
+| **InfluxDB** | 8086   | Base de datos      |
+| **MQTT**     | 1883   | Broker de mensajes |
+| **Telegraf** | -      | Pipeline de datos  |
+
+### Frecuencias Optimizadas
+
+- **Simulador:** Datos cada 15 segundos
+- **Dashboard:** Actualización cada 30 segundos
+- **Agregación:** Ventanas de 30 segundos
+
+## 🆘 Solución de Problemas
+
+### No aparecen datos en Grafana
+
+```cmd
+# 1. Verificar que el simulador esté corriendo
+# Deberías ver mensajes 📤 en el terminal
+
+# 2. Verificar servicios Docker
+docker compose -f docker/docker-compose.yml ps
+
+# 3. Reiniciar todo si es necesario
+docker compose -f docker/docker-compose.yml restart
 ```
 
-### Sin datos en gateway
-```bash
-# Verificar simuladores funcionan
-python arduino/test_limited.py 10
+### Error "Docker no encontrado"
 
-# Usar gateway directo
-python gateway/gateway_direct.py
+1. Instalar Docker Desktop
+2. Asegurarse de que esté corriendo
+3. Ejecutar `verificar.bat` de nuevo
+
+### Error "Python no encontrado"
+
+1. Instalar Python desde Microsoft Store
+2. Instalar dependencias: `pip install paho-mqtt requests`
+
+### Servicios no inician
+
+```cmd
+# Limpiar y reiniciar
+docker compose -f docker/docker-compose.yml down
+docker volume prune -f
+docker compose -f docker/docker-compose.yml up -d
 ```
 
-## 📁 Archivos Importantes
+## 📁 Archivos Clave del Proyecto
 
-- `arduino/src/main.cpp` - Firmware principal
-- `gateway/gateway_direct.py` - Gateway funcionando
-- `arduino/test_multiple_nodes.py` - Simulador principal
-- `gateway/GATEWAY_SUCCESS.md` - Resultados detallados
+### Scripts de Ejecución
+
+- `demo.bat` - ✅ **Ejecutar proyecto completo**
+- `verificar.bat` - ✅ **Verificar sistema**
+
+### Simulador y Datos
+
+- `arduino/medusse_simulator.py` - ✅ **Simulador optimizado**
+- `docker/grafana/dashboards/medusse-clean.json` - ✅ **Dashboard completo**
+
+### Configuración Docker
+
+- `docker/docker-compose.yml` - ✅ **Stack de servicios**
+- `docker/telegraf/telegraf.conf` - ✅ **Pipeline de datos**
+
+## 🎉 ¡Listo!
+
+**En menos de 2 minutos tienes un sistema IoT completo funcionando:**
+
+- ✅ Simulación de 3 ubicaciones con 4 sensores cada una
+- ✅ Pipeline de datos moderno (MQTT → InfluxDB → Grafana)
+- ✅ Dashboard profesional en tiempo real
+- ✅ Visualización optimizada y clara
+
+**¡Perfecto para demostración o como base para sensores ESP32 reales!** 🚀
+
+---
+
+_Proyecto desarrollado para IES Celia Viñas - Curso 2024/2025_
