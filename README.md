@@ -121,6 +121,9 @@ docker logs medusse_telegraf
 - **Actualización:** Cada 30 segundos
 - **Agregación:** Datos promediados cada 30 segundos
 
+<img width="960" height="465" alt="dashboard" src="https://github.com/user-attachments/assets/5bf163d6-6181-49fd-bcd1-c4f810237f97" />
+
+
 ## 🔧 Configuración Avanzada
 
 ### Modificar Frecuencia de Datos
