@@ -42,20 +42,26 @@ proyecto-medusse/
 
 ## 🚀 Inicio Rápido
 
-### Prerrequisitos
+### Instalación Automática (Recomendada)
 
-- Docker Desktop instalado y funcionando
-- Python 3.7+ con pip
-- Windows 10/11 (scripts .bat incluidos)
+**Para equipos nuevos (instala Docker automáticamente):**
+```cmd
+instalar_proyecto.bat
+```
 
-### 1. Verificar Sistema
+**Para equipos con Docker ya instalado:**
+```cmd
+setup_rapido.bat
+```
 
+### Uso Rápido (Después de Instalar)
+
+**1. Verificar Sistema:**
 ```cmd
 verificar.bat
 ```
 
-### 2. Ejecutar Demo Completa
-
+**2. Ejecutar Demo Completa:**
 ```cmd
 demo.bat
 ```
@@ -110,6 +116,7 @@ docker logs medusse_telegraf
 - **Panel de Temperatura:** Gráfico de líneas por ubicación
 - **Panel de CO2:** Niveles con alertas por colores
 - **Panel de Humedad:** Tendencias por ubicación
+- **Panel de Presión:** Valores por ubicación
 - **Gauges de CO2:** Valores actuales con umbrales
 - **Actualización:** Cada 30 segundos
 - **Agregación:** Datos promediados cada 30 segundos
@@ -172,16 +179,6 @@ verificar.bat
 1. Modificar simulador para incluir nuevos campos
 2. Actualizar configuración Telegraf
 3. Crear nuevos paneles en Grafana
-
-## 🤝 Contribuir
-
-Si quieres contribuir al proyecto:
-
-1. Fork el repositorio
-2. Crea una rama para tu feature (`git checkout -b feature/nueva-funcionalidad`)
-3. Commit tus cambios (`git commit -am 'Agregar nueva funcionalidad'`)
-4. Push a la rama (`git push origin feature/nueva-funcionalidad`)
-5. Abre un Pull Request
 
 ## 📄 Licencia
 
