@@ -18,9 +18,8 @@ echo Docker OK
 
 echo.
 echo [2/4] Iniciando servicios Docker...
-cd docker
-echo Ejecutando start_stack.py...
-start /B python start_stack.py
+echo Iniciando stack de contenedores...
+docker compose -f docker/docker-compose.yml up -d
 echo Esperando 15 segundos para que los servicios se inicien...
 timeout /t 15 >nul
 
@@ -33,11 +32,10 @@ start http://localhost:3000
 timeout /t 5 >nul
 
 echo.
-echo [4/4] Iniciando gateway con simuladores...
+echo [4/4] Iniciando simulador de datos...
 echo Presiona Ctrl+C para detener la demostracion
 echo.
-cd ..\gateway
-python medusse_gateway.py --broker localhost --source simulator
+python arduino/medusse_simulator.py
 
 echo.
 echo Demostracion finalizada.

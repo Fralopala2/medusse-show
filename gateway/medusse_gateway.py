@@ -42,13 +42,13 @@ class MedusseGateway:
             print(f"❌ Error conectando a MQTT {self.broker}:{self.port} - {e}")
             return False
     
-    def _on_connect(self, client, userdata, flags, rc):
+    def _on_connect(self, client, userdata, flags, rc, *args):
         if rc == 0:
             print(f"✅ Conectado a MQTT broker {self.broker}:{self.port}")
         else:
             print(f"❌ Error de conexión MQTT: {rc}")
     
-    def _on_disconnect(self, client, userdata, rc):
+    def _on_disconnect(self, client, userdata, rc, *args):
         print(f"⚠️  Desconectado del broker MQTT")
     
     def process_sensor_data(self, json_data):
@@ -219,6 +219,10 @@ class MedusseGateway:
                             self.process_sensor_data(line)
                         elif line.startswith('[ESP32_NODE_') and '] {' in line:
                             # Extraer JSON de líneas con prefijo de nodo
+                            json_part = line.split('] ', 1)[1]
+                            self.process_sensor_data(json_part)
+                        elif '[ESP32_NODE_' in line and '] {' in line:
+                            # Formato alternativo: [ESP32_NODE_01] {"data"...}
                             json_part = line.split('] ', 1)[1]
                             self.process_sensor_data(json_part)
                 except Exception as e:
