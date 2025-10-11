@@ -9,13 +9,20 @@ echo.
 echo Este script instalara automaticamente:
 echo - Docker Desktop (si no esta instalado)
 echo - Python y dependencias
-echo - Configuracion completa del proyecto
+echo - Node.js (para API REST)
+echo - Configuracion completa del ecosistema IoT
+echo.
+echo ECOSISTEMA INCLUYE:
+echo - Dashboard Grafana (puerto 3000)
+echo - API REST + WebSocket (puertos 3001/3002)
+echo - App Flutter multiplataforma
+echo - Pipeline completo MQTT -> InfluxDB
 echo.
 echo Presiona cualquier tecla para continuar...
 pause >nul
 
 echo.
-echo [1/6] Verificando sistema...
+echo [1/8] Verificando sistema...
 
 :: Verificar si estamos en Windows
 ver | findstr /i "Windows" >nul
@@ -39,7 +46,7 @@ if errorlevel 1 (
 echo Sistema Windows detectado - OK
 
 echo.
-echo [2/6] Verificando Docker Desktop...
+echo [2/8] Verificando Docker Desktop...
 
 docker --version >nul 2>&1
 if errorlevel 1 (
@@ -73,7 +80,7 @@ if errorlevel 1 (
 )
 
 echo.
-echo [3/6] Verificando Python...
+echo [3/8] Verificando Python...
 
 python --version >nul 2>&1
 if errorlevel 1 (
@@ -101,7 +108,49 @@ python --version
 echo Python encontrado - OK
 
 echo.
-echo [4/6] Instalando dependencias Python...
+echo [4/8] Verificando Node.js (para API REST)...
+
+node --version >nul 2>&1
+if errorlevel 1 (
+    echo Node.js no encontrado. Descargando Node.js...
+    echo.
+    echo INSTRUCCIONES:
+    echo 1. Se abrira la pagina de descarga de Node.js
+    echo 2. Descarga e instala Node.js LTS
+    echo 3. Reinicia esta terminal y ejecuta este script de nuevo
+    echo.
+    start https://nodejs.org/
+    pause
+    
+    :: Verificar de nuevo
+    node --version >nul 2>&1
+    if errorlevel 1 (
+        echo ERROR: Node.js sigue sin estar disponible
+        echo Instala Node.js manualmente y ejecuta este script de nuevo
+        pause
+        exit /b 1
+    )
+)
+
+node --version
+echo Node.js encontrado - OK
+
+echo.
+echo [5/8] Verificando Flutter SDK (opcional)...
+
+flutter --version >nul 2>&1
+if errorlevel 1 (
+    echo Flutter no encontrado - App movil no estara disponible
+    echo Para instalar Flutter: https://flutter.dev/docs/get-started/install
+    echo (Opcional - puedes continuar sin Flutter)
+    echo.
+) else (
+    flutter --version | findstr "Flutter"
+    echo Flutter encontrado - OK
+)
+
+echo.
+echo [6/8] Instalando dependencias Python...
 
 python -m pip install --upgrade pip
 python -m pip install paho-mqtt requests
@@ -109,7 +158,7 @@ python -m pip install paho-mqtt requests
 echo Dependencias instaladas - OK
 
 echo.
-echo [5/6] Verificando servicios Docker...
+echo [7/8] Verificando servicios Docker...
 
 echo Iniciando Docker Desktop (puede tardar unos minutos)...
 docker info >nul 2>&1
@@ -132,11 +181,21 @@ if errorlevel 1 (
 echo Docker Desktop corriendo - OK
 
 echo.
-echo [6/6] Configurando proyecto...
+echo [8/8] Configurando proyecto...
 
 :: Crear directorios necesarios si no existen
 if not exist "docker\grafana\data" mkdir "docker\grafana\data"
 if not exist "docker\influxdb\data" mkdir "docker\influxdb\data"
+
+:: Instalar dependencias API si Node.js esta disponible
+node --version >nul 2>&1
+if not errorlevel 1 (
+    echo Instalando dependencias API REST...
+    cd api
+    npm install >nul 2>&1
+    cd ..
+    echo Dependencias API instaladas - OK
+)
 
 echo Configuracion completada - OK
 
@@ -145,13 +204,19 @@ echo ========================================
 echo   INSTALACION COMPLETADA
 echo ========================================
 echo.
-echo El proyecto Medusse IoT esta listo para usar:
+echo El ecosistema Medusse IoT esta listo para usar:
 echo.
-echo 1. Verificar sistema:     verificar.bat
-echo 2. Ejecutar proyecto:     demo.bat
-echo 3. Acceder dashboard:     http://localhost:3000
-echo    Usuario: admin
-echo    Password: medusse2025
+echo OPCIONES DE EJECUCION:
+echo 1. Verificar sistema:        verificar.bat
+echo 2. Solo Dashboard Grafana:   demo.bat
+echo 3. Sistema completo:         sistema_completo.bat
+echo 4. Solo API REST:            iniciar_api.bat
+echo 5. Solo App Flutter:         ejecutar_flutter.bat
+echo.
+echo ACCESO WEB:
+echo - Grafana: http://localhost:3000 (admin/medusse2025)
+echo - API REST: http://localhost:3001
+echo - InfluxDB: http://localhost:8086 (admin/medusse2025)
 echo.
 echo Presiona cualquier tecla para ejecutar la verificacion...
 pause >nul
@@ -161,15 +226,34 @@ echo Ejecutando verificacion del sistema...
 call verificar.bat
 
 echo.
-echo ¿Quieres ejecutar la demo ahora? (S/N)
-set /p ejecutar_demo=
-if /i "%ejecutar_demo%"=="S" (
+echo ¿Que quieres ejecutar ahora?
+echo 1. Solo Dashboard Grafana (demo.bat)
+echo 2. Sistema completo (sistema_completo.bat)
+echo 3. Nada (salir)
+echo.
+set /p opcion=Elige opcion (1/2/3): 
+
+if "%opcion%"=="1" (
     echo.
-    echo Iniciando demo del proyecto...
+    echo Iniciando Dashboard Grafana...
     call demo.bat
+) else if "%opcion%"=="2" (
+    echo.
+    echo Iniciando sistema completo...
+    call sistema_completo.bat
+) else (
+    echo.
+    echo Puedes ejecutar el sistema cuando quieras con:
+    echo - demo.bat (solo Grafana)
+    echo - sistema_completo.bat (ecosistema completo)
 )
 
 echo.
 echo Instalacion y configuracion completadas.
-echo El proyecto Medusse IoT esta listo para usar.
+echo El ecosistema Medusse IoT esta listo para usar.
+echo.
+echo RECORDATORIO:
+echo - Para sistema completo: sistema_completo.bat
+echo - Para solo Grafana: demo.bat
+echo - Para verificar: verificar.bat
 pause
