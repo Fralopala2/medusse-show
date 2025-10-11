@@ -79,22 +79,21 @@ setup_rapido.bat
 
 **1. Verificar Sistema:**
 ```cmd
-verificar.bat
+verificar.bat              # Verificación completa
+verificar_rapido.bat        # Verificación rápida (30 segundos)
 ```
 
-**2. Ejecutar Core IoT (Dashboard Grafana):**
+**2. Ejecutar Ecosistema Completo:**
 ```cmd
-demo.bat
+sistema_completo.bat        # Ecosistema completo (recomendado)
+sistema_completo_debug.bat  # Con diagnósticos detallados
 ```
 
-**3. Ejecutar API REST (Opcional):**
+**3. Ejecutar Componentes Individuales:**
 ```cmd
-iniciar_api.bat
-```
-
-**4. Ejecutar App Flutter (Opcional):**
-```cmd
-ejecutar_flutter.bat
+demo.bat                    # Solo Dashboard Grafana
+iniciar_api.bat            # Solo API REST
+ejecutar_flutter.bat       # Solo App Flutter
 ```
 
 ### Acceso a Interfaces

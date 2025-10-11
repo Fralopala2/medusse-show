@@ -35,23 +35,26 @@ if errorlevel 1 (
 
 echo.
 echo [3/8] Verificando Flutter (para app móvil)...
-flutter --version >nul 2>&1
+REM Verificación rápida de Flutter sin ejecutar comando completo
+where flutter >nul 2>&1
 if errorlevel 1 (
     echo Flutter: NO ENCONTRADO (App móvil no disponible)
     echo Instala desde: https://flutter.dev/
+    echo (Opcional - puedes continuar sin Flutter)
 ) else (
-    echo Flutter: OK
+    echo Flutter: ENCONTRADO
+    echo (Verificación completa se hace en ejecutar_flutter.bat)
 )
 
 echo.
 echo [4/8] Verificando PlatformIO...
-platformio --version >nul 2>&1
+where platformio >nul 2>&1
 if errorlevel 1 (
-    echo ERROR: PlatformIO no encontrado
-    echo Ejecuta: pip install platformio
+    echo PlatformIO: NO ENCONTRADO (para desarrollo ESP32)
+    echo Instalar: pip install platformio
+    echo (Opcional - no necesario para simulador)
 ) else (
-    platformio --version
-    echo PlatformIO OK
+    echo PlatformIO: ENCONTRADO
 )
 
 echo.
@@ -77,27 +80,29 @@ if errorlevel 1 (
 
 echo.
 echo [7/8] Verificando contenedores Docker...
+echo (Consultando Docker daemon...)
 docker ps >nul 2>&1
 if errorlevel 1 (
-    echo ERROR: Docker no esta corriendo
-    echo Inicia Docker Desktop
+    echo Docker: NO ESTA CORRIENDO
+    echo Solucion: Inicia Docker Desktop
 ) else (
-    echo Contenedores Docker:
-    docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
+    echo Docker: CORRIENDO
+    echo Contenedores activos:
+    docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}" 2>nul
 )
 
 echo.
 echo [8/8] Verificando servicios web...
-echo Verificando Grafana (http://localhost:3000)...
-curl -s http://localhost:3000 >nul 2>&1
+echo Verificando Grafana (timeout 3s)...
+powershell -Command "try { $response = Invoke-WebRequest -Uri 'http://localhost:3000' -TimeoutSec 3 -UseBasicParsing; exit 0 } catch { exit 1 }" >nul 2>&1
 if errorlevel 1 (
-    echo Grafana: NO ACCESIBLE
+    echo Grafana: NO ACCESIBLE (ejecutar: demo.bat o sistema_completo.bat)
 ) else (
     echo Grafana: ACCESIBLE
 )
 
-echo Verificando API REST (http://localhost:3001)...
-curl -s http://localhost:3001/health >nul 2>&1
+echo Verificando API REST (timeout 3s)...
+powershell -Command "try { $response = Invoke-WebRequest -Uri 'http://localhost:3001/health' -TimeoutSec 3 -UseBasicParsing; exit 0 } catch { exit 1 }" >nul 2>&1
 if errorlevel 1 (
     echo API REST: NO ACCESIBLE (ejecutar: iniciar_api.bat)
 ) else (

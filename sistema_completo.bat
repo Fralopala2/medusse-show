@@ -17,62 +17,133 @@ echo       con: ejecutar_flutter.bat
 echo.
 
 REM Verificar Docker
-echo [1/5] Verificando Docker...
+echo [1/5] Verificando Docker
+
+REM Verificar si Docker esta instalado
 docker --version >nul 2>&1
 if errorlevel 1 (
-    echo ❌ ERROR: Docker no esta instalado o no esta corriendo
-    echo    Por favor, inicia Docker Desktop y vuelve a ejecutar
+    echo [ERROR] Docker no esta instalado
+    echo    Instalar Docker Desktop desde: https://www.docker.com/products/docker-desktop
     pause
     exit /b 1
 )
-echo ✅ Docker OK
+echo [OK] Docker instalado
+
+REM Verificar si Docker Desktop esta corriendo
+echo Verificando si Docker Desktop esta corriendo
+docker info >nul 2>&1
+if errorlevel 1 (
+    echo [WARN] Docker Desktop no esta corriendo
+    echo [INFO] Intentando iniciar Docker Desktop
+    
+    REM Intentar iniciar Docker Desktop
+    start "" "C:\Program Files\Docker\Docker\Docker Desktop.exe" >nul 2>&1
+    if errorlevel 1 (
+        REM Intentar ruta alternativa
+        start "" "%ProgramFiles%\Docker\Docker\Docker Desktop.exe" >nul 2>&1
+    )
+    
+    echo [WAIT] Esperando a que Docker Desktop se inicie (puede tardar 1-2 minutos)
+    echo    Veras el icono de Docker en la bandeja del sistema cuando este listo
+    
+    REM Esperar hasta que Docker este listo (maximo 2 minutos)
+    set /a contador=0
+    :wait_docker
+    timeout /t 10 >nul
+    docker info >nul 2>&1
+    if not errorlevel 1 goto docker_ready
+    
+    set /a contador+=1
+    if %contador% lss 12 (
+        echo    Esperando (%contador%/12)
+        goto wait_docker
+    )
+    
+    echo [ERROR] Docker Desktop no se pudo iniciar automaticamente
+    echo.
+    echo SOLUCION MANUAL:
+    echo 1. Abre Docker Desktop manualmente desde el menu de inicio
+    echo 2. Espera a que aparezca "Docker Desktop is running" 
+    echo 3. Ejecuta este script de nuevo
+    echo.
+    pause
+    exit /b 1
+    
+    :docker_ready
+    echo [OK] Docker Desktop iniciado correctamente
+) else (
+    echo [OK] Docker Desktop ya esta corriendo
+)
 
 REM Verificar Node.js para API
 echo.
-echo [2/5] Verificando Node.js para API...
+echo [2/5] Verificando Node.js para API
 node --version >nul 2>&1
 if errorlevel 1 (
-    echo ⚠️  Node.js no encontrado - API REST no estará disponible
+    echo [WARN] Node.js no encontrado - API REST no estara disponible
     echo    Instalar desde: https://nodejs.org/
     set API_AVAILABLE=false
 ) else (
-    echo ✅ Node.js OK
+    echo [OK] Node.js OK
     set API_AVAILABLE=true
 )
 
 REM Verificar Python para simulador
 echo.
-echo [3/5] Verificando Python para simulador...
+echo [3/5] Verificando Python para simulador
 python --version >nul 2>&1
 if errorlevel 1 (
-    echo ❌ ERROR: Python no encontrado
+    echo [ERROR] Python no encontrado
     echo    Instalar desde Microsoft Store
     pause
     exit /b 1
 )
-echo ✅ Python OK
+echo [OK] Python OK
 
 REM Iniciar servicios Docker
 echo.
-echo [4/5] Iniciando servicios Docker...
+echo [4/5] Iniciando servicios Docker
+echo Iniciando contenedores: MQTT, InfluxDB, Grafana, Telegraf
+
 docker compose -f docker/docker-compose.yml up -d
-echo ⏳ Esperando servicios (20 segundos)...
-timeout /t 20 >nul
+if errorlevel 1 (
+    echo [ERROR] No se pudieron iniciar los servicios Docker
+    echo.
+    echo POSIBLES SOLUCIONES:
+    echo 1. Verificar que Docker Desktop este corriendo
+    echo 2. Ejecutar: docker compose -f docker/docker-compose.yml down
+    echo 3. Ejecutar: docker system prune -f
+    echo 4. Intentar de nuevo
+    echo.
+    pause
+    exit /b 1
+)
+
+echo [OK] Contenedores iniciados
+echo [WAIT] Esperando a que los servicios esten listos (30 segundos)
+echo    - InfluxDB inicializandose
+echo    - Grafana configurandose
+echo    - Telegraf conectandose
+
+timeout /t 30 >nul
+
+echo Verificando estado de contenedores
+docker compose -f docker/docker-compose.yml ps
 
 REM Abrir interfaces web
 echo.
-echo [5/5] Abriendo interfaces web...
-echo 📊 Grafana Dashboard: http://localhost:3000
+echo [5/5] Abriendo interfaces web
+echo [WEB] Grafana Dashboard: http://localhost:3000
 start http://localhost:3000
 timeout /t 3 >nul
 
 if "%API_AVAILABLE%"=="true" (
-    echo 🌐 Iniciando API REST en segundo plano...
+    echo [API] Iniciando API REST en segundo plano
     cd api
     start /min cmd /c "npm install >nul 2>&1 && node server.js"
     cd ..
     timeout /t 5 >nul
-    echo 🔗 API REST: http://localhost:3001
+    echo [API] API REST: http://localhost:3001
     start http://localhost:3001/health
 )
 
@@ -81,19 +152,19 @@ echo ========================================
 echo   SISTEMA INICIADO CORRECTAMENTE
 echo ========================================
 echo.
-echo 📊 Grafana Dashboard: http://localhost:3000
-echo    Usuario: admin / Contraseña: medusse2025
+echo [WEB] Grafana Dashboard: http://localhost:3000
+echo    Usuario: admin / Contrasena: medusse2025
 echo.
 if "%API_AVAILABLE%"=="true" (
-    echo 🌐 API REST: http://localhost:3001
-    echo 🔌 WebSocket: ws://localhost:3002
+    echo [API] API REST: http://localhost:3001
+    echo [WS]  WebSocket: ws://localhost:3002
     echo.
 )
-echo 📱 Para app Flutter ejecutar: ejecutar_flutter.bat
+echo [APP] Para app Flutter ejecutar: ejecutar_flutter.bat
 echo.
-echo ⏹️  Para detener todo: Ctrl+C y ejecutar 'docker compose down'
+echo [STOP] Para detener todo: Ctrl+C y ejecutar 'docker compose down'
 echo.
-echo [SIMULADOR] Iniciando datos de sensores...
+echo [SIMULADOR] Iniciando datos de sensores
 echo Presiona Ctrl+C para detener
 echo.
 
@@ -101,7 +172,7 @@ REM Ejecutar simulador (bloquea hasta Ctrl+C)
 python arduino/medusse_simulator.py
 
 echo.
-echo 👋 Sistema detenido
+echo [INFO] Sistema detenido
 echo.
 echo Para limpiar completamente:
 echo docker compose -f docker/docker-compose.yml down
