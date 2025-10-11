@@ -44,6 +44,34 @@ proyecto-medusse/
 └── README.md                 # Esta documentación
 ```
 
+## 🚀 Características
+
+### Sistema IoT Completo
+- **Simulador de sensores** con datos realistas
+- **Gateway MQTT** para comunicación
+- **Base de datos InfluxDB** para almacenamiento
+- **Dashboard Grafana** para visualización
+- **API REST** para integración
+- **App móvil Flutter** para monitoreo
+
+### Sensores Monitoreados
+- 🌡️ **Temperatura** (°C)
+- 💧 **Humedad** (%)
+- 🌬️ **CO₂** (ppm)
+- 📊 **Presión atmosférica** (hPa)
+
+### Ubicaciones
+- 📍 **Aula 20**
+- 📍 **Aula 21** 
+- 📍 **Laboratorio**
+
+### Aplicación Móvil
+- 📱 **Flutter app** con Material Design 3
+- 📊 **Dashboard en tiempo real**
+- 📈 **Gráficos históricos interactivos**
+- 🔄 **Sincronización con Grafana**
+- 📍 **Vista por ubicaciones**
+
 ## 🎉 Estado: SISTEMA COMPLETO ✅
 
 ### ✅ Funcionalidades Implementadas

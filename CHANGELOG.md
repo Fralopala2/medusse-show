@@ -1,6 +1,6 @@
 # Changelog - Proyecto Medusse IoT
 
-## [2.0.0] - 2025-01-11 - SISTEMA COMPLETO CON API Y APP MÓVIL ✅
+## [2.0.0] - 2025-10-11 - SISTEMA COMPLETO CON API Y APP MÓVIL ✅
 
 ### 🎉 HITO PRINCIPAL: Ecosistema IoT Completo
 
@@ -11,9 +11,9 @@
 #### ✅ API REST Node.js
 - **Servidor Express** con endpoints RESTful
 - **WebSocket** para datos en tiempo real
-- **Integración InfluxDB** para datos históricos
-- **Integración MQTT** para streaming
-- **Documentación completa** con ejemplos
+- **Conexión directa InfluxDB** con credenciales reales
+- **Sincronización exacta con Grafana**
+- **Parser CSV robusto** para datos InfluxDB
 
 #### ✅ App Móvil Flutter
 - **3 pantallas completas:** Home, Detalle, Gráficos

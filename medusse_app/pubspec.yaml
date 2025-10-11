@@ -27,8 +27,7 @@ dependencies:
   intl: ^0.19.0
   shared_preferences: ^2.2.2
   
-  # Notificaciones
-  flutter_local_notifications: ^16.3.2
+
   
   # Iconos y UI
   google_fonts: ^6.1.0
