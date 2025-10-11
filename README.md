@@ -1,15 +1,19 @@
 # Proyecto Medusse IoT
 
-Sistema IoT completo para monitoreo ambiental con ESP32, MQTT, InfluxDB y Grafana.
+Sistema IoT completo para monitoreo ambiental con ESP32, MQTT, InfluxDB, Grafana, API REST y App móvil Flutter.
 
 ## 📋 Descripción
 
-Proyecto IoT completo que simula una red de sensores ESP32 recopilando datos ambientales (temperatura, humedad, CO2, presión) y visualizándolos en tiempo real mediante un stack tecnológico moderno.
+Proyecto IoT completo que incluye simulación de sensores ESP32, pipeline de datos moderno, dashboard web profesional, API REST y aplicación móvil Flutter. Sistema preparado para migración a hardware real con comunicación LoRa Mesh.
 
-## 🏗️ Arquitectura
+## 🏗️ Arquitectura Completa
 
 ```
 ESP32 Simulators → MQTT → Telegraf → InfluxDB → Grafana Dashboard
+                     ↓
+                 API REST ← Flutter Mobile App
+                     ↓
+                WebSocket (Real-time)
 ```
 
 ## 📁 Estructura del Proyecto
@@ -24,21 +28,38 @@ proyecto-medusse/
 │   ├── grafana/              # Configuración y dashboards
 │   ├── telegraf/             # Pipeline de datos MQTT→InfluxDB
 │   └── mosquitto/            # Broker MQTT
+├── api/                       # ✅ API REST Node.js
+│   ├── server.js             # Servidor API con WebSocket
+│   ├── package.json          # Dependencias Node.js
+│   └── README.md             # Documentación API
+├── medusse_app/               # ✅ App móvil Flutter
+│   ├── lib/                  # Código fuente Flutter
+│   ├── pubspec.yaml          # Dependencias Flutter
+│   └── README_FLUTTER.md     # Documentación app
 ├── gateway/                   # Gateway avanzado (opcional)
 ├── demo.bat                   # 🚀 Ejecutar demo completa
+├── iniciar_api.bat           # 🚀 Iniciar API REST
+├── ejecutar_flutter.bat      # 📱 Ejecutar app Flutter
 ├── verificar.bat             # 🔍 Verificar sistema
 └── README.md                 # Esta documentación
 ```
 
-## 🎉 Estado: COMPLETADO ✅
+## 🎉 Estado: SISTEMA COMPLETO ✅
 
 ### ✅ Funcionalidades Implementadas
 
+**Core IoT System:**
 - **3 ubicaciones monitoreadas:** Aula 20, Aula 21, Laboratorio
 - **4 tipos de sensores:** Temperatura, Humedad, CO2, Presión
-- **Dashboard en tiempo real** con visualización optimizada
-- **Pipeline completo** funcionando end-to-end
+- **Dashboard Grafana** en tiempo real con visualización optimizada
+- **Pipeline completo** MQTT → Telegraf → InfluxDB → Grafana
 - **Simulador realista** con datos variables por ubicación
+
+**API REST & Mobile:**
+- **API REST Node.js** con endpoints para datos históricos y tiempo real
+- **WebSocket** para streaming de datos en vivo
+- **App móvil Flutter** con gráficos interactivos y alertas
+- **Arquitectura preparada** para migración a LoRa Mesh
 
 ## 🚀 Inicio Rápido
 
@@ -54,31 +75,36 @@ instalar_proyecto.bat
 setup_rapido.bat
 ```
 
-### Uso Rápido (Después de Instalar)
+### Uso del Sistema Completo
 
 **1. Verificar Sistema:**
 ```cmd
 verificar.bat
 ```
 
-**2. Ejecutar Demo Completa:**
+**2. Ejecutar Core IoT (Dashboard Grafana):**
 ```cmd
 demo.bat
 ```
 
-Esto automáticamente:
+**3. Ejecutar API REST (Opcional):**
+```cmd
+iniciar_api.bat
+```
 
-- ✅ Inicia todos los servicios Docker
-- ✅ Abre Grafana en el navegador
-- ✅ Ejecuta el simulador de datos
-- ✅ Muestra datos en tiempo real
+**4. Ejecutar App Flutter (Opcional):**
+```cmd
+ejecutar_flutter.bat
+```
 
-### 3. Acceder al Dashboard
+### Acceso a Interfaces
 
-- **URL:** http://localhost:3000
-- **Usuario:** admin
-- **Contraseña:** medusse2025
-- **Dashboard:** "Medusse IoT - Dashboard Completo"
+| Servicio | URL | Credenciales |
+|----------|-----|--------------|
+| **Grafana Dashboard** | http://localhost:3000 | admin / medusse2025 |
+| **API REST** | http://localhost:3001 | - |
+| **InfluxDB** | http://localhost:8086 | admin / medusse2025 |
+| **App Flutter** | Ejecutar con script | - |
 
 ## 📊 Servicios Incluidos
 
@@ -88,6 +114,9 @@ Esto automáticamente:
 | **InfluxDB**    | 8086   | Base de datos de series temporales |
 | **MQTT Broker** | 1883   | Comunicación IoT                   |
 | **Telegraf**    | -      | Pipeline de datos                  |
+| **API REST**    | 3001   | API para datos históricos         |
+| **WebSocket**   | 3002   | Streaming tiempo real              |
+| **Flutter App** | -      | App móvil multiplataforma          |
 
 ## 🛠️ Uso Manual
 
@@ -195,13 +224,56 @@ Para consultas de licencia o permisos, contacta al autor.
 
 ---
 
+## 📱 App Móvil Flutter
+
+### Características
+- **Tiempo real** con WebSocket
+- **Gráficos interactivos** con fl_chart
+- **Sistema de alertas** inteligente
+- **3 pantallas:** Home, Detalle ubicación, Gráficos históricos
+- **Multiplataforma:** Windows, Web, Android, iOS
+
+### Uso
+```cmd
+ejecutar_flutter.bat
+```
+
+Ver documentación completa en: [README_FLUTTER.md](README_FLUTTER.md)
+
+## 🌐 API REST
+
+### Endpoints Principales
+- `GET /health` - Estado de servicios
+- `GET /api/locations` - Ubicaciones disponibles
+- `GET /api/summary` - Resumen de todas las ubicaciones
+- `GET /api/latest/:location` - Últimos valores por ubicación
+- `GET /api/data/:location/:sensor` - Datos históricos
+- `WebSocket ws://localhost:3002` - Tiempo real
+
+### Uso
+```cmd
+iniciar_api.bat
+```
+
+Ver documentación completa en: [api/README.md](api/README.md)
+
+## 🔮 Migración a LoRa Mesh
+
+El sistema está **completamente preparado** para migración a hardware real:
+
+- **Arquitectura compatible** - Solo cambiar gateway
+- **Formato de datos idéntico** - Sin modificar API/Flutter
+- **Pipeline sin cambios** - MQTT → InfluxDB → Grafana
+- **Documentación completa** - Ver [MIGRACION.md](MIGRACION.md)
+
 ## 🎯 Próximos Pasos
 
+- [x] ✅ API REST para datos
+- [x] ✅ App móvil de monitoreo
+- [x] ✅ Sistema de alertas automáticas
 - [ ] Integración con ESP32 físicos
 - [ ] Comunicación LoRa mesh
-- [ ] Alertas automáticas por umbrales
-- [ ] API REST para datos
-- [ ] App móvil de monitoreo
+- [ ] Notificaciones push móviles
 
 ---
 

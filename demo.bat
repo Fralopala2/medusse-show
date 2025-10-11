@@ -6,6 +6,10 @@ echo ========================================
 echo   DEMOSTRACION PROYECTO MEDUSSE IoT
 echo ========================================
 echo.
+echo Sistema IoT completo con Dashboard Grafana
+echo API REST disponible en: iniciar_api.bat
+echo App Flutter disponible en: ejecutar_flutter.bat
+echo.
 echo [1/4] Verificando Docker...
 docker --version >nul 2>&1
 if errorlevel 1 (
@@ -35,8 +39,15 @@ echo.
 echo [4/4] Iniciando simulador de datos...
 echo Presiona Ctrl+C para detener la demostracion
 echo.
+echo TIP: Ejecuta 'iniciar_api.bat' y 'ejecutar_flutter.bat' 
+echo      en otras terminales para el sistema completo
+echo.
 python arduino/medusse_simulator.py
 
 echo.
 echo Demostracion finalizada.
+echo.
+echo Para sistema completo:
+echo - API REST: iniciar_api.bat
+echo - App Flutter: ejecutar_flutter.bat
 pause

@@ -1,0 +1,46 @@
+name: medusse_app
+description: "App móvil para monitoreo del proyecto Medusse"
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.9.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  
+  # HTTP y WebSocket
+  http: ^1.1.0
+  web_socket_channel: ^2.4.0
+  
+  # Gráficos y UI
+  fl_chart: ^0.66.0
+  
+  # Estado y navegación
+  provider: ^6.1.1
+  go_router: ^12.1.3
+  
+  # Utilidades
+  intl: ^0.19.0
+  shared_preferences: ^2.2.2
+  
+  # Notificaciones
+  flutter_local_notifications: ^16.3.2
+  
+  # Iconos y UI
+  google_fonts: ^6.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+  
+  # assets:
+  #   - assets/images/
+  #   - assets/icons/

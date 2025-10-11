@@ -6,8 +6,13 @@ echo ========================================
 echo   VERIFICACION PROYECTO MEDUSSE
 echo ========================================
 echo.
+echo Verificando sistema IoT completo:
+echo - Core: Docker, Python, Simulador
+echo - API REST: Node.js
+echo - App Flutter: Flutter SDK
+echo.
 
-echo [1/6] Verificando Python...
+echo [1/8] Verificando Python...
 python --version >nul 2>&1
 if errorlevel 1 (
     echo ERROR: Python no encontrado
@@ -18,7 +23,28 @@ if errorlevel 1 (
 )
 
 echo.
-echo [2/6] Verificando PlatformIO...
+echo [2/8] Verificando Node.js (para API REST)...
+node --version >nul 2>&1
+if errorlevel 1 (
+    echo Node.js: NO ENCONTRADO (API REST no disponible)
+    echo Instala desde: https://nodejs.org/
+) else (
+    node --version
+    echo Node.js: OK
+)
+
+echo.
+echo [3/8] Verificando Flutter (para app móvil)...
+flutter --version >nul 2>&1
+if errorlevel 1 (
+    echo Flutter: NO ENCONTRADO (App móvil no disponible)
+    echo Instala desde: https://flutter.dev/
+) else (
+    echo Flutter: OK
+)
+
+echo.
+echo [4/8] Verificando PlatformIO...
 platformio --version >nul 2>&1
 if errorlevel 1 (
     echo ERROR: PlatformIO no encontrado
@@ -29,7 +55,7 @@ if errorlevel 1 (
 )
 
 echo.
-echo [3/6] Verificando Docker...
+echo [5/8] Verificando Docker...
 docker --version >nul 2>&1
 if errorlevel 1 (
     echo ERROR: Docker no encontrado
@@ -40,7 +66,7 @@ if errorlevel 1 (
 )
 
 echo.
-echo [4/6] Verificando dependencias Python...
+echo [6/8] Verificando dependencias Python...
 python -c "import paho.mqtt.client as mqtt; import requests; print('Dependencias OK')" 2>nul
 if errorlevel 1 (
     echo ERROR: Dependencias Python faltantes
@@ -50,7 +76,7 @@ if errorlevel 1 (
 )
 
 echo.
-echo [5/6] Verificando contenedores Docker...
+echo [7/8] Verificando contenedores Docker...
 docker ps >nul 2>&1
 if errorlevel 1 (
     echo ERROR: Docker no esta corriendo
@@ -61,7 +87,7 @@ if errorlevel 1 (
 )
 
 echo.
-echo [6/6] Verificando servicios web...
+echo [8/8] Verificando servicios web...
 echo Verificando Grafana (http://localhost:3000)...
 curl -s http://localhost:3000 >nul 2>&1
 if errorlevel 1 (
@@ -70,8 +96,16 @@ if errorlevel 1 (
     echo Grafana: ACCESIBLE
 )
 
+echo Verificando API REST (http://localhost:3001)...
+curl -s http://localhost:3001/health >nul 2>&1
+if errorlevel 1 (
+    echo API REST: NO ACCESIBLE (ejecutar: iniciar_api.bat)
+) else (
+    echo API REST: ACCESIBLE
+)
+
 echo.
-echo [7/7] Verificando archivos del proyecto...
+echo [EXTRA] Verificando archivos del proyecto...
 if exist "arduino\medusse_simulator.py" (
     echo Simulador: arduino\medusse_simulator.py
 ) else (
@@ -90,12 +124,33 @@ if exist "docker\grafana\dashboards\medusse-clean.json" (
     echo Dashboard no encontrado
 )
 
+if exist "api\server.js" (
+    echo API REST: api\server.js
+) else (
+    echo API REST no encontrada
+)
+
+if exist "medusse_app\pubspec.yaml" (
+    echo App Flutter: medusse_app\pubspec.yaml
+) else (
+    echo App Flutter no encontrada
+)
+
 echo.
 echo ========================================
 echo   VERIFICACION COMPLETADA
 echo ========================================
 echo.
-echo Para iniciar la demostracion completa: demo.bat
-echo Para acceder a Grafana: http://localhost:3000 (admin/medusse2025)
+echo SISTEMA DISPONIBLE:
+echo.
+echo 📊 Core IoT (Grafana):     demo.bat
+echo 🌐 API REST:               iniciar_api.bat
+echo 📱 App Flutter:            ejecutar_flutter.bat
+echo 🚀 Sistema Completo:       sistema_completo.bat
+echo.
+echo ACCESO WEB:
+echo - Grafana: http://localhost:3000 (admin/medusse2025)
+echo - API REST: http://localhost:3001
+echo - InfluxDB: http://localhost:8086 (admin/medusse2025)
 echo.
 pause
