@@ -73,21 +73,21 @@ if errorlevel 1 (
 echo.
 echo [7/7] Verificando archivos del proyecto...
 if exist "arduino\medusse_simulator.py" (
-    echo ✅ Simulador: arduino\medusse_simulator.py
+    echo Simulador: arduino\medusse_simulator.py
 ) else (
-    echo ❌ Simulador no encontrado
+    echo Simulador no encontrado
 )
 
 if exist "docker\docker-compose.yml" (
-    echo ✅ Docker Compose: docker\docker-compose.yml
+    echo Docker Compose: docker\docker-compose.yml
 ) else (
-    echo ❌ Docker Compose no encontrado
+    echo Docker Compose no encontrado
 )
 
 if exist "docker\grafana\dashboards\medusse-clean.json" (
-    echo ✅ Dashboard: medusse-clean.json
+    echo Dashboard: medusse-clean.json
 ) else (
-    echo ❌ Dashboard no encontrado
+    echo Dashboard no encontrado
 )
 
 echo.
@@ -95,7 +95,7 @@ echo ========================================
 echo   VERIFICACION COMPLETADA
 echo ========================================
 echo.
-echo 🚀 Para iniciar la demostracion completa: demo.bat
-echo 📊 Para acceder a Grafana: http://localhost:3000 (admin/medusse2025)
+echo Para iniciar la demostracion completa: demo.bat
+echo Para acceder a Grafana: http://localhost:3000 (admin/medusse2025)
 echo.
 pause
