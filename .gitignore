@@ -18,7 +18,7 @@ Thumbs.db
 .pio/
 .pioenvs/
 .piolibdeps/
-lib/
+arduino/lib/
 .clang_complete
 .gcc-flags.json
 
@@ -34,7 +34,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+python-lib/
 lib64/
 parts/
 sdist/
