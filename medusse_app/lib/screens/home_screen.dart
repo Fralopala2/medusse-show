@@ -6,6 +6,7 @@ import '../main.dart';
 import '../widgets/location_card.dart';
 import '../widgets/connection_status.dart';
 import 'location_detail_screen.dart';
+import 'settings_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,6 +23,18 @@ class _HomeScreenState extends State<HomeScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<SensorProvider>().refresh();
     });
+  }
+
+  void _navigateToSettings() {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const SettingsScreen()))
+        .then((_) {
+          // Refrescar datos cuando se vuelve de la configuración
+          // por si se cambió la URL del servidor
+          if (mounted) {
+            context.read<SensorProvider>().refresh();
+          }
+        });
   }
 
   @override
@@ -41,6 +54,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 tooltip: provider.isConnected ? 'Conectado' : 'Desconectado',
               );
             },
+          ),
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () => _navigateToSettings(),
+            tooltip: 'Configuración del Servidor',
           ),
         ],
       ),
