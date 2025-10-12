@@ -4,8 +4,8 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 import '../models/sensor_data.dart';
 
 class ApiService {
-  static const String baseUrl = 'http://192.168.1.128:3001';
-  static const String wsUrl = 'ws://192.168.1.128:3002';
+  static const String baseUrl = 'http://192.168.1.140:3001';
+  static const String wsUrl = 'ws://192.168.1.140:3002';
 
   final http.Client _client = http.Client();
   WebSocketChannel? _wsChannel;
