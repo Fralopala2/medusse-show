@@ -24,6 +24,26 @@
   "panels": [
     {
       "datasource": {
+        "type": "text"
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 100,
+      "options": {
+        "content": "<div style=\"text-align: center; padding: 15px; background: linear-gradient(135deg, #2196F3, #1976D2); border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);\">\n  <div style=\"display: flex; align-items: center; justify-content: center; gap: 20px;\">\n    <div style=\"width: 50px; height: 50px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.2);\">\n      <span style=\"color: #1976D2; font-size: 28px; font-weight: bold; font-family: 'Arial', sans-serif;\">M</span>\n    </div>\n    <div>\n      <h1 style=\"color: white; margin: 0; font-size: 32px; font-weight: bold; font-family: 'Arial', sans-serif; text-shadow: 0 2px 4px rgba(0,0,0,0.3);\">Medusse IoT</h1>\n      <p style=\"color: rgba(255,255,255,0.9); margin: 0; font-size: 16px; font-family: 'Arial', sans-serif;\">Sistema de Monitoreo Ambiental en Tiempo Real</p>\n    </div>\n    <div style=\"display: flex; gap: 15px; color: rgba(255,255,255,0.8); font-size: 12px;\">\n      <div style=\"text-align: center;\">\n        <div style=\"font-size: 18px;\">🌡️</div>\n        <div>Temperatura</div>\n      </div>\n      <div style=\"text-align: center;\">\n        <div style=\"font-size: 18px;\">💧</div>\n        <div>Humedad</div>\n      </div>\n      <div style=\"text-align: center;\">\n        <div style=\"font-size: 18px;\">🫁</div>\n        <div>CO2</div>\n      </div>\n      <div style=\"text-align: center;\">\n        <div style=\"font-size: 18px;\">🌪️</div>\n        <div>Presión</div>\n      </div>\n    </div>\n  </div>\n</div>",
+        "mode": "html"
+      },
+      "pluginVersion": "10.2.0",
+      "title": "",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "datasource": {
         "type": "influxdb",
         "uid": "influxdb-medusse"
       },
@@ -140,7 +160,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 0
+        "y": 3
       },
       "id": 1,
       "options": {
@@ -289,7 +309,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 0
+        "y": 3
       },
       "id": 2,
       "options": {
@@ -389,7 +409,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 8
+        "y": 11
       },
       "id": 3,
       "options": {
@@ -534,7 +554,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 8
+        "y": 11
       },
       "id": 4,
       "options": {
@@ -679,7 +699,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 16
+        "y": 19
       },
       "id": 5,
       "options": {
