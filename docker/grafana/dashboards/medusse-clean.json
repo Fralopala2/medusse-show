@@ -1182,6 +1182,25 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula21.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Aula 21"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "blue"
+                }
+              }
+            ]
           }
         ]
       },
