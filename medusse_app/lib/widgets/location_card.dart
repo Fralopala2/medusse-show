@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../models/sensor_data.dart';
-import '../services/api_service.dart';
 import '../main.dart';
 
 class LocationCard extends StatelessWidget {
@@ -15,6 +14,21 @@ class LocationCard extends StatelessWidget {
     this.summary,
     this.onTap,
   });
+
+  String _getLocationDisplayName(String location) {
+    switch (location.toLowerCase()) {
+      case 'aula20':
+        return 'Aula 20';
+      case 'aula21':
+        return 'Aula 21';
+      case 'laboratorio':
+        return 'Laboratorio';
+      case 'gimnasio':
+        return 'Gimnasio';
+      default:
+        return location;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +66,7 @@ class LocationCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          location.displayName,
+                          _getLocationDisplayName(location),
                           style: Theme.of(context).textTheme.titleLarge
                               ?.copyWith(fontWeight: FontWeight.bold),
                         ),
