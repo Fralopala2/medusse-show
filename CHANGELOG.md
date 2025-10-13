@@ -1,5 +1,61 @@
 # Changelog - Proyecto Medusse IoT
 
+## [2.3.0] - 2025-10-14 - DASHBOARD PROFESIONAL CON FILTROS AVANZADOS ✅
+
+### 📊 Dashboard Reorganizado y Optimizado
+
+#### ✅ Reorganización Profesional del Dashboard
+- **Filas colapsables**: Los 18 paneles organizados en secciones lógicas expandibles/colapsables
+- **Sección de Resumen**: KPIs principales (temperatura promedio, humedad, CO₂) en la parte superior
+- **Navegación mejorada**: Estructura jerárquica clara con títulos descriptivos
+- **Experiencia de usuario**: Reducción del clutter visual y mejor organización
+
+#### ✅ Sistema de Filtrado Avanzado
+- **Filtro de ubicación multi-select**: Variables personalizadas para aula20, aula21, gimnasio, laboratorio
+- **Aplicación universal**: Filtro implementado en todos los 18 paneles del dashboard
+- **Consultas Flux optimizadas**: Todas las queries incluyen `contains(set: ${location:csv}, value: r.location)`
+- **Funcionamiento correcto**: Corregido problema de "sin datos" eliminando `allValue=".*"`
+
+#### ✅ Mejoras de Visualización y Colores
+- **Esquema de colores actualizado**: Aula21 cambiado de azul a púrpura para mejor visibilidad
+- **Consistencia visual**: 16 cambios aplicados sistemáticamente en todos los overrides
+- **Diferenciación clara**: Rojo (aula20), Púrpura (aula21), Naranja (gimnasio), Verde (laboratorio)
+- **Overrides por regex**: Sistema robusto de field overrides usando patrones `.*aula21.*`
+
+#### ✅ Paneles de Resumen Funcionales
+- **Gauge panels**: Temperatura, humedad y CO₂ promedio en tiempo real
+- **Datos coherentes**: Conexión correcta con variables de filtrado
+- **Métricas principales**: Visibilidad inmediata del estado general del sistema
+- **Actualización automática**: Datos en tiempo real con refresh automático
+
+### 🔧 Mejoras Técnicas Implementadas
+
+#### ✅ Arquitectura de Variables Grafana
+- **Variable custom multi-select**: Opciones predefinidas sin valores "All"
+- **CSV export**: Configuración `${location:csv}` para consultas Flux
+- **Regex matching**: Overrides condicionales por ubicación usando expresiones regulares
+- **JSON válido**: Todas las modificaciones verificadas y validadas
+
+#### ✅ Optimización de Consultas
+- **Filtro universal**: Todas las queries Flux incluyen filtrado por ubicación
+- **Performance**: Consultas optimizadas sin impacto en rendimiento
+- **Escalabilidad**: Preparado para futuras ubicaciones adicionales
+- **Mantenibilidad**: Sistema consistente y fácil de mantener
+
+### 📈 Impacto en la Experiencia de Usuario
+
+#### ✅ Usabilidad Mejorada
+- **Navegación intuitiva**: Paneles organizados lógicamente
+- **Filtrado dinámico**: Cambio instantáneo de vista por ubicación
+- **Información jerárquica**: Resumen primero, detalles expandibles
+- **Visual clarity**: Colores diferenciados y consistentes
+
+#### ✅ Funcionalidad Completa
+- **18 paneles funcionales**: Todos con filtrado aplicado correctamente
+- **Datos en tiempo real**: Actualización automática de todas las métricas
+- **Interactividad**: Filtros que afectan todos los gráficos simultáneamente
+- **Profesionalismo**: Dashboard de nivel empresarial
+
 ## [2.2.0] - 2025-10-13 - NUEVA UBICACIÓN: GIMNASIO ✅
 
 ### 🏟️ Nueva Ubicación Añadida

@@ -64,7 +64,7 @@ proyecto-medusse/
 - **Simulador de sensores** con datos realistas por ubicación
 - **Gateway MQTT avanzado** con múltiples fuentes
 - **Base de datos InfluxDB v2** con configuración persistente
-- **Dashboard Grafana** profesional con branding personalizado
+- **Dashboard Grafana profesional** con filas colapsables, filtros avanzados y branding personalizado
 - **API REST robusta** con cache inteligente
 - **App móvil Flutter** multiplataforma con Material Design 3
 
@@ -108,7 +108,7 @@ proyecto-medusse/
 **🏗️ Core IoT System:**
 - **4 ubicaciones monitoreadas:** Aula 20 (22°C), Aula 21 (24°C), Gimnasio (23°C), Laboratorio (21°C)
 - **4 tipos de sensores:** Temperatura, Humedad, CO2, Presión
-- **Dashboard Grafana profesional** con logo personalizado y colores diferenciados
+- **Dashboard Grafana profesional** con filas colapsables, sección de resumen, filtros avanzados y branding personalizado
 - **Pipeline optimizado** MQTT → Telegraf → InfluxDB → Grafana
 - **Simulador inteligente** con datos realistas por ubicación
 
@@ -243,27 +243,41 @@ docker logs medusse_telegraf
 
 ## 📈 Dashboard Profesional Personalizado
 
-### 🎨 Diseño y Branding
+### 🎨 Diseño y Branding Avanzado
 - **Header personalizado** con logo Medusse y gradientes CSS
 - **Iconos de sensores** integrados (🌡️💧🫁🌪️)
 - **Colores diferenciados** por ubicación:
-  - 🔴 **Aula 20:** Rojo (#FF5722)
-  - 🔵 **Aula 21:** Azul (#2196F3)
+  - 🔴 **Aula 20:** Rojo (#E53E3E)
+  - � **Aula 21:** Púrpura (#805AD5) - Optimizado para mejor visibilidad
   - 🟠 **Gimnasio:** Naranja (#FF9800)
-  - 🟢 **Laboratorio:** Verde (#4CAF50)
+  - 🟢 **Laboratorio:** Verde (#38A169)
+
+### 📊 Organización Profesional
+- **Filas colapsables**: 18 paneles organizados en secciones lógicas expandibles
+- **Sección de Resumen**: KPIs principales (temperatura, humedad, CO₂) en la parte superior
+- **Navegación jerárquica**: Estructura clara con títulos descriptivos
+- **Experiencia optimizada**: Reducción del clutter visual
+
+### 🔍 Sistema de Filtrado Avanzado
+- **Filtro multi-select por ubicación**: Variables personalizadas para filtrado dinámico
+- **Aplicación universal**: Filtro implementado en todos los paneles
+- **Consultas Flux optimizadas**: Filtrado por ubicación en tiempo real
+- **Interactividad completa**: Cambio instantáneo en todos los gráficos
 
 ### 📊 Paneles Optimizados
-- **🌡️ Panel Temperatura:** Gráfico de líneas con rangos adaptativos
+- **🌡️ Panel Temperatura:** Gráfico de líneas con rangos adaptativos y filtrado
 - **🫁 Panel CO2:** Niveles con sistema de alertas por colores (verde/amarillo/rojo)
 - **🚨 Gauges CO2:** Valores actuales con umbrales visuales (400-1000+ ppm)
 - **💧 Panel Humedad:** Tendencias temporales con promedios móviles
 - **🌪️ Panel Presión:** Datos barométricos con variaciones naturales
+- **📊 Paneles de Resumen:** KPIs principales con datos en tiempo real
 
 ### ⚡ Rendimiento y Actualización
 - **Actualización automática:** Cada 30 segundos
 - **Agregación inteligente:** Datos promediados cada 30 segundos
 - **Cache optimizado:** Sin sobrecarga del sistema
 - **Responsive design:** Adaptable a cualquier pantalla
+- **Filtrado eficiente:** Consultas optimizadas sin impacto en rendimiento
 
 <img width="960" height="465" alt="dashboard" src="https://github.com/user-attachments/assets/5bf163d6-6181-49fd-bcd1-c4f810237f97" />
 
