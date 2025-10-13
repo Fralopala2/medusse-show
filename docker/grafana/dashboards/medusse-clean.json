@@ -130,7 +130,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "red"
+                  "fixedColor": "blue"
                 }
               }
             ]
@@ -1099,44 +1099,6 @@
         },
         "overrides": [
           {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*aula20.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Aula 20"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "red"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*laboratorio.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Laboratorio"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "green"
-                }
-              }
-            ]
-          },
-          {
             "matcher": { "id": "byRegexp", "options": ".*aula20.*" },
             "properties": [
               { "id": "displayName", "value": "Aula 20" },
@@ -1162,44 +1124,6 @@
             "properties": [
               { "id": "displayName", "value": "Laboratorio" },
               { "id": "color", "value": { "mode": "fixed", "fixedColor": "green" } }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*gimnasio.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Gimnasio"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "orange"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*aula21.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Aula 21"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "blue"
-                }
-              }
             ]
           }
         ]
