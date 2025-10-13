@@ -262,6 +262,18 @@ class SensorProvider with ChangeNotifier {
         return locationSummary.co2;
       case SensorType.pressure:
         return locationSummary.pressure;
+      case SensorType.voc:
+        return locationSummary.voc;
+      case SensorType.soilMoisture:
+        return locationSummary.soilMoisture;
+      case SensorType.phLevel:
+        return locationSummary.phLevel;
+      case SensorType.waterFlow:
+        return locationSummary.waterFlow;
+      case SensorType.tdsPpm:
+        return locationSummary.tdsPpm;
+      case SensorType.dissolvedOxygen:
+        return locationSummary.dissolvedOxygen;
     }
   }
 
@@ -270,15 +282,21 @@ class SensorProvider with ChangeNotifier {
     final data = getLatestSensorValue(location, sensorType);
     if (data == null) return false;
 
+    final thresholds = sensorType.thresholds;
     switch (sensorType) {
       case SensorType.temperature:
-        return data.value < 18 || data.value > 28;
       case SensorType.humidity:
-        return data.value < 30 || data.value > 70;
-      case SensorType.co2:
-        return data.value > 1000;
       case SensorType.pressure:
-        return data.value < 1000 || data.value > 1030;
+      case SensorType.phLevel:
+      case SensorType.soilMoisture:
+        return data.value < thresholds[0] || data.value > thresholds[1];
+      case SensorType.co2:
+      case SensorType.voc:
+      case SensorType.tdsPpm:
+        return data.value > thresholds[0];
+      case SensorType.waterFlow:
+      case SensorType.dissolvedOxygen:
+        return data.value < thresholds[0];
     }
   }
 
@@ -287,25 +305,57 @@ class SensorProvider with ChangeNotifier {
     final data = getLatestSensorValue(location, sensorType);
     if (data == null) return AlertLevel.none;
 
+    final thresholds = sensorType.thresholds;
+
     switch (sensorType) {
       case SensorType.temperature:
         if (data.value < 15 || data.value > 32) return AlertLevel.critical;
-        if (data.value < 18 || data.value > 28) return AlertLevel.warning;
+        if (data.value < thresholds[0] || data.value > thresholds[1])
+          return AlertLevel.warning;
         return AlertLevel.normal;
 
       case SensorType.humidity:
+      case SensorType.soilMoisture:
         if (data.value < 20 || data.value > 80) return AlertLevel.critical;
-        if (data.value < 30 || data.value > 70) return AlertLevel.warning;
+        if (data.value < thresholds[0] || data.value > thresholds[1])
+          return AlertLevel.warning;
         return AlertLevel.normal;
 
       case SensorType.co2:
         if (data.value > 1500) return AlertLevel.critical;
-        if (data.value > 1000) return AlertLevel.warning;
+        if (data.value > thresholds[0]) return AlertLevel.warning;
+        return AlertLevel.normal;
+
+      case SensorType.voc:
+        if (data.value > 500) return AlertLevel.critical;
+        if (data.value > thresholds[0]) return AlertLevel.warning;
         return AlertLevel.normal;
 
       case SensorType.pressure:
         if (data.value < 995 || data.value > 1035) return AlertLevel.critical;
-        if (data.value < 1000 || data.value > 1030) return AlertLevel.warning;
+        if (data.value < thresholds[0] || data.value > thresholds[1])
+          return AlertLevel.warning;
+        return AlertLevel.normal;
+
+      case SensorType.phLevel:
+        if (data.value < 6.0 || data.value > 8.0) return AlertLevel.critical;
+        if (data.value < thresholds[0] || data.value > thresholds[1])
+          return AlertLevel.warning;
+        return AlertLevel.normal;
+
+      case SensorType.waterFlow:
+        if (data.value < 0.5) return AlertLevel.critical;
+        if (data.value < thresholds[0]) return AlertLevel.warning;
+        return AlertLevel.normal;
+
+      case SensorType.tdsPpm:
+        if (data.value > 1000) return AlertLevel.critical;
+        if (data.value > thresholds[0]) return AlertLevel.warning;
+        return AlertLevel.normal;
+
+      case SensorType.dissolvedOxygen:
+        if (data.value < 3.0) return AlertLevel.critical;
+        if (data.value < thresholds[0]) return AlertLevel.warning;
         return AlertLevel.normal;
     }
   }

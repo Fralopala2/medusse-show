@@ -120,6 +120,84 @@ app.get('/api/stats/:location/:sensor', async (req, res) => {
   }
 });
 
+// ===== ENERGY MONITORING ENDPOINTS (FASE 2) =====
+
+app.get('/api/energy/:location', async (req, res) => {
+  try {
+    const location = req.params.location;
+    console.log(`🔋 Getting energy data for ${location}...`);
+    
+    const energyData = await getEnergyDataForLocation(location);
+    
+    res.json({
+      location: location,
+      energy: energyData,
+      timestamp: new Date().toISOString()
+    });
+  } catch (error) {
+    console.error('❌ Error getting energy data:', error.message);
+    res.status(500).json({ error: 'Error fetching energy data' });
+  }
+});
+
+app.get('/api/energy/summary', async (req, res) => {
+  try {
+    console.log('🔋 Getting energy summary for all locations...');
+    
+    const locations = ['aula20', 'aula21', 'gimnasio', 'laboratorio'];
+    const energySummary = {};
+    
+    for (const location of locations) {
+      energySummary[location] = await getEnergyDataForLocation(location);
+    }
+    
+    res.json({
+      summary: energySummary,
+      timestamp: new Date().toISOString()
+    });
+  } catch (error) {
+    console.error('❌ Error getting energy summary:', error.message);
+    res.status(500).json({ error: 'Error fetching energy summary' });
+  }
+});
+
+app.get('/api/energy/alerts', async (req, res) => {
+  try {
+    console.log('⚠️ Getting energy alerts...');
+    
+    const alerts = await getEnergyAlerts();
+    
+    res.json({
+      alerts: alerts,
+      timestamp: new Date().toISOString()
+    });
+  } catch (error) {
+    console.error('❌ Error getting energy alerts:', error.message);
+    res.status(500).json({ error: 'Error fetching energy alerts' });
+  }
+});
+
+app.get('/api/energy/:location/history', async (req, res) => {
+  try {
+    const location = req.params.location;
+    const hours = parseInt(req.query.hours) || 24;
+    const interval = req.query.interval || '15m';
+    
+    console.log(`📈 Getting energy history: ${location} for ${hours}h`);
+    
+    const energyHistory = await getEnergyHistory(location, hours, interval);
+    
+    res.json({
+      location: location,
+      history: energyHistory,
+      timestamp: new Date().toISOString()
+    });
+  } catch (error) {
+    console.error('❌ Error getting energy history:', error.message);
+    res.status(500).json({ error: 'Error fetching energy history' });
+  }
+});
+
 // Función para consultar InfluxDB usando HTTP directo con autenticación
 async function queryInfluxDB(fluxQuery) {
   return new Promise((resolve, reject) => {
@@ -386,25 +464,53 @@ function getFallbackData() {
       temperature: { value: 22.5, sensor: 'temperature', time: now, location: 'aula20' },
       humidity: { value: 65.2, sensor: 'humidity', time: now, location: 'aula20' },
       co2: { value: 420, sensor: 'co2', time: now, location: 'aula20' },
-      pressure: { value: 1013.2, sensor: 'pressure', time: now, location: 'aula20' }
+      pressure: { value: 1013.2, sensor: 'pressure', time: now, location: 'aula20' },
+      voc: { value: 45.3, sensor: 'voc', time: now, location: 'aula20' },
+      iaq: { value: 85, sensor: 'iaq', time: now, location: 'aula20' },
+      soil_moisture: { value: 32.1, sensor: 'soil_moisture', time: now, location: 'aula20' },
+      ph_level: { value: 6.8, sensor: 'ph_level', time: now, location: 'aula20' },
+      water_flow: { value: 0.7, sensor: 'water_flow', time: now, location: 'aula20' },
+      tds: { value: 120.5, sensor: 'tds', time: now, location: 'aula20' },
+      dissolved_oxygen: { value: 7.8, sensor: 'dissolved_oxygen', time: now, location: 'aula20' }
     },
     aula21: {
       temperature: { value: 23.1, sensor: 'temperature', time: now, location: 'aula21' },
       humidity: { value: 58.7, sensor: 'humidity', time: now, location: 'aula21' },
       co2: { value: 380, sensor: 'co2', time: now, location: 'aula21' },
-      pressure: { value: 1012.8, sensor: 'pressure', time: now, location: 'aula21' }
+      pressure: { value: 1012.8, sensor: 'pressure', time: now, location: 'aula21' },
+      voc: { value: 52.1, sensor: 'voc', time: now, location: 'aula21' },
+      iaq: { value: 72, sensor: 'iaq', time: now, location: 'aula21' },
+      soil_moisture: { value: 38.5, sensor: 'soil_moisture', time: now, location: 'aula21' },
+      ph_level: { value: 7.2, sensor: 'ph_level', time: now, location: 'aula21' },
+      water_flow: { value: 1.1, sensor: 'water_flow', time: now, location: 'aula21' },
+      tds: { value: 95.2, sensor: 'tds', time: now, location: 'aula21' },
+      dissolved_oxygen: { value: 8.2, sensor: 'dissolved_oxygen', time: now, location: 'aula21' }
     },
     gimnasio: {
-      temperature: { value: 23.1, sensor: 'temperature', time: now, location: 'gimnasio' },
-      humidity: { value: 58.7, sensor: 'humidity', time: now, location: 'gimnasio' },
-      co2: { value: 380, sensor: 'co2', time: now, location: 'gimnasio' },
-      pressure: { value: 1012.8, sensor: 'pressure', time: now, location: 'gimnasio' }
+      temperature: { value: 23.8, sensor: 'temperature', time: now, location: 'gimnasio' },
+      humidity: { value: 62.3, sensor: 'humidity', time: now, location: 'gimnasio' },
+      co2: { value: 415, sensor: 'co2', time: now, location: 'gimnasio' },
+      pressure: { value: 1013.5, sensor: 'pressure', time: now, location: 'gimnasio' },
+      voc: { value: 38.7, sensor: 'voc', time: now, location: 'gimnasio' },
+      iaq: { value: 110, sensor: 'iaq', time: now, location: 'gimnasio' },
+      soil_moisture: { value: 28.3, sensor: 'soil_moisture', time: now, location: 'gimnasio' },
+      ph_level: { value: 6.9, sensor: 'ph_level', time: now, location: 'gimnasio' },
+      water_flow: { value: 2.3, sensor: 'water_flow', time: now, location: 'gimnasio' },
+      tds: { value: 145.8, sensor: 'tds', time: now, location: 'gimnasio' },
+      dissolved_oxygen: { value: 7.5, sensor: 'dissolved_oxygen', time: now, location: 'gimnasio' }
     },
     laboratorio: {
       temperature: { value: 24.2, sensor: 'temperature', time: now, location: 'laboratorio' },
       humidity: { value: 72.1, sensor: 'humidity', time: now, location: 'laboratorio' },
       co2: { value: 450, sensor: 'co2', time: now, location: 'laboratorio' },
-      pressure: { value: 1014.1, sensor: 'pressure', time: now, location: 'laboratorio' }
+      pressure: { value: 1014.1, sensor: 'pressure', time: now, location: 'laboratorio' },
+      voc: { value: 65.4, sensor: 'voc', time: now, location: 'laboratorio' },
+      iaq: { value: 55, sensor: 'iaq', time: now, location: 'laboratorio' },
+      soil_moisture: { value: 45.7, sensor: 'soil_moisture', time: now, location: 'laboratorio' },
+      ph_level: { value: 7.0, sensor: 'ph_level', time: now, location: 'laboratorio' },
+      water_flow: { value: 0.9, sensor: 'water_flow', time: now, location: 'laboratorio' },
+      tds: { value: 78.3, sensor: 'tds', time: now, location: 'laboratorio' },
+      dissolved_oxygen: { value: 8.5, sensor: 'dissolved_oxygen', time: now, location: 'laboratorio' }
     }
   };
 }
@@ -431,6 +537,27 @@ function generateMockHistoricalData(location, sensor, hours) {
       case 'pressure':
         value = 1010 + Math.random() * 10 + Math.sin(i * 0.08) * 5;
         break;
+      case 'voc':
+        value = 30 + Math.random() * 40 + Math.sin(i * 0.12) * 15;
+        break;
+      case 'iaq':
+        value = 50 + Math.random() * 100 + Math.cos(i * 0.08) * 30;
+        break;
+      case 'soil_moisture':
+        value = 25 + Math.random() * 30 + Math.sin(i * 0.06) * 10;
+        break;
+      case 'ph_level':
+        value = 6.5 + Math.random() * 1.5 + Math.sin(i * 0.04) * 0.3;
+        break;
+      case 'water_flow':
+        value = 0.5 + Math.random() * 2 + Math.cos(i * 0.09) * 0.5;
+        break;
+      case 'tds':
+        value = 80 + Math.random() * 100 + Math.sin(i * 0.07) * 20;
+        break;
+      case 'dissolved_oxygen':
+        value = 7 + Math.random() * 2 + Math.cos(i * 0.11) * 0.8;
+        break;
       default:
         value = Math.random() * 100;
     }
@@ -446,13 +573,292 @@ function generateMockHistoricalData(location, sensor, hours) {
   return data;
 }
 
+// ===== ENERGY MONITORING FUNCTIONS (FASE 2) =====
+
+async function getEnergyDataForLocation(location) {
+  try {
+    console.log(`🔋 Querying energy data for ${location}...`);
+    
+    // Lista de sensores energéticos
+    const energySensors = [
+      'battery_voltage',
+      'solar_voltage',
+      'battery_percentage',
+      'power_consumption',
+      'charging_status',
+      'low_power_mode',
+      'wake_count'
+    ];
+    
+    const energyData = {};
+    
+    for (const sensor of energySensors) {
+      const fluxQuery = `
+        from(bucket: "${INFLUX_CONFIG.bucket}")
+          |> range(start: -1h)
+          |> filter(fn: (r) => r["_measurement"] == "${sensor}")
+          |> filter(fn: (r) => r["location"] == "${location}")
+          |> last()
+      `;
+      
+      try {
+        const result = await queryInfluxDB(fluxQuery);
+        if (result && result.length > 0) {
+          const record = result[0];
+          energyData[sensor] = {
+            value: record._value,
+            sensor: sensor,
+            time: record._time,
+            location: location
+          };
+        }
+      } catch (sensorError) {
+        console.log(`⚠️ No data for ${sensor} in ${location}, using fallback`);
+        energyData[sensor] = generateFallbackEnergyData(sensor, location);
+      }
+    }
+    
+    return energyData;
+  } catch (error) {
+    console.error('❌ Error getting energy data:', error.message);
+    return generateFallbackEnergyData('all', location);
+  }
+}
+
+async function getEnergyAlerts() {
+  try {
+    console.log('⚠️ Checking energy alerts...');
+    
+    const locations = ['aula20', 'aula21', 'gimnasio', 'laboratorio'];
+    const alerts = [];
+    
+    for (const location of locations) {
+      const energyData = await getEnergyDataForLocation(location);
+      
+      // Verificar alertas de batería baja
+      if (energyData.battery_percentage && energyData.battery_percentage.value < 25) {
+        alerts.push({
+          level: 'warning',
+          type: 'low_battery',
+          location: location,
+          message: `Batería baja en ${location}: ${energyData.battery_percentage.value}%`,
+          value: energyData.battery_percentage.value,
+          timestamp: new Date().toISOString()
+        });
+      }
+      
+      // Verificar alertas de batería crítica
+      if (energyData.battery_percentage && energyData.battery_percentage.value < 15) {
+        alerts.push({
+          level: 'critical',
+          type: 'critical_battery',
+          location: location,
+          message: `Batería crítica en ${location}: ${energyData.battery_percentage.value}%`,
+          value: energyData.battery_percentage.value,
+          timestamp: new Date().toISOString()
+        });
+      }
+      
+      // Verificar alertas de voltaje bajo
+      if (energyData.battery_voltage && energyData.battery_voltage.value < 3.4) {
+        alerts.push({
+          level: 'warning',
+          type: 'low_voltage',
+          location: location,
+          message: `Voltaje bajo en ${location}: ${energyData.battery_voltage.value}V`,
+          value: energyData.battery_voltage.value,
+          timestamp: new Date().toISOString()
+        });
+      }
+      
+      // Verificar alertas de modo de bajo consumo
+      if (energyData.low_power_mode && energyData.low_power_mode.value === 1) {
+        alerts.push({
+          level: 'info',
+          type: 'low_power_mode',
+          location: location,
+          message: `Nodo ${location} en modo de bajo consumo`,
+          value: energyData.low_power_mode.value,
+          timestamp: new Date().toISOString()
+        });
+      }
+      
+      // Verificar alertas de panel solar sin generar
+      if (energyData.solar_voltage && energyData.solar_voltage.value < 1.0) {
+        const currentHour = new Date().getHours();
+        // Solo alertar durante horas de día (7-19h)
+        if (currentHour >= 7 && currentHour <= 19) {
+          alerts.push({
+            level: 'warning',
+            type: 'no_solar_generation',
+            location: location,
+            message: `Panel solar sin generación en ${location}: ${energyData.solar_voltage.value}V`,
+            value: energyData.solar_voltage.value,
+            timestamp: new Date().toISOString()
+          });
+        }
+      }
+    }
+    
+    return alerts;
+  } catch (error) {
+    console.error('❌ Error checking energy alerts:', error.message);
+    return [];
+  }
+}
+
+async function getEnergyHistory(location, hours, interval) {
+  try {
+    console.log(`📈 Getting energy history for ${location}...`);
+    
+    const energySensors = [
+      'battery_voltage',
+      'solar_voltage',
+      'battery_percentage',
+      'power_consumption'
+    ];
+    
+    const history = {};
+    
+    for (const sensor of energySensors) {
+      const fluxQuery = `
+        from(bucket: "${INFLUX_CONFIG.bucket}")
+          |> range(start: -${hours}h)
+          |> filter(fn: (r) => r["_measurement"] == "${sensor}")
+          |> filter(fn: (r) => r["location"] == "${location}")
+          |> aggregateWindow(every: ${interval}, fn: mean, createEmpty: false)
+          |> yield(name: "mean")
+      `;
+      
+      try {
+        const result = await queryInfluxDB(fluxQuery);
+        if (result && result.length > 0) {
+          history[sensor] = result.map(record => ({
+            time: record._time,
+            value: record._value,
+            location: location,
+            sensor: sensor
+          }));
+        } else {
+          history[sensor] = generateMockEnergyHistory(sensor, location, hours);
+        }
+      } catch (sensorError) {
+        console.log(`⚠️ No history for ${sensor} in ${location}, generating mock data`);
+        history[sensor] = generateMockEnergyHistory(sensor, location, hours);
+      }
+    }
+    
+    return history;
+  } catch (error) {
+    console.error('❌ Error getting energy history:', error.message);
+    // Generar datos mock para todos los sensores
+    const history = {};
+    const energySensors = ['battery_voltage', 'solar_voltage', 'battery_percentage', 'power_consumption'];
+    
+    for (const sensor of energySensors) {
+      history[sensor] = generateMockEnergyHistory(sensor, location, hours);
+    }
+    
+    return history;
+  }
+}
+
+function generateFallbackEnergyData(sensor, location) {
+  const now = new Date().toISOString();
+  const baseValues = {
+    battery_voltage: { value: 3.8 + Math.random() * 0.4, unit: 'V' },
+    solar_voltage: { value: Math.random() * 15, unit: 'V' },
+    battery_percentage: { value: 50 + Math.random() * 40, unit: '%' },
+    power_consumption: { value: 100 + Math.random() * 50, unit: 'mA' },
+    charging_status: { value: Math.random() > 0.5 ? 1 : 0, unit: 'bool' },
+    low_power_mode: { value: Math.random() > 0.8 ? 1 : 0, unit: 'bool' },
+    wake_count: { value: Math.floor(Math.random() * 100) + 1, unit: 'count' }
+  };
+  
+  if (sensor === 'all') {
+    const allData = {};
+    for (const [key, config] of Object.entries(baseValues)) {
+      allData[key] = {
+        value: Math.round(config.value * 100) / 100,
+        sensor: key,
+        time: now,
+        location: location
+      };
+    }
+    return allData;
+  }
+  
+  const config = baseValues[sensor] || { value: Math.random() * 100, unit: 'unknown' };
+  return {
+    value: Math.round(config.value * 100) / 100,
+    sensor: sensor,
+    time: now,
+    location: location
+  };
+}
+
+function generateMockEnergyHistory(sensor, location, hours) {
+  const data = [];
+  const now = new Date();
+  const points = Math.min(hours * 4, 100); // Un punto cada 15 minutos
+  
+  for (let i = points; i >= 0; i--) {
+    const timestamp = new Date(now.getTime() - (i * 15 * 60 * 1000));
+    let value;
+    
+    switch (sensor) {
+      case 'battery_voltage':
+        // Voltaje de batería con descarga lenta durante la noche
+        const batteryBase = 4.1 - (i / points) * 0.3;
+        value = batteryBase + Math.sin(i * 0.1) * 0.05;
+        break;
+      case 'solar_voltage':
+        // Voltaje solar basado en hora del día (simulación día/noche)
+        const hour = timestamp.getHours();
+        if (hour >= 7 && hour <= 19) {
+          // Día: patrón de campana con pico al mediodía
+          const dayProgress = (hour - 7) / 12;
+          const solarCurve = Math.sin(dayProgress * Math.PI);
+          value = solarCurve * 18 + Math.random() * 2;
+        } else {
+          // Noche: muy bajo o 0
+          value = Math.random() * 0.5;
+        }
+        break;
+      case 'battery_percentage':
+        // Porcentaje de batería con descarga lenta y carga durante el día
+        const basePercent = 85 - (i / points) * 20;
+        value = Math.max(20, basePercent + Math.sin(i * 0.08) * 10);
+        break;
+      case 'power_consumption':
+        // Consumo variable con picos ocasionales
+        const baseConsumption = 120;
+        value = baseConsumption + Math.random() * 40 + Math.sin(i * 0.15) * 20;
+        break;
+      default:
+        value = Math.random() * 100;
+    }
+    
+    data.push({
+      time: timestamp.toISOString(),
+      value: Math.round(value * 100) / 100,
+      location: location,
+      sensor: sensor
+    });
+  }
+  
+  return data;
+}
+
 // Iniciar servidor
 const server = app.listen(PORT, () => {
   console.log(`🚀 Stable InfluxDB API Server running on http://localhost:${PORT}`);
   console.log(`📊 Health check: http://localhost:${PORT}/health`);
   console.log(`📍 Locations: http://localhost:${PORT}/api/locations`);
   console.log(`📈 Summary: http://localhost:${PORT}/api/summary`);
-  console.log(`🔗 Connected to InfluxDB: ${INFLUX_CONFIG.url}`);
+  console.log(`� Energy Summary: http://localhost:${PORT}/api/energy/summary`);
+  console.log(`⚠️ Energy Alerts: http://localhost:${PORT}/api/energy/alerts`);
+  console.log(`�🔗 Connected to InfluxDB: ${INFLUX_CONFIG.url}`);
   console.log(`📊 Using bucket: ${INFLUX_CONFIG.bucket}`);
   console.log(`🏢 Using organization: ${INFLUX_CONFIG.org}`);
 });

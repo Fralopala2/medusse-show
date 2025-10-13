@@ -94,7 +94,7 @@ class LocationCard extends StatelessWidget {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   crossAxisCount: 2,
-                  childAspectRatio: 2.5,
+                  childAspectRatio: 2.2,
                   crossAxisSpacing: 8,
                   mainAxisSpacing: 8,
                   children: [
@@ -113,6 +113,32 @@ class LocationCard extends StatelessWidget {
                       context,
                       SensorType.pressure,
                       summary!.pressure,
+                    ),
+                    _buildSensorTile(context, SensorType.voc, summary!.voc),
+                    _buildSensorTile(
+                      context,
+                      SensorType.soilMoisture,
+                      summary!.soilMoisture,
+                    ),
+                    _buildSensorTile(
+                      context,
+                      SensorType.phLevel,
+                      summary!.phLevel,
+                    ),
+                    _buildSensorTile(
+                      context,
+                      SensorType.waterFlow,
+                      summary!.waterFlow,
+                    ),
+                    _buildSensorTile(
+                      context,
+                      SensorType.tdsPpm,
+                      summary!.tdsPpm,
+                    ),
+                    _buildSensorTile(
+                      context,
+                      SensorType.dissolvedOxygen,
+                      summary!.dissolvedOxygen,
                     ),
                   ],
                 ),
@@ -202,6 +228,12 @@ class LocationCard extends StatelessWidget {
       summary?.humidity?.timestamp,
       summary?.co2?.timestamp,
       summary?.pressure?.timestamp,
+      summary?.voc?.timestamp,
+      summary?.soilMoisture?.timestamp,
+      summary?.phLevel?.timestamp,
+      summary?.waterFlow?.timestamp,
+      summary?.tdsPpm?.timestamp,
+      summary?.dissolvedOxygen?.timestamp,
     ].where((t) => t != null).cast<DateTime>();
 
     if (updates.isNotEmpty) {
@@ -229,9 +261,17 @@ class LocationCard extends StatelessWidget {
       case SensorType.temperature:
       case SensorType.humidity:
       case SensorType.pressure:
+      case SensorType.soilMoisture:
         return value.toStringAsFixed(1);
       case SensorType.co2:
+      case SensorType.voc:
+      case SensorType.tdsPpm:
+      case SensorType.dissolvedOxygen:
         return value.toStringAsFixed(0);
+      case SensorType.phLevel:
+        return value.toStringAsFixed(2);
+      case SensorType.waterFlow:
+        return value.toStringAsFixed(2);
     }
   }
 
@@ -251,15 +291,24 @@ class LocationCard extends StatelessWidget {
   }
 
   bool _isAlert(SensorType sensorType, double value) {
+    final thresholds = sensorType.thresholds;
     switch (sensorType) {
       case SensorType.temperature:
-        return value < 18 || value > 28;
+        return value < thresholds[0] || value > thresholds[1];
       case SensorType.humidity:
-        return value < 30 || value > 70;
+      case SensorType.soilMoisture:
+        return value < thresholds[0] || value > thresholds[1];
       case SensorType.co2:
-        return value > 1000;
+      case SensorType.voc:
+      case SensorType.tdsPpm:
+        return value > thresholds[0]; // Solo alerta por exceso
       case SensorType.pressure:
-        return value < 1000 || value > 1030;
+        return value < thresholds[0] || value > thresholds[1];
+      case SensorType.phLevel:
+        return value < thresholds[0] || value > thresholds[1];
+      case SensorType.waterFlow:
+      case SensorType.dissolvedOxygen:
+        return value < thresholds[0]; // Solo alerta por déficit
     }
   }
 }

@@ -101,6 +101,12 @@ class AppColors {
   static const Color humidity = Color(0xFF2196F3);
   static const Color co2 = Color(0xFF4CAF50);
   static const Color pressure = Color(0xFF9C27B0);
+  static const Color voc = Color(0xFF607D8B);
+  static const Color soilMoisture = Color(0xFF8BC34A);
+  static const Color phLevel = Color(0xFFE91E63);
+  static const Color waterFlow = Color(0xFF00BCD4);
+  static const Color tdsPpm = Color(0xFF795548);
+  static const Color dissolvedOxygen = Color(0xFF03DAC6);
 
   // Colores para ubicaciones
   static const Color aula20 = Color(0xFFE53E3E);
@@ -121,6 +127,18 @@ extension SensorTypeColors on SensorType {
         return AppColors.co2;
       case SensorType.pressure:
         return AppColors.pressure;
+      case SensorType.voc:
+        return AppColors.voc;
+      case SensorType.soilMoisture:
+        return AppColors.soilMoisture;
+      case SensorType.phLevel:
+        return AppColors.phLevel;
+      case SensorType.waterFlow:
+        return AppColors.waterFlow;
+      case SensorType.tdsPpm:
+        return AppColors.tdsPpm;
+      case SensorType.dissolvedOxygen:
+        return AppColors.dissolvedOxygen;
     }
   }
 
@@ -134,6 +152,18 @@ extension SensorTypeColors on SensorType {
         return Icons.air;
       case SensorType.pressure:
         return Icons.compress;
+      case SensorType.voc:
+        return Icons.cloud;
+      case SensorType.soilMoisture:
+        return Icons.grass;
+      case SensorType.phLevel:
+        return Icons.science;
+      case SensorType.waterFlow:
+        return Icons.waves;
+      case SensorType.tdsPpm:
+        return Icons.filter_alt;
+      case SensorType.dissolvedOxygen:
+        return Icons.bubble_chart;
     }
   }
 }

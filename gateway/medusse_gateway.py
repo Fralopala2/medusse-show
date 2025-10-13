@@ -105,10 +105,122 @@ class MedusseGateway:
                         gas_data["co2_ppm"], node_id, timestamp
                     )
             
-            # System info
-            if "system" in data:
-                system_data = data["system"]
-                self._publish_system_info(location, system_data, node_id, timestamp)
+                # BME680 data (upgraded from BME280)
+                if "bme680" in sensors:
+                    bme_data = sensors["bme680"]
+                    if "temperature" in bme_data:
+                        self._publish_sensor_value(
+                            location, "temperature", "bme680",
+                            bme_data["temperature"], node_id, timestamp
+                        )
+                    if "humidity" in bme_data:
+                        self._publish_sensor_value(
+                            location, "humidity", "bme680",
+                            bme_data["humidity"], node_id, timestamp
+                        )
+                    if "pressure" in bme_data:
+                        self._publish_sensor_value(
+                            location, "pressure", "bme680",
+                            bme_data["pressure"], node_id, timestamp
+                        )
+                    if "voc_resistance" in bme_data:
+                        self._publish_sensor_value(
+                            location, "voc", "bme680",
+                            bme_data["voc_resistance"], node_id, timestamp
+                        )
+                    if "voc_iaq" in bme_data:
+                        self._publish_sensor_value(
+                            location, "iaq", "bme680",
+                            bme_data["voc_iaq"], node_id, timestamp
+                        )
+            
+                # Soil sensor data
+                if "soil" in sensors:
+                    soil_data = sensors["soil"]
+                    if "moisture_percent" in soil_data:
+                        self._publish_sensor_value(
+                            location, "soil_moisture", "soil",
+                            soil_data["moisture_percent"], node_id, timestamp
+                        )
+            
+                # Water sensor data
+                if "water" in sensors:
+                    water_data = sensors["water"]
+                    if "ph_level" in water_data:
+                        self._publish_sensor_value(
+                            location, "ph_level", "ph",
+                            water_data["ph_level"], node_id, timestamp
+                        )
+                    if "flow_lmin" in water_data:
+                        self._publish_sensor_value(
+                            location, "water_flow", "flow",
+                            water_data["flow_lmin"], node_id, timestamp
+                        )
+                    if "tds_ppm" in water_data:
+                        self._publish_sensor_value(
+                            location, "tds", "tds",
+                            water_data["tds_ppm"], node_id, timestamp
+                        )
+                    if "dissolved_oxygen" in water_data:
+                        self._publish_sensor_value(
+                            location, "dissolved_oxygen", "dissolved_oxygen",
+                            water_data["dissolved_oxygen"], node_id, timestamp
+                        )
+            
+                # ===== ENERGY MONITORING DATA (FASE 2) =====
+                if "energy" in data:
+                    energy_data = data["energy"]
+                
+                    # Battery monitoring
+                    if "battery_voltage" in energy_data:
+                        self._publish_sensor_value(
+                            location, "battery_voltage", "battery_voltage",
+                            energy_data["battery_voltage"], node_id, timestamp
+                        )
+                
+                    if "battery_percentage" in energy_data:
+                        self._publish_sensor_value(
+                            location, "battery_percentage", "battery_percentage",
+                            energy_data["battery_percentage"], node_id, timestamp
+                        )
+                
+                    # Solar monitoring
+                    if "solar_voltage" in energy_data:
+                        self._publish_sensor_value(
+                            location, "solar_voltage", "solar_voltage",
+                            energy_data["solar_voltage"], node_id, timestamp
+                        )
+                
+                    # Power consumption
+                    if "power_consumption_ma" in energy_data:
+                        self._publish_sensor_value(
+                            location, "power_consumption", "power_consumption",
+                            energy_data["power_consumption_ma"], node_id, timestamp
+                        )
+                
+                    # Status indicators
+                    if "charging_status" in energy_data:
+                        self._publish_sensor_value(
+                            location, "charging_status", "charging_status",
+                            energy_data["charging_status"], node_id, timestamp
+                        )
+                
+                    if "low_power_mode" in energy_data:
+                        self._publish_sensor_value(
+                            location, "low_power_mode", "low_power_mode",
+                            energy_data["low_power_mode"], node_id, timestamp
+                        )
+                
+                    if "wake_count" in energy_data:
+                        self._publish_sensor_value(
+                            location, "wake_count", "wake_count",
+                            energy_data["wake_count"], node_id, timestamp
+                        )
+            
+                # System info
+                if "system" in data:
+                    system_data = data["system"]
+                    self._publish_system_info(location, system_data, node_id, timestamp)
             
             # Publicar datos completos también
             self._publish_complete_data(location, data, node_id)
