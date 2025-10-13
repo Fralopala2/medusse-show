@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 import '../providers/sensor_provider.dart';
 import '../models/sensor_data.dart';
 import '../services/api_service.dart';
-import '../main.dart';
 
 class SensorChartScreen extends StatefulWidget {
   final String? location;

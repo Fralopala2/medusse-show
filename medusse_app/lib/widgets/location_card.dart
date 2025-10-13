@@ -262,16 +262,25 @@ class LocationCard extends StatelessWidget {
       case SensorType.humidity:
       case SensorType.pressure:
       case SensorType.soilMoisture:
+      case SensorType.batteryVoltage:
+      case SensorType.solarVoltage:
+      case SensorType.batteryPercentage:
         return value.toStringAsFixed(1);
       case SensorType.co2:
       case SensorType.voc:
+      case SensorType.iaq:
       case SensorType.tdsPpm:
       case SensorType.dissolvedOxygen:
+      case SensorType.powerConsumption:
+      case SensorType.wakeCount:
         return value.toStringAsFixed(0);
       case SensorType.phLevel:
         return value.toStringAsFixed(2);
       case SensorType.waterFlow:
-        return value.toStringAsFixed(2);
+        return value.toStringAsFixed(1);
+      case SensorType.chargingStatus:
+      case SensorType.lowPowerMode:
+        return value > 0.5 ? 'Activo' : 'Inactivo';
     }
   }
 
@@ -300,6 +309,7 @@ class LocationCard extends StatelessWidget {
         return value < thresholds[0] || value > thresholds[1];
       case SensorType.co2:
       case SensorType.voc:
+      case SensorType.iaq:
       case SensorType.tdsPpm:
         return value > thresholds[0]; // Solo alerta por exceso
       case SensorType.pressure:
@@ -309,6 +319,19 @@ class LocationCard extends StatelessWidget {
       case SensorType.waterFlow:
       case SensorType.dissolvedOxygen:
         return value < thresholds[0]; // Solo alerta por déficit
+      case SensorType.batteryVoltage:
+      case SensorType.solarVoltage:
+        return value < thresholds[0]; // Alerta por bajo voltaje
+      case SensorType.batteryPercentage:
+        return value < thresholds[0]; // Alerta por batería baja
+      case SensorType.powerConsumption:
+        return value > thresholds[0]; // Alerta por alto consumo
+      case SensorType.wakeCount:
+        return false; // No hay alertas para wake count
+      case SensorType.chargingStatus:
+        return value < 0.5; // Alerta si no está cargando
+      case SensorType.lowPowerMode:
+        return value > 0.5; // Alerta si está en modo ahorro
     }
   }
 }

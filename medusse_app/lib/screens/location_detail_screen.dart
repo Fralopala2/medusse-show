@@ -199,13 +199,33 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
                         onTap: () => _navigateToChart(SensorType.co2),
                       ),
                       SensorCard(
-                        sensorType: SensorType.pressure,
-                        data: summary.pressure,
+                        sensorType: SensorType.batteryPercentage,
+                        data: summary.batteryPercentage,
                         showAlert: provider.hasAlert(
                           currentLocation,
-                          SensorType.pressure,
+                          SensorType.batteryPercentage,
                         ),
-                        onTap: () => _navigateToChart(SensorType.pressure),
+                        onTap: () =>
+                            _navigateToChart(SensorType.batteryPercentage),
+                      ),
+                      SensorCard(
+                        sensorType: SensorType.iaq,
+                        data: summary.iaq,
+                        showAlert: provider.hasAlert(
+                          currentLocation,
+                          SensorType.iaq,
+                        ),
+                        onTap: () => _navigateToChart(SensorType.iaq),
+                      ),
+                      SensorCard(
+                        sensorType: SensorType.powerConsumption,
+                        data: summary.powerConsumption,
+                        showAlert: provider.hasAlert(
+                          currentLocation,
+                          SensorType.powerConsumption,
+                        ),
+                        onTap: () =>
+                            _navigateToChart(SensorType.powerConsumption),
                       ),
                     ]),
                   ),

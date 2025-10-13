@@ -4,6 +4,14 @@
 
 ### 📊 Dashboard Reorganizado y Optimizado
 
+#### ✅ Expansión Completa de Sensores
+- **18 tipos de sensores implementados**: Expansión desde 4 sensores básicos a sistema completo
+- **Sensores ambientales**: Temperatura, Humedad, CO₂, Presión, VOC, IAQ
+- **Sensores de calidad de agua**: Humedad suelo, pH, Flujo agua, TDS, Oxígeno disuelto
+- **Sistema de energía solar**: Voltaje batería, Voltaje solar, Porcentaje batería, Consumo energía
+- **Gestión inteligente**: Estado carga, Modo bajo consumo, Contador wake-ups
+- **Simulación realista**: Datos coherentes con variaciones por ubicación y condiciones ambientales
+
 #### ✅ Reorganización Profesional del Dashboard
 - **Filas colapsables**: Los 18 paneles organizados en secciones lógicas expandibles/colapsables
 - **Sección de Resumen**: KPIs principales (temperatura promedio, humedad, CO₂) en la parte superior

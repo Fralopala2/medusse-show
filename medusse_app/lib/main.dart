@@ -102,11 +102,19 @@ class AppColors {
   static const Color co2 = Color(0xFF4CAF50);
   static const Color pressure = Color(0xFF9C27B0);
   static const Color voc = Color(0xFF607D8B);
+  static const Color iaq = Color(0xFF3F51B5);
   static const Color soilMoisture = Color(0xFF8BC34A);
   static const Color phLevel = Color(0xFFE91E63);
   static const Color waterFlow = Color(0xFF00BCD4);
   static const Color tdsPpm = Color(0xFF795548);
   static const Color dissolvedOxygen = Color(0xFF03DAC6);
+  static const Color batteryVoltage = Color(0xFFFFC107);
+  static const Color solarVoltage = Color(0xFFFFEB3B);
+  static const Color batteryPercentage = Color(0xFF4CAF50);
+  static const Color powerConsumption = Color(0xFFF44336);
+  static const Color chargingStatus = Color(0xFF2196F3);
+  static const Color lowPowerMode = Color(0xFF9E9E9E);
+  static const Color wakeCount = Color(0xFF673AB7);
 
   // Colores para ubicaciones
   static const Color aula20 = Color(0xFFE53E3E);
@@ -129,6 +137,8 @@ extension SensorTypeColors on SensorType {
         return AppColors.pressure;
       case SensorType.voc:
         return AppColors.voc;
+      case SensorType.iaq:
+        return AppColors.iaq;
       case SensorType.soilMoisture:
         return AppColors.soilMoisture;
       case SensorType.phLevel:
@@ -139,6 +149,20 @@ extension SensorTypeColors on SensorType {
         return AppColors.tdsPpm;
       case SensorType.dissolvedOxygen:
         return AppColors.dissolvedOxygen;
+      case SensorType.batteryVoltage:
+        return AppColors.batteryVoltage;
+      case SensorType.solarVoltage:
+        return AppColors.solarVoltage;
+      case SensorType.batteryPercentage:
+        return AppColors.batteryPercentage;
+      case SensorType.powerConsumption:
+        return AppColors.powerConsumption;
+      case SensorType.chargingStatus:
+        return AppColors.chargingStatus;
+      case SensorType.lowPowerMode:
+        return AppColors.lowPowerMode;
+      case SensorType.wakeCount:
+        return AppColors.wakeCount;
     }
   }
 
@@ -154,6 +178,8 @@ extension SensorTypeColors on SensorType {
         return Icons.compress;
       case SensorType.voc:
         return Icons.cloud;
+      case SensorType.iaq:
+        return Icons.home;
       case SensorType.soilMoisture:
         return Icons.grass;
       case SensorType.phLevel:
@@ -164,6 +190,20 @@ extension SensorTypeColors on SensorType {
         return Icons.filter_alt;
       case SensorType.dissolvedOxygen:
         return Icons.bubble_chart;
+      case SensorType.batteryVoltage:
+        return Icons.battery_std;
+      case SensorType.solarVoltage:
+        return Icons.wb_sunny;
+      case SensorType.batteryPercentage:
+        return Icons.battery_charging_full;
+      case SensorType.powerConsumption:
+        return Icons.power;
+      case SensorType.chargingStatus:
+        return Icons.ev_station;
+      case SensorType.lowPowerMode:
+        return Icons.power_off;
+      case SensorType.wakeCount:
+        return Icons.schedule;
     }
   }
 }

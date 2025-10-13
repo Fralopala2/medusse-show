@@ -4,7 +4,7 @@
 
 ## 📋 Descripción
 
-**Sistema IoT de nivel profesional** que incluye simulación realista de sensores ESP32, pipeline de datos moderno, dashboard web con branding personalizado, API REST robusta y aplicación móvil Flutter multiplataforma. **Completamente automatizado** con scripts de instalación y verificación. Sistema preparado para migración directa a hardware real con comunicación LoRa Mesh.
+**Sistema IoT de nivel profesional** que incluye simulación realista de sensores ESP32, pipeline de datos moderno, dashboard web con branding personalizado, API REST robusta y aplicación móvil Flutter multiplataforma. **18 tipos de sensores monitoreados** incluyendo ambientales, calidad de agua, energía solar y gestión de batería. **Completamente automatizado** con scripts de instalación y verificación. Sistema preparado para migración directa a hardware real con comunicación LoRa Mesh.
 
 ## 🏗️ Arquitectura Completa
 
@@ -73,12 +73,27 @@ proyecto-medusse/
 - **Pipeline sin pérdidas** con retry automático
 - **Agregación inteligente** de datos (30s)
 - **Networking Docker** optimizado
+- **18 sensores monitoreados** simultáneamente
 
 ### Sensores Monitoreados
 - 🌡️ **Temperatura** (°C)
 - 💧 **Humedad** (%)
 - 🌬️ **CO₂** (ppm)
 - 📊 **Presión atmosférica** (hPa)
+- 🌿 **VOC** (Compuestos Orgánicos Volátiles - ppb)
+- 🏠 **IAQ** (Calidad del Aire Interior - índice)
+- 🌱 **Humedad del suelo** (%)
+- ⚗️ **pH** (nivel de pH del agua)
+- 💦 **Flujo de agua** (L/min)
+- 🧪 **TDS** (Sólidos Disueltos Totales - ppm)
+- 🐟 **Oxígeno disuelto** (mg/L)
+- 🔋 **Voltaje de batería** (V)
+- ☀️ **Voltaje solar** (V)
+- 🔋 **Porcentaje de batería** (%)
+- ⚡ **Consumo de energía** (mA)
+- 🔌 **Estado de carga** (booleano)
+- 🌙 **Modo bajo consumo** (booleano)
+- 🔄 **Contador de wake-ups** (conteo)
 
 ### Ubicaciones
 - 📍 **Aula 20**
@@ -107,7 +122,7 @@ proyecto-medusse/
 
 **🏗️ Core IoT System:**
 - **4 ubicaciones monitoreadas:** Aula 20 (22°C), Aula 21 (24°C), Gimnasio (23°C), Laboratorio (21°C)
-- **4 tipos de sensores:** Temperatura, Humedad, CO2, Presión
+- **18 tipos de sensores:** Temperatura, Humedad, CO2, Presión, VOC, IAQ, Humedad suelo, pH, Flujo agua, TDS, Oxígeno disuelto, Voltaje batería, Voltaje solar, Porcentaje batería, Consumo energía, Estado carga, Modo bajo consumo, Wake count
 - **Dashboard Grafana profesional** con filas colapsables, sección de resumen, filtros avanzados y branding personalizado
 - **Pipeline optimizado** MQTT → Telegraf → InfluxDB → Grafana
 - **Simulador inteligente** con datos realistas por ubicación
@@ -413,7 +428,7 @@ El sistema está **completamente preparado** para migración a hardware real:
 
 ## 🎯 Roadmap y Próximos Pasos
 
-### ✅ **Completado (v2.1.0)**
+### ✅ **Completado (v2.3.0)**
 - [x] ✅ **API REST robusta** con 6 endpoints y cache inteligente
 - [x] ✅ **App móvil Flutter** con 3 pantallas y Material Design 3
 - [x] ✅ **Sistema de alertas** automáticas por umbrales
@@ -457,10 +472,10 @@ El sistema está **completamente preparado** para migración a hardware real:
 - **4 tecnologías principales** (Docker, Node.js, Flutter, Python)
 - **6 endpoints API** con documentación completa
 - **3 pantallas móviles** con navegación fluida
-- **4 tipos de sensores** simulados realísticamente
+- **18 tipos de sensores** simulados realísticamente
 - **4 ubicaciones** monitoreadas simultáneamente
 
 ---
 
 _Proyecto desarrollado para **IES José Rodrigo Botet** - Curso 2025/2026_
-_**Versión actual:** 2.2.0 (Octubre 2025)_
+_**Versión actual:** 2.3.0 (Octubre 2025)_

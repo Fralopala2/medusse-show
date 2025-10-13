@@ -213,6 +213,20 @@ class SensorProvider with ChangeNotifier {
         humidity: sensorType == 'humidity' ? data : null,
         co2: sensorType == 'co2' ? data : null,
         pressure: sensorType == 'pressure' ? data : null,
+        voc: sensorType == 'voc' ? data : null,
+        iaq: sensorType == 'iaq' ? data : null,
+        soilMoisture: sensorType == 'soil_moisture' ? data : null,
+        phLevel: sensorType == 'ph_level' ? data : null,
+        waterFlow: sensorType == 'water_flow' ? data : null,
+        tdsPpm: sensorType == 'tds' ? data : null,
+        dissolvedOxygen: sensorType == 'dissolved_oxygen' ? data : null,
+        batteryVoltage: sensorType == 'battery_voltage' ? data : null,
+        solarVoltage: sensorType == 'solar_voltage' ? data : null,
+        batteryPercentage: sensorType == 'battery_percentage' ? data : null,
+        powerConsumption: sensorType == 'power_consumption' ? data : null,
+        chargingStatus: sensorType == 'charging_status' ? data : null,
+        lowPowerMode: sensorType == 'low_power_mode' ? data : null,
+        wakeCount: sensorType == 'wake_count' ? data : null,
       );
     } else {
       // Actualizar resumen existente
@@ -224,6 +238,36 @@ class SensorProvider with ChangeNotifier {
         humidity: sensorType == 'humidity' ? data : currentSummary.humidity,
         co2: sensorType == 'co2' ? data : currentSummary.co2,
         pressure: sensorType == 'pressure' ? data : currentSummary.pressure,
+        voc: sensorType == 'voc' ? data : currentSummary.voc,
+        iaq: sensorType == 'iaq' ? data : currentSummary.iaq,
+        soilMoisture: sensorType == 'soil_moisture'
+            ? data
+            : currentSummary.soilMoisture,
+        phLevel: sensorType == 'ph_level' ? data : currentSummary.phLevel,
+        waterFlow: sensorType == 'water_flow' ? data : currentSummary.waterFlow,
+        tdsPpm: sensorType == 'tds' ? data : currentSummary.tdsPpm,
+        dissolvedOxygen: sensorType == 'dissolved_oxygen'
+            ? data
+            : currentSummary.dissolvedOxygen,
+        batteryVoltage: sensorType == 'battery_voltage'
+            ? data
+            : currentSummary.batteryVoltage,
+        solarVoltage: sensorType == 'solar_voltage'
+            ? data
+            : currentSummary.solarVoltage,
+        batteryPercentage: sensorType == 'battery_percentage'
+            ? data
+            : currentSummary.batteryPercentage,
+        powerConsumption: sensorType == 'power_consumption'
+            ? data
+            : currentSummary.powerConsumption,
+        chargingStatus: sensorType == 'charging_status'
+            ? data
+            : currentSummary.chargingStatus,
+        lowPowerMode: sensorType == 'low_power_mode'
+            ? data
+            : currentSummary.lowPowerMode,
+        wakeCount: sensorType == 'wake_count' ? data : currentSummary.wakeCount,
       );
     }
   }
@@ -264,6 +308,8 @@ class SensorProvider with ChangeNotifier {
         return locationSummary.pressure;
       case SensorType.voc:
         return locationSummary.voc;
+      case SensorType.iaq:
+        return locationSummary.iaq;
       case SensorType.soilMoisture:
         return locationSummary.soilMoisture;
       case SensorType.phLevel:
@@ -274,6 +320,20 @@ class SensorProvider with ChangeNotifier {
         return locationSummary.tdsPpm;
       case SensorType.dissolvedOxygen:
         return locationSummary.dissolvedOxygen;
+      case SensorType.batteryVoltage:
+        return locationSummary.batteryVoltage;
+      case SensorType.solarVoltage:
+        return locationSummary.solarVoltage;
+      case SensorType.batteryPercentage:
+        return locationSummary.batteryPercentage;
+      case SensorType.powerConsumption:
+        return locationSummary.powerConsumption;
+      case SensorType.chargingStatus:
+        return locationSummary.chargingStatus;
+      case SensorType.lowPowerMode:
+        return locationSummary.lowPowerMode;
+      case SensorType.wakeCount:
+        return locationSummary.wakeCount;
     }
   }
 
@@ -289,14 +349,25 @@ class SensorProvider with ChangeNotifier {
       case SensorType.pressure:
       case SensorType.phLevel:
       case SensorType.soilMoisture:
+      case SensorType.batteryVoltage:
+      case SensorType.solarVoltage:
+      case SensorType.batteryPercentage:
         return data.value < thresholds[0] || data.value > thresholds[1];
       case SensorType.co2:
       case SensorType.voc:
+      case SensorType.iaq:
       case SensorType.tdsPpm:
+      case SensorType.powerConsumption:
         return data.value > thresholds[0];
       case SensorType.waterFlow:
       case SensorType.dissolvedOxygen:
         return data.value < thresholds[0];
+      case SensorType.chargingStatus:
+        return data.value < 0.5; // Not charging
+      case SensorType.lowPowerMode:
+        return data.value > 0.5; // Low power mode active
+      case SensorType.wakeCount:
+        return data.value > thresholds[1]; // Too many wake-ups
     }
   }
 
@@ -356,6 +427,42 @@ class SensorProvider with ChangeNotifier {
       case SensorType.dissolvedOxygen:
         if (data.value < 3.0) return AlertLevel.critical;
         if (data.value < thresholds[0]) return AlertLevel.warning;
+        return AlertLevel.normal;
+
+      case SensorType.batteryVoltage:
+        if (data.value < 3.0) return AlertLevel.critical;
+        if (data.value < thresholds[0]) return AlertLevel.warning;
+        return AlertLevel.normal;
+
+      case SensorType.solarVoltage:
+        if (data.value < 1.0) return AlertLevel.critical;
+        if (data.value < thresholds[0]) return AlertLevel.warning;
+        return AlertLevel.normal;
+
+      case SensorType.batteryPercentage:
+        if (data.value < 10) return AlertLevel.critical;
+        if (data.value < thresholds[0]) return AlertLevel.warning;
+        return AlertLevel.normal;
+
+      case SensorType.powerConsumption:
+        if (data.value > 300) return AlertLevel.critical;
+        if (data.value > thresholds[0]) return AlertLevel.warning;
+        return AlertLevel.normal;
+
+      case SensorType.iaq:
+        if (data.value > 200) return AlertLevel.critical;
+        if (data.value > thresholds[0]) return AlertLevel.warning;
+        return AlertLevel.normal;
+
+      case SensorType.chargingStatus:
+        return data.value > 0.5 ? AlertLevel.normal : AlertLevel.warning;
+
+      case SensorType.lowPowerMode:
+        return data.value > 0.5 ? AlertLevel.warning : AlertLevel.normal;
+
+      case SensorType.wakeCount:
+        if (data.value > 100) return AlertLevel.critical;
+        if (data.value > thresholds[1]) return AlertLevel.warning;
         return AlertLevel.normal;
     }
   }

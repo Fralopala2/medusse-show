@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../models/sensor_data.dart';
-import '../main.dart';
 
 class SensorCard extends StatelessWidget {
   final SensorType sensorType;
@@ -160,16 +159,25 @@ class SensorCard extends StatelessWidget {
       case SensorType.humidity:
       case SensorType.pressure:
       case SensorType.soilMoisture:
+      case SensorType.batteryVoltage:
+      case SensorType.solarVoltage:
+      case SensorType.batteryPercentage:
         return value.toStringAsFixed(1);
       case SensorType.co2:
       case SensorType.voc:
+      case SensorType.iaq:
       case SensorType.tdsPpm:
       case SensorType.dissolvedOxygen:
+      case SensorType.powerConsumption:
+      case SensorType.wakeCount:
         return value.toStringAsFixed(0);
       case SensorType.phLevel:
         return value.toStringAsFixed(2);
       case SensorType.waterFlow:
-        return value.toStringAsFixed(2);
+        return value.toStringAsFixed(1);
+      case SensorType.chargingStatus:
+      case SensorType.lowPowerMode:
+        return value > 0.5 ? 'Activo' : 'Inactivo';
     }
   }
 
@@ -217,6 +225,11 @@ class SensorCard extends StatelessWidget {
         if (data!.value > thresholds[0]) return Colors.orange;
         return Colors.green;
 
+      case SensorType.iaq:
+        if (data!.value > 200) return Colors.red;
+        if (data!.value > thresholds[0]) return Colors.orange;
+        return Colors.green;
+
       case SensorType.pressure:
         if (data!.value < 995 || data!.value > 1035) return Colors.red;
         if (data!.value < thresholds[0] || data!.value > thresholds[1])
@@ -243,6 +256,35 @@ class SensorCard extends StatelessWidget {
         if (data!.value < 3.0) return Colors.red;
         if (data!.value < thresholds[0]) return Colors.orange;
         return Colors.green;
+
+      case SensorType.batteryVoltage:
+        if (data!.value < 3.0) return Colors.red;
+        if (data!.value < thresholds[0]) return Colors.orange;
+        return Colors.green;
+
+      case SensorType.solarVoltage:
+        if (data!.value < 2.0) return Colors.red;
+        if (data!.value < thresholds[0]) return Colors.orange;
+        return Colors.green;
+
+      case SensorType.batteryPercentage:
+        if (data!.value < 20) return Colors.red;
+        if (data!.value < thresholds[0]) return Colors.orange;
+        return Colors.green;
+
+      case SensorType.powerConsumption:
+        if (data!.value > 500) return Colors.red;
+        if (data!.value > thresholds[0]) return Colors.orange;
+        return Colors.green;
+
+      case SensorType.wakeCount:
+        return Colors.green; // No critical thresholds for wake count
+
+      case SensorType.chargingStatus:
+        return data!.value > 0.5 ? Colors.green : Colors.orange;
+
+      case SensorType.lowPowerMode:
+        return data!.value > 0.5 ? Colors.orange : Colors.green;
     }
   }
 
@@ -275,6 +317,11 @@ class SensorCard extends StatelessWidget {
         if (data!.value > thresholds[0]) return 'Advertencia';
         return 'Normal';
 
+      case SensorType.iaq:
+        if (data!.value > 200) return 'Crítico';
+        if (data!.value > thresholds[0]) return 'Advertencia';
+        return 'Normal';
+
       case SensorType.pressure:
         if (data!.value < 995 || data!.value > 1035) return 'Crítico';
         if (data!.value < thresholds[0] || data!.value > thresholds[1])
@@ -301,6 +348,35 @@ class SensorCard extends StatelessWidget {
         if (data!.value < 3.0) return 'Crítico';
         if (data!.value < thresholds[0]) return 'Advertencia';
         return 'Normal';
+
+      case SensorType.batteryVoltage:
+        if (data!.value < 3.0) return 'Crítico';
+        if (data!.value < thresholds[0]) return 'Advertencia';
+        return 'Normal';
+
+      case SensorType.solarVoltage:
+        if (data!.value < 2.0) return 'Crítico';
+        if (data!.value < thresholds[0]) return 'Advertencia';
+        return 'Normal';
+
+      case SensorType.batteryPercentage:
+        if (data!.value < 20) return 'Crítico';
+        if (data!.value < thresholds[0]) return 'Advertencia';
+        return 'Normal';
+
+      case SensorType.powerConsumption:
+        if (data!.value > 500) return 'Crítico';
+        if (data!.value > thresholds[0]) return 'Advertencia';
+        return 'Normal';
+
+      case SensorType.wakeCount:
+        return 'Normal'; // No critical thresholds for wake count
+
+      case SensorType.chargingStatus:
+        return data!.value > 0.5 ? 'Cargando' : 'No cargando';
+
+      case SensorType.lowPowerMode:
+        return data!.value > 0.5 ? 'Modo ahorro' : 'Normal';
     }
   }
 

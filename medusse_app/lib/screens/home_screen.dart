@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/sensor_provider.dart';
 import '../models/sensor_data.dart';
-import '../main.dart';
 import '../widgets/location_card.dart';
 import '../widgets/connection_status.dart';
 import 'location_detail_screen.dart';
