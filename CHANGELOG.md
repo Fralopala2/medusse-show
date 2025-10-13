@@ -1,5 +1,35 @@
 # Changelog - Proyecto Medusse IoT
 
+## [2.2.0] - 2025-10-13 - NUEVA UBICACIÓN: GIMNASIO ✅
+
+### 🏟️ Nueva Ubicación Añadida
+
+#### ✅ Gimnasio Completamente Integrado
+- **Nueva ubicación "gimnasio"** añadida al simulador con temperatura base 23°C
+- **Node ESP32_NODE_03** asignado al gimnasio (laboratorio ahora es NODE_04)
+- **Color naranja (#FF9800)** asignado para diferenciación visual
+- **Integración completa** en todos los paneles de Grafana
+- **Soporte completo** en API REST y App Flutter
+
+#### ✅ Actualizaciones Realizadas
+- **Simulador Python:** 4 ubicaciones con datos diferenciados
+- **Dashboard Grafana:** 5 paneles actualizados con gimnasio
+- **API REST:** Lista de ubicaciones ampliada
+- **App Flutter:** Colores y nombres actualizados
+- **Documentación:** README.md actualizado con nueva información
+
+#### 🎨 Esquema de Colores Actualizado
+- 🔴 **Aula 20:** Rojo (#E53E3E) - Temp. base 22°C
+- 🔵 **Aula 21:** Azul (#3182CE) - Temp. base 24°C
+- 🟠 **Gimnasio:** Naranja (#FF9800) - Temp. base 23°C
+- 🟢 **Laboratorio:** Verde (#38A169) - Temp. base 21°C
+
+### 📊 Impacto en el Sistema
+- **4 ubicaciones monitoreadas** simultáneamente
+- **Datos coherentes** con variaciones realistas por ubicación
+- **Escalabilidad demostrada** para futuras ubicaciones
+- **Compatibilidad total** con arquitectura existente
+
 ## [2.1.0] - 2025-10-13 - AUTOMATIZACIÓN Y OPTIMIZACIONES AVANZADAS ✅
 
 ### 🚀 Nuevas Funcionalidades de Automatización

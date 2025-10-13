@@ -106,6 +106,7 @@ class AppColors {
   static const Color aula20 = Color(0xFFE53E3E);
   static const Color aula21 = Color(0xFF3182CE);
   static const Color laboratorio = Color(0xFF38A169);
+  static const Color gimnasio = Color(0xFFFF9800);
 }
 
 // Extensiones útiles
@@ -146,6 +147,8 @@ extension LocationColors on String {
         return AppColors.aula21;
       case 'laboratorio':
         return AppColors.laboratorio;
+      case 'gimnasio':
+        return AppColors.gimnasio;
       default:
         return AppColors.primary;
     }

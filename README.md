@@ -21,7 +21,7 @@ ESP32 Simulators → MQTT → Telegraf → InfluxDB → Grafana Dashboard
 ```
 proyecto-medusse/
 ├── arduino/                    # Simuladores y firmware ESP32
-│   ├── medusse_simulator.py   # ✅ Simulador principal (3 ubicaciones)
+│   ├── medusse_simulator.py   # ✅ Simulador principal (4 ubicaciones)
 │   └── src/                   # Código ESP32 real
 ├── docker/                    # Stack completo Docker
 │   ├── docker-compose.yml     # Servicios: MQTT, InfluxDB, Grafana, Telegraf
@@ -83,6 +83,7 @@ proyecto-medusse/
 ### Ubicaciones
 - 📍 **Aula 20**
 - 📍 **Aula 21**
+- 📍 **Gimnasio**
 - 📍 **Laboratorio**
 
 ### 📱 Aplicación Móvil Avanzada
@@ -105,7 +106,7 @@ proyecto-medusse/
 - **Ecosistema completo** con monitoreo (`sistema_completo.bat`)
 
 **🏗️ Core IoT System:**
-- **3 ubicaciones monitoreadas:** Aula 20 (22°C), Aula 21 (24°C), Laboratorio (21°C)
+- **4 ubicaciones monitoreadas:** Aula 20 (22°C), Aula 21 (24°C), Gimnasio (23°C), Laboratorio (21°C)
 - **4 tipos de sensores:** Temperatura, Humedad, CO2, Presión
 - **Dashboard Grafana profesional** con logo personalizado y colores diferenciados
 - **Pipeline optimizado** MQTT → Telegraf → InfluxDB → Grafana
@@ -248,6 +249,7 @@ docker logs medusse_telegraf
 - **Colores diferenciados** por ubicación:
   - 🔴 **Aula 20:** Rojo (#FF5722)
   - 🔵 **Aula 21:** Azul (#2196F3)
+  - 🟠 **Gimnasio:** Naranja (#FF9800)
   - 🟢 **Laboratorio:** Verde (#4CAF50)
 
 ### 📊 Paneles Optimizados
@@ -442,9 +444,9 @@ El sistema está **completamente preparado** para migración a hardware real:
 - **6 endpoints API** con documentación completa
 - **3 pantallas móviles** con navegación fluida
 - **4 tipos de sensores** simulados realísticamente
-- **3 ubicaciones** monitoreadas simultáneamente
+- **4 ubicaciones** monitoreadas simultáneamente
 
 ---
 
 _Proyecto desarrollado para **IES José Rodrigo Botet** - Curso 2025/2026_
-_**Versión actual:** 2.1.0 (Octubre 2025)_
+_**Versión actual:** 2.2.0 (Octubre 2025)_

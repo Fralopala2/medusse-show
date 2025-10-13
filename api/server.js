@@ -44,7 +44,7 @@ app.get('/health', (req, res) => {
 
 app.get('/api/locations', (req, res) => {
   // Por ahora devolvemos las ubicaciones conocidas
-  const locations = ['aula20', 'aula21', 'laboratorio'];
+  const locations = ['aula20', 'aula21', 'gimnasio', 'laboratorio'];
   console.log(`📍 Returning ${locations.length} locations:`, locations);
   res.json({ locations });
 });
@@ -393,6 +393,12 @@ function getFallbackData() {
       humidity: { value: 58.7, sensor: 'humidity', time: now, location: 'aula21' },
       co2: { value: 380, sensor: 'co2', time: now, location: 'aula21' },
       pressure: { value: 1012.8, sensor: 'pressure', time: now, location: 'aula21' }
+    },
+    gimnasio: {
+      temperature: { value: 23.1, sensor: 'temperature', time: now, location: 'gimnasio' },
+      humidity: { value: 58.7, sensor: 'humidity', time: now, location: 'gimnasio' },
+      co2: { value: 380, sensor: 'co2', time: now, location: 'gimnasio' },
+      pressure: { value: 1012.8, sensor: 'pressure', time: now, location: 'gimnasio' }
     },
     laboratorio: {
       temperature: { value: 24.2, sensor: 'temperature', time: now, location: 'laboratorio' },

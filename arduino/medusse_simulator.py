@@ -16,12 +16,13 @@ def main():
     try:
         client.connect("localhost", 1883, 60)
         print("✅ Conectado a MQTT broker")
-        print("🔄 Generando datos para 3 ubicaciones... (Ctrl+C para parar)")
+        print("🔄 Generando datos para 4 ubicaciones... (Ctrl+C para parar)")
         
         locations = [
             {"name": "aula20", "node": "ESP32_NODE_01", "temp_base": 22},
-            {"name": "aula21", "node": "ESP32_NODE_02", "temp_base": 24}, 
-            {"name": "laboratorio", "node": "ESP32_NODE_03", "temp_base": 21}
+            {"name": "aula21", "node": "ESP32_NODE_02", "temp_base": 24},
+            {"name": "gimnasio", "node": "ESP32_NODE_03", "temp_base": 23},
+            {"name": "laboratorio", "node": "ESP32_NODE_04", "temp_base": 21}
         ]
         
         i = 0

@@ -153,6 +153,25 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*gimnasio.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Gimnasio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "orange"
+                }
+              }
+            ]
           }
         ]
       },
@@ -302,6 +321,25 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*gimnasio.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Gimnasio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "orange"
+                }
+              }
+            ]
           }
         ]
       },
@@ -400,6 +438,18 @@
               {
                 "id": "displayName",
                 "value": "Laboratorio"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*gimnasio.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Gimnasio"
               }
             ]
           }
@@ -547,6 +597,25 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*gimnasio.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Gimnasio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "orange"
+                }
+              }
+            ]
           }
         ]
       },
@@ -689,6 +758,25 @@
                 "value": {
                   "mode": "fixed",
                   "fixedColor": "green"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*gimnasio.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Gimnasio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "orange"
                 }
               }
             ]

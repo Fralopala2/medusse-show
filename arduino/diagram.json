@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "author": "Medusse",
+  "editor": "wokwi-vscode",
+  "name": "Medusse ESP32 Node",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-dht22", "id": "dht1", "top": -67.2, "left": 172.8, "attrs": {} },
+    { "type": "wokwi-bme280", "id": "bme1", "top": -86.4, "left": 268.8, "attrs": {} },
+    { "type": "wokwi-gas-sensor", "id": "gas1", "top": -105.6, "left": 364.8, "attrs": {} }
+  ],
+  "connections": [
+    [ "esp:3V3", "dht1:VCC", "red", [ "h0" ] ],
+    [ "esp:GND", "dht1:GND", "black", [ "h0" ] ],
+    [ "esp:D4", "dht1:SDA", "green", [ "h0" ] ],
+    [ "esp:3V3", "bme1:VCC", "red", [ "h0" ] ],
+    [ "esp:GND", "bme1:GND", "black", [ "h0" ] ],
+    [ "esp:D21", "bme1:SDA", "blue", [ "h0" ] ],
+    [ "esp:D22", "bme1:SCL", "yellow", [ "h0" ] ],
+    [ "esp:3V3", "gas1:VCC", "red", [ "h0" ] ],
+    [ "esp:GND", "gas1:GND", "black", [ "h0" ] ],
+    [ "esp:A0", "gas1:AO", "orange", [ "h0" ] ]
+  ],
+  "dependencies": {}
+}

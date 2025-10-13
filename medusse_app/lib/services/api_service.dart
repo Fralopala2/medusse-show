@@ -263,6 +263,8 @@ extension LocationExtension on String {
         return 'Aula 21';
       case 'laboratorio':
         return 'Laboratorio';
+      case 'gimnasio':
+        return 'Gimnasio';
       default:
         return this;
     }
@@ -276,6 +278,8 @@ extension LocationExtension on String {
         return 'A21';
       case 'laboratorio':
         return 'LAB';
+      case 'gimnasio':
+        return 'GYM';
       default:
         return substring(0, 3).toUpperCase();
     }

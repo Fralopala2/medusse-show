@@ -83,7 +83,7 @@ secrets.json
 
 # Wokwi simulation files (keep .toml but ignore simulation outputs)
 wokwi-project.txt
-diagram.json
+#diagram.json
 
 # Node modules (if any JavaScript tooling is used)
 node_modules/
