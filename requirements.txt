@@ -1,0 +1,5 @@
+# Dependencias de Python para el proyecto Medusse
+# Instalar con: python -m pip install -r requirements.txt
+
+paho-mqtt
+requests

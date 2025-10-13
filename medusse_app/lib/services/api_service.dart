@@ -2,25 +2,66 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:web_socket_channel/web_socket_channel.dart';
 import '../models/sensor_data.dart';
+import 'config_service.dart';
 
 class ApiService {
-  static const String baseUrl = 'http://192.168.1.128:3001';
-  static const String wsUrl = 'ws://192.168.1.128:3002';
-
   final http.Client _client = http.Client();
   WebSocketChannel? _wsChannel;
+  ConfigService? _configService;
 
   // Singleton pattern
   static final ApiService _instance = ApiService._internal();
   factory ApiService() => _instance;
   ApiService._internal();
 
-  // Health check
-  Future<Map<String, dynamic>> getHealth() async {
+  // Getters dinámicos para las URLs
+  Future<String> get baseUrl async {
+    _configService ??= await ConfigService.getInstance();
+    return _configService!.apiBaseUrl;
+  }
+
+  Future<String> get wsUrl async {
+    _configService ??= await ConfigService.getInstance();
+    return _configService!.webSocketUrl;
+  }
+
+  // Método para actualizar configuración (forzar recarga)
+  void updateConfiguration() {
+    _configService = null;
+    disconnectRealTime(); // Cerrar WebSocket actual si existe
+  }
+
+  // Método para probar conexión con URLs específicas
+  Future<void> testConnection(String apiUrl, String wsUrl) async {
     try {
       final response = await _client
           .get(
-            Uri.parse('$baseUrl/health'),
+            Uri.parse('$apiUrl/health'),
+            headers: {'Content-Type': 'application/json'},
+          )
+          .timeout(const Duration(seconds: 10));
+
+      if (response.statusCode != 200) {
+        throw Exception('Health check failed: ${response.statusCode}');
+      }
+
+      // Opcionalmente, también probar WebSocket
+      // (comentado por ahora para no complicar la prueba)
+      // final testWs = WebSocketChannel.connect(Uri.parse(wsUrl));
+      // await testWs.ready;
+      // testWs.sink.close();
+    } catch (e) {
+      throw Exception('Error connecting to API: $e');
+    }
+  }
+
+  // Health check
+  Future<Map<String, dynamic>> getHealth() async {
+    try {
+      final url = await baseUrl;
+      final response = await _client
+          .get(
+            Uri.parse('$url/health'),
             headers: {'Content-Type': 'application/json'},
           )
           .timeout(const Duration(seconds: 10));
@@ -38,9 +79,10 @@ class ApiService {
   // Obtener ubicaciones disponibles
   Future<List<String>> getLocations() async {
     try {
+      final url = await baseUrl;
       final response = await _client
           .get(
-            Uri.parse('$baseUrl/api/locations'),
+            Uri.parse('$url/api/locations'),
             headers: {'Content-Type': 'application/json'},
           )
           .timeout(const Duration(seconds: 10));
@@ -59,9 +101,10 @@ class ApiService {
   // Obtener resumen de todas las ubicaciones
   Future<Map<String, LocationSummary>> getSummary() async {
     try {
+      final url = await baseUrl;
       final response = await _client
           .get(
-            Uri.parse('$baseUrl/api/summary'),
+            Uri.parse('$url/api/summary'),
             headers: {'Content-Type': 'application/json'},
           )
           .timeout(const Duration(seconds: 10));
@@ -87,9 +130,10 @@ class ApiService {
   // Obtener últimos valores de una ubicación
   Future<LocationSummary> getLatestData(String location) async {
     try {
+      final url = await baseUrl;
       final response = await _client
           .get(
-            Uri.parse('$baseUrl/api/latest/$location'),
+            Uri.parse('$url/api/latest/$location'),
             headers: {'Content-Type': 'application/json'},
           )
           .timeout(const Duration(seconds: 10));
@@ -113,10 +157,11 @@ class ApiService {
     String interval = '5m',
   }) async {
     try {
+      final url = await baseUrl;
       final response = await _client
           .get(
             Uri.parse(
-              '$baseUrl/api/data/$location/${sensorType.apiName}?hours=$hours&interval=$interval',
+              '$url/api/data/$location/${sensorType.apiName}?hours=$hours&interval=$interval',
             ),
             headers: {'Content-Type': 'application/json'},
           )
@@ -144,10 +189,11 @@ class ApiService {
     int hours = 24,
   }) async {
     try {
+      final url = await baseUrl;
       final response = await _client
           .get(
             Uri.parse(
-              '$baseUrl/api/stats/$location/${sensorType.apiName}?hours=$hours',
+              '$url/api/stats/$location/${sensorType.apiName}?hours=$hours',
             ),
             headers: {'Content-Type': 'application/json'},
           )
@@ -165,19 +211,20 @@ class ApiService {
   }
 
   // Conectar a WebSocket para datos en tiempo real
-  Stream<Map<String, dynamic>> connectToRealTimeData() {
+  Stream<Map<String, dynamic>> connectToRealTimeData() async* {
     try {
       _wsChannel?.sink.close();
-      _wsChannel = WebSocketChannel.connect(Uri.parse(wsUrl));
+      final url = await wsUrl;
+      _wsChannel = WebSocketChannel.connect(Uri.parse(url));
 
-      return _wsChannel!.stream.map((data) {
+      await for (final data in _wsChannel!.stream) {
         try {
-          return json.decode(data);
+          yield json.decode(data);
         } catch (e) {
           // Error parsing WebSocket data
-          return <String, dynamic>{};
+          yield <String, dynamic>{};
         }
-      });
+      }
     } catch (e) {
       throw Exception('Error connecting to WebSocket: $e');
     }
