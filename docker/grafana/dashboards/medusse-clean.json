@@ -1,4 +1,47 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_INFLUXDB-MEDUSSE",
+      "label": "InfluxDB-Medusse",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "influxdb",
+      "pluginName": "InfluxDB"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "panel",
+      "id": "gauge",
+      "name": "Gauge",
+      "version": ""
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "10.2.0"
+    },
+    {
+      "type": "datasource",
+      "id": "influxdb",
+      "name": "InfluxDB",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "text",
+      "name": "Text",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -24,7 +67,8 @@
   "panels": [
     {
       "datasource": {
-        "type": "text"
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB-MEDUSSE}"
       },
       "gridPos": {
         "h": 3,
@@ -34,18 +78,22 @@
       },
       "id": 100,
       "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
         "content": "<div style=\"text-align: center; padding: 15px; background: linear-gradient(135deg, #2196F3, #1976D2); border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);\">\n  <div style=\"display: flex; align-items: center; justify-content: center; gap: 20px;\">\n    <div style=\"width: 50px; height: 50px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.2); background: white; display: flex; align-items: center; justify-content: center;\">\n      <!-- PLACEHOLDER: Aquí se insertará el icono real de app_icon.png -->\n      <img src=\"data:image/png;base64,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\" style=\"width: 100%; height: 100%; object-fit: cover;\" alt=\"Medusse Logo\" onerror=\"this.style.display='none'; this.nextElementSibling.style.display='flex';\">\n      <span style=\"color: #1976D2; font-size: 28px; font-weight: bold; font-family: 'Arial', sans-serif; display: none;\">M</span>\n    </div>\n    <div>\n      <h1 style=\"color: white; margin: 0; font-size: 32px; font-weight: bold; font-family: 'Arial', sans-serif; text-shadow: 0 2px 4px rgba(0,0,0,0.3);\">Medusse IoT</h1>\n      <p style=\"color: rgba(255,255,255,0.9); margin: 0; font-size: 16px; font-family: 'Arial', sans-serif;\">Sistema de Monitoreo Ambiental en Tiempo Real</p>\n    </div>\n    <div style=\"display: flex; gap: 12px; color: rgba(255,255,255,0.8); font-size: 11px;\">\n      <div style=\"text-align: center;\">\n        <div style=\"font-size: 16px;\">🌡️</div>\n        <div>Temperatura</div>\n      </div>\n      <div style=\"text-align: center;\">\n        <div style=\"font-size: 16px;\">💧</div>\n        <div>Humedad</div>\n      </div>\n      <div style=\"text-align: center;\">\n        <div style=\"font-size: 16px;\">🫁</div>\n        <div>CO2 & VOC</div>\n      </div>\n      <div style=\"text-align: center;\">\n        <div style=\"font-size: 16px;\">🌪️</div>\n        <div>Presión</div>\n      </div>\n      <div style=\"text-align: center;\">\n        <div style=\"font-size: 16px;\">🌱</div>\n        <div>Suelo</div>\n      </div>\n      <div style=\"text-align: center;\">\n        <div style=\"font-size: 16px;\">🧪</div>\n        <div>pH</div>\n      </div>\n      <div style=\"text-align: center;\">\n        <div style=\"font-size: 16px;\">🌊</div>\n        <div>Flujo</div>\n      </div>\n      <div style=\"text-align: center;\">\n        <div style=\"font-size: 16px;\">🐟</div>\n        <div>O2</div>\n      </div>\n    </div>\n  </div>\n</div>",
         "mode": "html"
       },
       "pluginVersion": "10.2.0",
-      "title": "",
       "transparent": true,
       "type": "text"
     },
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "influxdb-medusse"
+        "uid": "${DS_INFLUXDB-MEDUSSE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -53,6 +101,9 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -62,8 +113,10 @@
             "hideFrom": {
               "legend": false,
               "tooltip": false,
-              "vis": false
+              "vis": false,
+              "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 2,
             "pointSize": 5,
@@ -110,8 +163,8 @@
               {
                 "id": "color",
                 "value": {
-                  "mode": "fixed",
-                  "fixedColor": "blue"
+                  "fixedColor": "red",
+                  "mode": "fixed"
                 }
               }
             ]
@@ -129,8 +182,8 @@
               {
                 "id": "color",
                 "value": {
-                  "mode": "fixed",
-                  "fixedColor": "red"
+                  "fixedColor": "blue",
+                  "mode": "fixed"
                 }
               }
             ]
@@ -148,8 +201,8 @@
               {
                 "id": "color",
                 "value": {
-                  "mode": "fixed",
-                  "fixedColor": "orange"
+                  "fixedColor": "orange",
+                  "mode": "fixed"
                 }
               }
             ]
@@ -167,8 +220,8 @@
               {
                 "id": "color",
                 "value": {
-                  "mode": "fixed",
-                  "fixedColor": "green"
+                  "fixedColor": "green",
+                  "mode": "fixed"
                 }
               }
             ]
@@ -186,8 +239,8 @@
               {
                 "id": "color",
                 "value": {
-                  "mode": "fixed",
-                  "fixedColor": "red"
+                  "fixedColor": "red",
+                  "mode": "fixed"
                 }
               }
             ]
@@ -205,8 +258,8 @@
               {
                 "id": "color",
                 "value": {
-                  "mode": "fixed",
-                  "fixedColor": "blue"
+                  "fixedColor": "blue",
+                  "mode": "fixed"
                 }
               }
             ]
@@ -224,8 +277,8 @@
               {
                 "id": "color",
                 "value": {
-                  "mode": "fixed",
-                  "fixedColor": "green"
+                  "fixedColor": "green",
+                  "mode": "fixed"
                 }
               }
             ]
@@ -243,8 +296,8 @@
               {
                 "id": "color",
                 "value": {
-                  "mode": "fixed",
-                  "fixedColor": "orange"
+                  "fixedColor": "orange",
+                  "mode": "fixed"
                 }
               }
             ]
@@ -260,9 +313,12 @@
       "id": 1,
       "options": {
         "legend": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "displayMode": "table",
-          "placement": "right"
+          "placement": "right",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -273,7 +329,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "influxdb-medusse"
+            "uid": "${DS_INFLUXDB-MEDUSSE}"
           },
           "query": "from(bucket: \"sensors\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"temperature\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> aggregateWindow(every: 30s, fn: mean, createEmpty: false)",
           "refId": "A"
@@ -285,7 +341,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "influxdb-medusse"
+        "uid": "${DS_INFLUXDB-MEDUSSE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -293,6 +349,9 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -302,8 +361,10 @@
             "hideFrom": {
               "legend": false,
               "tooltip": false,
-              "vis": false
+              "vis": false,
+              "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 2,
             "pointSize": 5,
@@ -354,8 +415,8 @@
               {
                 "id": "color",
                 "value": {
-                  "mode": "fixed",
-                  "fixedColor": "red"
+                  "fixedColor": "red",
+                  "mode": "fixed"
                 }
               }
             ]
@@ -373,8 +434,8 @@
               {
                 "id": "color",
                 "value": {
-                  "mode": "fixed",
-                  "fixedColor": "blue"
+                  "fixedColor": "blue",
+                  "mode": "fixed"
                 }
               }
             ]
@@ -392,8 +453,8 @@
               {
                 "id": "color",
                 "value": {
-                  "mode": "fixed",
-                  "fixedColor": "green"
+                  "fixedColor": "green",
+                  "mode": "fixed"
                 }
               }
             ]
@@ -411,8 +472,8 @@
               {
                 "id": "color",
                 "value": {
-                  "mode": "fixed",
-                  "fixedColor": "orange"
+                  "fixedColor": "orange",
+                  "mode": "fixed"
                 }
               }
             ]
@@ -428,9 +489,12 @@
       "id": 2,
       "options": {
         "legend": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "displayMode": "table",
-          "placement": "right"
+          "placement": "right",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -441,7 +505,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "influxdb-medusse"
+            "uid": "${DS_INFLUXDB-MEDUSSE}"
           },
           "query": "from(bucket: \"sensors\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"co2\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> aggregateWindow(every: 30s, fn: mean, createEmpty: false)",
           "refId": "A"
@@ -453,7 +517,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "influxdb-medusse"
+        "uid": "${DS_INFLUXDB-MEDUSSE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -539,11 +603,15 @@
       },
       "id": 3,
       "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
         "orientation": "auto",
         "reduceOptions": {
-          "values": false,
-          "calcs": ["lastNotNull"],
-          "fields": ""
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
         },
         "showThresholdLabels": false,
         "showThresholdMarkers": true
@@ -553,7 +621,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "influxdb-medusse"
+            "uid": "${DS_INFLUXDB-MEDUSSE}"
           },
           "query": "from(bucket: \"sensors\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"co2\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> last()",
           "refId": "A"
@@ -565,7 +633,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "influxdb-medusse"
+        "uid": "${DS_INFLUXDB-MEDUSSE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -573,6 +641,9 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -582,8 +653,10 @@
             "hideFrom": {
               "legend": false,
               "tooltip": false,
-              "vis": false
+              "vis": false,
+              "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 2,
             "pointSize": 5,
@@ -630,8 +703,8 @@
               {
                 "id": "color",
                 "value": {
-                  "mode": "fixed",
-                  "fixedColor": "red"
+                  "fixedColor": "red",
+                  "mode": "fixed"
                 }
               }
             ]
@@ -649,8 +722,8 @@
               {
                 "id": "color",
                 "value": {
-                  "mode": "fixed",
-                  "fixedColor": "blue"
+                  "fixedColor": "blue",
+                  "mode": "fixed"
                 }
               }
             ]
@@ -668,8 +741,8 @@
               {
                 "id": "color",
                 "value": {
-                  "mode": "fixed",
-                  "fixedColor": "green"
+                  "fixedColor": "green",
+                  "mode": "fixed"
                 }
               }
             ]
@@ -687,8 +760,8 @@
               {
                 "id": "color",
                 "value": {
-                  "mode": "fixed",
-                  "fixedColor": "orange"
+                  "fixedColor": "orange",
+                  "mode": "fixed"
                 }
               }
             ]
@@ -704,9 +777,12 @@
       "id": 4,
       "options": {
         "legend": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "displayMode": "table",
-          "placement": "right"
+          "placement": "right",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -717,7 +793,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "influxdb-medusse"
+            "uid": "${DS_INFLUXDB-MEDUSSE}"
           },
           "query": "from(bucket: \"sensors\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"humidity\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> aggregateWindow(every: 30s, fn: mean, createEmpty: false)",
           "refId": "A"
@@ -729,7 +805,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "influxdb-medusse"
+        "uid": "${DS_INFLUXDB-MEDUSSE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -737,6 +813,9 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -746,8 +825,10 @@
             "hideFrom": {
               "legend": false,
               "tooltip": false,
-              "vis": false
+              "vis": false,
+              "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 2,
             "pointSize": 5,
@@ -794,8 +875,8 @@
               {
                 "id": "color",
                 "value": {
-                  "mode": "fixed",
-                  "fixedColor": "red"
+                  "fixedColor": "red",
+                  "mode": "fixed"
                 }
               }
             ]
@@ -813,8 +894,8 @@
               {
                 "id": "color",
                 "value": {
-                  "mode": "fixed",
-                  "fixedColor": "blue"
+                  "fixedColor": "blue",
+                  "mode": "fixed"
                 }
               }
             ]
@@ -832,8 +913,8 @@
               {
                 "id": "color",
                 "value": {
-                  "mode": "fixed",
-                  "fixedColor": "green"
+                  "fixedColor": "green",
+                  "mode": "fixed"
                 }
               }
             ]
@@ -851,8 +932,8 @@
               {
                 "id": "color",
                 "value": {
-                  "mode": "fixed",
-                  "fixedColor": "orange"
+                  "fixedColor": "orange",
+                  "mode": "fixed"
                 }
               }
             ]
@@ -868,9 +949,12 @@
       "id": 5,
       "options": {
         "legend": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "displayMode": "table",
-          "placement": "right"
+          "placement": "right",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -881,7 +965,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "influxdb-medusse"
+            "uid": "${DS_INFLUXDB-MEDUSSE}"
           },
           "query": "from(bucket: \"sensors\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"pressure\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> aggregateWindow(every: 30s, fn: mean, createEmpty: false)",
           "refId": "A"
@@ -893,7 +977,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "influxdb-medusse"
+        "uid": "${DS_INFLUXDB-MEDUSSE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -901,6 +985,9 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -910,157 +997,10 @@
             "hideFrom": {
               "legend": false,
               "tooltip": false,
-              "vis": false
+              "vis": false,
+              "viz": false
             },
-            "lineInterpolation": "linear",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "line"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 150
-              },
-              {
-                "color": "red",
-                "value": 300
-              }
-            ]
-          },
-          "unit": "conc"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*aula20.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Aula 20"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "blue"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*laboratorio.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Laboratorio"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "green"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*gimnasio.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Gimnasio"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "orange"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 19
-      },
-      "id": 6,
-      "options": {
-        "legend": {
-          "calcs": ["lastNotNull"],
-          "displayMode": "table",
-          "placement": "right"
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "influxdb-medusse"
-          },
-          "query": "from(bucket: \"sensors\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"voc\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> aggregateWindow(every: 30s, fn: mean, createEmpty: false)",
-          "refId": "A"
-        }
-      ],
-      "title": "🫁 Calidad del Aire (VOC) por Ubicación",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "influxdb-medusse"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "vis": false
-            },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 2,
             "pointSize": 5,
@@ -1111,8 +1051,8 @@
               {
                 "id": "color",
                 "value": {
-                  "mode": "fixed",
-                  "fixedColor": "blue"
+                  "fixedColor": "red",
+                  "mode": "fixed"
                 }
               }
             ]
@@ -1130,38 +1070,48 @@
               {
                 "id": "color",
                 "value": {
-                  "mode": "fixed",
-                  "fixedColor": "green"
+                  "fixedColor": "green",
+                  "mode": "fixed"
                 }
               }
             ]
           },
           {
-            "matcher": { "id": "byRegexp", "options": ".*aula20.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula20.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Aula 20" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "red" } }
+              {
+                "id": "displayName",
+                "value": "Aula 20"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
             ]
           },
           {
-            "matcher": { "id": "byRegexp", "options": ".*aula21.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula21.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Aula 21" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "blue" } }
-            ]
-          },
-          {
-            "matcher": { "id": "byRegexp", "options": ".*gimnasio.*" },
-            "properties": [
-              { "id": "displayName", "value": "Gimnasio" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "orange" } }
-            ]
-          },
-          {
-            "matcher": { "id": "byRegexp", "options": ".*laboratorio.*" },
-            "properties": [
-              { "id": "displayName", "value": "Laboratorio" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "green" } }
+              {
+                "id": "displayName",
+                "value": "Aula 21"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
             ]
           },
           {
@@ -1177,8 +1127,46 @@
               {
                 "id": "color",
                 "value": {
-                  "mode": "fixed",
-                  "fixedColor": "orange"
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*laboratorio.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Laboratorio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*gimnasio.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Gimnasio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
                 }
               }
             ]
@@ -1194,9 +1182,12 @@
       "id": 7,
       "options": {
         "legend": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "displayMode": "table",
-          "placement": "right"
+          "placement": "right",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -1207,7 +1198,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "influxdb-medusse"
+            "uid": "${DS_INFLUXDB-MEDUSSE}"
           },
           "query": "from(bucket: \"sensors\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"soil_moisture\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> aggregateWindow(every: 30s, fn: mean, createEmpty: false)",
           "refId": "A"
@@ -1219,7 +1210,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "influxdb-medusse"
+        "uid": "${DS_INFLUXDB-MEDUSSE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1227,6 +1218,9 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -1236,8 +1230,10 @@
             "hideFrom": {
               "legend": false,
               "tooltip": false,
-              "vis": false
+              "vis": false,
+              "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 2,
             "pointSize": 5,
@@ -1259,8 +1255,357 @@
             "mode": "absolute",
             "steps": [
               {
+                "color": "green"
+              },
+              {
+                "color": "yellow",
+                "value": 150
+              },
+              {
                 "color": "red",
-                "value": null
+                "value": 300
+              }
+            ]
+          },
+          "unit": "conc"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula20.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Aula 20"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*laboratorio.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Laboratorio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*gimnasio.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Gimnasio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula21.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Aula 21"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 27
+      },
+      "id": 6,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB-MEDUSSE}"
+          },
+          "query": "from(bucket: \"sensors\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"voc\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> aggregateWindow(every: 30s, fn: mean, createEmpty: false)",
+          "refId": "A"
+        }
+      ],
+      "title": "🫁 Calidad del Aire (VOC) por Ubicación",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB-MEDUSSE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "vis": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red"
+              },
+              {
+                "color": "yellow",
+                "value": 1
+              },
+              {
+                "color": "green",
+                "value": 2
+              }
+            ]
+          },
+          "unit": "litre"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula20.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Aula 20"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*laboratorio.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Laboratorio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula21.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Aula 21"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*gimnasio.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Gimnasio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 27
+      },
+      "id": 9,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB-MEDUSSE}"
+          },
+          "query": "from(bucket: \"sensors\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"water_flow\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> aggregateWindow(every: 30s, fn: mean, createEmpty: false)",
+          "refId": "A"
+        }
+      ],
+      "title": "🌊 Flujo de Agua por Ubicación",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB-MEDUSSE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "vis": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red"
               },
               {
                 "color": "yellow",
@@ -1296,8 +1641,8 @@
               {
                 "id": "color",
                 "value": {
-                  "mode": "fixed",
-                  "fixedColor": "blue"
+                  "fixedColor": "red",
+                  "mode": "fixed"
                 }
               }
             ]
@@ -1315,8 +1660,8 @@
               {
                 "id": "color",
                 "value": {
-                  "mode": "fixed",
-                  "fixedColor": "green"
+                  "fixedColor": "green",
+                  "mode": "fixed"
                 }
               }
             ]
@@ -1324,186 +1669,18 @@
           {
             "matcher": {
               "id": "byRegexp",
-              "options": ".*biblioteca.*"
+              "options": ".*aula21.*"
             },
             "properties": [
               {
                 "id": "displayName",
-                "value": "Biblioteca"
+                "value": "Aula 21"
               },
               {
                 "id": "color",
                 "value": {
-                  "mode": "fixed",
-                  "fixedColor": "purple"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*gimnasio.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Gimnasio"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "orange"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 27
-      },
-      "id": 8,
-      "options": {
-        "legend": {
-          "calcs": ["lastNotNull"],
-          "displayMode": "table",
-          "placement": "right"
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "influxdb-medusse"
-          },
-          "query": "from(bucket: \"sensors\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ph_level\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> aggregateWindow(every: 30s, fn: mean, createEmpty: false)",
-          "refId": "A"
-        }
-      ],
-      "title": "🧪 Nivel de pH por Ubicación",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "influxdb-medusse"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "vis": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "line"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 1
-              },
-              {
-                "color": "green",
-                "value": 2
-              }
-            ]
-          },
-          "unit": "litre"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*aula20.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Aula 20"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "blue"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*laboratorio.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Laboratorio"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "green"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*biblioteca.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Biblioteca"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "purple"
+                  "fixedColor": "blue",
+                  "mode": "fixed"
                 }
               }
             ]
@@ -1521,176 +1698,8 @@
               {
                 "id": "color",
                 "value": {
-                  "mode": "fixed",
-                  "fixedColor": "orange"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 27
-      },
-      "id": 9,
-      "options": {
-        "legend": {
-          "calcs": ["lastNotNull"],
-          "displayMode": "table",
-          "placement": "right"
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "influxdb-medusse"
-          },
-          "query": "from(bucket: \"sensors\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"water_flow\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> aggregateWindow(every: 30s, fn: mean, createEmpty: false)",
-          "refId": "A"
-        }
-      ],
-      "title": "🌊 Flujo de Agua por Ubicación",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "influxdb-medusse"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "vis": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "line"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 300
-              },
-              {
-                "color": "red",
-                "value": 600
-              }
-            ]
-          },
-          "unit": "ppm"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*aula20.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Aula 20"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "blue"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*laboratorio.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Laboratorio"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "green"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*biblioteca.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Biblioteca"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "purple"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*gimnasio.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Gimnasio"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "orange"
+                  "fixedColor": "orange",
+                  "mode": "fixed"
                 }
               }
             ]
@@ -1703,12 +1712,15 @@
         "x": 0,
         "y": 35
       },
-      "id": 10,
+      "id": 8,
       "options": {
         "legend": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "displayMode": "table",
-          "placement": "right"
+          "placement": "right",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -1719,19 +1731,19 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "influxdb-medusse"
+            "uid": "${DS_INFLUXDB-MEDUSSE}"
           },
-          "query": "from(bucket: \"sensors\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"tds_ppm\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> aggregateWindow(every: 30s, fn: mean, createEmpty: false)",
+          "query": "from(bucket: \"sensors\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ph_level\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> aggregateWindow(every: 30s, fn: mean, createEmpty: false)",
           "refId": "A"
         }
       ],
-      "title": "💧 TDS (Sólidos Disueltos) por Ubicación",
+      "title": "🧪 Nivel de pH por Ubicación",
       "type": "timeseries"
     },
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "influxdb-medusse"
+        "uid": "${DS_INFLUXDB-MEDUSSE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1739,6 +1751,9 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -1748,8 +1763,10 @@
             "hideFrom": {
               "legend": false,
               "tooltip": false,
-              "vis": false
+              "vis": false,
+              "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 2,
             "pointSize": 5,
@@ -1771,8 +1788,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red",
-                "value": null
+                "color": "red"
               },
               {
                 "color": "yellow",
@@ -1800,8 +1816,8 @@
               {
                 "id": "color",
                 "value": {
-                  "mode": "fixed",
-                  "fixedColor": "blue"
+                  "fixedColor": "red",
+                  "mode": "fixed"
                 }
               }
             ]
@@ -1819,8 +1835,8 @@
               {
                 "id": "color",
                 "value": {
-                  "mode": "fixed",
-                  "fixedColor": "green"
+                  "fixedColor": "green",
+                  "mode": "fixed"
                 }
               }
             ]
@@ -1828,18 +1844,18 @@
           {
             "matcher": {
               "id": "byRegexp",
-              "options": ".*biblioteca.*"
+              "options": ".*aula21.*"
             },
             "properties": [
               {
                 "id": "displayName",
-                "value": "Biblioteca"
+                "value": "Aula 21"
               },
               {
                 "id": "color",
                 "value": {
-                  "mode": "fixed",
-                  "fixedColor": "purple"
+                  "fixedColor": "blue",
+                  "mode": "fixed"
                 }
               }
             ]
@@ -1857,8 +1873,8 @@
               {
                 "id": "color",
                 "value": {
-                  "mode": "fixed",
-                  "fixedColor": "orange"
+                  "fixedColor": "orange",
+                  "mode": "fixed"
                 }
               }
             ]
@@ -1874,9 +1890,12 @@
       "id": 11,
       "options": {
         "legend": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "displayMode": "table",
-          "placement": "right"
+          "placement": "right",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -1887,7 +1906,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "influxdb-medusse"
+            "uid": "${DS_INFLUXDB-MEDUSSE}"
           },
           "query": "from(bucket: \"sensors\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"dissolved_oxygen\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> aggregateWindow(every: 30s, fn: mean, createEmpty: false)",
           "refId": "A"
@@ -1895,12 +1914,191 @@
       ],
       "title": "🐟 Oxígeno Disuelto por Ubicación",
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB-MEDUSSE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "vis": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "yellow",
+                "value": 300
+              },
+              {
+                "color": "red",
+                "value": 600
+              }
+            ]
+          },
+          "unit": "ppm"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula20.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Aula 20"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*laboratorio.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Laboratorio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula21.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Aula 21"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*gimnasio.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Gimnasio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 43
+      },
+      "id": 10,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB-MEDUSSE}"
+          },
+          "query": "from(bucket: \"sensors\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"tds\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> aggregateWindow(every: 30s, fn: mean, createEmpty: false)",
+          "refId": "A"
+        }
+      ],
+      "title": "💧 TDS (Sólidos Disueltos) por Ubicación",
+      "type": "timeseries"
     }
   ],
   "refresh": "30s",
-  "schemaVersion": 37,
-  "style": "dark",
-  "tags": ["medusse", "iot", "sensors", "clean"],
+  "schemaVersion": 38,
+  "tags": [
+    "medusse",
+    "iot",
+    "sensors",
+    "clean"
+  ],
   "templating": {
     "list": []
   },
@@ -1912,6 +2110,6 @@
   "timezone": "",
   "title": "Medusse IoT - Dashboard Completo",
   "uid": "medusse-clean",
-  "version": 1,
+  "version": 19,
   "weekStart": ""
 }
