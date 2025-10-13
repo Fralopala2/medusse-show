@@ -1,5 +1,87 @@
 # Changelog - Proyecto Medusse IoT
 
+## [2.1.0] - 2025-10-13 - AUTOMATIZACIÓN Y OPTIMIZACIONES AVANZADAS ✅
+
+### 🚀 Nuevas Funcionalidades de Automatización
+
+#### ✅ Scripts de Instalación Automática
+- **`instalar_proyecto.bat`** - Instalación completa automática para equipos nuevos
+- **`setup_rapido.bat`** - Setup rápido para equipos con Docker instalado
+- **`verificar_rapido.bat`** - Verificación rápida del sistema (30 segundos)
+- **`sistema_completo.bat`** - Ejecución del ecosistema completo con diagnósticos
+
+#### ✅ Sistema de Verificación Inteligente
+- **Detección automática** de Docker Desktop
+- **Verificación de servicios** con timeout inteligente
+- **Diagnóstico de problemas** comunes automático
+- **Instalación de dependencias** Python automática
+
+#### ✅ Optimizaciones de Rendimiento
+- **Cache inteligente** en API REST (30 segundos)
+- **Agregación de datos** optimizada en Telegraf
+- **Configuración de memoria** optimizada para contenedores
+- **Pipeline de datos** sin pérdidas con retry automático
+
+#### ✅ Documentación Completa Actualizada
+- **`INSTALACION.md`** - Guías de instalación detalladas
+- **`QUICK_START.md`** - Inicio rápido en menos de 5 minutos
+- **`MIGRACION.md`** - Preparación para migración a LoRa Mesh
+- **Troubleshooting** avanzado para problemas comunes
+
+### 📊 Configuraciones Avanzadas Implementadas
+
+#### ✅ Telegraf Pipeline Optimizado
+- **Parsing inteligente** de topics MQTT
+- **Agregación temporal** cada 30 segundos
+- **Múltiples consumers** para raw data y sensores específicos
+- **Procesamiento de timestamps** automático
+
+#### ✅ Grafana Dashboard Profesional
+- **Branding personalizado** con logo Medusse
+- **Header estilizado** con iconos de sensores
+- **Colores diferenciados** por ubicación (Rojo, Azul, Verde)
+- **Umbrales de CO2** con sistema de alertas visual
+
+#### ✅ Configuración Docker Productiva
+- **Volúmenes persistentes** para todos los servicios
+- **Networking interno** optimizado (medusse_network)
+- **Variables de entorno** configuradas para producción
+- **Restart policies** automáticas
+
+### 🔧 Mejoras Técnicas
+
+#### ✅ API REST Robusta
+- **Manejo de errores** completo con try-catch
+- **Logging detallado** para debugging
+- **CORS habilitado** para desarrollo
+- **Timeout configurado** para consultas InfluxDB
+
+#### ✅ Flutter App Profesional
+- **Google Fonts** (Inter) para tipografía moderna
+- **Provider pattern** para gestión de estado
+- **Material Design 3** con tema personalizado
+- **Iconos personalizados** y assets optimizados
+
+#### ✅ Simulador de Datos Realista
+- **Variación por ubicación** (temperaturas base diferentes)
+- **Datos coherentes** con rangos realistas
+- **Timestamps precisos** en milisegundos
+- **Node IDs diferenciados** por ESP32
+
+### 📱 Características Móviles Avanzadas
+
+#### ✅ Interfaz de Usuario Optimizada
+- **Cards elevation** con sombras Material
+- **Botones sin elevation** para diseño plano moderno
+- **Border radius** consistente (12px) en toda la app
+- **Color scheme** generado desde seed color
+
+#### ✅ Navegación y UX
+- **Estructura de 3 pantallas** bien definida
+- **Navegación intuitiva** entre ubicaciones
+- **Estados de carga** y manejo de errores
+- **Actualización automática** de datos
+
 ## [2.0.0] - 2025-10-11 - SISTEMA COMPLETO CON API Y APP MÓVIL ✅
 
 ### 🎉 HITO PRINCIPAL: Ecosistema IoT Completo
@@ -49,17 +131,91 @@
 - `probar_api.bat` - Testing automático API
 - `ejecutar_flutter.bat` - Ejecutar app Flutter
 
+### 📊 Configuración InfluxDB v2 Completa
+- **Token de administración** preconfigurado: `medusse-admin-token-2025`
+- **Organización** predefinida: `iescelia`
+- **Bucket de sensores** automático: `sensors`
+- **Usuario administrador** configurado: `admin/medusse2025`
+- **Configuración persistente** con volúmenes Docker
+
+### 🛡️ Configuración MQTT Segura
+- **Broker Mosquitto 2.0** con configuración optimizada
+- **WebSocket habilitado** en puerto 9001
+- **Logs persistentes** para debugging
+- **Configuración de retención** de mensajes
+
+### 🎨 Personalización Visual Avanzada
+- **Logo personalizado** integrado en dashboard
+- **Gradientes CSS** en header de Grafana
+- **Iconos emoji** para tipos de sensores (🌡️💧🫁🌪️)
+- **Paleta de colores** coherente en toda la interfaz
+
 ### 🎯 Preparado para LoRa Mesh
 - **Arquitectura compatible** - Solo cambiar gateway
 - **Formato datos idéntico** - Sin modificar API/Flutter
 - **Pipeline sin cambios** - MQTT → InfluxDB → Grafana
 - **Documentación migración** completa
 
+### 🔌 Gateway Avanzado Implementado
+- **Múltiples fuentes de datos** (serial, simuladores, archivos)
+- **Procesamiento JSON estructurado** con validación
+- **Estadísticas en tiempo real** de mensajes procesados
+- **Reconexión automática** a MQTT en caso de fallos
+- **Threading para múltiples nodos** ESP32
+
+### 💾 Código ESP32 Producción
+- **Sensores múltiples** DHT22, BME280, sensor de gas
+- **Configuración I2C** optimizada (SDA/SCL en pines 21/22)
+- **Validación de lecturas** con filtros anti-ruido
+- **Estructura JSON** compatible con pipeline completo
+- **Node ID configurable** por ubicación (`ESP32_NODE_01/02/03`)
+
+### 📊 Características Simulador Avanzadas
+- **Datos por ubicación** con bases térmicas diferentes
+  - Aula 20: 22°C base
+  - Aula 21: 24°C base
+  - Laboratorio: 21°C base
+- **Variaciones realistas** con rangos controlados
+- **Publicación MQTT directa** sin intermediarios
+- **Timestamps precisos** en milisegundos Unix
+
 ### 📁 Archivos Nuevos
 - `api/` - Directorio completo API REST
 - `medusse_app/` - Directorio completo Flutter
 - `README_FLUTTER.md` - Documentación app móvil
 - Scripts de ejecución y testing
+
+### 📦 Dependencias Completas Configuradas
+
+#### ✅ Node.js API Dependencies
+- **@influxdata/influxdb-client** ^1.35.0 - Cliente InfluxDB oficial
+- **express** ^4.18.2 - Framework web robusto
+- **cors** ^2.8.5 - Cross-origin resource sharing
+- **ws** ^8.14.2 - WebSocket server/client
+- **mqtt** ^5.3.0 - Cliente MQTT moderno
+- **dotenv** ^16.3.1 - Variables de entorno
+
+#### ✅ Flutter App Dependencies
+- **fl_chart** ^0.66.0 - Gráficos interactivos avanzados
+- **provider** ^6.1.1 - Gestión de estado reactiva
+- **go_router** ^12.1.3 - Navegación declarativa
+- **http** ^1.1.0 - Cliente HTTP/REST
+- **web_socket_channel** ^2.4.0 - WebSocket Flutter
+- **google_fonts** ^6.1.0 - Tipografía Google Fonts
+- **shared_preferences** ^2.2.2 - Almacenamiento local
+- **intl** ^0.19.0 - Internacionalización
+
+#### ✅ Python Ecosystem
+- **paho-mqtt** - Cliente MQTT para Python
+- **requests** - HTTP client para testing API
+- **json** - Procesamiento de datos estructurados
+- **threading** - Manejo de múltiples nodos simultáneos
+
+### 🏗️ Arquitectura de Microservicios
+- **4 contenedores Docker** independientes y escalables
+- **Red interna** medusse_network para comunicación segura
+- **Volúmenes persistentes** para cada servicio
+- **Health checks** automáticos en todos los servicios
 
 ## [1.0.0] - 2025-10-09 - PROYECTO CORE COMPLETADO ✅
 
@@ -126,7 +282,7 @@ demo.bat         # Ejecutar demo completa
 - **Telegraf**: Pipeline MQTT→InfluxDB
 - **Grafana 10.2.0**: Puerto 3000, dashboards automáticos
 
-## [0.3.0] - 2025-01-08 - Gateway y Simuladores
+## [0.3.0] - 2025-10-08 - Gateway y Simuladores
 
 ### ✅ Completado
 - **Gateway Medusse funcional con MQTT**
@@ -138,7 +294,7 @@ demo.bat         # Ejecutar demo completa
 - `arduino/test_multiple_nodes.py` - Simulador múltiples nodos
 - `arduino/simulate_serial.py` - Simulador single node
 
-## [0.2.0] - 2025-01-08 - Firmware ESP32
+## [0.2.0] - 2025-10-08 - Firmware ESP32
 
 ### ✅ Completado
 - **Firmware ESP32 con sensores reales**
@@ -171,5 +327,5 @@ demo.bat         # Ejecutar demo completa
 
 ---
 
-*Desarrollado para IES Celia Viñas - Curso 2024/2025*  
+*Desarrollado para IES José Rodrigo Botet - Curso 2026/2026*
 *Autor: Francisco Manuel López Alarte*

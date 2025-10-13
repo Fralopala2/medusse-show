@@ -299,8 +299,7 @@ def main():
     parser.add_argument("--broker", default="localhost", help="MQTT broker address")
     parser.add_argument("--port", type=int, default=1883, help="MQTT broker port")
     parser.add_argument("--topic", default="iescelia", help="Base MQTT topic")
-    parser.add_argument("--source", choices=["serial", "simulator"], default="simulator", 
-                       help="Data source type")
+    parser.add_argument("--source", choices=["serial", "simulator"], default="simulator", help="Data source type")
     parser.add_argument("--path", help="Serial port or simulator script path")
     parser.add_argument("--baud", type=int, default=115200, help="Serial baud rate")
     
