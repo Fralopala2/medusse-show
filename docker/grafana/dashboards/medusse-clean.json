@@ -111,7 +111,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "blue"
+                  "fixedColor": "red"
                 }
               }
             ]
@@ -963,7 +963,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "blue"
+                  "fixedColor": "red"
                 }
               }
             ]
@@ -1112,7 +1112,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "blue"
+                  "fixedColor": "red"
                 }
               }
             ]
@@ -1297,7 +1297,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "blue"
+                  "fixedColor": "red"
                 }
               }
             ]
@@ -1324,18 +1324,18 @@
           {
             "matcher": {
               "id": "byRegexp",
-              "options": ".*biblioteca.*"
+              "options": ".*aula21.*"
             },
             "properties": [
               {
                 "id": "displayName",
-                "value": "Biblioteca"
+                "value": "Aula 21"
               },
               {
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "purple"
+                  "fixedColor": "blue"
                 }
               }
             ]
@@ -1465,7 +1465,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "blue"
+                  "fixedColor": "red"
                 }
               }
             ]
@@ -1492,18 +1492,18 @@
           {
             "matcher": {
               "id": "byRegexp",
-              "options": ".*biblioteca.*"
+              "options": ".*aula21.*"
             },
             "properties": [
               {
                 "id": "displayName",
-                "value": "Biblioteca"
+                "value": "Aula 21"
               },
               {
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "purple"
+                  "fixedColor": "blue"
                 }
               }
             ]
@@ -1633,7 +1633,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "blue"
+                  "fixedColor": "red"
                 }
               }
             ]
@@ -1660,18 +1660,18 @@
           {
             "matcher": {
               "id": "byRegexp",
-              "options": ".*biblioteca.*"
+              "options": ".*aula21.*"
             },
             "properties": [
               {
                 "id": "displayName",
-                "value": "Biblioteca"
+                "value": "Aula 21"
               },
               {
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "purple"
+                  "fixedColor": "blue"
                 }
               }
             ]
@@ -1721,7 +1721,7 @@
             "type": "influxdb",
             "uid": "influxdb-medusse"
           },
-          "query": "from(bucket: \"sensors\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"tds_ppm\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> aggregateWindow(every: 30s, fn: mean, createEmpty: false)",
+          "query": "from(bucket: \"sensors\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"tds\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> aggregateWindow(every: 30s, fn: mean, createEmpty: false)",
           "refId": "A"
         }
       ],
@@ -1801,7 +1801,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "blue"
+                  "fixedColor": "red"
                 }
               }
             ]
@@ -1828,18 +1828,18 @@
           {
             "matcher": {
               "id": "byRegexp",
-              "options": ".*biblioteca.*"
+              "options": ".*aula21.*"
             },
             "properties": [
               {
                 "id": "displayName",
-                "value": "Biblioteca"
+                "value": "Aula 21"
               },
               {
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "purple"
+                  "fixedColor": "blue"
                 }
               }
             ]
