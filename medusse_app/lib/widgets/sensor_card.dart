@@ -50,50 +50,46 @@ class SensorCard extends StatelessWidget {
                   ),
                   const SizedBox(width: 12),
                   Expanded(
-                    child: Row(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(
-                          child: Text(
-                            sensorType.displayName,
-                            style: Theme.of(context).textTheme.titleMedium
-                                ?.copyWith(fontWeight: FontWeight.w600),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                        Text(
+                          sensorType.displayName,
+                          style: Theme.of(context).textTheme.titleMedium
+                              ?.copyWith(fontWeight: FontWeight.w600),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        if (hasData) ...[
-                          Text(
-                            hasData ? _formatValue(value!) : '--',
-                            style: Theme.of(context).textTheme.titleMedium
-                                ?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color: sensorType.color,
-                                ),
+                        if (hasData)
+                          Wrap(
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            spacing: 4,
+                            runSpacing: 4,
+                            children: [
+                              Text(
+                                '${_formatValue(value!)} ${sensorType.unit}',
+                                style: Theme.of(context).textTheme.bodySmall
+                                    ?.copyWith(color: Colors.grey[600]),
+                              ),
+                              Text(
+                                '·',
+                                style: Theme.of(context).textTheme.bodySmall
+                                    ?.copyWith(color: Colors.grey[500]),
+                              ),
+                              Text(
+                                'Last: ${_formatTimestamp(timestamp!)}',
+                                style: Theme.of(context).textTheme.bodySmall
+                                    ?.copyWith(color: Colors.grey[500]),
+                              ),
+                            ],
                           ),
-                          const SizedBox(width: 4),
-                          Text(
-                            sensorType.unit,
-                            style: Theme.of(context).textTheme.bodyMedium
-                                ?.copyWith(color: Colors.grey[600]),
-                          ),
-                          const SizedBox(width: 12),
-                          Text(
-                            'Last *',
-                            style: Theme.of(context).textTheme.bodySmall
-                                ?.copyWith(color: Colors.grey[500]),
-                          ),
-                          const SizedBox(width: 2),
-                          Text(
-                            _formatTimestamp(timestamp!),
-                            style: Theme.of(context).textTheme.bodySmall
-                                ?.copyWith(color: Colors.grey[700]),
-                          ),
-                        ],
                       ],
                     ),
                   ),
-                  if (showAlert)
+                  if (showAlert) ...[
+                    const SizedBox(width: 8),
                     Icon(Icons.warning, color: Colors.orange[700], size: 20),
+                  ],
                 ],
               ),
 
