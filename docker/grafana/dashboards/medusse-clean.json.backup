@@ -1,0 +1,87 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 6,
+  "links": [],
+  "liveNow": false,
+  "panels": [],
+  "refresh": "30s",
+  "schemaVersion": 38,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "hide": 0,
+        "includeAll": true,
+        "multi": true,
+        "name": "location",
+        "options": [
+          {
+            "selected": true,
+            "text": "All",
+            "value": "$__all"
+          },
+          {
+            "selected": false,
+            "text": "aula20",
+            "value": "aula20"
+          },
+          {
+            "selected": false,
+            "text": "aula21",
+            "value": "aula21"
+          },
+          {
+            "selected": false,
+            "text": "gimnasio",
+            "value": "gimnasio"
+          },
+          {
+            "selected": false,
+            "text": "laboratorio",
+            "value": "laboratorio"
+          }
+        ],
+        "query": "aula20,aula21,gimnasio,laboratorio",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Medusse IoT - Dashboard Completo",
+  "uid": "medusse-clean",
+  "version": 2,
+  "weekStart": ""
+}
