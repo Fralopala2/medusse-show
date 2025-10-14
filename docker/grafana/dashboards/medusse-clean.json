@@ -89,10 +89,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
+        "h": 7,
         "w": 4,
-        "x": 0,
-        "y": 4
+        "x": 2,
+        "y": 5
       },
       "id": 102,
       "options": {
@@ -103,7 +103,9 @@
           "fields": ""
         },
         "showThresholdLabels": false,
-        "showThresholdMarkers": true
+        "showThresholdMarkers": true,
+        "minVizWidth": 75,
+        "minVizHeight": 75
       },
       "pluginVersion": "10.2.0",
       "targets": [
@@ -153,10 +155,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
+        "h": 7,
         "w": 4,
-        "x": 4,
-        "y": 4
+        "x": 6,
+        "y": 5
       },
       "id": 103,
       "options": {
@@ -167,7 +169,9 @@
           "fields": ""
         },
         "showThresholdLabels": false,
-        "showThresholdMarkers": true
+        "showThresholdMarkers": true,
+        "minVizWidth": 75,
+        "minVizHeight": 75
       },
       "pluginVersion": "10.2.0",
       "targets": [
@@ -217,10 +221,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
+        "h": 7,
         "w": 4,
-        "x": 8,
-        "y": 4
+        "x": 10,
+        "y": 5
       },
       "id": 104,
       "options": {
@@ -231,7 +235,9 @@
           "fields": ""
         },
         "showThresholdLabels": false,
-        "showThresholdMarkers": true
+        "showThresholdMarkers": true,
+        "minVizWidth": 75,
+        "minVizHeight": 75
       },
       "pluginVersion": "10.2.0",
       "targets": [
@@ -281,10 +287,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
+        "h": 7,
         "w": 4,
-        "x": 12,
-        "y": 4
+        "x": 14,
+        "y": 5
       },
       "id": 105,
       "options": {
@@ -295,7 +301,9 @@
           "fields": ""
         },
         "showThresholdLabels": false,
-        "showThresholdMarkers": true
+        "showThresholdMarkers": true,
+        "minVizWidth": 75,
+        "minVizHeight": 75
       },
       "pluginVersion": "10.2.0",
       "targets": [
@@ -345,10 +353,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
+        "h": 7,
         "w": 4,
-        "x": 16,
-        "y": 4
+        "x": 18,
+        "y": 5
       },
       "id": 106,
       "options": {
@@ -359,7 +367,9 @@
           "fields": ""
         },
         "showThresholdLabels": false,
-        "showThresholdMarkers": true
+        "showThresholdMarkers": true,
+        "minVizWidth": 75,
+        "minVizHeight": 75
       },
       "pluginVersion": "10.2.0",
       "targets": [
