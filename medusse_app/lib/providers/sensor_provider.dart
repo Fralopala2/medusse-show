@@ -175,23 +175,42 @@ class SensorProvider with ChangeNotifier {
         return;
       }
 
+      // Ruta 1: Mensajes con { topic, data }
       final topic = message['topic'] as String?;
       final data = message['data'] as Map<String, dynamic>?;
 
-      if (topic == null || data == null) return;
+      if (topic != null && data != null) {
+        // Parsear topic: iescelia/location/sensor
+        final topicParts = topic.split('/');
+        if (topicParts.length != 3) return;
 
-      // Parsear topic: iescelia/location/sensor
-      final topicParts = topic.split('/');
-      if (topicParts.length != 3) return;
+        final location = topicParts[1];
+        final sensorType = topicParts[2];
 
-      final location = topicParts[1];
-      final sensorType = topicParts[2];
+        // Actualizar resumen con nuevo dato
+        final sensorData = SensorData.fromJson(data);
+        _updateSummaryWithNewData(location, sensorType, sensorData);
+        notifyListeners();
+        return;
+      }
 
-      // Actualizar resumen con nuevo dato
-      final sensorData = SensorData.fromJson(data);
-      _updateSummaryWithNewData(location, sensorType, sensorData);
-
-      notifyListeners();
+      // Ruta 2: Mensajes "flat" { location, sensor, value, timestamp }
+      final flatLocation = message['location'] as String?;
+      final flatSensor = message['sensor'] as String?;
+      final flatValue = message['value'];
+      if (flatLocation != null && flatSensor != null && flatValue != null) {
+        final ts = message['timestamp'] ?? message['time'];
+        final sensorData = SensorData.fromJson({
+          'value': flatValue,
+          'sensor': flatSensor,
+          'time': ts ?? DateTime.now().toIso8601String(),
+          'location': flatLocation,
+          'node_id': message['node_id'] ?? '',
+        });
+        _updateSummaryWithNewData(flatLocation, flatSensor, sensorData);
+        notifyListeners();
+        return;
+      }
     } catch (e) {
       // Error handling real-time data
     }
@@ -381,77 +400,101 @@ class SensorProvider with ChangeNotifier {
     switch (sensorType) {
       case SensorType.temperature:
         if (data.value < 15 || data.value > 32) return AlertLevel.critical;
-        if (data.value < thresholds[0] || data.value > thresholds[1])
+        if (data.value < thresholds[0] || data.value > thresholds[1]) {
           return AlertLevel.warning;
+        }
         return AlertLevel.normal;
 
       case SensorType.humidity:
       case SensorType.soilMoisture:
         if (data.value < 20 || data.value > 80) return AlertLevel.critical;
-        if (data.value < thresholds[0] || data.value > thresholds[1])
+        if (data.value < thresholds[0] || data.value > thresholds[1]) {
           return AlertLevel.warning;
+        }
         return AlertLevel.normal;
 
       case SensorType.co2:
         if (data.value > 1500) return AlertLevel.critical;
-        if (data.value > thresholds[0]) return AlertLevel.warning;
+        if (data.value > thresholds[0]) {
+          return AlertLevel.warning;
+        }
         return AlertLevel.normal;
 
       case SensorType.voc:
         if (data.value > 500) return AlertLevel.critical;
-        if (data.value > thresholds[0]) return AlertLevel.warning;
+        if (data.value > thresholds[0]) {
+          return AlertLevel.warning;
+        }
         return AlertLevel.normal;
 
       case SensorType.pressure:
         if (data.value < 995 || data.value > 1035) return AlertLevel.critical;
-        if (data.value < thresholds[0] || data.value > thresholds[1])
+        if (data.value < thresholds[0] || data.value > thresholds[1]) {
           return AlertLevel.warning;
+        }
         return AlertLevel.normal;
 
       case SensorType.phLevel:
         if (data.value < 6.0 || data.value > 8.0) return AlertLevel.critical;
-        if (data.value < thresholds[0] || data.value > thresholds[1])
+        if (data.value < thresholds[0] || data.value > thresholds[1]) {
           return AlertLevel.warning;
+        }
         return AlertLevel.normal;
 
       case SensorType.waterFlow:
         if (data.value < 0.5) return AlertLevel.critical;
-        if (data.value < thresholds[0]) return AlertLevel.warning;
+        if (data.value < thresholds[0]) {
+          return AlertLevel.warning;
+        }
         return AlertLevel.normal;
 
       case SensorType.tdsPpm:
         if (data.value > 1000) return AlertLevel.critical;
-        if (data.value > thresholds[0]) return AlertLevel.warning;
+        if (data.value > thresholds[0]) {
+          return AlertLevel.warning;
+        }
         return AlertLevel.normal;
 
       case SensorType.dissolvedOxygen:
         if (data.value < 3.0) return AlertLevel.critical;
-        if (data.value < thresholds[0]) return AlertLevel.warning;
+        if (data.value < thresholds[0]) {
+          return AlertLevel.warning;
+        }
         return AlertLevel.normal;
 
       case SensorType.batteryVoltage:
         if (data.value < 3.0) return AlertLevel.critical;
-        if (data.value < thresholds[0]) return AlertLevel.warning;
+        if (data.value < thresholds[0]) {
+          return AlertLevel.warning;
+        }
         return AlertLevel.normal;
 
       case SensorType.solarVoltage:
         if (data.value < 1.0) return AlertLevel.critical;
-        if (data.value < thresholds[0]) return AlertLevel.warning;
+        if (data.value < thresholds[0]) {
+          return AlertLevel.warning;
+        }
         return AlertLevel.normal;
 
       case SensorType.batteryPercentage:
         if (data.value < 10) return AlertLevel.critical;
-        if (data.value < thresholds[0]) return AlertLevel.warning;
+        if (data.value < thresholds[0]) {
+          return AlertLevel.warning;
+        }
         return AlertLevel.normal;
 
       case SensorType.powerConsumption:
         if (data.value > 300) return AlertLevel.critical;
-        if (data.value > thresholds[0]) return AlertLevel.warning;
+        if (data.value > thresholds[0]) {
+          return AlertLevel.warning;
+        }
         return AlertLevel.normal;
 
       case SensorType.iaq:
         if (data.value > 200) return AlertLevel.critical;
-        if (data.value > thresholds[0]) return AlertLevel.warning;
+        if (data.value > thresholds[0]) {
+          return AlertLevel.warning;
+        }
         return AlertLevel.normal;
 
       case SensorType.chargingStatus:
@@ -461,8 +504,12 @@ class SensorProvider with ChangeNotifier {
         return data.value > 0.5 ? AlertLevel.warning : AlertLevel.normal;
 
       case SensorType.wakeCount:
-        if (data.value > 100) return AlertLevel.critical;
-        if (data.value > thresholds[1]) return AlertLevel.warning;
+        if (data.value > 100) {
+          return AlertLevel.critical;
+        }
+        if (data.value > thresholds[1]) {
+          return AlertLevel.warning;
+        }
         return AlertLevel.normal;
     }
   }

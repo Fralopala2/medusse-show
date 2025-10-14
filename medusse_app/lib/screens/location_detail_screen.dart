@@ -163,13 +163,12 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
                 SliverPadding(
                   padding: const EdgeInsets.all(16),
                   sliver: SliverGrid(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          childAspectRatio: 0.9,
-                          crossAxisSpacing: 12,
-                          mainAxisSpacing: 12,
-                        ),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2, // siempre 2 columnas
+                      childAspectRatio: 1.1,
+                      crossAxisSpacing: 12,
+                      mainAxisSpacing: 12,
+                    ),
                     delegate: SliverChildListDelegate([
                       SensorCard(
                         sensorType: SensorType.temperature,

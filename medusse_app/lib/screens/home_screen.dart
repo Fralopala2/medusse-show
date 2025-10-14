@@ -61,126 +61,131 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: Consumer<SensorProvider>(
-        builder: (context, provider, child) {
-          if (provider.isLoading && provider.summary.isEmpty) {
-            return const Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircularProgressIndicator(),
-                  SizedBox(height: 16),
-                  Text('Cargando datos de sensores...'),
+      body: SafeArea(
+        top: false,
+        bottom: true,
+        child: Consumer<SensorProvider>(
+          builder: (context, provider, child) {
+            if (provider.isLoading && provider.summary.isEmpty) {
+              return const Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircularProgressIndicator(),
+                    SizedBox(height: 16),
+                    Text('Cargando datos de sensores...'),
+                  ],
+                ),
+              );
+            }
+
+            return RefreshIndicator(
+              onRefresh: provider.refresh,
+              child: CustomScrollView(
+                slivers: [
+                  // Estado de conexión
+                  SliverToBoxAdapter(
+                    child: ConnectionStatus(
+                      isConnected: provider.isConnected,
+                      error: provider.error,
+                      onRetry: provider.refresh,
+                    ),
+                  ),
+
+                  // Resumen general
+                  if (provider.summary.isNotEmpty) ...[
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          'Resumen General',
+                          style: Theme.of(context).textTheme.headlineSmall
+                              ?.copyWith(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    SliverToBoxAdapter(
+                      child: _buildSummaryCards(context, provider),
+                    ),
+                  ],
+
+                  // Ubicaciones
+                  if (provider.locations.isNotEmpty) ...[
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          'Ubicaciones',
+                          style: Theme.of(context).textTheme.headlineSmall
+                              ?.copyWith(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    SliverList(
+                      delegate: SliverChildBuilderDelegate((context, index) {
+                        final location = provider.locations[index];
+                        final summary = provider.summary[location];
+
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0,
+                            vertical: 4.0,
+                          ),
+                          child: LocationCard(
+                            location: location,
+                            summary: summary,
+                            onTap: () =>
+                                _navigateToLocationDetail(context, location),
+                          ),
+                        );
+                      }, childCount: provider.locations.length),
+                    ),
+                  ],
+
+                  // Mensaje si no hay datos
+                  if (provider.summary.isEmpty && !provider.isLoading) ...[
+                    SliverFillRemaining(
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.sensors_off,
+                              size: 64,
+                              color: Colors.grey[400],
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                              'No hay datos disponibles',
+                              style: Theme.of(context).textTheme.titleLarge
+                                  ?.copyWith(color: Colors.grey[600]),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'Verifica que el simulador esté corriendo',
+                              style: Theme.of(context).textTheme.bodyMedium
+                                  ?.copyWith(color: Colors.grey[500]),
+                            ),
+                            const SizedBox(height: 24),
+                            ElevatedButton.icon(
+                              onPressed: provider.refresh,
+                              icon: const Icon(Icons.refresh),
+                              label: const Text('Reintentar'),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+
+                  // Espacio adicional al final
+                  // Espacio adicional al final (más alto para evitar superposición con navbar/FAB)
+                  const SliverToBoxAdapter(child: SizedBox(height: 48)),
                 ],
               ),
             );
-          }
-
-          return RefreshIndicator(
-            onRefresh: provider.refresh,
-            child: CustomScrollView(
-              slivers: [
-                // Estado de conexión
-                SliverToBoxAdapter(
-                  child: ConnectionStatus(
-                    isConnected: provider.isConnected,
-                    error: provider.error,
-                    onRetry: provider.refresh,
-                  ),
-                ),
-
-                // Resumen general
-                if (provider.summary.isNotEmpty) ...[
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text(
-                        'Resumen General',
-                        style: Theme.of(context).textTheme.headlineSmall
-                            ?.copyWith(fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
-                  SliverToBoxAdapter(
-                    child: _buildSummaryCards(context, provider),
-                  ),
-                ],
-
-                // Ubicaciones
-                if (provider.locations.isNotEmpty) ...[
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text(
-                        'Ubicaciones',
-                        style: Theme.of(context).textTheme.headlineSmall
-                            ?.copyWith(fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
-                  SliverList(
-                    delegate: SliverChildBuilderDelegate((context, index) {
-                      final location = provider.locations[index];
-                      final summary = provider.summary[location];
-
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0,
-                          vertical: 4.0,
-                        ),
-                        child: LocationCard(
-                          location: location,
-                          summary: summary,
-                          onTap: () =>
-                              _navigateToLocationDetail(context, location),
-                        ),
-                      );
-                    }, childCount: provider.locations.length),
-                  ),
-                ],
-
-                // Mensaje si no hay datos
-                if (provider.summary.isEmpty && !provider.isLoading) ...[
-                  SliverFillRemaining(
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.sensors_off,
-                            size: 64,
-                            color: Colors.grey[400],
-                          ),
-                          const SizedBox(height: 16),
-                          Text(
-                            'No hay datos disponibles',
-                            style: Theme.of(context).textTheme.titleLarge
-                                ?.copyWith(color: Colors.grey[600]),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            'Verifica que el simulador esté corriendo',
-                            style: Theme.of(context).textTheme.bodyMedium
-                                ?.copyWith(color: Colors.grey[500]),
-                          ),
-                          const SizedBox(height: 24),
-                          ElevatedButton.icon(
-                            onPressed: provider.refresh,
-                            icon: const Icon(Icons.refresh),
-                            label: const Text('Reintentar'),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-
-                // Espacio adicional al final
-                const SliverToBoxAdapter(child: SizedBox(height: 16)),
-              ],
-            ),
-          );
-        },
+          },
+        ),
       ),
       floatingActionButton: Consumer<SensorProvider>(
         builder: (context, provider, child) {
@@ -230,8 +235,8 @@ class _HomeScreenState extends State<HomeScreen> {
       child: GridView.count(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        crossAxisCount: 2,
-        childAspectRatio: 1.3,
+        crossAxisCount: 2, // siempre 2 columnas
+        childAspectRatio: 1.4,
         crossAxisSpacing: 12,
         mainAxisSpacing: 12,
         children: [

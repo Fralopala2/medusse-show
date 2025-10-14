@@ -29,7 +29,7 @@ class SensorCard extends StatelessWidget {
         onTap: onTap,
         borderRadius: BorderRadius.circular(12),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(12.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -61,27 +61,13 @@ class SensorCard extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                         if (hasData)
-                          Wrap(
-                            crossAxisAlignment: WrapCrossAlignment.center,
-                            spacing: 4,
-                            runSpacing: 4,
-                            children: [
-                              Text(
-                                '${_formatValue(value!)} ${sensorType.unit}',
-                                style: Theme.of(context).textTheme.bodySmall
-                                    ?.copyWith(color: Colors.grey[600]),
-                              ),
-                              Text(
-                                '·',
-                                style: Theme.of(context).textTheme.bodySmall
-                                    ?.copyWith(color: Colors.grey[500]),
-                              ),
-                              Text(
-                                'Last: ${_formatTimestamp(timestamp!)}',
-                                style: Theme.of(context).textTheme.bodySmall
-                                    ?.copyWith(color: Colors.grey[500]),
-                              ),
-                            ],
+                          Text(
+                            // Compact single-line meta: value + unit · time
+                            '${_formatValue(value!)} ${sensorType.unit} · ${_formatTimestamp(timestamp!)}',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context).textTheme.bodySmall
+                                ?.copyWith(color: Colors.grey[600]),
                           ),
                       ],
                     ),
@@ -139,6 +125,8 @@ class SensorCard extends StatelessWidget {
                     style: Theme.of(
                       context,
                     ).textTheme.bodySmall?.copyWith(color: Colors.grey[600]),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),
@@ -199,78 +187,130 @@ class SensorCard extends StatelessWidget {
 
     switch (sensorType) {
       case SensorType.temperature:
-        if (data!.value < 15 || data!.value > 32) return Colors.red;
-        if (data!.value < thresholds[0] || data!.value > thresholds[1])
+        if (data!.value < 15 || data!.value > 32) {
+          return Colors.red;
+        }
+        if (data!.value < thresholds[0] || data!.value > thresholds[1]) {
           return Colors.orange;
+        }
         return Colors.green;
 
       case SensorType.humidity:
       case SensorType.soilMoisture:
-        if (data!.value < 20 || data!.value > 80) return Colors.red;
-        if (data!.value < thresholds[0] || data!.value > thresholds[1])
+        if (data!.value < 20 || data!.value > 80) {
+          return Colors.red;
+        }
+        if (data!.value < thresholds[0] || data!.value > thresholds[1]) {
           return Colors.orange;
+        }
         return Colors.green;
 
       case SensorType.co2:
-        if (data!.value > 1500) return Colors.red;
-        if (data!.value > thresholds[0]) return Colors.orange;
+        if (data!.value > 1500) {
+          return Colors.red;
+        }
+        if (data!.value > thresholds[0]) {
+          return Colors.orange;
+        }
         return Colors.green;
 
       case SensorType.voc:
-        if (data!.value > 500) return Colors.red;
-        if (data!.value > thresholds[0]) return Colors.orange;
+        if (data!.value > 500) {
+          return Colors.red;
+        }
+        if (data!.value > thresholds[0]) {
+          return Colors.orange;
+        }
         return Colors.green;
 
       case SensorType.iaq:
-        if (data!.value > 200) return Colors.red;
-        if (data!.value > thresholds[0]) return Colors.orange;
+        if (data!.value > 200) {
+          return Colors.red;
+        }
+        if (data!.value > thresholds[0]) {
+          return Colors.orange;
+        }
         return Colors.green;
 
       case SensorType.pressure:
-        if (data!.value < 995 || data!.value > 1035) return Colors.red;
-        if (data!.value < thresholds[0] || data!.value > thresholds[1])
+        if (data!.value < 995 || data!.value > 1035) {
+          return Colors.red;
+        }
+        if (data!.value < thresholds[0] || data!.value > thresholds[1]) {
           return Colors.orange;
+        }
         return Colors.green;
 
       case SensorType.phLevel:
-        if (data!.value < 6.0 || data!.value > 8.0) return Colors.red;
-        if (data!.value < thresholds[0] || data!.value > thresholds[1])
+        if (data!.value < 6.0 || data!.value > 8.0) {
+          return Colors.red;
+        }
+        if (data!.value < thresholds[0] || data!.value > thresholds[1]) {
           return Colors.orange;
+        }
         return Colors.green;
 
       case SensorType.waterFlow:
-        if (data!.value < 0.5) return Colors.red;
-        if (data!.value < thresholds[0]) return Colors.orange;
+        if (data!.value < 0.5) {
+          return Colors.red;
+        }
+        if (data!.value < thresholds[0]) {
+          return Colors.orange;
+        }
         return Colors.green;
 
       case SensorType.tdsPpm:
-        if (data!.value > 1000) return Colors.red;
-        if (data!.value > thresholds[0]) return Colors.orange;
+        if (data!.value > 1000) {
+          return Colors.red;
+        }
+        if (data!.value > thresholds[0]) {
+          return Colors.orange;
+        }
         return Colors.green;
 
       case SensorType.dissolvedOxygen:
-        if (data!.value < 3.0) return Colors.red;
-        if (data!.value < thresholds[0]) return Colors.orange;
+        if (data!.value < 3.0) {
+          return Colors.red;
+        }
+        if (data!.value < thresholds[0]) {
+          return Colors.orange;
+        }
         return Colors.green;
 
       case SensorType.batteryVoltage:
-        if (data!.value < 3.0) return Colors.red;
-        if (data!.value < thresholds[0]) return Colors.orange;
+        if (data!.value < 3.0) {
+          return Colors.red;
+        }
+        if (data!.value < thresholds[0]) {
+          return Colors.orange;
+        }
         return Colors.green;
 
       case SensorType.solarVoltage:
-        if (data!.value < 2.0) return Colors.red;
-        if (data!.value < thresholds[0]) return Colors.orange;
+        if (data!.value < 2.0) {
+          return Colors.red;
+        }
+        if (data!.value < thresholds[0]) {
+          return Colors.orange;
+        }
         return Colors.green;
 
       case SensorType.batteryPercentage:
-        if (data!.value < 20) return Colors.red;
-        if (data!.value < thresholds[0]) return Colors.orange;
+        if (data!.value < 20) {
+          return Colors.red;
+        }
+        if (data!.value < thresholds[0]) {
+          return Colors.orange;
+        }
         return Colors.green;
 
       case SensorType.powerConsumption:
-        if (data!.value > 500) return Colors.red;
-        if (data!.value > thresholds[0]) return Colors.orange;
+        if (data!.value > 500) {
+          return Colors.red;
+        }
+        if (data!.value > thresholds[0]) {
+          return Colors.orange;
+        }
         return Colors.green;
 
       case SensorType.wakeCount:
@@ -291,78 +331,130 @@ class SensorCard extends StatelessWidget {
 
     switch (sensorType) {
       case SensorType.temperature:
-        if (data!.value < 15 || data!.value > 32) return 'Crítico';
-        if (data!.value < thresholds[0] || data!.value > thresholds[1])
+        if (data!.value < 15 || data!.value > 32) {
+          return 'Crítico';
+        }
+        if (data!.value < thresholds[0] || data!.value > thresholds[1]) {
           return 'Advertencia';
+        }
         return 'Normal';
 
       case SensorType.humidity:
       case SensorType.soilMoisture:
-        if (data!.value < 20 || data!.value > 80) return 'Crítico';
-        if (data!.value < thresholds[0] || data!.value > thresholds[1])
+        if (data!.value < 20 || data!.value > 80) {
+          return 'Crítico';
+        }
+        if (data!.value < thresholds[0] || data!.value > thresholds[1]) {
           return 'Advertencia';
+        }
         return 'Normal';
 
       case SensorType.co2:
-        if (data!.value > 1500) return 'Crítico';
-        if (data!.value > thresholds[0]) return 'Advertencia';
+        if (data!.value > 1500) {
+          return 'Crítico';
+        }
+        if (data!.value > thresholds[0]) {
+          return 'Advertencia';
+        }
         return 'Normal';
 
       case SensorType.voc:
-        if (data!.value > 500) return 'Crítico';
-        if (data!.value > thresholds[0]) return 'Advertencia';
+        if (data!.value > 500) {
+          return 'Crítico';
+        }
+        if (data!.value > thresholds[0]) {
+          return 'Advertencia';
+        }
         return 'Normal';
 
       case SensorType.iaq:
-        if (data!.value > 200) return 'Crítico';
-        if (data!.value > thresholds[0]) return 'Advertencia';
+        if (data!.value > 200) {
+          return 'Crítico';
+        }
+        if (data!.value > thresholds[0]) {
+          return 'Advertencia';
+        }
         return 'Normal';
 
       case SensorType.pressure:
-        if (data!.value < 995 || data!.value > 1035) return 'Crítico';
-        if (data!.value < thresholds[0] || data!.value > thresholds[1])
+        if (data!.value < 995 || data!.value > 1035) {
+          return 'Crítico';
+        }
+        if (data!.value < thresholds[0] || data!.value > thresholds[1]) {
           return 'Advertencia';
+        }
         return 'Normal';
 
       case SensorType.phLevel:
-        if (data!.value < 6.0 || data!.value > 8.0) return 'Crítico';
-        if (data!.value < thresholds[0] || data!.value > thresholds[1])
+        if (data!.value < 6.0 || data!.value > 8.0) {
+          return 'Crítico';
+        }
+        if (data!.value < thresholds[0] || data!.value > thresholds[1]) {
           return 'Advertencia';
+        }
         return 'Normal';
 
       case SensorType.waterFlow:
-        if (data!.value < 0.5) return 'Crítico';
-        if (data!.value < thresholds[0]) return 'Advertencia';
+        if (data!.value < 0.5) {
+          return 'Crítico';
+        }
+        if (data!.value < thresholds[0]) {
+          return 'Advertencia';
+        }
         return 'Normal';
 
       case SensorType.tdsPpm:
-        if (data!.value > 1000) return 'Crítico';
-        if (data!.value > thresholds[0]) return 'Advertencia';
+        if (data!.value > 1000) {
+          return 'Crítico';
+        }
+        if (data!.value > thresholds[0]) {
+          return 'Advertencia';
+        }
         return 'Normal';
 
       case SensorType.dissolvedOxygen:
-        if (data!.value < 3.0) return 'Crítico';
-        if (data!.value < thresholds[0]) return 'Advertencia';
+        if (data!.value < 3.0) {
+          return 'Crítico';
+        }
+        if (data!.value < thresholds[0]) {
+          return 'Advertencia';
+        }
         return 'Normal';
 
       case SensorType.batteryVoltage:
-        if (data!.value < 3.0) return 'Crítico';
-        if (data!.value < thresholds[0]) return 'Advertencia';
+        if (data!.value < 3.0) {
+          return 'Crítico';
+        }
+        if (data!.value < thresholds[0]) {
+          return 'Advertencia';
+        }
         return 'Normal';
 
       case SensorType.solarVoltage:
-        if (data!.value < 2.0) return 'Crítico';
-        if (data!.value < thresholds[0]) return 'Advertencia';
+        if (data!.value < 2.0) {
+          return 'Crítico';
+        }
+        if (data!.value < thresholds[0]) {
+          return 'Advertencia';
+        }
         return 'Normal';
 
       case SensorType.batteryPercentage:
-        if (data!.value < 20) return 'Crítico';
-        if (data!.value < thresholds[0]) return 'Advertencia';
+        if (data!.value < 20) {
+          return 'Crítico';
+        }
+        if (data!.value < thresholds[0]) {
+          return 'Advertencia';
+        }
         return 'Normal';
 
       case SensorType.powerConsumption:
-        if (data!.value > 500) return 'Crítico';
-        if (data!.value > thresholds[0]) return 'Advertencia';
+        if (data!.value > 500) {
+          return 'Crítico';
+        }
+        if (data!.value > thresholds[0]) {
+          return 'Advertencia';
+        }
         return 'Normal';
 
       case SensorType.wakeCount:
