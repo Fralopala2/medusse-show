@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Medusse IoT - Web Application
 
-## Getting Started
+Sistema web moderno para el proyecto Medusse IoT desarrollado con Next.js 16, TypeScript y Tailwind CSS.
 
-First, run the development server:
+## 🚀 Inicio Rápido
 
+### Opción 1: Script Automático (Recomendado)
+Desde la raíz del proyecto:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+ejecutar_web.bat
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Opción 2: Manual
+```bash
+cd web
+npm install
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+La aplicación estará disponible en [http://localhost:3100](http://localhost:3100)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Nota:** Usamos el puerto 3100 para evitar conflicto con Grafana (puerto 3000)
 
-## Learn More
+## 📋 Requisitos
 
-To learn more about Next.js, take a look at the following resources:
+- Node.js 20+
+- npm o yarn
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠️ Tecnologías
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Next.js 16.0.3** - Framework React con SSR
+- **React 19.2.0** - Librería UI
+- **TypeScript 5** - Tipado estático
+- **Tailwind CSS 4** - Estilos utility-first
+- **Framer Motion 12** - Animaciones
+- **Lucide React** - Iconos
 
-## Deploy on Vercel
+## 📁 Estructura
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+web/
+├── src/
+│   ├── app/              # App Router
+│   ├── components/       # Componentes React
+│   ├── hooks/           # Custom hooks
+│   └── lib/             # Utilidades y datos
+├── public/              # Archivos estáticos
+└── .env.local          # Variables de entorno
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🔗 Integración con Medusse IoT
+
+- **API REST**: http://localhost:3001
+- **WebSocket**: ws://localhost:3002
+- **Grafana**: http://localhost:3000
+
+## 📚 Documentación
+
+- [README_MEDUSSE.md](./README_MEDUSSE.md) - Documentación técnica completa
+- [PLAN_ADAPTACION.md](./PLAN_ADAPTACION.md) - Plan de desarrollo
+
+## 🎯 Estado del Proyecto
+
+✅ Fase 1: Adaptación de branding y contenido - **COMPLETADO**
+⏳ Fase 2: Integración con API REST - Pendiente
+⏳ Fase 3: Sistema de autenticación - Pendiente
+⏳ Fase 4: Panel de administración - Pendiente
+⏳ Fase 5: Optimización y testing - Pendiente
+
+## 👨‍💻 Autor
+
+Francisco Manuel López Alarte  
+IES José Rodrigo Botet - TFG 2025/2026
+
+## 📄 Licencia
+
+All Rights Reserved

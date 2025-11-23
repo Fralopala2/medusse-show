@@ -1,121 +1,121 @@
 export const companyData = {
-  name: "Soleares",
-  claim: "Mejora la conexión con el centro de control, evita limitaciones a la producción, incidencias y penalizaciones. Lectura de contadores operativa en 72h.",
+  name: "Medusse IoT",
+  claim: "Sistema de Monitoreo Ambiental en Tiempo Real con 18 tipos de sensores, visualización profesional y gestión inteligente de energía solar.",
   contact: {
-    email: "info@soleares.eu",
-    copyright: "© Soleares 2025",
+    email: "pacoaldev@gmail.com",
+    copyright: "© Medusse IoT 2025 - IES José Rodrigo Botet",
   },
 };
 
 export const heroSections = [
   {
     id: "hero-main",
-    title: "Soleares",
-    subtitle: "Lectura de contadores operativa en 72h",
-    description: "Soluciones innovadoras para comunicar instalaciones de producción eléctrica con REE y centros de control (CCO)",
-    ctas: [{ primary: "Ver soluciones", secondary: "Solicitar información" }],
-    backgroundImage: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=2070&auto=format&fit=crop", // Wind/Solar landscape
+    title: "Medusse IoT",
+    subtitle: "Monitoreo Ambiental Inteligente",
+    description: "Sistema IoT completo con 18 tipos de sensores, visualización en tiempo real, gestión de energía solar y arquitectura de microservicios",
+    ctas: [{ primary: "Ver Dashboard", secondary: "Documentación" }],
+    backgroundImage: "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?q=80&w=2070&auto=format&fit=crop", // IoT sensors
   },
   {
-    id: "hero-102tcp",
-    title: "Solución 102TCP",
-    subtitle: "Desde 2.600 €",
+    id: "hero-dashboard",
+    title: "Dashboard en Tiempo Real",
+    subtitle: "Visualización Profesional con Grafana",
     features: [
-      "Entrega urgente 72h",
-      "SIM con IP pública incluida",
-      "Router Soleares 4G",
-      "Servicio mensual: 40 €/mes",
+      "4 ubicaciones monitoreadas",
+      "18 tipos de sensores",
+      "Actualización cada 30 segundos",
+      "Alertas automáticas inteligentes",
     ],
-    ctas: [{ primary: "Solicitar ahora", secondary: "Descargar PDF" }],
-    backgroundImage: "https://images.unsplash.com/photo-1558449028-b53a39d100fc?q=80&w=2070&auto=format&fit=crop", // Electric meter / industrial
+    ctas: [{ primary: "Acceder a Grafana", secondary: "Ver Demo" }],
+    backgroundImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop", // Dashboard
     darkText: true,
   },
   {
-    id: "hero-solearesmq",
-    title: "Remota SolearesMQ",
-    subtitle: "Desde 800 €",
+    id: "hero-mobile",
+    title: "App Móvil Flutter",
+    subtitle: "Multiplataforma y Tiempo Real",
     features: [
-      "Dispositivo hardware único",
-      "Múltiples módulos de software",
-      "Protocolo MQTT seguro",
-      "Escalable según necesidades",
+      "Windows, Web, Android, iOS",
+      "WebSocket para datos en vivo",
+      "Gráficos interactivos con fl_chart",
+      "Sistema de alertas por umbrales",
     ],
-    ctas: [{ primary: "Configurar", secondary: "Más información" }],
-    backgroundImage: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop", // Tech/Hardware
+    ctas: [{ primary: "Descargar App", secondary: "Ver Capturas" }],
+    backgroundImage: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop", // Mobile app
   },
   {
-    id: "hero-srap",
-    title: "Sistema SRAP",
-    subtitle: "Desde 6.000 €",
-    description: "Evita limitaciones a la producción con nuestro sistema certificado de Reducción Automática de Potencia",
+    id: "hero-sensors",
+    title: "18 Tipos de Sensores",
+    subtitle: "Monitoreo Completo",
+    description: "Sensores ambientales, calidad de agua, suelo y gestión de energía solar con batería inteligente",
     features: [
-      "Certificado con varios CCO",
-      "Redundancia de comunicaciones",
-      "Respeta Mínimo Técnico",
-      "Tiempos de respuesta < 4 segundos",
+      "Temperatura, Humedad, CO₂, Presión",
+      "VOC, IAQ, pH, TDS, Oxígeno disuelto",
+      "Voltaje solar y batería",
+      "Modo de bajo consumo automático",
     ],
-    ctas: [{ primary: "Solicitar certificación", secondary: "Más información" }],
-    backgroundImage: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=2070&auto=format&fit=crop", // Solar plant
+    ctas: [{ primary: "Ver Sensores", secondary: "Especificaciones" }],
+    backgroundImage: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=2070&auto=format&fit=crop", // Solar/sensors
   },
   {
-    id: "hero-ttr",
-    title: "Telemedida en Tiempo Real",
-    subtitle: "Desde 2.500 €",
-    description: "Envío de P, Q, V desde el contador al CCO y red de Telecontrol",
-    ctas: [{ primary: "Solicitar", secondary: "Más información" }],
-    backgroundImage: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop", // Abstract network
+    id: "hero-api",
+    title: "API REST Completa",
+    subtitle: "Integración Fácil",
+    description: "7 endpoints HTTP + WebSocket para streaming en tiempo real. Documentación completa y ejemplos de uso",
+    ctas: [{ primary: "Ver API Docs", secondary: "Probar Endpoints" }],
+    backgroundImage: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop", // Network/API
   },
   {
-    id: "hero-despacho",
-    title: "Despacho Delegado",
-    subtitle: "Desde 4.000 €",
-    description: "Envío de datos y recepción de consignas de potencia desde REE",
-    ctas: [{ primary: "Solicitar", secondary: "Más información" }],
-    backgroundImage: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop", // Control room / industrial
+    id: "hero-lora",
+    title: "Preparado para LoRa Mesh",
+    subtitle: "Migración a Hardware Real",
+    description: "Arquitectura compatible con comunicación LoRa. Gateway intercambiable sin modificar API o Flutter",
+    ctas: [{ primary: "Ver Migración", secondary: "Hardware Necesario" }],
+    backgroundImage: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop", // Industrial/tech
   },
 ];
 
 export const hardwareProducts = [
-  { name: "Remota SolearesMQ 102TCP-1", price: "2.100 €" },
-  { name: "Remota SolearesMQ 102TCP-2", price: "2.700 €" },
-  { name: "Remota Estándar SolearesMQ", price: "800 €" },
-  { name: "SAI (autonomía 3h)", price: "100 €" },
-  { name: "Módem 4G", price: "300 €" },
-  { name: "SIM con IP pública", price: "30 €/mes" },
-  { name: "Adaptador USB-Serie", price: "100 €" },
-  { name: "GPS/GNSS USB", price: "100 €" },
+  { name: "Nodo ESP32 + Sensores Ambientales (DHT22, BME680)", price: "150 €" },
+  { name: "Nodo ESP32 + Sensores de Agua (pH, TDS, DO)", price: "180 €" },
+  { name: "Nodo ESP32 + Panel Solar + Batería", price: "200 €" },
+  { name: "Gateway LoRa Raspberry Pi 4 (4GB)", price: "250 €" },
+  { name: "Sensor DHT22 (Temperatura/Humedad)", price: "15 €" },
+  { name: "Sensor BME680 (Calidad Aire + VOC)", price: "25 €" },
+  { name: "Sensor pH para agua", price: "30 €" },
+  { name: "Módulo LoRa SX1276 868MHz", price: "20 €" },
 ];
 
 export const softwareModules = [
-  { name: "Telemedida fiscal (102TCP)", price: "800 €" },
-  { name: "Telemedida secundaria (102TCP+)", price: "500 €" },
-  { name: "DNS Dinámico (DDNS)", price: "200 € + 120 €/año" },
-  { name: "TTR (Tiempo Real)", price: "2.500 €" },
-  { name: "Despacho Delegado", price: "4.000 €" },
-  { name: "SRAP", price: "6.000 €" },
+  { name: "Dashboard Grafana Personalizado", price: "Incluido" },
+  { name: "API REST + WebSocket", price: "Incluido" },
+  { name: "App Flutter Multiplataforma", price: "Incluido" },
+  { name: "Sistema de Alertas Inteligentes", price: "50 €" },
+  { name: "Panel de Administración de Usuarios", price: "100 €" },
+  { name: "Integración LoRa Mesh", price: "200 €" },
 ];
 
 export const technologyData = {
-  title: "Tecnología MQTT",
-  subtitle: "Un protocolo seguro y robusto",
+  title: "Stack Tecnológico Moderno",
+  subtitle: "Arquitectura de microservicios robusta y escalable",
   points: [
-    "Patrón pub/sub (como WhatsApp)",
-    "Comunicaciones cifradas y encriptadas",
-    "Comunicación instantánea o diferida",
-    "Redundancia de comunicaciones (RedCOM)",
-    "Aislamiento con módulo DUO+",
+    "MQTT (Mosquitto 2.0) para comunicación IoT",
+    "InfluxDB 2.7 para series temporales",
+    "Grafana 10.2.0 para visualización profesional",
+    "Docker Compose para orquestación de servicios",
+    "Next.js + Flutter para interfaces modernas",
   ],
 };
 
 export const servicesData = [
-  { title: "Servicio DDNS-HCS", price: "120 €/año" },
-  { title: "Monitorización Web", price: "360 €/año" },
-  { title: "Mantenimiento Remoto", price: "Consultar" },
-  { title: "Instalación en planta", price: "400 €" },
-  { title: "Soporte remoto", price: "100 €/hora" },
+  { title: "Instalación Completa del Sistema", price: "500 €" },
+  { title: "Configuración de Nodos ESP32", price: "100 €/nodo" },
+  { title: "Soporte Técnico Especializado", price: "50 €/hora" },
+  { title: "Mantenimiento Anual", price: "600 €/año" },
+  { title: "Formación Personalizada", price: "300 €/día" },
 ];
 
 export const aboutData = {
-  title: "Una startup con 20 años de experiencia",
-  text: "Soleares se constituye como startup a principios de 2023, tras casi 20 años de presencia en el mercado eléctrico mediante colaboraciones freelance. Somos independientes, desvinculados de comercializadoras y distribuidoras.",
+  title: "Proyecto de Trabajo de Fin de Grado",
+  text: "Medusse IoT es un proyecto de TFG desarrollado en el IES José Rodrigo Botet (curso 2025/2026). Sistema completo de monitoreo ambiental con arquitectura de microservicios, 18 tipos de sensores, visualización en tiempo real y preparado para migración a hardware real con comunicación LoRa Mesh. Incluye dashboard Grafana, API REST, WebSocket y app móvil Flutter.",
 };

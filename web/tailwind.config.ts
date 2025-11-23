@@ -9,6 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Colores originales de Soleares (mantener compatibilidad)
         soleares: {
           black: "#1a1a1a",
           white: "#ffffff",
@@ -17,6 +18,19 @@ const config: Config = {
           gray: "#171717",
           "gray-light": "#f5f5f5",
           "gray-dark": "#333333",
+        },
+        // Colores corporativos de Medusse IoT
+        medusse: {
+          blue: "#2196F3",
+          darkblue: "#1976D2",
+          red: "#E53E3E",        // Aula 20
+          purple: "#805AD5",     // Aula 21
+          orange: "#FF9800",     // Gimnasio
+          green: "#38A169",      // Laboratorio
+          black: "#1a1a1a",
+          white: "#ffffff",
+          gray: "#171717",
+          "gray-light": "#f5f5f5",
         },
       },
       backgroundImage: {

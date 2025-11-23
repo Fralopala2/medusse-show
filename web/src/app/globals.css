@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @theme {
+  /* Colores Soleares (compatibilidad) */
   --color-soleares-black: #1a1a1a;
   --color-soleares-white: #ffffff;
   --color-soleares-blue: #3b82f6;
@@ -8,6 +9,18 @@
   --color-soleares-gray: #171717;
   --color-soleares-gray-light: #f5f5f5;
   --color-soleares-gray-dark: #333333;
+  
+  /* Colores Medusse IoT */
+  --color-medusse-blue: #2196F3;
+  --color-medusse-darkblue: #1976D2;
+  --color-medusse-red: #E53E3E;
+  --color-medusse-purple: #805AD5;
+  --color-medusse-orange: #FF9800;
+  --color-medusse-green: #38A169;
+  --color-medusse-black: #1a1a1a;
+  --color-medusse-white: #ffffff;
+  --color-medusse-gray: #171717;
+  --color-medusse-gray-light: #f5f5f5;
 }
 
 @utility snap-y-mandatory {
