@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@theme {
+  --color-soleares-black: #1a1a1a;
+  --color-soleares-white: #ffffff;
+  --color-soleares-blue: #3b82f6;
+  --color-soleares-green: #22c55e;
+  --color-soleares-gray: #171717;
+  --color-soleares-gray-light: #f5f5f5;
+  --color-soleares-gray-dark: #333333;
+}
+
+@utility snap-y-mandatory {
+  scroll-snap-type: y mandatory;
+}
+
+@utility snap-center {
+  scroll-snap-align: center;
+}
+
+@utility snap-start {
+  scroll-snap-align: start;
+}
+
+@utility no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* For webkit scrollbar hiding, we might need standard CSS as @utility doesn't support pseudo-elements easily in the same block sometimes, but let's try standard css for that specific part if needed. 
+   Actually, let's just use a standard class for the scrollbar hiding to be safe.
+*/
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    @apply snap-y-mandatory;
+  }
+  
+  body {
+    @apply bg-soleares-white text-soleares-black antialiased;
+    overflow-x: hidden;
+  }
+}

@@ -16,8 +16,8 @@
 | 1 | Proyecto de sostenibilidad | ⏳ Pendiente | Alta | 📄 Pendiente |
 | 2 | Montar la base de datos | ✅ Parcial (InfluxDB) | Alta | 📄 Pendiente |
 | 3 | Creación de procedimientos almacenados | ⏳ Pendiente | Media | 📄 Pendiente |
-| 4 | Diseño de bocetos | ⏳ Pendiente | Alta | 📄 Pendiente |
-| 5 | Diseño de interfaces web HTML/CSS | ⏳ Pendiente | Alta | 📄 Pendiente |
+| 4 | Diseño de bocetos | ✅ Completado | Alta | 📄 Completado |
+| 5 | Diseño de interfaces web HTML/CSS | ✅ Completado | Alta | 📄 Completado |
 | 6 | Plan de empresa | ⏳ Pendiente | Media | 📄 Pendiente |
 | 7 | Validación de formularios por JS | ⏳ Pendiente | Media | 📄 Pendiente |
 | 8 | Transferencia datos front-end/back-end | ✅ Parcial (API REST) | Alta | 📄 Pendiente |
@@ -127,7 +127,9 @@ Crear bocetos y wireframes de todas las interfaces del sistema.
 ### Estado Actual
 - ✅ Dashboard Grafana existente (referencia)
 - ✅ App Flutter existente (referencia)
-- ⏳ Falta diseño web formal
+- ✅ Web Next.js con diseño moderno integrada (carpeta `web/`)
+- ✅ Componentes UI reutilizables implementados
+- ⏳ Falta adaptación de contenido a Medusse IoT
 
 ---
 
@@ -152,7 +154,13 @@ Implementar interfaces web estáticas con HTML5 y CSS3.
 - Guía de estilos CSS
 
 ### Estado Actual
-- ⏳ No implementado (requiere Reto 4)
+- ✅ Web Next.js 16 con TypeScript implementada
+- ✅ Tailwind CSS 4 para estilos
+- ✅ Componentes modulares y reutilizables
+- ✅ Layout responsive con Header y Footer
+- ✅ Secciones: Hero, Products, Services, Technology, About
+- ⏳ Falta adaptación de contenido a Medusse IoT
+- ⏳ Falta integración con API REST
 
 ---
 
