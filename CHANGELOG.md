@@ -1,5 +1,164 @@
 # Changelog - Proyecto Medusse IoT
 
+## [2.6.0] - 2025-11-24 - LOGIN WEB, LOGOS Y SOPORTE LINUX ✅
+
+### 🌐 Sistema de Login Web Completo
+
+#### ✅ Paginas Implementadas
+- **Pagina de Login** (/login)
+  * Formulario de autenticacion con validacion
+  * Integracion con API REST
+  * Mensajes de error claros
+  * Logo de Medusse integrado
+  * Informacion de usuarios de prueba
+
+- **Dashboard Protegido** (/dashboard)
+  * Validacion de sesion en tiempo real
+  * Informacion del usuario logueado
+  * Permisos diferenciados por rol (admin/user/viewer)
+  * Enlaces a Grafana y API
+  * Boton de logout funcional
+  * Logo en header
+
+#### ✅ Flujo de Autenticacion
+- Login → Validacion → Dashboard → Logout
+- Redireccion automatica si no hay sesion
+- Token guardado en localStorage
+- Validacion de sesion al cargar dashboard
+
+### 🎨 Integracion de Logos
+
+#### ✅ Logos Agregados
+- **logoMedusse.svg** - Logo vectorial (formato SVG)
+- **LogoMedusse.png** - Logo rasterizado (formato PNG)
+- **favicon.png** - Icono del navegador
+
+#### ✅ Ubicaciones de Logos
+- **Pagina de Login**: Logo grande (128x128px) encima del formulario
+- **Dashboard**: Logo en header (48x48px) junto al titulo
+- **Header Principal**: Logo pequeño (32x32px) en navegacion
+- **Favicon**: Icono en pestaña del navegador
+
+#### ✅ Carpeta de Logos
+- `web/public/logos/` con README de documentacion
+- Logos accesibles desde `/logos/` en la web
+
+### 👤 Actualizaciones de Usuario
+
+#### ✅ Cambios en Base de Datos
+- Usuario "francisco" renombrado a "paco"
+- Nombres completos sin acentos para evitar problemas de codificacion:
+  * admin: Administrador del Sistema
+  * paco: Francisco Manuel Lopez Alarte
+  * profesor: Profesor del Centro
+  * alumno: Alumno Observador
+
+#### ✅ Footer Actualizado
+- Copyright cambiado a "Pacoaldev 2025"
+- Email de contacto: pacoaldev@gmail.com
+
+### 🐧 Soporte Completo para Linux
+
+#### ✅ Documentacion Linux
+- **INSTALACION_LINUX.md** - Guia completa para Linux/Lliurex
+  * Instalacion automatica y manual
+  * Instrucciones especificas para Lliurex
+  * Solucion de problemas comunes
+  * Optimizaciones para Linux
+  * Configuracion de systemd
+  * Alias utiles
+
+#### ✅ Scripts de Linux
+- **setup_linux.sh** - Instalacion automatica
+  * Instala Docker, Node.js, Python
+  * Configura dependencias del proyecto
+  * Configura permisos automaticamente
+
+- **ejecutar_linux.sh** - Iniciar sistema completo
+  * Inicia Docker Compose
+  * Inicia simulador, API y Web
+  * Guarda PIDs para control de procesos
+
+- **detener_linux.sh** - Detener todos los servicios
+  * Detiene procesos por PID
+  * Detiene Docker Compose
+  * Limpia archivos temporales
+
+- **verificar_linux.sh** - Verificar estado del sistema
+  * Verifica instalacion de software
+  * Verifica servicios corriendo
+  * Verifica conectividad de servicios
+
+#### ✅ Compatibilidad Linux
+- **Lliurex** (basado en Ubuntu)
+- **Ubuntu** 20.04+
+- **Debian** 11+
+- Cualquier distribucion basada en Debian
+
+#### ✅ Ventajas en Linux
+- Docker nativo (mejor rendimiento)
+- Sin WSL2 (menos overhead)
+- Comandos nativos (Bash)
+- Mas estable y rapido
+
+### 🧪 Testing y Verificacion
+
+#### ✅ Scripts de Testing
+- **probar_login_web.bat** - Testing completo del login web
+  * Verifica Docker y MySQL
+  * Inicia API y Web automaticamente
+  * Guia paso a paso para probar login
+
+#### ✅ Pruebas Realizadas
+- Login exitoso con 4 usuarios diferentes
+- Validacion de sesion funcionando
+- Dashboard con permisos por rol
+- Logout e invalidacion de sesion
+- Grafana con datos en tiempo real
+
+### 🔧 Mejoras Tecnicas
+
+#### ✅ Correccion de Errores
+- Problema de codificacion UTF-8 resuelto
+- Nombres sin acentos en base de datos
+- API y Web en puertos correctos (3001 y 3003)
+- Simulador funcionando correctamente
+
+#### ✅ Optimizaciones
+- Queries SQL directas en lugar de procedimientos (mejor compatibilidad)
+- Comparacion de contraseñas con bcrypt
+- Tokens UUID para sesiones
+- Cache de datos en API (30 segundos)
+
+### 📊 Estadisticas de la Version
+
+#### Archivos Nuevos
+- 2 paginas Next.js (login, dashboard)
+- 3 archivos de logos (SVG, PNG, favicon)
+- 4 scripts de Linux (.sh)
+- 1 guia de instalacion Linux
+- 1 script de testing web
+
+#### Lineas de Codigo Agregadas
+- TypeScript/React: ~400 lineas (login + dashboard)
+- Bash: ~300 lineas (scripts Linux)
+- Documentacion: ~500 lineas (guia Linux)
+- Total: ~1200 lineas nuevas
+
+### 📝 Documentacion Actualizada
+- README.md con endpoints de autenticacion
+- api/README.md con documentacion completa de auth
+- GUIA_AUTENTICACION.md con instrucciones de prueba
+- INSTALACION_LINUX.md para sistemas Linux
+- SCRIPTS.md con documentacion de scripts
+
+### 🎯 Progreso del TFG
+- **10/16 retos completados** (62.5%)
+- **Reto 9**: Gestion de usuarios con sesiones ✅
+- **6 retos pendientes**
+
+---
+
 ## [2.5.0] - 2025-11-24 - SISTEMA DE AUTENTICACION COMPLETO ✅
 
 ### 🔐 Gestion de Usuarios con Sesiones (Reto 9)
