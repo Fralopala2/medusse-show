@@ -1,5 +1,37 @@
 # Changelog - Proyecto Medusse IoT
 
+## [2.7.0] - 2025-11-24 - SOPORTE LLIUREX Y OPTIMIZACION SCRIPTS ✅
+
+### 🧹 Optimizacion de Scripts Windows
+
+#### ✅ Unificacion de Scripts .bat
+- **medusse.bat** - Menu principal unificado con todas las funciones
+  * Instalacion (completa y rapida)
+  * Ejecucion (sistema completo, componentes individuales)
+  * Verificacion (completa y rapida)
+  * Testing (API, autenticacion, login web)
+  * Menu interactivo facil de usar
+
+#### ✅ Scripts Eliminados (redundantes)
+- **ejecutar.bat** - Funcionalidad integrada en medusse.bat
+- **probar.bat** - Funcionalidad integrada en medusse.bat
+- **probar_login_web.bat** - Funcionalidad integrada en medusse.bat
+- **compilar_app.bat** - Caso especifico de desarrollo
+- **configurar_firewall.bat** - Caso especifico de red
+
+#### ✅ Scripts Mantenidos (necesarios)
+- **instalar_proyecto.bat** - Instalacion completa
+- **setup_rapido.bat** - Setup rapido
+- **sistema_completo.bat** - Sistema completo
+- **verificar.bat** - Verificacion completa
+- **medusse.bat** - Menu principal (NUEVO)
+
+#### ✅ Ventajas
+- Proyecto mas limpio (5 archivos eliminados)
+- Menu unico facil de usar
+- Menos confusion para usuarios nuevos
+- Mantenimiento simplificado
+
 ## [2.7.0] - 2025-11-24 - SOPORTE LLIUREX COMPLETO ✅
 
 ### 🐧 Scripts Especificos para Lliurex

@@ -48,8 +48,7 @@ proyecto-medusse/
 │ ─ iniciar_api.bat          # 🚀 API REST + WebSocket
 ├── ejecutar_flutter.bat     # 📱 App móvil Flutter
 ├── verificar.bat            # 🔍 Verificación completa
-├── verificar_rapido.bat     # ⚡ Verificacion rapida (30s)
-├── probar_api.bat           # 🧪 Testing automatico API
+├── medusse.bat              # 🎯 Menu principal unificado (Windows)
 ├── setup_lliurex.sh         # 🐧 Instalacion para Lliurex
 ├── ejecutar_lliurex.sh      # 🐧 Ejecutar en Lliurex
 ├── verificar_lliurex.sh     # 🐧 Verificar en Lliurex
@@ -181,23 +180,15 @@ chmod +x setup_lliurex.sh
 
 #### Windows
 
-**1. Verificar Sistema:**
+**Menu Principal Unificado (Recomendado):**
 ```cmd
+medusse.bat                # Menu interactivo con todas las opciones
+```
+
+**O ejecutar directamente:**
+```cmd
+sistema_completo.bat       # Sistema completo
 verificar.bat              # Verificacion completa
-verificar_rapido.bat       # Verificacion rapida (30 segundos)
-```
-
-**2. Ejecutar Ecosistema Completo (Recomendado):**
-```cmd
-sistema_completo.bat       # Dashboard + API + Simulador + diagnosticos
-```
-
-**3. Ejecutar Componentes Individuales:**
-```cmd
-demo.bat                   # Solo Dashboard Grafana
-iniciar_api.bat           # Solo API REST + WebSocket
-ejecutar_flutter.bat      # Solo App movil Flutter
-ejecutar_web.bat          # Solo Web Next.js
 ```
 
 #### Linux / Lliurex
