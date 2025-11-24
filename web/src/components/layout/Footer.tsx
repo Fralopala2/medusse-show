@@ -32,7 +32,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-8 text-center md:text-left text-xs text-gray-500">
-          © Soleares 2025. Todos los derechos reservados. | info@soleares.eu
+          © Pacoaldev 2025. Todos los derechos reservados. | pacoaldev@gmail.com
         </div>
       </div>
     </footer>
