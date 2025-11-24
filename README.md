@@ -353,7 +353,7 @@ Ver documentación completa en: [README_FLUTTER.md](README_FLUTTER.md)
 
 ## 🌐 API REST Robusta
 
-### 🔌 Endpoints Completos
+### 🔌 Endpoints de Datos
 | Endpoint | Método | Descripción | Parámetros |
 |----------|--------|-------------|------------|
 | `/health` | GET | Estado de todos los servicios | - |
@@ -362,6 +362,14 @@ Ver documentación completa en: [README_FLUTTER.md](README_FLUTTER.md)
 | `/api/latest/:location` | GET | Últimos valores por ubicación | `location` |
 | `/api/data/:location/:sensor` | GET | Datos históricos con filtros | `location`, `sensor`, `?hours`, `?interval` |
 | `/api/stats/:location/:sensor` | GET | Estadísticas (min/max/avg) | `location`, `sensor` |
+
+### 🔐 Endpoints de Autenticación (Reto 9)
+| Endpoint | Método | Descripción | Autenticación |
+|----------|--------|-------------|---------------|
+| `/api/auth/login` | POST | Autenticar usuario y crear sesión | No |
+| `/api/auth/logout` | POST | Cerrar sesión activa | Bearer Token |
+| `/api/auth/validate` | GET | Validar token de sesión | Bearer Token |
+| `/api/auth/profile` | GET | Obtener perfil del usuario | Bearer Token |
 
 ### ⚡ WebSocket Real-time
 - **Puerto:** `ws://localhost:3002`
@@ -378,9 +386,17 @@ Ver documentación completa en: [README_FLUTTER.md](README_FLUTTER.md)
 
 ### 📊 Uso y Testing
 ```cmd
-iniciar_api.bat     # Iniciar servidor API + WebSocket
-probar_api.bat      # Testing automático de todos los endpoints
+iniciar_api.bat              # Iniciar servidor API + WebSocket
+probar_api.bat               # Testing automatico de endpoints de datos
+probar_autenticacion.bat     # Testing de autenticacion (Reto 9)
 ```
+
+### 🔐 Sistema de Autenticación
+- **Gestión de usuarios** con roles (admin, user, viewer)
+- **Sesiones seguras** con tokens UUID
+- **Procedimientos almacenados** MySQL para autenticación
+- **Middleware de protección** para rutas privadas
+- **4 usuarios iniciales** configurados (admin, francisco, profesor, alumno)
 
 Ver documentación completa en: [api/README.md](api/README.md)
 
@@ -515,23 +531,23 @@ La web estara disponible en: http://localhost:3100
 
 ## 📊 Estado del Proyecto TFG
 
-### Retos Completados (9/16 - 56.25%)
+### Retos Completados (10/16 - 62.5%)
 
 ✅ **Reto 2**: Base de datos (InfluxDB + MySQL)
 ✅ **Reto 3**: Procedimientos almacenados (10 procedimientos)
 ✅ **Reto 4**: Diseno de bocetos (estructura de componentes)
 ✅ **Reto 5**: Interfaces HTML/CSS (Next.js + Tailwind)
 ✅ **Reto 8**: Transferencia Front-end/Back-end (API REST completa)
+✅ **Reto 9**: Gestion de usuarios con sesiones (MySQL + bcrypt)
 ✅ **Reto 12**: Comunicacion asincrona (WebSocket + Fetch API)
 ✅ **Reto 13**: Framework cliente (Flutter + Next.js)
 ✅ **Reto 15**: Framework servidor (Express + Docker)
 
-### Retos Pendientes (7/16)
+### Retos Pendientes (6/16)
 
 ⏳ **Reto 1**: Proyecto de sostenibilidad
 ⏳ **Reto 6**: Plan de empresa
 ⏳ **Reto 7**: Validacion de formularios JS
-⏳ **Reto 9**: Gestion de usuarios con sesiones
 ⏳ **Reto 10**: Panel de administracion
 ⏳ **Reto 11**: Script FTP
 ⏳ **Reto 14**: Diseno web avanzado (responsive/animaciones)
@@ -642,9 +658,8 @@ La web estara disponible en: http://localhost:3100
 
 Este proyecto está bajo la licencia **All Rights Reserved**.
 
-Para consultas de licencia o permisos, contacta al autor.
+Para consultas de licencia o permisos, contacta al autor
 
 ---
 
-_Proyecto desarrollado para **IES José Rodrigo Botet** - Curso 2025/2026_
 _**Version actual:** 2.3.0 (Noviembre 2025)_

@@ -1,5 +1,50 @@
 # Changelog - Proyecto Medusse IoT
 
+## [2.5.0] - 2025-11-24 - SISTEMA DE AUTENTICACION COMPLETO ✅
+
+### 🔐 Gestion de Usuarios con Sesiones (Reto 9)
+
+#### ✅ Backend de Autenticacion
+- **Modulo MySQL** (db.js) con pool de conexiones
+- **Modulo de autenticacion** (auth.js) con bcrypt
+- **4 endpoints REST** para autenticacion completa
+- **Middleware de proteccion** para rutas privadas
+- **Middleware de roles** para control de acceso
+- **Integracion con procedimientos almacenados** MySQL
+
+#### ✅ Endpoints de Autenticacion
+- **POST /api/auth/login**: Autenticar usuario y crear sesion
+- **POST /api/auth/logout**: Cerrar sesion activa
+- **GET /api/auth/validate**: Validar token de sesion
+- **GET /api/auth/profile**: Obtener perfil del usuario autenticado
+
+#### ✅ Seguridad Implementada
+- **Tokens UUID** para sesiones seguras
+- **Expiracion automatica** de sesiones (24 horas)
+- **Registro de IP y User-Agent** en sesiones
+- **Validacion de credenciales** con procedimientos almacenados
+- **Proteccion de rutas** con Bearer Token
+- **Control de acceso** por roles (admin/user/viewer)
+
+#### ✅ Testing Automatizado
+- **Script de testing** (test-auth.js) con 8 tests
+- **Script batch** (probar_autenticacion.bat) para Windows
+- **Tests de login** con credenciales correctas/incorrectas
+- **Tests de validacion** de sesion
+- **Tests de logout** y expiracion de sesion
+- **Tests con 4 usuarios** diferentes (admin, francisco, profesor, alumno)
+
+#### ✅ Dependencias Agregadas
+- **mysql2**: Cliente MySQL para Node.js (v3.6.5)
+- **bcrypt**: Hashing de contraseñas (v5.1.1)
+
+#### 📊 Progreso de Retos TFG
+- **Reto 9 completado**: Gestion de usuarios con sesiones ✅
+- **10/16 retos completados** (62.5%)
+- **6 retos pendientes**
+
+---
+
 ## [2.4.0] - 2025-11-24 - BASE DE DATOS MYSQL Y WEB NEXT.JS ✅
 
 ### 🗄️ Base de Datos MySQL Completa
