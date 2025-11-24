@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { validateUsername, validatePassword } from '@/lib/validation';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -9,10 +10,50 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  
+  // Errores de validacion en tiempo real
+  const [usernameError, setUsernameError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [touched, setTouched] = useState({ username: false, password: false });
+
+  // Validar en tiempo real
+  const handleUsernameChange = (value: string) => {
+    setUsername(value);
+    if (touched.username) {
+      const validation = validateUsername(value);
+      setUsernameError(validation.isValid ? '' : validation.error || '');
+    }
+  };
+
+  const handlePasswordChange = (value: string) => {
+    setPassword(value);
+    if (touched.password) {
+      const validation = validatePassword(value);
+      setPasswordError(validation.isValid ? '' : validation.error || '');
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    
+    // Marcar todos como tocados
+    setTouched({ username: true, password: true });
+    
+    // Validar antes de enviar
+    const usernameValidation = validateUsername(username);
+    const passwordValidation = validatePassword(password);
+    
+    if (!usernameValidation.isValid) {
+      setUsernameError(usernameValidation.error || '');
+      return;
+    }
+    
+    if (!passwordValidation.isValid) {
+      setPasswordError(passwordValidation.error || '');
+      return;
+    }
+    
     setLoading(true);
 
     try {
@@ -76,10 +117,18 @@ export default function LoginPage() {
                 type="text"
                 required
                 value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                onChange={(e) => handleUsernameChange(e.target.value)}
+                onBlur={() => setTouched({ ...touched, username: true })}
+                className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+                  usernameError 
+                    ? 'border-red-300 focus:ring-red-500 focus:border-red-500' 
+                    : 'border-gray-300 focus:ring-indigo-500 focus:border-indigo-500'
+                }`}
                 placeholder="admin, paco, profesor, alumno"
               />
+              {usernameError && (
+                <p className="mt-1 text-sm text-red-600">{usernameError}</p>
+              )}
             </div>
 
             {/* Contraseña */}
@@ -93,10 +142,18 @@ export default function LoginPage() {
                 type="password"
                 required
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                onChange={(e) => handlePasswordChange(e.target.value)}
+                onBlur={() => setTouched({ ...touched, password: true })}
+                className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+                  passwordError 
+                    ? 'border-red-300 focus:ring-red-500 focus:border-red-500' 
+                    : 'border-gray-300 focus:ring-indigo-500 focus:border-indigo-500'
+                }`}
                 placeholder="medusse2025"
               />
+              {passwordError && (
+                <p className="mt-1 text-sm text-red-600">{passwordError}</p>
+              )}
             </div>
           </div>
 
@@ -115,8 +172,8 @@ export default function LoginPage() {
           <div className="space-y-3">
             <button
               type="submit"
-              disabled={loading}
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={loading || !!usernameError || !!passwordError}
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
             >
               {loading ? 'Iniciando sesion...' : 'Iniciar sesion'}
             </button>
