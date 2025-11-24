@@ -139,20 +139,23 @@ start http://localhost:3000
 timeout /t 3 >nul
 
 if "%API_AVAILABLE%"=="true" (
-    echo [API] Iniciando API REST en segundo plano
+    echo [API] Iniciando API REST
     cd api
-    start /min cmd /c "npm install >nul 2>&1 && node server.js"
+    start "Medusse API" cmd /k "node server.js"
     cd ..
     timeout /t 5 >nul
     echo [API] API REST: http://localhost:3001
-    start http://localhost:3001/health
     
-    echo [WEB] Iniciando Web Next.js en segundo plano
+    echo [WEB] Iniciando Web Next.js
     cd web
-    start /min cmd /c "npm install >nul 2>&1 && npm run dev"
+    start "Medusse Web" cmd /k "npm run dev"
     cd ..
-    timeout /t 10 >nul
+    timeout /t 15 >nul
     echo [WEB] Web Next.js: http://localhost:3100
+    
+    echo [NAVEGADOR] Abriendo interfaces web
+    start http://localhost:3001/health
+    timeout /t 2 >nul
     start http://localhost:3100
 )
 
