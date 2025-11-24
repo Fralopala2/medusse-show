@@ -4,6 +4,8 @@ inclusion: always
 
 # Reglas del Proyecto Medusse IoT
 - Lo comentarios siempre seran en ESPAÑOL de España, y nunca con acentos.
+- TODA y repito, TODA la documentación estará en un solo archivo, el README.md. Aparte, cada vez que se modifique algo sustancial del proyecto, se deberá actualizar el CHANGELOG.md y documentarlo.
+- El proyecto lo mas limpio posible de archivos que no se utilicen, o sean extrictamente necesarios
 
 ## Información del Proyecto
 - **Nombre**: Medusse IoT - Sistema de Monitoreo Ambiental Completo
@@ -110,7 +112,6 @@ ESP32 Simulators → MQTT → Telegraf → InfluxDB → Grafana Dashboard
 - Formato de datos consistente entre simulador y hardware real
 - Pipeline de datos sin pérdidas (MQTT → Telegraf → InfluxDB)
 - Compatibilidad API REST con App Flutter
-- El proyecto lo mas limpio posible de archivos que no se utilicen, o sean extrictamente necesarios
 
 ### Al agregar nuevos sensores:
 1. Actualizar `arduino/medusse_simulator.py` con nuevo sensor

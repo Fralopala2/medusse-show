@@ -479,3 +479,198 @@ El sistema está **completamente preparado** para migración a hardware real:
 
 _Proyecto desarrollado para **IES José Rodrigo Botet** - Curso 2025/2026_
 _**Versión actual:** 2.3.0 (Octubre 2025)_
+
+
+---
+
+## 🌐 Aplicacion Web Next.js
+
+### Caracteristicas
+- **Next.js 16** con TypeScript y Tailwind CSS
+- **Dashboard en tiempo real** con datos de 4 ubicaciones
+- **Integracion API REST** con 10+ funciones
+- **WebSocket** para actualizacion automatica
+- **Sistema de alertas** visual (CO2, bateria)
+- **Responsive design** con Framer Motion
+
+### Uso
+```cmd
+ejecutar_web.bat
+```
+
+La web estara disponible en: http://localhost:3100
+
+**Nota**: Usamos puerto 3100 para evitar conflicto con Grafana (puerto 3000)
+
+---
+
+## 🗄️ Base de Datos MySQL
+
+### Configuracion
+- **MySQL 8.0** integrado en Docker
+- **Puerto**: 3306
+- **Base de datos**: medusse_db
+- **Usuario**: medusse_user / medusse2025
+
+### Esquema (9 tablas)
+1. **users** - Usuarios del sistema (admin, user, viewer)
+2. **sessions** - Gestion de sesiones con tokens UUID
+3. **user_preferences** - Preferencias personalizadas
+4. **locations** - 4 ubicaciones monitoreadas
+5. **sensors** - 18 tipos de sensores configurados
+6. **alerts** - Sistema de alertas
+7. **user_alerts** - Notificaciones de usuarios
+8. **activity_log** - Registro de actividad
+9. **system_config** - Configuracion del sistema
+
+### Procedimientos Almacenados (10)
+- `sp_authenticate_user` - Autenticacion y creacion de sesion
+- `sp_validate_session` - Validacion de token
+- `sp_logout_user` - Cierre de sesion
+- `sp_create_alert` - Crear alerta
+- `sp_resolve_alert` - Resolver alerta
+- `sp_get_user_alerts` - Obtener notificaciones
+- `sp_mark_alert_read` - Marcar como leida
+- `sp_cleanup_expired_sessions` - Limpieza automatica
+- `sp_get_system_stats` - Estadisticas del sistema
+- `sp_get_location_stats` - Estadisticas por ubicacion
+
+### Usuarios Iniciales
+| Username | Email | Password | Role |
+|----------|-------|----------|------|
+| admin | admin@medusse.local | medusse2025 | admin |
+| francisco | pacoaldev@gmail.com | medusse2025 | admin |
+| profesor | profesor@medusse.local | medusse2025 | user |
+| alumno | alumno@medusse.local | medusse2025 | viewer |
+
+**Documentacion completa**: `docker/mysql/DATABASE_DOCUMENTATION.md`
+
+---
+
+## 📊 Estado del Proyecto TFG
+
+### Retos Completados (9/16 - 56.25%)
+
+✅ **Reto 2**: Base de datos (InfluxDB + MySQL)
+✅ **Reto 3**: Procedimientos almacenados (10 procedimientos)
+✅ **Reto 4**: Diseno de bocetos (estructura de componentes)
+✅ **Reto 5**: Interfaces HTML/CSS (Next.js + Tailwind)
+✅ **Reto 8**: Transferencia Front-end/Back-end (API REST completa)
+✅ **Reto 12**: Comunicacion asincrona (WebSocket + Fetch API)
+✅ **Reto 13**: Framework cliente (Flutter + Next.js)
+✅ **Reto 15**: Framework servidor (Express + Docker)
+
+### Retos Pendientes (7/16)
+
+⏳ **Reto 1**: Proyecto de sostenibilidad
+⏳ **Reto 6**: Plan de empresa
+⏳ **Reto 7**: Validacion de formularios JS
+⏳ **Reto 9**: Gestion de usuarios con sesiones
+⏳ **Reto 10**: Panel de administracion
+⏳ **Reto 11**: Script FTP
+⏳ **Reto 14**: Diseno web avanzado (responsive/animaciones)
+⏳ **Reto 16**: Documentacion final
+
+---
+
+## 🔧 Integracion de Componentes
+
+### Web Next.js (Fase 1 y 2 Completadas)
+
+**Fase 1 - Branding**: ✅ Completado
+- Metadata actualizada a Medusse IoT
+- 6 hero sections con informacion del proyecto
+- Colores corporativos configurados
+- Contenido adaptado (productos, servicios, tecnologia)
+
+**Fase 2 - API REST**: ✅ Completado
+- Cliente API TypeScript (400+ lineas)
+- Hook WebSocket con reconexion automatica
+- Dashboard en tiempo real con 4 ubicaciones
+- Sistema de alertas visual (CO2, bateria)
+- 18 tipos de sensores mostrados
+
+**Fase 3 - Autenticacion**: ⏳ Pendiente
+- Formularios de login/registro
+- Validacion con react-hook-form + zod
+- Integracion con MySQL
+- Proteccion de rutas
+
+### Base de Datos MySQL (Reto 2 y 3 Completados)
+
+**Implementacion**: ✅ Completado
+- 9 tablas con relaciones y indices
+- 10 procedimientos almacenados
+- 4 usuarios iniciales con roles
+- 4 ubicaciones y 18 sensores configurados
+- Sistema de alertas y notificaciones
+- Documentacion tecnica completa
+
+**Integracion con API**: ⏳ Pendiente
+- Instalar mysql2 en Node.js
+- Endpoints de autenticacion
+- Middleware de validacion de sesiones
+
+---
+
+## 📈 Estadisticas del Proyecto
+
+### Lineas de Codigo
+- **Python**: ~500 lineas (simulador)
+- **JavaScript/Node.js**: ~1000 lineas (API REST)
+- **TypeScript/React**: ~1200 lineas (Web Next.js)
+- **Dart/Flutter**: ~2000 lineas (App movil)
+- **SQL**: ~900 lineas (esquema + procedimientos)
+- **Configuracion**: ~500 lineas (Docker, Telegraf, etc.)
+- **Total**: ~6100 lineas de codigo
+
+### Archivos del Proyecto
+- **Archivos de codigo**: 50+
+- **Archivos de configuracion**: 15+
+- **Scripts de automatizacion**: 10+
+- **Documentacion**: README.md + CHANGELOG.md + docs tecnicas
+
+### Tecnologias Utilizadas
+- **Backend**: Node.js, Express, Python
+- **Frontend**: Next.js 16, React 19, TypeScript 5
+- **Mobile**: Flutter 3.9+, Dart
+- **Bases de Datos**: InfluxDB 2.7, MySQL 8.0
+- **Mensajeria**: MQTT (Mosquitto 2.0)
+- **Visualizacion**: Grafana 10.2.0
+- **Contenedores**: Docker, Docker Compose
+- **Estilos**: Tailwind CSS 4
+- **Animaciones**: Framer Motion 12
+
+---
+
+## 🎓 Informacion Academica
+
+**Proyecto**: Trabajo de Fin de Grado (TFG)
+**Titulo**: Sistema IoT de Monitoreo Ambiental con Arquitectura de Microservicios
+**Autor**: Francisco Manuel López Alarte
+**Email**: pacoaldev@gmail.com
+**Institucion**: IES José Rodrigo Botet
+**Curso Academico**: 2025/2026
+**Rama de trabajo**: clase
+
+### Objetivos del Proyecto
+1. Diseñar e implementar un sistema IoT completo
+2. Aplicar arquitectura de microservicios
+3. Integrar multiples tecnologias modernas
+4. Preparar para migracion a hardware real
+5. Documentar completamente el proceso
+6. Cumplir con 16 retos tecnicos especificos
+
+### Competencias Desarrolladas
+- Desarrollo Full-Stack (Frontend + Backend + Mobile)
+- Bases de datos relacionales y series temporales
+- Comunicacion IoT (MQTT, WebSocket)
+- Contenedorizacion con Docker
+- Diseno de interfaces responsive
+- Gestion de proyectos de software
+- Documentacion tecnica profesional
+
+---
+
+_Proyecto desarrollado para **IES José Rodrigo Botet** - Curso 2025/2026_
+_**Version actual:** 2.3.0 (Noviembre 2025)_

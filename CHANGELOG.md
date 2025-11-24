@@ -1,5 +1,96 @@
 # Changelog - Proyecto Medusse IoT
 
+## [2.4.0] - 2025-11-24 - BASE DE DATOS MYSQL Y WEB NEXT.JS ✅
+
+### 🗄️ Base de Datos MySQL Completa
+
+#### ✅ Esquema de Base de Datos (Reto 2)
+- **MySQL 8.0** integrado en Docker Compose
+- **9 tablas** con relaciones y claves foraneas
+- **users**: Gestion de usuarios con roles (admin/user/viewer)
+- **sessions**: Tokens UUID con expiracion automatica
+- **user_preferences**: Configuracion personalizada por usuario
+- **locations**: 4 ubicaciones con colores corporativos
+- **sensors**: 18 tipos de sensores con umbrales
+- **alerts**: Sistema de alertas con resolucion
+- **user_alerts**: Notificaciones N:M
+- **activity_log**: Auditoria completa del sistema
+- **system_config**: Configuracion clave-valor
+
+#### ✅ Procedimientos Almacenados (Reto 3)
+- **10 procedimientos** para logica de negocio
+- **Autenticacion**: sp_authenticate_user, sp_validate_session, sp_logout_user
+- **Alertas**: sp_create_alert, sp_resolve_alert, sp_get_user_alerts, sp_mark_alert_read
+- **Estadisticas**: sp_get_system_stats, sp_get_location_stats
+- **Mantenimiento**: sp_cleanup_expired_sessions
+
+#### ✅ Datos Iniciales
+- **4 usuarios** con roles diferenciados
+- **4 ubicaciones** configuradas (Aula 20, 21, Gimnasio, Lab)
+- **18 sensores** con umbrales de warning/danger
+- **20+ configuraciones** del sistema
+
+### 🌐 Aplicacion Web Next.js
+
+#### ✅ Fase 1 - Adaptacion de Branding (Reto 4 y 5)
+- **Next.js 16** con TypeScript y Tailwind CSS 4
+- **Metadata** actualizada a Medusse IoT
+- **6 hero sections** con informacion del proyecto
+- **Colores corporativos** configurados (4 ubicaciones)
+- **Contenido adaptado**: productos hardware/software, servicios, tecnologia
+- **Variables de entorno** configuradas (.env.local)
+
+#### ✅ Fase 2 - Integracion API REST (Reto 8 y 12)
+- **Cliente API TypeScript** (400+ lineas, 10+ funciones)
+- **Hook WebSocket** con reconexion automatica (5 intentos)
+- **Dashboard en tiempo real** con 4 ubicaciones
+- **Sistema de alertas** visual (CO2, bateria)
+- **18 tipos de sensores** mostrados con iconos
+- **Indicador de conexion** WebSocket
+- **Auto-refresh** cada 30 segundos
+
+### 🔧 Mejoras Tecnicas
+
+#### ✅ Integracion Docker
+- **Servicio MySQL** añadido a docker-compose.yml
+- **Puerto 3306** expuesto
+- **Volumen persistente** para datos
+- **Auto-inicializacion** con scripts SQL
+- **Red interna** medusse_network
+
+#### ✅ Documentacion
+- **DATABASE_DOCUMENTATION.md**: Documentacion tecnica completa de MySQL
+- **README.md**: Consolidacion de toda la documentacion general
+- **CHANGELOG.md**: Actualizacion con cambios significativos
+- **Eliminacion** de archivos de documentacion redundantes
+
+### 📊 Estadisticas de Version
+
+#### Archivos Creados
+- `docker/mysql/init/01-schema.sql` (350+ lineas)
+- `docker/mysql/init/02-seed-data.sql` (150+ lineas)
+- `docker/mysql/init/03-stored-procedures.sql` (400+ lineas)
+- `docker/mysql/DATABASE_DOCUMENTATION.md` (600+ lineas)
+- `web/src/lib/api.ts` (400+ lineas)
+- `web/src/hooks/use-websocket.ts` (200+ lineas)
+- `web/src/components/sections/DashboardSection.tsx` (300+ lineas)
+
+#### Retos TFG Completados
+- ✅ **Reto 2**: Base de datos (InfluxDB + MySQL)
+- ✅ **Reto 3**: Procedimientos almacenados
+- ✅ **Reto 4**: Diseno de bocetos
+- ✅ **Reto 5**: Interfaces HTML/CSS
+- ✅ **Reto 8**: Transferencia Front-end/Back-end
+- ✅ **Reto 12**: Comunicacion asincrona
+
+#### Progreso Total
+- **9 de 16 retos completados** (56.25%)
+- **~6100 lineas de codigo** en total
+- **50+ archivos de codigo**
+- **10+ scripts de automatizacion**
+
+---
+
 ## [2.3.0] - 2025-10-14 - DASHBOARD PROFESIONAL CON FILTROS AVANZADOS ✅
 
 ### 📊 Dashboard Reorganizado y Optimizado
