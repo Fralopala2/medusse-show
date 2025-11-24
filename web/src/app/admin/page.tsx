@@ -60,11 +60,19 @@ export default function AdminPage() {
     // Cargar datos
     const loadData = async () => {
       try {
+        console.log('Loading admin data with token:', token?.substring(0, 10) + '...');
+        
         // Cargar estadisticas
         const statsRes = await fetch('http://localhost:3001/api/admin/stats', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const statsData = await statsRes.json();
+        console.log('Stats response:', statsData);
+        
+        if (!statsRes.ok) {
+          throw new Error(statsData.message || 'Error al cargar estadisticas');
+        }
+        
         if (statsData.success) setStats(statsData.stats);
         
         // Cargar usuarios
@@ -72,6 +80,12 @@ export default function AdminPage() {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const usersData = await usersRes.json();
+        console.log('Users response:', usersData);
+        
+        if (!usersRes.ok) {
+          throw new Error(usersData.message || 'Error al cargar usuarios');
+        }
+        
         if (usersData.success) setUsers(usersData.users);
         
         // Cargar logs
@@ -79,12 +93,18 @@ export default function AdminPage() {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const logsData = await logsRes.json();
+        console.log('Logs response:', logsData);
+        
+        if (!logsRes.ok) {
+          throw new Error(logsData.message || 'Error al cargar logs');
+        }
+        
         if (logsData.success) setLogs(logsData.logs);
         
         setLoading(false);
       } catch (error) {
         console.error('Error loading admin data:', error);
-        setError('Error al cargar datos del panel');
+        setError(error instanceof Error ? error.message : 'Error al cargar datos del panel');
         setLoading(false);
       }
     };
