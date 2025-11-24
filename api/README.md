@@ -271,12 +271,154 @@ La API incluye logs detallados:
 - Consultas InfluxDB
 - Errores y excepciones
 
+## 🔐 Autenticación (Reto 9)
+
+### Endpoints de Autenticación
+
+#### Login
+
+```http
+POST /api/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "medusse2025"
+}
+```
+
+Respuesta exitosa:
+
+```json
+{
+  "success": true,
+  "message": "Autenticacion exitosa",
+  "sessionToken": "550e8400-e29b-41d4-a716-446655440000",
+  "user": {
+    "id": 1,
+    "username": "admin",
+    "email": "admin@medusse.local",
+    "fullName": "Administrador",
+    "role": "admin"
+  }
+}
+```
+
+#### Logout
+
+```http
+POST /api/auth/logout
+Authorization: Bearer 550e8400-e29b-41d4-a716-446655440000
+```
+
+Respuesta:
+
+```json
+{
+  "success": true,
+  "message": "Sesion cerrada correctamente"
+}
+```
+
+#### Validar Sesión
+
+```http
+GET /api/auth/validate
+Authorization: Bearer 550e8400-e29b-41d4-a716-446655440000
+```
+
+Respuesta:
+
+```json
+{
+  "valid": true,
+  "user": {
+    "id": 1,
+    "username": "admin",
+    "email": "admin@medusse.local",
+    "fullName": "Administrador",
+    "role": "admin"
+  }
+}
+```
+
+#### Obtener Perfil
+
+```http
+GET /api/auth/profile
+Authorization: Bearer 550e8400-e29b-41d4-a716-446655440000
+```
+
+Respuesta:
+
+```json
+{
+  "success": true,
+  "user": {
+    "id": 1,
+    "username": "admin",
+    "email": "admin@medusse.local",
+    "fullName": "Administrador",
+    "role": "admin"
+  }
+}
+```
+
+### Usuarios Disponibles
+
+| Username | Password | Role | Descripción |
+|----------|----------|------|-------------|
+| admin | medusse2025 | admin | Administrador del sistema |
+| francisco | medusse2025 | admin | Autor del proyecto |
+| profesor | medusse2025 | user | Usuario estándar |
+| alumno | medusse2025 | viewer | Solo lectura |
+
+### Middleware de Protección
+
+Para proteger rutas, usa el middleware `requireAuth`:
+
+```javascript
+const auth = require('./auth');
+
+// Ruta protegida
+app.get('/api/protected', auth.requireAuth, (req, res) => {
+  // req.user contiene la informacion del usuario autenticado
+  res.json({ user: req.user });
+});
+
+// Ruta con rol especifico
+app.get('/api/admin', auth.requireAuth, auth.requireRole('admin'), (req, res) => {
+  res.json({ message: 'Solo administradores' });
+});
+```
+
+### Seguridad Implementada
+
+- **Tokens UUID** para sesiones seguras
+- **Expiración automática** de sesiones (24 horas)
+- **Registro de IP y User-Agent** en cada sesión
+- **Validación con procedimientos almacenados** MySQL
+- **Control de acceso por roles** (admin/user/viewer)
+- **Protección contra ataques** de fuerza bruta
+
+### Testing de Autenticación
+
+```bash
+# Ejecutar tests automaticos
+node test-auth.js
+
+# O usar el script batch (Windows)
+..\probar_autenticacion.bat
+```
+
 ## 🔒 Seguridad
 
 Para producción, considera:
 
-- Autenticación JWT
+- ✅ Autenticación con sesiones (implementado)
 - Rate limiting
 - HTTPS/WSS
 - Validación de entrada
 - Variables de entorno seguras
+- Rotación de tokens
+- Auditoría de accesos
