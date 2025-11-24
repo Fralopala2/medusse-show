@@ -75,10 +75,10 @@ export default function LoginPage() {
               />
             </div>
 
-            {/* Contraseña */}
+            {/* Contrasena */}
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Contraseña
+                Contrasena
               </label>
               <input
                 id="password"
