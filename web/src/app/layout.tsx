@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Medusse IoT - Sistema de Monitoreo Ambiental",
   description: "Sistema IoT completo para monitoreo ambiental con ESP32, MQTT, InfluxDB, Grafana y Flutter. 18 tipos de sensores en tiempo real.",
+  icons: {
+    icon: '/favicon.png',
+  },
 };
 
 export default function RootLayout({

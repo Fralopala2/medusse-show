@@ -49,6 +49,13 @@ export default function LoginPage() {
       <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-xl shadow-2xl">
         {/* Logo y titulo */}
         <div className="text-center">
+          <div className="flex justify-center mb-4">
+            <img 
+              src="/logos/logoMedusse.svg" 
+              alt="Medusse IoT Logo" 
+              className="h-32 w-32"
+            />
+          </div>
           <h2 className="text-3xl font-bold text-gray-900">Medusse IoT</h2>
           <p className="mt-2 text-sm text-gray-600">
             Sistema de Monitoreo Ambiental

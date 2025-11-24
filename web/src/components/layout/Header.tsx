@@ -30,8 +30,15 @@ export function Header() {
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
-        <Link href="/" className="text-xl font-bold tracking-widest uppercase">
-          Medusse IoT
+        <Link href="/" className="flex items-center gap-2">
+          <img 
+            src="/logos/logoMedusse.svg" 
+            alt="Medusse IoT" 
+            className="h-8 w-8"
+          />
+          <span className="text-xl font-bold tracking-widest uppercase">
+            Medusse IoT
+          </span>
         </Link>
 
         {/* Desktop Menu */}
