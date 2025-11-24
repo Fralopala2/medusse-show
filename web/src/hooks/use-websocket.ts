@@ -40,7 +40,7 @@ export function useWebSocket(): UseWebSocketReturn {
   // Función de conexión sin useCallback para evitar problemas de dependencias
   const connect = () => {
     try {
-      console.log('🔌 Connecting to WebSocket:', WS_URL);
+      console.log('🔌 Intentando conectar WebSocket:', WS_URL);
       
       const ws = new WebSocket(WS_URL);
       wsRef.current = ws;
@@ -64,29 +64,29 @@ export function useWebSocket(): UseWebSocketReturn {
       };
 
       ws.onerror = () => {
-        console.error('❌ WebSocket error');
-        setError('Error de conexión WebSocket');
+        console.warn('⚠️ WebSocket error (API no disponible)');
+        setError('API no disponible - datos en tiempo real desactivados');
         setIsConnected(false);
       };
 
       ws.onclose = (event) => {
-        console.log('🔌 WebSocket disconnected:', event.code, event.reason);
+        console.log('🔌 WebSocket desconectado:', event.code);
         setIsConnected(false);
         wsRef.current = null;
 
-        // Intentar reconectar automáticamente
-        if (reconnectAttemptsRef.current < MAX_RECONNECT_ATTEMPTS) {
+        // Intentar reconectar automaticamente solo si no fue cierre intencional
+        if (event.code !== 1000 && reconnectAttemptsRef.current < MAX_RECONNECT_ATTEMPTS) {
           reconnectAttemptsRef.current++;
           console.log(
-            `🔄 Reconnecting... (attempt ${reconnectAttemptsRef.current}/${MAX_RECONNECT_ATTEMPTS})`
+            `🔄 Reintentando conexion... (${reconnectAttemptsRef.current}/${MAX_RECONNECT_ATTEMPTS})`
           );
           
           reconnectTimeoutRef.current = setTimeout(() => {
             connect();
           }, RECONNECT_DELAY);
-        } else {
-          console.error('❌ Max reconnection attempts reached');
-          setError('No se pudo reconectar al servidor');
+        } else if (reconnectAttemptsRef.current >= MAX_RECONNECT_ATTEMPTS) {
+          console.warn('⚠️ WebSocket no disponible - continuando sin datos en tiempo real');
+          setError('Datos en tiempo real no disponibles');
         }
       };
     } catch (err) {
