@@ -38,8 +38,8 @@ async function getConnection() {
 async function query(sql, params = []) {
   const connection = await getConnection();
   try {
-    const [rows] = await connection.execute(sql, params);
-    return rows;
+    const result = await connection.execute(sql, params);
+    return result; // Devuelve [rows, fields]
   } finally {
     connection.release();
   }
