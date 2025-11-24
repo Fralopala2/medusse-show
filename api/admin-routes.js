@@ -19,7 +19,7 @@ const requireAdmin = async (req, res, next) => {
 router.get('/users', auth.requireAuth, requireAdmin, async (req, res) => {
   try {
     const [users] = await db.query(
-      'SELECT user_id, username, full_name, email, role, created_at, last_login FROM users ORDER BY created_at DESC'
+      'SELECT id as user_id, username, full_name, email, role, created_at, last_login FROM users ORDER BY created_at DESC'
     );
     
     res.json({
@@ -89,7 +89,7 @@ router.get('/logs', auth.requireAuth, requireAdmin, async (req, res) => {
     const [logs] = await db.query(
       `SELECT al.*, u.username 
        FROM activity_log al 
-       LEFT JOIN users u ON al.user_id = u.user_id 
+       LEFT JOIN users u ON al.user_id = u.id 
        ORDER BY al.created_at DESC 
        LIMIT ? OFFSET ?`,
       [limit, offset]
@@ -112,10 +112,10 @@ router.get('/logs', auth.requireAuth, requireAdmin, async (req, res) => {
 router.get('/sessions', auth.requireAuth, requireAdmin, async (req, res) => {
   try {
     const [sessions] = await db.query(
-      `SELECT s.session_id, s.session_token, s.user_id, s.ip_address, 
+      `SELECT s.id as session_id, s.session_token, s.user_id, s.ip_address, 
               s.user_agent, s.created_at, s.expires_at, u.username, u.full_name
        FROM sessions s
-       JOIN users u ON s.user_id = u.user_id
+       JOIN users u ON s.user_id = u.id
        WHERE s.expires_at > NOW()
        ORDER BY s.created_at DESC`
     );
@@ -139,14 +139,14 @@ router.delete('/users/:userId', auth.requireAuth, requireAdmin, async (req, res)
     const { userId } = req.params;
     
     // No permitir eliminar el propio usuario
-    if (parseInt(userId) === req.user.user_id) {
+    if (parseInt(userId) === req.user.id) {
       return res.status(400).json({
         error: 'Operacion no permitida',
         message: 'No puedes eliminar tu propio usuario'
       });
     }
     
-    await db.query('DELETE FROM users WHERE user_id = ?', [userId]);
+    await db.query('DELETE FROM users WHERE id = ?', [userId]);
     
     res.json({
       success: true,
@@ -175,14 +175,14 @@ router.put('/users/:userId/role', auth.requireAuth, requireAdmin, async (req, re
     }
     
     // No permitir cambiar el propio rol
-    if (parseInt(userId) === req.user.user_id) {
+    if (parseInt(userId) === req.user.id) {
       return res.status(400).json({
         error: 'Operacion no permitida',
         message: 'No puedes cambiar tu propio rol'
       });
     }
     
-    await db.query('UPDATE users SET role = ? WHERE user_id = ?', [role, userId]);
+    await db.query('UPDATE users SET role = ? WHERE id = ?', [role, userId]);
     
     res.json({
       success: true,
