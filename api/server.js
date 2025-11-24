@@ -37,6 +37,10 @@ db.testConnection().then(connected => {
 // Rutas de autenticacion (Reto 9)
 app.use('/api/auth', authRoutes);
 
+// Rutas de administracion (Reto 10)
+const adminRoutes = require('./admin-routes');
+app.use('/api/admin', adminRoutes);
+
 // Cache para datos recientes
 let cachedSummary = {};
 let lastCacheUpdate = 0;
