@@ -181,7 +181,8 @@ if "%API_AVAILABLE%"=="true" (
     echo    Login: http://localhost:3003/login
     echo.
 )
-echo [APP] Para app Flutter: cd medusse_app && flutter run -d windows
+echo [INFO] App Flutter no se inicia automaticamente
+echo       Para ejecutarla: cd medusse_app ^&^& flutter run -d windows
 echo.
 echo [STOP] Para detener todo: ejecutar detener.bat
 echo.
