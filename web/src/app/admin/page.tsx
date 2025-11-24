@@ -38,26 +38,6 @@ export default function AdminPage() {
   const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState<'users' | 'stats' | 'logs'>('stats');
 
-  useEffect(() => {
-    // Verificar autenticacion y permisos
-    const token = localStorage.getItem('sessionToken');
-    const userData = localStorage.getItem('user');
-    
-    if (!token || !userData) {
-      router.push('/login');
-      return;
-    }
-    
-    const user = JSON.parse(userData);
-    if (user.role !== 'admin') {
-      setError('Acceso denegado - Se requieren permisos de administrador');
-      setTimeout(() => router.push('/dashboard'), 2000);
-      return;
-    }
-    
-    loadData();
-  }, [router]);
-
   const loadData = async () => {
     const token = localStorage.getItem('sessionToken');
     
@@ -84,12 +64,32 @@ export default function AdminPage() {
       if (logsData.success) setLogs(logsData.logs);
       
       setLoading(false);
-    } catch (err) {
-      console.error('Error loading admin data:', err);
+    } catch (error) {
+      console.error('Error loading admin data:', error);
       setError('Error al cargar datos del panel');
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    // Verificar autenticacion y permisos
+    const token = localStorage.getItem('sessionToken');
+    const userData = localStorage.getItem('user');
+    
+    if (!token || !userData) {
+      router.push('/login');
+      return;
+    }
+    
+    const user = JSON.parse(userData);
+    if (user.role !== 'admin') {
+      setError('Acceso denegado - Se requieren permisos de administrador');
+      setTimeout(() => router.push('/dashboard'), 2000);
+      return;
+    }
+    
+    loadData();
+  }, [router, loadData]);
 
   const handleDeleteUser = async (userId: number) => {
     if (!confirm('¿Estas seguro de eliminar este usuario?')) return;
@@ -108,7 +108,8 @@ export default function AdminPage() {
       } else {
         alert(data.message || 'Error al eliminar usuario');
       }
-    } catch (err) {
+    } catch (error) {
+      console.error('Error deleting user:', error);
       alert('Error al eliminar usuario');
     }
   };
@@ -134,7 +135,8 @@ export default function AdminPage() {
       } else {
         alert(data.message || 'Error al cambiar rol');
       }
-    } catch (err) {
+    } catch (error) {
+      console.error('Error changing role:', error);
       alert('Error al cambiar rol');
     }
   };
