@@ -877,3 +877,58 @@ demo.bat         # Ejecutar demo completa
 
 *Desarrollado para IES José Rodrigo Botet - Curso 2026/2026*
 *Autor: Francisco Manuel López Alarte*
+
+## [
+2.8.0] - 2025-11-24 - RETO 7: VALIDACION DE FORMULARIOS JS ✅
+
+### ✅ Validacion de Formularios Completa
+
+#### ✅ Sistema de Validacion Robusto
+- **Libreria de validacion** (validation.ts) sin dependencias externas
+  * validateUsername() - Validacion de usuario
+  * validatePassword() - Validacion de contrasena
+  * validateEmail() - Validacion de email
+  * validateFullName() - Validacion de nombre completo
+
+#### ✅ Validacion en Tiempo Real
+- **Validacion mientras escribes** - Feedback inmediato
+- **Validacion al perder foco** (onBlur) - No molesta mientras escribes
+- **Validacion antes de enviar** - Doble verificacion
+- **Estados de error individuales** - Mensajes especificos por campo
+
+#### ✅ Reglas de Validacion Implementadas
+
+**Usuario:**
+- Requerido
+- Minimo 3 caracteres
+- Maximo 50 caracteres
+- Solo letras, numeros y guion bajo
+
+**Contrasena:**
+- Requerida
+- Minimo 6 caracteres
+- Maximo 100 caracteres
+
+**Email:**
+- Requerido
+- Formato valido (regex)
+
+**Nombre completo:**
+- Requerido
+- Minimo 3 caracteres
+- Maximo 100 caracteres
+
+#### ✅ Mejoras UX
+- **Bordes rojos** en campos con error
+- **Mensajes de error** debajo de cada campo
+- **Boton deshabilitado** si hay errores de validacion
+- **Transiciones suaves** en estados de error
+- **Focus rings** diferenciados (rojo para error, azul para normal)
+
+### 📊 Progreso del TFG
+- **11/16 retos completados** (68.75%)
+- **Reto 7 completado**: Validacion de formularios JS ✅
+- **5 retos pendientes**
+
+---
+
