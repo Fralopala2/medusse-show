@@ -43,10 +43,10 @@ if %errorlevel% equ 0 (
     )
 )
 
-netstat -ano | findstr ":3100" >nul 2>&1
+netstat -ano | findstr ":3003" >nul 2>&1
 if %errorlevel% equ 0 (
-    echo [WARN] Puerto 3100 aun ocupado
-    for /f "tokens=5" %%a in ('netstat -ano ^| findstr ":3100"') do (
+    echo [WARN] Puerto 3003 aun ocupado
+    for /f "tokens=5" %%a in ('netstat -ano ^| findstr ":3003"') do (
         taskkill /F /PID %%a >nul 2>&1
     )
 )

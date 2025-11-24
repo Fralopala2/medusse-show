@@ -181,7 +181,7 @@ start "Medusse Web" cmd /k "npm run dev"
 cd ..
 
 echo.
-echo ✅ Web disponible en: http://localhost:3100
+echo ✅ Web disponible en: http://localhost:3003
 echo.
 pause
 goto menu
@@ -365,11 +365,11 @@ echo    • paco / medusse2025 (Administrador)
 echo    • profesor / medusse2025 (Usuario)
 echo    • alumno / medusse2025 (Viewer)
 echo.
-echo 🌐 Login: http://localhost:3100/login
+echo 🌐 Login: http://localhost:3003/login
 echo.
 
 set /p abrir="¿Abrir navegador? (S/N): "
-if /i "%abrir%"=="S" start http://localhost:3100/login
+if /i "%abrir%"=="S" start http://localhost:3003/login
 
 pause
 goto menu

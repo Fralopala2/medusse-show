@@ -10,7 +10,7 @@ echo Este script inicia el ecosistema completo:
 echo - Servicios Docker (MQTT, InfluxDB, Grafana, MySQL)
 echo - Simulador de datos
 echo - API REST (puerto 3001)
-echo - Web Next.js (puerto 3100)
+echo - Web Next.js (puerto 3003)
 echo - Dashboard Grafana (puerto 3000)
 echo.
 echo NOTA: La app Flutter debe ejecutarse manualmente
@@ -153,22 +153,22 @@ if "%API_AVAILABLE%"=="true" (
     )
     
     echo [WEB] Verificando si Web ya esta corriendo
-    curl -s http://localhost:3100 >nul 2>&1
+    curl -s http://localhost:3003 >nul 2>&1
     if errorlevel 1 (
         echo [WEB] Iniciando Web Next.js
         cd web
         start "Medusse Web" cmd /k "npm run dev"
         cd ..
         timeout /t 15 >nul
-        echo [WEB] Web Next.js: http://localhost:3100
+        echo [WEB] Web Next.js: http://localhost:3003
     ) else (
-        echo [WEB] Web ya esta corriendo en http://localhost:3100
+        echo [WEB] Web ya esta corriendo en http://localhost:3003
     )
     
     echo [NAVEGADOR] Abriendo interfaces web
     start http://localhost:3001/health
     timeout /t 2 >nul
-    start http://localhost:3100
+    start http://localhost:3003
 )
 
 echo.
@@ -182,8 +182,8 @@ echo.
 if "%API_AVAILABLE%"=="true" (
     echo [API] API REST: http://localhost:3001
     echo [WS]  WebSocket: ws://localhost:3002
-    echo [WEB] Web Next.js: http://localhost:3100
-    echo    Login: http://localhost:3100/login
+    echo [WEB] Web Next.js: http://localhost:3003
+    echo    Login: http://localhost:3003/login
     echo.
 )
 echo [APP] Para app Flutter: cd medusse_app && flutter run -d windows
