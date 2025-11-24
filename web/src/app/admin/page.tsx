@@ -38,39 +38,6 @@ export default function AdminPage() {
   const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState<'users' | 'stats' | 'logs'>('stats');
 
-  const loadData = async () => {
-    const token = localStorage.getItem('sessionToken');
-    
-    try {
-      // Cargar estadisticas
-      const statsRes = await fetch('http://localhost:3001/api/admin/stats', {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      const statsData = await statsRes.json();
-      if (statsData.success) setStats(statsData.stats);
-      
-      // Cargar usuarios
-      const usersRes = await fetch('http://localhost:3001/api/admin/users', {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      const usersData = await usersRes.json();
-      if (usersData.success) setUsers(usersData.users);
-      
-      // Cargar logs
-      const logsRes = await fetch('http://localhost:3001/api/admin/logs?limit=20', {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      const logsData = await logsRes.json();
-      if (logsData.success) setLogs(logsData.logs);
-      
-      setLoading(false);
-    } catch (error) {
-      console.error('Error loading admin data:', error);
-      setError('Error al cargar datos del panel');
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
     // Verificar autenticacion y permisos
     const token = localStorage.getItem('sessionToken');
@@ -83,13 +50,47 @@ export default function AdminPage() {
     
     const user = JSON.parse(userData);
     if (user.role !== 'admin') {
-      setError('Acceso denegado - Se requieren permisos de administrador');
-      setTimeout(() => router.push('/dashboard'), 2000);
+      setTimeout(() => {
+        setError('Acceso denegado - Se requieren permisos de administrador');
+        router.push('/dashboard');
+      }, 100);
       return;
     }
     
+    // Cargar datos
+    const loadData = async () => {
+      try {
+        // Cargar estadisticas
+        const statsRes = await fetch('http://localhost:3001/api/admin/stats', {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const statsData = await statsRes.json();
+        if (statsData.success) setStats(statsData.stats);
+        
+        // Cargar usuarios
+        const usersRes = await fetch('http://localhost:3001/api/admin/users', {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const usersData = await usersRes.json();
+        if (usersData.success) setUsers(usersData.users);
+        
+        // Cargar logs
+        const logsRes = await fetch('http://localhost:3001/api/admin/logs?limit=20', {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const logsData = await logsRes.json();
+        if (logsData.success) setLogs(logsData.logs);
+        
+        setLoading(false);
+      } catch (error) {
+        console.error('Error loading admin data:', error);
+        setError('Error al cargar datos del panel');
+        setLoading(false);
+      }
+    };
+    
     loadData();
-  }, [router, loadData]);
+  }, [router]);
 
   const handleDeleteUser = async (userId: number) => {
     if (!confirm('¿Estas seguro de eliminar este usuario?')) return;
