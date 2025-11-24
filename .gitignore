@@ -50,6 +50,7 @@ docker/grafana/data/
 docker/influxdb/data/
 docker/mosquitto/data/
 docker/mosquitto/log/
+docker/mysql/data/
 
 # Virtual environments
 .env

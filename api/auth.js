@@ -1,5 +1,6 @@
 // Modulo de autenticacion
 const bcrypt = require('bcrypt');
+const crypto = require('crypto');
 const db = require('./db');
 
 // Autenticar usuario (login)
@@ -7,53 +8,84 @@ async function authenticateUser(username, password, ipAddress = null, userAgent 
   try {
     console.log(`🔐 Attempting authentication for user: ${username}`);
     
-    // Llamar al procedimiento almacenado sp_authenticate_user
-    const results = await db.callProcedure('sp_authenticate_user', [
-      username,
-      password,
-      ipAddress,
-      userAgent
-    ]);
+    const connection = await db.getConnection();
     
-    // El procedimiento devuelve multiples result sets
-    // [0] = resultado de la autenticacion
-    // [1] = informacion del usuario
-    // [2] = metadata
-    
-    if (results && results[0] && results[0].length > 0) {
-      const authResult = results[0][0];
+    try {
+      // Buscar usuario directamente (sin procedimiento almacenado)
+      const [userRows] = await connection.execute(
+        'SELECT id, username, email, full_name, role, password_hash, is_active FROM users WHERE (username = ? OR email = ?) LIMIT 1',
+        [username, username]
+      );
       
-      if (authResult.success) {
-        console.log(`✅ Authentication successful for user: ${username}`);
-        
-        // Obtener informacion del usuario del segundo result set
-        const userInfo = results[1] && results[1][0] ? results[1][0] : null;
-        
-        return {
-          success: true,
-          message: authResult.message,
-          sessionToken: authResult.session_token,
-          user: userInfo ? {
-            id: userInfo.user_id,
-            username: userInfo.username,
-            email: userInfo.email,
-            fullName: userInfo.full_name,
-            role: userInfo.role
-          } : null
-        };
-      } else {
-        console.log(`❌ Authentication failed for user: ${username} - ${authResult.message}`);
+      if (userRows.length === 0) {
+        console.log(`❌ User not found: ${username}`);
         return {
           success: false,
-          message: authResult.message
+          message: 'Credenciales invalidas'
         };
       }
+      
+      const user = userRows[0];
+      
+      // Verificar que el usuario este activo
+      if (!user.is_active) {
+        console.log(`❌ User inactive: ${username}`);
+        return {
+          success: false,
+          message: 'Usuario inactivo'
+        };
+      }
+      
+      // Verificar contraseña con bcrypt
+      const passwordMatch = await bcrypt.compare(password, user.password_hash);
+      
+      if (!passwordMatch) {
+        console.log(`❌ Invalid password for user: ${username}`);
+        return {
+          success: false,
+          message: 'Credenciales invalidas'
+        };
+      }
+      
+      // Generar token de sesion
+      const sessionToken = crypto.randomUUID();
+      
+      // Crear sesion
+      await connection.execute(
+        'INSERT INTO sessions (user_id, session_token, ip_address, user_agent, expires_at) VALUES (?, ?, ?, ?, DATE_ADD(NOW(), INTERVAL 24 HOUR))',
+        [user.id, sessionToken, ipAddress, userAgent]
+      );
+      
+      // Actualizar ultimo login
+      await connection.execute(
+        'UPDATE users SET last_login = NOW() WHERE id = ?',
+        [user.id]
+      );
+      
+      // Registrar actividad
+      await connection.execute(
+        'INSERT INTO activity_log (user_id, action, entity_type, entity_id, ip_address, user_agent) VALUES (?, ?, ?, ?, ?, ?)',
+        [user.id, 'user_login', 'user', user.id, ipAddress, userAgent]
+      );
+      
+      console.log(`✅ Authentication successful for user: ${username}`);
+      
+      return {
+        success: true,
+        message: 'Autenticacion exitosa',
+        sessionToken: sessionToken,
+        user: {
+          id: user.id,
+          username: user.username,
+          email: user.email,
+          fullName: user.full_name,
+          role: user.role
+        }
+      };
+      
+    } finally {
+      connection.release();
     }
-    
-    return {
-      success: false,
-      message: 'Error en la autenticacion'
-    };
     
   } catch (error) {
     console.error('❌ Error in authenticateUser:', error.message);
@@ -66,41 +98,41 @@ async function validateSession(sessionToken) {
   try {
     console.log(`🔍 Validating session token: ${sessionToken.substring(0, 8)}...`);
     
-    // Llamar al procedimiento almacenado sp_validate_session
-    const results = await db.callProcedure('sp_validate_session', [sessionToken]);
+    const connection = await db.getConnection();
     
-    if (results && results[0] && results[0].length > 0) {
-      const validationResult = results[0][0];
+    try {
+      // Buscar sesion activa directamente
+      const [sessionRows] = await connection.execute(
+        'SELECT s.user_id, u.username, u.email, u.full_name, u.role FROM sessions s JOIN users u ON s.user_id = u.id WHERE s.session_token = ? AND s.expires_at > NOW() AND u.is_active = TRUE LIMIT 1',
+        [sessionToken]
+      );
       
-      if (validationResult.is_valid) {
-        console.log(`✅ Session valid for user ID: ${validationResult.user_id}`);
-        
-        // Obtener informacion del usuario del segundo result set
-        const userInfo = results[1] && results[1][0] ? results[1][0] : null;
-        
-        return {
-          valid: true,
-          user: userInfo ? {
-            id: userInfo.user_id,
-            username: userInfo.username,
-            email: userInfo.email,
-            fullName: userInfo.full_name,
-            role: userInfo.role
-          } : null
-        };
-      } else {
-        console.log(`❌ Session invalid: ${validationResult.message}`);
+      if (sessionRows.length === 0) {
+        console.log(`❌ Session invalid or expired`);
         return {
           valid: false,
-          message: validationResult.message
+          message: 'Sesion invalida o expirada'
         };
       }
+      
+      const session = sessionRows[0];
+      
+      console.log(`✅ Session valid for user ID: ${session.user_id}`);
+      
+      return {
+        valid: true,
+        user: {
+          id: session.user_id,
+          username: session.username,
+          email: session.email,
+          fullName: session.full_name,
+          role: session.role
+        }
+      };
+      
+    } finally {
+      connection.release();
     }
-    
-    return {
-      valid: false,
-      message: 'Sesion no encontrada'
-    };
     
   } catch (error) {
     console.error('❌ Error in validateSession:', error.message);
@@ -113,31 +145,32 @@ async function logoutUser(sessionToken) {
   try {
     console.log(`🚪 Logging out session: ${sessionToken.substring(0, 8)}...`);
     
-    // Llamar al procedimiento almacenado sp_logout_user
-    const results = await db.callProcedure('sp_logout_user', [sessionToken]);
+    const connection = await db.getConnection();
     
-    if (results && results[0] && results[0].length > 0) {
-      const logoutResult = results[0][0];
+    try {
+      // Eliminar sesion directamente
+      const [result] = await connection.execute(
+        'DELETE FROM sessions WHERE session_token = ?',
+        [sessionToken]
+      );
       
-      if (logoutResult.success) {
+      if (result.affectedRows > 0) {
         console.log(`✅ Logout successful`);
         return {
           success: true,
-          message: logoutResult.message
+          message: 'Sesion cerrada correctamente'
         };
       } else {
-        console.log(`❌ Logout failed: ${logoutResult.message}`);
+        console.log(`❌ Session not found`);
         return {
           success: false,
-          message: logoutResult.message
+          message: 'Sesion no encontrada'
         };
       }
+      
+    } finally {
+      connection.release();
     }
-    
-    return {
-      success: false,
-      message: 'Error al cerrar sesion'
-    };
     
   } catch (error) {
     console.error('❌ Error in logoutUser:', error.message);

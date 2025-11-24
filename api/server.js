@@ -242,22 +242,6 @@ app.get('/api/auth/validate', async (req, res) => {
   }
 });
 
-// Obtener perfil del usuario autenticado
-app.get('/api/auth/profile', auth.requireAuth, async (req, res) => {
-  try {
-    res.json({
-      success: true,
-      user: req.user
-    });
-  } catch (error) {
-    console.error('❌ Error getting profile:', error.message);
-    res.status(500).json({
-      error: 'Error al obtener perfil',
-      message: 'Error al procesar la solicitud'
-    });
-  }
-});
-
 // ===== ENERGY MONITORING ENDPOINTS (FASE 2) =====
 
 app.get('/api/energy/:location', async (req, res) => {
