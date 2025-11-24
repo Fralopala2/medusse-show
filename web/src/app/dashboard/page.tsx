@@ -182,6 +182,27 @@ export default function DashboardPage() {
           </div>
         </div>
 
+        {/* Panel de admin (solo para admins) */}
+        {user.role === 'admin' && (
+          <div className="mt-6">
+            <button
+              onClick={() => router.push('/admin')}
+              className="w-full bg-indigo-600 text-white rounded-lg shadow p-6 hover:bg-indigo-700 transition-colors text-left"
+            >
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="text-3xl mb-2">🛡️</div>
+                  <h3 className="text-lg font-semibold mb-2">Panel de Administracion</h3>
+                  <p className="text-sm text-indigo-100">Gestionar usuarios, ver estadisticas y logs del sistema</p>
+                </div>
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            </button>
+          </div>
+        )}
+
         {/* Permisos segun rol */}
         <div className="mt-6 bg-white rounded-lg shadow p-6">
           <h2 className="text-xl font-semibold mb-4">Permisos de tu Rol</h2>
