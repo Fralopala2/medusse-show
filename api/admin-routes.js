@@ -86,13 +86,13 @@ router.get('/logs', auth.requireAuth, requireAdmin, async (req, res) => {
     const limit = parseInt(req.query.limit) || 50;
     const offset = parseInt(req.query.offset) || 0;
     
+    // Usar template string en lugar de placeholders para LIMIT y OFFSET
     const [logs] = await db.query(
       `SELECT al.*, u.username 
        FROM activity_log al 
        LEFT JOIN users u ON al.user_id = u.id 
        ORDER BY al.created_at DESC 
-       LIMIT ? OFFSET ?`,
-      [limit, offset]
+       LIMIT ${limit} OFFSET ${offset}`
     );
     
     res.json({
