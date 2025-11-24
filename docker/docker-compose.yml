@@ -68,6 +68,25 @@ services:
     networks:
       - medusse_network
 
+  # MySQL Database for Users and Authentication
+  mysql:
+    image: mysql:8.0
+    container_name: medusse_mysql
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=medusse2025
+      - MYSQL_DATABASE=medusse_db
+      - MYSQL_USER=medusse_user
+      - MYSQL_PASSWORD=medusse2025
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/init:/docker-entrypoint-initdb.d
+    networks:
+      - medusse_network
+    command: --default-authentication-plugin=mysql_native_password
+
 networks:
   medusse_network:
     driver: bridge
@@ -76,6 +95,7 @@ volumes:
   mosquitto_data:
   influxdb_data:
   grafana_data:
+  mysql_data:
 
 # Quick Start:
 # 1. docker-compose up -d
