@@ -139,19 +139,31 @@ start http://localhost:3000
 timeout /t 3 >nul
 
 if "%API_AVAILABLE%"=="true" (
-    echo [API] Iniciando API REST
-    cd api
-    start "Medusse API" cmd /k "node server.js"
-    cd ..
-    timeout /t 5 >nul
-    echo [API] API REST: http://localhost:3001
+    echo [API] Verificando si API ya esta corriendo
+    curl -s http://localhost:3001/health >nul 2>&1
+    if errorlevel 1 (
+        echo [API] Iniciando API REST
+        cd api
+        start "Medusse API" cmd /k "node server.js"
+        cd ..
+        timeout /t 5 >nul
+        echo [API] API REST: http://localhost:3001
+    ) else (
+        echo [API] API ya esta corriendo en http://localhost:3001
+    )
     
-    echo [WEB] Iniciando Web Next.js
-    cd web
-    start "Medusse Web" cmd /k "npm run dev"
-    cd ..
-    timeout /t 15 >nul
-    echo [WEB] Web Next.js: http://localhost:3100
+    echo [WEB] Verificando si Web ya esta corriendo
+    curl -s http://localhost:3100 >nul 2>&1
+    if errorlevel 1 (
+        echo [WEB] Iniciando Web Next.js
+        cd web
+        start "Medusse Web" cmd /k "npm run dev"
+        cd ..
+        timeout /t 15 >nul
+        echo [WEB] Web Next.js: http://localhost:3100
+    ) else (
+        echo [WEB] Web ya esta corriendo en http://localhost:3100
+    )
     
     echo [NAVEGADOR] Abriendo interfaces web
     start http://localhost:3001/health
@@ -176,7 +188,7 @@ if "%API_AVAILABLE%"=="true" (
 )
 echo [APP] Para app Flutter: cd medusse_app && flutter run -d windows
 echo.
-echo [STOP] Para detener todo: Ctrl+C y ejecutar 'docker compose down'
+echo [STOP] Para detener todo: ejecutar detener.bat
 echo.
 echo [SIMULADOR] Iniciando datos de sensores
 echo Presiona Ctrl+C para detener
@@ -186,8 +198,8 @@ REM Ejecutar simulador (bloquea hasta Ctrl+C)
 python arduino/medusse_simulator.py
 
 echo.
-echo [INFO] Sistema detenido
+echo [INFO] Simulador detenido
 echo.
-echo Para limpiar completamente:
-echo docker compose -f docker/docker-compose.yml down
+echo Para detener todo el sistema:
+echo detener.bat
 pause

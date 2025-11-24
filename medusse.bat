@@ -29,11 +29,14 @@ echo   9. Test API REST
 echo   10. Test autenticacion
 echo   11. Test login web
 echo.
+echo UTILIDADES:
+echo   12. Detener todo el sistema
+echo.
 echo   0. Salir
 echo.
 echo ========================================
 
-set /p opcion="Selecciona una opcion (0-11): "
+set /p opcion="Selecciona una opcion (0-12): "
 
 if "%opcion%"=="0" goto fin
 if "%opcion%"=="1" goto instalar
@@ -47,6 +50,7 @@ if "%opcion%"=="8" goto verificar_rapido
 if "%opcion%"=="9" goto test_api
 if "%opcion%"=="10" goto test_auth
 if "%opcion%"=="11" goto test_login_web
+if "%opcion%"=="12" goto detener
 
 echo.
 echo ❌ Opcion invalida
@@ -378,3 +382,14 @@ echo   Gracias por usar Medusse IoT
 echo ========================================
 echo.
 exit /b 0
+
+:detener
+cls
+echo.
+echo ========================================
+echo   DETENER SISTEMA
+echo ========================================
+echo.
+call detener.bat
+pause
+goto menu
