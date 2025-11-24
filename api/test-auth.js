@@ -178,7 +178,7 @@ async function runTests() {
   
   // Test 6: Login con otros usuarios
   const testUsers = [
-    { username: 'francisco', password: 'medusse2025', role: 'admin' },
+    { username: 'paco', password: 'medusse2025', role: 'admin' },
     { username: 'profesor', password: 'medusse2025', role: 'user' },
     { username: 'alumno', password: 'medusse2025', role: 'viewer' }
   ];

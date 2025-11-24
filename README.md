@@ -396,7 +396,7 @@ probar_autenticacion.bat     # Testing de autenticacion (Reto 9)
 - **Sesiones seguras** con tokens UUID
 - **Procedimientos almacenados** MySQL para autenticación
 - **Middleware de protección** para rutas privadas
-- **4 usuarios iniciales** configurados (admin, francisco, profesor, alumno)
+- **4 usuarios iniciales** configurados (admin, paco, profesor, alumno)
 
 Ver documentación completa en: [api/README.md](api/README.md)
 
@@ -521,7 +521,7 @@ La web estara disponible en: http://localhost:3100
 | Username | Email | Password | Role |
 |----------|-------|----------|------|
 | admin | admin@medusse.local | medusse2025 | admin |
-| francisco | pacoaldev@gmail.com | medusse2025 | admin |
+| paco | pacoaldev@gmail.com | medusse2025 | admin |
 | profesor | profesor@medusse.local | medusse2025 | user |
 | alumno | alumno@medusse.local | medusse2025 | viewer |
 

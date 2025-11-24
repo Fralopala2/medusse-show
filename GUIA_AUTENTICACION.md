@@ -76,8 +76,8 @@ Este script:
 📝 Test 5: Acceso a perfil sin autenticacion
 ✅ Acceso no autorizado rechazado correctamente
 
-📝 Test: Login como francisco (admin)
-✅ Login exitoso como francisco
+📝 Test: Login como paco (admin)
+✅ Login exitoso como paco
    Rol: admin
 
 📝 Test: Login como profesor (user)
@@ -267,11 +267,11 @@ curl -X GET http://localhost:3001/api/auth/validate ^
 | Username | Password | Role | Descripción |
 |----------|----------|------|-------------|
 | admin | medusse2025 | admin | Administrador del sistema |
-| francisco | medusse2025 | admin | Autor del proyecto |
+| paco | medusse2025 | admin | Autor del proyecto |
 | profesor | medusse2025 | user | Usuario estándar |
 | alumno | medusse2025 | viewer | Solo lectura |
 
-Puedes probar con cualquiera de estos usuarios.
+Puedes probar con cualquiera de estos usuarios. Todos usan la misma contraseña: **medusse2025**
 
 ---
 

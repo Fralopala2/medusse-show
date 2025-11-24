@@ -369,7 +369,7 @@ Respuesta:
 | Username | Password | Role | Descripción |
 |----------|----------|------|-------------|
 | admin | medusse2025 | admin | Administrador del sistema |
-| francisco | medusse2025 | admin | Autor del proyecto |
+| paco | medusse2025 | admin | Autor del proyecto |
 | profesor | medusse2025 | user | Usuario estándar |
 | alumno | medusse2025 | viewer | Solo lectura |
 

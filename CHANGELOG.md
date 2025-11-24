@@ -32,7 +32,7 @@
 - **Tests de login** con credenciales correctas/incorrectas
 - **Tests de validacion** de sesion
 - **Tests de logout** y expiracion de sesion
-- **Tests con 4 usuarios** diferentes (admin, francisco, profesor, alumno)
+- **Tests con 4 usuarios** diferentes (admin, paco, profesor, alumno)
 
 #### ✅ Dependencias Agregadas
 - **mysql2**: Cliente MySQL para Node.js (v3.6.5)
