@@ -49,13 +49,15 @@ export function Header() {
 
         {/* CTA & Mobile Toggle */}
         <div className="flex items-center gap-4">
-          <Button
-            variant={scrolled || mobileMenuOpen ? "default" : "outline"}
-            size="sm"
-            className="hidden sm:flex"
-          >
-            Solicitar pedido
-          </Button>
+          <Link href="/login">
+            <Button
+              variant={scrolled || mobileMenuOpen ? "default" : "outline"}
+              size="sm"
+              className="hidden sm:flex"
+            >
+              Iniciar sesion
+            </Button>
+          </Link>
 
           <button
             className="md:hidden"

@@ -394,9 +394,15 @@ probar_autenticacion.bat     # Testing de autenticacion (Reto 9)
 ### 🔐 Sistema de Autenticación
 - **Gestión de usuarios** con roles (admin, user, viewer)
 - **Sesiones seguras** con tokens UUID
-- **Procedimientos almacenados** MySQL para autenticación
+- **Login web** con Next.js y React
+- **Dashboard protegido** con validación de sesión
 - **Middleware de protección** para rutas privadas
 - **4 usuarios iniciales** configurados (admin, paco, profesor, alumno)
+
+**Probar login web:**
+```cmd
+probar_login_web.bat
+```
 
 Ver documentación completa en: [api/README.md](api/README.md)
 
