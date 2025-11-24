@@ -3,6 +3,7 @@ inclusion: always
 ---
 
 # Reglas del Proyecto Medusse IoT
+- Lo comentarios siempre seran en ESPAÑOL de España, y nunca con acentos.
 
 ## Información del Proyecto
 - **Nombre**: Medusse IoT - Sistema de Monitoreo Ambiental Completo

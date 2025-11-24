@@ -173,7 +173,7 @@ export function DashboardSection() {
 }
 
 // Componente para cada tarjeta de ubicación
-function LocationCard({ location, data }: { location: typeof LOCATIONS[0]; data: any }) {
+function LocationCard({ location, data }: { location: typeof LOCATIONS[0]; data: Summary[string] }) {
   const { temperature, humidity, co2, pressure, battery_percentage } = data;
 
   return (

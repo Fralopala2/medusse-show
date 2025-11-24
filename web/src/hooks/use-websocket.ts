@@ -37,7 +37,8 @@ export function useWebSocket(): UseWebSocketReturn {
   const MAX_RECONNECT_ATTEMPTS = 5;
   const RECONNECT_DELAY = 3000; // 3 segundos
 
-  const connect = useCallback(() => {
+  // Función de conexión sin useCallback para evitar problemas de dependencias
+  const connect = () => {
     try {
       console.log('🔌 Connecting to WebSocket:', WS_URL);
       
@@ -53,7 +54,7 @@ export function useWebSocket(): UseWebSocketReturn {
 
       ws.onmessage = (event) => {
         try {
-          const parsedData = JSON.parse(event.data);
+          const parsedData = JSON.parse(event.data) as WebSocketData;
           console.log('📨 WebSocket data received:', parsedData);
           setData(parsedData);
         } catch (err) {
@@ -62,8 +63,8 @@ export function useWebSocket(): UseWebSocketReturn {
         }
       };
 
-      ws.onerror = (event) => {
-        console.error('❌ WebSocket error:', event);
+      ws.onerror = () => {
+        console.error('❌ WebSocket error');
         setError('Error de conexión WebSocket');
         setIsConnected(false);
       };
@@ -92,7 +93,7 @@ export function useWebSocket(): UseWebSocketReturn {
       console.error('❌ Error creating WebSocket:', err);
       setError('Error al crear conexión WebSocket');
     }
-  }, []);
+  };
 
   const reconnect = useCallback(() => {
     console.log('🔄 Manual reconnection requested');
@@ -112,7 +113,7 @@ export function useWebSocket(): UseWebSocketReturn {
     
     // Conectar de nuevo
     connect();
-  }, [connect]);
+  }, []);
 
   useEffect(() => {
     // Conectar al montar el componente
@@ -131,7 +132,8 @@ export function useWebSocket(): UseWebSocketReturn {
         wsRef.current = null;
       }
     };
-  }, [connect]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return { data, isConnected, error, reconnect };
 }
@@ -142,13 +144,9 @@ export function useWebSocket(): UseWebSocketReturn {
  */
 export function useWebSocketFiltered(location: string): UseWebSocketReturn {
   const { data, isConnected, error, reconnect } = useWebSocket();
-  const [filteredData, setFilteredData] = useState<WebSocketData | null>(null);
-
-  useEffect(() => {
-    if (data && data.location === location) {
-      setFilteredData(data);
-    }
-  }, [data, location]);
+  
+  // Usar useMemo en lugar de useState + useEffect para evitar renders innecesarios
+  const filteredData = data && data.location === location ? data : null;
 
   return { data: filteredData, isConnected, error, reconnect };
 }
@@ -165,22 +163,28 @@ export function useWebSocketBuffer(bufferSize: number = 10): {
   clearBuffer: () => void;
 } {
   const { data, isConnected, error, reconnect } = useWebSocket();
+  const bufferRef = useRef<WebSocketData[]>([]);
   const [buffer, setBuffer] = useState<WebSocketData[]>([]);
 
   useEffect(() => {
     if (data) {
-      setBuffer((prev) => {
-        const newBuffer = [...prev, data];
-        // Mantener solo los últimos N elementos
-        if (newBuffer.length > bufferSize) {
-          return newBuffer.slice(-bufferSize);
-        }
-        return newBuffer;
-      });
+      // Actualizar ref primero
+      bufferRef.current = [...bufferRef.current, data];
+      
+      // Mantener solo los últimos N elementos
+      if (bufferRef.current.length > bufferSize) {
+        bufferRef.current = bufferRef.current.slice(-bufferSize);
+      }
+      
+      // Actualizar estado en el siguiente tick para evitar cascading renders
+      setTimeout(() => {
+        setBuffer([...bufferRef.current]);
+      }, 0);
     }
   }, [data, bufferSize]);
 
   const clearBuffer = useCallback(() => {
+    bufferRef.current = [];
     setBuffer([]);
   }, []);
 
