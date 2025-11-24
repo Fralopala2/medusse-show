@@ -48,12 +48,17 @@ proyecto-medusse/
 │ ─ iniciar_api.bat          # 🚀 API REST + WebSocket
 ├── ejecutar_flutter.bat     # 📱 App móvil Flutter
 ├── verificar.bat            # 🔍 Verificación completa
-├── verificar_rapido.bat     # ⚡ Verificación rápida (30s)
-├── probar_api.bat           # 🧪 Testing automático API
-├── INSTALACION.md           # 📖 Guías de instalación
-├── QUICK_START.md           # ⚡ Inicio rápido (5 minutos)
-├── MIGRACION.md             # 🔄 Migración a LoRa Mesh
-└── README.md                # Esta documentación
+├── verificar_rapido.bat     # ⚡ Verificacion rapida (30s)
+├── probar_api.bat           # 🧪 Testing automatico API
+├── setup_lliurex.sh         # 🐧 Instalacion para Lliurex
+├── ejecutar_lliurex.sh      # 🐧 Ejecutar en Lliurex
+├── verificar_lliurex.sh     # 🐧 Verificar en Lliurex
+├── detener_lliurex.sh       # 🐧 Detener en Lliurex
+├── INSTALACION.md           # 📖 Guias de instalacion
+├── INSTALACION_LLIUREX.md   # 🐧 Guia especifica Lliurex
+├── QUICK_START.md           # ⚡ Inicio rapido (5 minutos)
+├── MIGRACION.md             # 🔄 Migracion a LoRa Mesh
+└── README.md                # Esta documentacion
 ```
 
 ## 🚀 Características
@@ -149,6 +154,8 @@ proyecto-medusse/
 
 ### 🤖 Instalación Automática (Recomendada)
 
+#### Windows
+
 **Para equipos nuevos (instala Docker automáticamente):**
 ```cmd
 instalar_proyecto.bat
@@ -161,25 +168,53 @@ setup_rapido.bat
 ```
 *Setup completo en menos de 2 minutos.*
 
+#### Linux / Lliurex (IES Jose Rodrigo Botet)
+
+**Instalacion completa:**
+```bash
+chmod +x setup_lliurex.sh
+./setup_lliurex.sh
+```
+*Maneja permisos de Docker automaticamente. Ver INSTALACION_LLIUREX.md para mas detalles.*
+
 ### ⚡ Ejecución del Sistema
+
+#### Windows
 
 **1. Verificar Sistema:**
 ```cmd
-verificar.bat              # Verificación completa
-verificar_rapido.bat       # Verificación rápida (30 segundos)
+verificar.bat              # Verificacion completa
+verificar_rapido.bat       # Verificacion rapida (30 segundos)
 ```
 
 **2. Ejecutar Ecosistema Completo (Recomendado):**
 ```cmd
-sistema_completo.bat       # Dashboard + API + Simulador + diagnósticos
+sistema_completo.bat       # Dashboard + API + Simulador + diagnosticos
 ```
 
 **3. Ejecutar Componentes Individuales:**
 ```cmd
 demo.bat                   # Solo Dashboard Grafana
 iniciar_api.bat           # Solo API REST + WebSocket
-ejecutar_flutter.bat      # Solo App móvil Flutter
+ejecutar_flutter.bat      # Solo App movil Flutter
 ejecutar_web.bat          # Solo Web Next.js
+```
+
+#### Linux / Lliurex
+
+**1. Verificar Sistema:**
+```bash
+./verificar_lliurex.sh     # Verificacion completa
+```
+
+**2. Ejecutar Sistema Completo:**
+```bash
+./ejecutar_lliurex.sh      # Dashboard + API + Simulador
+```
+
+**3. Detener Sistema:**
+```bash
+./detener_lliurex.sh       # Detener todos los servicios
 ```
 
 ### Acceso a Interfaces
@@ -209,9 +244,10 @@ ejecutar_web.bat          # Solo Web Next.js
 - **Frontend Móvil:** Flutter + Provider + fl_chart + Google Fonts
 - **Base de Datos:** InfluxDB 2.7 (series temporales)
 - **Comunicación:** MQTT + WebSocket + HTTP REST
-- **Visualización:** Grafana 10.2.0 + Dashboard personalizado
+- **Visualizacion:** Grafana 10.2.0 + Dashboard personalizado
 - **Contenedores:** Docker Compose con networking optimizado
-- **Automatización:** Scripts batch para Windows
+- **Automatizacion:** Scripts batch para Windows y scripts shell para Linux/Lliurex
+- **Multiplataforma:** Windows, Linux, Lliurex (IES Jose Rodrigo Botet)
 
 ## 🛠️ Uso Manual
 

@@ -1,5 +1,132 @@
 # Changelog - Proyecto Medusse IoT
 
+## [2.7.0] - 2025-11-24 - SOPORTE LLIUREX COMPLETO ✅
+
+### 🐧 Scripts Especificos para Lliurex
+
+#### ✅ Problema Resuelto
+- **Permisos de Docker** en entornos educativos Lliurex
+- Usuario sin permisos de sudoers no puede usar Docker
+- Solucion con scripts que manejan sudo automaticamente
+
+#### ✅ Scripts Nuevos para Lliurex
+- **setup_lliurex.sh** - Instalacion con manejo inteligente de sudo
+  * Detecta si necesita sudo para Docker
+  * Instala dependencias Python en home del usuario
+  * Instala dependencias Node.js si esta disponible
+  * Inicia servicios Docker automaticamente
+
+- **ejecutar_lliurex.sh** - Iniciar sistema completo
+  * Maneja sudo solo para comandos Docker
+  * Inicia Docker Compose con permisos correctos
+  * Inicia simulador y API en background
+  * Guarda PIDs para control de procesos
+
+- **verificar_lliurex.sh** - Verificacion completa del sistema
+  * Verifica Docker con o sin sudo
+  * Verifica contenedores corriendo
+  * Verifica puertos y servicios
+  * Verifica datos en InfluxDB
+
+- **detener_lliurex.sh** - Detener todos los servicios
+  * Detiene simulador y API por PID
+  * Detiene Docker Compose con permisos
+  * Limpia archivos temporales
+
+#### ✅ Documentacion Lliurex
+- **INSTALACION_LLIUREX.md** - Guia completa para Lliurex
+  * Explicacion del problema de permisos
+  * Solucion recomendada (agregar usuario al grupo docker)
+  * Solucion alternativa (scripts con sudo)
+  * Instalacion de Node.js sin sudo usando nvm
+  * Solucion de problemas especificos de Lliurex
+  * URL del repositorio actualizada
+
+#### ✅ Funciones Inteligentes
+- **docker_cmd()** - Ejecuta docker con o sin sudo segun permisos
+- **docker_compose_cmd()** - Ejecuta docker compose con permisos correctos
+- **Deteccion automatica** - Scripts detectan si necesitan sudo
+- **Mensajes claros** - Informa cuando pide permisos de admin
+
+### 🎯 Casos de Uso
+
+#### Caso 1: Usuario sin permisos de grupo docker
+```bash
+# Los scripts piden sudo solo para comandos Docker
+./setup_lliurex.sh        # Pide password admin cuando sea necesario
+./ejecutar_lliurex.sh     # Funciona con sudo automatico
+```
+
+#### Caso 2: Usuario agregado al grupo docker (recomendado)
+```bash
+# Admin ejecuta una sola vez:
+sudo usermod -aG docker fralopala2
+
+# Despues de logout/login, funciona sin sudo:
+./setup_lliurex.sh        # Sin pedir password
+./ejecutar_lliurex.sh     # Sin pedir password
+```
+
+### 📊 Compatibilidad
+
+#### ✅ Sistemas Soportados
+- **Lliurex** (IES Jose Rodrigo Botet)
+- **Ubuntu** 20.04+
+- **Debian** 11+
+- Cualquier distribucion basada en Debian
+
+#### ✅ Requisitos
+- Docker Desktop instalado (ya disponible en clase)
+- Python 3 (incluido en Lliurex)
+- Node.js (opcional, se puede instalar con nvm)
+
+### 🔧 Mejoras Tecnicas
+
+#### ✅ Manejo de Permisos
+- Deteccion automatica de permisos Docker
+- Uso minimo de sudo (solo donde es necesario)
+- Mensajes informativos cuando pide permisos
+- Funciona con o sin permisos de grupo docker
+
+#### ✅ Instalacion Flexible
+- Instalacion en home del usuario (sin tocar sistema)
+- Dependencias Python con --user flag
+- Node.js opcional con nvm (sin sudo)
+- Scripts ejecutables con chmod +x
+
+### 📁 Archivos Nuevos
+- `setup_lliurex.sh` - Script de instalacion
+- `ejecutar_lliurex.sh` - Script de ejecucion
+- `verificar_lliurex.sh` - Script de verificacion
+- `detener_lliurex.sh` - Script de detencion
+- `INSTALACION_LLIUREX.md` - Documentacion completa
+
+### 🎓 Uso en Clase
+
+#### Preparacion (una sola vez)
+```bash
+cd ~/Documentos
+git clone https://github.com/Fralopala2/proyecto-medusse.git
+cd proyecto-medusse
+chmod +x *.sh
+./setup_lliurex.sh
+```
+
+#### Uso Diario
+```bash
+cd ~/Documentos/proyecto-medusse
+./ejecutar_lliurex.sh
+# Abrir navegador: http://localhost:3000
+# Ctrl+C para detener o usar ./detener_lliurex.sh
+```
+
+### 📊 Progreso del TFG
+- **10/16 retos completados** (62.5%)
+- **Soporte multiplataforma**: Windows + Linux + Lliurex ✅
+- **6 retos pendientes**
+
+---
+
 ## [2.6.0] - 2025-11-24 - LOGIN WEB, LOGOS Y SOPORTE LINUX ✅
 
 ### 🌐 Sistema de Login Web Completo
