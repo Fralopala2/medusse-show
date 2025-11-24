@@ -22,7 +22,7 @@ interface Stats {
 }
 
 interface Log {
-  log_id: number;
+  id: number;
   username: string;
   action: string;
   details: string;
@@ -393,8 +393,8 @@ export default function AdminPage() {
                 <h3 className="text-lg font-medium text-gray-900">Actividad Reciente</h3>
               </div>
               <div className="divide-y divide-gray-200">
-                {logs.map((log) => (
-                  <div key={log.log_id} className="px-6 py-4">
+                {logs.map((log, index) => (
+                  <div key={log.id || index} className="px-6 py-4">
                     <div className="flex items-center justify-between">
                       <div className="flex-1">
                         <p className="text-sm font-medium text-gray-900">
