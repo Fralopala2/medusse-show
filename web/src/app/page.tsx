@@ -1,6 +1,7 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { HeroSection } from "@/components/sections/HeroSection";
+import { DashboardSection } from "@/components/sections/DashboardSection";
 import { ProductGrid } from "@/components/sections/ProductGrid";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
 import { TechnologySection } from "@/components/sections/TechnologySection";
@@ -23,6 +24,9 @@ export default function Home() {
       {heroSections.map((hero) => (
         <HeroSection key={hero.id} {...hero} />
       ))}
+
+      {/* Dashboard en Tiempo Real - NUEVO */}
+      <DashboardSection />
 
       {/* Hardware Grid */}
       <div id="precios">
