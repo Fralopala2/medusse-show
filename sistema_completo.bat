@@ -133,10 +133,7 @@ docker compose -f docker/docker-compose.yml ps
 
 REM Abrir interfaces web
 echo.
-echo [5/5] Abriendo interfaces web
-echo [WEB] Grafana Dashboard: http://localhost:3000
-start http://localhost:3000
-timeout /t 3 >nul
+echo [5/5] Iniciando servicios web
 
 if "%API_AVAILABLE%"=="true" (
     echo [API] Verificando si API ya esta corriendo
@@ -165,9 +162,7 @@ if "%API_AVAILABLE%"=="true" (
         echo [WEB] Web ya esta corriendo en http://localhost:3003
     )
     
-    echo [NAVEGADOR] Abriendo interfaces web
-    start http://localhost:3001/health
-    timeout /t 2 >nul
+    echo [NAVEGADOR] Abriendo Web Next.js
     start http://localhost:3003
 )
 
