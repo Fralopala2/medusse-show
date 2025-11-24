@@ -48,7 +48,7 @@ router.get('/stats', auth.requireAuth, requireAdmin, async (req, res) => {
     
     // Alertas activas
     const [activeAlerts] = await db.query(
-      'SELECT COUNT(*) as total FROM alerts WHERE status = "active"'
+      'SELECT COUNT(*) as total FROM alerts WHERE is_resolved = FALSE'
     );
     
     // Actividad reciente (ultimos 7 dias)
