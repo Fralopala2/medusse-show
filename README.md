@@ -4,20 +4,22 @@
 
 # Proyecto Medusse IoT
 
-**Ecosistema IoT completo y profesional** para monitoreo ambiental con ESP32, MQTT, InfluxDB, Grafana, API REST y App móvil Flutter. **Instalación automática en un solo clic.**
+**Ecosistema IoT completo y profesional** para monitoreo ambiental con ESP32, MQTT, InfluxDB, Grafana, API REST, Web Next.js y App movil Flutter. **Instalacion automatica en un solo clic.**
 
-## 📋 Descripción
+## 📋 Descripcion
 
-**Sistema IoT de nivel profesional** que incluye simulación realista de sensores ESP32, pipeline de datos moderno, dashboard web con branding personalizado, API REST robusta y aplicación móvil Flutter multiplataforma. **18 tipos de sensores monitoreados** incluyendo ambientales, calidad de agua, energía solar y gestión de batería. **Completamente automatizado** con scripts de instalación y verificación. Sistema preparado para migración directa a hardware real con comunicación LoRa Mesh.
+**Sistema IoT de nivel profesional** que incluye simulacion realista de sensores ESP32, pipeline de datos moderno, dashboard web con branding personalizado, API REST robusta, aplicacion web Next.js y aplicacion movil Flutter multiplataforma. **18 tipos de sensores monitoreados** incluyendo ambientales, calidad de agua, energia solar y gestion de bateria. **Completamente automatizado** con scripts de instalacion y verificacion. Sistema preparado para migracion directa a hardware real con comunicacion LoRa Mesh.
 
 ## 🏗️ Arquitectura Completa
 
 ```
 ESP32 Simulators → MQTT → Telegraf → InfluxDB → Grafana Dashboard
+                     ↓                              ↓
+                 API REST ← Web Next.js      MySQL Database
                      ↓
-                 API REST ← Flutter Mobile App
+              WebSocket (Real-time)
                      ↓
-                WebSocket (Real-time)
+              Flutter Mobile App
 ```
 
 ## 📁 Estructura del Proyecto
@@ -25,27 +27,25 @@ ESP32 Simulators → MQTT → Telegraf → InfluxDB → Grafana Dashboard
 ```
 proyecto-medusse/
 ├── arduino/                    # Simuladores y firmware ESP32
-│   ├── medusse_simulator.py   # ✅ Simulador principal (4 ubicaciones)
-│   └── src/                   # Código ESP32 real
+│   ├── medusse_simulator.py   # Simulador principal (4 ubicaciones)
+│   └── src/                   # Codigo ESP32 real
 ├── docker/                    # Stack completo Docker
-│   ├── docker-compose.yml     # Servicios: MQTT, InfluxDB, Grafana, Telegraf
-│   ├── grafana/              # Configuración y dashboards
+│   ├── docker-compose.yml     # Servicios: MQTT, InfluxDB, Grafana, Telegraf, MySQL
+│   ├── grafana/              # Configuracion y dashboards
 │   ├── telegraf/             # Pipeline de datos MQTT→InfluxDB
-│   └── mosquitto/            # Broker MQTT
-├── api/                       # ✅ API REST Node.js
+│   ├── mosquitto/            # Broker MQTT
+│   └── mysql/                # Base de datos MySQL
+│       ├── init/             # Scripts SQL de inicializacion
+│       └── DATABASE_DOCUMENTATION.md
+├── api/                       # API REST Node.js
 │   ├── server.js             # Servidor API con WebSocket
 │   ├── package.json          # Dependencias Node.js
-│   └── README.md             # Documentación API
-├── medusse_app/               # ✅ App móvil Flutter
-│   ├── lib/                  # Código fuente Flutter
-│   ├── pubspec.yaml          # Dependencias Flutter
-│   └── README_FLUTTER.md     # Documentación app
-├── gateway/                   # Gateway avanzado con múltiples fuentes
-├── instalar_proyecto.bat     # 🚀 Instalación automática completa
-├── setup_rapido.bat          # ⚡ Setup rápido (Docker ya instalado)
-├── sistema_completo.bat      # 🌟 Ecosistema completo con diagnósticos
-├── demo.bat                  # 🚀 Solo dashboard Grafana
-├── iniciar_api.bat          # 🚀 API REST + WebSocket
+│   └── README.md             # Documentacion API
+├── web/                       # Aplicacion Web Next.js
+│   ├── src/                  # Codigo fuente TypeScript
+│   │   ├── app/             # App Router de Next.js
+│   │   ├── components/      # Componentes React
+│ ─ iniciar_api.bat          # 🚀 API REST + WebSocket
 ├── ejecutar_flutter.bat     # 📱 App móvil Flutter
 ├── verificar.bat            # 🔍 Verificación completa
 ├── verificar_rapido.bat     # ⚡ Verificación rápida (30s)
@@ -161,50 +161,25 @@ setup_rapido.bat
 ```
 *Setup completo en menos de 2 minutos.*
 
-### ⚡ Ejecución Inmediata
-
-**Opción 1: Ecosistema Completo (Recomendada)**
-```cmd
-sistema_completo.bat
-```
-*Dashboard + API + preparación para Flutter + diagnósticos*
-
-**Opción 2: Solo Dashboard Grafana**
-```cmd
-demo.bat
-```
-*Inicio rápido solo con visualización*
-
-**Opción 3: Componentes Individuales**
-```cmd
-iniciar_api.bat        # Solo API REST + WebSocket
-ejecutar_flutter.bat   # Solo App móvil Flutter
-```
-
-**Para equipos con Docker ya instalado:**
-```cmd
-setup_rapido.bat
-```
-
-### Uso del Sistema Completo
+### ⚡ Ejecución del Sistema
 
 **1. Verificar Sistema:**
 ```cmd
 verificar.bat              # Verificación completa
-verificar_rapido.bat        # Verificación rápida (30 segundos)
+verificar_rapido.bat       # Verificación rápida (30 segundos)
 ```
 
-**2. Ejecutar Ecosistema Completo:**
+**2. Ejecutar Ecosistema Completo (Recomendado):**
 ```cmd
-sistema_completo.bat        # Ecosistema completo (recomendado)
-sistema_completo_debug.bat  # Con diagnósticos detallados
+sistema_completo.bat       # Dashboard + API + Simulador + diagnósticos
 ```
 
 **3. Ejecutar Componentes Individuales:**
 ```cmd
-demo.bat                    # Solo Dashboard Grafana
-iniciar_api.bat            # Solo API REST
-ejecutar_flutter.bat       # Solo App Flutter
+demo.bat                   # Solo Dashboard Grafana
+iniciar_api.bat           # Solo API REST + WebSocket
+ejecutar_flutter.bat      # Solo App móvil Flutter
+ejecutar_web.bat          # Solo Web Next.js
 ```
 
 ### Acceso a Interfaces
@@ -360,18 +335,6 @@ verificar.bat
 2. Actualizar configuración Telegraf
 3. Crear nuevos paneles en Grafana
 
-## 📄 Licencia
-
-Este proyecto está bajo la licencia "All Rights Reserved".
-
-Para consultas de licencia o permisos, contacta al autor.
-
-## 👨‍💻 Autor
-
-**Francisco Manuel López Alarte**
-
----
-
 ## 📱 App Móvil Flutter
 
 ### Características
@@ -481,7 +444,6 @@ El sistema está **completamente preparado** para migración a hardware real:
 
 ---
 
-_Proyecto desarrollado para **IES José Rodrigo Botet** - Curso 2025/2026_
 _**Versión actual:** 2.3.0 (Octubre 2025)_
 
 
@@ -673,6 +635,14 @@ La web estara disponible en: http://localhost:3100
 - Diseno de interfaces responsive
 - Gestion de proyectos de software
 - Documentacion tecnica profesional
+
+---
+
+## 📄 Licencia
+
+Este proyecto está bajo la licencia **All Rights Reserved**.
+
+Para consultas de licencia o permisos, contacta al autor.
 
 ---
 
