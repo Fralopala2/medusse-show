@@ -20,11 +20,11 @@
 | 5 | Diseño de interfaces web HTML/CSS | ✅ Completado | Alta | 📄 Completado |
 | 6 | Plan de empresa | ⏳ Pendiente | Media | 📄 Pendiente |
 | 7 | Validación de formularios por JS | ⏳ Pendiente | Media | 📄 Pendiente |
-| 8 | Transferencia datos front-end/back-end | ✅ Parcial (API REST) | Alta | 📄 Pendiente |
+| 8 | Transferencia datos front-end/back-end | ✅ Completado | Alta | 📄 Completado |
 | 9 | Gestión de usuarios (sesiones/cookies) | ⏳ Pendiente | Alta | 📄 Pendiente |
 | 10 | Panel de administración de usuarios | ⏳ Pendiente | Alta | 📄 Pendiente |
 | 11 | Script para subir archivos FTP | ⏳ Pendiente | Baja | 📄 Pendiente |
-| 12 | Comunicación asíncrona con servidor | ✅ Parcial (WebSocket) | Media | 📄 Pendiente |
+| 12 | Comunicación asíncrona con servidor | ✅ Completado | Media | 📄 Completado |
 | 13 | Librería/framework entorno cliente | ✅ Completado (Flutter) | Alta | 📄 Pendiente |
 | 14 | Diseño web avanzado (responsive/animaciones) | ⏳ Pendiente | Media | 📄 Pendiente |
 | 15 | Framework servidor y arquitecturas avanzadas | ✅ Parcial (Express/Docker) | Alta | 📄 Pendiente |
@@ -239,7 +239,10 @@ Implementar comunicación eficiente entre cliente y servidor.
 ### Estado Actual
 - ✅ API REST operativa (7 endpoints + energía)
 - ✅ WebSocket para tiempo real
-- ⏳ Falta integración con web HTML
+- ✅ **FASE 2 COMPLETADA**: Integración completa con web
+- ✅ Cliente API TypeScript con 10+ funciones
+- ✅ Dashboard en tiempo real funcionando
+- ✅ Datos de 4 ubicaciones y 18 sensores mostrados
 
 ---
 
@@ -336,7 +339,10 @@ Implementar comunicación asíncrona para mejorar UX.
 
 ### Estado Actual
 - ✅ WebSocket operativo (puerto 3002)
-- ⏳ Falta integración AJAX en web HTML
+- ✅ **FASE 2 COMPLETADA**: Hook personalizado implementado
+- ✅ Reconexión automática (5 intentos)
+- ✅ Integración en Dashboard con indicador visual
+- ✅ Fetch API para peticiones HTTP asíncronas
 
 ---
 
