@@ -121,12 +121,18 @@ if errorlevel 1 (
 )
 
 echo [OK] Contenedores iniciados
-echo [WAIT] Esperando a que los servicios esten listos (30 segundos)
-echo    - InfluxDB inicializandose
-echo    - Grafana configurandose
-echo    - Telegraf conectandose
 
-timeout /t 30 >nul
+REM Verificar si los servicios ya estaban corriendo
+docker ps | findstr "medusse_grafana" | findstr "Up" >nul 2>&1
+if %errorlevel% equ 0 (
+    echo [INFO] Servicios ya estaban corriendo - sin espera
+) else (
+    echo [WAIT] Esperando a que los servicios esten listos (15 segundos)
+    echo    - InfluxDB inicializandose
+    echo    - Grafana configurandose
+    echo    - Telegraf conectandose
+    timeout /t 15 >nul
+)
 
 echo Verificando estado de contenedores
 docker compose -f docker/docker-compose.yml ps
