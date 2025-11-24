@@ -14,8 +14,8 @@
 | Reto | Título | Estado | Prioridad | Documentación |
 |------|--------|--------|-----------|---------------|
 | 1 | Proyecto de sostenibilidad | ⏳ Pendiente | Alta | 📄 Pendiente |
-| 2 | Montar la base de datos | ✅ Parcial (InfluxDB) | Alta | 📄 Pendiente |
-| 3 | Creación de procedimientos almacenados | ⏳ Pendiente | Media | 📄 Pendiente |
+| 2 | Montar la base de datos | ✅ Completado | Alta | 📄 Completado |
+| 3 | Creación de procedimientos almacenados | ✅ Completado | Media | 📄 Completado |
 | 4 | Diseño de bocetos | ✅ Completado | Alta | 📄 Completado |
 | 5 | Diseño de interfaces web HTML/CSS | ✅ Completado | Alta | 📄 Completado |
 | 6 | Plan de empresa | ⏳ Pendiente | Media | 📄 Pendiente |
@@ -78,7 +78,12 @@ Diseñar e implementar una base de datos robusta para el sistema IoT.
 
 ### Estado Actual
 - ✅ InfluxDB operativa (bucket: sensors, org: iescelia)
-- ⏳ Falta BD relacional para usuarios/autenticación
+- ✅ **COMPLETADO**: MySQL 8.0 para usuarios y autenticación
+- ✅ 9 tablas con relaciones y índices
+- ✅ 4 usuarios iniciales con roles
+- ✅ 4 ubicaciones y 18 sensores configurados
+- ✅ Sistema de alertas y notificaciones
+- ✅ Documentación completa con diagrama ER
 
 ---
 
@@ -101,7 +106,12 @@ Implementar lógica de negocio mediante procedimientos almacenados en la base de
 - Tests de procedimientos
 
 ### Estado Actual
-- ⏳ No implementado (requiere Reto 2 completado)
+- ✅ **COMPLETADO**: 10 procedimientos almacenados
+- ✅ Autenticación y gestión de sesiones
+- ✅ Gestión de alertas y notificaciones
+- ✅ Estadísticas del sistema
+- ✅ Mantenimiento automático (cleanup)
+- ✅ Documentación completa de cada procedimiento
 
 ---
 

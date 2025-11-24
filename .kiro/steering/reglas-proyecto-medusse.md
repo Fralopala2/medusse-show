@@ -110,6 +110,7 @@ ESP32 Simulators → MQTT → Telegraf → InfluxDB → Grafana Dashboard
 - Formato de datos consistente entre simulador y hardware real
 - Pipeline de datos sin pérdidas (MQTT → Telegraf → InfluxDB)
 - Compatibilidad API REST con App Flutter
+- El proyecto lo mas limpio posible de archivos que no se utilicen, o sean extrictamente necesarios
 
 ### Al agregar nuevos sensores:
 1. Actualizar `arduino/medusse_simulator.py` con nuevo sensor
