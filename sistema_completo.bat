@@ -7,13 +7,14 @@ echo   SISTEMA COMPLETO MEDUSSE IoT
 echo ==========================================
 echo.
 echo Este script inicia el ecosistema completo:
-echo - Servicios Docker (MQTT, InfluxDB, Grafana)
+echo - Servicios Docker (MQTT, InfluxDB, Grafana, MySQL)
 echo - Simulador de datos
 echo - API REST (puerto 3001)
+echo - Web Next.js (puerto 3100)
 echo - Dashboard Grafana (puerto 3000)
 echo.
 echo NOTA: La app Flutter debe ejecutarse manualmente
-echo       con: ejecutar_flutter.bat
+echo       con: flutter run -d windows en medusse_app/
 echo.
 
 REM Verificar Docker
@@ -145,6 +146,14 @@ if "%API_AVAILABLE%"=="true" (
     timeout /t 5 >nul
     echo [API] API REST: http://localhost:3001
     start http://localhost:3001/health
+    
+    echo [WEB] Iniciando Web Next.js en segundo plano
+    cd web
+    start /min cmd /c "npm install >nul 2>&1 && npm run dev"
+    cd ..
+    timeout /t 10 >nul
+    echo [WEB] Web Next.js: http://localhost:3100
+    start http://localhost:3100
 )
 
 echo.
@@ -152,15 +161,17 @@ echo ========================================
 echo   SISTEMA INICIADO CORRECTAMENTE
 echo ========================================
 echo.
-echo [WEB] Grafana Dashboard: http://localhost:3000
+echo [GRAFANA] Dashboard: http://localhost:3000
 echo    Usuario: admin / Contrasena: medusse2025
 echo.
 if "%API_AVAILABLE%"=="true" (
     echo [API] API REST: http://localhost:3001
     echo [WS]  WebSocket: ws://localhost:3002
+    echo [WEB] Web Next.js: http://localhost:3100
+    echo    Login: http://localhost:3100/login
     echo.
 )
-echo [APP] Para app Flutter ejecutar: ejecutar_flutter.bat
+echo [APP] Para app Flutter: cd medusse_app && flutter run -d windows
 echo.
 echo [STOP] Para detener todo: Ctrl+C y ejecutar 'docker compose down'
 echo.
