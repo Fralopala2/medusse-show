@@ -859,4 +859,4 @@ docker compose -f docker/docker-compose.yml down
 **Documento preparado para:** Presentacion de Reto 1 - Proyecto de Sostenibilidad  
 **Fecha:** Noviembre 2025  
 **Version:** 1.0  
-**Estado:** Completo y listo para presentacion
+**Estado:** Completo
