@@ -43,7 +43,13 @@
 #### ✅ Enlaces a GitHub Configurados
 - README principal: https://github.com/Fralopala2/proyecto-medusse/blob/clase/README.md
 - API Docs: https://github.com/Fralopala2/proyecto-medusse/blob/clase/api/README.md
-- Migracion: https://github.com/Fralopala2/proyecto-medusse/blob/clase/MIGRACION.md
+- Migracion: https://github.com/Fralopala2/proyecto-medusse/blob/clase/documentacion/MIGRACION.md
+
+#### ✅ Correccion de Enlaces Rotos
+- Actualizado enlace de MIGRACION.md a documentacion/MIGRACION.md en web Next.js
+- Corregido enlace de README_FLUTTER.md a medusse_app/README.md en README principal
+- Actualizada estructura de archivos en README.md para reflejar carpeta documentacion/
+- Eliminadas referencias a archivos inexistentes (QUICK_START.md, INSTALACION_LLIUREX.md)
 
 ## [2.7.0] - 2025-11-24 - SOPORTE LLIUREX Y OPTIMIZACION SCRIPTS ✅
 
@@ -616,9 +622,8 @@ cd ~/Documentos/proyecto-medusse
 - **Pipeline de datos** sin pérdidas con retry automático
 
 #### ✅ Documentación Completa Actualizada
-- **`INSTALACION.md`** - Guías de instalación detalladas
-- **`QUICK_START.md`** - Inicio rápido en menos de 5 minutos
-- **`MIGRACION.md`** - Preparación para migración a LoRa Mesh
+- **`documentacion/INSTALACION.md`** - Guias de instalacion detalladas
+- **`documentacion/MIGRACION.md`** - Preparacion para migracion a LoRa Mesh
 - **Troubleshooting** avanzado para problemas comunes
 
 ### 📊 Configuraciones Avanzadas Implementadas

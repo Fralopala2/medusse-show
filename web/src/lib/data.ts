@@ -116,7 +116,7 @@ export const heroSections = [
       {
         primary: "Ver Migración",
         secondary: "Hardware Necesario",
-        primaryAction: "https://github.com/Fralopala2/proyecto-medusse/blob/clase/MIGRACION.md",
+        primaryAction: "https://github.com/Fralopala2/proyecto-medusse/blob/clase/documentacion/MIGRACION.md",
         secondaryAction: "#precios",
       },
     ],

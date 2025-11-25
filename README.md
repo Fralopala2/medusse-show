@@ -53,10 +53,11 @@ proyecto-medusse/
 ├── ejecutar_lliurex.sh      # 🐧 Ejecutar en Lliurex
 ├── verificar_lliurex.sh     # 🐧 Verificar en Lliurex
 ├── detener_lliurex.sh       # 🐧 Detener en Lliurex
-├── INSTALACION.md           # 📖 Guías de instalación
-├── INSTALACION_LLIUREX.md   # 🐧 Guía específica Lliurex
-├── QUICK_START.md           # ⚡ Inicio rápido (5 minutos)
-├── MIGRACION.md             # 🔄 Migración a LoRa Mesh
+├── documentacion/           # 📖 Documentación del proyecto
+│   ├── INSTALACION.md       # Guías de instalación
+│   ├── MIGRACION.md         # Migración a LoRa Mesh
+│   └── VERCEL_DEPLOYMENT.md # Deployment en Vercel
+├── CHANGELOG.md             # Historial de cambios
 └── README.md                # Esta documentación
 ```
 
@@ -376,7 +377,7 @@ verificar.bat
 ejecutar_flutter.bat
 ```
 
-Ver documentación completa en: [README_FLUTTER.md](README_FLUTTER.md)
+Ver documentación completa en: [medusse_app/README.md](medusse_app/README.md)
 
 ## 🌐 API REST Robusta
 
@@ -441,7 +442,7 @@ El sistema está **completamente preparado** para migración a hardware real:
 - **Arquitectura compatible** - Solo cambiar gateway
 - **Formato de datos idéntico** - Sin modificar API/Flutter
 - **Pipeline sin cambios** - MQTT → InfluxDB → Grafana
-- **Documentación completa** - Ver [MIGRACION.md](MIGRACION.md)
+- **Documentación completa** - Ver [documentacion/MIGRACION.md](documentacion/MIGRACION.md)
 
 ---
 
