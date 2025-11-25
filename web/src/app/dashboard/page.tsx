@@ -104,13 +104,13 @@ export default function DashboardPage() {
                 className="h-12 w-12"
               />
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">Dashboard Medusse IoT</h1>
-                <p className="text-sm text-gray-600">Bienvenido, {user.fullName}</p>
+                <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Dashboard Medusse IoT</h1>
+                <p className="text-xs sm:text-sm text-gray-600">Bienvenido, {user.fullName}</p>
               </div>
             </div>
             <button
               onClick={handleLogout}
-              className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
+              className="px-3 py-2 sm:px-4 text-sm sm:text-base bg-red-600 text-white rounded-md hover:bg-red-700 transition-all duration-300 hover:scale-105"
             >
               Cerrar sesion
             </button>
@@ -152,12 +152,12 @@ export default function DashboardPage() {
         </div>
 
         {/* Acciones rapidas */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           <a
             href="http://localhost:3000"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow"
+            className="bg-white rounded-lg shadow p-4 sm:p-6 hover:shadow-lg transition-all duration-300 hover:scale-105 hover:-translate-y-1"
           >
             <div className="text-3xl mb-2">📊</div>
             <h3 className="text-lg font-semibold mb-2">Dashboard Grafana</h3>

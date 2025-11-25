@@ -86,8 +86,8 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-xl shadow-2xl">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8 p-6 sm:p-8 bg-white rounded-xl shadow-2xl">
         {/* Logo y titulo */}
         <div className="text-center">
           <div className="flex justify-center mb-4">
@@ -97,8 +97,8 @@ export default function LoginPage() {
               className="h-32 w-32"
             />
           </div>
-          <h2 className="text-3xl font-bold text-gray-900">Medusse IoT</h2>
-          <p className="mt-2 text-sm text-gray-600">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Medusse IoT</h2>
+          <p className="mt-2 text-xs sm:text-sm text-gray-600">
             Sistema de Monitoreo Ambiental
           </p>
         </div>
@@ -189,9 +189,9 @@ export default function LoginPage() {
         </form>
 
         {/* Info de usuarios */}
-        <div className="mt-6 text-center text-xs text-gray-500">
+        <div className="mt-6 text-center text-xs sm:text-sm text-gray-500">
           <p className="font-semibold mb-2">Usuarios de prueba:</p>
-          <div className="space-y-1">
+          <div className="space-y-1 text-xs">
             <p>admin / paco (admin)</p>
             <p>profesor (user) / alumno (viewer)</p>
             <p className="mt-2 font-medium">Password: medusse2025</p>
