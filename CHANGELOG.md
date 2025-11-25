@@ -998,7 +998,14 @@ demo.bat         # Ejecutar demo completa
 
 ### 📤 Sistema de Deployment Automatico
 
-#### ✅ Scripts FTP Implementados
+#### ✅ Deployment en Vercel (Implementado)
+- **URL Produccion**: https://medusse-web.vercel.app
+- **Deployment automatico** con cada push a GitHub
+- **Build en 20-30 segundos** con optimizacion automatica
+- **SSL/HTTPS** incluido y CDN global
+- **Preview deployments** por cada commit
+
+#### ✅ Scripts FTP Implementados (Alternativa)
 - **deploy-ftp.bat** - Script Windows para deployment FTP
 - **deploy-ftp.js** - Script Node.js con FTP basico
 - **deploy-sftp.js** - Script Node.js con SFTP seguro
