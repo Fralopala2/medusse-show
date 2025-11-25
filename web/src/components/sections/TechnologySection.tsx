@@ -17,9 +17,7 @@ interface TechnologySectionProps {
 
 export function TechnologySection({ data, id }: TechnologySectionProps) {
   return (
-    <Section id={id} className="relative bg-soleares-black text-white flex items-center justify-center">
-      {/* Overlay oscuro para mejorar contraste */}
-      <div className="absolute inset-0 bg-black/40 z-0" />
+    <Section id={id} className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white flex items-center justify-center">
       <Container className="relative z-10 flex flex-col md:flex-row items-center gap-12">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
