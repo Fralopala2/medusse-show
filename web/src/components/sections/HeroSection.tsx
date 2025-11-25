@@ -15,6 +15,8 @@ interface HeroSectionProps {
   ctas?: {
     primary: string;
     secondary?: string;
+    primaryAction?: string;
+    secondaryAction?: string;
   }[];
   features?: string[];
   id?: string;
@@ -94,29 +96,49 @@ export function HeroSection({
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           className="mt-10 flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
         >
-          {ctas?.map((cta, i) => (
-            <div key={i} className="flex gap-4">
-               <Button
-                variant={darkText ? "default" : "secondary"}
-                size="lg"
-                className="w-full sm:w-auto min-w-[160px]"
-              >
-                {cta.primary}
-              </Button>
-              {cta.secondary && (
+          {ctas?.map((cta, i) => {
+            const handlePrimaryClick = () => {
+              if (cta.primaryAction?.startsWith('http')) {
+                window.open(cta.primaryAction, '_blank');
+              } else if (cta.primaryAction?.startsWith('#')) {
+                document.querySelector(cta.primaryAction)?.scrollIntoView({ behavior: 'smooth' });
+              }
+            };
+
+            const handleSecondaryClick = () => {
+              if (cta.secondaryAction?.startsWith('http')) {
+                window.open(cta.secondaryAction, '_blank');
+              } else if (cta.secondaryAction?.startsWith('#')) {
+                document.querySelector(cta.secondaryAction)?.scrollIntoView({ behavior: 'smooth' });
+              }
+            };
+
+            return (
+              <div key={i} className="flex gap-4">
                 <Button
-                  variant={darkText ? "outline" : "outline"}
+                  variant={darkText ? "default" : "secondary"}
                   size="lg"
-                  className={cn(
-                    "w-full sm:w-auto min-w-[160px]",
-                    darkText ? "border-soleares-black text-soleares-black hover:bg-soleares-black hover:text-white" : "text-white border-white hover:bg-white hover:text-black"
-                  )}
+                  className="w-full sm:w-auto min-w-[160px]"
+                  onClick={handlePrimaryClick}
                 >
-                  {cta.secondary}
+                  {cta.primary}
                 </Button>
-              )}
-            </div>
-          ))}
+                {cta.secondary && (
+                  <Button
+                    variant={darkText ? "outline" : "outline"}
+                    size="lg"
+                    className={cn(
+                      "w-full sm:w-auto min-w-[160px]",
+                      darkText ? "border-soleares-black text-soleares-black hover:bg-soleares-black hover:text-white" : "text-white border-white hover:bg-white hover:text-black"
+                    )}
+                    onClick={handleSecondaryClick}
+                  >
+                    {cta.secondary}
+                  </Button>
+                )}
+              </div>
+            );
+          })}
         </motion.div>
       </Container>
     </Section>

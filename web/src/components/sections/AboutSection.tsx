@@ -28,7 +28,11 @@ export function AboutSection({ data, id }: AboutSectionProps) {
           <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-12">
             {data.text}
           </p>
-          <Button size="xl" className="bg-soleares-black text-white hover:bg-gray-800">
+          <Button 
+            size="xl" 
+            className="bg-soleares-black text-white hover:bg-gray-800"
+            onClick={() => window.location.href = 'mailto:pacoaldev@gmail.com?subject=Consulta sobre Medusse IoT&body=Hola, me gustaría obtener más información sobre el proyecto Medusse IoT.'}
+          >
             Contactar
           </Button>
         </motion.div>

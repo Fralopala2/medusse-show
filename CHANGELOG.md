@@ -1,5 +1,50 @@
 # Changelog - Proyecto Medusse IoT
 
+## [2.7.1] - 2025-11-25 - MEJORAS WEB NEXT.JS ✅
+
+### 🌐 Funcionalidad de Botones Web
+
+#### ✅ Botones Interactivos Implementados
+- **Hero Principal (Medusse IoT)**
+  * "Ver Dashboard" - Scroll suave a seccion #dashboard
+  * "Documentacion" - Abre README.md en GitHub
+  
+- **Dashboard en Tiempo Real**
+  * "Acceder a Grafana" - Abre http://localhost:3000 en nueva pestana
+  * "Ver Demo" - Scroll a seccion #dashboard
+  * Imagen de fondo actualizada con captura real del dashboard Raspberry Pi
+
+- **App Movil Flutter**
+  * "Descargar App" - Enlace a documentacion en GitHub
+  * "Ver Capturas" - Scroll a seccion dashboard
+
+- **18 Tipos de Sensores**
+  * "Ver Sensores" - Scroll a seccion dashboard
+  * "Especificaciones" - Enlace a README.md en GitHub
+
+- **API REST Completa**
+  * "Ver API Docs" - Abre documentacion API en GitHub (api/README.md)
+  * "Probar Endpoints" - Abre http://localhost:3001/api/summary
+
+- **LoRa Mesh**
+  * "Ver Migracion" - Abre MIGRACION.md en GitHub
+  * "Hardware Necesario" - Scroll a seccion #precios
+
+- **Seccion About**
+  * "Contactar" - Abre cliente de correo con pacoaldev@gmail.com pre-rellenado
+
+#### ✅ Mejoras Tecnicas
+- Sistema de navegacion con scroll suave entre secciones
+- Enlaces externos abren en nueva pestana
+- Formulario de contacto integrado con mailto
+- Imagen personalizada del dashboard Raspberry Pi
+- Enlaces directos a documentacion especifica en GitHub
+
+#### ✅ Enlaces a GitHub Configurados
+- README principal: https://github.com/Fralopala2/proyecto-medusse/blob/clase/README.md
+- API Docs: https://github.com/Fralopala2/proyecto-medusse/blob/clase/api/README.md
+- Migracion: https://github.com/Fralopala2/proyecto-medusse/blob/clase/MIGRACION.md
+
 ## [2.7.0] - 2025-11-24 - SOPORTE LLIUREX Y OPTIMIZACION SCRIPTS ✅
 
 ### 🧹 Optimizacion de Scripts Windows

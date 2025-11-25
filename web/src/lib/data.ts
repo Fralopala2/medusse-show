@@ -13,8 +13,16 @@ export const heroSections = [
     title: "Medusse IoT",
     subtitle: "Monitoreo Ambiental Inteligente",
     description: "Sistema IoT completo con 18 tipos de sensores, visualización en tiempo real, gestión de energía solar y arquitectura de microservicios",
-    ctas: [{ primary: "Ver Dashboard", secondary: "Documentación" }],
-    backgroundImage: "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?q=80&w=2070&auto=format&fit=crop", // IoT sensors
+    ctas: [
+      {
+        primary: "Ver Dashboard",
+        secondary: "Documentación",
+        primaryAction: "#dashboard",
+        secondaryAction: "https://github.com/Fralopala2/proyecto-medusse/blob/clase/README.md",
+      },
+    ],
+    backgroundImage:
+      "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?q=80&w=2070&auto=format&fit=crop", // IoT sensors
   },
   {
     id: "hero-dashboard",
@@ -26,8 +34,15 @@ export const heroSections = [
       "Actualización cada 30 segundos",
       "Alertas automáticas inteligentes",
     ],
-    ctas: [{ primary: "Acceder a Grafana", secondary: "Ver Demo" }],
-    backgroundImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop", // Dashboard
+    ctas: [
+      {
+        primary: "Acceder a Grafana",
+        secondary: "Ver Demo",
+        primaryAction: "http://localhost:3000",
+        secondaryAction: "#dashboard",
+      },
+    ],
+    backgroundImage: "/dashboard-raspberry.png", // Dashboard Raspberry Pi
     darkText: false,
   },
   {
@@ -40,38 +55,73 @@ export const heroSections = [
       "Gráficos interactivos con fl_chart",
       "Sistema de alertas por umbrales",
     ],
-    ctas: [{ primary: "Descargar App", secondary: "Ver Capturas" }],
-    backgroundImage: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop", // Mobile app
+    ctas: [
+      {
+        primary: "Descargar App",
+        secondary: "Ver Capturas",
+        primaryAction: "https://github.com/Fralopala2/proyecto-medusse/blob/clase/README.md",
+        secondaryAction: "#dashboard",
+      },
+    ],
+    backgroundImage:
+      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop", // Mobile app
   },
   {
     id: "hero-sensors",
     title: "18 Tipos de Sensores",
     subtitle: "Monitoreo Completo",
-    description: "Sensores ambientales, calidad de agua, suelo y gestión de energía solar con batería inteligente",
+    description:
+      "Sensores ambientales, calidad de agua, suelo y gestión de energía solar con batería inteligente",
     features: [
       "Temperatura, Humedad, CO₂, Presión",
       "VOC, IAQ, pH, TDS, Oxígeno disuelto",
       "Voltaje solar y batería",
       "Modo de bajo consumo automático",
     ],
-    ctas: [{ primary: "Ver Sensores", secondary: "Especificaciones" }],
-    backgroundImage: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=2070&auto=format&fit=crop", // Solar/sensors
+    ctas: [
+      {
+        primary: "Ver Sensores",
+        secondary: "Especificaciones",
+        primaryAction: "#dashboard",
+        secondaryAction: "https://github.com/Fralopala2/proyecto-medusse/blob/clase/README.md",
+      },
+    ],
+    backgroundImage:
+      "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=2070&auto=format&fit=crop", // Solar/sensors
   },
   {
     id: "hero-api",
     title: "API REST Completa",
     subtitle: "Integración Fácil",
-    description: "7 endpoints HTTP + WebSocket para streaming en tiempo real. Documentación completa y ejemplos de uso",
-    ctas: [{ primary: "Ver API Docs", secondary: "Probar Endpoints" }],
-    backgroundImage: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop", // Network/API
+    description:
+      "7 endpoints HTTP + WebSocket para streaming en tiempo real. Documentación completa y ejemplos de uso",
+    ctas: [
+      {
+        primary: "Ver API Docs",
+        secondary: "Probar Endpoints",
+        primaryAction: "https://github.com/Fralopala2/proyecto-medusse/blob/clase/api/README.md",
+        secondaryAction: "http://localhost:3001/api/summary",
+      },
+    ],
+    backgroundImage:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop", // Network/API
   },
   {
     id: "hero-lora",
     title: "Preparado para LoRa Mesh",
     subtitle: "Migración a Hardware Real",
-    description: "Arquitectura compatible con comunicación LoRa. Gateway intercambiable sin modificar API o Flutter",
-    ctas: [{ primary: "Ver Migración", secondary: "Hardware Necesario" }],
-    backgroundImage: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop", // Industrial/tech
+    description:
+      "Arquitectura compatible con comunicación LoRa. Gateway intercambiable sin modificar API o Flutter",
+    ctas: [
+      {
+        primary: "Ver Migración",
+        secondary: "Hardware Necesario",
+        primaryAction: "https://github.com/Fralopala2/proyecto-medusse/blob/clase/MIGRACION.md",
+        secondaryAction: "#precios",
+      },
+    ],
+    backgroundImage:
+      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop", // Industrial/tech
   },
 ];
 

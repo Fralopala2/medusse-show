@@ -507,6 +507,17 @@ _**Versión actual:** 2.3.0 (Octubre 2025)_
 - **WebSocket** para actualizacion automatica
 - **Sistema de alertas** visual (CO2, bateria)
 - **Responsive design** con Framer Motion
+- **Botones funcionales** con navegacion y enlaces externos
+- **Formulario de contacto** integrado con email
+- **Hero sections** con imagenes personalizadas
+
+### Botones Funcionales
+- **Ver Dashboard** - Scroll a seccion dashboard
+- **Acceder a Grafana** - Abre http://localhost:3000
+- **Documentacion** - Enlace a README.md en GitHub
+- **Ver API Docs** - Enlace a documentacion API
+- **Ver Migracion** - Enlace a MIGRACION.md
+- **Contactar** - Abre cliente de correo con pacoaldev@gmail.com
 
 ### Uso
 ```cmd
