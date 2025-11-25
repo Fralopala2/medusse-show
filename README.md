@@ -523,28 +523,30 @@ La web estará disponible en: http://localhost:3003
 
 ## 📊 Estado del Proyecto TFG
 
-### Retos Completados (14/16 - 87.5%)
+### Retos Completados (16/16 - 100%) ✅
 
+✅ **Reto 1**: Proyecto de sostenibilidad (ODS, impacto medible, casos de uso)
 ✅ **Reto 2**: Base de datos (InfluxDB + MySQL)
 ✅ **Reto 3**: Procedimientos almacenados (10 procedimientos)
 ✅ **Reto 4**: Diseño de bocetos (estructura de componentes)
 ✅ **Reto 5**: Interfaces HTML/CSS (Next.js + Tailwind)
+✅ **Reto 6**: Plan de empresa (modelo de negocio, proyecciones, estrategia)
+✅ **Reto 7**: Validación de formularios JS (validación en tiempo real)
 ✅ **Reto 8**: Transferencia Front-end/Back-end (API REST completa)
 ✅ **Reto 9**: Gestión de usuarios con sesiones (MySQL + bcrypt)
-✅ **Reto 12**: Comunicación asíncrona (WebSocket + Fetch API)
-✅ **Reto 13**: Framework cliente (Flutter + Next.js)
-✅ **Reto 15**: Framework servidor (Express + Docker)
-
-✅ **Reto 7**: Validación de formularios JS (validación en tiempo real)
 ✅ **Reto 10**: Panel de administración (gestión usuarios, estadísticas, logs)
 ✅ **Reto 11**: Script FTP/SFTP (deployment automático)
+✅ **Reto 12**: Comunicación asíncrona (WebSocket + Fetch API)
+✅ **Reto 13**: Framework cliente (Flutter + Next.js)
 ✅ **Reto 14**: Diseño web avanzado (responsive + animaciones Framer Motion)
+✅ **Reto 15**: Framework servidor (Express + Docker)
+✅ **Reto 16**: Documentación final (completa y profesional)
 
-### Retos Pendientes (2/16)
+### Documentacion de Retos
 
-⏳ **Reto 1**: Proyecto de sostenibilidad
-⏳ **Reto 6**: Plan de empresa
-⏳ **Reto 16**: Documentación final
+📖 **Documentacion General:** `documentacion/DOCUMENTACION_GENERAL_RETOS.md`  
+📖 **Reto 1 - Sostenibilidad:** `documentacion/RETO_1_SOSTENIBILIDAD.md`  
+📖 **Reto 6 - Plan de Empresa:** `documentacion/RETO_6_PLAN_EMPRESA.md`
 
 ---
 

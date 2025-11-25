@@ -11,9 +11,10 @@
 **Email:** pacoaldev@gmail.com  
 **Institucion:** IES Jose Rodrigo Botet  
 **Curso Academico:** 2025/2026  
-**Version:** 2.7.1  
+**Version:** 2.7.4  
 **Fecha:** Noviembre 2025  
-**Licencia:** All Rights Reserved
+**Licencia:** All Rights Reserved  
+**Estado:** 16/16 Retos Completados (100%) ✅
 
 ---
 
@@ -164,26 +165,44 @@ El sistema monitorea 4 ubicaciones diferentes, cada una con caracteristicas term
 
 ## Retos del Trabajo de Fin de Grado
 
-### Estado Actual: 14/16 Retos Completados (87.5%)
+### Estado Actual: 16/16 Retos Completados (100%) ✅
 
 ### Reto 1: Proyecto de Sostenibilidad
-**Estado:** Pendiente
+**Estado:** Completado ✅
 
 **Descripcion:** Desarrollar un proyecto que contribuya a la sostenibilidad ambiental.
 
-**Implementacion Propuesta:**
-El proyecto Medusse IoT contribuye a la sostenibilidad mediante:
-- Monitoreo de calidad del aire interior (CO2, VOC, IAQ)
-- Gestion inteligente de energia solar con baterias
-- Optimizacion del consumo energetico con modo de bajo consumo
-- Monitorizacion de recursos hidricos (pH, TDS, oxigeno disuelto)
-- Sistema de alertas para condiciones ambientales adversas
+**Implementacion:**
 
-**Impacto Ambiental:**
-- Reduccion del consumo energetico mediante monitorizacion
-- Optimizacion del uso de recursos hidricos
-- Mejora de la calidad del aire en espacios cerrados
-- Uso de energia solar renovable
+#### Alineacion con Objetivos de Desarrollo Sostenible (ODS)
+- **ODS 3 - Salud y Bienestar:** Monitorizacion de CO2, IAQ y VOC
+- **ODS 6 - Agua Limpia:** Sensores de pH, TDS, flujo y oxigeno disuelto
+- **ODS 7 - Energia Limpia:** Gestion de energia solar y baterias
+- **ODS 11 - Ciudades Sostenibles:** Gestion eficiente de edificios
+- **ODS 13 - Accion por el Clima:** Datos ambientales para politicas
+
+#### Contribuciones a la Sostenibilidad
+1. **Monitorizacion Ambiental Integral:** 18 sensores (aire, agua, energia)
+2. **Datos en Tiempo Real:** Alertas automaticas para toma de decisiones
+3. **Energia y Autonomia:** Gestion inteligente de energia solar
+4. **Escalabilidad Eficiente:** LoRa Mesh de bajo consumo
+5. **Educacion y Replicabilidad:** Herramienta para concienciacion
+6. **Implementacion Reproducible:** Despliegue rapido con Docker
+
+#### Casos de Uso Implementados
+- Gestion inteligente de aulas (20-30% ahorro HVAC)
+- Riego inteligente (30-50% ahorro agua)
+- Monitorizacion de instalaciones solares
+- Deteccion temprana de problemas de agua
+- Educacion ambiental con datos reales
+
+#### Impacto Medible
+- Ahorro energetico: 2500-4000 kWh/año
+- Ahorro economico: 700-1200€/año
+- Reduccion CO2: 1-1.5 toneladas/año
+- Ahorro agua: 50-100 m³/año
+
+**Documentacion completa:** `documentacion/RETO_1_SOSTENIBILIDAD.md`
 
 ---
 
@@ -386,45 +405,64 @@ Usuario: admin / medusse2025
 ---
 
 ### Reto 6: Plan de Empresa
-**Estado:** Pendiente
+**Estado:** Completado ✅
 
 **Descripcion:** Desarrollar un plan de negocio para el proyecto.
 
-**Propuesta de Plan de Empresa:**
+**Implementacion:**
 
 #### Modelo de Negocio
-- **Producto:** Sistema IoT de monitoreo ambiental
-- **Mercado objetivo:** Instituciones educativas, empresas, edificios inteligentes
-- **Propuesta de valor:** Monitorizacion completa, facil instalacion, escalable
+- **Vision:** Solucion de referencia para monitorizacion ambiental en España
+- **Mision:** Sistemas accesibles para mejorar salud, eficiencia y sostenibilidad
+- **Valores:** Sostenibilidad, innovacion, educacion, accesibilidad, calidad
 
-#### Estructura de Costes
-**Hardware (por ubicacion):**
-- Nodo ESP32 + Sensores Ambientales: 150€
-- Nodo ESP32 + Sensores de Agua: 180€
-- Nodo ESP32 + Panel Solar + Bateria: 200€
-- Gateway LoRa Raspberry Pi 4: 250€
+#### Paquetes Comerciales
+1. **STARTER (1.200€):** 2 nodos ambientales, ideal para 1 aula
+2. **STANDARD (2.750€):** 4 nodos + Gateway LoRa, centro pequeño
+3. **PREMIUM (3.580€):** Completo con agua + solar + formacion
 
-**Software:**
-- Dashboard Grafana: Incluido
-- API REST + WebSocket: Incluido
-- App Flutter: Incluido
-- Sistema de Alertas: 50€
-- Panel de Administracion: 100€
-- Integracion LoRa Mesh: 200€
+#### Proyecciones Financieras (Año 1)
+**Escenario Conservador (5 clientes):**
+- Ingresos: 12.500€
+- Resultado bruto: 5.500€
 
-**Servicios:**
-- Instalacion Completa: 500€
-- Configuracion por Nodo: 100€/nodo
-- Soporte Tecnico: 50€/hora
-- Mantenimiento Anual: 600€/año
-- Formacion: 300€/dia
+**Escenario Esperado (15 clientes):**
+- Ingresos: 37.500€
+- Resultado bruto: 16.500€
 
-#### Estrategia de Comercializacion
-- Demostraciones en instituciones educativas
-- Partnerships con distribuidores de hardware IoT
-- Marketing digital y presencia en redes sociales
-- Participacion en ferias tecnologicas
-- Documentacion tecnica completa y accesible
+**Escenario Ambicioso (30 clientes):**
+- Ingresos: 75.000€
+- Resultado bruto: 33.000€
+
+**Break-even:** 39-53 clientes
+
+#### Estrategia Go-to-Market
+- **Canales:** Directo (demos, ventas) + Indirecto (distribuidores, partners)
+- **Marketing:** Contenidos, eventos, digital, webinars
+- **Proceso de ventas:** 5 fases (8-12 semanas)
+- **KPIs:** CAC ≤800€, conversion 20-30%
+
+#### Equipo y Operaciones
+- **Equipo inicial:** 4 personas (62.000€/año)
+- **Costes fijos año 1:** 42.000€
+- **Financiacion necesaria:** 50.000€
+
+#### Analisis de Riesgos
+- 9 riesgos identificados con estrategias de mitigacion
+- Comerciales, tecnicos, operacionales, legales
+
+#### Hoja de Ruta (18 Meses)
+- **Fase 1 (0-3m):** Preparacion y lanzamiento soft
+- **Fase 2 (4-6m):** Lanzamiento y primeras ventas
+- **Fase 3 (7-12m):** Crecimiento y consolidacion
+- **Fase 4 (13-18m):** Expansion regional
+
+#### ROI para Cliente
+- Año 1: 40% ROI
+- Payback: 2.5 años
+- Ahorro anual: 1.700€ (HVAC + agua)
+
+**Documentacion completa:** `documentacion/RETO_6_PLAN_EMPRESA.md`
 
 ---
 
@@ -884,7 +922,7 @@ api/
 - Mejoras de rendimiento
 
 #### Comentarios en Codigo
-- Todos los comentarios en español sin acentos
+- Todos los comentarios en español
 - Explicaciones de logica compleja
 - Documentacion de funciones
 - TODOs para mejoras futuras
