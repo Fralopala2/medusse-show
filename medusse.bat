@@ -10,73 +10,45 @@ echo ========================================
 echo   MEDUSSE IoT - MENU PRINCIPAL
 echo ========================================
 echo.
-echo INSTALACION:
-echo   1. Instalacion completa (equipos nuevos)
-echo   2. Setup rapido (Docker ya instalado)
-echo.
 echo EJECUCION:
-echo   3. Sistema completo (Dashboard + API + Simulador)
-echo   4. Solo Dashboard Grafana
-echo   5. Solo API REST
-echo   6. Solo Web Next.js
+echo   1. Sistema completo (Dashboard + API + Simulador)
+echo   2. Solo Dashboard Grafana
+echo   3. Solo API REST
+echo   4. Solo Web Next.js
 echo.
 echo VERIFICACION:
-echo   7. Verificacion completa
-echo   8. Verificacion rapida
+echo   5. Verificacion completa
+echo   6. Verificacion rapida
 echo.
 echo TESTING:
-echo   9. Test API REST
-echo   10. Test autenticacion
-echo   11. Test login web
+echo   7. Test API REST
+echo   8. Test autenticacion
+echo   9. Test login web
 echo.
 echo UTILIDADES:
-echo   12. Detener todo el sistema
+echo   10. Detener todo el sistema
 echo.
 echo   0. Salir
 echo.
 echo ========================================
 
-set /p opcion="Selecciona una opcion (0-12): "
+set /p opcion="Selecciona una opcion (0-10): "
 
 if "%opcion%"=="0" goto fin
-if "%opcion%"=="1" goto instalar
-if "%opcion%"=="2" goto setup_rapido
-if "%opcion%"=="3" goto sistema_completo
-if "%opcion%"=="4" goto dashboard
-if "%opcion%"=="5" goto api
-if "%opcion%"=="6" goto web
-if "%opcion%"=="7" goto verificar
-if "%opcion%"=="8" goto verificar_rapido
-if "%opcion%"=="9" goto test_api
-if "%opcion%"=="10" goto test_auth
-if "%opcion%"=="11" goto test_login_web
-if "%opcion%"=="12" goto detener
+if "%opcion%"=="1" goto sistema_completo
+if "%opcion%"=="2" goto dashboard
+if "%opcion%"=="3" goto api
+if "%opcion%"=="4" goto web
+if "%opcion%"=="5" goto verificar
+if "%opcion%"=="6" goto verificar_rapido
+if "%opcion%"=="7" goto test_api
+if "%opcion%"=="8" goto test_auth
+if "%opcion%"=="9" goto test_login_web
+if "%opcion%"=="10" goto detener
 
 echo.
 echo ❌ Opcion invalida
 timeout /t 2 >nul
-goto menu
-
-:instalar
-cls
-echo.
-echo ========================================
-echo   INSTALACION COMPLETA
-echo ========================================
-echo.
-call instalar_proyecto.bat
-pause
-goto menu
-
-:setup_rapido
-cls
-echo.
-echo ========================================
-echo   SETUP RAPIDO
-echo ========================================
-echo.
-call setup_rapido.bat
-pause
 goto menu
 
 :sistema_completo
