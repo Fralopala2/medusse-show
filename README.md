@@ -383,6 +383,7 @@ Ver documentación completa en: [README_FLUTTER.md](README_FLUTTER.md)
 ### 🔌 Endpoints de Datos
 | Endpoint | Método | Descripción | Parámetros |
 |----------|--------|-------------|------------|
+| `/` | GET | Información de la API y endpoints disponibles | - |
 | `/health` | GET | Estado de todos los servicios | - |
 | `/api/locations` | GET | Lista de ubicaciones disponibles | - |
 | `/api/summary` | GET | Resumen general de todas las ubicaciones | - |

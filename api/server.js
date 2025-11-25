@@ -46,6 +46,35 @@ let cachedSummary = {};
 let lastCacheUpdate = 0;
 const CACHE_DURATION = 30000; // 30 segundos
 
+// Ruta raiz - Informacion de la API
+app.get('/', (req, res) => {
+  res.json({
+    name: 'Medusse IoT API',
+    version: '2.7.1',
+    description: 'API REST para sistema de monitoreo ambiental',
+    endpoints: {
+      health: '/health',
+      locations: '/api/locations',
+      summary: '/api/summary',
+      latest: '/api/latest/:location',
+      data: '/api/data/:location/:sensor',
+      stats: '/api/stats/:location/:sensor',
+      auth: {
+        login: '/api/auth/login',
+        logout: '/api/auth/logout',
+        validate: '/api/auth/validate',
+        profile: '/api/auth/profile'
+      },
+      admin: {
+        users: '/api/admin/users',
+        stats: '/api/admin/stats',
+        logs: '/api/admin/logs'
+      }
+    },
+    documentation: 'https://github.com/Fralopala2/proyecto-medusse/blob/clase/api/README.md'
+  });
+});
+
 // Routes
 app.get('/health', (req, res) => {
   res.json({
