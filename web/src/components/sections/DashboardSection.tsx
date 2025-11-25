@@ -70,7 +70,7 @@ export function DashboardSection() {
   }
 
   return (
-    <Section id="dashboard" className="bg-medusse-gray-light">
+    <Section id="dashboard" className="bg-medusse-gray-light pt-24">
       <Container>
         <div className="space-y-8">
           {/* Header */}
