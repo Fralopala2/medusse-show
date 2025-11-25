@@ -28,7 +28,7 @@ export const heroSections = [
     ],
     ctas: [{ primary: "Acceder a Grafana", secondary: "Ver Demo" }],
     backgroundImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop", // Dashboard
-    darkText: true,
+    darkText: false,
   },
   {
     id: "hero-mobile",
