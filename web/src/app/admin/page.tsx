@@ -191,12 +191,12 @@ export default function AdminPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Panel de Administracion</h1>
-              <p className="mt-1 text-sm text-gray-500">Gestion del sistema Medusse IoT</p>
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Panel de Administracion</h1>
+              <p className="mt-1 text-xs sm:text-sm text-gray-500">Gestion del sistema Medusse IoT</p>
             </div>
             <button
               onClick={() => router.push('/dashboard')}
-              className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+              className="px-3 py-2 sm:px-4 border border-gray-300 rounded-md text-xs sm:text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-all duration-300 hover:scale-105"
             >
               Volver al Dashboard
             </button>
@@ -247,7 +247,7 @@ export default function AdminPage() {
           {activeTab === 'stats' && stats && (
             <div className="space-y-6">
               {/* Cards de estadisticas */}
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 <div className="bg-white overflow-hidden shadow rounded-lg">
                   <div className="p-5">
                     <div className="flex items-center">
