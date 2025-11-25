@@ -564,7 +564,7 @@ La web estara disponible en: http://localhost:3100
 
 ## 📊 Estado del Proyecto TFG
 
-### Retos Completados (13/16 - 81.25%)
+### Retos Completados (14/16 - 87.5%)
 
 ✅ **Reto 2**: Base de datos (InfluxDB + MySQL)
 ✅ **Reto 3**: Procedimientos almacenados (10 procedimientos)
@@ -579,12 +579,12 @@ La web estara disponible en: http://localhost:3100
 ✅ **Reto 7**: Validacion de formularios JS (validacion en tiempo real)
 ✅ **Reto 10**: Panel de administracion (gestion usuarios, estadisticas, logs)
 ✅ **Reto 11**: Script FTP/SFTP (deployment automatico)
+✅ **Reto 14**: Diseno web avanzado (responsive + animaciones Framer Motion)
 
-### Retos Pendientes (3/16)
+### Retos Pendientes (2/16)
 
 ⏳ **Reto 1**: Proyecto de sostenibilidad
 ⏳ **Reto 6**: Plan de empresa
-⏳ **Reto 14**: Diseno web avanzado (responsive/animaciones)
 ⏳ **Reto 16**: Documentacion final
 
 ---
