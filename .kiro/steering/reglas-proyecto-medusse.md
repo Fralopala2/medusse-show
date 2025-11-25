@@ -3,7 +3,7 @@ inclusion: always
 ---
 
 # Reglas del Proyecto Medusse IoT
-- Lo comentarios siempre seran en ESPAÑOL de España, y nunca con acentos.
+- Lo comentarios siempre seran en ESPAÑOL de España, y nunca con acentos. Sólo como excepcion, de deberan añadir los acentos en los archivos que sean de documentacion, por ejemplo: README.md, etc...
 - TODA y repito, TODA la documentación estará en un solo archivo, el README.md. Aparte, cada vez que se modifique algo sustancial del proyecto, se deberá actualizar el CHANGELOG.md y documentarlo.
 - El proyecto lo mas limpio posible de archivos que no se utilicen, o sean extrictamente necesarios, me refiero a tests, debugs, .bat, .md, etc...
 

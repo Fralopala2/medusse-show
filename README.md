@@ -4,11 +4,11 @@
 
 # Proyecto Medusse IoT
 
-**Ecosistema IoT completo y profesional** para monitoreo ambiental con ESP32, MQTT, InfluxDB, Grafana, API REST, Web Next.js y App movil Flutter. **Instalacion automatica en un solo clic.**
+**Ecosistema IoT completo y profesional** para monitoreo ambiental con ESP32, MQTT, InfluxDB, Grafana, API REST, Web Next.js y App móvil Flutter. **Instalación automática en un solo clic.**
 
-## 📋 Descripcion
+## 📋 Descripción
 
-**Sistema IoT de nivel profesional** que incluye simulacion realista de sensores ESP32, pipeline de datos moderno, dashboard web con branding personalizado, API REST robusta, aplicacion web Next.js y aplicacion movil Flutter multiplataforma. **18 tipos de sensores monitoreados** incluyendo ambientales, calidad de agua, energia solar y gestion de bateria. **Completamente automatizado** con scripts de instalacion y verificacion. Sistema preparado para migracion directa a hardware real con comunicacion LoRa Mesh.
+**Sistema IoT de nivel profesional** que incluye simulación realista de sensores ESP32, pipeline de datos moderno, dashboard web con branding personalizado, API REST robusta, aplicación web Next.js y aplicación móvil Flutter multiplataforma. **18 tipos de sensores monitoreados** incluyendo ambientales, calidad de agua, energía solar y gestión de batería. **Completamente automatizado** con scripts de instalación y verificación. Sistema preparado para migración directa a hardware real con comunicación LoRa Mesh.
 
 ## 🏗️ Arquitectura Completa
 
@@ -28,36 +28,36 @@ ESP32 Simulators → MQTT → Telegraf → InfluxDB → Grafana Dashboard
 proyecto-medusse/
 ├── arduino/                    # Simuladores y firmware ESP32
 │   ├── medusse_simulator.py   # Simulador principal (4 ubicaciones)
-│   └── src/                   # Codigo ESP32 real
+│   └── src/                   # Código ESP32 real
 ├── docker/                    # Stack completo Docker
 │   ├── docker-compose.yml     # Servicios: MQTT, InfluxDB, Grafana, Telegraf, MySQL
-│   ├── grafana/              # Configuracion y dashboards
+│   ├── grafana/              # Configuración y dashboards
 │   ├── telegraf/             # Pipeline de datos MQTT→InfluxDB
 │   ├── mosquitto/            # Broker MQTT
 │   └── mysql/                # Base de datos MySQL
-│       ├── init/             # Scripts SQL de inicializacion
+│       ├── init/             # Scripts SQL de inicialización
 │       └── DATABASE_DOCUMENTATION.md
 ├── api/                       # API REST Node.js
 │   ├── server.js             # Servidor API con WebSocket
 │   ├── package.json          # Dependencias Node.js
-│   └── README.md             # Documentacion API
-├── web/                       # Aplicacion Web Next.js
-│   ├── src/                  # Codigo fuente TypeScript
+│   └── README.md             # Documentación API
+├── web/                       # Aplicación Web Next.js
+│   ├── src/                  # Código fuente TypeScript
 │   │   ├── app/             # App Router de Next.js
 │   │   ├── components/      # Componentes React
 │ ─ iniciar_api.bat          # 🚀 API REST + WebSocket
 ├── ejecutar_flutter.bat     # 📱 App móvil Flutter
 ├── verificar.bat            # 🔍 Verificación completa
-├── medusse.bat              # 🎯 Menu principal unificado (Windows)
-├── setup_lliurex.sh         # 🐧 Instalacion para Lliurex
+├── medusse.bat              # 🎯 Menú principal unificado (Windows)
+├── setup_lliurex.sh         # 🐧 Instalación para Lliurex
 ├── ejecutar_lliurex.sh      # 🐧 Ejecutar en Lliurex
 ├── verificar_lliurex.sh     # 🐧 Verificar en Lliurex
 ├── detener_lliurex.sh       # 🐧 Detener en Lliurex
-├── INSTALACION.md           # 📖 Guias de instalacion
-├── INSTALACION_LLIUREX.md   # 🐧 Guia especifica Lliurex
-├── QUICK_START.md           # ⚡ Inicio rapido (5 minutos)
-├── MIGRACION.md             # 🔄 Migracion a LoRa Mesh
-└── README.md                # Esta documentacion
+├── INSTALACION.md           # 📖 Guías de instalación
+├── INSTALACION_LLIUREX.md   # 🐧 Guía específica Lliurex
+├── QUICK_START.md           # ⚡ Inicio rápido (5 minutos)
+├── MIGRACION.md             # 🔄 Migración a LoRa Mesh
+└── README.md                # Esta documentación
 ```
 
 ## 🚀 Características
@@ -73,11 +73,11 @@ proyecto-medusse/
 - **Gateway MQTT avanzado** con múltiples fuentes
 - **Base de datos InfluxDB v2** con configuración persistente
 - **Dashboard Grafana profesional** con filas colapsables, filtros avanzados y branding personalizado
-- **API REST robusta** con cache inteligente
+- **API REST robusta** con caché inteligente
 - **App móvil Flutter** multiplataforma con Material Design 3
 
 ### ⚡ Performance Optimizado
-- **Cache automático** en API (30 segundos)
+- **Caché automático** en API (30 segundos)
 - **Pipeline sin pérdidas** con retry automático
 - **Agregación inteligente** de datos (30s)
 - **Networking Docker** optimizado
@@ -116,7 +116,7 @@ proyecto-medusse/
 - **Gráficos interactivos** con fl_chart y animaciones
 - **Sistema de alertas** inteligente por umbrales
 - **Provider pattern** para gestión de estado reactiva
-- **Multiplataforma:** Windows, Web, Android, iOS
+- **Multiplataforma:** Windows, Web, Android
 
 ## 🎉 Estado: ECOSISTEMA COMPLETO ✅
 
@@ -136,7 +136,7 @@ proyecto-medusse/
 - **Simulador inteligente** con datos realistas por ubicación
 
 **🔌 API REST & Mobile Avanzados:**
-- **API REST Node.js** con 6 endpoints y cache inteligente
+- **API REST Node.js** con 6 endpoints y caché inteligente
 - **WebSocket Server** para streaming en tiempo real (puerto 3002)
 - **App Flutter completa** con 3 pantallas y gráficos interactivos
 - **Sistema de alertas** automático por umbrales de CO2
@@ -167,35 +167,35 @@ setup_rapido.bat
 ```
 *Setup completo en menos de 2 minutos.*
 
-#### Linux / Lliurex (IES Jose Rodrigo Botet)
+#### Linux / Lliurex
 
-**Instalacion completa:**
+**Instalación completa:**
 ```bash
 chmod +x setup_lliurex.sh
 ./setup_lliurex.sh
 ```
-*Maneja permisos de Docker automaticamente. Ver INSTALACION_LLIUREX.md para mas detalles.*
+*Maneja permisos de Docker automáticamente. Ver INSTALACION_LLIUREX.md para más detalles.*
 
 ### ⚡ Ejecución del Sistema
 
 #### Windows
 
-**Menu Principal Unificado (Recomendado):**
+**Menú Principal Unificado (Recomendado):**
 ```cmd
-medusse.bat                # Menu interactivo con todas las opciones
+medusse.bat                # Menú interactivo con todas las opciones
 ```
 
 **O ejecutar directamente:**
 ```cmd
 sistema_completo.bat       # Sistema completo
-verificar.bat              # Verificacion completa
+verificar.bat              # Verificación completa
 ```
 
 #### Linux / Lliurex
 
 **1. Verificar Sistema:**
 ```bash
-./verificar_lliurex.sh     # Verificacion completa
+./verificar_lliurex.sh     # Verificación completa
 ```
 
 **2. Ejecutar Sistema Completo:**
@@ -226,7 +226,7 @@ verificar.bat              # Verificacion completa
 | **MQTT Broker** | 1883   | Mosquitto con WebSocket habilitado | 2.0 |
 | **WebSocket MQTT** | 9001 | Comunicación web en tiempo real | 2.0 |
 | **Telegraf**    | -      | Pipeline optimizado con múltiples consumers | 1.28 |
-| **API REST**    | 3001   | Node.js con cache inteligente y 6 endpoints | Express 4.18.2 |
+| **API REST**    | 3001   | Node.js con caché inteligente y 6 endpoints | Express 4.18.2 |
 | **WebSocket**   | 3002   | Streaming datos en tiempo real para Flutter | ws 8.14.2 |
 | **Flutter App** | -      | App multiplataforma con Material Design 3 | Flutter 3.9+ |
 
@@ -235,10 +235,10 @@ verificar.bat              # Verificacion completa
 - **Frontend Móvil:** Flutter + Provider + fl_chart + Google Fonts
 - **Base de Datos:** InfluxDB 2.7 (series temporales)
 - **Comunicación:** MQTT + WebSocket + HTTP REST
-- **Visualizacion:** Grafana 10.2.0 + Dashboard personalizado
+- **Visualización:** Grafana 10.2.0 + Dashboard personalizado
 - **Contenedores:** Docker Compose con networking optimizado
-- **Automatizacion:** Scripts batch para Windows y scripts shell para Linux/Lliurex
-- **Multiplataforma:** Windows, Linux, Lliurex (IES Jose Rodrigo Botet)
+- **Automatización:** Scripts batch para Windows y scripts shell para Linux/Lliurex
+- **Multiplataforma:** Windows, Linux, Lliurex
 
 ## 🛠️ Uso Manual
 
@@ -269,13 +269,13 @@ docker logs medusse_telegraf
 - **Iconos de sensores** integrados (🌡️💧🫁🌪️)
 - **Colores diferenciados** por ubicación:
   - 🔴 **Aula 20:** Rojo (#E53E3E)
-  - � **Aula 21:** Púrpura (#805AD5) - Optimizado para mejor visibilidad
+  - 🟣 **Aula 21:** Púrpura (#805AD5)
   - 🟠 **Gimnasio:** Naranja (#FF9800)
   - 🟢 **Laboratorio:** Verde (#38A169)
 
 ### 📊 Organización Profesional
 - **Filas colapsables**: 18 paneles organizados en secciones lógicas expandibles
-- **Sección de Resumen**: KPIs principales (temperatura, humedad, CO₂) en la parte superior
+- **Sección de Resumen**: KPIs principales (temperatura, humedad, CO2) en la parte superior
 - **Navegación jerárquica**: Estructura clara con títulos descriptivos
 - **Experiencia optimizada**: Reducción del clutter visual
 
@@ -296,7 +296,7 @@ docker logs medusse_telegraf
 ### ⚡ Rendimiento y Actualización
 - **Actualización automática:** Cada 30 segundos
 - **Agregación inteligente:** Datos promediados cada 30 segundos
-- **Cache optimizado:** Sin sobrecarga del sistema
+- **Caché optimizado:** Sin sobrecarga del sistema
 - **Responsive design:** Adaptable a cualquier pantalla
 - **Filtrado eficiente:** Consultas optimizadas sin impacto en rendimiento
 
@@ -318,7 +318,7 @@ time.sleep(15)  # Cambiar intervalo entre ciclos
 En `medusse_simulator.py`, agregar a la lista `locations`:
 
 ```python
-{"name": "nueva_aula", "node": "ESP32_NODE_04", "temp_base": 23}
+{"name": "nueva_aula", "node": "ESP32_NODE_05", "temp_base": 23}
 ```
 
 ### Personalizar Dashboard
@@ -337,9 +337,9 @@ En `medusse_simulator.py`, agregar a la lista `locations`:
 ### Error "bucket not found"
 
 ```cmd
-docker compose down
+docker compose -f docker/docker-compose.yml down
 docker volume prune -f
-docker compose up -d
+docker compose -f docker/docker-compose.yml up -d
 ```
 
 ### Servicios no inician
@@ -369,7 +369,7 @@ verificar.bat
 - **Gráficos interactivos** con fl_chart
 - **Sistema de alertas** inteligente
 - **3 pantallas:** Home, Detalle ubicación, Gráficos históricos
-- **Multiplataforma:** Windows, Web, Android, iOS
+- **Multiplataforma:** Windows, Web, Android
 
 ### Uso
 ```cmd
@@ -405,7 +405,7 @@ Ver documentación completa en: [README_FLUTTER.md](README_FLUTTER.md)
 - **Frecuencia:** Cada 15 segundos (sincronizado con simulador)
 
 ### 🚀 Características Avanzadas
-- **Cache inteligente:** 30 segundos para optimizar rendimiento
+- **Caché inteligente:** 30 segundos para optimizar rendimiento
 - **CORS habilitado:** Para desarrollo y testing
 - **Logging detallado:** Para debugging y monitoreo
 - **Manejo de errores:** Try-catch completo con mensajes descriptivos
@@ -414,8 +414,8 @@ Ver documentación completa en: [README_FLUTTER.md](README_FLUTTER.md)
 ### 📊 Uso y Testing
 ```cmd
 iniciar_api.bat              # Iniciar servidor API + WebSocket
-probar_api.bat               # Testing automatico de endpoints de datos
-probar_autenticacion.bat     # Testing de autenticacion (Reto 9)
+probar_api.bat               # Testing automático de endpoints de datos
+probar_autenticacion.bat     # Testing de autenticación (Reto 9)
 ```
 
 ### 🔐 Sistema de Autenticación
@@ -442,81 +442,27 @@ El sistema está **completamente preparado** para migración a hardware real:
 - **Pipeline sin cambios** - MQTT → InfluxDB → Grafana
 - **Documentación completa** - Ver [MIGRACION.md](MIGRACION.md)
 
-## 🎯 Roadmap y Próximos Pasos
-
-### ✅ **Completado (v2.3.0)**
-- [x] ✅ **API REST robusta** con 6 endpoints y cache inteligente
-- [x] ✅ **App móvil Flutter** con 3 pantallas y Material Design 3
-- [x] ✅ **Sistema de alertas** automáticas por umbrales
-- [x] ✅ **WebSocket real-time** para streaming de datos
-- [x] ✅ **Instalación automática** con scripts inteligentes
-- [x] ✅ **Dashboard profesional** con branding personalizado
-- [x] ✅ **Pipeline optimizado** sin pérdidas de datos
-- [x] ✅ **Documentación completa** con guías paso a paso
-
-### 🚧 **En Desarrollo**
-- [ ] 📱 **Notificaciones push** móviles para alertas críticas
-- [ ] 🔔 **Sistema de alertas** por email/SMS
-- [ ] 📊 **Métricas avanzadas** y analytics
-- [ ] 🌍 **Interfaz web** complementaria a Grafana
-
-### 🔮 **Migración a Hardware Real**
-- [ ] 🔌 **Integración ESP32 físicos** (código preparado)
-- [ ] 📡 **Comunicación LoRa Mesh** entre nodos
-- [ ] 🌐 **Gateway IoT** con múltiples protocolos
-- [ ] ☁️ **Cloud deployment** para producción
-
-### 📈 **Escalabilidad Futura**
-- [ ] 🏢 **Multi-sede** con geolocalización
-- [ ] 📱 **App iOS/Android nativas** optimizadas
-- [ ] 🤖 **ML/AI** para predicción de tendencias
-- [ ] 🔐 **Autenticación y roles** de usuario
-
 ---
 
-## 🏆 Sobre el Proyecto
+## 🌐 Aplicación Web Next.js
 
-**Medusse IoT** es un proyecto de **nivel profesional** que demuestra las mejores prácticas en:
-- **Arquitectura de microservicios** con Docker
-- **Pipeline de datos** en tiempo real (MQTT → InfluxDB → Grafana)
-- **Desarrollo Full-Stack** (Node.js + Flutter + Python)
-- **DevOps y automatización** con scripts inteligentes
-- **UI/UX moderno** con Material Design 3
-
-### 📊 Estadísticas del Proyecto
-- **+15 scripts automatizados** para instalación y uso
-- **4 tecnologías principales** (Docker, Node.js, Flutter, Python)
-- **6 endpoints API** con documentación completa
-- **3 pantallas móviles** con navegación fluida
-- **18 tipos de sensores** simulados realísticamente
-- **4 ubicaciones** monitoreadas simultáneamente
-
----
-
-_**Versión actual:** 2.3.0 (Octubre 2025)_
-
-
----
-
-## 🌐 Aplicacion Web Next.js
-
-### Caracteristicas
+### Características
 - **Next.js 16** con TypeScript y Tailwind CSS
 - **Dashboard en tiempo real** con datos de 4 ubicaciones
-- **Integracion API REST** con 10+ funciones
-- **WebSocket** para actualizacion automatica
-- **Sistema de alertas** visual (CO2, bateria)
+- **Integración API REST** con 10+ funciones
+- **WebSocket** para actualización automática
+- **Sistema de alertas** visual (CO2, batería)
 - **Responsive design** con Framer Motion
-- **Botones funcionales** con navegacion y enlaces externos
+- **Botones funcionales** con navegación y enlaces externos
 - **Formulario de contacto** integrado con email
-- **Hero sections** con imagenes personalizadas
+- **Hero sections** con imágenes personalizadas
 
 ### Botones Funcionales
-- **Ver Dashboard** - Scroll a seccion dashboard
+- **Ver Dashboard** - Scroll a sección dashboard
 - **Acceder a Grafana** - Abre http://localhost:3000
-- **Documentacion** - Enlace a README.md en GitHub
-- **Ver API Docs** - Enlace a documentacion API
-- **Ver Migracion** - Enlace a MIGRACION.md
+- **Documentación** - Enlace a README.md en GitHub
+- **Ver API Docs** - Enlace a documentación API
+- **Ver Migración** - Enlace a MIGRACION.md
 - **Contactar** - Abre cliente de correo con pacoaldev@gmail.com
 
 ### Uso
@@ -524,15 +470,15 @@ _**Versión actual:** 2.3.0 (Octubre 2025)_
 ejecutar_web.bat
 ```
 
-La web estara disponible en: http://localhost:3100
+La web estará disponible en: http://localhost:3003
 
-**Nota**: Usamos puerto 3100 para evitar conflicto con Grafana (puerto 3000)
+**Nota**: Usamos puerto 3003 para evitar conflicto con Grafana (puerto 3000)
 
 ---
 
 ## 🗄️ Base de Datos MySQL
 
-### Configuracion
+### Configuración
 - **MySQL 8.0** integrado en Docker
 - **Puerto**: 3306
 - **Base de datos**: medusse_db
@@ -540,26 +486,26 @@ La web estara disponible en: http://localhost:3100
 
 ### Esquema (9 tablas)
 1. **users** - Usuarios del sistema (admin, user, viewer)
-2. **sessions** - Gestion de sesiones con tokens UUID
+2. **sessions** - Gestión de sesiones con tokens UUID
 3. **user_preferences** - Preferencias personalizadas
 4. **locations** - 4 ubicaciones monitoreadas
 5. **sensors** - 18 tipos de sensores configurados
 6. **alerts** - Sistema de alertas
 7. **user_alerts** - Notificaciones de usuarios
 8. **activity_log** - Registro de actividad
-9. **system_config** - Configuracion del sistema
+9. **system_config** - Configuración del sistema
 
 ### Procedimientos Almacenados (10)
-- `sp_authenticate_user` - Autenticacion y creacion de sesion
-- `sp_validate_session` - Validacion de token
-- `sp_logout_user` - Cierre de sesion
+- `sp_authenticate_user` - Autenticación y creación de sesión
+- `sp_validate_session` - Validación de token
+- `sp_logout_user` - Cierre de sesión
 - `sp_create_alert` - Crear alerta
 - `sp_resolve_alert` - Resolver alerta
 - `sp_get_user_alerts` - Obtener notificaciones
-- `sp_mark_alert_read` - Marcar como leida
-- `sp_cleanup_expired_sessions` - Limpieza automatica
-- `sp_get_system_stats` - Estadisticas del sistema
-- `sp_get_location_stats` - Estadisticas por ubicacion
+- `sp_mark_alert_read` - Marcar como leída
+- `sp_cleanup_expired_sessions` - Limpieza automática
+- `sp_get_system_stats` - Estadísticas del sistema
+- `sp_get_location_stats` - Estadísticas por ubicación
 
 ### Usuarios Iniciales
 | Username | Email | Password | Role |
@@ -569,7 +515,7 @@ La web estara disponible en: http://localhost:3100
 | profesor | profesor@medusse.local | medusse2025 | user |
 | alumno | alumno@medusse.local | medusse2025 | viewer |
 
-**Documentacion completa**: `docker/mysql/DATABASE_DOCUMENTATION.md`
+**Documentación completa**: `docker/mysql/DATABASE_DOCUMENTATION.md`
 
 ---
 
@@ -579,123 +525,123 @@ La web estara disponible en: http://localhost:3100
 
 ✅ **Reto 2**: Base de datos (InfluxDB + MySQL)
 ✅ **Reto 3**: Procedimientos almacenados (10 procedimientos)
-✅ **Reto 4**: Diseno de bocetos (estructura de componentes)
+✅ **Reto 4**: Diseño de bocetos (estructura de componentes)
 ✅ **Reto 5**: Interfaces HTML/CSS (Next.js + Tailwind)
 ✅ **Reto 8**: Transferencia Front-end/Back-end (API REST completa)
-✅ **Reto 9**: Gestion de usuarios con sesiones (MySQL + bcrypt)
-✅ **Reto 12**: Comunicacion asincrona (WebSocket + Fetch API)
+✅ **Reto 9**: Gestión de usuarios con sesiones (MySQL + bcrypt)
+✅ **Reto 12**: Comunicación asíncrona (WebSocket + Fetch API)
 ✅ **Reto 13**: Framework cliente (Flutter + Next.js)
 ✅ **Reto 15**: Framework servidor (Express + Docker)
 
-✅ **Reto 7**: Validacion de formularios JS (validacion en tiempo real)
-✅ **Reto 10**: Panel de administracion (gestion usuarios, estadisticas, logs)
-✅ **Reto 11**: Script FTP/SFTP (deployment automatico)
-✅ **Reto 14**: Diseno web avanzado (responsive + animaciones Framer Motion)
+✅ **Reto 7**: Validación de formularios JS (validación en tiempo real)
+✅ **Reto 10**: Panel de administración (gestión usuarios, estadísticas, logs)
+✅ **Reto 11**: Script FTP/SFTP (deployment automático)
+✅ **Reto 14**: Diseño web avanzado (responsive + animaciones Framer Motion)
 
 ### Retos Pendientes (2/16)
 
 ⏳ **Reto 1**: Proyecto de sostenibilidad
 ⏳ **Reto 6**: Plan de empresa
-⏳ **Reto 16**: Documentacion final
+⏳ **Reto 16**: Documentación final
 
 ---
 
-## 🔧 Integracion de Componentes
+## 🔧 Integración de Componentes
 
 ### Web Next.js (Fase 1 y 2 Completadas)
 
 **Fase 1 - Branding**: ✅ Completado
 - Metadata actualizada a Medusse IoT
-- 6 hero sections con informacion del proyecto
+- 6 hero sections con información del proyecto
 - Colores corporativos configurados
-- Contenido adaptado (productos, servicios, tecnologia)
+- Contenido adaptado (productos, servicios, tecnología)
 
 **Fase 2 - API REST**: ✅ Completado
-- Cliente API TypeScript (400+ lineas)
-- Hook WebSocket con reconexion automatica
+- Cliente API TypeScript (400+ líneas)
+- Hook WebSocket con reconexión automática
 - Dashboard en tiempo real con 4 ubicaciones
-- Sistema de alertas visual (CO2, bateria)
+- Sistema de alertas visual (CO2, batería)
 - 18 tipos de sensores mostrados
 
-**Fase 3 - Autenticacion**: ⏳ Pendiente
+**Fase 3 - Autenticación**: ⏳ Pendiente
 - Formularios de login/registro
-- Validacion con react-hook-form + zod
-- Integracion con MySQL
-- Proteccion de rutas
+- Validación con react-hook-form + zod
+- Integración con MySQL
+- Protección de rutas
 
 ### Base de Datos MySQL (Reto 2 y 3 Completados)
 
-**Implementacion**: ✅ Completado
-- 9 tablas con relaciones y indices
+**Implementación**: ✅ Completado
+- 9 tablas con relaciones e índices
 - 10 procedimientos almacenados
 - 4 usuarios iniciales con roles
 - 4 ubicaciones y 18 sensores configurados
 - Sistema de alertas y notificaciones
-- Documentacion tecnica completa
+- Documentación técnica completa
 
-**Integracion con API**: ⏳ Pendiente
+**Integración con API**: ⏳ Pendiente
 - Instalar mysql2 en Node.js
-- Endpoints de autenticacion
-- Middleware de validacion de sesiones
+- Endpoints de autenticación
+- Middleware de validación de sesiones
 
 ---
 
-## 📈 Estadisticas del Proyecto
+## 📈 Estadísticas del Proyecto
 
-### Lineas de Codigo
-- **Python**: ~500 lineas (simulador)
-- **JavaScript/Node.js**: ~1000 lineas (API REST)
-- **TypeScript/React**: ~1200 lineas (Web Next.js)
-- **Dart/Flutter**: ~2000 lineas (App movil)
-- **SQL**: ~900 lineas (esquema + procedimientos)
-- **Configuracion**: ~500 lineas (Docker, Telegraf, etc.)
-- **Total**: ~6100 lineas de codigo
+### Líneas de Código
+- **Python**: ~500 líneas (simulador)
+- **JavaScript/Node.js**: ~1000 líneas (API REST)
+- **TypeScript/React**: ~1200 líneas (Web Next.js)
+- **Dart/Flutter**: ~2000 líneas (App móvil)
+- **SQL**: ~900 líneas (esquema + procedimientos)
+- **Configuración**: ~500 líneas (Docker, Telegraf, etc.)
+- **Total**: ~6100 líneas de código
 
 ### Archivos del Proyecto
-- **Archivos de codigo**: 50+
-- **Archivos de configuracion**: 15+
-- **Scripts de automatizacion**: 10+
-- **Documentacion**: README.md + CHANGELOG.md + docs tecnicas
+- **Archivos de código**: 50+
+- **Archivos de configuración**: 15+
+- **Scripts de automatización**: 10+
+- **Documentación**: README.md + CHANGELOG.md + docs técnicas
 
-### Tecnologias Utilizadas
+### Tecnologías Utilizadas
 - **Backend**: Node.js, Express, Python
 - **Frontend**: Next.js 16, React 19, TypeScript 5
 - **Mobile**: Flutter 3.9+, Dart
 - **Bases de Datos**: InfluxDB 2.7, MySQL 8.0
-- **Mensajeria**: MQTT (Mosquitto 2.0)
-- **Visualizacion**: Grafana 10.2.0
+- **Mensajería**: MQTT (Mosquitto 2.0)
+- **Visualización**: Grafana 10.2.0
 - **Contenedores**: Docker, Docker Compose
 - **Estilos**: Tailwind CSS 4
 - **Animaciones**: Framer Motion 12
 
 ---
 
-## 🎓 Informacion Academica
+## 🎓 Información Académica
 
 **Proyecto**: Trabajo de Fin de Grado (TFG)
-**Titulo**: Sistema IoT de Monitoreo Ambiental con Arquitectura de Microservicios
+**Título**: Sistema IoT de Monitoreo Ambiental con Arquitectura de Microservicios
 **Autor**: Francisco Manuel López Alarte
 **Email**: pacoaldev@gmail.com
-**Institucion**: IES José Rodrigo Botet
-**Curso Academico**: 2025/2026
+**Institución**: IES José Rodrigo Botet
+**Curso Académico**: 2025/2026
 **Rama de trabajo**: clase
 
 ### Objetivos del Proyecto
 1. Diseñar e implementar un sistema IoT completo
 2. Aplicar arquitectura de microservicios
-3. Integrar multiples tecnologias modernas
-4. Preparar para migracion a hardware real
+3. Integrar múltiples tecnologías modernas
+4. Preparar para migración a hardware real
 5. Documentar completamente el proceso
-6. Cumplir con 16 retos tecnicos especificos
+6. Cumplir con 16 retos técnicos específicos
 
 ### Competencias Desarrolladas
 - Desarrollo Full-Stack (Frontend + Backend + Mobile)
 - Bases de datos relacionales y series temporales
-- Comunicacion IoT (MQTT, WebSocket)
-- Contenedorizacion con Docker
-- Diseno de interfaces responsive
-- Gestion de proyectos de software
-- Documentacion tecnica profesional
+- Comunicación IoT (MQTT, WebSocket)
+- Contenedorización con Docker
+- Diseño de interfaces responsive
+- Gestión de proyectos de software
+- Documentación técnica profesional
 
 ---
 
@@ -707,4 +653,4 @@ Para consultas de licencia o permisos, contacta al autor
 
 ---
 
-_**Version actual:** 2.3.0 (Noviembre 2025)_
+_**Versión actual:** 2.7.1 (Noviembre 2025)_

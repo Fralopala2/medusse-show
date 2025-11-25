@@ -6,27 +6,39 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex gap-6 text-xs text-gray-400">
-            <Link href="#" className="hover:text-white transition-colors">
+            <Link href="#soluciones" className="hover:text-white transition-colors">
               Soluciones
             </Link>
-            <Link href="#" className="hover:text-white transition-colors">
+            <Link href="#precios" className="hover:text-white transition-colors">
               Precios
             </Link>
-            <Link href="#" className="hover:text-white transition-colors">
+            <Link href="#tecnologia" className="hover:text-white transition-colors">
               Tecnología
             </Link>
-            <Link href="#" className="hover:text-white transition-colors">
+            <Link href="#contacto" className="hover:text-white transition-colors">
               Contacto
             </Link>
-            <Link href="#" className="hover:text-white transition-colors">
+            <Link 
+              href="https://github.com/Fralopala2/proyecto-medusse/blob/clase/README.md" 
+              target="_blank"
+              className="hover:text-white transition-colors"
+            >
               Descargas PDF
             </Link>
           </div>
           <div className="flex gap-6 text-xs text-gray-400">
-            <Link href="#" className="hover:text-white transition-colors">
+            <Link 
+              href="https://github.com/Fralopala2/proyecto-medusse/blob/clase/LICENSE" 
+              target="_blank"
+              className="hover:text-white transition-colors"
+            >
               Privacidad
             </Link>
-            <Link href="#" className="hover:text-white transition-colors">
+            <Link 
+              href="https://github.com/Fralopala2/proyecto-medusse/blob/clase/LICENSE" 
+              target="_blank"
+              className="hover:text-white transition-colors"
+            >
               Términos
             </Link>
           </div>
