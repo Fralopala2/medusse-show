@@ -393,23 +393,38 @@ export default function AdminPage() {
                 <h3 className="text-lg font-medium text-gray-900">Actividad Reciente</h3>
               </div>
               <div className="divide-y divide-gray-200">
-                {logs.map((log, index) => (
-                  <div key={log.id || index} className="px-6 py-4">
-                    <div className="flex items-center justify-between">
-                      <div className="flex-1">
-                        <p className="text-sm font-medium text-gray-900">
-                          {log.username || 'Sistema'} - {log.action}
-                        </p>
-                        <p className="text-sm text-gray-500 mt-1">{log.details}</p>
-                      </div>
-                      <div className="ml-4 flex-shrink-0">
-                        <p className="text-xs text-gray-400">
-                          {new Date(log.created_at).toLocaleString('es-ES')}
-                        </p>
+                {logs.map((log, index) => {
+                  // Parsear detalles si es JSON string
+                  let detailsText = '';
+                  if (log.details) {
+                    try {
+                      const parsed = typeof log.details === 'string' ? JSON.parse(log.details) : log.details;
+                      detailsText = parsed.message || JSON.stringify(parsed);
+                    } catch {
+                      detailsText = log.details;
+                    }
+                  }
+                  
+                  return (
+                    <div key={log.id || index} className="px-6 py-4">
+                      <div className="flex items-center justify-between">
+                        <div className="flex-1">
+                          <p className="text-sm font-medium text-gray-900">
+                            {log.username || 'Sistema'} - {log.action}
+                          </p>
+                          {detailsText && (
+                            <p className="text-sm text-gray-500 mt-1">{detailsText}</p>
+                          )}
+                        </div>
+                        <div className="ml-4 flex-shrink-0">
+                          <p className="text-xs text-gray-400">
+                            {new Date(log.created_at).toLocaleString('es-ES')}
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           )}
