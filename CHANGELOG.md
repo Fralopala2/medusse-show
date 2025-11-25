@@ -992,3 +992,45 @@ demo.bat         # Ejecutar demo completa
 
 ---
 
+
+
+## [2.10.0] - 2025-11-24 - RETO 11: SCRIPT FTP/SFTP ✅
+
+### 📤 Sistema de Deployment Automatico
+
+#### ✅ Scripts FTP Implementados
+- **deploy-ftp.bat** - Script Windows para deployment FTP
+- **deploy-ftp.js** - Script Node.js con FTP basico
+- **deploy-sftp.js** - Script Node.js con SFTP seguro
+
+#### ✅ Funcionalidades
+- **Upload automatico** de directorios al servidor
+- **Exclusion inteligente** de node_modules, .git, .env
+- **Logs detallados** de progreso y errores
+- **Soporte FTP y SFTP** (seguro)
+- **Configuracion por variables de entorno**
+
+#### ✅ Directorios Incluidos
+- `web/.next` → Build de Next.js
+- `api` → API Node.js
+- `docker` → Configuracion Docker
+
+#### ✅ Seguridad
+- Variables de entorno para credenciales
+- Archivo .env.ftp.example como plantilla
+- Soporte para claves SSH en SFTP
+- Exclusion automatica de archivos sensibles
+
+#### ✅ Documentacion
+- **FTP_DEPLOYMENT.md** - Guia completa de uso
+- Ejemplos de configuracion
+- Integracion con CI/CD (GitHub Actions)
+- Solucion de problemas comunes
+
+### 📊 Progreso del TFG
+- **13/16 retos completados** (81.25%)
+- **Reto 11 completado**: Script FTP/SFTP ✅
+- **3 retos pendientes**
+
+---
+
