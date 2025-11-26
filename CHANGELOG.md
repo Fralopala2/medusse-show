@@ -1,5 +1,31 @@
 # Changelog - Proyecto Medusse IoT
 
+## [2.7.6] - 2025-11-25 - DOCUMENTACION DE ENLACES WEB ✅
+
+### 📋 Documento de Referencias de Enlaces
+
+#### ✅ Archivo LINKS.md Creado
+- **Documentacion completa de enlaces de la web Next.js**
+- 12 botones documentados con sus URLs
+- 9 URLs unicas identificadas y categorizadas
+- Enlaces internos (scroll), locales (servicios) y externos (GitHub)
+- Notas de mantenimiento y verificacion
+- Historial de cambios incluido
+
+#### ✅ Contenido del Documento
+- Enlaces por seccion (6 hero sections)
+- Enlaces del footer y contacto
+- Resumen de URLs unicas
+- Comandos de verificacion
+- Guia de actualizacion
+- Solucion de problemas comunes
+
+#### ✅ Utilidad
+- Referencia rapida para mantenimiento
+- Documentacion para actualizaciones
+- Verificacion de enlaces rotos
+- Guia para nuevos desarrolladores
+
 ## [2.7.5] - 2025-11-25 - TODOS LOS RETOS COMPLETADOS 16/16 (100%) 🎉
 
 ### 🎓 Proyecto TFG Completado al 100%
