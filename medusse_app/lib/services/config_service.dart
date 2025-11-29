@@ -4,9 +4,9 @@ class ConfigService {
   static const String _apiUrlKey = 'api_base_url';
   static const String _wsUrlKey = 'websocket_url';
 
-  // URLs por defecto (localhost para desarrollo)
-  static const String _defaultApiUrl = 'http://localhost:3001';
-  static const String _defaultWsUrl = 'ws://localhost:3002';
+  // URLs por defecto (10.0.2.2 para emulador Android, localhost para otros)
+  static const String _defaultApiUrl = 'http://10.0.2.2:3001';
+  static const String _defaultWsUrl = 'ws://10.0.2.2:3002';
 
   static ConfigService? _instance;
   SharedPreferences? _prefs;
@@ -52,7 +52,11 @@ class ConfigService {
 
   // Configuraciones predefinidas comunes
   static const Map<String, Map<String, String>> presetConfigs = {
-    'Local (Docker)': {
+    'Emulador Android': {
+      'api': 'http://10.0.2.2:3001',
+      'ws': 'ws://10.0.2.2:3002',
+    },
+    'Local (Windows/Chrome)': {
       'api': 'http://localhost:3001',
       'ws': 'ws://localhost:3002',
     },
@@ -60,7 +64,6 @@ class ConfigService {
       'api': 'http://192.168.1.140:3001',
       'ws': 'ws://192.168.1.140:3002',
     },
-    'Simulación': {'api': 'http://127.0.0.1:3001', 'ws': 'ws://127.0.0.1:3002'},
   };
 
   // Aplicar configuración predefinida

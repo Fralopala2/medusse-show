@@ -283,13 +283,16 @@ class _SensorChartScreenState extends State<SensorChartScreen> {
     final minY = values.reduce((a, b) => a < b ? a : b);
     final maxY = values.reduce((a, b) => a > b ? a : b);
     final padding = (maxY - minY) * 0.1;
+    final range = maxY - minY;
+    final horizontalInterval = range > 0 ? range / 5 : 1.0;
+    final verticalInterval = data.length > 6 ? data.length / 6 : 1.0;
 
     return LineChartData(
       gridData: FlGridData(
         show: true,
         drawVerticalLine: true,
-        horizontalInterval: (maxY - minY) / 5,
-        verticalInterval: data.length / 6,
+        horizontalInterval: horizontalInterval,
+        verticalInterval: verticalInterval,
         getDrawingHorizontalLine: (value) =>
             FlLine(color: Colors.grey[300], strokeWidth: 1),
         getDrawingVerticalLine: (value) =>
