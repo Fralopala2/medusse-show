@@ -27,38 +27,91 @@ ESP32 Simulators → MQTT → Telegraf → InfluxDB → Grafana Dashboard
 ```
 proyecto-medusse/
 ├── arduino/                    # Simuladores y firmware ESP32
-│   ├── medusse_simulator.py   # Simulador principal (4 ubicaciones)
-│   └── src/                   # Código ESP32 real
+│   ├── medusse_simulator.py   # Simulador principal (4 ubicaciones, 18 sensores)
+│   ├── src/                   # Código ESP32 real (preparado para LoRa)
+│   └── node2/                 # Configuración nodo secundario
 ├── docker/                    # Stack completo Docker
-│   ├── docker-compose.yml     # Servicios: MQTT, InfluxDB, Grafana, Telegraf, MySQL
+│   ├── docker-compose.yml     # 5 servicios: MQTT, InfluxDB, Grafana, Telegraf, MySQL
 │   ├── grafana/              # Configuración y dashboards
+│   │   ├── dashboards/       # Dashboard medusse-clean.json
+│   │   └── provisioning/     # Configuración automática
 │   ├── telegraf/             # Pipeline de datos MQTT→InfluxDB
-│   ├── mosquitto/            # Broker MQTT
-│   └── mysql/                # Base de datos MySQL
-│       ├── init/             # Scripts SQL de inicialización
-│       └── DATABASE_DOCUMENTATION.md
-├── api/                       # API REST Node.js
-│   ├── server.js             # Servidor API con WebSocket
+│   │   └── telegraf.conf     # Configuración completa
+│   ├── mosquitto/            # Broker MQTT 2.0
+│   │   └── mosquitto.conf    # Configuración con WebSocket
+│   ├── mysql/                # Base de datos MySQL 8.0
+│   │   ├── init/             # Scripts SQL de inicialización
+│   │   │   ├── 01-schema.sql           # 9 tablas
+│   │   │   ├── 02-seed-data.sql        # Datos iniciales
+│   │   │   └── 03-stored-procedures.sql # 10 procedimientos
+│   │   └── DATABASE_DOCUMENTATION.md    # Documentación técnica
+│   └── influxdb/             # Configuración InfluxDB
+├── api/                       # API REST Node.js + Express
+│   ├── server.js             # Servidor principal (1075 líneas)
+│   ├── db.js                 # Conexión MySQL
+│   ├── auth.js               # Lógica de autenticación
+│   ├── auth-routes.js        # Rutas de autenticación
+│   ├── admin-routes.js       # Rutas de administración
 │   ├── package.json          # Dependencias Node.js
-│   └── README.md             # Documentación API
-├── web/                       # Aplicación Web Next.js
+│   ├── .env                  # Variables de entorno
+│   └── README.md             # Documentación API completa
+├── web/                       # Aplicación Web Next.js 16
 │   ├── src/                  # Código fuente TypeScript
 │   │   ├── app/             # App Router de Next.js
+│   │   │   ├── page.tsx     # Página principal
+│   │   │   ├── login/       # Página de login
+│   │   │   └── dashboard/   # Dashboard protegido
 │   │   ├── components/      # Componentes React
-│ ─ iniciar_api.bat          # 🚀 API REST + WebSocket
-├── ejecutar_flutter.bat     # 📱 App móvil Flutter
-├── verificar.bat            # 🔍 Verificación completa
-├── medusse.bat              # 🎯 Menú principal unificado (Windows)
-├── setup_lliurex.sh         # 🐧 Instalación para Lliurex
-├── ejecutar_lliurex.sh      # 🐧 Ejecutar en Lliurex
-├── verificar_lliurex.sh     # 🐧 Verificar en Lliurex
-├── detener_lliurex.sh       # 🐧 Detener en Lliurex
-├── documentacion/           # 📖 Documentación del proyecto
-│   ├── INSTALACION.md       # Guías de instalación
-│   ├── MIGRACION.md         # Migración a LoRa Mesh
-│   └── VERCEL_DEPLOYMENT.md # Deployment en Vercel
-├── CHANGELOG.md             # Historial de cambios
-└── README.md                # Esta documentación
+│   │   │   ├── layout/      # Header, Footer
+│   │   │   ├── sections/    # Hero sections
+│   │   │   └── ui/          # Componentes UI
+│   │   ├── lib/             # Utilidades
+│   │   │   ├── api.ts       # Cliente API (400+ líneas)
+│   │   │   └── data.ts      # Datos estáticos
+│   │   └── hooks/           # Custom hooks
+│   │       └── use-websocket.ts # Hook WebSocket
+│   ├── public/              # Recursos estáticos
+│   ├── tailwind.config.ts   # Configuración Tailwind
+│   └── package.json         # Dependencias
+├── medusse_app/              # Aplicación Móvil Flutter
+│   ├── lib/                 # Código fuente Dart
+│   │   ├── main.dart        # Entry point
+│   │   ├── models/          # Modelos de datos
+│   │   ├── services/        # Servicios (API, WebSocket)
+│   │   ├── providers/       # Providers de estado
+│   │   ├── screens/         # Pantallas (Home, Detail, Charts)
+│   │   └── widgets/         # Widgets reutilizables
+│   ├── pubspec.yaml         # Dependencias Flutter
+│   └── README.md            # Documentación Flutter
+├── documentacion/           # 📖 Documentación completa del proyecto
+│   ├── DOCUMENTACION_RETOS.md          # 16 retos detallados (2792 líneas)
+│   ├── DOCUMENTACION_GENERAL_RETOS.md  # Resumen general (1224 líneas)
+│   ├── README_DOCUMENTACION.md         # Guía de documentación
+│   ├── RESUMEN_ENTREGA_PROFESOR.md     # Resumen ejecutivo
+│   ├── RETO_1_SOSTENIBILIDAD.md        # Reto 1 completo
+│   ├── RETO_6_PLAN_EMPRESA.md          # Plan de empresa
+│   ├── INSTALACION.md                  # Guías de instalación
+│   ├── MIGRACION.md                    # Migración a LoRa Mesh
+│   ├── VERCEL_DEPLOYMENT.md            # Deployment en Vercel
+│   └── LINKS.md                        # Enlaces web
+├── tools_linux/             # Herramientas para Linux/Lliurex
+│   ├── setup_lliurex.sh     # 🐧 Instalación para Lliurex
+│   ├── ejecutar_lliurex.sh  # 🐧 Ejecutar en Lliurex
+│   ├── verificar_lliurex.sh # 🐧 Verificar en Lliurex
+│   └── detener_lliurex.sh   # 🐧 Detener en Lliurex
+├── Scripts Windows (raíz):  # Scripts de automatización
+│   ├── medusse.bat          # 🎯 Menú principal unificado
+│   ├── sistema_completo.bat # 🚀 Sistema completo
+│   ├── iniciar_api.bat      # 🔌 API REST + WebSocket
+│   ├── ejecutar_flutter.bat # 📱 App móvil Flutter
+│   ├── ejecutar_web.bat     # 🌐 Web Next.js
+│   ├── verificar.bat        # 🔍 Verificación completa
+│   ├── setup_rapido.bat     # ⚡ Setup rápido
+│   └── detener.bat          # 🛑 Detener servicios
+├── CHANGELOG.md             # Historial de cambios (1340+ líneas)
+├── README.md                # Esta documentación
+├── requirements.txt         # Dependencias Python
+└── Medusse.code-workspace   # Workspace de VS Code
 ```
 
 ## 🚀 Características
@@ -542,9 +595,12 @@ La web estará disponible en: http://localhost:3003
 ✅ **Reto 15**: Framework servidor (Express + Docker)
 ✅ **Reto 16**: Documentación final (completa y profesional)
 
-### Documentacion de Retos
+### Documentación de Retos
 
-📖 **Documentacion General:** `documentacion/DOCUMENTACION_GENERAL_RETOS.md`  
+📖 **Documentación Detallada (Principal):** `documentacion/DOCUMENTACION_RETOS.md` (2792 líneas)  
+📖 **Documentación General:** `documentacion/DOCUMENTACION_GENERAL_RETOS.md` (1224 líneas)  
+📖 **Guía de Documentación:** `documentacion/README_DOCUMENTACION.md`  
+📖 **Resumen Ejecutivo:** `documentacion/RESUMEN_ENTREGA_PROFESOR.md`  
 📖 **Reto 1 - Sostenibilidad:** `documentacion/RETO_1_SOSTENIBILIDAD.md`  
 📖 **Reto 6 - Plan de Empresa:** `documentacion/RETO_6_PLAN_EMPRESA.md`
 
@@ -601,11 +657,18 @@ La web estará disponible en: http://localhost:3003
 - **Configuración**: ~500 líneas (Docker, Telegraf, etc.)
 - **Total**: ~6100 líneas de código
 
+### Documentación Generada
+- **Documentación de retos**: 2300+ líneas (DOCUMENTACION_RETOS.md)
+- **Documentación técnica**: 2500+ líneas (varios archivos)
+- **Documentación general**: 1500+ líneas (README, CHANGELOG, etc.)
+- **Comentarios en código**: 1000+ líneas
+- **Total**: ~7000+ líneas de documentación
+
 ### Archivos del Proyecto
 - **Archivos de código**: 50+
 - **Archivos de configuración**: 15+
 - **Scripts de automatización**: 10+
-- **Documentación**: README.md + CHANGELOG.md + docs técnicas
+- **Archivos de documentación**: 10+
 
 ### Tecnologías Utilizadas
 - **Backend**: Node.js, Express, Python
@@ -657,4 +720,4 @@ Para consultas de licencia o permisos, contacta al autor
 
 ---
 
-_**Versión actual:** 2.7.1 (Noviembre 2025)_
+_**Versión actual:** 2.7.7 (Noviembre 2025)_

@@ -1,72 +1,72 @@
-# Documentacion del Proyecto Medusse IoT
+# Documentación del Proyecto Medusse IoT
 
-**Guia de Documentacion para Evaluacion del TFG**
+**Guía de Documentación para Evaluación del TFG**
 
 ---
 
 ## Documentos Principales para Entrega
 
-### 1. Documentacion Detallada de los 16 Retos
+### 1. Documentación Detallada de los 16 Retos
 
 **Archivo Principal:**
-- `DOCUMENTACION_RETOS.md` (2300+ lineas)
+- `DOCUMENTACION_RETOS.md` (2300+ líneas)
   * Los 16 retos documentados en profundidad
-  * Explicacion detallada con ejemplos de codigo
-  * Localizacion exacta en archivos del proyecto
+  * Explicación detallada con ejemplos de código
+  * Localización exacta en archivos del proyecto
   * Diagramas y esquemas visuales
   * Tabla resumen final
 
 **Contenido de cada Reto:**
-- Descripcion del reto
-- Implementacion en el proyecto
-- Archivos involucrados con lineas especificas
-- Ejemplos de codigo concretos
+- Descripción del reto
+- Implementación en el proyecto
+- Archivos involucrados con líneas específicas
+- Ejemplos de código concretos
 - Diagramas de flujo y arquitectura
-- Resultados y metricas
+- Resultados y métricas
 
-### 2. Documentacion General
+### 2. Documentación General
 
 **Archivo:**
-- `DOCUMENTACION_GENERAL_RETOS.md` (1224 lineas)
+- `DOCUMENTACION_GENERAL_RETOS.md` (1224 líneas)
   * Resumen ejecutivo del proyecto
   * Arquitectura completa del sistema
-  * Stack tecnologico utilizado
-  * Estadisticas del proyecto
-  * Guias de instalacion
-  * Casos de uso y demostracion
+  * Stack tecnológico utilizado
+  * Estadísticas del proyecto
+  * Guías de instalación
+  * Casos de uso y demostración
 
-### 3. Documentacion Especifica de Retos
+### 3. Documentación Específica de Retos
 
 **Reto 1 - Sostenibilidad:**
-- `RETO_1_SOSTENIBILIDAD.md` (800+ lineas)
-  * Alineacion con 5 ODS
+- `RETO_1_SOSTENIBILIDAD.md` (800+ líneas)
+  * Alineación con 5 ODS
   * Impacto medible y cuantificable
   * 15 KPIs de sostenibilidad
   * Plan de despliegue completo
 
 **Reto 6 - Plan de Empresa:**
-- `RETO_6_PLAN_EMPRESA.md` (1500+ lineas)
+- `RETO_6_PLAN_EMPRESA.md` (1500+ líneas)
   * Modelo de negocio completo
   * Proyecciones financieras 3 escenarios
   * Estrategia Go-to-Market
-  * Analisis de riesgos
+  * Análisis de riesgos
   * Hoja de ruta 18 meses
 
-### 4. Documentacion Tecnica
+### 4. Documentación Técnica
 
-**Instalacion y Configuracion:**
-- `INSTALACION.md` - Guias de instalacion detalladas
-- `MIGRACION.md` - Migracion a hardware real LoRa Mesh
-- `VERCEL_DEPLOYMENT.md` - Deployment en produccion
+**Instalación y Configuración:**
+- `INSTALACION.md` - Guías de instalación detalladas
+- `MIGRACION.md` - Migración a hardware real LoRa Mesh
+- `VERCEL_DEPLOYMENT.md` - Deployment en producción
 
 **Base de Datos:**
 - `../docker/mysql/DATABASE_DOCUMENTATION.md` - Esquema MySQL completo
 
 **API REST:**
-- `../api/README.md` - Documentacion completa de la API
+- `../api/README.md` - Documentación completa de la API
 
 **App Flutter:**
-- `../medusse_app/README.md` - Documentacion de la app movil
+- `../medusse_app/README.md` - Documentación de la app móvil
 
 **Enlaces Web:**
 - `LINKS.md` - Referencias de enlaces de la web Next.js
@@ -93,25 +93,25 @@ documentacion/
 
 ## Orden de Lectura Recomendado
 
-### Para Evaluacion Rapida (30 minutos)
+### Para Evaluación Rápida (30 minutos)
 
 1. **DOCUMENTACION_RETOS.md** - Leer los 16 retos completos
 2. **Tabla resumen final** - Ver estado de 16/16 retos
 
-### Para Evaluacion Completa (2 horas)
+### Para Evaluación Completa (2 horas)
 
 1. **DOCUMENTACION_RETOS.md** - Los 16 retos completos
 2. **DOCUMENTACION_GENERAL_RETOS.md** - Contexto general del proyecto
 3. **RETO_1_SOSTENIBILIDAD.md** - Profundizar en sostenibilidad
 4. **RETO_6_PLAN_EMPRESA.md** - Profundizar en plan de empresa
-5. **README.md principal** - Vision general del proyecto
+5. **README.md principal** - Visión general del proyecto
 
-### Para Verificacion Tecnica (1 hora)
+### Para Verificación Técnica (1 hora)
 
-1. **INSTALACION.md** - Como instalar el proyecto
-2. **../api/README.md** - Documentacion API REST
+1. **INSTALACION.md** - Cómo instalar el proyecto
+2. **../api/README.md** - Documentación API REST
 3. **../docker/mysql/DATABASE_DOCUMENTATION.md** - Esquema BD
-4. **Ejecutar scripts de verificacion** - `verificar.bat`
+4. **Ejecutar scripts de verificación** - `verificar.bat`
 
 ---
 
@@ -140,17 +140,17 @@ documentacion/
 
 ---
 
-## Estadisticas del Proyecto
+## Estadísticas del Proyecto
 
-### Documentacion
-- **Total lineas documentacion:** 8000+ lineas
-- **Archivos de documentacion:** 10+ archivos
+### Documentación
+- **Total líneas documentación:** 8000+ líneas
+- **Archivos de documentación:** 10+ archivos
 - **Diagramas y esquemas:** 15+ diagramas
-- **Ejemplos de codigo:** 50+ ejemplos
+- **Ejemplos de código:** 50+ ejemplos
 
-### Codigo
-- **Total lineas de codigo:** 6100+ lineas
-- **Archivos de codigo:** 50+ archivos
+### Código
+- **Total líneas de código:** 6100+ líneas
+- **Archivos de código:** 50+ archivos
 - **Lenguajes:** Python, JavaScript, TypeScript, Dart, SQL, Bash
 - **Frameworks:** Express, Next.js, Flutter, React
 
@@ -165,33 +165,33 @@ documentacion/
 
 ## Contacto
 
-**Autor:** Francisco Manuel Lopez Alarte  
+**Autor:** Francisco Manuel López Alarte  
 **Email:** pacoaldev@gmail.com  
-**Institucion:** IES Jose Rodrigo Botet  
+**Institución:** IES José Rodrigo Botet  
 **Curso:** 2025/2026  
-**Version:** 2.7.7  
+**Versión:** 2.7.7  
 **Fecha:** Noviembre 2025
 
 ---
 
 ## Notas para el Profesor
 
-### Documentos Clave para Evaluacion
+### Documentos Clave para Evaluación
 
-Los dos documentos principales que contienen toda la informacion de los 16 retos son:
+Los dos documentos principales que contienen toda la información de los 16 retos son:
 
 1. **RETOS_DETALLADOS_ENTREGA_PROFESOR.md** (Retos 1-8)
 2. **RETOS_9_A_16_COMPLEMENTO.md** (Retos 9-16)
 
 Estos documentos incluyen:
-- Explicacion detallada de cada reto
-- Implementacion en el proyecto
-- Archivos involucrados con lineas especificas
-- Ejemplos de codigo reales
+- Explicación detallada de cada reto
+- Implementación en el proyecto
+- Archivos involucrados con líneas específicas
+- Ejemplos de código reales
 - Diagramas de arquitectura
-- Resultados y metricas
+- Resultados y métricas
 
-### Verificacion del Sistema
+### Verificación del Sistema
 
 Para verificar que el sistema funciona correctamente:
 

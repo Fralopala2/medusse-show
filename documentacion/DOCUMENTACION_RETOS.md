@@ -1,23 +1,23 @@
-# Documentacion Detallada de los 16 Retos - Proyecto Medusse IoT
+# Documentación Detallada de los 16 Retos - Proyecto Medusse IoT
 
 **Sistema IoT de Monitoreo Ambiental con Arquitectura de Microservicios**
 
 ---
 
-## Informacion del Proyecto
+## Información del Proyecto
 
-**Titulo:** Sistema IoT de Monitoreo Ambiental con Arquitectura de Microservicios  
-**Autor:** Francisco Manuel Lopez Alarte  
+**Título:** Sistema IoT de Monitoreo Ambiental con Arquitectura de Microservicios  
+**Autor:** Francisco Manuel López Alarte  
 **Email:** pacoaldev@gmail.com  
-**Institucion:** IES Jose Rodrigo Botet  
-**Curso Academico:** 2025/2026  
-**Version:** 2.7.6  
+**Institución:** IES José Rodrigo Botet  
+**Curso Académico:** 2025/2026  
+**Versión:** 2.7.6  
 **Fecha de Entrega:** Noviembre 2025  
 **Estado:** 16/16 Retos Completados (100%) ✅
 
 ---
 
-## Indice de Contenidos
+## Índice de Contenidos
 
 1. [Reto 1: Proyecto de Sostenibilidad](#reto-1-proyecto-de-sostenibilidad)
 2. [Reto 2: Base de Datos](#reto-2-base-de-datos)
@@ -25,133 +25,133 @@
 4. [Reto 4: Diseño de Bocetos](#reto-4-diseño-de-bocetos)
 5. [Reto 5: Interfaces HTML/CSS](#reto-5-interfaces-htmlcss)
 6. [Reto 6: Plan de Empresa](#reto-6-plan-de-empresa)
-7. [Reto 7: Validacion de Formularios JS](#reto-7-validacion-de-formularios-js)
+7. [Reto 7: Validación de Formularios JS](#reto-7-validacion-de-formularios-js)
 8. [Reto 8: Transferencia Front-end/Back-end](#reto-8-transferencia-front-endback-end)
-9. [Reto 9: Gestion de Usuarios con Sesiones](#reto-9-gestion-de-usuarios-con-sesiones)
-10. [Reto 10: Panel de Administracion](#reto-10-panel-de-administracion)
+9. [Reto 9: Gestión de Usuarios con Sesiones](#reto-9-gestion-de-usuarios-con-sesiones)
+10. [Reto 10: Panel de Administración](#reto-10-panel-de-administracion)
 11. [Reto 11: Script FTP/SFTP](#reto-11-script-ftpsftp)
-12. [Reto 12: Comunicacion Asincrona](#reto-12-comunicacion-asincrona)
+12. [Reto 12: Comunicación Asíncrona](#reto-12-comunicacion-asincrona)
 13. [Reto 13: Framework Cliente](#reto-13-framework-cliente)
 14. [Reto 14: Diseño Web Avanzado](#reto-14-diseño-web-avanzado)
 15. [Reto 15: Framework Servidor](#reto-15-framework-servidor)
-16. [Reto 16: Documentacion Final](#reto-16-documentacion-final)
+16. [Reto 16: Documentación Final](#reto-16-documentacion-final)
 
 ---
 
 
 ## Reto 1: Proyecto de Sostenibilidad
 
-### Descripcion del Reto
-Desarrollar un proyecto tecnologico que contribuya activamente a la sostenibilidad ambiental, alineado con los Objetivos de Desarrollo Sostenible (ODS) de la ONU.
+### Descripción del Reto
+Desarrollar un proyecto tecnológico que contribuya activamente a la sostenibilidad ambiental, alineado con los Objetivos de Desarrollo Sostenible (ODS) de la ONU.
 
-### Implementacion en el Proyecto
+### Implementación en el Proyecto
 
-#### 1. Alineacion con 5 Objetivos de Desarrollo Sostenible
+#### 1. Alineación con 5 Objetivos de Desarrollo Sostenible
 
 **ODS 3 - Salud y Bienestar:**
-- Monitorizacion de CO2 (400-1000+ ppm) para calidad del aire interior
+- Monitorización de CO2 (400-1000+ ppm) para calidad del aire interior
 - Sensor IAQ (Indoor Air Quality) con escala 0-500
-- Sensor VOC (Compuestos Organicos Volatiles) en ppb
-- Sistema de alertas automaticas cuando se superan umbrales de seguridad
+- Sensor VOC (Compuestos Orgánicos Volátiles) en ppb
+- Sistema de alertas automáticas cuando se superan umbrales de seguridad
 
 **ODS 6 - Agua Limpia y Saneamiento:**
 - Sensor de pH (6.2-7.8) para calidad del agua
-- Sensor TDS (Solidos Disueltos Totales) 50-200 ppm
-- Sensor de oxigeno disuelto (7.2-8.8 mg/L)
+- Sensor TDS (Sólidos Disueltos Totales) 50-200 ppm
+- Sensor de oxígeno disuelto (7.2-8.8 mg/L)
 - Sensor de flujo de agua (0.5-2.1 L/min)
 
-**ODS 7 - Energia Asequible y No Contaminante:**
-- Gestion de energia solar con paneles fotovoltaicos
-- Monitorizacion de voltaje solar (0-18.5V)
-- Gestion inteligente de baterias LiPo (3.2-4.2V)
-- Modo de bajo consumo automatico cuando bateria < 25%
+**ODS 7 - Energía Asequible y No Contaminante:**
+- Gestión de energía solar con paneles fotovoltaicos
+- Monitorización de voltaje solar (0-18.5V)
+- Gestión inteligente de baterías LiPo (3.2-4.2V)
+- Modo de bajo consumo automático cuando batería < 25%
 
 **ODS 11 - Ciudades y Comunidades Sostenibles:**
-- Monitorizacion en tiempo real de 4 ubicaciones
+- Monitorización en tiempo real de 4 ubicaciones
 - Dashboard profesional con datos agregados
 - Sistema de alertas para toma de decisiones
-- Escalabilidad para multiples edificios
+- Escalabilidad para múltiples edificios
 
-**ODS 13 - Accion por el Clima:**
-- Datos ambientales para politicas de eficiencia energetica
-- Reduccion estimada de 1-1.5 toneladas CO2/año
-- Optimizacion de sistemas HVAC (20-30% ahorro)
-- Educacion ambiental con datos reales
+**ODS 13 - Acción por el Clima:**
+- Datos ambientales para políticas de eficiencia energética
+- Reducción estimada de 1-1.5 toneladas CO2/año
+- Optimización de sistemas HVAC (20-30% ahorro)
+- Educación ambiental con datos reales
 
 #### 2. Impacto Medible y Cuantificable
 
-**Ahorro Energetico:**
-- Reduccion consumo HVAC: 2500-4000 kWh/año
-- Ahorro economico: 700-1200€/año
+**Ahorro Energético:**
+- Reducción consumo HVAC: 2500-4000 kWh/año
+- Ahorro económico: 700-1200€/año
 - ROI estimado: 40% primer año
 
 **Ahorro de Agua:**
-- Reduccion consumo: 50-100 m³/año
-- Deteccion temprana de fugas
-- Optimizacion de riego: 30-50% ahorro
+- Reducción consumo: 50-100 m³/año
+- Detección temprana de fugas
+- Optimización de riego: 30-50% ahorro
 
-**Reduccion de Emisiones:**
+**Reducción de Emisiones:**
 - CO2 evitado: 1-1.5 toneladas/año
-- Equivalente a plantar 50-75 arboles/año
+- Equivalente a plantar 50-75 árboles/año
 
 #### 3. Casos de Uso Implementados
 
-**Caso 1: Gestion Inteligente de Aulas**
-- Monitorizacion de temperatura, humedad y CO2
-- Alertas cuando CO2 > 800 ppm (ventilacion necesaria)
-- Optimizacion de climatizacion segun ocupacion
+**Caso 1: Gestión Inteligente de Aulas**
+- Monitorización de temperatura, humedad y CO2
+- Alertas cuando CO2 > 800 ppm (ventilación necesaria)
+- Optimización de climatización según ocupación
 - Ahorro estimado: 20-30% en HVAC
 
 **Caso 2: Riego Inteligente**
 - Sensor de humedad del suelo (25-45%)
 - Sensor de flujo de agua
-- Riego automatizado segun necesidad real
+- Riego automatizado según necesidad real
 - Ahorro estimado: 40-60% en consumo de agua
 
-**Caso 3: Monitorizacion de Energia Solar**
+**Caso 3: Monitorización de Energía Solar**
 - Voltaje de panel solar en tiempo real
-- Porcentaje de bateria (0-100%)
+- Porcentaje de batería (0-100%)
 - Estado de carga (cargando/no cargando)
-- Optimizacion de consumo energetico
+- Optimización de consumo energético
 
 ### Archivos Involucrados
 
-**Documentacion:**
-- `documentacion/RETO_1_SOSTENIBILIDAD.md` - Documentacion completa del reto
-- `README.md` - Seccion de sostenibilidad y ODS
+**Documentación:**
+- `documentacion/RETO_1_SOSTENIBILIDAD.md` - Documentación completa del reto
+- `README.md` - Sección de sostenibilidad y ODS
 
 **Simulador con 18 Sensores:**
-- `arduino/medusse_simulator.py` - Lineas 1-500
-  * Sensores ambientales (lineas 50-150)
-  * Sensores de agua (lineas 150-250)
-  * Sensores de energia solar (lineas 250-350)
-  * Funciones de simulacion realista (lineas 10-50)
+- `arduino/medusse_simulator.py` - Líneas 1-500
+  * Sensores ambientales (líneas 50-150)
+  * Sensores de agua (líneas 150-250)
+  * Sensores de energía solar (líneas 250-350)
+  * Funciones de simulación realista (líneas 10-50)
 
 **Dashboard Grafana:**
 - `docker/grafana/dashboards/medusse-clean.json` - Dashboard con 18 paneles
   * Paneles de calidad del aire (CO2, VOC, IAQ)
   * Paneles de calidad del agua (pH, TDS, O2)
-  * Paneles de energia solar (voltaje, bateria, consumo)
+  * Paneles de energía solar (voltaje, batería, consumo)
 
-### Ejemplo de Codigo - Simulacion de Energia Solar
+### Ejemplo de Código - Simulación de Energía Solar
 
 ```python
-# arduino/medusse_simulator.py - Lineas 10-40
+# arduino/medusse_simulator.py - Líneas 10-40
 def get_solar_irradiance():
-    """Calcula la irradiancia solar basada en la hora del dia"""
+    """Calcula la irradiancia solar basada en la hora del día"""
     current_time = datetime.now()
     hour = current_time.hour
     
-    if 6 <= hour <= 18:  # Dia
+    if 6 <= hour <= 18:  # Día
         angle = (hour - 6) * math.pi / 12
-        base_irradiance = math.sin(angle) * 1000  # Maximo 1000 W/m²
+        base_irradiance = math.sin(angle) * 1000  # Máximo 1000 W/m²
         cloud_factor = random.uniform(0.7, 1.0)
         return max(0, base_irradiance * cloud_factor)
     else:  # Noche
         return 0
 
 def simulate_battery_discharge(current_percentage, power_consumption, time_delta_minutes):
-    """Simula la descarga de bateria basada en consumo"""
+    """Simula la descarga de batería basada en consumo"""
     battery_capacity_wh = 11.1  # 3000mAh, 3.7V
     power_consumption_w = (power_consumption / 1000.0) * 3.7
     discharge_percent = (power_consumption_w * time_delta_minutes / 60.0) / battery_capacity_wh * 100
@@ -167,12 +167,12 @@ def simulate_battery_discharge(current_percentage, power_consumption, time_delta
 │                                                              │
 │  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐ │
 │  │   Sensores   │───▶│  Monitoreo   │───▶│   Alertas    │ │
-│  │  Ambientales │    │  Tiempo Real │    │  Automaticas │ │
+│  │  Ambientales │    │  Tiempo Real │    │  Automáticas │ │
 │  └──────────────┘    └──────────────┘    └──────────────┘ │
 │         │                    │                    │         │
 │         ▼                    ▼                    ▼         │
 │  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐ │
-│  │   Energia    │    │     Agua     │    │     Aire     │ │
+│  │   Energía    │    │     Agua     │    │     Aire     │ │
 │  │    Solar     │    │    Limpia    │    │   Saludable  │ │
 │  └──────────────┘    └──────────────┘    └──────────────┘ │
 │         │                    │                    │         │
@@ -186,22 +186,22 @@ def simulate_battery_discharge(current_percentage, power_consumption, time_delta
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Resultados y Metricas
+### Resultados y Métricas
 
 **KPIs Implementados:**
 - 18 tipos de sensores monitoreados
-- 4 ubicaciones simultaneas
+- 4 ubicaciones simultáneas
 - Datos cada 15 segundos
 - Alertas en tiempo real
 - Dashboard profesional con Grafana
-- API REST para integracion
-- App movil multiplataforma
+- API REST para integración
+- App móvil multiplataforma
 
 **Impacto Esperado:**
-- Reduccion 25-35% consumo energetico
-- Reduccion 40-60% consumo agua
+- Reducción 25-35% consumo energético
+- Reducción 40-60% consumo agua
 - Mejora calidad del aire interior
-- Educacion ambiental con datos reales
+- Educación ambiental con datos reales
 - Sistema replicable en otros centros
 
 ---

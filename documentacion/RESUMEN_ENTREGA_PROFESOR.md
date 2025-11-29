@@ -1,16 +1,16 @@
-# Resumen Ejecutivo - Entrega de Documentacion TFG
+# Resumen Ejecutivo - Entrega de Documentación TFG
 
 **Proyecto Medusse IoT - Sistema de Monitoreo Ambiental**
 
 ---
 
-## Informacion del Proyecto
+## Información del Proyecto
 
-**Titulo:** Sistema IoT de Monitoreo Ambiental con Arquitectura de Microservicios  
-**Autor:** Francisco Manuel Lopez Alarte  
+**Título:** Sistema IoT de Monitoreo Ambiental con Arquitectura de Microservicios  
+**Autor:** Francisco Manuel López Alarte  
 **Email:** pacoaldev@gmail.com  
-**Institucion:** IES Jose Rodrigo Botet  
-**Curso Academico:** 2025/2026  
+**Institución:** IES José Rodrigo Botet  
+**Curso Académico:** 2025/2026  
 **Version:** 2.7.7  
 **Fecha de Entrega:** Noviembre 2025  
 
@@ -46,57 +46,57 @@
 
 ## Documentos Entregados
 
-### 📄 Documentacion Principal (OBLIGATORIA)
+### 📄 Documentación Principal (OBLIGATORIA)
 
-**1. DOCUMENTACION_RETOS.md** (2300+ lineas)
+**1. DOCUMENTACION_RETOS.md** (2300+ líneas)
 - Los 16 retos documentados en profundidad
-- Explicacion detallada con ejemplos de codigo
-- Localizacion exacta en archivos
+- Explicación detallada con ejemplos de código
+- Localización exacta en archivos
 - Diagramas y esquemas visuales
 - Tabla resumen final
 
-### 📚 Documentacion Complementaria
+### 📚 Documentación Complementaria
 
-**3. DOCUMENTACION_GENERAL_RETOS.md** (959 lineas)
+**3. DOCUMENTACION_GENERAL_RETOS.md** (959 líneas)
 - Resumen ejecutivo del proyecto
 - Arquitectura completa
-- Stack tecnologico
-- Estadisticas del proyecto
+- Stack tecnológico
+- Estadísticas del proyecto
 
-**4. RETO_1_SOSTENIBILIDAD.md** (647 lineas)
-- Alineacion con 5 ODS
+**4. RETO_1_SOSTENIBILIDAD.md** (647 líneas)
+- Alineación con 5 ODS
 - Impacto medible
 - 15 KPIs de sostenibilidad
 
-**5. RETO_6_PLAN_EMPRESA.md** (829 lineas)
+**5. RETO_6_PLAN_EMPRESA.md** (829 líneas)
 - Modelo de negocio completo
 - Proyecciones financieras
 - Estrategia comercial
 
-**6. README_DOCUMENTACION.md** (167 lineas)
-- Guia de documentacion
+**6. README_DOCUMENTACION.md** (167 líneas)
+- Guía de documentación
 - Orden de lectura recomendado
 - Notas para el profesor
 
-### 📖 Documentacion Tecnica
+### 📖 Documentación Técnica
 
-**7. INSTALACION.md** (328 lineas)
-- Guias de instalacion Windows/Linux
+**7. INSTALACION.md** (328 líneas)
+- Guías de instalación Windows/Linux
 - Scripts automatizados
-- Solucion de problemas
+- Solución de problemas
 
-**8. MIGRACION.md** (791 lineas)
-- Migracion a hardware real
-- Configuracion LoRa Mesh
+**8. MIGRACION.md** (791 líneas)
+- Migración a hardware real
+- Configuración LoRa Mesh
 - Plan de despliegue
 
-**9. DATABASE_DOCUMENTATION.md** (600+ lineas)
+**9. DATABASE_DOCUMENTATION.md** (600+ líneas)
 - Esquema MySQL completo
 - 9 tablas documentadas
 - 10 procedimientos almacenados
 
-**10. api/README.md** (400+ lineas)
-- Documentacion API REST
+**10. api/README.md** (400+ líneas)
+- Documentación API REST
 - 11 endpoints documentados
 - Ejemplos de uso
 
@@ -104,29 +104,29 @@
 
 ## Estadisticas del Proyecto
 
-### Codigo Desarrollado
-- **Python:** 500 lineas (simulador)
-- **JavaScript/Node.js:** 1000 lineas (API REST)
-- **TypeScript/React:** 1200 lineas (Web Next.js)
-- **Dart/Flutter:** 2000 lineas (App movil)
-- **SQL:** 900 lineas (esquema + procedimientos)
-- **Configuracion:** 500 lineas (Docker, Telegraf, etc.)
-- **TOTAL:** 6100+ lineas de codigo
+### Código Desarrollado
+- **Python:** 500 líneas (simulador)
+- **JavaScript/Node.js:** 1000 líneas (API REST)
+- **TypeScript/React:** 1200 líneas (Web Next.js)
+- **Dart/Flutter:** 2000 líneas (App móvil)
+- **SQL:** 900 líneas (esquema + procedimientos)
+- **Configuración:** 500 líneas (Docker, Telegraf, etc.)
+- **TOTAL:** 6100+ líneas de código
 
-### Documentacion Generada
-- **Documentacion de retos:** 2300+ lineas
-- **Documentacion tecnica:** 2500+ lineas
-- **Documentacion general:** 1500+ lineas
-- **Comentarios en codigo:** 1000+ lineas
-- **TOTAL:** 7000+ lineas de documentacion
+### Documentación Generada
+- **Documentación de retos:** 2300+ líneas
+- **Documentación técnica:** 2500+ líneas
+- **Documentación general:** 1500+ líneas
+- **Comentarios en código:** 1000+ líneas
+- **TOTAL:** 7000+ líneas de documentación
 
 ### Archivos del Proyecto
-- **Archivos de codigo:** 50+ archivos
-- **Archivos de configuracion:** 15+ archivos
-- **Scripts de automatizacion:** 10+ scripts
-- **Archivos de documentacion:** 10+ documentos
+- **Archivos de código:** 50+ archivos
+- **Archivos de configuración:** 15+ archivos
+- **Scripts de automatización:** 10+ scripts
+- **Archivos de documentación:** 10+ documentos
 
-### Tecnologias Utilizadas
+### Tecnologías Utilizadas
 - **Lenguajes:** Python, JavaScript, TypeScript, Dart, SQL, Bash
 - **Frameworks:** Express, Next.js, Flutter, React
 - **Bases de Datos:** InfluxDB 2.7, MySQL 8.0
@@ -185,17 +185,17 @@
 ## Funcionalidades Implementadas
 
 ### 🌍 Sostenibilidad (Reto 1)
-- Alineacion con 5 ODS de la ONU
+- Alineación con 5 ODS de la ONU
 - 18 tipos de sensores monitoreados
 - Impacto medible: -1.5 ton CO2/año
-- Ahorro energetico: 25-35%
+- Ahorro energético: 25-35%
 - Ahorro agua: 40-60%
 
 ### 💾 Bases de Datos (Retos 2 y 3)
 - InfluxDB 2.7 para series temporales
 - MySQL 8.0 con 9 tablas
 - 10 procedimientos almacenados
-- Relaciones y claves foraneas
+- Relaciones y claves foráneas
 - 4 usuarios iniciales
 
 ### 🎨 Interfaces (Retos 4 y 5)
@@ -212,19 +212,19 @@
 - ROI cliente: 40% año 1
 - Hoja de ruta 18 meses
 
-### 🔐 Autenticacion (Retos 7, 9 y 10)
-- Validacion de formularios
+### 🔐 Autenticación (Retos 7, 9 y 10)
+- Validación de formularios
 - Hashing bcrypt
 - Tokens UUID
 - 3 roles de usuario
-- Panel de administracion
+- Panel de administración
 
-### 🔄 Comunicacion (Retos 8 y 12)
+### 🔄 Comunicación (Retos 8 y 12)
 - 11 endpoints API REST
 - WebSocket en tiempo real
 - Cliente TypeScript completo
 - Cache inteligente
-- MQTT asincrono
+- MQTT asíncrono
 
 ### 🚀 Frameworks (Retos 13, 14 y 15)
 - Next.js 16 + TypeScript
@@ -233,18 +233,18 @@
 - Docker Compose 5 servicios
 - Diseño web avanzado
 
-### 📖 Documentacion (Reto 16)
-- 7000+ lineas documentacion
-- 10+ documentos tecnicos
-- Comentarios en codigo
-- Guias de instalacion
-- Plan de migracion
+### 📖 Documentación (Reto 16)
+- 7000+ líneas documentación
+- 10+ documentos técnicos
+- Comentarios en código
+- Guías de instalación
+- Plan de migración
 
 ---
 
 ## Como Verificar el Proyecto
 
-### Instalacion Rapida
+### Instalación Rápida
 
 **Windows:**
 ```cmd
@@ -266,7 +266,7 @@ chmod +x setup_lliurex.sh
 - **Web Next.js:** http://localhost:3003
 - **InfluxDB:** http://localhost:8086 (admin / medusse2025)
 
-### Verificacion del Sistema
+### Verificación del Sistema
 
 ```cmd
 # Windows
@@ -286,8 +286,8 @@ verificar.bat
 
 **Documentos Clave:**
 - `documentacion/DOCUMENTACION_RETOS.md` - Los 16 retos completos
-- `documentacion/README_DOCUMENTACION.md` - Guia de lectura
-- `README.md` - Documentacion general del proyecto
+- `documentacion/README_DOCUMENTACION.md` - Guía de lectura
+- `README.md` - Documentación general del proyecto
 
 ---
 
@@ -298,38 +298,38 @@ verificar.bat
 1. **16/16 Retos Completados** (100%)
 2. **Sistema IoT Completo** funcionando
 3. **Arquitectura de Microservicios** implementada
-4. **Multiples Tecnologias** integradas
-5. **Documentacion Completa** y profesional
-6. **Preparado para Produccion** con hardware real
+4. **Múltiples Tecnologías** integradas
+5. **Documentación Completa** y profesional
+6. **Preparado para Producción** con hardware real
 
 ### Competencias Desarrolladas
 
 - Desarrollo Full-Stack completo
 - Arquitectura de sistemas distribuidos
 - Bases de datos relacionales y no relacionales
-- Comunicacion IoT (MQTT, WebSocket)
-- Contenedorizacion y orquestacion
+- Comunicación IoT (MQTT, WebSocket)
+- Contenedorización y orquestación
 - Diseño de interfaces modernas
-- Gestion de proyectos de software
-- Documentacion tecnica profesional
+- Gestión de proyectos de software
+- Documentación técnica profesional
 
 ### Impacto del Proyecto
 
-El proyecto Medusse IoT demuestra la viabilidad de implementar un sistema de monitoreo ambiental completo utilizando tecnologias modernas y arquitectura de microservicios. El sistema es escalable, mantenible y esta preparado para despliegue en entornos reales con comunicacion LoRa Mesh.
+El proyecto Medusse IoT demuestra la viabilidad de implementar un sistema de monitoreo ambiental completo utilizando tecnologías modernas y arquitectura de microservicios. El sistema es escalable, mantenible y está preparado para despliegue en entornos reales con comunicación LoRa Mesh.
 
 ---
 
 ## Contacto
 
-**Autor:** Francisco Manuel Lopez Alarte  
+**Autor:** Francisco Manuel López Alarte  
 **Email:** pacoaldev@gmail.com  
-**Institucion:** IES Jose Rodrigo Botet  
+**Institución:** IES José Rodrigo Botet  
 **Curso:** 2025/2026  
-**Version:** 2.7.7  
+**Versión:** 2.7.7  
 **Fecha:** Noviembre 2025
 
 ---
 
 **Documento generado:** Noviembre 2025  
-**Estado:** Proyecto Completo y Listo para Evaluacion ✅
+**Estado:** Proyecto Completo y Listo para Evaluación ✅
 
