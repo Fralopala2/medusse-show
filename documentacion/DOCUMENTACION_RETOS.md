@@ -160,30 +160,25 @@ def simulate_battery_discharge(current_percentage, power_consumption, time_delta
 
 ### Diagrama de Flujo de Sostenibilidad
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    SISTEMA SOSTENIBLE                        │
-├─────────────────────────────────────────────────────────────┤
-│                                                              │
-│  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐ │
-│  │   Sensores   │───▶│  Monitoreo   │───▶│   Alertas    │ │
-│  │  Ambientales │    │  Tiempo Real │    │  Automáticas │ │
-│  └──────────────┘    └──────────────┘    └──────────────┘ │
-│         │                    │                    │         │
-│         ▼                    ▼                    ▼         │
-│  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐ │
-│  │   Energía    │    │     Agua     │    │     Aire     │ │
-│  │    Solar     │    │    Limpia    │    │   Saludable  │ │
-│  └──────────────┘    └──────────────┘    └──────────────┘ │
-│         │                    │                    │         │
-│         └────────────────────┴────────────────────┘         │
-│                              │                               │
-│                              ▼                               │
-│                    ┌──────────────────┐                     │
-│                    │  Ahorro 700-1200€ │                     │
-│                    │  CO2 -1.5 ton/año │                     │
-│                    └──────────────────┘                     │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    subgraph Sistema["SISTEMA SOSTENIBLE"]
+        A[Sensores<br/>Ambientales] --> B[Monitoreo<br/>Tiempo Real]
+        B --> C[Alertas<br/>Automáticas]
+        
+        A --> D[Energía<br/>Solar]
+        B --> E[Agua<br/>Limpia]
+        C --> F[Aire<br/>Saludable]
+        
+        D --> G[Impacto Medible]
+        E --> G
+        F --> G
+        
+        G --> H["💰 Ahorro 700-1200€<br/>🌱 CO2 -1.5 ton/año"]
+    end
+    
+    style Sistema fill:#1e293b,stroke:#3b82f6,stroke-width:2px
+    style H fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
 ```
 
 ### Resultados y Métricas
@@ -448,35 +443,73 @@ CREATE TABLE system_config (
 
 ### Diagrama de Relaciones MySQL
 
-```
-┌──────────────┐         ┌──────────────┐         ┌──────────────┐
-│    users     │────1:N──│   sessions   │         │  locations   │
-│              │         │              │         │              │
-│ - id         │         │ - user_id    │         │ - id         │
-│ - username   │         │ - token      │         │ - name       │
-│ - email      │         │ - expires_at │         │ - color      │
-│ - role       │         └──────────────┘         │ - node_id    │
-└──────┬───────┘                                  └──────┬───────┘
-       │                                                 │
-       │1:1                                             1:N
-       │                                                 │
-┌──────▼───────┐         ┌──────────────┐         ┌────▼─────────┐
-│user_prefs    │         │    alerts    │◀───N:M──│ user_alerts  │
-│              │         │              │         │              │
-│ - user_id    │         │ - location_id│         │ - user_id    │
-│ - theme      │         │ - sensor_id  │         │ - alert_id   │
-│ - language   │         │ - alert_type │         │ - is_read    │
-└──────────────┘         └──────┬───────┘         └──────────────┘
-                                │
-                               N:1
-                                │
-                         ┌──────▼───────┐
-                         │   sensors    │
-                         │              │
-                         │ - id         │
-                         │ - type       │
-                         │ - thresholds │
-                         └──────────────┘
+```mermaid
+erDiagram
+    users ||--o{ sessions : "1:N"
+    users ||--|| user_preferences : "1:1"
+    users ||--o{ user_alerts : "N:M"
+    locations ||--o{ alerts : "1:N"
+    sensors ||--o{ alerts : "1:N"
+    alerts ||--o{ user_alerts : "N:M"
+    
+    users {
+        int id PK
+        string username
+        string email
+        string password_hash
+        string role
+        boolean is_active
+    }
+    
+    sessions {
+        int id PK
+        int user_id FK
+        string session_token
+        string ip_address
+        datetime expires_at
+    }
+    
+    user_preferences {
+        int id PK
+        int user_id FK
+        string theme
+        string language
+        string timezone
+    }
+    
+    locations {
+        int id PK
+        string name
+        string display_name
+        string color
+        string node_id
+        decimal temp_base
+    }
+    
+    sensors {
+        int id PK
+        string sensor_type
+        string display_name
+        string unit
+        decimal warning_threshold
+        decimal danger_threshold
+    }
+    
+    alerts {
+        int id PK
+        int location_id FK
+        int sensor_id FK
+        string alert_type
+        string message
+        boolean is_resolved
+    }
+    
+    user_alerts {
+        int id PK
+        int user_id FK
+        int alert_id FK
+        boolean is_read
+    }
 ```
 
 ### Ejemplo de Consulta InfluxDB (Flux)
@@ -1502,42 +1535,27 @@ export default function Alert({ type, message }: AlertProps) {
 
 ### Diagrama de Estructura de Componentes
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                        App Layout                            │
-├─────────────────────────────────────────────────────────────┤
-│                                                              │
-│  ┌────────────────────────────────────────────────────────┐ │
-│  │                      Header                             │ │
-│  │  [Logo] [Nav Links] [Menu Button]                      │ │
-│  └────────────────────────────────────────────────────────┘ │
-│                                                              │
-│  ┌────────────────────────────────────────────────────────┐ │
-│  │                   Page Content                          │ │
-│  │                                                          │ │
-│  │  ┌──────────────────────────────────────────────────┐  │ │
-│  │  │            HeroSection                            │  │ │
-│  │  │  [Logo] [Title] [Description] [Buttons]          │  │ │
-│  │  └──────────────────────────────────────────────────┘  │ │
-│  │                                                          │ │
-│  │  ┌──────────────────────────────────────────────────┐  │ │
-│  │  │         DashboardSection                          │  │ │
-│  │  │  [LocationCard] [LocationCard] [LocationCard]    │  │ │
-│  │  └──────────────────────────────────────────────────┘  │ │
-│  │                                                          │ │
-│  │  ┌──────────────────────────────────────────────────┐  │ │
-│  │  │          ProductGrid                              │  │ │
-│  │  │  [Card] [Card] [Card] [Card]                     │  │ │
-│  │  └──────────────────────────────────────────────────┘  │ │
-│  │                                                          │ │
-│  └────────────────────────────────────────────────────────┘ │
-│                                                              │
-│  ┌────────────────────────────────────────────────────────┐ │
-│  │                      Footer                             │ │
-│  │  [Links] [Contact] [Social] [Copyright]                │ │
-│  └────────────────────────────────────────────────────────┘ │
-│                                                              │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    subgraph Layout["App Layout Next.js"]
+        Header["Header<br/>[Logo] [Nav Links] [Menu Button]"]
+        
+        subgraph Content["Page Content"]
+            Hero["HeroSection<br/>[Logo] [Title] [Description] [Buttons]"]
+            Dashboard["DashboardSection<br/>[LocationCard] [LocationCard] [LocationCard]"]
+            Products["ProductGrid<br/>[Card] [Card] [Card] [Card]"]
+        end
+        
+        Footer["Footer<br/>[Links] [Contact] [Social] [Copyright]"]
+        
+        Header --> Content
+        Content --> Footer
+    end
+    
+    style Layout fill:#1e293b,stroke:#3b82f6,stroke-width:2px
+    style Header fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff
+    style Footer fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff
+    style Dashboard fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
 ```
 
 ---

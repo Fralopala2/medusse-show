@@ -30,14 +30,23 @@ El proyecto demuestra la implementación práctica de una arquitectura de micros
 
 ### Diagrama de Arquitectura
 
-```
-ESP32 Simulators → MQTT Broker → Telegraf → InfluxDB → Grafana Dashboard
-                        ↓                                      ↓
-                    API REST ← Web Next.js            MySQL Database
-                        ↓
-                 WebSocket (Real-time)
-                        ↓
-                 Flutter Mobile App
+```mermaid
+flowchart LR
+    ESP[ESP32<br/>Simulators] --> MQTT[MQTT<br/>Broker]
+    MQTT --> TEL[Telegraf]
+    TEL --> INFLUX[InfluxDB]
+    INFLUX --> GRAF[Grafana<br/>Dashboard]
+    MQTT --> API[API REST]
+    INFLUX --> API
+    API --> MYSQL[MySQL<br/>Database]
+    API --> WEB[Web<br/>Next.js]
+    API --> WS[WebSocket<br/>Real-time]
+    WS --> FLUTTER[Flutter<br/>Mobile App]
+    
+    style ESP fill:#3b82f6,stroke:#1e40af,stroke-width:2px,color:#fff
+    style MQTT fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff
+    style INFLUX fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
+    style GRAF fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#fff
 ```
 
 ### Componentes Principales

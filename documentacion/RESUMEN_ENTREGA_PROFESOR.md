@@ -138,46 +138,51 @@
 
 ## Arquitectura del Sistema
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                  ARQUITECTURA COMPLETA                       │
-├─────────────────────────────────────────────────────────────┤
-│                                                              │
-│  ┌──────────────┐                        ┌──────────────┐  │
-│  │   ESP32 x4   │───── MQTT ────────────▶│  Mosquitto   │  │
-│  │  Simulador   │                        │   Broker     │  │
-│  └──────────────┘                        └──────┬───────┘  │
-│                                                  │          │
-│                                                  ▼          │
-│                                           ┌──────────────┐  │
-│                                           │   Telegraf   │  │
-│                                           │   Pipeline   │  │
-│                                           └──────┬───────┘  │
-│                                                  │          │
-│                                                  ▼          │
-│  ┌──────────────┐                        ┌──────────────┐  │
-│  │   Grafana    │◀───────────────────────│   InfluxDB   │  │
-│  │  Dashboard   │                        │  Time Series │  │
-│  └──────────────┘                        └──────────────┘  │
-│                                                  ▲          │
-│                                                  │          │
-│  ┌──────────────┐                        ┌──────┴───────┐  │
-│  │  Web Next.js │◀───── HTTP ────────────│  API REST    │  │
-│  │  TypeScript  │                        │  Express.js  │  │
-│  └──────────────┘                        └──────┬───────┘  │
-│         ▲                                        │          │
-│         │                                        ▼          │
-│         │                                 ┌──────────────┐  │
-│         │                                 │    MySQL     │  │
-│         │                                 │   Users DB   │  │
-│         │                                 └──────────────┘  │
-│         │                                                   │
-│  ┌──────┴───────┐                                          │
-│  │ App Flutter  │◀───── WebSocket ───────────────────────┐ │
-│  │ Multiplat.   │                                         │ │
-│  └──────────────┘                                         │ │
-│                                                            │ │
-└────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    subgraph IoT["Capa IoT"]
+        ESP["ESP32 x4<br/>Simulador"]
+    end
+    
+    subgraph Messaging["Capa de Mensajería"]
+        MQTT["Mosquitto<br/>Broker MQTT"]
+    end
+    
+    subgraph Pipeline["Pipeline de Datos"]
+        TEL["Telegraf<br/>Pipeline"]
+    end
+    
+    subgraph Storage["Almacenamiento"]
+        INFLUX["InfluxDB<br/>Time Series"]
+        MYSQL["MySQL<br/>Users DB"]
+    end
+    
+    subgraph Visualization["Visualización"]
+        GRAF["Grafana<br/>Dashboard"]
+    end
+    
+    subgraph Backend["Backend"]
+        API["API REST<br/>Express.js"]
+    end
+    
+    subgraph Frontend["Frontend"]
+        WEB["Web Next.js<br/>TypeScript"]
+        FLUTTER["App Flutter<br/>Multiplataforma"]
+    end
+    
+    ESP -->|MQTT| MQTT
+    MQTT --> TEL
+    TEL --> INFLUX
+    INFLUX --> GRAF
+    INFLUX --> API
+    API --> MYSQL
+    API -->|HTTP| WEB
+    API -->|WebSocket| FLUTTER
+    
+    style IoT fill:#3b82f6,stroke:#1e40af,stroke-width:2px
+    style Messaging fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px
+    style Storage fill:#10b981,stroke:#059669,stroke-width:2px
+    style Visualization fill:#f59e0b,stroke:#d97706,stroke-width:2px
 ```
 
 ---
