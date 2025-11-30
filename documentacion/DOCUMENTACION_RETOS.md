@@ -249,7 +249,7 @@ Fields:
 **Proposito:** Gestionar usuarios, autenticacion, configuracion y alertas del sistema.
 
 **Configuracion:**
-- **Host:** localhost:3306
+- **Host:** localhost:3307
 - **Base de datos:** medusse_db
 - **Usuario:** medusse_user
 - **Password:** medusse2025
@@ -2683,7 +2683,7 @@ services:
   
   mysql:
     image: mysql:8.0
-    ports: ["3306:3306"]
+    ports: ["3307:3306"]
     environment:
       - MYSQL_ROOT_PASSWORD=medusse2025
       - MYSQL_DATABASE=medusse_db

@@ -1040,7 +1040,7 @@ sistema_completo.bat
 | API REST | http://localhost:3001 | - |
 | Web Next.js | http://localhost:3003 | - |
 | InfluxDB | http://localhost:8086 | admin / medusse2025 |
-| MySQL | localhost:3306 | medusse_user / medusse2025 |
+| MySQL | localhost:3307 | medusse_user / medusse2025 |
 
 ---
 

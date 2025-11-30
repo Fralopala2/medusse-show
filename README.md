@@ -544,9 +544,11 @@ La web estará disponible en: http://localhost:3003
 
 ### Configuración
 - **MySQL 8.0** integrado en Docker
-- **Puerto**: 3306
+- **Puerto**: 3307 (mapeado desde 3306 interno)
 - **Base de datos**: medusse_db
 - **Usuario**: medusse_user / medusse2025
+
+**Nota:** El puerto 3307 se usa para evitar conflictos con instalaciones locales de MySQL.
 
 ### Esquema (9 tablas)
 1. **users** - Usuarios del sistema (admin, user, viewer)
