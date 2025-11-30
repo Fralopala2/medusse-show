@@ -9,11 +9,11 @@
 ### 1. Documentación Detallada de los 16 Retos
 
 **Archivo Principal:**
-- `DOCUMENTACION_RETOS.md` (2300+ líneas)
+- `DOCUMENTACION_RETOS.md` (2792 líneas)
   * Los 16 retos documentados en profundidad
   * Explicación detallada con ejemplos de código
   * Localización exacta en archivos del proyecto
-  * Diagramas y esquemas visuales
+  * Diagramas Mermaid profesionales
   * Tabla resumen final
 
 **Contenido de cada Reto:**
@@ -21,7 +21,7 @@
 - Implementación en el proyecto
 - Archivos involucrados con líneas específicas
 - Ejemplos de código concretos
-- Diagramas de flujo y arquitectura
+- Diagramas de flujo y arquitectura Mermaid
 - Resultados y métricas
 
 ### 2. Documentación General
@@ -38,19 +38,21 @@
 ### 3. Documentación Específica de Retos
 
 **Reto 1 - Sostenibilidad:**
-- `RETO_1_SOSTENIBILIDAD.md` (800+ líneas)
+- `RETO_1_SOSTENIBILIDAD.md` (860+ líneas)
   * Alineación con 5 ODS
   * Impacto medible y cuantificable
   * 15 KPIs de sostenibilidad
   * Plan de despliegue completo
+  * Diagramas Mermaid de sostenibilidad
 
 **Reto 6 - Plan de Empresa:**
-- `RETO_6_PLAN_EMPRESA.md` (1500+ líneas)
+- `RETO_6_PLAN_EMPRESA.md` (1100+ líneas)
   * Modelo de negocio completo
+  * 3 paquetes comerciales (STARTER, STANDARD, PREMIUM)
   * Proyecciones financieras 3 escenarios
   * Estrategia Go-to-Market
-  * Análisis de riesgos
-  * Hoja de ruta 18 meses
+  * Análisis de riesgos (9 riesgos identificados)
+  * Hoja de ruta 18 meses en 4 fases
 
 ### 4. Documentación Técnica
 
@@ -143,10 +145,10 @@ documentacion/
 ## Estadísticas del Proyecto
 
 ### Documentación
-- **Total líneas documentación:** 8000+ líneas
-- **Archivos de documentación:** 10+ archivos
-- **Diagramas y esquemas:** 15+ diagramas
-- **Ejemplos de código:** 50+ ejemplos
+- **Total líneas documentación:** 7000+ líneas
+- **Archivos de documentación:** 10 archivos principales
+- **Diagramas Mermaid:** 10+ diagramas profesionales
+- **Ejemplos de código:** 50+ ejemplos reales
 
 ### Código
 - **Total líneas de código:** 6100+ líneas
@@ -170,7 +172,7 @@ documentacion/
 **Institución:** IES José Rodrigo Botet  
 **Curso:** 2025/2026  
 **Versión:** 2.7.7  
-**Fecha:** Noviembre 2025
+**Fecha:** 30 Noviembre 2025
 
 ---
 
@@ -178,17 +180,23 @@ documentacion/
 
 ### Documentos Clave para Evaluación
 
-Los dos documentos principales que contienen toda la información de los 16 retos son:
+El documento principal que contiene toda la información de los 16 retos es:
 
-1. **RETOS_DETALLADOS_ENTREGA_PROFESOR.md** (Retos 1-8)
-2. **RETOS_9_A_16_COMPLEMENTO.md** (Retos 9-16)
+1. **DOCUMENTACION_RETOS.md** (2792 líneas) - Documento completo con los 16 retos
+
+Documentos complementarios:
+
+2. **DOCUMENTACION_GENERAL_RETOS.md** (1224 líneas) - Resumen general del proyecto
+3. **RESUMEN_ENTREGA_PROFESOR.md** - Resumen ejecutivo para evaluación rápida
+4. **RETO_1_SOSTENIBILIDAD.md** - Reto 1 en profundidad
+5. **RETO_6_PLAN_EMPRESA.md** - Reto 6 en profundidad
 
 Estos documentos incluyen:
 - Explicación detallada de cada reto
 - Implementación en el proyecto
 - Archivos involucrados con líneas específicas
-- Ejemplos de código reales
-- Diagramas de arquitectura
+- Ejemplos de código reales del proyecto
+- Diagramas Mermaid profesionales
 - Resultados y métricas
 
 ### Verificación del Sistema
