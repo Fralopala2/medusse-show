@@ -29,6 +29,34 @@ interface Log {
   created_at: string;
 }
 
+interface Alert {
+  id: number;
+  location_id: number;
+  sensor_id: number;
+  location_name: string;
+  sensor_name: string;
+  alert_type: string;
+  message: string;
+  value: number | null;
+  threshold: number | null;
+  is_resolved: boolean;
+  resolved_at: string | null;
+  created_at: string;
+}
+
+interface Location {
+  id: number;
+  name: string;
+  display_name: string;
+}
+
+interface Sensor {
+  id: number;
+  sensor_type: string;
+  display_name: string;
+  unit: string;
+}
+
 export default function AdminPage() {
   const router = useRouter();
   const [users, setUsers] = useState<User[]>([]);
@@ -39,9 +67,9 @@ export default function AdminPage() {
   const [activeTab, setActiveTab] = useState<'users' | 'stats' | 'logs' | 'alerts'>('stats');
   const [showCreateUserModal, setShowCreateUserModal] = useState(false);
   const [showCreateAlertModal, setShowCreateAlertModal] = useState(false);
-  const [alerts, setAlerts] = useState<any[]>([]);
-  const [locations, setLocations] = useState<any[]>([]);
-  const [sensors, setSensors] = useState<unknown[]>([]);
+  const [alerts, setAlerts] = useState<Alert[]>([]);
+  const [locations, setLocations] = useState<Location[]>([]);
+  const [sensors, setSensors] = useState<Sensor[]>([]);
 
   useEffect(() => {
     // Verificar autenticacion y permisos
