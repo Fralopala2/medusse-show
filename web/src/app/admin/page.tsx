@@ -36,7 +36,12 @@ export default function AdminPage() {
   const [logs, setLogs] = useState<Log[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [activeTab, setActiveTab] = useState<'users' | 'stats' | 'logs'>('stats');
+  const [activeTab, setActiveTab] = useState<'users' | 'stats' | 'logs' | 'alerts'>('stats');
+  const [showCreateUserModal, setShowCreateUserModal] = useState(false);
+  const [showCreateAlertModal, setShowCreateAlertModal] = useState(false);
+  const [alerts, setAlerts] = useState<any[]>([]);
+  const [locations, setLocations] = useState<any[]>([]);
+  const [sensors, setSensors] = useState<any[]>([]);
 
   useEffect(() => {
     // Verificar autenticacion y permisos
@@ -101,6 +106,28 @@ export default function AdminPage() {
         
         if (logsData.success) setLogs(logsData.logs);
         
+        // Cargar alertas (solo para admin)
+        if (user.role === 'admin') {
+          const alertsRes = await fetch('http://localhost:3001/api/admin/alerts', {
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+          const alertsData = await alertsRes.json();
+          if (alertsData.success) setAlerts(alertsData.alerts);
+          
+          // Cargar ubicaciones y sensores para formularios
+          const locationsRes = await fetch('http://localhost:3001/api/admin/locations', {
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+          const locationsData = await locationsRes.json();
+          if (locationsData.success) setLocations(locationsData.locations);
+          
+          const sensorsRes = await fetch('http://localhost:3001/api/admin/sensors', {
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+          const sensorsData = await sensorsRes.json();
+          if (sensorsData.success) setSensors(sensorsData.sensors);
+        }
+        
         setLoading(false);
       } catch (error) {
         console.error('Error loading admin data:', error);
@@ -159,6 +186,123 @@ export default function AdminPage() {
     } catch (error) {
       console.error('Error changing role:', error);
       alert('Error al cambiar rol');
+    }
+  };
+
+  const handleCreateUser = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const token = localStorage.getItem('sessionToken');
+    
+    try {
+      const res = await fetch('http://localhost:3001/api/admin/users', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username: formData.get('username'),
+          email: formData.get('email'),
+          password: formData.get('password'),
+          full_name: formData.get('full_name'),
+          role: formData.get('role')
+        })
+      });
+      
+      const data = await res.json();
+      if (data.success) {
+        alert('Usuario creado correctamente');
+        setShowCreateUserModal(false);
+        window.location.reload();
+      } else {
+        alert(data.message || 'Error al crear usuario');
+      }
+    } catch (error) {
+      console.error('Error creating user:', error);
+      alert('Error al crear usuario');
+    }
+  };
+
+  const handleCreateAlert = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const token = localStorage.getItem('sessionToken');
+    
+    try {
+      const res = await fetch('http://localhost:3001/api/admin/alerts', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          location_id: formData.get('location_id'),
+          sensor_id: formData.get('sensor_id'),
+          alert_type: formData.get('alert_type'),
+          message: formData.get('message'),
+          value: formData.get('value') || null,
+          threshold: formData.get('threshold') || null
+        })
+      });
+      
+      const data = await res.json();
+      if (data.success) {
+        alert('Alerta creada correctamente');
+        setShowCreateAlertModal(false);
+        window.location.reload();
+      } else {
+        alert(data.message || 'Error al crear alerta');
+      }
+    } catch (error) {
+      console.error('Error creating alert:', error);
+      alert('Error al crear alerta');
+    }
+  };
+
+  const handleResolveAlert = async (alertId: number) => {
+    const token = localStorage.getItem('sessionToken');
+    
+    try {
+      const res = await fetch(`http://localhost:3001/api/admin/alerts/${alertId}/resolve`, {
+        method: 'PUT',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      
+      const data = await res.json();
+      if (data.success) {
+        setAlerts(alerts.map(a => 
+          a.id === alertId ? { ...a, is_resolved: true, resolved_at: new Date().toISOString() } : a
+        ));
+      } else {
+        alert(data.message || 'Error al resolver alerta');
+      }
+    } catch (error) {
+      console.error('Error resolving alert:', error);
+      alert('Error al resolver alerta');
+    }
+  };
+
+  const handleDeleteAlert = async (alertId: number) => {
+    if (!confirm('¿Estas seguro de eliminar esta alerta?')) return;
+    
+    const token = localStorage.getItem('sessionToken');
+    
+    try {
+      const res = await fetch(`http://localhost:3001/api/admin/alerts/${alertId}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      
+      const data = await res.json();
+      if (data.success) {
+        setAlerts(alerts.filter(a => a.id !== alertId));
+      } else {
+        alert(data.message || 'Error al eliminar alerta');
+      }
+    } catch (error) {
+      console.error('Error deleting alert:', error);
+      alert('Error al eliminar alerta');
     }
   };
 
