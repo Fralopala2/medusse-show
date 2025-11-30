@@ -107,6 +107,8 @@ export function HeroSection({
                 window.open(cta.secondaryAction, '_blank');
               } else if (cta.secondaryAction?.startsWith('#')) {
                 document.querySelector(cta.secondaryAction)?.scrollIntoView({ behavior: 'smooth' });
+              } else if (cta.secondaryAction?.startsWith('/')) {
+                window.location.href = cta.secondaryAction;
               }
             };
 
