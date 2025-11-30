@@ -439,6 +439,20 @@ verificar.bat
 ejecutar_flutter.bat
 ```
 
+### Capturas de Pantalla
+
+<div align="center">
+  <img src="web/public/images/app-home.jpg" alt="Pantalla Principal" width="200"/>
+  <img src="web/public/images/app-detail.jpg" alt="Detalle de Ubicación" width="200"/>
+  <img src="web/public/images/app-charts.jpg" alt="Visualización de Alarmas" width="200"/>
+  <img src="web/public/images/app-settings.jpg" alt="Configuración" width="200"/>
+</div>
+
+**Pantalla Principal**: Vista general con 4 ubicaciones monitoreadas en tiempo real  
+**Detalle de Ubicación**: 18 sensores con valores actuales y alertas inteligentes  
+**Visualización de Alarmas**: Sistema de alertas con notificaciones en tiempo real  
+**Configuración**: Ajustes de servidor y conexión con test integrado
+
 Ver documentación completa en: [medusse_app/README.md](medusse_app/README.md)
 
 ## 🌐 API REST Robusta
