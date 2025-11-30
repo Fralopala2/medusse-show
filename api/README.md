@@ -23,7 +23,16 @@ INFLUXDB_ORG=iescelia
 INFLUXDB_BUCKET=sensors
 MQTT_BROKER=localhost
 MQTT_PORT=1883
+
+# MySQL Configuration
+MYSQL_HOST=localhost
+MYSQL_PORT=3307
+MYSQL_DATABASE=medusse_db
+MYSQL_USER=medusse_user
+MYSQL_PASSWORD=medusse2025
 ```
+
+**Nota importante:** MySQL usa el puerto **3307** (no 3306) porque está mapeado así en docker-compose.yml para evitar conflictos con instalaciones locales de MySQL.
 
 ### 3. Iniciar la API
 
