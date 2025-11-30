@@ -1,219 +1,30 @@
 # Changelog - Proyecto Medusse IoT
 
-## [2.7.8] - 2025-11-29 - VERIFICACION Y SCRIPT PARA APP FLUTTER ✅
+## [2.7.7] - 2025-11-29 - DOCUMENTACION COMPLETA DE 16 RETOS ✅
 
-### 📱 App Flutter Lista para Probar
+### 📖 Documentacion de Retos TFG
 
-#### ✅ Script Automatico Creado
-- **probar_app_flutter.bat** - Script completo de verificacion y ejecucion
-- Verifica Flutter instalado
-- Inicia Docker automaticamente si no esta corriendo
-- Inicia servicios Docker (Mosquitto, InfluxDB, Telegraf, Grafana, MySQL)
-- Inicia API REST en puerto 3001
-- Inicia simulador de sensores
-- Instala dependencias de Flutter
-- Menu interactivo para elegir dispositivo (Windows/Chrome)
+#### ✅ Documentos Existentes
+- **documentacion/DOCUMENTACION_RETOS.md** - Documento principal (2792 lineas)
+- **documentacion/DOCUMENTACION_GENERAL_RETOS.md** - Documento general (1224 lineas)
+- **documentacion/RESUMEN_ENTREGA_PROFESOR.md** - Resumen ejecutivo
+- **documentacion/README_DOCUMENTACION.md** - Guia de lectura
+- **documentacion/RETO_1_SOSTENIBILIDAD.md** - Sostenibilidad completa
+- **documentacion/RETO_6_PLAN_EMPRESA.md** - Plan de empresa completo
 
-#### ✅ Documento de Verificacion
-- **medusse_app/VERIFICACION_APP.md** - Guia completa (400+ lineas)
-- Requisitos previos
-- Estructura de la app
-- Dependencias instaladas
-- Funcionalidades implementadas
-- Como probar la app
-- Verificacion de funcionamiento
-- Soluciones a problemas comunes
-- Comandos utiles
-
-#### ✅ Estado de la App
-- **Completamente funcional** y lista para probar
-- 4 pantallas implementadas (Home, Detalle, Graficos, Settings)
-- 18 sensores monitoreados
-- WebSocket en tiempo real
-- Graficos interactivos con fl_chart
-- Material Design 3
-- Multiplataforma (Windows, Chrome, Android, iOS)
-
-#### ✅ Configuracion Verificada
-- URLs por defecto: localhost:3001 (API), localhost:3002 (WebSocket)
-- 3 configuraciones predefinidas
-- Test de conexion integrado
-- Reconexion automatica
-
-#### ✅ Funcionalidades Verificadas
-- Grid de 4 ubicaciones con colores
-- Datos en tiempo real cada 15 segundos
-- Pull-to-refresh
-- Navegacion entre pantallas
-- Graficos historicos con selector de rango
-- Estadisticas (min/max/avg)
-- Indicador de conexion
-
-#### ✅ Archivos Generados
-- `probar_app_flutter.bat` - Script de ejecucion automatica
-- `medusse_app/VERIFICACION_APP.md` - Documentacion completa
-
-#### ✅ Uso
-```cmd
-# Ejecutar script automatico
-probar_app_flutter.bat
-
-# O manualmente
-cd medusse_app
-flutter pub get
-flutter run -d windows
-```
-
-## [2.7.7] - 2025-11-29 - DOCUMENTACION DETALLADA DE 16 RETOS PARA ENTREGA ✅
-
-### 📖 Documentacion Completa para Profesor
-
-#### ✅ Documento Principal Creado
-- **RETOS_DETALLADOS_ENTREGA_PROFESOR.md** - Documento principal (1905 lineas)
-- Retos 1-8 documentados en profundidad
-- Explicacion detallada de cada reto
-- Ejemplos de codigo concretos
-- Localizacion exacta en archivos
-- Diagramas y esquemas visuales
-
-#### ✅ Documento Complementario Creado
-- **RETOS_9_A_16_COMPLEMENTO.md** - Retos 9-16 (400+ lineas)
-- Retos 9-16 documentados de forma concisa
-- Todos los archivos involucrados identificados
-- Ejemplos de implementacion
-- Tabla resumen final de 16 retos
-
-#### ✅ Contenido de la Documentacion
-**Reto 1 - Sostenibilidad:**
-- Alineacion con 5 ODS
-- 18 sensores para sostenibilidad
-- Impacto medible y cuantificable
-- 5 casos de uso implementados
-- Ahorro energetico y reduccion CO2
-
-**Reto 2 - Base de Datos:**
-- InfluxDB 2.7 para series temporales
-- MySQL 8.0 con 9 tablas
-- Esquema completo documentado
-- Relaciones y claves foraneas
-- Datos iniciales cargados
-
-**Reto 3 - Procedimientos Almacenados:**
-- 10 procedimientos implementados
-- Autenticacion, alertas, estadisticas
-- Codigo SQL completo
-- Ventajas y uso desde Node.js
-
-**Reto 4 - Diseño de Bocetos:**
-- Dashboard Grafana con 6 filas
-- Web Next.js con 6 sections
-- App Flutter con 3 pantallas
-- Esquema de colores por ubicacion
-- Mockups y diagramas
-
-**Reto 5 - Interfaces HTML/CSS:**
-- Next.js 16 + TypeScript 5
-- Tailwind CSS 4 + Framer Motion 12
-- Componentes reutilizables
-- Responsive design completo
-- Animaciones y efectos
-
-**Reto 6 - Plan de Empresa:**
-- 3 paquetes comerciales
-- Proyecciones financieras 3 escenarios
-- Estrategia Go-to-Market
-- ROI para cliente
-- Hoja de ruta 18 meses
-
-**Reto 7 - Validacion de Formularios:**
-- Validacion en tiempo real
-- Expresiones regulares
-- Sanitizacion de inputs
-- Feedback visual
-- Validacion en API
-
-**Reto 8 - Transferencia Front-Back:**
-- 11 endpoints API REST
-- Cliente TypeScript completo
-- Manejo de errores robusto
-- Cache inteligente 30 segundos
-- CORS configurado
-
-**Reto 9 - Gestion de Usuarios:**
-- Autenticacion con bcrypt
-- Tokens UUID v4
-- Sesiones con expiracion
-- 3 roles de usuario
-- Middleware de proteccion
-
-**Reto 10 - Panel de Administracion:**
-- 6 endpoints de administracion
-- CRUD completo de usuarios
-- Estadisticas del sistema
-- Registro de actividad
-- Protegido por rol admin
-
-**Reto 11 - Script FTP/SFTP:**
-- Deployment en Vercel
-- Variables de entorno
-- Build optimizado
-- CI/CD preparado
-- HTTPS automatico
-
-**Reto 12 - Comunicacion Asincrona:**
-- WebSocket Server puerto 3002
-- Cliente WebSocket con reconexion
-- Fetch API para peticiones
-- MQTT asincrono
-- Streaming en tiempo real
-
-**Reto 13 - Framework Cliente:**
-- Next.js 16 con App Router
-- Flutter 3.9+ multiplataforma
-- TypeScript + Dart
-- Material Design 3
-- Provider pattern
-
-**Reto 14 - Diseño Web Avanzado:**
-- Responsive design mobile-first
-- Animaciones Framer Motion
-- Optimizaciones performance
-- Accesibilidad WCAG 2.1
-- SEO optimizado
-
-**Reto 15 - Framework Servidor:**
-- Express 4.18.2
-- Docker Compose 5 servicios
-- Middleware completo
-- Orquestacion de microservicios
-- Networking optimizado
-
-**Reto 16 - Documentacion Final:**
-- README.md 2000+ lineas
-- CHANGELOG.md 1340+ lineas
-- 8+ documentos tecnicos
-- Comentarios en codigo
-- Guias de instalacion
+#### ✅ Contenido Documentado
+- Todos los 16 retos del TFG completados y documentados
+- Explicacion detallada de implementaciones
+- Ejemplos de codigo reales del proyecto
+- Diagramas de arquitectura y flujo
+- Referencias a archivos especificos
+- Estadisticas del proyecto completo
 
 #### ✅ Formato Profesional
-- Redaccion clara sin marcas de AI
+- Redaccion clara y profesional
 - Estructura logica por retos
-- Ejemplos de codigo reales
-- Diagramas de flujo y arquitectura
+- Diagramas Mermaid profesionales
 - Localizacion exacta de archivos
-- Estadisticas del proyecto
-- Tabla resumen final
-
-#### ✅ Archivos Generados
-- `documentacion/RETOS_DETALLADOS_ENTREGA_PROFESOR.md` (1905 lineas)
-- `documentacion/RETOS_9_A_16_COMPLEMENTO.md` (400+ lineas)
-- Total: 2300+ lineas de documentacion detallada
-
-#### ✅ Utilidad
-- Documento listo para entregar al profesor
-- Explicacion completa de cada reto
-- Demostracion de cumplimiento 100%
-- Referencias a codigo real
 - Evidencia de trabajo realizado
 
 ## [2.7.6] - 2025-11-25 - DOCUMENTACION DE ENLACES WEB ✅
@@ -446,38 +257,6 @@ flutter run -d windows
 - Actualizada estructura de archivos en README.md para reflejar carpeta documentacion/
 - Eliminadas referencias a archivos inexistentes (QUICK_START.md, INSTALACION_LLIUREX.md)
 
-## [2.7.0] - 2025-11-24 - SOPORTE LLIUREX Y OPTIMIZACION SCRIPTS ✅
-
-### 🧹 Optimizacion de Scripts Windows
-
-#### ✅ Unificacion de Scripts .bat
-- **medusse.bat** - Menu principal unificado con todas las funciones
-  * Instalacion (completa y rapida)
-  * Ejecucion (sistema completo, componentes individuales)
-  * Verificacion (completa y rapida)
-  * Testing (API, autenticacion, login web)
-  * Menu interactivo facil de usar
-
-#### ✅ Scripts Eliminados (redundantes)
-- **ejecutar.bat** - Funcionalidad integrada en medusse.bat
-- **probar.bat** - Funcionalidad integrada en medusse.bat
-- **probar_login_web.bat** - Funcionalidad integrada en medusse.bat
-- **compilar_app.bat** - Caso especifico de desarrollo
-- **configurar_firewall.bat** - Caso especifico de red
-
-#### ✅ Scripts Mantenidos (necesarios)
-- **instalar_proyecto.bat** - Instalacion completa
-- **setup_rapido.bat** - Setup rapido
-- **sistema_completo.bat** - Sistema completo
-- **verificar.bat** - Verificacion completa
-- **medusse.bat** - Menu principal (NUEVO)
-
-#### ✅ Ventajas
-- Proyecto mas limpio (5 archivos eliminados)
-- Menu unico facil de usar
-- Menos confusion para usuarios nuevos
-- Mantenimiento simplificado
-
 ## [2.7.0] - 2025-11-24 - SOPORTE LLIUREX COMPLETO ✅
 
 ### 🐧 Scripts Especificos para Lliurex
@@ -487,38 +266,11 @@ flutter run -d windows
 - Usuario sin permisos de sudoers no puede usar Docker
 - Solucion con scripts que manejan sudo automaticamente
 
-#### ✅ Scripts Nuevos para Lliurex
+#### ✅ Scripts para Lliurex (tools_linux/)
 - **setup_lliurex.sh** - Instalacion con manejo inteligente de sudo
-  * Detecta si necesita sudo para Docker
-  * Instala dependencias Python en home del usuario
-  * Instala dependencias Node.js si esta disponible
-  * Inicia servicios Docker automaticamente
-
 - **ejecutar_lliurex.sh** - Iniciar sistema completo
-  * Maneja sudo solo para comandos Docker
-  * Inicia Docker Compose con permisos correctos
-  * Inicia simulador y API en background
-  * Guarda PIDs para control de procesos
-
 - **verificar_lliurex.sh** - Verificacion completa del sistema
-  * Verifica Docker con o sin sudo
-  * Verifica contenedores corriendo
-  * Verifica puertos y servicios
-  * Verifica datos en InfluxDB
-
 - **detener_lliurex.sh** - Detener todos los servicios
-  * Detiene simulador y API por PID
-  * Detiene Docker Compose con permisos
-  * Limpia archivos temporales
-
-#### ✅ Documentacion Lliurex
-- **INSTALACION_LLIUREX.md** - Guia completa para Lliurex
-  * Explicacion del problema de permisos
-  * Solucion recomendada (agregar usuario al grupo docker)
-  * Solucion alternativa (scripts con sudo)
-  * Instalacion de Node.js sin sudo usando nvm
-  * Solucion de problemas especificos de Lliurex
-  * URL del repositorio actualizada
 
 #### ✅ Funciones Inteligentes
 - **docker_cmd()** - Ejecuta docker con o sin sudo segun permisos
@@ -573,11 +325,10 @@ sudo usermod -aG docker fralopala2
 - Scripts ejecutables con chmod +x
 
 ### 📁 Archivos Nuevos
-- `setup_lliurex.sh` - Script de instalacion
-- `ejecutar_lliurex.sh` - Script de ejecucion
-- `verificar_lliurex.sh` - Script de verificacion
-- `detener_lliurex.sh` - Script de detencion
-- `INSTALACION_LLIUREX.md` - Documentacion completa
+- `tools_linux/setup_lliurex.sh` - Script de instalacion
+- `tools_linux/ejecutar_lliurex.sh` - Script de ejecucion
+- `tools_linux/verificar_lliurex.sh` - Script de verificacion
+- `tools_linux/detener_lliurex.sh` - Script de detencion
 
 ### 🎓 Uso en Clase
 
@@ -664,41 +415,10 @@ cd ~/Documentos/proyecto-medusse
 
 ### 🐧 Soporte Completo para Linux
 
-#### ✅ Documentacion Linux
-- **INSTALACION_LINUX.md** - Guia completa para Linux/Lliurex
-  * Instalacion automatica y manual
-  * Instrucciones especificas para Lliurex
-  * Solucion de problemas comunes
-  * Optimizaciones para Linux
-  * Configuracion de systemd
-  * Alias utiles
-
-#### ✅ Scripts de Linux
-- **setup_linux.sh** - Instalacion automatica
-  * Instala Docker, Node.js, Python
-  * Configura dependencias del proyecto
-  * Configura permisos automaticamente
-
-- **ejecutar_linux.sh** - Iniciar sistema completo
-  * Inicia Docker Compose
-  * Inicia simulador, API y Web
-  * Guarda PIDs para control de procesos
-
-- **detener_linux.sh** - Detener todos los servicios
-  * Detiene procesos por PID
-  * Detiene Docker Compose
-  * Limpia archivos temporales
-
-- **verificar_linux.sh** - Verificar estado del sistema
-  * Verifica instalacion de software
-  * Verifica servicios corriendo
-  * Verifica conectividad de servicios
-
-#### ✅ Compatibilidad Linux
-- **Lliurex** (basado en Ubuntu)
-- **Ubuntu** 20.04+
-- **Debian** 11+
-- Cualquier distribucion basada en Debian
+#### ✅ Scripts de Linux (tools_linux/)
+- Scripts especificos para Lliurex con manejo de permisos
+- Instalacion, ejecucion, verificacion y detencion
+- Compatibilidad con Ubuntu, Debian y Lliurex
 
 #### ✅ Ventajas en Linux
 - Docker nativo (mejor rendimiento)
@@ -707,12 +427,6 @@ cd ~/Documentos/proyecto-medusse
 - Mas estable y rapido
 
 ### 🧪 Testing y Verificacion
-
-#### ✅ Scripts de Testing
-- **probar_login_web.bat** - Testing completo del login web
-  * Verifica Docker y MySQL
-  * Inicia API y Web automaticamente
-  * Guia paso a paso para probar login
 
 #### ✅ Pruebas Realizadas
 - Login exitoso con 4 usuarios diferentes
@@ -740,9 +454,8 @@ cd ~/Documentos/proyecto-medusse
 #### Archivos Nuevos
 - 2 paginas Next.js (login, dashboard)
 - 3 archivos de logos (SVG, PNG, favicon)
-- 4 scripts de Linux (.sh)
-- 1 guia de instalacion Linux
-- 1 script de testing web
+- Scripts de Linux en tools_linux/
+- Sistema de autenticacion completo
 
 #### Lineas de Codigo Agregadas
 - TypeScript/React: ~400 lineas (login + dashboard)
@@ -753,9 +466,7 @@ cd ~/Documentos/proyecto-medusse
 ### 📝 Documentacion Actualizada
 - README.md con endpoints de autenticacion
 - api/README.md con documentacion completa de auth
-- GUIA_AUTENTICACION.md con instrucciones de prueba
-- INSTALACION_LINUX.md para sistemas Linux
-- SCRIPTS.md con documentacion de scripts
+- Documentacion de instalacion y uso en README.md
 
 ### 🎯 Progreso del TFG
 - **10/16 retos completados** (62.5%)
@@ -791,8 +502,7 @@ cd ~/Documentos/proyecto-medusse
 - **Control de acceso** por roles (admin/user/viewer)
 
 #### ✅ Testing Automatizado
-- **Script de testing** (test-auth.js) con 8 tests
-- **Script batch** (probar_autenticacion.bat) para Windows
+- **Script de testing** (api/test-auth.js) con 8 tests
 - **Tests de login** con credenciales correctas/incorrectas
 - **Tests de validacion** de sesion
 - **Tests de logout** y expiracion de sesion
@@ -1025,21 +735,21 @@ cd ~/Documentos/proyecto-medusse
 
 #### ✅ Telegraf Pipeline Optimizado
 - **Parsing inteligente** de topics MQTT
-- **Agregación temporal** cada 30 segundos
-- **Múltiples consumers** para raw data y sensores específicos
-- **Procesamiento de timestamps** automático
+- **Agregacion temporal** cada 30 segundos
+- **Multiples consumers** para raw data y sensores especificos
+- **Procesamiento de timestamps** automatico
 
 #### ✅ Grafana Dashboard Profesional
 - **Branding personalizado** con logo Medusse
 - **Header estilizado** con iconos de sensores
-- **Colores diferenciados** por ubicación (Rojo, Azul, Verde)
+- **Colores diferenciados** por ubicacion (Rojo, Purpura, Naranja, Verde)
 - **Umbrales de CO2** con sistema de alertas visual
 
-#### ✅ Configuración Docker Productiva
-- **Volúmenes persistentes** para todos los servicios
+#### ✅ Configuracion Docker Productiva
+- **Volumenes persistentes** para todos los servicios
 - **Networking interno** optimizado (medusse_network)
-- **Variables de entorno** configuradas para producción
-- **Restart policies** automáticas
+- **Variables de entorno** configuradas para produccion
+- **Restart policies** automaticas
 
 ### 🔧 Mejoras Técnicas
 
@@ -1175,8 +885,8 @@ cd ~/Documentos/proyecto-medusse
 ### 📁 Archivos Nuevos
 - `api/` - Directorio completo API REST
 - `medusse_app/` - Directorio completo Flutter
-- `README_FLUTTER.md` - Documentación app móvil
-- Scripts de ejecución y testing
+- `medusse_app/README.md` - Documentacion app movil
+- Scripts de ejecucion y testing
 
 ### 📦 Dependencias Completas Configuradas
 
@@ -1439,44 +1149,27 @@ demo.bat         # Ejecutar demo completa
 
 
 
-## [2.10.0] - 2025-11-24 - RETO 11: SCRIPT FTP/SFTP ✅
+## [2.10.0] - 2025-11-24 - RETO 11: DEPLOYMENT EN VERCEL ✅
 
 ### 📤 Sistema de Deployment Automatico
 
 #### ✅ Deployment en Vercel (Implementado)
-- **URL Produccion**: https://medusse-web.vercel.app
 - **Deployment automatico** con cada push a GitHub
-- **Build en 20-30 segundos** con optimizacion automatica
+- **Build optimizado** con Next.js
 - **SSL/HTTPS** incluido y CDN global
 - **Preview deployments** por cada commit
+- **Variables de entorno** configuradas
 
-#### ✅ Scripts FTP Implementados (Alternativa)
-- **deploy-ftp.bat** - Script Windows para deployment FTP
-- **deploy-ftp.js** - Script Node.js con FTP basico
-- **deploy-sftp.js** - Script Node.js con SFTP seguro
-
-#### ✅ Funcionalidades
-- **Upload automatico** de directorios al servidor
-- **Exclusion inteligente** de node_modules, .git, .env
-- **Logs detallados** de progreso y errores
-- **Soporte FTP y SFTP** (seguro)
-- **Configuracion por variables de entorno**
-
-#### ✅ Directorios Incluidos
-- `web/.next` → Build de Next.js
-- `api` → API Node.js
-- `docker` → Configuracion Docker
-
-#### ✅ Seguridad
-- Variables de entorno para credenciales
-- Archivo .env.ftp.example como plantilla
-- Soporte para claves SSH en SFTP
-- Exclusion automatica de archivos sensibles
+#### ✅ Configuracion
+- Archivo `web/vercel.json` con configuracion
+- Variables de entorno en Vercel dashboard
+- Build automatico desde repositorio GitHub
+- Dominio personalizado disponible
 
 #### ✅ Documentacion
-- **FTP_DEPLOYMENT.md** - Guia completa de uso
-- Ejemplos de configuracion
-- Integracion con CI/CD (GitHub Actions)
+- `documentacion/VERCEL_DEPLOYMENT.md` - Guia completa
+- Instrucciones de configuracion
+- Integracion con GitHub
 - Solucion de problemas comunes
 
 ### 📊 Progreso del TFG
