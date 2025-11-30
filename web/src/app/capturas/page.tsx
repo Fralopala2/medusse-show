@@ -3,10 +3,9 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Container } from "@/components/ui/Container";
-import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const screenshots = [
   {
@@ -32,16 +31,10 @@ const screenshots = [
 ];
 
 export default function CapturasPage() {
+  const [selectedImage, setSelectedImage] = useState<number | null>(null);
+
   useEffect(() => {
-    // Forzar scroll al inicio inmediatamente
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    
-    // Segundo intento despues de un pequeño delay
-    const timer = setTimeout(() => {
-      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    }, 100);
-    
-    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -73,7 +66,8 @@ export default function CapturasPage() {
           {screenshots.map((screenshot, index) => (
             <div
               key={index}
-              className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
+              className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer"
+              onClick={() => setSelectedImage(index)}
             >
               <div className="relative h-96 bg-gray-100">
                 <Image
@@ -136,6 +130,32 @@ export default function CapturasPage() {
       </Container>
 
       <Footer />
+
+      {selectedImage !== null && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button
+            className="absolute top-4 right-4 text-white text-4xl hover:text-gray-300"
+            onClick={() => setSelectedImage(null)}
+          >
+            ×
+          </button>
+          <div className="relative w-full h-full max-w-5xl max-h-[90vh]">
+            <Image
+              src={screenshots[selectedImage].image}
+              alt={screenshots[selectedImage].title}
+              fill
+              className="object-contain"
+            />
+          </div>
+          <div className="absolute bottom-8 left-0 right-0 text-center text-white">
+            <h3 className="text-2xl font-bold mb-2">{screenshots[selectedImage].title}</h3>
+            <p className="text-lg">{screenshots[selectedImage].description}</p>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
