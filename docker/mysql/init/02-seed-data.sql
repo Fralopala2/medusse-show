@@ -10,14 +10,14 @@ USE medusse_db;
 
 -- ============================================================================
 -- USUARIOS INICIALES
--- Contraseña por defecto: "medusse2025" (debe ser hasheada en producción)
--- Hash bcrypt de "medusse2025": $2b$10$rGfE8YZ9X5qJ3K7L9M1N2eXxYzQwVbCdEfGhIjKlMnOpQrStUvWxY
+-- Contraseña por defecto: "medusse2025"
+-- Hash bcrypt de "medusse2025": $2b$10$BYdJqqDUobkjcB/lxFYAZOc2YUEzJJUhlouA5dr4OO3gcG1DkT6NW
 -- ============================================================================
 INSERT INTO users (username, email, password_hash, full_name, role, is_active) VALUES
-('admin', 'admin@medusse.local', '$2b$10$rGfE8YZ9X5qJ3K7L9M1N2eXxYzQwVbCdEfGhIjKlMnOpQrStUvWxY', 'Administrador del Sistema', 'admin', TRUE),
-('francisco', 'pacoaldev@gmail.com', '$2b$10$rGfE8YZ9X5qJ3K7L9M1N2eXxYzQwVbCdEfGhIjKlMnOpQrStUvWxY', 'Francisco Manuel López Alarte', 'admin', TRUE),
-('profesor', 'profesor@medusse.local', '$2b$10$rGfE8YZ9X5qJ3K7L9M1N2eXxYzQwVbCdEfGhIjKlMnOpQrStUvWxY', 'Profesor IES', 'user', TRUE),
-('alumno', 'alumno@medusse.local', '$2b$10$rGfE8YZ9X5qJ3K7L9M1N2eXxYzQwVbCdEfGhIjKlMnOpQrStUvWxY', 'Alumno de Prueba', 'viewer', TRUE);
+('admin', 'admin@medusse.local', '$2b$10$BYdJqqDUobkjcB/lxFYAZOc2YUEzJJUhlouA5dr4OO3gcG1DkT6NW', 'Administrador del Sistema', 'admin', TRUE),
+('francisco', 'pacoaldev@gmail.com', '$2b$10$BYdJqqDUobkjcB/lxFYAZOc2YUEzJJUhlouA5dr4OO3gcG1DkT6NW', 'Francisco Manuel López Alarte', 'admin', TRUE),
+('profesor', 'profesor@medusse.local', '$2b$10$BYdJqqDUobkjcB/lxFYAZOc2YUEzJJUhlouA5dr4OO3gcG1DkT6NW', 'Profesor IES', 'user', TRUE),
+('alumno', 'alumno@medusse.local', '$2b$10$BYdJqqDUobkjcB/lxFYAZOc2YUEzJJUhlouA5dr4OO3gcG1DkT6NW', 'Alumno de Prueba', 'viewer', TRUE);
 
 -- ============================================================================
 -- PREFERENCIAS DE USUARIOS
