@@ -67,7 +67,7 @@ erDiagram
     
     user_preferences {
         int id PK
-        int user_id FK_UK
+        int user_id FK
         varchar theme
         varchar language
         varchar timezone
