@@ -6,17 +6,20 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 export function Header() {
   const scrolled = useScroll(50);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
 
   const navLinks = [
-    { name: "Dashboard", href: "#dashboard" },
-    { name: "Soluciones", href: "#soluciones" },
-    { name: "Tecnología", href: "#tecnologia" },
-    { name: "Precios", href: "#precios" },
-    { name: "Contacto", href: "#contacto" },
+    { name: "Dashboard", href: isHomePage ? "#dashboard" : "/#dashboard" },
+    { name: "Soluciones", href: isHomePage ? "#soluciones" : "/#soluciones" },
+    { name: "Tecnología", href: isHomePage ? "#tecnologia" : "/#tecnologia" },
+    { name: "Precios", href: isHomePage ? "#precios" : "/#precios" },
+    { name: "Contacto", href: isHomePage ? "#contacto" : "/#contacto" },
   ];
 
   return (
