@@ -29,130 +29,119 @@ Database: medusse_db
 
 ## Diagrama Entidad-Relación
 
-```
-┌─────────────┐
-│   users     │
-├─────────────┤
-│ id (PK)     │
-│ username    │
-│ email       │
-│ password_hash│
-│ full_name   │
-│ role        │
-│ is_active   │
-│ created_at  │
-│ updated_at  │
-│ last_login  │
-└──────┬──────┘
-       │
-       │ 1:N
-       │
-┌──────┴──────────┐
-│   sessions      │
-├─────────────────┤
-│ id (PK)         │
-│ user_id (FK)    │
-│ session_token   │
-│ ip_address      │
-│ user_agent      │
-│ expires_at      │
-│ created_at      │
-└─────────────────┘
-
-┌─────────────────┐
-│user_preferences │
-├─────────────────┤
-│ id (PK)         │
-│ user_id (FK)    │ 1:1 → users
-│ theme           │
-│ language        │
-│ timezone        │
-│ notifications   │
-│ dashboard_layout│
-└─────────────────┘
-
-┌─────────────┐
-│  locations  │
-├─────────────┤
-│ id (PK)     │
-│ name        │
-│ display_name│
-│ description │
-│ color       │
-│ node_id     │
-│ temp_base   │
-│ is_active   │
-└──────┬──────┘
-       │
-       │ 1:N
-       │
-┌──────┴──────┐
-│   alerts    │
-├─────────────┤
-│ id (PK)     │
-│ location_id │ (FK) → locations
-│ sensor_id   │ (FK) → sensors
-│ alert_type  │
-│ message     │
-│ value       │
-│ threshold   │
-│ is_resolved │
-│ resolved_at │
-│ resolved_by │ (FK) → users
-│ created_at  │
-└──────┬──────┘
-       │
-       │ N:M
-       │
-┌──────┴──────────┐
-│  user_alerts    │
-├─────────────────┤
-│ id (PK)         │
-│ user_id (FK)    │ → users
-│ alert_id (FK)   │ → alerts
-│ is_read         │
-│ read_at         │
-└─────────────────┘
-
-┌─────────────┐
-│   sensors   │
-├─────────────┤
-│ id (PK)     │
-│ sensor_type │
-│ display_name│
-│ unit        │
-│ icon        │
-│ min_value   │
-│ max_value   │
-│ warning_th  │
-│ danger_th   │
-│ is_active   │
-└─────────────┘
-
-┌──────────────┐
-│activity_log  │
-├──────────────┤
-│ id (PK)      │
-│ user_id (FK) │ → users
-│ action       │
-│ entity_type  │
-│ entity_id    │
-│ details      │
-│ ip_address   │
-│ user_agent   │
-│ created_at   │
-└──────────────┘
-
-┌──────────────┐
-│system_config │
-├──────────────┤
-│ id (PK)      │
-│ config_key   │
-│ config_value │
-│ config_type  │
-│ description  │
-│ is_public    │
-└──────────────┘
+```mermaid
+erDiagram
+    users ||--o{ sessions : "tiene"
+    users ||--|| user_preferences : "tiene"
+    users ||--o{ user_alerts : "recibe"
+    users ||--o{ activity_log : "registra"
+    users ||--o{ alerts : "resuelve"
+    
+    locations ||--o{ alerts : "genera"
+    sensors ||--o{ alerts : "detecta"
+    
+    alerts ||--o{ user_alerts : "notifica"
+    
+    users {
+        int id PK
+        varchar username UK
+        varchar email UK
+        varchar password_hash
+        varchar full_name
+        enum role
+        boolean is_active
+        timestamp created_at
+        timestamp updated_at
+        timestamp last_login
+    }
+    
+    sessions {
+        int id PK
+        int user_id FK
+        varchar session_token UK
+        varchar ip_address
+        text user_agent
+        timestamp expires_at
+        timestamp created_at
+    }
+    
+    user_preferences {
+        int id PK
+        int user_id FK_UK
+        varchar theme
+        varchar language
+        varchar timezone
+        boolean notifications
+        json dashboard_layout
+        timestamp updated_at
+    }
+    
+    locations {
+        int id PK
+        varchar name UK
+        varchar display_name
+        text description
+        varchar color
+        varchar node_id
+        decimal temp_base
+        boolean is_active
+    }
+    
+    sensors {
+        int id PK
+        varchar sensor_type UK
+        varchar display_name
+        varchar unit
+        varchar icon
+        decimal min_value
+        decimal max_value
+        decimal warning_threshold
+        decimal danger_threshold
+        boolean is_active
+    }
+    
+    alerts {
+        int id PK
+        int location_id FK
+        int sensor_id FK
+        enum alert_type
+        text message
+        decimal value
+        decimal threshold
+        boolean is_resolved
+        timestamp resolved_at
+        int resolved_by FK
+        timestamp created_at
+    }
+    
+    user_alerts {
+        int id PK
+        int user_id FK
+        int alert_id FK
+        boolean is_read
+        timestamp read_at
+    }
+    
+    activity_log {
+        int id PK
+        int user_id FK
+        varchar action
+        varchar entity_type
+        int entity_id
+        json details
+        varchar ip_address
+        text user_agent
+        timestamp created_at
+    }
+    
+    system_config {
+        int id PK
+        varchar config_key UK
+        text config_value
+        varchar config_type
+        text description
+        boolean is_public
+    }
 ```
 
 ---
