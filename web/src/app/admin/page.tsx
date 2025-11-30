@@ -41,7 +41,7 @@ export default function AdminPage() {
   const [showCreateAlertModal, setShowCreateAlertModal] = useState(false);
   const [alerts, setAlerts] = useState<any[]>([]);
   const [locations, setLocations] = useState<any[]>([]);
-  const [sensors, setSensors] = useState<any[]>([]);
+  const [sensors, setSensors] = useState<unknown[]>([]);
 
   useEffect(() => {
     // Verificar autenticacion y permisos
@@ -382,6 +382,19 @@ export default function AdminPage() {
             >
               Logs ({logs.length})
             </button>
+            {/* Solo admin puede ver alertas */}
+            {JSON.parse(localStorage.getItem('user') || '{}').role === 'admin' && (
+              <button
+                onClick={() => setActiveTab('alerts')}
+                className={`${
+                  activeTab === 'alerts'
+                    ? 'border-indigo-500 text-indigo-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
+              >
+                Alertas ({alerts.length})
+              </button>
+            )}
           </nav>
         </div>
 
@@ -483,6 +496,15 @@ export default function AdminPage() {
           {/* Usuarios */}
           {activeTab === 'users' && (
             <div className="bg-white shadow rounded-lg overflow-hidden">
+              <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                <h3 className="text-lg font-medium text-gray-900">Gestión de Usuarios</h3>
+                <button
+                  onClick={() => setShowCreateUserModal(true)}
+                  className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors text-sm font-medium"
+                >
+                  + Crear Usuario
+                </button>
+              </div>
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
@@ -518,6 +540,74 @@ export default function AdminPage() {
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <button
                           onClick={() => handleDeleteUser(user.user_id)}
+                          className="text-red-600 hover:text-red-900"
+                        >
+                          Eliminar
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          {/* Alertas */}
+          {activeTab === 'alerts' && (
+            <div className="bg-white shadow rounded-lg overflow-hidden">
+              <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                <h3 className="text-lg font-medium text-gray-900">Gestión de Alertas</h3>
+                <button
+                  onClick={() => setShowCreateAlertModal(true)}
+                  className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors text-sm font-medium"
+                >
+                  + Crear Alerta
+                </button>
+              </div>
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ubicación</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sensor</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipo</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mensaje</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
+                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {alerts.map((alert) => (
+                    <tr key={alert.id}>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{alert.location_name}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{alert.sensor_name}</td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <span className={`px-2 py-1 text-xs rounded-full ${
+                          alert.alert_type === 'danger' ? 'bg-red-100 text-red-800' :
+                          alert.alert_type === 'warning' ? 'bg-yellow-100 text-yellow-800' :
+                          'bg-blue-100 text-blue-800'
+                        }`}>
+                          {alert.alert_type}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 text-sm text-gray-500">{alert.message}</td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {alert.is_resolved ? (
+                          <span className="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">Resuelta</span>
+                        ) : (
+                          <span className="px-2 py-1 text-xs rounded-full bg-red-100 text-red-800">Activa</span>
+                        )}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
+                        {!alert.is_resolved && (
+                          <button
+                            onClick={() => handleResolveAlert(alert.id)}
+                            className="text-green-600 hover:text-green-900"
+                          >
+                            Resolver
+                          </button>
+                        )}
+                        <button
+                          onClick={() => handleDeleteAlert(alert.id)}
                           className="text-red-600 hover:text-red-900"
                         >
                           Eliminar
@@ -574,6 +664,180 @@ export default function AdminPage() {
           )}
         </div>
       </div>
+
+      {/* Modal Crear Usuario */}
+      {showCreateUserModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <h3 className="text-lg font-medium text-gray-900 mb-4">Crear Nuevo Usuario</h3>
+            <form onSubmit={handleCreateUser} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Nombre de usuario</label>
+                <input
+                  type="text"
+                  name="username"
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Nombre completo</label>
+                <input
+                  type="text"
+                  name="full_name"
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+                <input
+                  type="password"
+                  name="password"
+                  required
+                  minLength={6}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Rol</label>
+                <select
+                  name="role"
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                  {JSON.parse(localStorage.getItem('user') || '{}').role === 'admin' ? (
+                    <>
+                      <option value="viewer">Alumno (Viewer)</option>
+                      <option value="user">Profesor (User)</option>
+                      <option value="admin">Administrador (Admin)</option>
+                    </>
+                  ) : (
+                    <option value="viewer">Alumno (Viewer)</option>
+                  )}
+                </select>
+              </div>
+              <div className="flex gap-3 pt-4">
+                <button
+                  type="submit"
+                  className="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors"
+                >
+                  Crear Usuario
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowCreateUserModal(false)}
+                  className="flex-1 px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors"
+                >
+                  Cancelar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Modal Crear Alerta */}
+      {showCreateAlertModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <h3 className="text-lg font-medium text-gray-900 mb-4">Crear Nueva Alerta</h3>
+            <form onSubmit={handleCreateAlert} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Ubicación</label>
+                <select
+                  name="location_id"
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                  <option value="">Seleccionar ubicación</option>
+                  {locations.map((loc) => (
+                    <option key={loc.id} value={loc.id}>{loc.display_name}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Sensor</label>
+                <select
+                  name="sensor_id"
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                  <option value="">Seleccionar sensor</option>
+                  {sensors.map((sensor) => (
+                    <option key={sensor.id} value={sensor.id}>{sensor.display_name}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Tipo de Alerta</label>
+                <select
+                  name="alert_type"
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                  <option value="info">Información</option>
+                  <option value="warning">Advertencia</option>
+                  <option value="danger">Peligro</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Mensaje</label>
+                <textarea
+                  name="message"
+                  required
+                  rows={3}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Valor (opcional)</label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    name="value"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Umbral (opcional)</label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    name="threshold"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  />
+                </div>
+              </div>
+              <div className="flex gap-3 pt-4">
+                <button
+                  type="submit"
+                  className="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors"
+                >
+                  Crear Alerta
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowCreateAlertModal(false)}
+                  className="flex-1 px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors"
+                >
+                  Cancelar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
