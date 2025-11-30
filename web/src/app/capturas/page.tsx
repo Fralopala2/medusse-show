@@ -19,8 +19,8 @@ const screenshots = [
     image: "/images/app-detail.jpg",
   },
   {
-    title: "Gráficos Históricos",
-    description: "Visualización interactiva con estadísticas min/max/avg",
+    title: "Visualización de Alarmas",
+    description: "Sistema de alertas inteligentes con notificaciones en tiempo real",
     image: "/images/app-charts.jpg",
   },
   {
@@ -36,12 +36,7 @@ export default function CapturasPage() {
       <Header />
       
       <Container className="py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             App Móvil Flutter
           </h1>
@@ -62,15 +57,12 @@ export default function CapturasPage() {
               Web
             </span>
           </div>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           {screenshots.map((screenshot, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
               className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
             >
               <div className="relative h-96 bg-gray-100">
@@ -85,16 +77,11 @@ export default function CapturasPage() {
                 <h3 className="text-xl font-bold mb-2">{screenshot.title}</h3>
                 <p className="text-gray-600">{screenshot.description}</p>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-center"
-        >
+        <div className="text-center">
           <h2 className="text-2xl font-bold mb-6">Características Principales</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <div className="p-6 bg-blue-50 rounded-lg">
@@ -135,7 +122,7 @@ export default function CapturasPage() {
               Volver al Inicio
             </Link>
           </div>
-        </motion.div>
+        </div>
       </Container>
 
       <Footer />
