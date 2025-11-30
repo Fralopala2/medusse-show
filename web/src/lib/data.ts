@@ -59,8 +59,8 @@ export const heroSections = [
       {
         primary: "Descargar App",
         secondary: "Ver Capturas",
-        primaryAction: "https://github.com/Fralopala2/proyecto-medusse/blob/clase/README.md",
-        secondaryAction: "#dashboard",
+        primaryAction: "https://github.com/Fralopala2/proyecto-medusse/tree/clase/medusse_app",
+        secondaryAction: "/capturas",
       },
     ],
     backgroundImage:
