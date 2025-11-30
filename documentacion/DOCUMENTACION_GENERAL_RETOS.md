@@ -11,7 +11,7 @@
 **Email:** pacoaldev@gmail.com  
 **Institución:** IES José Rodrigo Botet  
 **Curso Académico:** 2025/2026  
-**Versión:** 2.7.4  
+**Versión:** 2.7.7  
 **Fecha:** Noviembre 2025  
 **Licencia:** All Rights Reserved  
 **Estado:** 16/16 Retos Completados (100%) ✅
@@ -1228,5 +1228,5 @@ La implementacion de 18 tipos de sensores, incluyendo gestion de energia solar, 
 ---
 
 **Documento generado:** Noviembre 2025  
-**Version del Proyecto:** 2.7.1  
+**Version del Proyecto:** 2.7.7  
 **Estado:** Documentacion General para Presentacion TFG
