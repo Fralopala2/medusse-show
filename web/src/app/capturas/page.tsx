@@ -33,14 +33,22 @@ const screenshots = [
 
 export default function CapturasPage() {
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // Forzar scroll al inicio inmediatamente
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    
+    // Segundo intento despues de un pequeño delay
+    const timer = setTimeout(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    }, 100);
+    
+    return () => clearTimeout(timer);
   }, []);
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <Header />
       
-      <Container className="py-20">
+      <Container className="py-20 pt-24">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             App Móvil Flutter
