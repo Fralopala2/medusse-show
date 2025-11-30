@@ -356,6 +356,212 @@ cd ~/Documentos/proyecto-medusse
 
 ---
 
+## [2.8.0] - 2025-11-24 - RETO 7: VALIDACION DE FORMULARIOS JS ✅
+
+### ✅ Validacion de Formularios Completa
+
+#### ✅ Sistema de Validacion Robusto
+- **Libreria de validacion** (validation.ts) sin dependencias externas
+  * validateUsername() - Validacion de usuario
+  * validatePassword() - Validacion de contrasena
+  * validateEmail() - Validacion de email
+  * validateFullName() - Validacion de nombre completo
+
+#### ✅ Validacion en Tiempo Real
+- **Validacion mientras escribes** - Feedback inmediato
+- **Validacion al perder foco** (onBlur) - No molesta mientras escribes
+- **Validacion antes de enviar** - Doble verificacion
+- **Estados de error individuales** - Mensajes especificos por campo
+
+#### ✅ Reglas de Validacion Implementadas
+
+**Usuario:**
+- Requerido
+- Minimo 3 caracteres
+- Maximo 50 caracteres
+- Solo letras, numeros y guion bajo
+
+**Contrasena:**
+- Requerida
+- Minimo 6 caracteres
+- Maximo 100 caracteres
+
+**Email:**
+- Requerido
+- Formato valido (regex)
+
+**Nombre completo:**
+- Requerido
+- Minimo 3 caracteres
+- Maximo 100 caracteres
+
+#### ✅ Mejoras UX
+- **Bordes rojos** en campos con error
+- **Mensajes de error** debajo de cada campo
+- **Boton deshabilitado** si hay errores de validacion
+- **Transiciones suaves** en estados de error
+- **Focus rings** diferenciados (rojo para error, azul para normal)
+
+### 📊 Progreso del TFG
+- **11/16 retos completados** (68.75%)
+- **Reto 7 completado**: Validacion de formularios JS ✅
+- **5 retos pendientes**
+
+---
+
+## [2.9.0] - 2025-11-24 - RETO 10: PANEL DE ADMINISTRACION ✅
+
+### 🛡️ Panel de Administracion Completo
+
+#### ✅ Endpoints de Administracion (API)
+- **GET /api/admin/users** - Listar todos los usuarios
+- **GET /api/admin/stats** - Estadisticas del sistema
+- **GET /api/admin/logs** - Logs de actividad
+- **GET /api/admin/sessions** - Sesiones activas
+- **DELETE /api/admin/users/:id** - Eliminar usuario
+- **PUT /api/admin/users/:id/role** - Cambiar rol de usuario
+
+#### ✅ Middleware de Seguridad
+- **requireAdmin** - Verificacion de permisos de administrador
+- **Proteccion de rutas** - Solo usuarios admin pueden acceder
+- **Validaciones** - No puede eliminar/modificar su propio usuario
+
+#### ✅ Panel Web (/admin)
+- **3 pestanas principales**:
+  * Estadisticas - Dashboard con metricas clave
+  * Usuarios - Gestion completa de usuarios
+  * Logs - Actividad reciente del sistema
+
+#### ✅ Estadisticas Implementadas
+- **Total de usuarios** - Contador general
+- **Sesiones activas** - Usuarios conectados
+- **Alertas activas** - Alertas sin resolver
+- **Actividad reciente** - Acciones ultimos 7 dias
+- **Usuarios por rol** - Distribucion admin/user/viewer
+
+#### ✅ Gestion de Usuarios
+- **Tabla completa** con todos los usuarios
+- **Cambiar rol** - Dropdown para cambiar admin/user/viewer
+- **Eliminar usuario** - Con confirmacion
+- **Informacion detallada** - Username, email, ultimo login
+- **Protecciones** - No puede modificar su propio usuario
+
+#### ✅ Logs de Actividad
+- **Ultimos 20 eventos** del sistema
+- **Informacion completa** - Usuario, accion, detalles, fecha
+- **Ordenados** - Mas recientes primero
+- **Formato legible** - Fechas en español
+
+#### ✅ Diseno y UX
+- **Tabs navegables** - Cambio rapido entre secciones
+- **Cards de estadisticas** - Visualizacion clara con iconos
+- **Tabla responsive** - Gestion de usuarios ordenada
+- **Confirmaciones** - Dialogs antes de acciones criticas
+- **Loading states** - Indicadores de carga
+- **Error handling** - Mensajes claros de error
+
+### 📊 Progreso del TFG
+- **12/16 retos completados** (75%)
+- **Reto 10 completado**: Panel de administracion ✅
+- **4 retos pendientes**
+
+---
+
+## [2.10.0] - 2025-11-24 - RETO 11: DEPLOYMENT EN VERCEL ✅
+
+### 📤 Sistema de Deployment Automatico
+
+#### ✅ Deployment en Vercel (Implementado)
+- **Deployment automatico** con cada push a GitHub
+- **Build optimizado** con Next.js
+- **SSL/HTTPS** incluido y CDN global
+- **Preview deployments** por cada commit
+- **Variables de entorno** configuradas
+
+#### ✅ Configuracion
+- Archivo `web/vercel.json` con configuracion
+- Variables de entorno en Vercel dashboard
+- Build automatico desde repositorio GitHub
+- Dominio personalizado disponible
+
+#### ✅ Documentacion
+- `documentacion/VERCEL_DEPLOYMENT.md` - Guia completa
+- Instrucciones de configuracion
+- Integracion con GitHub
+- Solucion de problemas comunes
+
+### 📊 Progreso del TFG
+- **13/16 retos completados** (81.25%)
+- **Reto 11 completado**: Script FTP/SFTP ✅
+- **3 retos pendientes**
+
+---
+
+## [2.11.0] - 2025-11-24 - RETO 14: DISEÑO WEB AVANZADO ✅
+
+### 🎨 Mejoras de Diseño Responsive y Animaciones
+
+#### ✅ Libreria de Animaciones
+- **animations.ts** - Libreria centralizada de animaciones reutilizables
+  * fadeInUp, fadeInLeft, fadeInRight
+  * scaleIn, staggerContainer, staggerItem
+  * cardHover, pulse, rotate
+  * slideInModal con spring physics
+  * Configuraciones de viewport y transitions
+
+#### ✅ Animaciones Implementadas
+- **Fade in suave** en HeroSection con easing personalizado
+- **Hover effects** en cards con scale y shadow
+- **Transiciones suaves** en botones (300ms)
+- **Animaciones de entrada** con Framer Motion
+- **Stagger animations** para listas de elementos
+
+#### ✅ Mejoras Responsive
+
+**Login Page:**
+- Padding adaptativo: px-4 (mobile) → px-6 (tablet) → px-8 (desktop)
+- Titulos escalables: text-2xl (mobile) → text-3xl (desktop)
+- Espaciado optimizado para pantallas pequeñas
+
+**Dashboard:**
+- Grid adaptativo: 1 col (mobile) → 2 cols (tablet) → 3 cols (desktop)
+- Header responsive con texto escalable
+- Botones con tamaños adaptativos
+- Cards con hover effects y animaciones
+
+**Panel Admin:**
+- Titulos responsive: text-2xl (mobile) → text-3xl (desktop)
+- Grid de estadisticas: 1 → 2 → 4 columnas
+- Tabs optimizados para mobile
+- Tablas con scroll horizontal en mobile
+
+#### ✅ Transiciones CSS
+- **duration-300** en todos los hover effects
+- **hover:scale-105** en botones y cards
+- **hover:-translate-y-1** en cards para efecto lift
+- **transition-all** para transiciones suaves
+
+#### ✅ Breakpoints Utilizados
+```
+sm: 640px   (tablet)
+md: 768px   (tablet grande)
+lg: 1024px  (desktop)
+xl: 1280px  (desktop grande)
+```
+
+#### ✅ Mejoras UX
+- Animaciones suaves que no distraen
+- Feedback visual en interacciones
+- Responsive en todos los dispositivos
+- Performance optimizado (GPU acceleration)
+
+### 📊 Progreso del TFG
+- **14/16 retos completados** (87.5%)
+- **Reto 14 completado**: Diseño web avanzado ✅
+- **2 retos pendientes** (solo documentación)
+
+---
+
 ## [2.6.0] - 2025-11-24 - LOGIN WEB, LOGOS Y SOPORTE LINUX ✅
 
 ### 🌐 Sistema de Login Web Completo
@@ -1030,219 +1236,6 @@ demo.bat         # Ejecutar demo completa
 
 ---
 
-*Desarrollado para IES José Rodrigo Botet - Curso 2026/2026*
+*Desarrollado para IES José Rodrigo Botet - Curso 2025/2026*
 *Autor: Francisco Manuel López Alarte*
-
-## [
-2.8.0] - 2025-11-24 - RETO 7: VALIDACION DE FORMULARIOS JS ✅
-
-### ✅ Validacion de Formularios Completa
-
-#### ✅ Sistema de Validacion Robusto
-- **Libreria de validacion** (validation.ts) sin dependencias externas
-  * validateUsername() - Validacion de usuario
-  * validatePassword() - Validacion de contrasena
-  * validateEmail() - Validacion de email
-  * validateFullName() - Validacion de nombre completo
-
-#### ✅ Validacion en Tiempo Real
-- **Validacion mientras escribes** - Feedback inmediato
-- **Validacion al perder foco** (onBlur) - No molesta mientras escribes
-- **Validacion antes de enviar** - Doble verificacion
-- **Estados de error individuales** - Mensajes especificos por campo
-
-#### ✅ Reglas de Validacion Implementadas
-
-**Usuario:**
-- Requerido
-- Minimo 3 caracteres
-- Maximo 50 caracteres
-- Solo letras, numeros y guion bajo
-
-**Contrasena:**
-- Requerida
-- Minimo 6 caracteres
-- Maximo 100 caracteres
-
-**Email:**
-- Requerido
-- Formato valido (regex)
-
-**Nombre completo:**
-- Requerido
-- Minimo 3 caracteres
-- Maximo 100 caracteres
-
-#### ✅ Mejoras UX
-- **Bordes rojos** en campos con error
-- **Mensajes de error** debajo de cada campo
-- **Boton deshabilitado** si hay errores de validacion
-- **Transiciones suaves** en estados de error
-- **Focus rings** diferenciados (rojo para error, azul para normal)
-
-### 📊 Progreso del TFG
-- **11/16 retos completados** (68.75%)
-- **Reto 7 completado**: Validacion de formularios JS ✅
-- **5 retos pendientes**
-
----
-
-
-
-## [2.9.0] - 2025-11-24 - RETO 10: PANEL DE ADMINISTRACION ✅
-
-### 🛡️ Panel de Administracion Completo
-
-#### ✅ Endpoints de Administracion (API)
-- **GET /api/admin/users** - Listar todos los usuarios
-- **GET /api/admin/stats** - Estadisticas del sistema
-- **GET /api/admin/logs** - Logs de actividad
-- **GET /api/admin/sessions** - Sesiones activas
-- **DELETE /api/admin/users/:id** - Eliminar usuario
-- **PUT /api/admin/users/:id/role** - Cambiar rol de usuario
-
-#### ✅ Middleware de Seguridad
-- **requireAdmin** - Verificacion de permisos de administrador
-- **Proteccion de rutas** - Solo usuarios admin pueden acceder
-- **Validaciones** - No puede eliminar/modificar su propio usuario
-
-#### ✅ Panel Web (/admin)
-- **3 pestanas principales**:
-  * Estadisticas - Dashboard con metricas clave
-  * Usuarios - Gestion completa de usuarios
-  * Logs - Actividad reciente del sistema
-
-#### ✅ Estadisticas Implementadas
-- **Total de usuarios** - Contador general
-- **Sesiones activas** - Usuarios conectados
-- **Alertas activas** - Alertas sin resolver
-- **Actividad reciente** - Acciones ultimos 7 dias
-- **Usuarios por rol** - Distribucion admin/user/viewer
-
-#### ✅ Gestion de Usuarios
-- **Tabla completa** con todos los usuarios
-- **Cambiar rol** - Dropdown para cambiar admin/user/viewer
-- **Eliminar usuario** - Con confirmacion
-- **Informacion detallada** - Username, email, ultimo login
-- **Protecciones** - No puede modificar su propio usuario
-
-#### ✅ Logs de Actividad
-- **Ultimos 20 eventos** del sistema
-- **Informacion completa** - Usuario, accion, detalles, fecha
-- **Ordenados** - Mas recientes primero
-- **Formato legible** - Fechas en español
-
-#### ✅ Diseno y UX
-- **Tabs navegables** - Cambio rapido entre secciones
-- **Cards de estadisticas** - Visualizacion clara con iconos
-- **Tabla responsive** - Gestion de usuarios ordenada
-- **Confirmaciones** - Dialogs antes de acciones criticas
-- **Loading states** - Indicadores de carga
-- **Error handling** - Mensajes claros de error
-
-### 📊 Progreso del TFG
-- **12/16 retos completados** (75%)
-- **Reto 10 completado**: Panel de administracion ✅
-- **4 retos pendientes**
-
----
-
-
-
-## [2.10.0] - 2025-11-24 - RETO 11: DEPLOYMENT EN VERCEL ✅
-
-### 📤 Sistema de Deployment Automatico
-
-#### ✅ Deployment en Vercel (Implementado)
-- **Deployment automatico** con cada push a GitHub
-- **Build optimizado** con Next.js
-- **SSL/HTTPS** incluido y CDN global
-- **Preview deployments** por cada commit
-- **Variables de entorno** configuradas
-
-#### ✅ Configuracion
-- Archivo `web/vercel.json` con configuracion
-- Variables de entorno en Vercel dashboard
-- Build automatico desde repositorio GitHub
-- Dominio personalizado disponible
-
-#### ✅ Documentacion
-- `documentacion/VERCEL_DEPLOYMENT.md` - Guia completa
-- Instrucciones de configuracion
-- Integracion con GitHub
-- Solucion de problemas comunes
-
-### 📊 Progreso del TFG
-- **13/16 retos completados** (81.25%)
-- **Reto 11 completado**: Script FTP/SFTP ✅
-- **3 retos pendientes**
-
----
-
-
-
-## [2.11.0] - 2025-11-24 - RETO 14: DISEÑO WEB AVANZADO ✅
-
-### 🎨 Mejoras de Diseño Responsive y Animaciones
-
-#### ✅ Libreria de Animaciones
-- **animations.ts** - Libreria centralizada de animaciones reutilizables
-  * fadeInUp, fadeInLeft, fadeInRight
-  * scaleIn, staggerContainer, staggerItem
-  * cardHover, pulse, rotate
-  * slideInModal con spring physics
-  * Configuraciones de viewport y transitions
-
-#### ✅ Animaciones Implementadas
-- **Fade in suave** en HeroSection con easing personalizado
-- **Hover effects** en cards con scale y shadow
-- **Transiciones suaves** en botones (300ms)
-- **Animaciones de entrada** con Framer Motion
-- **Stagger animations** para listas de elementos
-
-#### ✅ Mejoras Responsive
-
-**Login Page:**
-- Padding adaptativo: px-4 (mobile) → px-6 (tablet) → px-8 (desktop)
-- Titulos escalables: text-2xl (mobile) → text-3xl (desktop)
-- Espaciado optimizado para pantallas pequeñas
-
-**Dashboard:**
-- Grid adaptativo: 1 col (mobile) → 2 cols (tablet) → 3 cols (desktop)
-- Header responsive con texto escalable
-- Botones con tamaños adaptativos
-- Cards con hover effects y animaciones
-
-**Panel Admin:**
-- Titulos responsive: text-2xl (mobile) → text-3xl (desktop)
-- Grid de estadisticas: 1 → 2 → 4 columnas
-- Tabs optimizados para mobile
-- Tablas con scroll horizontal en mobile
-
-#### ✅ Transiciones CSS
-- **duration-300** en todos los hover effects
-- **hover:scale-105** en botones y cards
-- **hover:-translate-y-1** en cards para efecto lift
-- **transition-all** para transiciones suaves
-
-#### ✅ Breakpoints Utilizados
-```
-sm: 640px   (tablet)
-md: 768px   (tablet grande)
-lg: 1024px  (desktop)
-xl: 1280px  (desktop grande)
-```
-
-#### ✅ Mejoras UX
-- Animaciones suaves que no distraen
-- Feedback visual en interacciones
-- Responsive en todos los dispositivos
-- Performance optimizado (GPU acceleration)
-
-### 📊 Progreso del TFG
-- **14/16 retos completados** (87.5%)
-- **Reto 14 completado**: Diseño web avanzado ✅
-- **2 retos pendientes** (solo documentación)
-
----
 
