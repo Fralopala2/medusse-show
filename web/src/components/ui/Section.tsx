@@ -14,7 +14,7 @@ export const Section = React.forwardRef<HTMLElement, SectionProps>(
         id={id}
         ref={ref}
         className={cn(
-          "relative h-screen w-full snap-start overflow-hidden",
+          "relative h-screen w-full overflow-hidden",
           className
         )}
         {...props}
