@@ -6,6 +6,7 @@ import { Container } from "@/components/ui/Container";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
 
 const screenshots = [
   {
@@ -31,6 +32,10 @@ const screenshots = [
 ];
 
 export default function CapturasPage() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <Header />
