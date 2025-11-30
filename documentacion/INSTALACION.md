@@ -443,7 +443,7 @@ instalar_proyecto.bat
 
 **¡El proyecto está listo para ser ejecutado en cualquier sistema operativo!** 🚀
 
-**Versión**: 2.7.1  
-**Última actualización**: 25/11/2025  
+**Versión**: 2.7.7  
+**Última actualización**: 30/11/2025  
 **Autor**: Francisco Manuel López Alarte  
 **Institución**: IES José Rodrigo Botet

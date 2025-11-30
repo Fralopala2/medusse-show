@@ -11,7 +11,7 @@
 **Email:** pacoaldev@gmail.com  
 **Institución:** IES José Rodrigo Botet  
 **Curso Académico:** 2025/2026  
-**Versión:** 2.7.6  
+**Versión:** 2.7.7  
 **Fecha de Entrega:** Noviembre 2025  
 **Estado:** 16/16 Retos Completados (100%) ✅
 
@@ -2722,7 +2722,7 @@ Documentacion completa y profesional del proyecto para presentacion, mantenimien
 
 **2. CHANGELOG.md (1340+ lineas):**
 - Historial completo de cambios
-- Versiones documentadas (2.0.0 - 2.7.6)
+- Versiones documentadas (2.0.0 - 2.7.7)
 - Nuevas funcionalidades
 - Correcciones de errores
 - Mejoras de rendimiento
@@ -2802,7 +2802,7 @@ documentacion/
 ---
 
 **Documento generado:** Noviembre 2025  
-**Version del Proyecto:** 2.7.6  
+**Version del Proyecto:** 2.7.7  
 **Autor:** Francisco Manuel Lopez Alarte  
 **Email:** pacoaldev@gmail.com  
 **Institucion:** IES Jose Rodrigo Botet
