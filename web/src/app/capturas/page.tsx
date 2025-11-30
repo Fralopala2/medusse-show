@@ -11,22 +11,22 @@ const screenshots = [
   {
     title: "Pantalla Principal",
     description: "Vista general con 4 ubicaciones monitoreadas en tiempo real",
-    image: "/images/app-home.png",
+    image: "/images/app-home.jpg",
   },
   {
     title: "Detalle de Ubicación",
     description: "18 sensores con valores actuales y alertas inteligentes",
-    image: "/images/app-detail.png",
+    image: "/images/app-detail.jpg",
   },
   {
     title: "Gráficos Históricos",
     description: "Visualización interactiva con estadísticas min/max/avg",
-    image: "/images/app-charts.png",
+    image: "/images/app-charts.jpg",
   },
   {
     title: "Configuración",
     description: "Ajustes de servidor y conexión con test integrado",
-    image: "/images/app-settings.png",
+    image: "/images/app-settings.jpg",
   },
 ];
 
