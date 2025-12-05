@@ -2102,70 +2102,48 @@ from(bucket: "sensors")
 
 ##### Tabla 1: `users`
 
+```sql
 CREATE TABLE users (
-
-    id INT AUTO\_INCREMENT PRIMARY KEY,
-
+    id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
-
     email VARCHAR(100) NOT NULL UNIQUE,
-
-    password\_hash VARCHAR(255) NOT NULL,
-
-    full\_name VARCHAR(100),
-
+    password_hash VARCHAR(255) NOT NULL,
+    full_name VARCHAR(100),
     role ENUM('admin', 'user', 'viewer') DEFAULT 'user',
-
-    is\_active BOOLEAN DEFAULT TRUE,
-
-    created\_at TIMESTAMP DEFAULT CURRENT\_TIMESTAMP,
-
-    updated\_at TIMESTAMP DEFAULT CURRENT\_TIMESTAMP ON UPDATE CURRENT\_TIMESTAMP,
-
-    last\_login TIMESTAMP NULL,
-
-    INDEX idx\_username (username),
-
-    INDEX idx\_email (email),
-
-    INDEX idx\_role (role)
-
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    last_login TIMESTAMP NULL,
+    INDEX idx_username (username),
+    INDEX idx_email (email),
+    INDEX idx_role (role)
 );
+```
 
 **4 usuarios iniciales:**
 
-- `admin` / `medusse2025` \- Rol: `admin`  
-- `paco` / `medusse2025` \- Rol: `admin`  
-- `profesor` / `medusse2025` \- Rol: `user`  
-- `alumno` / `medusse2025` \- Rol: `viewer`
+- `admin` / `medusse2025` - Rol: `admin`  
+- `paco` / `medusse2025` - Rol: `admin`  
+- `profesor` / `medusse2025` - Rol: `user`  
+- `alumno` / `medusse2025` - Rol: `viewer`
 
 ##### Tabla 2: `sessions`
 
+```sql
 CREATE TABLE sessions (
-
-    id INT AUTO\_INCREMENT PRIMARY KEY,
-
-    user\_id INT NOT NULL,
-
-    session\_token VARCHAR(255) NOT NULL UNIQUE,
-
-    ip\_address VARCHAR(45),
-
-    user\_agent TEXT,
-
-    expires\_at TIMESTAMP NOT NULL,
-
-    created\_at TIMESTAMP DEFAULT CURRENT\_TIMESTAMP,
-
-    FOREIGN KEY (user\_id) REFERENCES users(id) ON DELETE CASCADE,
-
-    INDEX idx\_session\_token (session\_token),
-
-    INDEX idx\_user\_id (user\_id),
-
-    INDEX idx\_expires\_at (expires\_at)
-
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    session_token VARCHAR(255) NOT NULL UNIQUE,
+    ip_address VARCHAR(45),
+    user_agent TEXT,
+    expires_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    INDEX idx_session_token (session_token),
+    INDEX idx_user_id (user_id),
+    INDEX idx_expires_at (expires_at)
 );
+```
 
 **Características:**
 
@@ -2176,234 +2154,152 @@ CREATE TABLE sessions (
 
 ##### Tabla 3: `user_preferences`
 
-CREATE TABLE user\_preferences (
-
-    id INT AUTO\_INCREMENT PRIMARY KEY,
-
-    user\_id INT NOT NULL UNIQUE,
-
+```sql
+CREATE TABLE user_preferences (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL UNIQUE,
     theme ENUM('light', 'dark', 'auto') DEFAULT 'auto',
-
     language VARCHAR(10) DEFAULT 'es',
-
     timezone VARCHAR(50) DEFAULT 'Europe/Madrid',
-
-    notifications\_enabled BOOLEAN DEFAULT TRUE,
-
-    email\_notifications BOOLEAN DEFAULT TRUE,
-
-    dashboard\_layout JSON,
-
-    created\_at TIMESTAMP DEFAULT CURRENT\_TIMESTAMP,
-
-    updated\_at TIMESTAMP DEFAULT CURRENT\_TIMESTAMP ON UPDATE CURRENT\_TIMESTAMP,
-
-    FOREIGN KEY (user\_id) REFERENCES users(id) ON DELETE CASCADE
-
+    notifications_enabled BOOLEAN DEFAULT TRUE,
+    email_notifications BOOLEAN DEFAULT TRUE,
+    dashboard_layout JSON,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+```
 
 ##### Tabla 4: `locations`
 
+```sql
 CREATE TABLE locations (
-
-    id INT AUTO\_INCREMENT PRIMARY KEY,
-
+    id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL UNIQUE,
-
-    display\_name VARCHAR(100) NOT NULL,
-
+    display_name VARCHAR(100) NOT NULL,
     description TEXT,
-
     color VARCHAR(7) NOT NULL,
-
-    node\_id VARCHAR(50) NOT NULL,
-
-    temp\_base DECIMAL(5,2),
-
-    is\_active BOOLEAN DEFAULT TRUE,
-
-    created\_at TIMESTAMP DEFAULT CURRENT\_TIMESTAMP,
-
-    updated\_at TIMESTAMP DEFAULT CURRENT\_TIMESTAMP ON UPDATE CURRENT\_TIMESTAMP,
-
-    INDEX idx\_name (name),
-
-    INDEX idx\_is\_active (is\_active)
-
+    node_id VARCHAR(50) NOT NULL,
+    temp_base DECIMAL(5,2),
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_name (name),
+    INDEX idx_is_active (is_active)
 );
+```
 
 **4 ubicaciones iniciales:**
 
-- `aula20` \- Rojo (\#E53E3E) \- ESP32\_NODE\_01 \- 22°C  
-- `aula21` \- Púrpura (\#805AD5) \- ESP32\_NODE\_02 \- 24°C  
-- `gimnasio` \- Naranja (\#FF9800) \- ESP32\_NODE\_03 \- 23°C  
-- `laboratorio` \- Verde (\#38A169) \- ESP32\_NODE\_04 \- 21°C
+- `aula20` - Rojo (#E53E3E) - ESP32_NODE_01 - 22°C  
+- `aula21` - Púrpura (#805AD5) - ESP32_NODE_02 - 24°C  
+- `gimnasio` - Naranja (#FF9800) - ESP32_NODE_03 - 23°C  
+- `laboratorio` - Verde (#38A169) - ESP32_NODE_04 - 21°C
 
 ##### Tabla 5: `sensors`
 
+```sql
 CREATE TABLE sensors (
-
-    id INT AUTO\_INCREMENT PRIMARY KEY,
-
-    sensor\_type VARCHAR(50) NOT NULL UNIQUE,
-
-    display\_name VARCHAR(100) NOT NULL,
-
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    sensor_type VARCHAR(50) NOT NULL UNIQUE,
+    display_name VARCHAR(100) NOT NULL,
     unit VARCHAR(20),
-
     icon VARCHAR(10),
-
-    min\_value DECIMAL(10,2),
-
-    max\_value DECIMAL(10,2),
-
-    warning\_threshold DECIMAL(10,2),
-
-    danger\_threshold DECIMAL(10,2),
-
-    is\_active BOOLEAN DEFAULT TRUE,
-
-    created\_at TIMESTAMP DEFAULT CURRENT\_TIMESTAMP,
-
-    updated\_at TIMESTAMP DEFAULT CURRENT\_TIMESTAMP ON UPDATE CURRENT\_TIMESTAMP,
-
-    INDEX idx\_sensor\_type (sensor\_type),
-
-    INDEX idx\_is\_active (is\_active)
-
+    min_value DECIMAL(10,2),
+    max_value DECIMAL(10,2),
+    warning_threshold DECIMAL(10,2),
+    danger_threshold DECIMAL(10,2),
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_sensor_type (sensor_type),
+    INDEX idx_is_active (is_active)
 );
+```
 
 **18 sensores configurados** con umbrales de alerta
 
 ##### Tabla 6: `alerts`
 
+```sql
 CREATE TABLE alerts (
-
-    id INT AUTO\_INCREMENT PRIMARY KEY,
-
-    location\_id INT NOT NULL,
-
-    sensor\_id INT NOT NULL,
-
-    alert\_type ENUM('info', 'warning', 'danger', 'critical') NOT NULL,
-
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    location_id INT NOT NULL,
+    sensor_id INT NOT NULL,
+    alert_type ENUM('info', 'warning', 'danger', 'critical') NOT NULL,
     message TEXT NOT NULL,
-
     value DECIMAL(10,2),
-
     threshold DECIMAL(10,2),
-
-    is\_resolved BOOLEAN DEFAULT FALSE,
-
-    resolved\_at TIMESTAMP NULL,
-
-    resolved\_by INT NULL,
-
-    created\_at TIMESTAMP DEFAULT CURRENT\_TIMESTAMP,
-
-    FOREIGN KEY (location\_id) REFERENCES locations(id) ON DELETE CASCADE,
-
-    FOREIGN KEY (sensor\_id) REFERENCES sensors(id) ON DELETE CASCADE,
-
-    FOREIGN KEY (resolved\_by) REFERENCES users(id) ON DELETE SET NULL,
-
-    INDEX idx\_location\_id (location\_id),
-
-    INDEX idx\_sensor\_id (sensor\_id),
-
-    INDEX idx\_alert\_type (alert\_type),
-
-    INDEX idx\_is\_resolved (is\_resolved)
-
+    is_resolved BOOLEAN DEFAULT FALSE,
+    resolved_at TIMESTAMP NULL,
+    resolved_by INT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (location_id) REFERENCES locations(id) ON DELETE CASCADE,
+    FOREIGN KEY (sensor_id) REFERENCES sensors(id) ON DELETE CASCADE,
+    FOREIGN KEY (resolved_by) REFERENCES users(id) ON DELETE SET NULL,
+    INDEX idx_location_id (location_id),
+    INDEX idx_sensor_id (sensor_id),
+    INDEX idx_alert_type (alert_type),
+    INDEX idx_is_resolved (is_resolved)
 );
+```
 
 ##### Tabla 7: `user_alerts` (Relación N:M)
 
-CREATE TABLE user\_alerts (
-
-    id INT AUTO\_INCREMENT PRIMARY KEY,
-
-    user\_id INT NOT NULL,
-
-    alert\_id INT NOT NULL,
-
-    is\_read BOOLEAN DEFAULT FALSE,
-
-    read\_at TIMESTAMP NULL,
-
-    created\_at TIMESTAMP DEFAULT CURRENT\_TIMESTAMP,
-
-    FOREIGN KEY (user\_id) REFERENCES users(id) ON DELETE CASCADE,
-
-    FOREIGN KEY (alert\_id) REFERENCES alerts(id) ON DELETE CASCADE,
-
-    INDEX idx\_user\_id (user\_id),
-
-    INDEX idx\_alert\_id (alert\_id),
-
-    INDEX idx\_is\_read (is\_read)
-
+```sql
+CREATE TABLE user_alerts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    alert_id INT NOT NULL,
+    is_read BOOLEAN DEFAULT FALSE,
+    read_at TIMESTAMP NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (alert_id) REFERENCES alerts(id) ON DELETE CASCADE,
+    INDEX idx_user_id (user_id),
+    INDEX idx_alert_id (alert_id),
+    INDEX idx_is_read (is_read)
 );
+```
 
 ##### Tabla 8: `activity_log`
 
-CREATE TABLE activity\_log (
-
-    id INT AUTO\_INCREMENT PRIMARY KEY,
-
-    user\_id INT,
-
+```sql
+CREATE TABLE activity_log (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
     action VARCHAR(100) NOT NULL,
-
-    entity\_type VARCHAR(50),
-
-    entity\_id INT,
-
+    entity_type VARCHAR(50),
+    entity_id INT,
     details JSON,
-
-    ip\_address VARCHAR(45),
-
-    user\_agent TEXT,
-
-    created\_at TIMESTAMP DEFAULT CURRENT\_TIMESTAMP,
-
-    FOREIGN KEY (user\_id) REFERENCES users(id) ON DELETE SET NULL,
-
-    INDEX idx\_user\_id (user\_id),
-
-    INDEX idx\_action (action),
-
-    INDEX idx\_created\_at (created\_at)
-
+    ip_address VARCHAR(45),
+    user_agent TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL,
+    INDEX idx_user_id (user_id),
+    INDEX idx_action (action),
+    INDEX idx_created_at (created_at)
 );
+```
 
 **Uso:** Auditoría completa del sistema
 
 ##### Tabla 9: `system_config`
 
-CREATE TABLE system\_config (
-
-    id INT AUTO\_INCREMENT PRIMARY KEY,
-
-    config\_key VARCHAR(100) NOT NULL UNIQUE,
-
-    config\_value TEXT,
-
-    config\_type ENUM('string', 'number', 'boolean', 'json') DEFAULT 'string',
-
+```sql
+CREATE TABLE system_config (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    config_key VARCHAR(100) NOT NULL UNIQUE,
+    config_value TEXT,
+    config_type ENUM('string', 'number', 'boolean', 'json') DEFAULT 'string',
     description TEXT,
-
-    is\_public BOOLEAN DEFAULT FALSE,
-
-    created\_at TIMESTAMP DEFAULT CURRENT\_TIMESTAMP,
-
-    updated\_at TIMESTAMP DEFAULT CURRENT\_TIMESTAMP ON UPDATE CURRENT\_TIMESTAMP,
-
-    INDEX idx\_config\_key (config\_key),
-
-    INDEX idx\_is\_public (is\_public)
-
+    is_public BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_config_key (config_key),
+    INDEX idx_is_public (is_public)
 );
+```
 
 ### Diagrama de Relaciones MySQL
 
@@ -2599,25 +2495,18 @@ Se han implementado **10 procedimientos almacenados** que gestionan autenticaci�
 
 **Ejemplo de uso:**
 
-CALL sp\_authenticate\_user(
-
+```sql
+CALL sp_authenticate_user(
     'admin', 
-
-    'hashed\_password', 
-
+    'hashed_password', 
     '192.168.1.100', 
-
     'Mozilla/5.0',
-
-    @user\_id, 
-
+    @user_id, 
     @token, 
-
     @role, 
-
     @success
-
 );
+```
 
 **Ubicación:** `docker/mysql/init/03-stored-procedures.sql` (Líneas 10-60)
 
@@ -2677,25 +2566,18 @@ CALL sp\_authenticate\_user(
 
 **Ejemplo:**
 
-CALL sp\_create\_alert(
-
+```sql
+CALL sp_create_alert(
     'aula20', 
-
     'co2', 
-
     'warning', 
-
     'CO2 alto: ventilar inmediatamente',
-
     1250.5,
-
     1000.0,
-
-    @alert\_id,
-
+    @alert_id,
     @success
-
 );
+```
 
 **Ubicación:** `docker/mysql/init/03-stored-procedures.sql` (Líneas 130-165)
 
@@ -2728,45 +2610,28 @@ CALL sp\_create\_alert(
 
 **Consulta:**
 
+```sql
 SELECT 
-
     a.id, 
-
-    a.alert\_type, 
-
+    a.alert_type, 
     a.message, 
-
     a.value, 
-
     a.threshold,
-
-    l.display\_name AS location\_name,
-
-    s.display\_name AS sensor\_name,
-
-    s.icon AS sensor\_icon,
-
-    a.is\_resolved,
-
-    a.created\_at,
-
-    ua.is\_read
-
-FROM user\_alerts ua
-
-INNER JOIN alerts a ON ua.alert\_id \= a.id
-
-INNER JOIN locations l ON a.location\_id \= l.id
-
-INNER JOIN sensors s ON a.sensor\_id \= s.id
-
-WHERE ua.user\_id \= p\_user\_id 
-
-  AND ua.is\_read \= FALSE
-
-ORDER BY a.created\_at DESC
-
-LIMIT p\_limit;
+    l.display_name AS location_name,
+    s.display_name AS sensor_name,
+    s.icon AS sensor_icon,
+    a.is_resolved,
+    a.created_at,
+    ua.is_read
+FROM user_alerts ua
+INNER JOIN alerts a ON ua.alert_id = a.id
+INNER JOIN locations l ON a.location_id = l.id
+INNER JOIN sensors s ON a.sensor_id = s.id
+WHERE ua.user_id = p_user_id 
+  AND ua.is_read = FALSE
+ORDER BY a.created_at DESC
+LIMIT p_limit;
+```
 
 **Ubicación:** `docker/mysql/init/03-stored-procedures.sql` (Líneas 200-230)
 
@@ -3421,27 +3286,19 @@ Implementar interfaces web modernas utilizando HTML5, CSS3 y frameworks modernos
 
 **Ejemplo de tipado:**
 
+```typescript
 interface SensorData {
-
   location: string;
-
-  node\_id: string;
-
+  node_id: string;
   timestamp: number;
-
   sensors: {
-
     temperature: number;
-
     humidity: number;
-
     co2: number;
-
     // ... más sensores
-
   };
-
 }
+```
 
 ##### Tailwind CSS 4
 
@@ -3595,10 +3452,9 @@ export default function Footer() {
 
 **HeroSection.tsx**
 
+```jsx
 export default function HeroSection() {
-
   return (
-    ```jsx
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
       <div className="absolute inset-0 bg-url('/images/dashboard-bg.jpg') bg-cover bg-center opacity-20" />
       <div className="relative z-10 container mx-auto px-4 text-center">
@@ -3631,10 +3487,9 @@ export default function HeroSection() {
         </motion.div>
       </div>
     </section>
-    ```
   );
-
 }
+```
 
 **Ubicación:** `web/src/components/sections/HeroSection.tsx` (120 líneas)
 
@@ -3745,61 +3600,52 @@ export default function DashboardSection() {
 
 **Gradiente de fondo:**
 
+```css
 .bg-gradient-to-br {
-
-  background: linear-gradient(to bottom right, \#EFF6FF, \#E0E7FF);
-
+  background: linear-gradient(to bottom right, #EFF6FF, #E0E7FF);
 }
+```
 
 **Backdrop blur (glassmorphism):**
 
+```css
 .backdrop-blur-md {
-
   backdrop-filter: blur(12px);
-
 }
+```
 
 **Sombras personalizadas:**
 
+```css
 .shadow-xl {
-
-  box-shadow: 0 20px 25px \-5px rgba(0, 0, 0, 0.1), 
-
-              0 10px 10px \-5px rgba(0, 0, 0, 0.04);
-
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 
+              0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
+```
 
 **Transiciones suaves:**
 
+```css
 .transition {
-
   transition: all 0.3s ease-in-out;
-
 }
+```
 
-#### 4\. Componentes de UI Reutilizables
+#### 4. Componentes de UI Reutilizables
 
 **Card Component**
 
+```typescript
 interface CardProps {
-
   title: string;
-
   value: number;
-
   unit: string;
-
   icon: React.ReactNode;
-
   color: string;
-
 }
 
 export default function Card({ title, value, unit, icon, color }: CardProps) {
-
   return (
-
-    ```jsx
     <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition">
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-gray-600 font-medium">{title}</h3>
@@ -3812,42 +3658,33 @@ export default function Card({ title, value, unit, icon, color }: CardProps) {
         <span className="ml-2 text-gray-500">{unit}</span>
       </div>
     </div>
-    ```
-
   );
-
 }
+```
 
 **Alert Component**
 
+```typescript
 interface AlertProps {
-
   type: 'info' | 'warning' | 'danger' | 'success';
-
   message: string;
-
 }
 
 export default function Alert({ type, message }: AlertProps) {
-
   const colors = {
-
     info: 'bg-blue-100 text-blue-800 border-blue-200',
-
     warning: 'bg-yellow-100 text-yellow-800 border-yellow-200',
-
     danger: 'bg-red-100 text-red-800 border-red-200',
-
     success: 'bg-green-100 text-green-800 border-green-200'
-
   };
 
-  ```jsx
-  <div className={`p-4 rounded-lg border ${colors[type]}`}>
-    <p className="font-medium">{message}</p>
-  </div>
-  ```
+  return (
+    <div className={`p-4 rounded-lg border ${colors[type]}`}>
+      <p className="font-medium">{message}</p>
+    </div>
+  );
 }
+```
 
 ### Archivos Involucrados
 
@@ -4975,6 +4812,7 @@ module.exports = { queryApi, writeApi };
 ```javascript
 const { queryApi } = require('./influx');
 
+```javascript
 async function getLatestReadings(location) {
   const query = `
     from(bucket: "sensors")
@@ -4984,43 +4822,26 @@ async function getLatestReadings(location) {
       |> group(columns: ["_measurement"])
       |> last()
   `;
-```
 
-  const results \= {};
+  const results = {};
 
-  return new Promise((resolve, reject) \=\> {
-
+  return new Promise((resolve, reject) => {
     queryApi.queryRows(query, {
-
       next(row, tableMeta) {
-
-        const measurement \= row.\_measurement;
-
-        const value \= row.\_value;
-
-        results\[measurement\] \= value;
-
+        const measurement = row._measurement;
+        const value = row._value;
+        results[measurement] = value;
       },
-
       error(error) {
-
         reject(error);
-
       },
-
       complete() {
-
         resolve(results);
-
       }
-
     });
-
   });
-
 }
-
-**Obtener datos históricos de un sensor:**
+```
 
 ```javascript
 async function getSensorHistory(location, sensor, hours = 24) {
@@ -5045,70 +4866,55 @@ async function getSensorHistory(location, sensor, hours = 24) {
       },
       error(error) {
         reject(error);
-```
-
       },
-
       complete() {
-
         resolve(dataPoints);
-
       }
-
     });
-
   });
-
 }
+```
 
 **Calcular estadísticas (min, max, mean):**
 
-async function getSensorStats(location, sensor, hours \= 24\) {
-
-  const query \= \`
-
-    from(bucket: "sensors")
-
-      |\> range(start: \-${hours}h)
-
-      |\> filter(fn: (r) \=\> r.location \== "${location}")
-
-```flux
-from(bucket: "${bucket}")
-  |> range(start: -24h)
-  |> filter(fn: (r) => r.location == "${location}")
-  |> filter(fn: (r) => r._measurement == "${sensor}")
-  |> filter(fn: (r) => r._field == "value")
-  |> group()
-  |> reduce(
-      fn: (r, accumulator) => ({
-        min: if r._value < accumulator.min then r._value else accumulator.min,
-        max: if r._value > accumulator.max then r._value else accumulator.max,
-        sum: accumulator.sum + r._value,
-        count: accumulator.count + 1.0
-      }),
-      identity: {min: 999999.0, max: -999999.0, sum: 0.0, count: 0.0}
-    )
-  |> map(fn: (r) => ({ r with mean: r.sum / r.count }))
-```
-
 ```javascript
-return new Promise((resolve, reject) => {
-  queryApi.queryRows(query, {
-    next(row, tableMeta) {
-      resolve({
-        min: row.min,
-        max: row.max,
-        mean: row.mean,
-        count: row.count
-      });
-    },
-    error(error) {
-      reject(error);
-    },
-    complete() {}
+async function getSensorStats(location, sensor, hours = 24) {
+  const query = `
+    from(bucket: "sensors")
+      |> range(start: -${hours}h)
+      |> filter(fn: (r) => r.location == "${location}")
+      |> filter(fn: (r) => r._measurement == "${sensor}")
+      |> filter(fn: (r) => r._field == "value")
+      |> group()
+      |> reduce(
+          fn: (r, accumulator) => ({
+            min: if r._value < accumulator.min then r._value else accumulator.min,
+            max: if r._value > accumulator.max then r._value else accumulator.max,
+            sum: accumulator.sum + r._value,
+            count: accumulator.count + 1.0
+          }),
+          identity: {min: 999999.0, max: -999999.0, sum: 0.0, count: 0.0}
+        )
+      |> map(fn: (r) => ({ r with mean: r.sum / r.count }))
+  `;
+
+  return new Promise((resolve, reject) => {
+    queryApi.queryRows(query, {
+      next(row, tableMeta) {
+        resolve({
+          min: row.min,
+          max: row.max,
+          mean: row.mean,
+          count: row.count
+        });
+      },
+      error(error) {
+        reject(error);
+      },
+      complete() {}
+    });
   });
-});
+}
 ```
 
 #### 4. Implementación en Endpoints API
@@ -5154,183 +4960,122 @@ app.get('/api/latest/:location', async (req, res) => {
 
 ##### Endpoint: GET /api/data/:location/:sensor
 
-app.get('/api/data/:location/:sensor', async (req, res) \=\> {
-
+```javascript
+app.get('/api/data/:location/:sensor', async (req, res) => {
   try {
-
-    const { location, sensor } \= req.params;
-
-    const { hours } \= req.query;
+    const { location, sensor } = req.params;
+    const { hours } = req.query;
 
     // Validar parámetros
+    const hoursNum = parseInt(hours, 10) || 24;
 
-    const hoursNum \= parseInt(hours, 10\) || 24;
-
-    if (hoursNum \< 1 || hoursNum \> 720\) {
-
+    if (hoursNum < 1 || hoursNum > 720) {
       return res.status(400).json({
-
         error: 'Parameter "hours" must be between 1 and 720'
-
       });
-
     }
 
     // Obtener datos históricos de InfluxDB
-
-    const data \= await getSensorHistory(location, sensor, hoursNum);
+    const data = await getSensorHistory(location, sensor, hoursNum);
 
     // Obtener estadísticas
-
-    const stats \= await getSensorStats(location, sensor, hoursNum);
+    const stats = await getSensorStats(location, sensor, hoursNum);
 
     res.json({
-
       location,
-
       sensor,
-
       hours: hoursNum,
-
       dataPoints: data,
-
       statistics: stats
-
     });
-
   } catch (error) {
-
     console.error('Error in /api/data:', error);
-
     res.status(500).json({ error: 'Internal server error' });
-
   }
-
 });
+```
 
 ##### Endpoint: GET /api/admin/alerts
 
-app.get('/api/admin/alerts', async (req, res) \=\> {
-
+```javascript
+app.get('/api/admin/alerts', async (req, res) => {
   try {
-
     // Validar sesión (token de admin)
+    const sessionToken = req.headers.authorization?.split(' ')[1];
 
-    const sessionToken \= req.headers.authorization?.split(' ')\[1\];
-
-    if (\!sessionToken) {
-
+    if (!sessionToken) {
       return res.status(401).json({ error: 'Unauthorized' });
-
     }
 
     // Validar token en MySQL
-
-    const \[sessionRows\] \= await db.execute(
-
-      \`SELECT u.id, u.role 
-
+    const [sessionRows] = await db.execute(
+      `SELECT u.id, u.role 
        FROM sessions s 
-
-       INNER JOIN users u ON s.user\_id \= u.id 
-
-       WHERE s.session\_token \= ? AND s.expires\_at \> NOW()\`,
-
-      \[sessionToken\]
-
+       INNER JOIN users u ON s.user_id = u.id 
+       WHERE s.session_token = ? AND s.expires_at > NOW()`,
+      [sessionToken]
     );
 
-    if (sessionRows.length \=== 0 || sessionRows\[0\].role \!== 'admin') {
-
+    if (sessionRows.length === 0 || sessionRows[0].role !== 'admin') {
       return res.status(403).json({ error: 'Forbidden' });
-
     }
 
     // Obtener alertas no resueltas
-
-    const \[alerts\] \= await db.execute(
-
-      \`SELECT a.\*, l.display\_name AS location\_name, s.display\_name AS sensor\_name
-
+    const [alerts] = await db.execute(
+      `SELECT a.*, l.display_name AS location_name, s.display_name AS sensor_name
        FROM alerts a
+       INNER JOIN locations l ON a.location_id = l.id
+       INNER JOIN sensors s ON a.sensor_id = s.id
+       WHERE a.is_resolved = FALSE
+       ORDER BY a.created_at DESC
 
-       INNER JOIN locations l ON a.location\_id \= l.id
-
-       INNER JOIN sensors s ON a.sensor\_id \= s.id
-
-       WHERE a.is\_resolved \= FALSE
-
-       ORDER BY a.created\_at DESC
-
-       LIMIT 50\`
-
+       LIMIT 50`
     );
 
     res.json({ alerts });
-
   } catch (error) {
-
     console.error('Error in /api/admin/alerts:', error);
-
     res.status(500).json({ error: 'Internal server error' });
-
   }
-
 });
+```
 
-#### 5\. Manejo de Transacciones
+#### 5. Manejo de Transacciones
 
+```javascript
 async function createUserWithPreferences(userData, preferences) {
-
-  const connection \= await db.getConnection();
-
+  const connection = await db.getConnection();
   try {
-
     // Iniciar transacción
-
     await connection.beginTransaction();
 
     // Insertar usuario
-
-    const \[userResult\] \= await connection.execute(
-
-      'INSERT INTO users (username, email, password\_hash, role) VALUES (?, ?, ?, ?)',
-
-      \[userData.username, userData.email, userData.passwordHash, userData.role\]
-
+    const [userResult] = await connection.execute(
+      'INSERT INTO users (username, email, password_hash, role) VALUES (?, ?, ?, ?)',
+      [userData.username, userData.email, userData.passwordHash, userData.role]
     );
 
-    const userId \= userResult.insertId;
+    const userId = userResult.insertId;
 
     // Insertar preferencias
-
     await connection.execute(
-
-      'INSERT INTO user\_preferences (user\_id, theme, language) VALUES (?, ?, ?)',
-
-      \[userId, preferences.theme, preferences.language\]
-
+      'INSERT INTO user_preferences (user_id, theme, language) VALUES (?, ?, ?)',
+      [userId, preferences.theme, preferences.language]
     );
 
     // Confirmar transacción
-
     await connection.commit();
 
     return { success: true, userId };
-
   } catch (error) {
-
     // Revertir transacción en caso de error
-
     await connection.rollback();
-
     throw error;
-
   } finally {
-
     connection.release();
-
   }
+}
+```
 
 }
 
@@ -5615,60 +5360,59 @@ app.post('/api/auth/login', async (req, res) => {
 
 ##### Middleware: requireAuth
 
+```javascript
 // Middleware para verificar que el usuario esté autenticado
-
 async function requireAuth(req, res, next) {
-
   try {
-
     // Obtener token del header Authorization (Bearer token)
+    const authHeader = req.headers.authorization;
 
-    const authHeader \= req.headers.authorization;
-
-    if (\!authHeader || \!authHeader.startsWith('Bearer ')) {
-
-      return res.status(401).json({ error: 'Unauthorized \- No token provided' });
-
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return res.status(401).json({ error: 'Unauthorized - No token provided' });
     }
 
-    const sessionToken \= authHeader.split(' ')\[1\];
+    const sessionToken = authHeader.split(' ')[1];
 
-```javascript
-// Validar token en MySQL
-const [sessionRows] = await db.execute(
-  `SELECT s.user_id, s.expires_at, u.username, u.role, u.is_active
-   FROM sessions s
-   INNER JOIN users u ON s.user_id = u.id
-   WHERE s.session_token = ?`,
-  [sessionToken]
-);
+    // Validar token en MySQL
+    const [sessionRows] = await db.execute(
+      `SELECT s.user_id, s.expires_at, u.username, u.role, u.is_active
+       FROM sessions s
+       INNER JOIN users u ON s.user_id = u.id
+       WHERE s.session_token = ?`,
+      [sessionToken]
+    );
 
-if (sessionRows.length === 0) {
-  return res.status(401).json({ error: 'Unauthorized - Invalid token' });
+    if (sessionRows.length === 0) {
+      return res.status(401).json({ error: 'Unauthorized - Invalid token' });
+    }
+
+    const session = sessionRows[0];
+
+    // Verificar expiración
+    if (new Date(session.expires_at) < new Date()) {
+      // Eliminar sesión expirada
+      await db.execute('DELETE FROM sessions WHERE session_token = ?', [sessionToken]);
+      return res.status(401).json({ error: 'Unauthorized - Token expired' });
+    }
+
+    // Verificar que usuario esté activo
+    if (!session.is_active) {
+      return res.status(403).json({ error: 'Forbidden - User account is disabled' });
+    }
+
+    // Agregar datos del usuario al request
+    req.user = {
+      id: session.user_id,
+      username: session.username,
+      role: session.role
+    };
+
+    next(); // Continuar al siguiente middleware/endpoint
+  } catch (error) {
+    console.error('Error in requireAuth:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 }
-
-const session = sessionRows[0];
-
-// Verificar expiración
-if (new Date(session.expires_at) < new Date()) {
-  // Eliminar sesión expirada
-  await db.execute('DELETE FROM sessions WHERE session_token = ?', [sessionToken]);
-  return res.status(401).json({ error: 'Unauthorized - Token expired' });
-}
-
-// Verificar que usuario esté activo
-if (!session.is_active) {
-  return res.status(403).json({ error: 'Forbidden - User account is disabled' });
-}
-
-// Agregar datos del usuario al request
-req.user = {
-  id: session.user_id,
-  username: session.username,
-  role: session.role
-};
-
-next(); // Continuar al siguiente middleware/endpoint
 ```
 
 ##### Middleware: requireRole
@@ -5946,59 +5690,49 @@ app.delete('/api/auth/sessions/:token', requireAuth, async (req, res) \=\> {
 - ❌ No puede resolver alertas  
 - ❌ No puede gestionar usuarios
 
-#### 6\. Seguridad Adicional
+#### 6. Seguridad Adicional
 
 ##### Rate Limiting (express-rate-limit)
 
-const rateLimit \= require('express-rate-limit');
+```javascript
+const rateLimit = require('express-rate-limit');
 
 // Limitar intentos de login
-
-const loginLimiter \= rateLimit({
-
-  windowMs: 15 \* 60 \* 1000, // 15 minutos
-
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutos
   max: 5, // Máximo 5 intentos por IP
-
   message: 'Too many login attempts, please try again later',
-
   standardHeaders: true,
-
   legacyHeaders: false
-
 });
 
-app.post('/api/auth/login', loginLimiter, async (req, res) \=\> {
-
+app.post('/api/auth/login', loginLimiter, async (req, res) => {
   // ... lógica de login
-
 });
+```
 
 ##### CORS Configurado
 
-const cors \= require('cors');
+```javascript
+const cors = require('cors');
 
 app.use(cors({
-
-  origin: \['http://localhost:3000', 'http://localhost:3001'\],
-
+  origin: ['http://localhost:3000', 'http://localhost:3001'],
   credentials: true,
-
-  methods: \['GET', 'POST', 'PUT', 'DELETE'\],
-
-  allowedHeaders: \['Content-Type', 'Authorization'\]
-
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
+```
 
 ##### Helmet para Seguridad de Headers
 
-const helmet \= require('helmet');
+```javascript
+const helmet = require('helmet');
 
 app.use(helmet({
-
   contentSecurityPolicy: false, // Deshabilitado para desarrollo
-
   crossOriginEmbedderPolicy: false
+```
 
 }));
 
@@ -6880,3 +6614,5 @@ Diciembre 2025
 
 ---
 
+ 
+``` 
