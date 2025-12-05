@@ -324,133 +324,88 @@ Desarrollar un **sistema completo de monitorización ambiental IoT** que permita
 
 ### Diagrama de Arquitectura General
 
-┌─────────────────────────────────────────────────────────────────┐
-
-│                CAPA DE SENSORES (IoT Layer)                     │
-
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐         │
-
-│  │  ESP32   │  │  ESP32   │  │  ESP32   │  │  ESP32   │         │
-
-│  │ NODE\_01 │  │ NODE\_02 │  │ NODE\_03 │  │ NODE\_04 │         │
-
-│  │ Aula 20  │  │ Aula 21  │  │ Gimnasio │  │   Lab    │         │
-
-│  │ 18 sens. │  │ 18 sens. │  │ 18 sens. │  │ 18 sens. │         │
-
-│  └────┬─────┘  └────┬─────┘  └────┬─────┘  └────┬─────┘         │
-
-└───────┼─────────────┼─────────────┼─────────────┼───────────────┘
-
-        │             │             │             │
-
-        │         MQTT Topics: iescelia/{location}/{sensor}
-
-        │             │             │             │
-
-        └─────────────┴─────────────┴─────────────┘
-
-                      │
-
-┌─────────────────────┼─────────────────────────────────────────┐
-
-│            CAPA DE COMUNICACIÓN (Message Broker)              │
-
-│                  ┌───────────────────┐                        │
-
-│                  │  Mosquitto MQTT   │                        │
-
-│                  │   Broker 2.0      │                        │
-
-│                  │  Port 1883/9001   │                        │
-
-│                  └─────────┬─────────┘                        │
-
-└────────────────────────────┼──────────────────────────────────┘
-
-                             │
-
-┌────────────────────────────┼───────────────────────────────────┐
-
-│         CAPA DE PROCESAMIENTO (Data Pipeline)                  │
-
-│                  ┌─────────┴─────────┐                         │
-
-│                  │   Telegraf 1.28   │                         │
-
-│                  │ JSON Parsing      │                         │
-
-│                  │ Aggregation 30s   │                         │
-
-│                  └─────────┬─────────┘                         │
-
-└────────────────────────────┼───────────────────────────────────┘
-
-                             │
-
-┌────────────────────────────┼───────────────────────────────────┐
-
-│         CAPA DE ALMACENAMIENTO (Data Storage)                  │
-
-│       ┌──────────────────┐ │ ┌──────────────────┐              │
-
-│       │  InfluxDB 2.7    │ │ │   MySQL 8.0      │              │
-
-│       │ Time Series DB   │ │ │ Users & Config   │              │
-
-│       │ Bucket: sensors  │ │ │ DB: medusse\_db  │              │
-
-│       └────────┬─────────┘ │ └────────┬─────────┘              │
-
-└────────────────┼───────────┼──────────┼────────────────────────┘
-
-                 │           │          │
-
-┌────────────────┼───────────┼──────────┼───────────────────────┐
-
-│      CAPA DE VISUALIZACIÓN Y API (Presentation Layer)         │
-
-│  ┌──────────┐ │           │          │                        │
-
-│  │ Grafana  │◄┘           │          │                        │
-
-│  │  10.2.0  │             │          │                        │
-
-│  │Dashboard │             │          │                        │
-
-│  └──────────┘             │          │                        │
-
-│                 ┌─────────┴──────────┴──────┐                 │
-
-│                 │   API REST Express.js     │                 │
-
-│                 │   Node.js \+ WebSocket    │                 │
-
-│                 │   11 Endpoints \+ Auth    │                 │
-
-│                 └────────────┬──────────────┘                 │
-
-└──────────────────────────────┼────────────────────────────────┘
-
-                               │
-
-┌──────────────────────────────┼─────────────────────────────────┐
-
-│           CAPA DE CLIENTES (Client Applications)               │
-
-│  ┌─────────────────┐         │         ┌─────────────────┐     │
-
-│  │  Web Next.js    │◄────────┴────────►│  Flutter App    │     │
-
-│  │  TypeScript     │                   │  Multiplataforma│     │
-
-│  │  6 Sections     │  HTTP/WebSocket   │  3 Screens      │     │
-
-│  │  Dashboard RT   │                   │  Charts         │     │
-
-│  └─────────────────┘                   └─────────────────┘     │
-
-└────────────────────────────────────────────────────────────────┘
+```mermaid
+graph TD
+    subgraph IoT["🔌 CAPA DE SENSORES (IoT Layer)"]
+        N1["ESP32 NODE_01<br/>Aula 20<br/>18 sensores"]
+        N2["ESP32 NODE_02<br/>Aula 21<br/>18 sensores"]
+        N3["ESP32 NODE_03<br/>Gimnasio<br/>18 sensores"]
+        N4["ESP32 NODE_04<br/>Laboratorio<br/>18 sensores"]
+        
+        N1:::red
+        N2:::purple
+        N3:::orange
+        N4:::green
+    end
+    
+    subgraph Comm["📡 CAPA DE COMUNICACIÓN (Message Broker)"]
+        MQTT["Mosquitto MQTT 2.0<br/>Port 1883/9001<br/>Broker MQTT"]
+        MQTT:::mqtt
+    end
+    
+    subgraph Processing["⚙️ CAPA DE PROCESAMIENTO (Data Pipeline)"]
+        TELE["Telegraf 1.28<br/>JSON Parsing<br/>Aggregation 30s"]
+        TELE:::processing
+    end
+    
+    subgraph Storage["💾 CAPA DE ALMACENAMIENTO (Data Storage)"]
+        INFLUX["InfluxDB 2.7<br/>Time Series DB<br/>Bucket: sensors"]
+        MYSQL["MySQL 8.0<br/>Users & Config<br/>DB: medusse_db"]
+        
+        INFLUX:::influxdb
+        MYSQL:::mysql
+    end
+    
+    subgraph Presentation["👁️ CAPA DE VISUALIZACIÓN Y API (Presentation Layer)"]
+        GRAFANA["Grafana 10.2.0<br/>18 Paneles<br/>Alertas"]
+        API["API REST Express.js<br/>Node.js + WebSocket<br/>11 Endpoints"]
+        
+        GRAFANA:::grafana
+        API:::api
+    end
+    
+    subgraph Clients["💻 CAPA DE CLIENTES (Client Applications)"]
+        WEB["🌐 Web Next.js<br/>TypeScript<br/>6 Sections"]
+        FLUTTER["📱 Flutter App<br/>Multiplataforma<br/>3 Screens"]
+        
+        WEB:::web
+        FLUTTER:::flutter
+    end
+    
+    N1 -->|MQTT| MQTT
+    N2 -->|MQTT| MQTT
+    N3 -->|MQTT| MQTT
+    N4 -->|MQTT| MQTT
+    
+    MQTT -->|Topics| TELE
+    
+    TELE -->|JSON| INFLUX
+    TELE -->|Parse| MYSQL
+    
+    INFLUX -->|Query| GRAFANA
+    MYSQL -->|Read| GRAFANA
+    
+    INFLUX -->|Query| API
+    MYSQL -->|Read| API
+    
+    GRAFANA -->|Display| WEB
+    API -->|HTTP/WS| WEB
+    
+    API -->|HTTP/WS| FLUTTER
+    
+    classDef red fill:#E53E3E,stroke:#C53030,color:#fff,stroke-width:2px
+    classDef purple fill:#805AD5,stroke:#6B46C1,color:#fff,stroke-width:2px
+    classDef orange fill:#ED8936,stroke:#DD6B20,color:#fff,stroke-width:2px
+    classDef green fill:#38A169,stroke:#276749,color:#fff,stroke-width:2px
+    classDef mqtt fill:#FF9800,stroke:#F57C00,color:#fff,stroke-width:2px
+    classDef processing fill:#2196F3,stroke:#1565C0,color:#fff,stroke-width:2px
+    classDef influxdb fill:#00BCD4,stroke:#0097A7,color:#fff,stroke-width:2px
+    classDef mysql fill:#FFC107,stroke:#FFA000,color:#000,stroke-width:2px
+    classDef grafana fill:#3F51B5,stroke:#283593,color:#fff,stroke-width:2px
+    classDef api fill:#4CAF50,stroke:#388E3C,color:#fff,stroke-width:2px
+    classDef web fill:#9C27B0,stroke:#7B1FA2,color:#fff,stroke-width:2px
+    classDef flutter fill:#E91E63,stroke:#C2185B,color:#fff,stroke-width:2px
+```
 
 ### Descripción de Capas
 
@@ -1330,303 +1285,73 @@ El sistema Medusse IoT monitorea **4 ubicaciones diferentes**, cada una con cara
 
 ### Diagrama de Flujo Detallado
 
-┌─────────────────────────────────────────────────────────────────┐
-
-│ PASO 1: GENERACIÓN DE DATOS                                     │
-
-│                                                                 │
-
-│  ┌────────────────────────────────────────────────┐             │
-
-│  │  Simulador Python (medusse\_simulator.py)      │             │
-
-│  │  \- 4 ubicaciones × 18 sensores \= 72 valores  │             │
-
-│  │  \- Simulación realista con variación          │             │
-
-│  │  \- Timestamp preciso (milisegundos)           │             │
-
-│  │  \- Formato JSON estructurado                  │             │
-
-│  └────────────────┬───────────────────────────────┘             │
-
-│                   │ Cada 15 segundos                            │
-
-│                   ▼                                             │
-
-│  ┌────────────────────────────────────────────────┐             │
-
-│  │ Payload JSON Ejemplo:                          │             │
-
-│  │ {                                              │             │
-
-│  │   "location": "aula20",                        │             │
-
-│  │   "node\_id": "ESP32\_NODE\_01",               │             │
-
-│  │   "timestamp": 1699876543210,                  │             │
-
-│  │   "sensors": {                                 │             │
-
-│  │     "temperature": 22.5,                       │             │
-
-│  │     "humidity": 55.3,                          │             │
-
-│  │     "co2": 850, ...                            │             │
-
-│  │   }                                            │             │
-
-│  │ }                                              │             │
-
-│  └────────────────────────────────────────────────┘             │
-
-└─────────────────────────────────────────────────────────────────┘
-
-                             │
-
-                             ▼
-
-┌─────────────────────────────────────────────────────────────────┐
-
-│ PASO 2: PUBLICACIÓN MQTT                                        │
-
-│                                                                 │
-
-│  Topics estructurados:                                          │
-
-│  \- iescelia/aula20/temperature                                 │
-
-│  \- iescelia/aula20/humidity                                    │
-
-│  \- iescelia/aula20/co2                                         │
-
-│  \- ...                                                         │
-
-│                                                                 │
-
-│  Total: 4 ubicaciones × 18 sensores \= 72 topics                │
-
-│                                                                 │
-
-│  Configuración MQTT:                                            │
-
-│  \- QoS: 0 (máxima velocidad)                                   │
-
-│  \- Retain: false                                               │
-
-│  \- Clean session: true                                         │
-
-│  \- Keep alive: 60 segundos                                     │
-
-└─────────────────────────────────────────────────────────────────┘
-
-                             │
-
-                             ▼
-
-┌─────────────────────────────────────────────────────────────────┐
-
-│ PASO 3: BROKER MOSQUITTO                                        │
-
-│                                                                 │
-
-│  ┌───────────────────────────────────┐                          │
-
-│  │   Mosquitto MQTT Broker 2.0       │                          │
-
-│  │   \- Puerto 1883 (MQTT)           │                          │
-
-│  │   \- Puerto 9001 (WebSocket)      │                          │
-
-│  │   \- Listeners: 2                 │                          │
-
-│  │   \- Conexiones activas: \~10     │                          │
-
-│  └───────────────────────────────────┘                          │
-
-│                                                                 │
-
-│  Suscriptores:                                                  │
-
-│  1\. Telegraf → InfluxDB                                        │
-
-│  2\. API WebSocket → Clientes Web                               │
-
-│  3\. App Flutter (opcional)                                     │
-
-└─────────────────────────────────────────────────────────────────┘
-
-                             │
-
-                             ▼
-
-┌─────────────────────────────────────────────────────────────────┐
-
-│ PASO 4: PROCESAMIENTO TELEGRAF                                  │
-
-│                                                                 │
-
-│  ┌───────────────────────────────────┐                          │
-
-│  │   Telegraf 1.28                   │                          │
-
-│  │   Pipeline de datos:              │                          │
-
-│  │   1\. Suscripción a topics        │                          │
-
-│  │   2\. Parsing JSON                │                          │
-
-│  │   3\. Agregación temporal (30s)   │                          │
-
-│  │   4\. Escritura a InfluxDB        │                          │
-
-│  └───────────────────────────────────┘                          │
-
-│                                                                 │
-
-│  Configuración:                                                 │
-
-│  \- Input: MQTT Consumer                                        │
-
-│  \- Parser: JSON                                                │
-
-│  \- Aggregator: 30 segundos                                     │
-
-│  \- Output: InfluxDB v2                                         │
-
-│  \- Batch size: 1000                                            │
-
-│  \- Flush interval: 10s                                         │
-
-└─────────────────────────────────────────────────────────────────┘
-
-                             │
-
-                             ▼
-
-┌─────────────────────────────────────────────────────────────────┐
-
-│ PASO 5: ALMACENAMIENTO                                          │
-
-│                                                                 │
-
-│  ┌────────────────────┐     ┌────────────────────┐              │
-
-│  │  InfluxDB 2.7      │     │   MySQL 8.0        │              │
-
-│  │  Series Temporales │     │   Datos Usuarios   │              │
-
-│  │                    │     │                    │              │
-
-│  │  Bucket: sensors   │     │  DB: medusse\_db   │              │
-
-│  │  Org: iescelia     │     │  Tablas: 9         │              │
-
-│  │  Retención: ∞      │     │  Procedimientos:10 │              │
-
-│  │                    │     │                    │              │
-
-│  │  Mediciones: 18    │     │  Users: 4          │              │
-
-│  │  Tags: 3           │     │  Sessions activas  │              │
-
-│  │  Fields: value     │     │  Alertas           │              │
-
-│  └────────────────────┘     └────────────────────┘              │
-
-│                                                                 │
-
-│  Datos almacenados:                                             │
-
-│  \- Mediciones cada 15s → 4 por minuto                          │
-
-│  \- 72 series × 4/min × 60 × 24 \= 414,720 puntos/día           │
-
-│  \- Compresión InfluxDB: \~80-90%                               │
-
-│  \- Tamaño estimado: 50-100 MB/mes                              │
-
-└─────────────────────────────────────────────────────────────────┘
-
-                             │
-
-                             ▼
-
-┌─────────────────────────────────────────────────────────────────┐
-
-│ PASO 6: VISUALIZACIÓN Y API                                     │
-
-│                                                                 │
-
-│  ┌─────────────────────┐   ┌──────────────────────┐             │
-
-│  │  Grafana 10.2.0     │   │  API REST Express    │             │
-
-│  │                     │   │                      │             │
-
-│  │  Query InfluxDB     │   │  Endpoints: 11       │             │
-
-│  │  Refresh: 30s       │   │  Cache: 30s          │             │
-
-│  │  Paneles: 18        │   │  WebSocket: ✓        │             │
-
-│  │  Filas: 6           │   │  Auth: Token UUID    │             │
-
-│  │  Alertas: ✓         │   │  CORS: ✓             │            │
-
-│  │                     │   │                      │             │
-
-│  │  Variables:         │   │  Routes:             │             │
-
-│  │  \- location        │   │  GET /api/summary    │             │
-
-│  │  \- sensor          │   │  GET /api/latest     │             │
-
-│  │                     │   │  GET /api/data       │             │
-
-│  └─────────────────────┘   └──────────────────────┘             │
-
-└─────────────────────────────────────────────────────────────────┘
-
-                             │
-
-                             ▼
-
-┌─────────────────────────────────────────────────────────────────┐
-
-│ PASO 7: CLIENTES                                                │
-
-│                                                                 │
-
-│  ┌───────────────────┐         ┌───────────────────┐            │
-
-│  │  Web Next.js      │         │  Flutter App      │            │
-
-│  │                   │         │                   │            │
-
-│  │  HTTP: API REST   │         │  HTTP: API REST   │            │
-
-│  │  WS: Tiempo Real  │         │  Polling: 15s     │            │
-
-│  │  Cache: 30s       │         │  Charts:fl\_chart │            │
-
-│  │  SSR: ✓           │         │  Provider: State  │            │
-
-│  │                   │         │                   │            │
-
-│  │  Dashboard:       │         │  Screens:         │            │
-
-│  │  \- 4 locations   │         │  \- Home          │            │
-
-│  │  \- 72 sensors    │         │  \- Detail        │            │
-
-│  │  \- Alertas       │         │  \- Charts        │            │
-
-│  │  \- Tiempo real   │         │  \- Alerts        │            │
-
-│  └───────────────────┘         └───────────────────┘            │
-
-└─────────────────────────────────────────────────────────────────┘
+```mermaid
+graph LR
+    subgraph P1["🔄 PASO 1: GENERACIÓN"]
+        SIM["Python Simulator<br/>4 ubicaciones × 18 sensores<br/>= 72 valores<br/>JSON estructurado<br/>Cada 15 seg"]
+        SIM:::generator
+    end
+    
+    subgraph P2["📤 PASO 2: PUBLICACIÓN MQTT"]
+        PUB["Topics:<br/>iescelia/location/sensor<br/>72 topics<br/>QoS: 0<br/>Retain: false"]
+        PUB:::mqtt
+    end
+    
+    subgraph P3["🔀 PASO 3: BROKER"]
+        BROKER["Mosquitto MQTT 2.0<br/>Puerto 1883 MQTT<br/>Puerto 9001 WS<br/>~10 conexiones<br/>Distribución"]
+        BROKER:::broker
+    end
+    
+    subgraph P4["⚙️ PASO 4: TELEGRAF"]
+        PARSE["Telegraf 1.28<br/>1. Suscripción<br/>2. JSON Parsing<br/>3. Agregación 30s<br/>4. Escritura"]
+        PARSE:::telegraf
+    end
+    
+    subgraph P5["💾 PASO 5: ALMACENAMIENTO"]
+        INFLUX["InfluxDB 2.7<br/>Series Temporales<br/>18 measurements<br/>Bucket: sensors<br/>414K puntos/día"]
+        MYSQL["MySQL 8.0<br/>Usuarios<br/>Sesiones<br/>Alertas<br/>Configuración"]
+        INFLUX:::influx
+        MYSQL:::mysql
+    end
+    
+    subgraph P6["📊 PASO 6: VISUALIZACIÓN & API"]
+        GRAFANA["Grafana 10.2.0<br/>18 paneles<br/>Refresh: 30s<br/>Alertas<br/>Filtros"]
+        API["API REST Express<br/>11 endpoints<br/>Cache: 30s<br/>WebSocket<br/>Auth: Token"]
+        GRAFANA:::grafana
+        API:::api
+    end
+    
+    subgraph P7["💻 PASO 7: CLIENTES"]
+        WEB["Web Next.js<br/>HTTP/WebSocket<br/>Dashboard RT<br/>4 locations<br/>72 sensores"]
+        APP["Flutter App<br/>HTTP<br/>3 Pantallas<br/>Charts<br/>Alerts"]
+        WEB:::web
+        APP:::flutter
+    end
+    
+    SIM -->|MQTT| PUB
+    PUB -->|Publica| BROKER
+    BROKER -->|Suscrito| PARSE
+    PARSE -->|JSON| INFLUX
+    PARSE -->|SQL| MYSQL
+    INFLUX -->|Query Flux| GRAFANA
+    MYSQL -->|Query SQL| GRAFANA
+    INFLUX -->|Query| API
+    MYSQL -->|Query| API
+    GRAFANA -->|Visualiza| WEB
+    API -->|HTTP/WS| WEB
+    API -->|HTTP| APP
+    
+    classDef generator fill:#FFC107,stroke:#FFA000,color:#000,stroke-width:2px
+    classDef mqtt fill:#FF9800,stroke:#F57C00,color:#fff,stroke-width:2px
+    classDef broker fill:#FF6F00,stroke:#E65100,color:#fff,stroke-width:2px
+    classDef telegraf fill:#2196F3,stroke:#1565C0,color:#fff,stroke-width:2px
+    classDef influx fill:#00BCD4,stroke:#0097A7,color:#fff,stroke-width:2px
+    classDef mysql fill:#FF9800,stroke:#F57C00,color:#fff,stroke-width:2px
+    classDef grafana fill:#3F51B5,stroke:#283593,color:#fff,stroke-width:2px
+    classDef api fill:#4CAF50,stroke:#388E3C,color:#fff,stroke-width:2px
+    classDef web fill:#9C27B0,stroke:#7B1FA2,color:#fff,stroke-width:2px
+    classDef flutter fill:#E91E63,stroke:#C2185B,color:#fff,stroke-width:2px
+```
 
 ### Tiempos de Latencia
 
@@ -2688,47 +2413,133 @@ CREATE TABLE system\_config (
 
 ### Diagrama de Relaciones MySQL
 
-┌──────────┐ 1:N ┌───────────────┐ 1:1 ┌──────────────────┐
+```mermaid
+erDiagram
+    USERS ||--o{ SESSIONS : "1:N"
+    USERS ||--o| USER_PREFERENCES : "1:1"
+    USERS ||--o{ USER_ALERTS : "1:M"
+    USERS ||--o{ ACTIVITY_LOG : "1:M"
+    USERS ||--o{ ALERTS : "resolved_by"
+    
+    USER_ALERTS }o--|| ALERTS : "N:M"
+    
+    ALERTS }o--|| LOCATIONS : "N:1"
+    ALERTS }o--|| SENSORS : "N:1"
+    ALERTS ||--o{ USER_ALERTS : "1:N"
+    
+    LOCATIONS ||--o{ ALERTS : "1:N"
+    SENSORS ||--o{ ALERTS : "1:N"
+    
+    SYSTEM_CONFIG ||--|| SYSTEM_CONFIG : "config"
 
-│  users   │────▶│  sessions    │     │ user\_preferences │
-
-│          │     │              │ ◀── │                   │
-
-└────┬─────┘     └──────────────┘     └───────────────────┘
-
-     │ N:M
-
-     │     ┌────────────────┐
-
-     └────▶│ user\_alerts  │
-
-           │               │
-
-           └──────┬────────┘
-
-                  │ N:M
-
-                  ▼
-
-           ┌──────────────┐
-
-           │   alerts     │
-
-           │              │
-
-           └──┬────────┬──┘
-
-              │ 1:N    │ 1:N
-
-              │        │
-
-        ┌─────▼───┐  ┌─▼─────────┐
-
-        │locations│  │  sensors  │
-
-        │         │  │           │
-
-        └─────────┘  └───────────┘
+    USERS {
+        int id PK
+        string username UK
+        string email UK
+        string password_hash
+        string full_name
+        enum role
+        boolean is_active
+        timestamp created_at
+        timestamp updated_at
+        timestamp last_login
+    }
+    
+    SESSIONS {
+        int id PK
+        int user_id FK
+        string session_token UK
+        string ip_address
+        text user_agent
+        timestamp expires_at
+        timestamp created_at
+    }
+    
+    USER_PREFERENCES {
+        int id PK
+        int user_id FK
+        enum theme
+        string language
+        string timezone
+        boolean notifications_enabled
+        boolean email_notifications
+        json dashboard_layout
+    }
+    
+    USER_ALERTS {
+        int id PK
+        int user_id FK
+        int alert_id FK
+        boolean is_read
+        timestamp read_at
+        timestamp created_at
+    }
+    
+    ALERTS {
+        int id PK
+        int location_id FK
+        int sensor_id FK
+        enum alert_type
+        text message
+        decimal value
+        decimal threshold
+        boolean is_resolved
+        timestamp resolved_at
+        int resolved_by FK
+        timestamp created_at
+    }
+    
+    LOCATIONS {
+        int id PK
+        string name UK
+        string display_name
+        text description
+        string color
+        string node_id
+        decimal temp_base
+        boolean is_active
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    SENSORS {
+        int id PK
+        string sensor_type UK
+        string display_name
+        string unit
+        string icon
+        decimal min_value
+        decimal max_value
+        decimal warning_threshold
+        decimal danger_threshold
+        boolean is_active
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    ACTIVITY_LOG {
+        int id PK
+        int user_id FK
+        string action
+        string entity_type
+        int entity_id
+        json details
+        string ip_address
+        text user_agent
+        timestamp created_at
+    }
+    
+    SYSTEM_CONFIG {
+        int id PK
+        string config_key UK
+        text config_value
+        enum config_type
+        text description
+        boolean is_public
+        timestamp created_at
+        timestamp updated_at
+    }
+```
 
 ### Archivos Involucrados
 
