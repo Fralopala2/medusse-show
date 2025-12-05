@@ -1532,33 +1532,24 @@ telegraf:
 
 **Configuración principal (telegraf.conf):**
 
-\[agent\]
+```ini
+[agent]
+  interval = "15s"
+  flush_interval = "30s"
+  precision = "1ms"
 
-  interval \= "15s"
+[[inputs.mqtt_consumer]]
+  servers = ["tcp://mosquitto:1883"]
+  topics = ["iescelia/#"]
+  data_format = "json"
+  json_string_fields = ["location", "node_id"]
 
-  flush\_interval \= "30s"
-
-  precision \= "1ms"
-
-\[\[inputs.mqtt\_consumer\]\]
-
-  servers \= \["tcp://mosquitto:1883"\]
-
-  topics \= \["iescelia/\#"\]
-
-  data\_format \= "json"
-
-  json\_string\_fields \= \["location", "node\_id"\]
-
-\[\[outputs.influxdb\_v2\]\]
-
-  urls \= \["http://influxdb:8086"\]
-
-  token \= "medusse-admin-token-2025"
-
-  organization \= "iescelia"
-
-  bucket \= "sensors"
+[[outputs.influxdb_v2]]
+  urls = ["http://influxdb:8086"]
+  token = "medusse-admin-token-2025"
+  organization = "iescelia"
+  bucket = "sensors"
+```
 
 #### Servicio 4: Grafana (Visualización)
 
@@ -2086,17 +2077,14 @@ Diseñar e implementar bases de datos relacionales y no relacionales para almace
 
 **Ejemplo de Consulta Flux:**
 
+```flux
 from(bucket: "sensors")
-
-  |\> range(start: \-24h)
-
-  |\> filter(fn: (r) \=\> r.\_measurement \== "temperature")
-
-  |\> filter(fn: (r) \=\> r.\_field \== "value")
-
-  |\> group(columns: \["location"\])
-
-  |\> last()
+  |> range(start: -24h)
+  |> filter(fn: (r) => r._measurement == "temperature")
+  |> filter(fn: (r) => r._field == "value")
+  |> group(columns: ["location"])
+  |> last()
+```
 
 #### MySQL 8.0 \- Base de Datos Relacional
 
@@ -2793,57 +2781,51 @@ LIMIT p\_limit;
 
 **Ubicación:** `docker/mysql/init/03-stored-procedures.sql` (Líneas 235-250)
 
-#### 8\. `sp_cleanup_expired_sessions`
+#### 8. `sp_cleanup_expired_sessions`
 
 **Propósito:** Limpieza automática de sesiones expiradas (ejecutar periódicamente).
 
 **Lógica:**
 
+```sql
 DELETE FROM sessions 
+WHERE expires_at < NOW();
 
-WHERE expires\_at \< NOW();
-
-SELECT ROW\_COUNT() AS deleted\_sessions;
+SELECT ROW_COUNT() AS deleted_sessions;
+```
 
 **Uso:** Puede ejecutarse vía cron job cada hora para mantener la base de datos limpia.
 
 **Ubicación:** `docker/mysql/init/03-stored-procedures.sql` (Líneas 255-265)
 
-#### 9\. `sp_get_system_stats`
+#### 9. `sp_get_system_stats`
 
 **Propósito:** Obtener estadísticas generales del sistema.
 
 **Retorna:**
 
-- `active_users` \- Usuarios activos  
-- `active_sessions` \- Sesiones activas  
-- `unresolved_alerts` \- Alertas sin resolver  
-- `alerts_24h` \- Alertas últimas 24 horas  
-- `active_locations` \- Ubicaciones activas  
-- `active_sensors` \- Sensores activos  
-- `activities_24h` \- Actividades últimas 24 horas
+- `active_users` - Usuarios activos  
+- `active_sessions` - Sesiones activas  
+- `unresolved_alerts` - Alertas sin resolver  
+- `alerts_24h` - Alertas últimas 24 horas  
+- `active_locations` - Ubicaciones activas  
+- `active_sensors` - Sensores activos  
+- `activities_24h` - Actividades últimas 24 horas
 
 **Consulta:**
 
+```sql
 SELECT 
-
-    (SELECT COUNT(\*) FROM users WHERE is\_active \= TRUE) AS active\_users,
-
-    (SELECT COUNT(\*) FROM sessions WHERE expires\_at \> NOW()) AS active\_sessions,
-
-    (SELECT COUNT(\*) FROM alerts WHERE is\_resolved \= FALSE) AS unresolved\_alerts,
-
-    (SELECT COUNT(\*) FROM alerts 
-
-     WHERE created\_at \> DATE\_SUB(NOW(), INTERVAL 24 HOUR)) AS alerts\_24h,
-
-    (SELECT COUNT(\*) FROM locations WHERE is\_active \= TRUE) AS active\_locations,
-
-    (SELECT COUNT(\*) FROM sensors WHERE is\_active \= TRUE) AS active\_sensors,
-
-    (SELECT COUNT(\*) FROM activity\_log 
-
-     WHERE created\_at \> DATE\_SUB(NOW(), INTERVAL 24 HOUR)) AS activities\_24h;
+    (SELECT COUNT(*) FROM users WHERE is_active = TRUE) AS active_users,
+    (SELECT COUNT(*) FROM sessions WHERE expires_at > NOW()) AS active_sessions,
+    (SELECT COUNT(*) FROM alerts WHERE is_resolved = FALSE) AS unresolved_alerts,
+    (SELECT COUNT(*) FROM alerts 
+     WHERE created_at > DATE_SUB(NOW(), INTERVAL 24 HOUR)) AS alerts_24h,
+    (SELECT COUNT(*) FROM locations WHERE is_active = TRUE) AS active_locations,
+    (SELECT COUNT(*) FROM sensors WHERE is_active = TRUE) AS active_sensors,
+    (SELECT COUNT(*) FROM activity_log 
+     WHERE created_at > DATE_SUB(NOW(), INTERVAL 24 HOUR)) AS activities_24h;
+```
 
 **Ubicación:** `docker/mysql/init/03-stored-procedures.sql` (Líneas 270-290)
 
@@ -2880,53 +2862,38 @@ SELECT
 
 **Ejemplo en `api/auth.js`:**
 
+```javascript
 async function authenticateUser(username, password, ipAddress, userAgent) {
-
-    const connection \= await db.getConnection();
-
+    const connection = await db.getConnection();
     try {
-
         // Buscar usuario
-
-        const \[userRows\] \= await connection.execute(
-
-            'SELECT id, username, password\_hash, role, is\_active FROM users WHERE username \= ?',
-
-            \[username\]
-
+        const [userRows] = await connection.execute(
+            'SELECT id, username, password_hash, role, is_active FROM users WHERE username = ?',
+            [username]
         );
 
-        if (userRows.length \=== 0\) {
-
+        if (userRows.length === 0) {
             return { success: false, message: 'Credenciales inválidas' };
-
         }
 
-        const user \= userRows\[0\];
+        const user = userRows[0];
 
         // Verificar contraseña con bcrypt
+        const passwordMatch = await bcrypt.compare(password, user.password_hash);
 
-        const passwordMatch \= await bcrypt.compare(password, user.password\_hash);
-
-        if (\!passwordMatch) {
-
+        if (!passwordMatch) {
             return { success: false, message: 'Credenciales inválidas' };
-
         }
 
         // Generar token de sesión
-
-        const sessionToken \= crypto.randomUUID();
+        const sessionToken = crypto.randomUUID();
 
         // Crear sesión
-
         await connection.execute(
-
-            'INSERT INTO sessions (user\_id, session\_token, ip\_address, user\_agent, expires\_at) VALUES (?, ?, ?, ?, DATE\_ADD(NOW(), INTERVAL 24 HOUR))',
-
-            \[user.id, sessionToken, ipAddress, userAgent\]
-
+            'INSERT INTO sessions (user_id, session_token, ip_address, user_agent, expires_at) VALUES (?, ?, ?, ?, DATE_ADD(NOW(), INTERVAL 24 HOUR))',
+            [user.id, sessionToken, ipAddress, userAgent]
         );
+```
 
         return {
 
@@ -3182,13 +3149,12 @@ from(bucket: "sensors")
 
 **Alertas Visuales:**
 
-\- CO2 \> 1000 ppm: border-yellow-500 bg-yellow-50
-
-\- CO2 \> 1500 ppm: border-red-500 bg-red-50
-
-\- Batería \< 25%: border-orange-500 bg-orange-50
-
-\- Batería \< 15%: border-red-500 bg-red-50
+```
+- CO2 > 1000 ppm: border-yellow-500 bg-yellow-50
+- CO2 > 1500 ppm: border-red-500 bg-red-50
+- Batería < 25%: border-orange-500 bg-orange-50
+- Batería < 15%: border-red-500 bg-red-50
+```
 
 **Indicadores de Estado:**
 
@@ -3489,15 +3455,13 @@ interface SensorData {
 
 **Ejemplo de uso:**
 
-\<div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-all duration-300"\>
-
-  \<h2 className="text-2xl font-bold text-gray-900 mb-4"\>
-
+```jsx
+<div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-all duration-300">
+  <h2 className="text-2xl font-bold text-gray-900 mb-4">
     Medusse IoT
-
-  \</h2\>
-
-\</div\>
+  </h2>
+</div>
+```
 
 ##### Framer Motion 12
 
@@ -3511,19 +3475,15 @@ interface SensorData {
 
 **Ejemplo de animación:**
 
-\<motion.div
-
+```jsx
+<motion.div
   initial={{ opacity: 0, y: 20 }}
-
   animate={{ opacity: 1, y: 0 }}
-
   transition={{ duration: 0.5 }}
-
-\>
-
-  \<Card /\>
-
-\</motion.div\>
+>
+  <Card />
+</motion.div>
+```
 
 #### 2\. Estructura de Componentes
 
@@ -3638,71 +3598,40 @@ export default function Footer() {
 export default function HeroSection() {
 
   return (
-
-    \<section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100"\>
-
-      \<div className="absolute inset-0 bg-url('/images/dashboard-bg.jpg') bg-cover bg-center opacity-20" /\>
-
-      \<div className="relative z-10 container mx-auto px-4 text-center"\>
-
-        \<motion.div
-
+    ```jsx
+    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
+      <div className="absolute inset-0 bg-url('/images/dashboard-bg.jpg') bg-cover bg-center opacity-20" />
+      <div className="relative z-10 container mx-auto px-4 text-center">
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
-
           animate={{ opacity: 1, y: 0 }}
-
           transition={{ duration: 0.8 }}
-
-        \>
-
-          \<Image
-
+        >
+          <Image
             src="/logos/LogoMedusse.png"
-
             alt="Medusse IoT"
-
             width={128}
-
             height={128}
-
             className="mx-auto mb-8"
-
-          /\>
-
-          \<h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6"\>
-
+          />
+          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6">
             Medusse IoT
-
-          \</h1\>
-
-          \<p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto"\>
-
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
             Sistema de Monitoreo Ambiental con Arquitectura de Microservicios
-
-          \</p\>
-
-          \<div className="flex flex-col sm:flex-row gap-4 justify-center"\>
-
-            \<button className="px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"\>
-
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button className="px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
               Ver Dashboard
-
-            \</button\>
-
-            \<button className="px-8 py-4 bg-white text-blue-600 border-2 border-blue-600 rounded-lg hover:bg-blue-50 transition"\>
-
+            </button>
+            <button className="px-8 py-4 bg-white text-blue-600 border-2 border-blue-600 rounded-lg hover:bg-blue-50 transition">
               Documentación
-
-            \</button\>
-
-          \</div\>
-
-        \</motion.div\>
-
-      \</div\>
-
-    \</section\>
-
+            </button>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+    ```
   );
 
 }
@@ -3870,29 +3799,20 @@ export default function Card({ title, value, unit, icon, color }: CardProps) {
 
   return (
 
-    \<div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition"\>
-
-      \<div className="flex items-center justify-between mb-4"\>
-
-        \<h3 className="text-gray-600 font-medium"\>{title}\</h3\>
-
-        \<div className={\`p-2 rounded-lg bg-${color}-100\`}\>
-
+    ```jsx
+    <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-gray-600 font-medium">{title}</h3>
+        <div className={`p-2 rounded-lg bg-${color}-100`}>
           {icon}
-
-        \</div\>
-
-      \</div\>
-
-      \<div className="flex items-baseline"\>
-
-        \<span className="text-3xl font-bold text-gray-900"\>{value}\</span\>
-
-        \<span className="ml-2 text-gray-500"\>{unit}\</span\>
-
-      \</div\>
-
-    \</div\>
+        </div>
+      </div>
+      <div className="flex items-baseline">
+        <span className="text-3xl font-bold text-gray-900">{value}</span>
+        <span className="ml-2 text-gray-500">{unit}</span>
+      </div>
+    </div>
+    ```
 
   );
 
@@ -3910,7 +3830,7 @@ interface AlertProps {
 
 export default function Alert({ type, message }: AlertProps) {
 
-  const colors \= {
+  const colors = {
 
     info: 'bg-blue-100 text-blue-800 border-blue-200',
 
@@ -3922,16 +3842,11 @@ export default function Alert({ type, message }: AlertProps) {
 
   };
 
-  return (
-
-    \<div className={\`p-4 rounded-lg border ${colors\[type\]}\`}\>
-
-      \<p className="font-medium"\>{message}\</p\>
-
-    \</div\>
-
-  );
-
+  ```jsx
+  <div className={`p-4 rounded-lg border ${colors[type]}`}>
+    <p className="font-medium">{message}</p>
+  </div>
+  ```
 }
 
 ### Archivos Involucrados
@@ -4432,371 +4347,235 @@ Implementar validación de formularios en tiempo real con JavaScript para garant
 
 ##### Validación de Campo Requerido
 
-if (\!username || username.trim() \=== '') {
-
+```javascript
+if (!username || username.trim() === '') {
   setErrors({ ...errors, username: 'El usuario es requerido' });
-
   return;
-
 }
+```
 
 ##### Validación de Formato de Email
 
-const emailRegex \= /^\[^\\s@\]+@\[^\\s@\]+\\.\[^\\s@\]+$/;
-
-if (username.includes('@') && \!emailRegex.test(username)) {
-
+```javascript
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+if (username.includes('@') && !emailRegex.test(username)) {
   setErrors({ ...errors, username: 'Email inválido' });
-
   return;
-
 }
+```
 
 ##### Validación de Longitud de Contraseña
 
-if (password.length \< 8\) {
-
+```javascript
+if (password.length < 8) {
   setErrors({ ...errors, password: 'La contraseña debe tener al menos 8 caracteres' });
-
   return;
-
 }
+```
 
 ##### Formulario Completo con Validación
 
+```javascript
 'use client';
 
 import { useState } from 'react';
-
 import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
-
-  const router \= useRouter();
-
-  const \[formData, setFormData\] \= useState({
-
+  const router = useRouter();
+  const [formData, setFormData] = useState({
     username: '',
-
     password: ''
-
   });
+  const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
-  const \[errors, setErrors\] \= useState({});
-
-  const \[isLoading, setIsLoading\] \= useState(false);
-
-  const validateForm \= () \=\> {
-
-    const newErrors \= {};
+  const validateForm = () => {
+    const newErrors = {};
 
     // Validar username
-
-    if (\!formData.username || formData.username.trim() \=== '') {
-
-      newErrors.username \= 'El usuario o email es requerido';
-
+    if (!formData.username || formData.username.trim() === '') {
+      newErrors.username = 'El usuario o email es requerido';
     } else if (formData.username.includes('@')) {
-
       // Si contiene @, validar como email
-
-      const emailRegex \= /^\[^\\s@\]+@\[^\\s@\]+\\.\[^\\s@\]+$/;
-
-      if (\!emailRegex.test(formData.username)) {
-
-        newErrors.username \= 'Email inválido';
-
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.username)) {
+        newErrors.username = 'Email inválido';
       }
-
     }
 
     // Validar password
-
-    if (\!formData.password || formData.password.trim() \=== '') {
-
-      newErrors.password \= 'La contraseña es requerida';
-
-    } else if (formData.password.length \< 8\) {
-
-      newErrors.password \= 'La contraseña debe tener al menos 8 caracteres';
-
+    if (!formData.password || formData.password.trim() === '') {
+      newErrors.password = 'La contraseña es requerida';
+    } else if (formData.password.length < 8) {
+      newErrors.password = 'La contraseña debe tener al menos 8 caracteres';
     }
 
     setErrors(newErrors);
-
-    return Object.keys(newErrors).length \=== 0;
-
+    return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit \= async (e) \=\> {
-
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (\!validateForm()) {
-
+    if (!validateForm()) {
       return;
-
     }
 
     setIsLoading(true);
-
     try {
-
-      const response \= await fetch('/api/auth/login', {
-
+      const response = await fetch('/api/auth/login', {
         method: 'POST',
-
         headers: { 'Content-Type': 'application/json' },
-
         body: JSON.stringify(formData)
-
       });
 
       if (response.ok) {
-
-        const data \= await response.json();
-
+        const data = await response.json();
         localStorage.setItem('sessionToken', data.sessionToken);
-
         router.push('/dashboard');
-
       } else {
-
-        const error \= await response.json();
-
+        const error = await response.json();
         setErrors({ general: error.message || 'Credenciales inválidas' });
-
       }
-
     } catch (error) {
-
       setErrors({ general: 'Error de conexión' });
-
     } finally {
-
       setIsLoading(false);
-
     }
-
   };
 
-  const handleChange \= (e) \=\> {
-
-    const { name, value } \= e.target;
-
-    setFormData({ ...formData, \[name\]: value });
-
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
     // Limpiar error del campo al escribir
-
-    if (errors\[name\]) {
-
-      setErrors({ ...errors, \[name\]: '' });
-
+    if (errors[name]) {
+      setErrors({ ...errors, [name]: '' });
     }
-
   };
+```
 
+```jsx
   return (
-
-    \<div className="min-h-screen flex items-center justify-center bg-gray-50"\>
-
-      \<div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8"\>
-
-        \<h1 className="text-2xl font-bold text-center mb-8"\>
-
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8">
+        <h1 className="text-2xl font-bold text-center mb-8">
           Iniciar Sesión
-
-        \</h1\>
+        </h1>
 
         {errors.general && (
-
-          \<div className="mb-4 p-4 bg-red-100 border border-red-200 text-red-800 rounded"\>
-
+          <div className="mb-4 p-4 bg-red-100 border border-red-200 text-red-800 rounded">
             {errors.general}
-
-          \</div\>
-
+          </div>
         )}
 
-        \<form onSubmit={handleSubmit}\>
-
-          {/\* Campo Username/Email \*/}
-
-          \<div className="mb-4"\>
-
-            \<label htmlFor="username" className="block text-gray-700 font-medium mb-2"\>
-
+        <form onSubmit={handleSubmit}>
+          {/* Campo Username/Email */}
+          <div className="mb-4">
+            <label htmlFor="username" className="block text-gray-700 font-medium mb-2">
               Usuario o Email
-
-            \</label\>
-
-            \<input
-
+            </label>
+            <input
               type="text"
-
               id="username"
-
               name="username"
-
               value={formData.username}
-
               onChange={handleChange}
-
-              className={\`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-
+              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                 errors.username ? 'border-red-500' : 'border-gray-300'
-
-              }\`}
-
+              }`}
               placeholder="admin o admin@example.com"
-
-            /\>
-
+            />
             {errors.username && (
-
-              \<p className="mt-1 text-sm text-red-600"\>{errors.username}\</p\>
-
+              <p className="mt-1 text-sm text-red-600">{errors.username}</p>
             )}
+          </div>
 
-          \</div\>
-
-          {/\* Campo Password \*/}
-
-          \<div className="mb-6"\>
-
-            \<label htmlFor="password" className="block text-gray-700 font-medium mb-2"\>
-
+          {/* Campo Password */}
+          <div className="mb-6">
+            <label htmlFor="password" className="block text-gray-700 font-medium mb-2">
               Contraseña
-
-            \</label\>
-
-            \<input
-
+            </label>
+            <input
               type="password"
-
               id="password"
-
               name="password"
-
               value={formData.password}
-
               onChange={handleChange}
-
-              className={\`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-
+              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                 errors.password ? 'border-red-500' : 'border-gray-300'
-
-              }\`}
-
+              }`}
               placeholder="••••••••"
-
-            /\>
-
+            />
             {errors.password && (
-
-              \<p className="mt-1 text-sm text-red-600"\>{errors.password}\</p\>
-
+              <p className="mt-1 text-sm text-red-600">{errors.password}</p>
             )}
+          </div>
 
-          \</div\>
-
-          {/\* Botón Submit \*/}
-
-          \<button
-
+          {/* Botón Submit */}
+          <button
             type="submit"
-
             disabled={isLoading}
-
             className="w-full py-3 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition"
-
-          \>
-
+          >
             {isLoading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
+          </button>
+        </form>
 
-          \</button\>
-
-        \</form\>
-
-        \<div className="mt-6 text-center text-sm text-gray-600"\>
-
-          \<p\>Usuarios de prueba:\</p\>
-
-          \<p\>admin / medusse2025\</p\>
-
-        \</div\>
-
-      \</div\>
-
-    \</div\>
-
+        <div className="mt-6 text-center text-sm text-gray-600">
+          <p>Usuarios de prueba:</p>
+          <p>admin / medusse2025</p>
+        </div>
+      </div>
+    </div>
   );
-
 }
+```
 
 **Ubicación:** `web/src/app/login/page.tsx` (150 líneas)
 
-#### 2\. Validación en Cliente API (Backend)
+#### 2. Validación en Cliente API (Backend)
 
 ##### Validación de Parámetros de Endpoints
 
-// api/server.js \- Líneas 100-150
+```javascript
+// api/server.js - Líneas 100-150
 
-app.get('/api/latest/:location', async (req, res) \=\> {
-
+app.get('/api/latest/:location', async (req, res) => {
   try {
-
-    const { location } \= req.params;
+    const { location } = req.params;
 
     // Validación: location debe estar en la lista válida
-
-    const validLocations \= \['aula20', 'aula21', 'gimnasio', 'laboratorio'\];
-
-    if (\!validLocations.includes(location)) {
-
+    const validLocations = ['aula20', 'aula21', 'gimnasio', 'laboratorio'];
+    if (!validLocations.includes(location)) {
       return res.status(400).json({
-
         error: 'Invalid location',
-
         validLocations: validLocations
-
       });
-
     }
 
     // ... resto del código
-
   } catch (error) {
-
     console.error('Error:', error);
-
     res.status(500).json({ error: 'Internal server error' });
-
   }
-
 });
+```
 
 ##### Sanitización de Inputs
 
+```javascript
 // Función helper para sanitizar strings
-
 function sanitizeString(str) {
-
-  if (typeof str \!== 'string') return '';
-
-  return str.trim().replace(/\[\<\>\]/g, '');
-
+  if (typeof str !== 'string') return '';
+  return str.trim().replace(/[<>]/g, '');
 }
 
 // Uso en endpoint
-
-app.post('/api/auth/login', async (req, res) \=\> {
-
+app.post('/api/auth/login', async (req, res) => {
   try {
-
-    const username \= sanitizeString(req.body.username);
-
-    const password \= sanitizeString(req.body.password);
+    const username = sanitizeString(req.body.username);
+    const password = sanitizeString(req.body.password);
+```
 
 ##### Validación de Credenciales
 
@@ -4877,7 +4656,7 @@ app.get('/api/endpoint', async (req, res) => {
 
 });
 
-#### 4\. Respuestas HTTP Apropiadas
+#### 4. Respuestas HTTP Apropiadas
 
 **Códigos de estado implementados:**
 
@@ -4892,33 +4671,23 @@ app.get('/api/endpoint', async (req, res) => {
 
 **Ejemplo de respuestas estructuradas:**
 
+```javascript
 // Respuesta exitosa
-
 res.status(200).json({
-
   success: true,
-
   data: result
-
 });
 
 // Respuesta de error
-
 res.status(400).json({
-
   success: false,
-
   error: 'Invalid parameters',
-
   details: {
-
     field: 'location',
-
     message: 'Location must be one of: aula20, aula21, gimnasio, laboratorio'
-
   }
-
 });
+```
 
 ### Técnicas Utilizadas
 
@@ -4933,41 +4702,36 @@ res.status(400).json({
 - ✅ Email: `/^[^\s@]+@[^\s@]+\.[^\s@]+$/`  
 - ✅ Username: `/^[a-zA-Z0-9_-]{3,20}$/`
 
-#### 3\. Validación de Tipos con TypeScript
+#### 3. Validación de Tipos con TypeScript
 
+```typescript
 interface LoginFormData {
-
   username: string;
-
   password: string;
-
 }
 
 interface FormErrors {
-
   username?: string;
-
   password?: string;
-
   general?: string;
-
 }
+```
 
-#### 4\. Mensajes de Error Contextuales
+#### 4. Mensajes de Error Contextuales
 
 - ✅ Mensajes claros y específicos  
 - ✅ Indicación visual con colores (rojo para error)  
 - ✅ Posición cerca del campo afectado
 
-#### 5\. Estados de Carga y Error
+#### 5. Estados de Carga y Error
 
-const \[isLoading, setIsLoading\] \= useState(false);
-
-const \[errors, setErrors\] \= useState({});
+```javascript
+const [isLoading, setIsLoading] = useState(false);
+const [errors, setErrors] = useState({});
 
 // Durante el envío
-
 setIsLoading(true);
+```
 
 try {
 
@@ -5020,55 +4784,36 @@ Implementar la conexión y consultas a bases de datos desde JavaScript/Node.js, 
 
 **Archivo:** `api/db.js` (100 líneas)
 
-const mysql \= require('mysql2/promise');
+```javascript
+const mysql = require('mysql2/promise');
 
 // Configuración del pool de conexiones
-
-const pool \= mysql.createPool({
-
-  host: process.env.DB\_HOST || 'localhost',
-
-  port: process.env.DB\_PORT || 3306,
-
-  user: process.env.DB\_USER || 'medusse\_user',
-
-  password: process.env.DB\_PASSWORD || 'medusse2025',
-
-  database: process.env.DB\_NAME || 'medusse\_db',
-
+const pool = mysql.createPool({
+  host: process.env.DB_HOST || 'localhost',
+  port: process.env.DB_PORT || 3306,
+  user: process.env.DB_USER || 'medusse_user',
+  password: process.env.DB_PASSWORD || 'medusse2025',
+  database: process.env.DB_NAME || 'medusse_db',
   connectionLimit: 10, // Máximo 10 conexiones simultáneas
-
   queueLimit: 0, // Sin límite de cola
-
   waitForConnections: true,
-
   enableKeepAlive: true,
-
   keepAliveInitialDelay: 0
-
 });
 
 // Test de conexión al iniciar
-
 pool.getConnection()
-
-  .then(connection \=\> {
-
+  .then(connection => {
     console.log('✅ MySQL conectado correctamente');
-
     connection.release();
-
   })
-
-  .catch(err \=\> {
-
+  .catch(err => {
     console.error('❌ Error conectando a MySQL:', err.message);
-
     process.exit(1);
-
   });
 
-module.exports \= pool;
+module.exports = pool;
+```
 
 **Ventajas del Pool de Conexiones:**
 
@@ -5080,41 +4825,28 @@ module.exports \= pool;
 
 ##### Consultas Preparadas (Prepared Statements)
 
-const db \= require('./db');
+```javascript
+const db = require('./db');
 
 // Consulta preparada para evitar SQL Injection
-
 async function getUser(username) {
-
-  const \[rows\] \= await db.execute(
-
-    'SELECT id, username, email, role FROM users WHERE username \= ?',
-
-    \[username\]
-
+  const [rows] = await db.execute(
+    'SELECT id, username, email, role FROM users WHERE username = ?',
+    [username]
   );
-
-  return rows\[0\];
-
+  return rows[0];
 }
 
 // Inserción preparada
-
 async function createSession(userId, token, ipAddress, userAgent) {
-
-  const \[result\] \= await db.execute(
-
-    \`INSERT INTO sessions (user\_id, session\_token, ip\_address, user\_agent, expires\_at) 
-
-     VALUES (?, ?, ?, ?, DATE\_ADD(NOW(), INTERVAL 24 HOUR))\`,
-
-    \[userId, token, ipAddress, userAgent\]
-
+  const [result] = await db.execute(
+    `INSERT INTO sessions (user_id, session_token, ip_address, user_agent, expires_at) 
+     VALUES (?, ?, ?, ?, DATE_ADD(NOW(), INTERVAL 24 HOUR))`,
+    [userId, token, ipAddress, userAgent]
   );
-
   return result.insertId;
-
 }
+```
 
 **Protección contra SQL Injection:**
 
@@ -5125,25 +4857,21 @@ async function createSession(userId, token, ipAddress, userAgent) {
 
 ##### Llamada a sp\_authenticate\_user
 
-const db \= require('./db');
+```javascript
+const db = require('./db');
 
 async function authenticateUser(username, passwordHash, ipAddress, userAgent) {
-
-  const connection \= await db.getConnection();
-
+  const connection = await db.getConnection();
   try {
-
     // Preparar variables de salida
-
-    await connection.query('SET @p\_user\_id \= 0, @p\_session\_token \= NULL, @p\_role \= NULL, @p\_success \= FALSE');
-
+    await connection.query('SET @p_user_id = 0, @p_session_token = NULL, @p_role = NULL, @p_success = FALSE');
+    
     // Llamar al procedimiento almacenado
-
     await connection.execute(
-
-      'CALL sp\_authenticate\_user(?, ?, ?, ?, @p\_user\_id, @p\_session\_token, @p\_role, @p\_success)',
-
-      \[username, passwordHash, ipAddress, userAgent\]
+      'CALL sp_authenticate_user(?, ?, ?, ?, @p_user_id, @p_session_token, @p_role, @p_success)',
+      [username, passwordHash, ipAddress, userAgent]
+    );
+```
 
     );
 
@@ -5219,61 +4947,44 @@ const influxDB = new InfluxDB({ url, token });
 // Query API
 const queryApi = influxDB.getQueryApi(org);
 
+```javascript
 // Write API (opcional, para escribir datos)
-
-const writeApi \= influxDB.getWriteApi(org, bucket);
+const writeApi = influxDB.getWriteApi(org, bucket);
 
 // Test de conexión
-
 queryApi.queryRows(
-
-  \`from(bucket: "${bucket}") |\> range(start: \-1m) |\> limit(n:1)\`,
-
+  `from(bucket: "${bucket}") |> range(start: -1m) |> limit(n:1)`,
   {
-
     next(row, tableMeta) {
-
       console.log('✅ InfluxDB conectado correctamente');
-
     },
-
     error(error) {
-
       console.error('❌ Error conectando a InfluxDB:', error.message);
-
     },
-
     complete() {}
-
   }
-
 );
 
-module.exports \= { queryApi, writeApi };
+module.exports = { queryApi, writeApi };
+```
 
 ##### Consultas con Flux Query Language
 
 **Obtener últimas lecturas de todos los sensores:**
 
-const { queryApi } \= require('./influx');
+```javascript
+const { queryApi } = require('./influx');
 
 async function getLatestReadings(location) {
-
-  const query \= \`
-
+  const query = `
     from(bucket: "sensors")
-
-      |\> range(start: \-15m)
-
-      |\> filter(fn: (r) \=\> r.location \== "${location}")
-
-      |\> filter(fn: (r) \=\> r.\_field \== "value")
-
-      |\> group(columns: \["\_measurement"\])
-
-      |\> last()
-
-  \`;
+      |> range(start: -15m)
+      |> filter(fn: (r) => r.location == "${location}")
+      |> filter(fn: (r) => r._field == "value")
+      |> group(columns: ["_measurement"])
+      |> last()
+  `;
+```
 
   const results \= {};
 
@@ -5311,45 +5022,30 @@ async function getLatestReadings(location) {
 
 **Obtener datos históricos de un sensor:**
 
-async function getSensorHistory(location, sensor, hours \= 24\) {
-
-  const query \= \`
-
+```javascript
+async function getSensorHistory(location, sensor, hours = 24) {
+  const query = `
     from(bucket: "sensors")
+      |> range(start: -${hours}h)
+      |> filter(fn: (r) => r.location == "${location}")
+      |> filter(fn: (r) => r._measurement == "${sensor}")
+      |> filter(fn: (r) => r._field == "value")
+      |> aggregateWindow(every: 5m, fn: mean, createEmpty: false)
+  `;
 
-      |\> range(start: \-${hours}h)
+  const dataPoints = [];
 
-      |\> filter(fn: (r) \=\> r.location \== "${location}")
-
-      |\> filter(fn: (r) \=\> r.\_measurement \== "${sensor}")
-
-      |\> filter(fn: (r) \=\> r.\_field \== "value")
-
-      |\> aggregateWindow(every: 5m, fn: mean, createEmpty: false)
-
-  \`;
-
-  const dataPoints \= \[\];
-
-  return new Promise((resolve, reject) \=\> {
-
+  return new Promise((resolve, reject) => {
     queryApi.queryRows(query, {
-
       next(row, tableMeta) {
-
         dataPoints.push({
-
-          timestamp: row.\_time,
-
-          value: row.\_value
-
+          timestamp: row._time,
+          value: row._value
         });
-
       },
-
       error(error) {
-
         reject(error);
+```
 
       },
 
