@@ -332,7 +332,7 @@ Desarrollar un **sistema completo de monitorización ambiental IoT** que permita
 
 ```mermaid
 graph TD
-    subgraph IoT["🔌 CAPA DE SENSORES (IoT Layer)"]
+    subgraph IoT["CAPA DE SENSORES"]
         N1["ESP32 NODE_01<br/>Aula 20<br/>18 sensores"]
         N2["ESP32 NODE_02<br/>Aula 21<br/>18 sensores"]
         N3["ESP32 NODE_03<br/>Gimnasio<br/>18 sensores"]
@@ -344,17 +344,17 @@ graph TD
         N4:::green
     end
     
-    subgraph Comm["📡 CAPA DE COMUNICACIÓN (Message Broker)"]
+    subgraph Comm["CAPA DE COMUNICACIÓN"]
         MQTT["Mosquitto MQTT 2.0<br/>Port 1883/9001<br/>Broker MQTT"]
         MQTT:::mqtt
     end
     
-    subgraph Processing["⚙️ CAPA DE PROCESAMIENTO (Data Pipeline)"]
+    subgraph Processing["CAPA DE PROCESAMIENTO"]
         TELE["Telegraf 1.28<br/>JSON Parsing<br/>Aggregation 30s"]
         TELE:::processing
     end
     
-    subgraph Storage["💾 CAPA DE ALMACENAMIENTO (Data Storage)"]
+    subgraph Storage["CAPA DE ALMACENAMIENTO"]
         INFLUX["InfluxDB 2.7<br/>Time Series DB<br/>Bucket: sensors"]
         MYSQL["MySQL 8.0<br/>Users & Config<br/>DB: medusse_db"]
         
@@ -362,7 +362,7 @@ graph TD
         MYSQL:::mysql
     end
     
-    subgraph Presentation["👁️ CAPA DE VISUALIZACIÓN Y API (Presentation Layer)"]
+    subgraph Presentation["CAPA DE VISUALIZACIÓN Y API"]
         GRAFANA["Grafana 10.2.0<br/>18 Paneles<br/>Alertas"]
         API["API REST Express.js<br/>Node.js + WebSocket<br/>11 Endpoints"]
         
@@ -370,9 +370,9 @@ graph TD
         API:::api
     end
     
-    subgraph Clients["💻 CAPA DE CLIENTES (Client Applications)"]
-        WEB["🌐 Web Next.js<br/>TypeScript<br/>6 Sections"]
-        FLUTTER["📱 Flutter App<br/>Multiplataforma<br/>3 Screens"]
+    subgraph Clients["CAPA DE CLIENTES"]
+        WEB["Web Next.js<br/>TypeScript<br/>6 Sections"]
+        FLUTTER["Flutter App<br/>Multiplataforma<br/>3 Screens"]
         
         WEB:::web
         FLUTTER:::flutter
@@ -1293,41 +1293,41 @@ El sistema Medusse IoT monitorea **4 ubicaciones diferentes**, cada una con cara
 
 ```mermaid
 graph LR
-    subgraph P1["🔄 PASO 1: GENERACIÓN"]
+    subgraph P1["PASO 1: GENERACIÓN"]
         SIM["Python Simulator<br/>4 ubicaciones × 18 sensores<br/>= 72 valores<br/>JSON estructurado<br/>Cada 15 seg"]
         SIM:::generator
     end
     
-    subgraph P2["📤 PASO 2: PUBLICACIÓN MQTT"]
+    subgraph P2["PASO 2: PUBLICACIÓN MQTT"]
         PUB["Topics:<br/>iescelia/location/sensor<br/>72 topics<br/>QoS: 0<br/>Retain: false"]
         PUB:::mqtt
     end
     
-    subgraph P3["🔀 PASO 3: BROKER"]
+    subgraph P3["PASO 3: BROKER"]
         BROKER["Mosquitto MQTT 2.0<br/>Puerto 1883 MQTT<br/>Puerto 9001 WS<br/>~10 conexiones<br/>Distribución"]
         BROKER:::broker
     end
     
-    subgraph P4["⚙️ PASO 4: TELEGRAF"]
+    subgraph P4["PASO 4: TELEGRAF"]
         PARSE["Telegraf 1.28<br/>1. Suscripción<br/>2. JSON Parsing<br/>3. Agregación 30s<br/>4. Escritura"]
         PARSE:::telegraf
     end
     
-    subgraph P5["💾 PASO 5: ALMACENAMIENTO"]
+    subgraph P5["PASO 5: ALMACENAMIENTO"]
         INFLUX["InfluxDB 2.7<br/>Series Temporales<br/>18 measurements<br/>Bucket: sensors<br/>414K puntos/día"]
         MYSQL["MySQL 8.0<br/>Usuarios<br/>Sesiones<br/>Alertas<br/>Configuración"]
         INFLUX:::influx
         MYSQL:::mysql
     end
     
-    subgraph P6["📊 PASO 6: VISUALIZACIÓN & API"]
+    subgraph P6["PASO 6: VISUALIZACIÓN & API"]
         GRAFANA["Grafana 10.2.0<br/>18 paneles<br/>Refresh: 30s<br/>Alertas<br/>Filtros"]
         API["API REST Express<br/>11 endpoints<br/>Cache: 30s<br/>WebSocket<br/>Auth: Token"]
         GRAFANA:::grafana
         API:::api
     end
     
-    subgraph P7["💻 PASO 7: CLIENTES"]
+    subgraph P7["PASO 7: CLIENTES"]
         WEB["Web Next.js<br/>HTTP/WebSocket<br/>Dashboard RT<br/>4 locations<br/>72 sensores"]
         APP["Flutter App<br/>HTTP<br/>3 Pantallas<br/>Charts<br/>Alerts"]
         WEB:::web
@@ -3529,189 +3529,107 @@ interface SensorData {
 
 ##### Componentes de Layout
 
-**Header.tsx \- Navegación Principal**
+**Header.tsx - Navegación Principal**
 
+Ubicación: `web/src/components/layout/Header.tsx` (100 líneas)
+
+```typescript
 export default function Header() {
-
   return (
-
-    \<header className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-gray-200"\>
-
-      \<nav className="container mx-auto px-4 py-4 flex items-center justify-between"\>
-
-        \<div className="flex items-center space-x-2"\>
-
-          \<Image src="/logos/logoMedusse.svg" alt="Medusse" width={32} height={32} /\>
-
-          \<span className="text-xl font-bold text-gray-900"\>Medusse IoT\</span\>
-
-        \</div\>
-
-        \<div className="hidden md:flex space-x-6"\>
-
-          \<a href="\#dashboard" className="text-gray-600 hover:text-blue-600 transition"\>
-
+    <header className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-gray-200">
+      <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="flex items-center space-x-2">
+          <Image src="/logos/logoMedusse.svg" alt="Medusse" width={32} height={32} />
+          <span className="text-xl font-bold text-gray-900">Medusse IoT</span>
+        </div>
+        <div className="hidden md:flex space-x-6">
+          <a href="#dashboard" className="text-gray-600 hover:text-blue-600 transition">
             Dashboard
-
-          \</a\>
-
-          \<a href="\#sensores" className="text-gray-600 hover:text-blue-600 transition"\>
-
+          </a>
+          <a href="#sensores" className="text-gray-600 hover:text-blue-600 transition">
             Sensores
-
-          \</a\>
-
-          \<a href="\#api" className="text-gray-600 hover:text-blue-600 transition"\>
-
+          </a>
+          <a href="#api" className="text-gray-600 hover:text-blue-600 transition">
             API
-
-          \</a\>
-
-          \<a href="\#about" className="text-gray-600 hover:text-blue-600 transition"\>
-
+          </a>
+          <a href="#about" className="text-gray-600 hover:text-blue-600 transition">
             Acerca de
-
-          \</a\>
-
-        \</div\>
-
-        \<button className="md:hidden"\>
-
-          \<MenuIcon /\>
-
-        \</button\>
-
-      \</nav\>
-
-    \</header\>
-
+          </a>
+        </div>
+        <button className="md:hidden">
+          <MenuIcon />
+        </button>
+      </nav>
+    </header>
   );
-
 }
+```
 
-**Ubicación:** `web/src/components/layout/Header.tsx` (100 líneas)
+**Footer.tsx - Pie de Página**
 
-**Footer.tsx \- Pie de Página**
+Ubicación: `web/src/components/layout/Footer.tsx` (80 líneas)
 
+```typescript
 export default function Footer() {
-
   return (
-
-    \<footer className="bg-gray-900 text-white py-12"\>
-
-      \<div className="container mx-auto px-4"\>
-
-        \<div className="grid grid-cols-1 md:grid-cols-4 gap-8"\>
-
-          {/\* Columna 1: Acerca de \*/}
-
-          \<div\>
-
-            \<h3 className="text-lg font-bold mb-4"\>Medusse IoT\</h3\>
-
-            \<p className="text-gray-400"\>
-
+    <footer className="bg-gray-900 text-white py-12">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* Columna 1: Acerca de */}
+          <div>
+            <h3 className="text-lg font-bold mb-4">Medusse IoT</h3>
+            <p className="text-gray-400">
               Sistema de monitoreo ambiental profesional
-
-            \</p\>
-
-          \</div\>
-
-          {/\* Columna 2: Enlaces \*/}
-
-          \<div\>
-
-            \<h4 className="font-semibold mb-4"\>Enlaces\</h4\>
-
-            \<ul className="space-y-2"\>
-
-              \<li\>
-
-                \<a href="\#dashboard" className="text-gray-400 hover:text-white"\>
-
+            </p>
+          </div>
+          {/* Columna 2: Enlaces */}
+          <div>
+            <h4 className="font-semibold mb-4">Enlaces</h4>
+            <ul className="space-y-2">
+              <li>
+                <a href="#dashboard" className="text-gray-400 hover:text-white">
                   Dashboard
-
-                \</a\>
-
-              \</li\>
-
-              \<li\>
-
-                \<a href="\#api" className="text-gray-400 hover:text-white"\>
-
+                </a>
+              </li>
+              <li>
+                <a href="#api" className="text-gray-400 hover:text-white">
                   API
-
-                \</a\>
-
-              \</li\>
-
-              \<li\>
-
-                \<a href="\#docs" className="text-gray-400 hover:text-white"\>
-
+                </a>
+              </li>
+              <li>
+                <a href="#docs" className="text-gray-400 hover:text-white">
                   Documentación
-
-                \</a\>
-
-              \</li\>
-
-            \</ul\>
-
-          \</div\>
-
-          {/\* Columna 3: Contacto \*/}
-
-          \<div\>
-
-            \<h4 className="font-semibold mb-4"\>Contacto\</h4\>
-
-            \<p className="text-gray-400"\>pacoaldev@gmail.com\</p\>
-
-            \<p className="text-gray-400"\>IES José Rodrigo Botet\</p\>
-
-          \</div\>
-
-          {/\* Columna 4: Redes Sociales \*/}
-
-          \<div\>
-
-            \<h4 className="font-semibold mb-4"\>Redes Sociales\</h4\>
-
-            \<div className="flex space-x-4"\>
-
-              \<a href="\#" className="text-gray-400 hover:text-white"\>
-
-                \<GitHubIcon /\>
-
-              \</a\>
-
-              \<a href="\#" className="text-gray-400 hover:text-white"\>
-
-                \<LinkedInIcon /\>
-
-              \</a\>
-
-            \</div\>
-
-          \</div\>
-
-        \</div\>
-
-        \<div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400"\>
-
-          \<p\>\&copy; 2025 Pacoaldev. Todos los derechos reservados.\</p\>
-
-        \</div\>
-
-      \</div\>
-
-    \</footer\>
-
+                </a>
+              </li>
+            </ul>
+          </div>
+          {/* Columna 3: Contacto */}
+          <div>
+            <h4 className="font-semibold mb-4">Contacto</h4>
+            <p className="text-gray-400">pacoaldev@gmail.com</p>
+            <p className="text-gray-400">IES José Rodrigo Botet</p>
+          </div>
+          {/* Columna 4: Redes Sociales */}
+          <div>
+            <h4 className="font-semibold mb-4">Redes Sociales</h4>
+            <div className="flex space-x-4">
+              <a href="#" className="text-gray-400 hover:text-white">
+                <GitHubIcon />
+              </a>
+              <a href="#" className="text-gray-400 hover:text-white">
+                <LinkedInIcon />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+          <p>&copy; 2025 Pacoaldev. Todos los derechos reservados.</p>
+        </div>
+      </div>
+    </footer>
   );
-
 }
-
-**Ubicación:** `web/src/components/layout/Footer.tsx` (80 líneas)
+```
 
 ##### Componentes de Sección
 
@@ -3791,143 +3709,108 @@ export default function HeroSection() {
 
 **Ubicación:** `web/src/components/sections/HeroSection.tsx` (120 líneas)
 
-**DashboardSection.tsx \- Dashboard en Tiempo Real**
+**DashboardSection.tsx - Dashboard en Tiempo Real**
 
+Ubicación: `web/src/components/sections/DashboardSection.tsx` (300 líneas)
+
+```typescript
 export default function DashboardSection() {
+  const { data, isConnected } = useWebSocket('ws://localhost:3002');
+  const [summary, setSummary] = useState(null);
 
-  const { data, isConnected } \= useWebSocket('ws://localhost:3002');
-
-  const \[summary, setSummary\] \= useState(null);
-
-  useEffect(() \=\> {
-
+  useEffect(() => {
     fetchSummary().then(setSummary);
-
-  }, \[\]);
+  }, []);
 
   return (
-
-    \<section id="dashboard" className="py-20 bg-white"\>
-
-      \<div className="container mx-auto px-4"\>
-
-        \<h2 className="text-4xl font-bold text-center mb-12"\>
-
+    <section id="dashboard" className="py-20 bg-white">
+      <div className="container mx-auto px-4">
+        <h2 className="text-4xl font-bold text-center mb-12">
           Dashboard en Tiempo Real
+        </h2>
 
-        \</h2\>
-
-        {/\* Indicador de conexión \*/}
-
-        \<div className="flex items-center justify-center mb-8"\>
-
-          \<div className={\`w-3 h-3 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'} mr-2\`} /\>
-
-          \<span className="text-gray-600"\>
-
+        {/* Indicador de conexión */}
+        <div className="flex items-center justify-center mb-8">
+          <div className={`w-3 h-3 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'} mr-2`} />
+          <span className="text-gray-600">
             {isConnected ? 'Conectado' : 'Desconectado'}
+          </span>
+        </div>
 
-          \</span\>
-
-        \</div\>
-
-        {/\* Grid de ubicaciones \*/}
-
-        \<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"\>
-
-          {\['aula20', 'aula21', 'gimnasio', 'laboratorio'\].map(location \=\> (
-
-            \<LocationCard 
-
+        {/* Grid de ubicaciones */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {['aula20', 'aula21', 'gimnasio', 'laboratorio'].map(location => (
+            <LocationCard 
               key={location} 
-
               location={location} 
-
-              data={summary?.\[location\]} 
-
-            /\>
-
+              data={summary?.[location]} 
+            />
           ))}
-
-        \</div\>
-
-      \</div\>
-
-    \</section\>
-
+        </div>
+      </div>
+    </section>
   );
-
 }
+```
 
-**Ubicación:** `web/src/components/sections/DashboardSection.tsx` (300 líneas)
-
-#### 3\. Estilos CSS Avanzados
+#### 3. Estilos CSS Avanzados
 
 ##### Responsive Design con Tailwind
 
 **Breakpoints de Tailwind CSS:**
 
-- `sm`: 640px (Móvil grande)  
-- `md`: 768px (Tablet)  
-- `lg`: 1024px (Laptop)  
-- `xl`: 1280px (Desktop)  
-- `2xl`: 1536px (Desktop grande)
+| Breakpoint | Ancho | Uso |
+|:---|:---|:---|
+| `sm` | 640px | Móvil grande |
+| `md` | 768px | Tablet |
+| `lg` | 1024px | Laptop |
+| `xl` | 1280px | Desktop |
+| `2xl` | 1536px | Desktop grande |
 
 **Ejemplo de uso:**
 
-\<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"\>
-
-  \<\!-- 1 columna en móvil, 2 en tablet, 4 en desktop \--\>
-
-\</div\>
+```typescript
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+  {/* 1 columna en móvil, 2 en tablet, 4 en desktop */}
+</div>
+```
 
 ##### Animaciones con Framer Motion
 
 **Animación de entrada:**
 
-\<motion.div
-
+```typescript
+<motion.div
   initial={{ opacity: 0, y: 20 }}
-
   animate={{ opacity: 1, y: 0 }}
-
   transition={{ duration: 0.5 }}
-
-\>
-
-  \<Card /\>
-
-\</motion.div\>
+>
+  <Card />
+</motion.div>
+```
 
 **Animación al hacer scroll:**
 
-\<motion.div
-
+```typescript
+<motion.div
   initial={{ opacity: 0 }}
-
   whileInView={{ opacity: 1 }}
-
   viewport={{ once: true }}
-
-\>
-
-  \<Section /\>
-
-\</motion.div\>
+>
+  <Section />
+</motion.div>
+```
 
 **Hover effect:**
 
-\<motion.button
-
+```typescript
+<motion.button
   whileHover={{ scale: 1.05 }}
-
   whileTap={{ scale: 0.95 }}
-
-\>
-
+>
   Click me
-
-\</motion.button\>
+</motion.button>
+```
 
 ##### Gradientes y Efectos
 
@@ -4915,102 +4798,67 @@ app.post('/api/auth/login', async (req, res) \=\> {
 
     const password \= sanitizeString(req.body.password);
 
-    // Validaciones
+##### Validación de Credenciales
 
-    if (\!username || username.length \< 3\) {
+```javascript
+// Validaciones en endpoint de login
+if (!username || username.length < 3) {
+  return res.status(400).json({
+    error: 'Username must be at least 3 characters'
+  });
+}
 
-      return res.status(400).json({
+if (!password || password.length < 8) {
+  return res.status(400).json({
+    error: 'Password must be at least 8 characters'
+  });
+}
 
-        error: 'Username must be at least 3 characters'
-
-      });
-
-    }
-
-    if (\!password || password.length \< 8\) {
-
-      return res.status(400).json({
-
-        error: 'Password must be at least 8 characters'
-
-      });
-
-    }
-
-    // ... autenticación
-
-  } catch (error) {
-
-    res.status(500).json({ error: 'Internal server error' });
-
-  }
-
-});
+// ... autenticación
+```
 
 ##### Validación de Tipos de Datos
 
+```javascript
 // Validar que un parámetro sea número
-
-app.get('/api/data/:location/:sensor', async (req, res) \=\> {
-
+app.get('/api/data/:location/:sensor', async (req, res) => {
   try {
-
-    const { location, sensor } \= req.params;
-
-    const { hours } \= req.query;
+    const { location, sensor } = req.params;
+    const { hours } = req.query;
 
     // Validar que hours sea un número válido
-
-    const hoursNum \= parseInt(hours, 10);
-
-    if (isNaN(hoursNum) || hoursNum \< 1 || hoursNum \> 720\) {
-
+    const hoursNum = parseInt(hours, 10);
+    if (isNaN(hoursNum) || hoursNum < 1 || hoursNum > 720) {
       return res.status(400).json({
-
         error: 'Parameter "hours" must be a number between 1 and 720'
-
       });
-
     }
 
     // ... resto del código
-
   } catch (error) {
-
     res.status(500).json({ error: 'Internal server error' });
-
   }
-
 });
+```
 
-#### 3\. Manejo de Errores con Try-Catch
+#### 3. Manejo de Errores con Try-Catch
 
+```javascript
 // Patrón estándar en todos los endpoints
-
-app.get('/api/endpoint', async (req, res) \=\> {
-
+app.get('/api/endpoint', async (req, res) => {
   try {
-
     // Validaciones
-
-    if (\!validInput) {
-
+    if (!validInput) {
       return res.status(400).json({ error: 'Bad request' });
-
     }
 
     // Lógica de negocio
-
-    const result \= await someAsyncOperation();
+    const result = await someAsyncOperation();
 
     // Respuesta exitosa
-
     res.json(result);
-
   } catch (error) {
-
     // Log del error (desarrollo)
-
     console.error('Error in /api/endpoint:', error);
 
     // Respuesta de error (no exponer detalles internos en producción)
@@ -5300,104 +5148,76 @@ async function authenticateUser(username, passwordHash, ipAddress, userAgent) {
     );
 
     // Obtener variables de salida
-
-    const \[results\] \= await connection.query(
-
-      'SELECT @p\_user\_id AS userId, @p\_session\_token AS sessionToken, @p\_role AS role, @p\_success AS success'
-
+    const [results] = await connection.query(
+      'SELECT @p_user_id AS userId, @p_session_token AS sessionToken, @p_role AS role, @p_success AS success'
     );
 
-    return results\[0\];
-
+    return results[0];
   } finally {
-
     connection.release();
-
   }
-
 }
+```
 
-##### Llamada a sp\_get\_user\_alerts
+##### Llamada a sp_get_user_alerts
 
-async function getUserAlerts(userId, limit \= 10\) {
-
-  const \[alerts\] \= await db.execute(
-
-    'CALL sp\_get\_user\_alerts(?, ?)',
-
-    \[userId, limit\]
-
+```javascript
+async function getUserAlerts(userId, limit = 10) {
+  const [alerts] = await db.execute(
+    'CALL sp_get_user_alerts(?, ?)',
+    [userId, limit]
   );
-
-  return alerts\[0\]; // Primer conjunto de resultados
-
+  return alerts[0]; // Primer conjunto de resultados
 }
+```
 
-##### Llamada a sp\_create\_alert
+##### Llamada a sp_create_alert
 
+```javascript
 async function createAlert(location, sensorType, alertType, message, value, threshold) {
-
-  const connection \= await db.getConnection();
-
+  const connection = await db.getConnection();
   try {
-
     // Preparar variables de salida
-
-    await connection.query('SET @p\_alert\_id \= 0, @p\_success \= FALSE');
+    await connection.query('SET @p_alert_id = 0, @p_success = FALSE');
 
     // Llamar al procedimiento almacenado
-
     await connection.execute(
-
-      'CALL sp\_create\_alert(?, ?, ?, ?, ?, ?, @p\_alert\_id, @p\_success)',
-
-      \[location, sensorType, alertType, message, value, threshold\]
-
+      'CALL sp_create_alert(?, ?, ?, ?, ?, ?, @p_alert_id, @p_success)',
+      [location, sensorType, alertType, message, value, threshold]
     );
 
     // Obtener variables de salida
-
-    const \[results\] \= await connection.query(
-
-      'SELECT @p\_alert\_id AS alertId, @p\_success AS success'
-
+    const [results] = await connection.query(
+      'SELECT @p_alert_id AS alertId, @p_success AS success'
     );
 
-    return results\[0\];
-
+    return results[0];
   } finally {
-
     connection.release();
-
   }
-
 }
+```
 
-#### 3\. Conexión a InfluxDB 2.7
+#### 3. Conexión a InfluxDB 2.7
 
 ##### Cliente InfluxDB con @influxdata/influxdb-client
 
-**Archivo:** `api/influx.js` (50 líneas)
+Archivo: `api/influx.js` (50 líneas)
 
-const { InfluxDB } \= require('@influxdata/influxdb-client');
+```javascript
+const { InfluxDB } = require('@influxdata/influxdb-client');
 
 // Configuración de InfluxDB
-
-const url \= process.env.INFLUX\_URL || 'http://localhost:8086';
-
-const token \= process.env.INFLUX\_TOKEN || 'medusse-admin-token-2025';
-
-const org \= process.env.INFLUX\_ORG || 'iescelia';
-
-const bucket \= process.env.INFLUX\_BUCKET || 'sensors';
+const url = process.env.INFLUX_URL || 'http://localhost:8086';
+const token = process.env.INFLUX_TOKEN || 'medusse-admin-token-2025';
+const org = process.env.INFLUX_ORG || 'iescelia';
+const bucket = process.env.INFLUX_BUCKET || 'sensors';
 
 // Crear cliente
-
-const influxDB \= new InfluxDB({ url, token });
+const influxDB = new InfluxDB({ url, token });
 
 // Query API
-
-const queryApi \= influxDB.getQueryApi(org);
+const queryApi = influxDB.getQueryApi(org);
 
 // Write API (opcional, para escribir datos)
 
@@ -5557,127 +5377,84 @@ async function getSensorStats(location, sensor, hours \= 24\) {
 
       |\> filter(fn: (r) \=\> r.location \== "${location}")
 
-      |\> filter(fn: (r) \=\> r.\_measurement \== "${sensor}")
+```flux
+from(bucket: "${bucket}")
+  |> range(start: -24h)
+  |> filter(fn: (r) => r.location == "${location}")
+  |> filter(fn: (r) => r._measurement == "${sensor}")
+  |> filter(fn: (r) => r._field == "value")
+  |> group()
+  |> reduce(
+      fn: (r, accumulator) => ({
+        min: if r._value < accumulator.min then r._value else accumulator.min,
+        max: if r._value > accumulator.max then r._value else accumulator.max,
+        sum: accumulator.sum + r._value,
+        count: accumulator.count + 1.0
+      }),
+      identity: {min: 999999.0, max: -999999.0, sum: 0.0, count: 0.0}
+    )
+  |> map(fn: (r) => ({ r with mean: r.sum / r.count }))
+```
 
-      |\> filter(fn: (r) \=\> r.\_field \== "value")
-
-      |\> group()
-
-      |\> reduce(
-
-          fn: (r, accumulator) \=\> ({
-
-            min: if r.\_value \< accumulator.min then r.\_value else accumulator.min,
-
-            max: if r.\_value \> accumulator.max then r.\_value else accumulator.max,
-
-            sum: accumulator.sum \+ r.\_value,
-
-            count: accumulator.count \+ 1.0
-
-          }),
-
-          identity: {min: 999999.0, max: \-999999.0, sum: 0.0, count: 0.0}
-
-        )
-
-      |\> map(fn: (r) \=\> ({ r with mean: r.sum / r.count }))
-
-  \`;
-
-  return new Promise((resolve, reject) \=\> {
-
-    queryApi.queryRows(query, {
-
-      next(row, tableMeta) {
-
-        resolve({
-
-          min: row.min,
-
-          max: row.max,
-
-          mean: row.mean,
-
-          count: row.count
-
-        });
-
-      },
-
-      error(error) {
-
-        reject(error);
-
-      },
-
-      complete() {}
-
-    });
-
+```javascript
+return new Promise((resolve, reject) => {
+  queryApi.queryRows(query, {
+    next(row, tableMeta) {
+      resolve({
+        min: row.min,
+        max: row.max,
+        mean: row.mean,
+        count: row.count
+      });
+    },
+    error(error) {
+      reject(error);
+    },
+    complete() {}
   });
+});
+```
 
-}
-
-#### 4\. Implementación en Endpoints API
+#### 4. Implementación en Endpoints API
 
 ##### Endpoint: GET /api/latest/:location
 
-const db \= require('./db');
+```javascript
+const db = require('./db');
+const { queryApi } = require('./influx');
 
-const { queryApi } \= require('./influx');
-
-app.get('/api/latest/:location', async (req, res) \=\> {
-
+app.get('/api/latest/:location', async (req, res) => {
   try {
-
-    const { location } \= req.params;
+    const { location } = req.params;
 
     // Validar ubicación en MySQL
-
-    const \[locationRows\] \= await db.execute(
-
-      'SELECT id, display\_name, color FROM locations WHERE name \= ? AND is\_active \= TRUE',
-
-      \[location\]
-
+    const [locationRows] = await db.execute(
+      'SELECT id, display_name, color FROM locations WHERE name = ? AND is_active = TRUE',
+      [location]
     );
 
-    if (locationRows.length \=== 0\) {
-
+    if (locationRows.length === 0) {
       return res.status(404).json({ error: 'Location not found' });
-
     }
 
-    const locationInfo \= locationRows\[0\];
+    const locationInfo = locationRows[0];
 
     // Obtener datos de InfluxDB
-
-    const sensorData \= await getLatestReadings(location);
+    const sensorData = await getLatestReadings(location);
 
     res.json({
-
       location: location,
-
-      displayName: locationInfo.display\_name,
-
+      displayName: locationInfo.display_name,
       color: locationInfo.color,
-
       timestamp: Date.now(),
-
       sensors: sensorData
-
     });
-
   } catch (error) {
-
     console.error('Error in /api/latest/:location:', error);
-
     res.status(500).json({ error: 'Internal server error' });
-
   }
-
 });
+```
 
 ##### Endpoint: GET /api/data/:location/:sensor
 
@@ -5974,52 +5751,42 @@ Usuario → Login → Validar Credenciales → Generar Token → Guardar Sesión
 
 ##### Hash de Contraseñas con bcrypt
 
-const bcrypt \= require('bcrypt');
+```javascript
+const bcrypt = require('bcrypt');
 
-// Al registrar usuario (hash con salt rounds \= 12\)
-
+// Al registrar usuario (hash con salt rounds = 12)
 async function hashPassword(plainPassword) {
-
-  const salt \= await bcrypt.genSalt(12);
-
-  const hash \= await bcrypt.hash(plainPassword, salt);
-
+  const salt = await bcrypt.genSalt(12);
+  const hash = await bcrypt.hash(plainPassword, salt);
   return hash;
-
 }
 
 // Al hacer login (comparar)
-
 async function verifyPassword(plainPassword, hashedPassword) {
-
   return await bcrypt.compare(plainPassword, hashedPassword);
-
 }
+```
 
 **Ejemplo de hashes almacenados en MySQL:**
 
-admin: $2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5oe2kR7xNlm9W
-
-paco: $2b$12$k7VqLBmxO5uF.dXOzZd9AuA3rMfZKz8uYYaVa2fJBz.lF8XP5aGmC
+| Usuario | Hash |
+|:---|:---|
+| admin | $2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5oe2kR7xNlm9W |
+| paco | $2b$12$k7VqLBmxO5uF.dXOzZd9AuA3rMfZKz8uYYaVa2fJBz.lF8XP5aGmC |
 
 ##### Endpoint: POST /api/auth/login
 
-const bcrypt \= require('bcrypt');
+```javascript
+const bcrypt = require('bcrypt');
+const crypto = require('crypto');
+const db = require('./db');
 
-const crypto \= require('crypto');
-
-const db \= require('./db');
-
-app.post('/api/auth/login', async (req, res) \=\> {
-
+app.post('/api/auth/login', async (req, res) => {
   try {
-
-    const { username, password } \= req.body;
+    const { username, password } = req.body;
 
     // Validar campos requeridos
-
-    if (\!username || \!password) {
-
+    if (!username || !password) {
       return res.status(400).json({
 
         error: 'Username and password are required'
@@ -6170,157 +5937,102 @@ async function requireAuth(req, res, next) {
 
     const sessionToken \= authHeader.split(' ')\[1\];
 
-    // Validar token en MySQL
+```javascript
+// Validar token en MySQL
+const [sessionRows] = await db.execute(
+  `SELECT s.user_id, s.expires_at, u.username, u.role, u.is_active
+   FROM sessions s
+   INNER JOIN users u ON s.user_id = u.id
+   WHERE s.session_token = ?`,
+  [sessionToken]
+);
 
-    const \[sessionRows\] \= await db.execute(
-
-      \`SELECT s.user\_id, s.expires\_at, u.username, u.role, u.is\_active
-
-       FROM sessions s
-
-       INNER JOIN users u ON s.user\_id \= u.id
-
-       WHERE s.session\_token \= ?\`,
-
-      \[sessionToken\]
-
-    );
-
-    if (sessionRows.length \=== 0\) {
-
-      return res.status(401).json({ error: 'Unauthorized \- Invalid token' });
-
-    }
-
-    const session \= sessionRows\[0\];
-
-    // Verificar expiración
-
-    if (new Date(session.expires\_at) \< new Date()) {
-
-      // Eliminar sesión expirada
-
-      await db.execute('DELETE FROM sessions WHERE session\_token \= ?', \[sessionToken\]);
-
-      return res.status(401).json({ error: 'Unauthorized \- Token expired' });
-
-    }
-
-    // Verificar que usuario esté activo
-
-    if (\!session.is\_active) {
-
-      return res.status(403).json({ error: 'Forbidden \- User account is disabled' });
-
-    }
-
-    // Agregar datos del usuario al request
-
-    req.user \= {
-
-      id: session.user\_id,
-
-      username: session.username,
-
-      role: session.role
-
-    };
-
-    next(); // Continuar al siguiente middleware/endpoint
-
-  } catch (error) {
-
-    console.error('Error in requireAuth middleware:', error);
-
-    res.status(500).json({ error: 'Internal server error' });
-
-  }
-
+if (sessionRows.length === 0) {
+  return res.status(401).json({ error: 'Unauthorized - Invalid token' });
 }
+
+const session = sessionRows[0];
+
+// Verificar expiración
+if (new Date(session.expires_at) < new Date()) {
+  // Eliminar sesión expirada
+  await db.execute('DELETE FROM sessions WHERE session_token = ?', [sessionToken]);
+  return res.status(401).json({ error: 'Unauthorized - Token expired' });
+}
+
+// Verificar que usuario esté activo
+if (!session.is_active) {
+  return res.status(403).json({ error: 'Forbidden - User account is disabled' });
+}
+
+// Agregar datos del usuario al request
+req.user = {
+  id: session.user_id,
+  username: session.username,
+  role: session.role
+};
+
+next(); // Continuar al siguiente middleware/endpoint
+```
 
 ##### Middleware: requireRole
 
+```javascript
 // Middleware para verificar rol del usuario
-
 function requireRole(...allowedRoles) {
-
-  return (req, res, next) \=\> {
-
-    if (\!req.user) {
-
+  return (req, res, next) => {
+    if (!req.user) {
       return res.status(401).json({ error: 'Unauthorized' });
-
     }
 
-    if (\!allowedRoles.includes(req.user.role)) {
-
+    if (!allowedRoles.includes(req.user.role)) {
       return res.status(403).json({ 
-
-        error: 'Forbidden \- Insufficient permissions',
-
+        error: 'Forbidden - Insufficient permissions',
         requiredRoles: allowedRoles,
-
         userRole: req.user.role
-
       });
-
     }
 
     next();
-
   };
-
 }
+```
 
-#### 3\. Protección de Endpoints
+#### 3. Protección de Endpoints
 
 ##### Endpoint Protegido: GET /api/dashboard
 
+```javascript
 // Solo usuarios autenticados
-
-app.get('/api/dashboard', requireAuth, async (req, res) \=\> {
-
+app.get('/api/dashboard', requireAuth, async (req, res) => {
   try {
-
     // req.user está disponible gracias a requireAuth middleware
-
-    const userId \= req.user.id;
+    const userId = req.user.id;
 
     // Obtener datos del dashboard
-
-    const summary \= await getSummaryData();
+    const summary = await getSummaryData();
 
     res.json({
-
       user: req.user,
-
       data: summary
-
     });
-
   } catch (error) {
-
     console.error('Error in /api/dashboard:', error);
-
     res.status(500).json({ error: 'Internal server error' });
-
   }
-
 });
+```
 
 ##### Endpoint Protegido: GET /api/admin/users (Solo Admin)
 
+```javascript
 // Solo usuarios con rol 'admin'
-
-app.get('/api/admin/users', requireAuth, requireRole('admin'), async (req, res) \=\> {
-
+app.get('/api/admin/users', requireAuth, requireRole('admin'), async (req, res) => {
   try {
-
-    const \[users\] \= await db.execute(
-
-      'SELECT id, username, email, role, is\_active, created\_at, last\_login FROM users ORDER BY created\_at DESC'
-
+    const [users] = await db.execute(
+      'SELECT id, username, email, role, is_active, created_at, last_login FROM users ORDER BY created_at DESC'
     );
+```
 
     res.json({ users });
 
