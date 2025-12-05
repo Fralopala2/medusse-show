@@ -1,3 +1,9 @@
+<div align="center">
+
+![Medusse IoT Logo](../web/public/logos/LogoMedusse.png)
+
+</div>
+
 # MEDUSSE IoT
 
 ## Sistema de Monitoreo Ambiental con Arquitectura de Microservicios
