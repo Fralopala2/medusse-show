@@ -2772,7 +2772,8 @@ async function authenticateUser(username, password, ipAddress, userAgent) {
     } finally {
         connection.release();
     }
-}
+}`
+```
 
 ### Archivos Involucrados
 
@@ -2885,6 +2886,7 @@ Diseñar la estructura visual y de componentes de las interfaces del sistema, de
 
 **Queries dinámicas con variables:**
 
+```flux
 from(bucket: "sensors")
 
   |\> range(start: v.timeRangeStart, stop: v.timeRangeStop)
@@ -2892,6 +2894,7 @@ from(bucket: "sensors")
   |\> filter(fn: (r) \=\> r.\_measurement \== "${sensor}")
 
   |\> filter(fn: (r) \=\> r.location \== "${location}")
+```
 
 #### 2\. Aplicación Web Next.js \- Diseño Moderno
 
@@ -4480,6 +4483,7 @@ app.get('/api/endpoint', async (req, res) => {
   }
 
 });
+```
 
 #### 4. Respuestas HTTP Apropiadas
 
@@ -4556,7 +4560,6 @@ const [errors, setErrors] = useState({});
 
 // Durante el envío
 setIsLoading(true);
-```
 
 try {
 
@@ -4571,6 +4574,7 @@ try {
   setIsLoading(false);
 
 }
+```
 
 ### Archivos Involucrados
 
@@ -4708,7 +4712,6 @@ async function authenticateUser(username, passwordHash, ipAddress, userAgent) {
   }
 }
 ```
-```
 
 ##### Llamada a sp_get_user_alerts
 
@@ -4770,7 +4773,6 @@ const influxDB = new InfluxDB({ url, token });
 // Query API
 const queryApi = influxDB.getQueryApi(org);
 
-```javascript
 // Write API (opcional, para escribir datos)
 const writeApi = influxDB.getWriteApi(org, bucket);
 
@@ -4798,7 +4800,6 @@ module.exports = { queryApi, writeApi };
 ```javascript
 const { queryApi } = require('./influx');
 
-```javascript
 async function getLatestReadings(location) {
   const query = `
     from(bucket: "sensors")
@@ -5063,8 +5064,6 @@ async function createUserWithPreferences(userData, preferences) {
 }
 ```
 
-}
-
 ### Archivos Involucrados
 
 **Configuración de Bases de Datos:**
@@ -5084,6 +5083,7 @@ async function createUserWithPreferences(userData, preferences) {
 
 - `.env` \- Configuración de conexión
 
+```ini
 \# MySQL
 
 DB\_HOST=localhost
@@ -5105,6 +5105,7 @@ INFLUX\_TOKEN=medusse-admin-token-2025
 INFLUX\_ORG=iescelia
 
 INFLUX\_BUCKET=sensors
+```
 
 ### Buenas Prácticas Implementadas
 
@@ -5776,6 +5777,7 @@ En lugar de SOAP, el proyecto implementa:
 
 **Archivo:** `api/openapi.yaml` (300 líneas)
 
+```yaml
 openapi: 3.0.0
 
 info:
@@ -6047,6 +6049,7 @@ components:
 security:
 
   \- BearerAuth: \[\]
+```
 
 ##### Ventajas de OpenAPI vs WSDL
 
@@ -6344,17 +6347,17 @@ Desarrollar una aplicación móvil multiplataforma para acceder al sistema IoT.
 #### Compilación
 
 \# Windows
-
+```bash
 flutter build windows \--release
-
+```
 \# Web
-
+```bash
 flutter build web \--release
-
+```
 \# Android
-
+```bash
 flutter build apk \--release
-
+```
 ### Conclusión del Reto
 
 ✅ **Reto completado al 100%**  
@@ -6475,6 +6478,3 @@ Diciembre 2025
 # FIN DEL DOCUMENTO
 
 ---
-
- 
-``` 
