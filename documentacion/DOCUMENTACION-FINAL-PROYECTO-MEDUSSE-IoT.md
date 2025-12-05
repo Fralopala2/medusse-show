@@ -2758,32 +2758,20 @@ async function authenticateUser(username, password, ipAddress, userAgent) {
             'INSERT INTO sessions (user_id, session_token, ip_address, user_agent, expires_at) VALUES (?, ?, ?, ?, DATE_ADD(NOW(), INTERVAL 24 HOUR))',
             [user.id, sessionToken, ipAddress, userAgent]
         );
-```
 
         return {
-
             success: true,
-
             sessionToken: sessionToken,
-
             user: {
-
                 id: user.id,
-
                 username: user.username,
-
                 role: user.role
-
             }
-
         };
 
     } finally {
-
         connection.release();
-
     }
-
 }
 
 ### Archivos Involucrados
@@ -4708,9 +4696,6 @@ async function authenticateUser(username, passwordHash, ipAddress, userAgent) {
       'CALL sp_authenticate_user(?, ?, ?, ?, @p_user_id, @p_session_token, @p_role, @p_success)',
       [username, passwordHash, ipAddress, userAgent]
     );
-```
-
-    );
 
     // Obtener variables de salida
     const [results] = await connection.query(
@@ -4722,6 +4707,7 @@ async function authenticateUser(username, passwordHash, ipAddress, userAgent) {
     connection.release();
   }
 }
+```
 ```
 
 ##### Llamada a sp_get_user_alerts
@@ -5229,53 +5215,35 @@ app.post('/api/auth/login', async (req, res) => {
     // Validar campos requeridos
     if (!username || !password) {
       return res.status(400).json({
-
         error: 'Username and password are required'
-
       });
-
     }
 
     // Buscar usuario en MySQL
-
-    const \[userRows\] \= await db.execute(
-
-      'SELECT id, username, password\_hash, role, is\_active FROM users WHERE username \= ? OR email \= ?',
-
-      \[username, username\]
-
+    const [userRows] = await db.execute(
+      'SELECT id, username, password_hash, role, is_active FROM users WHERE username = ? OR email = ?',
+      [username, username]
     );
 
-    if (userRows.length \=== 0\) {
-
+    if (userRows.length === 0) {
       return res.status(401).json({
-
         error: 'Invalid credentials'
-
       });
-
     }
 
-    const user \= userRows\[0\];
+    const user = userRows[0];
 
     // Verificar que el usuario esté activo
-
-    if (\!user.is\_active) {
-
+    if (!user.is_active) {
       return res.status(403).json({
-
         error: 'User account is disabled'
-
       });
-
     }
 
     // Verificar contraseña con bcrypt
+    const passwordMatch = await bcrypt.compare(password, user.password_hash);
 
-    const passwordMatch \= await bcrypt.compare(password, user.password\_hash);
-
-    if (\!passwordMatch) {
-
+    if (!passwordMatch) {
       return res.status(401).json({
 
         error: 'Invalid credentials'
@@ -5285,76 +5253,47 @@ app.post('/api/auth/login', async (req, res) => {
     }
 
     // Generar token de sesión (UUID v4)
-
-    const sessionToken \= crypto.randomUUID();
+    const sessionToken = crypto.randomUUID();
 
     // Obtener IP y User-Agent
-
-    const ipAddress \= req.ip || req.connection.remoteAddress;
-
-    const userAgent \= req.headers\['user-agent'\];
+    const ipAddress = req.ip || req.connection.remoteAddress;
+    const userAgent = req.headers['user-agent'];
 
     // Crear sesión en MySQL (expira en 24 horas)
-
     await db.execute(
-
-      \`INSERT INTO sessions (user\_id, session\_token, ip\_address, user\_agent, expires\_at) 
-
-       VALUES (?, ?, ?, ?, DATE\_ADD(NOW(), INTERVAL 24 HOUR))\`,
-
-      \[user.id, sessionToken, ipAddress, userAgent\]
-
+      `INSERT INTO sessions (user_id, session_token, ip_address, user_agent, expires_at) 
+       VALUES (?, ?, ?, ?, DATE_ADD(NOW(), INTERVAL 24 HOUR))`,
+      [user.id, sessionToken, ipAddress, userAgent]
     );
 
-    // Actualizar last\_login
-
+    // Actualizar last_login
     await db.execute(
-
-      'UPDATE users SET last\_login \= NOW() WHERE id \= ?',
-
-      \[user.id\]
-
+      'UPDATE users SET last_login = NOW() WHERE id = ?',
+      [user.id]
     );
 
-    // Registrar en activity\_log
-
+    // Registrar en activity_log
     await db.execute(
-
-      'INSERT INTO activity\_log (user\_id, action, ip\_address, user\_agent) VALUES (?, ?, ?, ?)',
-
-      \[user.id, 'login', ipAddress, userAgent\]
-
+      'INSERT INTO activity_log (user_id, action, ip_address, user_agent) VALUES (?, ?, ?, ?)',
+      [user.id, 'login', ipAddress, userAgent]
     );
 
     // Retornar token y datos del usuario
-
     res.json({
-
       success: true,
-
       sessionToken: sessionToken,
-
       user: {
-
         id: user.id,
-
         username: user.username,
-
         role: user.role
-
       }
-
     });
-
   } catch (error) {
-
     console.error('Error in /api/auth/login:', error);
-
     res.status(500).json({ error: 'Internal server error' });
-
   }
-
 });
+```
 
 #### 2\. Middleware de Autenticación
 
@@ -5472,119 +5411,84 @@ app.get('/api/admin/users', requireAuth, requireRole('admin'), async (req, res) 
     const [users] = await db.execute(
       'SELECT id, username, email, role, is_active, created_at, last_login FROM users ORDER BY created_at DESC'
     );
-```
 
     res.json({ users });
-
   } catch (error) {
-
     console.error('Error in /api/admin/users:', error);
-
     res.status(500).json({ error: 'Internal server error' });
-
   }
-
 });
+```
 
 ##### Endpoint Protegido: POST /api/admin/alerts/resolve (Admin o User)
 
 // Solo usuarios con rol 'admin' o 'user' (viewer no puede)
 
-app.post('/api/admin/alerts/resolve', requireAuth, requireRole('admin', 'user'), async (req, res) \=\> {
-
+```javascript
+app.post('/api/admin/alerts/resolve', requireAuth, requireRole('admin', 'user'), async (req, res) => {
   try {
-
-    const { alertId } \= req.body;
-
-    const userId \= req.user.id;
+    const { alertId } = req.body;
+    const userId = req.user.id;
 
     // Resolver alerta
-
     await db.execute(
-
-      'UPDATE alerts SET is\_resolved \= TRUE, resolved\_at \= NOW(), resolved\_by \= ? WHERE id \= ?',
-
-      \[userId, alertId\]
-
+      'UPDATE alerts SET is_resolved = TRUE, resolved_at = NOW(), resolved_by = ? WHERE id = ?',
+      [userId, alertId]
     );
 
     // Registrar actividad
-
     await db.execute(
-
-      'INSERT INTO activity\_log (user\_id, action, entity\_type, entity\_id) VALUES (?, ?, ?, ?)',
-
-      \[userId, 'resolve\_alert', 'alert', alertId\]
-
+      'INSERT INTO activity_log (user_id, action, entity_type, entity_id) VALUES (?, ?, ?, ?)',
+      [userId, 'resolve_alert', 'alert', alertId]
     );
 
     res.json({ success: true, message: 'Alert resolved successfully' });
-
   } catch (error) {
-
     console.error('Error in /api/admin/alerts/resolve:', error);
-
     res.status(500).json({ error: 'Internal server error' });
-
   }
-
 });
+```
 
 #### 4\. Logout y Gestión de Sesiones
 
 ##### Endpoint: POST /api/auth/logout
 
-app.post('/api/auth/logout', requireAuth, async (req, res) \=\> {
-
+```javascript
+app.post('/api/auth/logout', requireAuth, async (req, res) => {
   try {
-
-    const sessionToken \= req.headers.authorization.split(' ')\[1\];
-
-    const userId \= req.user.id;
+    const sessionToken = req.headers.authorization.split(' ')[1];
+    const userId = req.user.id;
 
     // Eliminar sesión de la base de datos
-
-    await db.execute('DELETE FROM sessions WHERE session\_token \= ?', \[sessionToken\]);
+    await db.execute('DELETE FROM sessions WHERE session_token = ?', [sessionToken]);
 
     // Registrar logout
-
     await db.execute(
-
-      'INSERT INTO activity\_log (user\_id, action) VALUES (?, ?)',
-
-      \[userId, 'logout'\]
-
+      'INSERT INTO activity_log (user_id, action) VALUES (?, ?)',
+      [userId, 'logout']
     );
 
     res.json({ success: true, message: 'Logged out successfully' });
-
   } catch (error) {
-
     console.error('Error in /api/auth/logout:', error);
-
     res.status(500).json({ error: 'Internal server error' });
-
   }
-
 });
+```
 
 ##### Endpoint: GET /api/auth/sessions (Mis Sesiones Activas)
 
-app.get('/api/auth/sessions', requireAuth, async (req, res) \=\> {
-
+```javascript
+app.get('/api/auth/sessions', requireAuth, async (req, res) => {
   try {
+    const userId = req.user.id;
 
-    const userId \= req.user.id;
-
-    const \[sessions\] \= await db.execute(
-
-      \`SELECT session\_token, ip\_address, user\_agent, created\_at, expires\_at 
-
+    const [sessions] = await db.execute(
+      `SELECT session_token, ip_address, user_agent, created_at, expires_at 
        FROM sessions 
-
-       WHERE user\_id \= ? AND expires\_at \> NOW()
-
-       ORDER BY created\_at DESC\`,
+       WHERE user_id = ? AND expires_at > NOW()
+       ORDER BY created_at DESC`,
 
       \[userId\]
 
@@ -5592,63 +5496,49 @@ app.get('/api/auth/sessions', requireAuth, async (req, res) \=\> {
 
     res.json({ sessions });
 
+      [userId]
+    );
+
+    res.json({ sessions });
   } catch (error) {
-
     console.error('Error in /api/auth/sessions:', error);
-
     res.status(500).json({ error: 'Internal server error' });
-
   }
-
 });
+```
 
 ##### Endpoint: DELETE /api/auth/sessions/:token (Cerrar Sesión Específica)
 
-app.delete('/api/auth/sessions/:token', requireAuth, async (req, res) \=\> {
-
+```javascript
+app.delete('/api/auth/sessions/:token', requireAuth, async (req, res) => {
   try {
-
-    const { token } \= req.params;
-
-    const userId \= req.user.id;
+    const { token } = req.params;
+    const userId = req.user.id;
 
     // Verificar que la sesión pertenece al usuario
-
-    const \[sessionRows\] \= await db.execute(
-
-      'SELECT user\_id FROM sessions WHERE session\_token \= ?',
-
-      \[token\]
-
+    const [sessionRows] = await db.execute(
+      'SELECT user_id FROM sessions WHERE session_token = ?',
+      [token]
     );
 
-    if (sessionRows.length \=== 0\) {
-
+    if (sessionRows.length === 0) {
       return res.status(404).json({ error: 'Session not found' });
-
     }
 
-    if (sessionRows\[0\].user\_id \!== userId) {
-
+    if (sessionRows[0].user_id !== userId) {
       return res.status(403).json({ error: 'Forbidden' });
-
     }
 
     // Eliminar sesión
-
-    await db.execute('DELETE FROM sessions WHERE session\_token \= ?', \[token\]);
+    await db.execute('DELETE FROM sessions WHERE session_token = ?', [token]);
 
     res.json({ success: true, message: 'Session closed successfully' });
-
   } catch (error) {
-
     console.error('Error in DELETE /api/auth/sessions:', error);
-
     res.status(500).json({ error: 'Internal server error' });
-
   }
-
 });
+```
 
 #### 5\. Control de Acceso Basado en Roles (RBAC)
 
@@ -5732,9 +5622,8 @@ const helmet = require('helmet');
 app.use(helmet({
   contentSecurityPolicy: false, // Deshabilitado para desarrollo
   crossOriginEmbedderPolicy: false
-```
-
 }));
+```
 
 ### Archivos Involucrados
 
@@ -6198,49 +6087,31 @@ Authorization: Bearer uuid-token
 
 **SOAP (No implementado):**
 
-\<\!-- Request (XML \- 450 bytes) \--\>
+```xml
+<!-- Request (XML - 450 bytes) -->
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Header>
+    <auth:Token>uuid-token</auth:Token>
+  </soap:Header>
+  <soap:Body>
+    <m:GetSensorData xmlns:m="http://medusse.iot/services">
+      <m:Location>aula20</m:Location>
+    </m:GetSensorData>
+  </soap:Body>
+</soap:Envelope>
 
-\<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"\>
-
-  \<soap:Header\>
-
-    \<auth:Token\>uuid-token\</auth:Token\>
-
-  \</soap:Header\>
-
-  \<soap:Body\>
-
-    \<m:GetSensorData xmlns:m="http://medusse.iot/services"\>
-
-      \<m:Location\>aula20\</m:Location\>
-
-    \</m:GetSensorData\>
-
-  \</soap:Body\>
-
-\</soap:Envelope\>
-
-\<\!-- Response (XML \- 600 bytes) \--\>
-
-\<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"\>
-
-  \<soap:Body\>
-
-    \<m:GetSensorDataResponse xmlns:m="http://medusse.iot/services"\>
-
-      \<m:Location\>aula20\</m:Location\>
-
-      \<m:Temperature\>22.5\</m:Temperature\>
-
-      \<m:Humidity\>55.3\</m:Humidity\>
-
-      \<m:CO2\>850\</m:CO2\>
-
-    \</m:GetSensorDataResponse\>
-
-  \</soap:Body\>
-
-\</soap:Envelope\>
+<!-- Response (XML - 600 bytes) -->
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <m:GetSensorDataResponse xmlns:m="http://medusse.iot/services">
+      <m:Location>aula20</m:Location>
+      <m:Temperature>22.5</m:Temperature>
+      <m:Humidity>55.3</m:Humidity>
+      <m:CO2>850</m:CO2>
+    </m:GetSensorDataResponse>
+  </soap:Body>
+</soap:Envelope>
+```
 
 **Análisis:**
 
@@ -6253,39 +6124,30 @@ Authorization: Bearer uuid-token
 
 Si en el futuro se requiere un protocolo más eficiente que REST pero moderno:
 
+```protobuf
 // sensors.proto
 
-syntax \= "proto3";
+syntax = "proto3";
 
 package medusse;
 
 service SensorService {
-
   rpc GetLatest(LocationRequest) returns (SensorData);
-
   rpc StreamData(LocationRequest) returns (stream SensorData);
-
 }
 
 message LocationRequest {
-
-  string location \= 1;
-
+  string location = 1;
 }
 
 message SensorData {
-
-  string location \= 1;
-
-  double temperature \= 2;
-
-  double humidity \= 3;
-
-  int32 co2 \= 4;
-
-  int64 timestamp \= 5;
-
+  string location = 1;
+  double temperature = 2;
+  double humidity = 3;
+  int32 co2 = 4;
+  int64 timestamp = 5;
 }
+```
 
 **Ventajas de gRPC sobre SOAP:**
 
