@@ -1,6 +1,6 @@
 <div align="center">
 
-![Medusse IoT Logo](../web/public/logos/LogoMedusse.png | width=300 height=300)
+<img src="../web/public/logos/LogoMedusse.png" alt="Medusse IoT Logo" width="300" height="300">
 
 </div>
 
