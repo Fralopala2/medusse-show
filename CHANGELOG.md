@@ -1,5 +1,23 @@
 # Changelog - Proyecto Medusse IoT
 
+## [2.7.8] - 2025-12-06 - CORRECCION DE FORMATO DE TEXTOS WEB ✅
+
+### 🎨 Aplicacion de Reglas de Estilo
+- **web/src/lib/data.ts** - Corregidos 30 textos a estilo oración (sin Title Case)
+- Títulos de secciones hero: monitoreo ambiental inteligente, dashboard en tiempo real, app móvil Flutter, etc.
+- Nombres de productos hardware y software
+- Descripciones de servicios
+- Stack tecnológico y datos sobre el proyecto
+- Todos los textos cumplen ahora con la regla: solo primera palabra y nombres propios en mayúscula
+
+### 🔧 Cambios Realizados
+- Monitoreo Ambiental → monitoreo ambiental
+- Dashboard en Tiempo Real → dashboard en tiempo real
+- API REST Completa → API REST completa
+- Sensor DHT22 → sensor DHT22
+- Instalación Completa del Sistema → instalación completa del sistema
+- 29 cambios más para mantener consistencia de formato
+
 ## [2.7.7] - 2025-11-29 - DOCUMENTACION COMPLETA DE 16 RETOS ✅
 
 ### 📖 Documentacion de Retos TFG
