@@ -926,6 +926,30 @@ El sistema Medusse IoT monitorea **4 ubicaciones diferentes**, cada una con cara
 
 ### Sensores Implementados (18 Tipos)
 
+#### Tabla de Pines y Conexiones (Arduino Nano ESP32)
+
+| Sensor / Módulo                                      | Señal/Pin Sensor         | Pin Arduino Nano ESP32 | Alimentación      | Notas                                               |
+|------------------------------------------------------|-------------------------|-----------------------|-------------------|-----------------------------------------------------|
+| **BME680**                                           | SDA                     | D21                   | 3V3 / GND         | I2C (puedes compartir SDA/SCL con otros I2C)        |
+|                                                      | SCL                     | D22                   |                   |                                                     |
+| **SGP30 (VOC/CO2)**                                 | SDA                     | D21                   | 3V3 / GND         | I2C (compartido con BME680)                         |
+|                                                      | SCL                     | D22                   |                   |                                                     |
+| **DHT22**                                            | DATA                    | D4                    | 3V3 / GND         |                                                     |
+| **Sensor humedad suelo capacitivo (SEN-0180)**       | AOUT                    | A1                    | 3V3 / GND         |                                                     |
+| **Sensor humedad suelo anticorrosión (SEN-0083)**    | AOUT                    | A2                    | 3V3 / GND         |                                                     |
+| **Sensor flujo agua YF-S201**                        | OUT                     | D5                    | 5V / GND          | Puede requerir 5V para mejor señal                  |
+| **Sensor pH analógico**                              | AOUT                    | A3                    | 3V3 / GND         |                                                     |
+| **Gravity: Analog TDS Sensor**                       | AOUT                    | A4                    | 3V3 / GND         |                                                     |
+| **Gravity: Oxígeno disuelto**                        | AOUT                    | A5                    | 3V3 / GND         |                                                     |
+| **Kit estación meteorológica**                       | Anemómetro              | D6                    | 3V3 / GND         | (ejemplo, revisar documentación del kit)            |
+|                                                      | Pluviómetro             | D7                    | 3V3 / GND         |                                                     |
+|                                                      | Veleta                  | D8                    | 3V3 / GND         |                                                     |
+| **Cargador LiPo solar / Panel solar / Booster**      | -                       | -                     | -                 | Se conectan a la entrada de energía del sistema     |
+| **Data Logger Shield**                               | SPI/I2C                 | D10-D13 (SPI)         | 3V3 / GND         | Depende del modelo, revisar documentación           |
+| **Sensor de gas (si aplica)**                        | AOUT                    | A0                    | 3V3 / GND         | Ya en tu código                                     |
+
+> **Nota:** Los pines analógicos pueden variar según disponibilidad. Si algún sensor requiere 5V, verifica que el Nano ESP32 lo soporte y no dañe el pin.
+
 #### Sensores Ambientales (6 sensores)
 
 ##### 1\. Temperatura (°C)
