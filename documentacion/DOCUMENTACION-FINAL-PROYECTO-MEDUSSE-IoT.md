@@ -793,7 +793,7 @@ medusse\_app/lib/
 
 #### Docker \+ Docker Compose
 
-**Docker:** Plataforma de contenedorización
+**Docker:** Plataforma de contenedores
 
 **Docker Compose:** Orquestación multi-contenedor
 
@@ -1451,30 +1451,18 @@ El sistema Medusse IoT utiliza **Docker Compose** para orquestar 5 servicios ind
 #### Servicio 1: Mosquitto (MQTT Broker)
 
 mosquitto:
-
-  image: eclipse-mosquitto:2
-
-  container\_name: medusse-mosquitto
-
-  ports:
-
-    \- "1883:1883"  \# MQTT
-
-    \- "9001:9001"  \# WebSocket
-
-  volumes:
-
-    \- ./mosquitto/config:/mosquitto/config
-
-    \- ./mosquitto/data:/mosquitto/data
-
-    \- ./mosquitto/log:/mosquitto/log
-
-  restart: unless-stopped
-
-  networks:
-
-    \- medusse-network
+    image: eclipse-mosquitto:2.0
+    container_name: medusse_mosquitto
+    restart: unless-stopped
+    ports:
+      - "1883:1883"
+      - "9001:9001"  # WebSocket
+    volumes:
+      - ./mosquitto/config:/mosquitto/config:ro
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log
+    networks:
+      - medusse_network
 
 **Configuración:**
 
@@ -1487,40 +1475,23 @@ mosquitto:
 #### Servicio 2: InfluxDB (Base de Datos Series Temporales)
 
 influxdb:
-
-  image: influxdb:2.7
-
-  container\_name: medusse-influxdb
-
-  ports:
-
-    \- "8086:8086"
-
-  environment:
-
-    \- DOCKER\_INFLUXDB\_INIT\_MODE=setup
-
-    \- DOCKER\_INFLUXDB\_INIT\_USERNAME=admin
-
-    \- DOCKER\_INFLUXDB\_INIT\_PASSWORD=medusse2025
-
-    \- DOCKER\_INFLUXDB\_INIT\_ORG=iescelia
-
-    \- DOCKER\_INFLUXDB\_INIT\_BUCKET=sensors
-
-    \- DOCKER\_INFLUXDB\_INIT\_ADMIN\_TOKEN=medusse-admin-token-2025
-
-  volumes:
-
-    \- influxdb-data:/var/lib/influxdb2
-
-    \- influxdb-config:/etc/influxdb2
-
-  restart: unless-stopped
-
-  networks:
-
-    \- medusse-network
+    image: influxdb:2.7
+    container_name: medusse_influxdb
+    restart: unless-stopped
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=medusse2025
+      - DOCKER_INFLUXDB_INIT_ORG=iescelia
+      - DOCKER_INFLUXDB_INIT_BUCKET=sensors
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=medusse-admin-token-2025
+    ports:
+      - "8086:8086"
+    volumes:
+      - ./influxdb/data:/var/lib/influxdb2
+      - ./influxdb/config:/etc/influxdb2
+    networks:
+      - medusse_network
 
 **Configuración:**
 
@@ -1533,26 +1504,16 @@ influxdb:
 #### Servicio 3: Telegraf (Pipeline de Datos)
 
 telegraf:
-
-  image: telegraf:1.28
-
-  container\_name: medusse-telegraf
-
-  volumes:
-
-    \- ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
-
-  depends\_on:
-
-    \- mosquitto
-
-    \- influxdb
-
-  restart: unless-stopped
-
-  networks:
-
-    \- medusse-network
+    image: telegraf:1.28
+    container_name: medusse_telegraf
+    restart: unless-stopped
+    volumes:
+      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    depends_on:
+      - mosquitto
+      - influxdb
+    networks:
+      - medusse_network
 
 **Configuración principal (telegraf.conf):**
 
@@ -1578,40 +1539,23 @@ telegraf:
 #### Servicio 4: Grafana (Visualización)
 
 grafana:
-
-  image: grafana/grafana:10.2.0
-
-  container\_name: medusse-grafana
-
-  ports:
-
-    \- "3000:3000"
-
-  environment:
-
-    \- GF\_SECURITY\_ADMIN\_USER=admin
-
-    \- GF\_SECURITY\_ADMIN\_PASSWORD=medusse2025
-
-    \- GF\_INSTALL\_PLUGINS=
-
-  volumes:
-
-    \- grafana-data:/var/lib/grafana
-
-    \- ./grafana/provisioning:/etc/grafana/provisioning
-
-    \- ./grafana/dashboards:/var/lib/grafana/dashboards
-
-  depends\_on:
-
-    \- influxdb
-
-  restart: unless-stopped
-
-  networks:
-
-    \- medusse-network
+    image: grafana/grafana:10.2.0
+    container_name: medusse_grafana
+    restart: unless-stopped
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=medusse2025
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./grafana/data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+    depends_on:
+      - influxdb
+    networks:
+      - medusse_network
 
 **Configuración:**
 
@@ -1623,36 +1567,32 @@ grafana:
 #### Servicio 5: MySQL (Base de Datos Relacional)
 
 mysql:
+    image: mysql:8.0
+    container_name: medusse_mysql
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=medusse2025
+      - MYSQL_DATABASE=medusse_db
+      - MYSQL_USER=medusse_user
+      - MYSQL_PASSWORD=medusse2025
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/init:/docker-entrypoint-initdb.d
+    networks:
+      - medusse_network
+    command: --default-authentication-plugin=mysql_native_password
 
-  image: mysql:8.0
-
-  container\_name: medusse-mysql
-
-  ports:
-
-    \- "3306:3306"
-
-  environment:
-
-    \- MYSQL\_ROOT\_PASSWORD=root2025
-
-    \- MYSQL\_DATABASE=medusse\_db
-
-    \- MYSQL\_USER=medusse\_user
-
-    \- MYSQL\_PASSWORD=medusse2025
+networks:
+  medusse_network:
+    driver: bridge
 
   volumes:
-
-    \- mysql-data:/var/lib/mysql
-
-    \- ./mysql/init:/docker-entrypoint-initdb.d
-
-  restart: unless-stopped
-
-  networks:
-
-    \- medusse-network
+    mosquitto_data:
+    influxdb_data:
+    grafana_data:
+    mysql_data:
 
 **Inicialización automática:**
 
