@@ -10,18 +10,22 @@ export function Footer() {
           </div>
           <div className="flex gap-6">
             <Link 
-              href="https://github.com/Fralopala2/proyecto-medusse/blob/clase/LICENSE" 
-              target="_blank"
+              href="/aviso-legal"
+              className="hover:text-white transition-colors"
+            >
+              Aviso Legal
+            </Link>
+            <Link 
+              href="/politica-privacidad"
               className="hover:text-white transition-colors"
             >
               Privacidad
             </Link>
             <Link 
-              href="https://github.com/Fralopala2/proyecto-medusse/blob/clase/LICENSE" 
-              target="_blank"
+              href="/mapa-sitio"
               className="hover:text-white transition-colors"
             >
-              Términos
+              Mapa del Sitio
             </Link>
           </div>
         </div>
