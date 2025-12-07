@@ -341,8 +341,10 @@
 
   <!-- PARTE 9: NOTAS IMPORTANTES - Footer -->
   <g id="notes-footer">
-    <rect x="40" y="1970" width="1520" height="30" fill="#fff9e6" stroke="#f39c12" stroke-width="2" rx="5"/>
-    <text x="800" y="1995" text-anchor="middle" class="note-text" fill="#b8860b" font-weight="bold">⚠️ Nota: Los pines A0-A5 aceptan máximo 3.3V. Para sensores de 5V, usar conversor de nivel lógico. Sensores I2C (D21/D22) pueden estar en paralelo si tienen direcciones I2C únicas.</text>
+    <rect x="40" y="1930" width="1520" height="60" fill="#fff9e6" stroke="#f39c12" stroke-width="2" rx="5"/>
+    <text x="50" y="1952" class="note-text" fill="#b8860b" font-weight="bold">⚠️ Nota:</text>
+    <text x="120" y="1952" class="note-text" fill="#2d3748">Los pines A0-A5 aceptan máximo 3.3V. Para sensores de 5V, usar conversor de nivel lógico.</text>
+    <text x="120" y="1972" class="note-text" fill="#2d3748">Sensores I2C (D21/D22) pueden estar en paralelo si tienen direcciones I2C únicas.</text>
   </g>
 
   <!-- LEYENDA DE COLORES - Top Right -->
