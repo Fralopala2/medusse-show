@@ -11,7 +11,7 @@ export const heroSections = [
   {
     id: "hero-main",
     title: "Medusse IoT",
-    subtitle: "monitoreo ambiental inteligente",
+    subtitle: "Monitoreo ambiental inteligente",
     description: "Sistema IoT completo con 18 tipos de sensores, visualización en tiempo real, gestión de energía solar y arquitectura de microservicios",
     ctas: [
       {
@@ -26,8 +26,8 @@ export const heroSections = [
   },
   {
     id: "hero-dashboard",
-    title: "dashboard en tiempo real",
-    subtitle: "visualización profesional con Grafana",
+    title: "Dashboard en tiempo real",
+    subtitle: "Visualización profesional con Grafana",
     features: [
       "4 ubicaciones monitoreadas",
       "18 tipos de sensores",
@@ -47,10 +47,10 @@ export const heroSections = [
   },
   {
     id: "hero-mobile",
-    title: "app móvil Flutter",
-    subtitle: "multiplataforma y tiempo real",
+    title: "App móvil Flutter",
+    subtitle: "Multiplataforma y tiempo real",
     features: [
-      "Windows, Web, Android, iOS",
+      "Windows, Web, Android",
       "WebSocket para datos en vivo",
       "Gráficos interactivos con fl_chart",
       "Sistema de alertas por umbrales",
@@ -69,7 +69,7 @@ export const heroSections = [
   {
     id: "hero-sensors",
     title: "18 tipos de sensores",
-    subtitle: "monitoreo completo",
+    subtitle: "Monitoreo completo",
     description:
       "Sensores ambientales, calidad de agua, suelo y gestión de energía solar con batería inteligente",
     features: [
@@ -92,7 +92,7 @@ export const heroSections = [
   {
     id: "hero-api",
     title: "API REST completa",
-    subtitle: "integración fácil",
+    subtitle: "Integración fácil",
     description:
       "7 endpoints HTTP + WebSocket para streaming en tiempo real. Documentación completa y ejemplos de uso",
     ctas: [
@@ -108,8 +108,8 @@ export const heroSections = [
   },
   {
     id: "hero-lora",
-    title: "preparado para LoRa Mesh",
-    subtitle: "migración a hardware real",
+    title: "Preparado para LoRa Mesh",
+    subtitle: "Migración a hardware real",
     description:
       "Arquitectura compatible con comunicación LoRa. Gateway intercambiable sin modificar API o Flutter",
     ctas: [
@@ -126,28 +126,28 @@ export const heroSections = [
 ];
 
 export const hardwareProducts = [
-  { name: "nodo ESP32 + sensores ambientales (DHT22, BME680)", price: "150 €" },
-  { name: "nodo ESP32 + sensores de agua (pH, TDS, DO)", price: "180 €" },
-  { name: "nodo ESP32 + panel solar + batería", price: "200 €" },
-  { name: "gateway LoRa Raspberry Pi 4 (4GB)", price: "250 €" },
-  { name: "sensor DHT22 (temperatura/humedad)", price: "15 €" },
-  { name: "sensor BME680 (calidad aire + VOC)", price: "25 €" },
-  { name: "sensor pH para agua", price: "30 €" },
-  { name: "módulo LoRa SX1276 868MHz", price: "20 €" },
+  { name: "Nodo ESP32 + sensores ambientales (DHT22, BME680)", price: "150 €" },
+  { name: "Nodo ESP32 + sensores de agua (pH, TDS, DO)", price: "180 €" },
+  { name: "Nodo ESP32 + panel solar + batería", price: "200 €" },
+  { name: "Gateway LoRa Raspberry Pi 4 (4GB)", price: "250 €" },
+  { name: "Sensor DHT22 (temperatura/humedad)", price: "15 €" },
+  { name: "Sensor BME680 (calidad aire + VOC)", price: "25 €" },
+  { name: "Sensor pH para agua", price: "30 €" },
+  { name: "Módulo LoRa SX1276 868MHz", price: "20 €" },
 ];
 
 export const softwareModules = [
-  { name: "dashboard Grafana personalizado", price: "Incluido" },
+  { name: "Dashboard Grafana personalizado", price: "Incluido" },
   { name: "API REST + WebSocket", price: "Incluido" },
-  { name: "app Flutter multiplataforma", price: "Incluido" },
-  { name: "sistema de alertas inteligentes", price: "50 €" },
-  { name: "panel de administración de usuarios", price: "100 €" },
-  { name: "integración LoRa Mesh", price: "200 €" },
+  { name: "App Flutter multiplataforma", price: "Incluido" },
+  { name: "Sistema de alertas inteligentes", price: "50 €" },
+  { name: "Panel de administración de usuarios", price: "100 €" },
+  { name: "Integración LoRa Mesh", price: "200 €" },
 ];
 
 export const technologyData = {
-  title: "stack tecnológico moderno",
-  subtitle: "arquitectura de microservicios robusta y escalable",
+  title: "Stack tecnológico moderno",
+  subtitle: "Arquitectura de microservicios robusta y escalable",
   points: [
     "MQTT (Mosquitto 2.0) para comunicación IoT",
     "InfluxDB 2.7 para series temporales",
@@ -158,14 +158,14 @@ export const technologyData = {
 };
 
 export const servicesData = [
-  { title: "instalación completa del sistema", price: "500 €" },
-  { title: "configuración de nodos ESP32", price: "100 €/nodo" },
-  { title: "soporte técnico especializado", price: "50 €/hora" },
-  { title: "mantenimiento anual", price: "600 €/año" },
-  { title: "formación personalizada", price: "300 €/día" },
+  { title: "Instalación completa del sistema", price: "500 €" },
+  { title: "Configuración de nodos ESP32", price: "100 €/nodo" },
+  { title: "Soporte técnico especializado", price: "50 €/hora" },
+  { title: "Mantenimiento anual", price: "600 €/año" },
+  { title: "Formación personalizada", price: "300 €/día" },
 ];
 
 export const aboutData = {
-  title: "proyecto de trabajo de fin de grado",
+  title: "Proyecto de trabajo de fin de grado",
   text: "Medusse IoT es un proyecto de TFG desarrollado en el IES José Rodrigo Botet (curso 2025/2026). Sistema completo de monitoreo ambiental con arquitectura de microservicios, 18 tipos de sensores, visualización en tiempo real y preparado para migración a hardware real con comunicación LoRa Mesh. Incluye dashboard Grafana, API REST, WebSocket y app móvil Flutter.",
 };
