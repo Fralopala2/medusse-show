@@ -6,9 +6,9 @@
 
 # MEDUSSE IoT
 
-## Sistema de Monitoreo Ambiental con Arquitectura de Microservicios
+## Sistema de monitoreo ambiental con arquitectura de aicroservicios
 
-### Documentación Final del Trabajo de Fin de Grado
+### Documentación final del trabajo de fin de grado
 
 ---
 
@@ -17,7 +17,7 @@
 **Institución:** IES José Rodrigo Botet  
 **Curso Académico:** 2025/2026  
 **Versión del Proyecto:** 2.7.7  
-**Fecha de Entrega:** Noviembre 2025  
+**Fecha de Entrega:** Diciembre 2025  
 **Estado:** 16/16 Retos Completados (100%) ✅
 
 ---
