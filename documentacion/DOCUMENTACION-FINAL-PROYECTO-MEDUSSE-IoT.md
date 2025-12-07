@@ -5047,28 +5047,28 @@ async function createUserWithPreferences(userData, preferences) {
 
 - `.env` \- Configuración de conexión
 
-```ini
-\# MySQL
+```sql
+# MySQL
 
-DB\_HOST=localhost
+DB_HOST=localhost
 
-DB\_PORT=3306
+DB_PORT=3306
 
-DB\_USER=medusse\_user
+DB_USER=medusse_user
 
-DB\_PASSWORD=medusse2025
+DB_PASSWORD=medusse2025
 
-DB\_NAME=medusse\_db
+DB_NAME=medusse_db
 
-\# InfluxDB
+# InfluxDB
 
-INFLUX\_URL=http://localhost:8086
+INFLUX_URL=http://localhost:8086
 
-INFLUX\_TOKEN=medusse-admin-token-2025
+INFLUX_TOKEN=medusse-admin-token-2025
 
-INFLUX\_ORG=iescelia
+INFLUX_ORG=iescelia
 
-INFLUX\_BUCKET=sensors
+INFLUX_BUCKET=sensors
 ```
 
 ### Buenas Prácticas Implementadas
