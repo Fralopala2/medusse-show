@@ -17,7 +17,7 @@
   <!-- Title Section -->
   <rect x="0" y="0" width="1600" height="80" fill="#2c3e50" rx="0"/>
   <text x="800" y="45" text-anchor="middle" class="title" fill="white">Arduino Nano ESP32 - Diagrama de Conexiones</text>
-  <text x="800" y="65" text-anchor="middle" class="subtitle" fill="#ecf0f1">Medusse IoT - 18 Sensores y módulos</text>
+  <text x="800" y="65" text-anchor="middle" class="subtitle" fill="#ffffff">Medusse IoT - 18 sensores y módulos</text>
 
   <!-- PARTE 1: ARDUINO BOARD CENTRAL -->
   <g id="arduino-board">
