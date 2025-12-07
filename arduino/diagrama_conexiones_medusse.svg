@@ -1,12 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 2000" width="1600" height="2000">
-  <!-- Version 2.0 - Mejorada legibilidad -->
+  <!-- Version 2.1 - Contraste corregido -->
   <defs>
     <style>
       .title { font-size: 32px; font-weight: bold; fill: #ffffff; }
       .subtitle { font-size: 14px; fill: #ffffff; }
       .section-title { font-size: 18px; font-weight: bold; }
       .sensor-name { font-size: 12px; font-weight: bold; fill: #1a202c; }
-      .pin-text { font-size: 10px; fill: #ffffff; }
+      .pin-text { font-size: 10px; fill: #2d3748; }
+      .pin-text-light { font-size: 10px; fill: #ffffff; }
       .connection-label { font-size: 9px; fill: #4a5568; font-weight: 500; }
       .note-text { font-size: 10px; fill: #2d3748; }
     </style>
@@ -32,73 +33,73 @@
     <g id="left-pins">
       <!-- 3V3 Power (Red) -->
       <circle cx="550" cy="220" r="5" fill="#e74c3c"/>
-      <text x="535" y="225" text-anchor="end" class="pin-text" fill="white">3V3</text>
+      <text x="535" y="225" text-anchor="end" class="pin-text-light">3V3</text>
       
       <!-- GND (Black) -->
       <circle cx="550" cy="280" r="5" fill="#000000"/>
-      <text x="535" y="285" text-anchor="end" class="pin-text" fill="white">GND</text>
+      <text x="535" y="285" text-anchor="end" class="pin-text-light">GND</text>
       
       <!-- D4 (Blue) -->
       <circle cx="550" cy="340" r="5" fill="#3498db"/>
-      <text x="535" y="345" text-anchor="end" class="pin-text" fill="white">D4</text>
+      <text x="535" y="345" text-anchor="end" class="pin-text-light">D4</text>
       
       <!-- D5 (Green) -->
       <circle cx="550" cy="400" r="5" fill="#27ae60"/>
-      <text x="535" y="405" text-anchor="end" class="pin-text" fill="white">D5</text>
+      <text x="535" y="405" text-anchor="end" class="pin-text-light">D5</text>
       
       <!-- D6 (Green) -->
       <circle cx="550" cy="460" r="5" fill="#27ae60"/>
-      <text x="535" y="465" text-anchor="end" class="pin-text" fill="white">D6</text>
+      <text x="535" y="465" text-anchor="end" class="pin-text-light">D6</text>
       
       <!-- D7 (Green) -->
       <circle cx="550" cy="520" r="5" fill="#27ae60"/>
-      <text x="535" y="525" text-anchor="end" class="pin-text" fill="white">D7</text>
+      <text x="535" y="525" text-anchor="end" class="pin-text-light">D7</text>
       
       <!-- D8 (Green) -->
       <circle cx="550" cy="580" r="5" fill="#27ae60"/>
-      <text x="535" y="585" text-anchor="end" class="pin-text" fill="white">D8</text>
+      <text x="535" y="585" text-anchor="end" class="pin-text-light">D8</text>
     </g>
 
     <!-- Center pin column -->
     <g id="center-pins">
       <!-- D21 I2C SDA (Blue) -->
       <circle cx="800" cy="220" r="5" fill="#3498db"/>
-      <text x="800" y="205" text-anchor="middle" class="pin-text" fill="white">D21 (SDA)</text>
+      <text x="800" y="205" text-anchor="middle" class="pin-text-light">D21 (SDA)</text>
       
       <!-- D22 I2C SCL (Blue) -->
       <circle cx="800" cy="280" r="5" fill="#3498db"/>
-      <text x="800" y="265" text-anchor="middle" class="pin-text" fill="white">D22 (SCL)</text>
+      <text x="800" y="265" text-anchor="middle" class="pin-text-light">D22 (SCL)</text>
     </g>
 
     <!-- Right pin column -->
     <g id="right-pins">
       <!-- A0 (Orange) -->
       <circle cx="1050" cy="220" r="5" fill="#f39c12"/>
-      <text x="1065" y="225" text-anchor="start" class="pin-text" fill="white">A0</text>
+      <text x="1065" y="225" text-anchor="start" class="pin-text-light">A0</text>
       
       <!-- A1 (Green) -->
       <circle cx="1050" cy="280" r="5" fill="#27ae60"/>
-      <text x="1065" y="285" text-anchor="start" class="pin-text" fill="white">A1</text>
+      <text x="1065" y="285" text-anchor="start" class="pin-text-light">A1</text>
       
       <!-- A2 (Green) -->
       <circle cx="1050" cy="340" r="5" fill="#27ae60"/>
-      <text x="1065" y="345" text-anchor="start" class="pin-text" fill="white">A2</text>
+      <text x="1065" y="345" text-anchor="start" class="pin-text-light">A2</text>
       
       <!-- A3 (Green) -->
       <circle cx="1050" cy="400" r="5" fill="#27ae60"/>
-      <text x="1065" y="405" text-anchor="start" class="pin-text" fill="white">A3</text>
+      <text x="1065" y="405" text-anchor="start" class="pin-text-light">A3</text>
       
       <!-- A4 (Green) -->
       <circle cx="1050" cy="460" r="5" fill="#27ae60"/>
-      <text x="1065" y="465" text-anchor="start" class="pin-text" fill="white">A4</text>
+      <text x="1065" y="465" text-anchor="start" class="pin-text-light">A4</text>
       
       <!-- A5 (Green) -->
       <circle cx="1050" cy="520" r="5" fill="#27ae60"/>
-      <text x="1065" y="525" text-anchor="start" class="pin-text" fill="white">A5</text>
+      <text x="1065" y="525" text-anchor="start" class="pin-text-light">A5</text>
       
       <!-- D10-D13 SPI (Orange) -->
       <circle cx="1050" cy="600" r="5" fill="#f39c12"/>
-      <text x="1065" y="605" text-anchor="start" class="pin-text" fill="white">D10-D13</text>
+      <text x="1065" y="605" text-anchor="start" class="pin-text-light">D10-D13</text>
     </g>
   </g>
 
