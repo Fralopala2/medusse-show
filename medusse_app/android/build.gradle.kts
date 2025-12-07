@@ -5,6 +5,25 @@ allprojects {
     }
 }
 
+// Aplicar plugins sin aplicarlos en el root
+plugins {
+    id("com.android.application") version "8.9.1" apply false
+    id("com.android.library") version "8.9.1" apply false
+    id("dev.flutter.flutter-gradle-plugin") apply false
+    id("kotlin-android") version "2.1.0" apply false
+}
+
+// Configuración común para subproyectos Android
+subprojects {
+    afterEvaluate {
+        if (plugins.hasPlugin("com.android.library")) {
+            android {
+                compileSdk = 35
+            }
+        }
+    }
+}
+
 val newBuildDir: Directory =
     rootProject.layout.buildDirectory
         .dir("../../build")
