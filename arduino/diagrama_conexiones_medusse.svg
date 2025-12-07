@@ -1,11 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 2000" width="1600" height="2000">
+  <!-- Version 2.0 - Mejorada legibilidad -->
   <defs>
     <style>
-      .title { font-size: 32px; font-weight: bold; fill: #1a202c; }
-      .subtitle { font-size: 14px; fill: #4a5568; }
+      .title { font-size: 32px; font-weight: bold; fill: #ffffff; }
+      .subtitle { font-size: 14px; fill: #ffffff; }
       .section-title { font-size: 18px; font-weight: bold; }
       .sensor-name { font-size: 12px; font-weight: bold; fill: #1a202c; }
-      .pin-text { font-size: 10px; fill: #2d3748; }
+      .pin-text { font-size: 10px; fill: #ffffff; }
       .connection-label { font-size: 9px; fill: #4a5568; font-weight: 500; }
       .note-text { font-size: 10px; fill: #2d3748; }
     </style>
@@ -16,8 +17,8 @@
 
   <!-- Title Section -->
   <rect x="0" y="0" width="1600" height="80" fill="#2c3e50" rx="0"/>
-  <text x="800" y="45" text-anchor="middle" class="title" fill="white">Arduino Nano ESP32 - Diagrama de Conexiones</text>
-  <text x="800" y="65" text-anchor="middle" class="subtitle" fill="#ffffff">Medusse IoT - 18 sensores y módulos</text>
+  <text x="800" y="45" text-anchor="middle" class="title">Arduino Nano ESP32 - Diagrama de conexiones</text>
+  <text x="800" y="65" text-anchor="middle" class="subtitle">Medusse IoT - 18 sensores y módulos</text>
 
   <!-- PARTE 1: ARDUINO BOARD CENTRAL -->
   <g id="arduino-board">
