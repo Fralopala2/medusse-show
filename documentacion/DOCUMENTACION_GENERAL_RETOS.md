@@ -1,17 +1,17 @@
-# Documentacion General del Proyecto - Medusse IoT
+# Documentación General del Proyecto - Medusse IoT
 
 **Sistema IoT de Monitoreo Ambiental con Arquitectura de Microservicios**
 
 ---
 
-## Informacion del Proyecto
+## Información del Proyecto
 
-**Titulo:** Sistema IoT de Monitoreo Ambiental con Arquitectura de Microservicios  
-**Autor:** Francisco Manuel Lopez Alarte  
+**Título:** Sistema IoT de Monitoreo Ambiental con Arquitectura de Microservicios  
+**Autor:** Francisco Manuel López Alarte  
 **Email:** pacoaldev@gmail.com  
-**Institucion:** IES Jose Rodrigo Botet  
-**Curso Academico:** 2025/2026  
-**Version:** 2.7.4  
+**Institución:** IES José Rodrigo Botet  
+**Curso Académico:** 2025/2026  
+**Versión:** 2.7.7  
 **Fecha:** Noviembre 2025  
 **Licencia:** All Rights Reserved  
 **Estado:** 16/16 Retos Completados (100%) ✅
@@ -20,9 +20,9 @@
 
 ## Resumen Ejecutivo
 
-Medusse IoT es un ecosistema completo de monitoreo ambiental que integra hardware ESP32, comunicacion MQTT, bases de datos de series temporales, visualizacion profesional y aplicaciones cliente multiplataforma. El sistema monitorea 18 tipos de sensores distribuidos en 4 ubicaciones, proporcionando datos en tiempo real a traves de multiples interfaces: dashboard Grafana, API REST, aplicacion web Next.js y aplicacion movil Flutter.
+Medusse IoT es un ecosistema completo de monitoreo ambiental que integra hardware ESP32, comunicación MQTT, bases de datos de series temporales, visualización profesional y aplicaciones cliente multiplataforma. El sistema monitorea 18 tipos de sensores distribuidos en 4 ubicaciones, proporcionando datos en tiempo real a través de múltiples interfaces: dashboard Grafana, API REST, aplicación web Next.js y aplicación móvil Flutter.
 
-El proyecto demuestra la implementacion practica de una arquitectura de microservicios moderna, con enfasis en escalabilidad, rendimiento y preparacion para despliegue en hardware real con comunicacion LoRa Mesh.
+El proyecto demuestra la implementación práctica de una arquitectura de microservicios moderna, con énfasis en escalabilidad, rendimiento y preparación para despliegue en hardware real con comunicación LoRa Mesh.
 
 ---
 
@@ -30,14 +30,23 @@ El proyecto demuestra la implementacion practica de una arquitectura de microser
 
 ### Diagrama de Arquitectura
 
-```
-ESP32 Simulators → MQTT Broker → Telegraf → InfluxDB → Grafana Dashboard
-                        ↓                                      ↓
-                    API REST ← Web Next.js            MySQL Database
-                        ↓
-                 WebSocket (Real-time)
-                        ↓
-                 Flutter Mobile App
+```mermaid
+flowchart LR
+    ESP[ESP32<br/>Simulators] --> MQTT[MQTT<br/>Broker]
+    MQTT --> TEL[Telegraf]
+    TEL --> INFLUX[InfluxDB]
+    INFLUX --> GRAF[Grafana<br/>Dashboard]
+    MQTT --> API[API REST]
+    INFLUX --> API
+    API --> MYSQL[MySQL<br/>Database]
+    API --> WEB[Web<br/>Next.js]
+    API --> WS[WebSocket<br/>Real-time]
+    WS --> FLUTTER[Flutter<br/>Mobile App]
+    
+    style ESP fill:#3b82f6,stroke:#1e40af,stroke-width:2px,color:#fff
+    style MQTT fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff
+    style INFLUX fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
+    style GRAF fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#fff
 ```
 
 ### Componentes Principales
@@ -47,22 +56,22 @@ ESP32 Simulators → MQTT Broker → Telegraf → InfluxDB → Grafana Dashboard
    - 18 tipos de sensores por ubicacion
    - Publicacion MQTT cada 15 segundos
 
-2. **Capa de Comunicacion (Message Broker)**
+2. **Capa de Comunicación (Message Broker)**
    - Mosquitto MQTT 2.0
    - Puerto 1883 (MQTT) y 9001 (WebSocket)
    - Topics estructurados: `iescelia/{ubicacion}/{sensor}`
 
 3. **Capa de Procesamiento (Data Pipeline)**
-   - Telegraf 1.28 con configuracion optimizada
-   - Parsing de JSON y agregacion temporal
-   - Pipeline sin perdidas con retry automatico
+   - Telegraf 1.28 con configuración optimizada
+   - Parsing de JSON y agregación temporal
+   - Pipeline sin pérdidas con retry automático
 
 4. **Capa de Almacenamiento (Data Storage)**
    - InfluxDB 2.7 para series temporales
-   - MySQL 8.0 para usuarios y configuracion
-   - Volumenes Docker persistentes
+   - MySQL 8.0 para usuarios y configuración
+   - Volúmenes Docker persistentes
 
-5. **Capa de Visualizacion (Presentation Layer)**
+5. **Capa de Visualización (Presentation Layer)**
    - Grafana 10.2.0 con dashboard personalizado
    - Web Next.js 16 con TypeScript
    - App Flutter multiplataforma
@@ -70,7 +79,7 @@ ESP32 Simulators → MQTT Broker → Telegraf → InfluxDB → Grafana Dashboard
 6. **Capa de API (Application Layer)**
    - Node.js + Express 4.18.2
    - WebSocket para streaming en tiempo real
-   - Sistema de autenticacion con sesiones
+   - Sistema de autenticación con sesiones
 
 ---
 
@@ -78,7 +87,7 @@ ESP32 Simulators → MQTT Broker → Telegraf → InfluxDB → Grafana Dashboard
 
 ### Ubicaciones
 
-El sistema monitorea 4 ubicaciones diferentes, cada una con caracteristicas termicas especificas:
+El sistema monitorea 4 ubicaciones diferentes, cada una con características térmicas específicas:
 
 1. **Aula 20** - Nodo ESP32_NODE_01
    - Temperatura base: 22°C
@@ -86,7 +95,7 @@ El sistema monitorea 4 ubicaciones diferentes, cada una con caracteristicas term
 
 2. **Aula 21** - Nodo ESP32_NODE_02
    - Temperatura base: 24°C
-   - Color identificativo: Purpura (#805AD5)
+   - Color identificativo: Púrpura (#805AD5)
 
 3. **Gimnasio** - Nodo ESP32_NODE_03
    - Temperatura base: 23°C
@@ -102,25 +111,25 @@ El sistema monitorea 4 ubicaciones diferentes, cada una con caracteristicas term
 - **Temperatura** (°C) - Sensor DHT22
 - **Humedad** (%) - Sensor DHT22
 - **CO2** (ppm) - Sensor de gas MQ-135
-- **Presion atmosferica** (hPa) - Sensor BME680
-- **VOC** (ppb) - Compuestos Organicos Volatiles - BME680
-- **IAQ** (indice) - Calidad del Aire Interior - BME680
+- **Presión atmosférica** (hPa) - Sensor BME680
+- **VOC** (ppb) - Compuestos Orgánicos Volátiles - BME680
+- **IAQ** (índice) - Calidad del Aire Interior - BME680
 
 #### Sensores de Calidad de Agua y Suelo
 - **Humedad del suelo** (%) - Sensor capacitivo
 - **pH** (nivel) - Sensor de pH para agua
 - **Flujo de agua** (L/min) - Sensor YF-S201
-- **TDS** (ppm) - Solidos Disueltos Totales
-- **Oxigeno disuelto** (mg/L) - Sensor DO
+- **TDS** (ppm) - Sólidos Disueltos Totales
+- **Oxígeno disuelto** (mg/L) - Sensor DO
 
-#### Sistema de Energia Solar (Fase 2)
-- **Voltaje de bateria** (V) - Rango 3.2-4.2V
+#### Sistema de Energía Solar (Fase 2)
+- **Voltaje de batería** (V) - Rango 3.2-4.2V
 - **Voltaje solar** (V) - Panel 18.5V max
-- **Porcentaje de bateria** (%) - 0-100%
-- **Consumo de energia** (mA) - Consumo actual del nodo
+- **Porcentaje de batería** (%) - 0-100%
+- **Consumo de energía** (mA) - Consumo actual del nodo
 - **Estado de carga** (booleano) - Cargando/No cargando
 - **Modo bajo consumo** (booleano) - Activado/Desactivado
-- **Contador de wake-ups** (count) - Numero de despertares
+- **Contador de wake-ups** (count) - Número de despertares
 
 ---
 
@@ -139,23 +148,23 @@ El sistema monitorea 4 ubicaciones diferentes, cada una con caracteristicas term
 
 ### Frontend
 - **Next.js** 16 - Framework React
-- **TypeScript** 5 - Tipado estatico
+- **TypeScript** 5 - Tipado estático
 - **Tailwind CSS** 4 - Estilos
 - **Framer Motion** 12 - Animaciones
 
 ### Mobile
 - **Flutter** 3.9+ - Framework multiplataforma
-- **Dart** - Lenguaje de programacion
-- **Provider** - Gestion de estado
-- **fl_chart** - Graficos interactivos
+- **Dart** - Lenguaje de programación
+- **Provider** - Gestión de estado
+- **fl_chart** - Gráficos interactivos
 
 ### Infraestructura
-- **Docker** - Contenedorizacion
-- **Docker Compose** - Orquestacion
+- **Docker** - Contenedorización
+- **Docker Compose** - Orquestación
 - **Mosquitto** 2.0 - Broker MQTT
-- **Grafana** 10.2.0 - Visualizacion
+- **Grafana** 10.2.0 - Visualización
 
-### Comunicacion
+### Comunicación
 - **MQTT** - Protocolo IoT
 - **WebSocket** - Tiempo real
 - **HTTP REST** - API
@@ -170,58 +179,58 @@ El sistema monitorea 4 ubicaciones diferentes, cada una con caracteristicas term
 ### Reto 1: Proyecto de Sostenibilidad
 **Estado:** Completado ✅
 
-**Descripcion:** Desarrollar un proyecto que contribuya a la sostenibilidad ambiental.
+**Descripción:** Desarrollar un proyecto que contribuya a la sostenibilidad ambiental.
 
-**Implementacion:**
+**Implementación:**
 
-#### Alineacion con Objetivos de Desarrollo Sostenible (ODS)
-- **ODS 3 - Salud y Bienestar:** Monitorizacion de CO2, IAQ y VOC
-- **ODS 6 - Agua Limpia:** Sensores de pH, TDS, flujo y oxigeno disuelto
-- **ODS 7 - Energia Limpia:** Gestion de energia solar y baterias
-- **ODS 11 - Ciudades Sostenibles:** Gestion eficiente de edificios
-- **ODS 13 - Accion por el Clima:** Datos ambientales para politicas
+#### Alineación con Objetivos de Desarrollo Sostenible (ODS)
+- **ODS 3 - Salud y Bienestar:** Monitorización de CO2, IAQ y VOC
+- **ODS 6 - Agua Limpia:** Sensores de pH, TDS, flujo y oxígeno disuelto
+- **ODS 7 - Energía Limpia:** Gestión de energía solar y baterías
+- **ODS 11 - Ciudades Sostenibles:** Gestión eficiente de edificios
+- **ODS 13 - Acción por el Clima:** Datos ambientales para políticas
 
 #### Contribuciones a la Sostenibilidad
-1. **Monitorizacion Ambiental Integral:** 18 sensores (aire, agua, energia)
-2. **Datos en Tiempo Real:** Alertas automaticas para toma de decisiones
-3. **Energia y Autonomia:** Gestion inteligente de energia solar
+1. **Monitorización Ambiental Integral:** 18 sensores (aire, agua, energía)
+2. **Datos en Tiempo Real:** Alertas automáticas para toma de decisiones
+3. **Energía y Autonomía:** Gestión inteligente de energía solar
 4. **Escalabilidad Eficiente:** LoRa Mesh de bajo consumo
-5. **Educacion y Replicabilidad:** Herramienta para concienciacion
-6. **Implementacion Reproducible:** Despliegue rapido con Docker
+5. **Educación y Replicabilidad:** Herramienta para concienciación
+6. **Implementación Reproducible:** Despliegue rápido con Docker
 
 #### Casos de Uso Implementados
-- Gestion inteligente de aulas (20-30% ahorro HVAC)
+- Gestión inteligente de aulas (20-30% ahorro HVAC)
 - Riego inteligente (30-50% ahorro agua)
-- Monitorizacion de instalaciones solares
-- Deteccion temprana de problemas de agua
-- Educacion ambiental con datos reales
+- Monitorización de instalaciones solares
+- Detección temprana de problemas de agua
+- Educación ambiental con datos reales
 
 #### Impacto Medible
-- Ahorro energetico: 2500-4000 kWh/año
-- Ahorro economico: 700-1200€/año
-- Reduccion CO2: 1-1.5 toneladas/año
+- Ahorro energético: 2500-4000 kWh/año
+- Ahorro económico: 700-1200€/año
+- Reducción CO2: 1-1.5 toneladas/año
 - Ahorro agua: 50-100 m³/año
 
-**Documentacion completa:** `documentacion/RETO_1_SOSTENIBILIDAD.md`
+**Documentación completa:** `documentacion/RETO_1_SOSTENIBILIDAD.md`
 
 ---
 
 ### Reto 2: Base de Datos
 **Estado:** Completado ✅
 
-**Descripcion:** Diseñar e implementar bases de datos relacionales y no relacionales.
+**Descripción:** Diseñar e implementar bases de datos relacionales y no relacionales.
 
-**Implementacion:**
+**Implementación:**
 
 #### InfluxDB 2.7 (Series Temporales)
 - **Bucket:** sensors
-- **Organizacion:** iescelia
-- **Retencion:** Ilimitada
+- **Organización:** iescelia
+- **Retención:** Ilimitada
 - **Measurements:** 18 tipos de sensores
 - **Tags:** location, node_id, sensor
 - **Fields:** value, timestamp
 
-**Configuracion:**
+**Configuración:**
 ```
 URL: http://localhost:8086
 Token: medusse-admin-token-2025
@@ -232,15 +241,15 @@ Usuario: admin / medusse2025
 - **Base de datos:** medusse_db
 - **Usuario:** medusse_user / medusse2025
 - **9 Tablas implementadas:**
-  1. users - Gestion de usuarios
-  2. sessions - Tokens de sesion
-  3. user_preferences - Configuracion personalizada
+  1. users - Gestión de usuarios
+  2. sessions - Tokens de sesión
+  3. user_preferences - Configuración personalizada
   4. locations - 4 ubicaciones
   5. sensors - 18 tipos de sensores
   6. alerts - Sistema de alertas
   7. user_alerts - Notificaciones
-  8. activity_log - Auditoria
-  9. system_config - Configuracion del sistema
+  8. activity_log - Auditoría
+  9. system_config - Configuración del sistema
 
 **Relaciones:**
 - users ← sessions (1:N)
@@ -254,27 +263,27 @@ Usuario: admin / medusse2025
 ### Reto 3: Procedimientos Almacenados
 **Estado:** Completado ✅
 
-**Descripcion:** Implementar logica de negocio mediante procedimientos almacenados.
+**Descripción:** Implementar lógica de negocio mediante procedimientos almacenados.
 
-**Implementacion:** 10 procedimientos almacenados en MySQL
+**Implementación:** 10 procedimientos almacenados en MySQL
 
-#### Procedimientos de Autenticacion
-1. **sp_authenticate_user** - Autenticacion y creacion de sesion
+#### Procedimientos de Autenticación
+1. **sp_authenticate_user** - Autenticación y creación de sesión
    - Valida credenciales con bcrypt
    - Genera token UUID
    - Registra IP y User-Agent
    - Retorna datos del usuario
 
-2. **sp_validate_session** - Validacion de token
+2. **sp_validate_session** - Validación de token
    - Verifica token activo
-   - Comprueba expiracion (24 horas)
+   - Comprueba expiración (24 horas)
    - Actualiza last_activity
    - Retorna datos del usuario
 
-3. **sp_logout_user** - Cierre de sesion
+3. **sp_logout_user** - Cierre de sesión
    - Invalida token
    - Registra logout en activity_log
-   - Limpia sesion
+   - Limpia sesión
 
 #### Procedimientos de Alertas
 4. **sp_create_alert** - Crear alerta
@@ -285,78 +294,78 @@ Usuario: admin / medusse2025
 5. **sp_resolve_alert** - Resolver alerta
    - Marca alerta como resuelta
    - Actualiza timestamp
-   - Notifica resolucion
+   - Notifica resolución
 
 6. **sp_get_user_alerts** - Obtener notificaciones
    - Lista alertas del usuario
-   - Filtra por leidas/no leidas
+   - Filtra por leídas/no leídas
    - Ordena por fecha
 
-7. **sp_mark_alert_read** - Marcar como leida
+7. **sp_mark_alert_read** - Marcar como leída
    - Actualiza estado de lectura
    - Registra timestamp
 
 #### Procedimientos de Mantenimiento
-8. **sp_cleanup_expired_sessions** - Limpieza automatica
+8. **sp_cleanup_expired_sessions** - Limpieza automática
    - Elimina sesiones expiradas
    - Optimiza rendimiento
-   - Ejecutable via cron
+   - Ejecutable vía cron
 
-#### Procedimientos de Estadisticas
-9. **sp_get_system_stats** - Estadisticas del sistema
+#### Procedimientos de Estadísticas
+9. **sp_get_system_stats** - Estadísticas del sistema
    - Total de usuarios por rol
    - Sesiones activas
    - Alertas pendientes
    - Actividad reciente
 
-10. **sp_get_location_stats** - Estadisticas por ubicacion
-    - Sensores por ubicacion
-    - Alertas por ubicacion
-    - Ultimas lecturas
+10. **sp_get_location_stats** - Estadísticas por ubicación
+    - Sensores por ubicación
+    - Alertas por ubicación
+    - Últimas lecturas
 
 **Ventajas:**
-- Logica centralizada en la base de datos
+- Lógica centralizada en la base de datos
 - Mejor rendimiento (menos round-trips)
 - Seguridad mejorada
 - Mantenimiento simplificado
-- Reutilizacion de codigo
+- Reutilización de código
 
 ---
 
 ### Reto 4: Diseño de Bocetos
 **Estado:** Completado ✅
 
-**Descripcion:** Diseñar la estructura visual y de componentes de las interfaces.
+**Descripción:** Diseñar la estructura visual y de componentes de las interfaces.
 
-**Implementacion:**
+**Implementación:**
 
 #### Dashboard Grafana
 - Header personalizado con logo y gradientes CSS
-- 6 filas colapsables organizadas por categoria
-- Seccion de resumen con KPIs principales
-- Filtros multi-select por ubicacion
-- Esquema de colores diferenciado por ubicacion
+- 6 filas colapsables organizadas por categoría
+- Sección de resumen con KPIs principales
+- Filtros multi-select por ubicación
+- Esquema de colores diferenciado por ubicación
 - Paneles con iconos de sensores integrados
 
-#### Aplicacion Web Next.js
-- 6 hero sections con informacion del proyecto
+#### Aplicación Web Next.js
+- 6 hero sections con información del proyecto
 - Dashboard en tiempo real con 4 ubicaciones
 - Cards de sensores con alertas visuales
-- Indicador de conexion WebSocket
-- Navegacion suave entre secciones
+- Indicador de conexión WebSocket
+- Navegación suave entre secciones
 - Responsive design para todos los dispositivos
 
-#### Aplicacion Movil Flutter
+#### Aplicación Móvil Flutter
 - Pantalla Home con resumen general
-- Pantalla de detalle por ubicacion
-- Pantalla de graficos historicos
+- Pantalla de detalle por ubicación
+- Pantalla de gráficos históricos
 - Sistema de alertas visual
 - Material Design 3
-- Navegacion intuitiva
+- Navegación intuitiva
 
 **Principios de Diseño:**
 - Consistencia visual en todas las plataformas
-- Jerarquia clara de informacion
+- Jerarquía clara de información
 - Feedback visual inmediato
 - Accesibilidad y usabilidad
 - Responsive y adaptable
@@ -366,40 +375,40 @@ Usuario: admin / medusse2025
 ### Reto 5: Interfaces HTML/CSS
 **Estado:** Completado ✅
 
-**Descripcion:** Implementar interfaces web modernas con HTML5 y CSS3.
+**Descripción:** Implementar interfaces web modernas con HTML5 y CSS3.
 
-**Implementacion:**
+**Implementación:**
 
-#### Tecnologias Utilizadas
+#### Tecnologías Utilizadas
 - **Next.js 16** - Framework React con App Router
-- **TypeScript 5** - Tipado estatico
+- **TypeScript 5** - Tipado estático
 - **Tailwind CSS 4** - Utility-first CSS
 - **Framer Motion 12** - Animaciones fluidas
 
 #### Componentes Implementados
-- **HeroSection** - Secciones de presentacion con imagenes de fondo
+- **HeroSection** - Secciones de presentación con imágenes de fondo
 - **DashboardSection** - Dashboard en tiempo real con datos de sensores
 - **ProductGrid** - Grid de productos hardware/software
 - **ServicesGrid** - Grid de servicios ofrecidos
-- **TechnologySection** - Seccion de tecnologias utilizadas
-- **AboutSection** - Informacion del proyecto
-- **Header** - Navegacion principal
-- **Footer** - Pie de pagina con enlaces
+- **TechnologySection** - Sección de tecnologías utilizadas
+- **AboutSection** - Información del proyecto
+- **Header** - Navegación principal
+- **Footer** - Pie de página con enlaces
 
-#### Caracteristicas CSS
-- **Responsive Design** - Adaptable a movil, tablet y escritorio
+#### Características CSS
+- **Responsive Design** - Adaptable a móvil, tablet y escritorio
 - **Animaciones** - Transiciones suaves con Framer Motion
 - **Gradientes** - Fondos degradados personalizados
-- **Sombras** - Elevacion de elementos con box-shadow
+- **Sombras** - Elevación de elementos con box-shadow
 - **Grid Layout** - Layouts flexibles con CSS Grid
-- **Flexbox** - Alineacion y distribucion de elementos
+- **Flexbox** - Alineación y distribución de elementos
 - **Custom Properties** - Variables CSS para temas
 
 **Accesibilidad:**
 - Contraste adecuado de colores
 - Tamaños de fuente legibles
-- Navegacion por teclado
-- Etiquetas semanticas HTML5
+- Navegación por teclado
+- Etiquetas semánticas HTML5
 - ARIA labels donde necesario
 
 ---
@@ -407,19 +416,19 @@ Usuario: admin / medusse2025
 ### Reto 6: Plan de Empresa
 **Estado:** Completado ✅
 
-**Descripcion:** Desarrollar un plan de negocio para el proyecto.
+**Descripción:** Desarrollar un plan de negocio para el proyecto.
 
-**Implementacion:**
+**Implementación:**
 
 #### Modelo de Negocio
-- **Vision:** Solucion de referencia para monitorizacion ambiental en España
-- **Mision:** Sistemas accesibles para mejorar salud, eficiencia y sostenibilidad
-- **Valores:** Sostenibilidad, innovacion, educacion, accesibilidad, calidad
+- **Visión:** Solución de referencia para monitorización ambiental en España
+- **Misión:** Sistemas accesibles para mejorar salud, eficiencia y sostenibilidad
+- **Valores:** Sostenibilidad, innovación, educación, accesibilidad, calidad
 
 #### Paquetes Comerciales
 1. **STARTER (1.200€):** 2 nodos ambientales, ideal para 1 aula
 2. **STANDARD (2.750€):** 4 nodos + Gateway LoRa, centro pequeño
-3. **PREMIUM (3.580€):** Completo con agua + solar + formacion
+3. **PREMIUM (3.580€):** Completo con agua + solar + formación
 
 #### Proyecciones Financieras (Año 1)
 **Escenario Conservador (5 clientes):**
@@ -440,58 +449,58 @@ Usuario: admin / medusse2025
 - **Canales:** Directo (demos, ventas) + Indirecto (distribuidores, partners)
 - **Marketing:** Contenidos, eventos, digital, webinars
 - **Proceso de ventas:** 5 fases (8-12 semanas)
-- **KPIs:** CAC ≤800€, conversion 20-30%
+- **KPIs:** CAC ≤800€, conversión 20-30%
 
 #### Equipo y Operaciones
 - **Equipo inicial:** 4 personas (62.000€/año)
 - **Costes fijos año 1:** 42.000€
-- **Financiacion necesaria:** 50.000€
+- **Financiación necesaria:** 50.000€
 
-#### Analisis de Riesgos
-- 9 riesgos identificados con estrategias de mitigacion
-- Comerciales, tecnicos, operacionales, legales
+#### Análisis de Riesgos
+- 9 riesgos identificados con estrategias de mitigación
+- Comerciales, técnicos, operacionales, legales
 
 #### Hoja de Ruta (18 Meses)
-- **Fase 1 (0-3m):** Preparacion y lanzamiento soft
+- **Fase 1 (0-3m):** Preparación y lanzamiento soft
 - **Fase 2 (4-6m):** Lanzamiento y primeras ventas
-- **Fase 3 (7-12m):** Crecimiento y consolidacion
-- **Fase 4 (13-18m):** Expansion regional
+- **Fase 3 (7-12m):** Crecimiento y consolidación
+- **Fase 4 (13-18m):** Expansión regional
 
 #### ROI para Cliente
 - Año 1: 40% ROI
 - Payback: 2.5 años
 - Ahorro anual: 1.700€ (HVAC + agua)
 
-**Documentacion completa:** `documentacion/RETO_6_PLAN_EMPRESA.md`
+**Documentación completa:** `documentacion/RETO_6_PLAN_EMPRESA.md`
 
 ---
 
-### Reto 7: Validacion de Formularios JS
+### Reto 7: Validación de Formularios JS
 **Estado:** Completado ✅
 
-**Descripcion:** Implementar validacion de formularios en tiempo real con JavaScript.
+**Descripción:** Implementar validación de formularios en tiempo real con JavaScript.
 
-**Implementacion:**
+**Implementación:**
 
 #### Formulario de Login (Web Next.js)
-- Validacion de campos requeridos
-- Validacion de formato de email
-- Validacion de longitud de contraseña
+- Validación de campos requeridos
+- Validación de formato de email
+- Validación de longitud de contraseña
 - Mensajes de error descriptivos
 - Feedback visual inmediato
-- Prevencion de envios duplicados
+- Prevención de envíos duplicados
 
-#### Validacion en Cliente API
-- Validacion de parametros de endpoints
-- Sanitizacion de inputs
-- Validacion de tipos de datos
+#### Validación en Cliente API
+- Validación de parámetros de endpoints
+- Sanitización de inputs
+- Validación de tipos de datos
 - Manejo de errores con try-catch
 - Respuestas HTTP apropiadas
 
-**Tecnicas Utilizadas:**
-- Validacion en tiempo real (onChange)
+**Técnicas Utilizadas:**
+- Validación en tiempo real (onChange)
 - Expresiones regulares para formatos
-- Validacion de tipos con TypeScript
+- Validación de tipos con TypeScript
 - Mensajes de error contextuales
 - Estados de carga y error
 
@@ -500,67 +509,67 @@ Usuario: admin / medusse2025
 ### Reto 8: Transferencia Front-end/Back-end
 **Estado:** Completado ✅
 
-**Descripcion:** Implementar comunicacion efectiva entre frontend y backend.
+**Descripción:** Implementar comunicación efectiva entre frontend y backend.
 
-**Implementacion:**
+**Implementación:**
 
 #### API REST (7 endpoints)
-1. **GET /** - Informacion de la API
+1. **GET /** - Información de la API
 2. **GET /health** - Estado de servicios
 3. **GET /api/locations** - Lista de ubicaciones
 4. **GET /api/summary** - Resumen general
-5. **GET /api/latest/:location** - Ultimos valores
-6. **GET /api/data/:location/:sensor** - Datos historicos
-7. **GET /api/stats/:location/:sensor** - Estadisticas
+5. **GET /api/latest/:location** - Últimos valores
+6. **GET /api/data/:location/:sensor** - Datos históricos
+7. **GET /api/stats/:location/:sensor** - Estadísticas
 
-#### Endpoints de Autenticacion
+#### Endpoints de Autenticación
 1. **POST /api/auth/login** - Autenticar usuario
-2. **POST /api/auth/logout** - Cerrar sesion
+2. **POST /api/auth/logout** - Cerrar sesión
 3. **GET /api/auth/validate** - Validar token
 4. **GET /api/auth/profile** - Perfil del usuario
 
 #### Cliente API TypeScript (Web Next.js)
 - **fetchSummary()** - Obtener resumen de todas las ubicaciones
-- **fetchLatestData()** - Obtener ultimos datos de una ubicacion
-- **fetchHistoricalData()** - Obtener datos historicos
-- **fetchStats()** - Obtener estadisticas
+- **fetchLatestData()** - Obtener últimos datos de una ubicación
+- **fetchHistoricalData()** - Obtener datos históricos
+- **fetchStats()** - Obtener estadísticas
 - **fetchLocations()** - Obtener lista de ubicaciones
 
-**Caracteristicas:**
+**Características:**
 - Manejo de errores robusto
 - Timeouts configurables
-- Retry automatico en fallos
+- Retry automático en fallos
 - Cache inteligente (30 segundos)
 - Logging detallado
 - CORS habilitado
 
-#### Integracion Flutter
+#### Integración Flutter
 - Servicio HTTP con package http
 - Modelos de datos tipados
 - Manejo de estados con Provider
-- Actualizacion automatica de UI
+- Actualización automática de UI
 - Manejo de errores con feedback visual
 
 ---
 
-### Reto 9: Gestion de Usuarios con Sesiones
+### Reto 9: Gestión de Usuarios con Sesiones
 **Estado:** Completado ✅
 
-**Descripcion:** Implementar sistema de autenticacion y gestion de usuarios.
+**Descripción:** Implementar sistema de autenticación y gestión de usuarios.
 
-**Implementacion:**
+**Implementación:**
 
-#### Sistema de Autenticacion
+#### Sistema de Autenticación
 - **Hashing de contraseñas** con bcrypt
 - **Tokens UUID** para sesiones
-- **Expiracion automatica** (24 horas)
+- **Expiración automática** (24 horas)
 - **Registro de IP y User-Agent**
-- **Validacion de sesiones** en cada request
-- **Logout con invalidacion** de token
+- **Validación de sesiones** en cada request
+- **Logout con invalidación** de token
 
 #### Roles de Usuario
 1. **admin** - Acceso completo al sistema
-2. **user** - Acceso a datos y configuracion
+2. **user** - Acceso a datos y configuración
 3. **viewer** - Solo lectura de datos
 
 #### Usuarios Iniciales
@@ -569,72 +578,72 @@ Usuario: admin / medusse2025
 - profesor / medusse2025 (user)
 - alumno / medusse2025 (viewer)
 
-#### Middleware de Proteccion
-- Validacion de token en headers
-- Verificacion de permisos por rol
+#### Middleware de Protección
+- Validación de token en headers
+- Verificación de permisos por rol
 - Registro de actividad
 - Manejo de sesiones expiradas
 
 **Seguridad:**
 - Contraseñas hasheadas con bcrypt (10 rounds)
 - Tokens UUID v4 aleatorios
-- Sesiones con expiracion automatica
-- Registro de actividad para auditoria
-- Proteccion contra ataques de fuerza bruta
+- Sesiones con expiración automática
+- Registro de actividad para auditoría
+- Protección contra ataques de fuerza bruta
 
 ---
 
-### Reto 10: Panel de Administracion
+### Reto 10: Panel de Administración
 **Estado:** Completado ✅
 
-**Descripcion:** Crear panel de administracion para gestion del sistema.
+**Descripción:** Crear panel de administración para gestión del sistema.
 
-**Implementacion:**
+**Implementación:**
 
-#### Endpoints de Administracion
+#### Endpoints de Administración
 1. **GET /api/admin/users** - Listar usuarios
 2. **POST /api/admin/users** - Crear usuario
 3. **PUT /api/admin/users/:id** - Actualizar usuario
 4. **DELETE /api/admin/users/:id** - Eliminar usuario
-5. **GET /api/admin/stats** - Estadisticas del sistema
+5. **GET /api/admin/stats** - Estadísticas del sistema
 6. **GET /api/admin/logs** - Registro de actividad
 
 #### Funcionalidades
-- Gestion completa de usuarios (CRUD)
-- Asignacion de roles
-- Visualizacion de sesiones activas
-- Estadisticas del sistema en tiempo real
+- Gestión completa de usuarios (CRUD)
+- Asignación de roles
+- Visualización de sesiones activas
+- Estadísticas del sistema en tiempo real
 - Registro de actividad con filtros
-- Gestion de alertas
-- Configuracion del sistema
+- Gestión de alertas
+- Configuración del sistema
 
-#### Proteccion
+#### Protección
 - Solo accesible para rol admin
-- Validacion de permisos en cada operacion
+- Validación de permisos en cada operación
 - Registro de todas las acciones administrativas
-- Confirmacion para operaciones criticas
+- Confirmación para operaciones críticas
 
 ---
 
 ### Reto 11: Script FTP/SFTP
 **Estado:** Completado ✅
 
-**Descripcion:** Implementar deployment automatico mediante FTP/SFTP.
+**Descripción:** Implementar deployment automático mediante FTP/SFTP.
 
-**Implementacion:**
+**Implementación:**
 
 #### Deployment en Vercel (Web Next.js)
-- Configuracion automatica con vercel.json
+- Configuración automática con vercel.json
 - Variables de entorno configuradas
-- Build optimizado para produccion
+- Build optimizado para producción
 - CDN global de Vercel
-- HTTPS automatico
+- HTTPS automático
 
 **Archivo:** `documentacion/VERCEL_DEPLOYMENT.md`
 
 #### Scripts de Deployment
-- Configuracion de variables de entorno
-- Build automatico de produccion
+- Configuración de variables de entorno
+- Build automático de producción
 - Deployment con un comando
 - Rollback en caso de error
 - Logs de deployment
@@ -644,62 +653,62 @@ Usuario: admin / medusse2025
 # Instalar Vercel CLI
 npm i -g vercel
 
-# Deploy a produccion
+# Deploy a producción
 cd web
 vercel --prod
 ```
 
 #### CI/CD Preparado
 - GitHub Actions configurado
-- Deploy automatico en push a main
+- Deploy automático en push a main
 - Testing antes de deploy
 - Notificaciones de estado
 
 ---
 
-### Reto 12: Comunicacion Asincrona
+### Reto 12: Comunicación Asíncrona
 **Estado:** Completado ✅
 
-**Descripcion:** Implementar comunicacion asincrona entre componentes.
+**Descripción:** Implementar comunicación asíncrona entre componentes.
 
-**Implementacion:**
+**Implementación:**
 
 #### WebSocket Server (Puerto 3002)
-- Servidor WebSocket con libreria ws
+- Servidor WebSocket con librería ws
 - Broadcasting a todos los clientes conectados
-- Reconexion automatica en caso de desconexion
-- Heartbeat para mantener conexion activa
+- Reconexión automática en caso de desconexión
+- Heartbeat para mantener conexión activa
 - Manejo de errores robusto
 
-**Caracteristicas:**
+**Características:**
 - Streaming de datos cada 15 segundos
 - Sincronizado con simulador MQTT
 - JSON estructurado con timestamps
-- Soporte para multiples clientes simultaneos
+- Soporte para múltiples clientes simultáneos
 
 #### Cliente WebSocket (Web Next.js)
 - Hook personalizado useWebSocket
-- Reconexion automatica (5 intentos)
-- Indicador visual de conexion
-- Actualizacion automatica de UI
+- Reconexión automática (5 intentos)
+- Indicador visual de conexión
+- Actualización automática de UI
 - Manejo de errores con feedback
 
 #### Cliente WebSocket (Flutter)
 - Package web_socket_channel
-- Reconexion automatica
+- Reconexión automática
 - Parsing de JSON
-- Actualizacion de estado con Provider
+- Actualización de estado con Provider
 - Manejo de errores
 
-#### Comunicacion MQTT
-- Protocolo asincrono por naturaleza
-- QoS 0 para maxima velocidad
+#### Comunicación MQTT
+- Protocolo asíncrono por naturaleza
+- QoS 0 para máxima velocidad
 - Topics estructurados
 - Retain messages deshabilitado
 - Clean session habilitado
 
 **Ventajas:**
-- Latencia minima (< 100ms)
+- Latencia mínima (< 100ms)
 - Actualizaciones en tiempo real
 - Escalable a miles de clientes
 - Menor consumo de ancho de banda
@@ -710,52 +719,52 @@ vercel --prod
 ### Reto 13: Framework Cliente
 **Estado:** Completado ✅
 
-**Descripcion:** Utilizar frameworks modernos para desarrollo de clientes.
+**Descripción:** Utilizar frameworks modernos para desarrollo de clientes.
 
-**Implementacion:**
+**Implementación:**
 
-#### Next.js 16 (Aplicacion Web)
-**Caracteristicas:**
+#### Next.js 16 (Aplicación Web)
+**Características:**
 - App Router con file-based routing
 - Server Components y Client Components
-- TypeScript para tipado estatico
+- TypeScript para tipado estático
 - Tailwind CSS para estilos
 - Framer Motion para animaciones
-- Optimizacion automatica de imagenes
+- Optimización automática de imágenes
 - SEO optimizado
 
 **Estructura:**
 ```
 web/src/
 ├── app/              # App Router
-│   ├── page.tsx     # Pagina principal
-│   ├── login/       # Pagina de login
+│   ├── page.tsx     # Página principal
+│   ├── login/       # Página de login
 │   └── dashboard/   # Dashboard protegido
 ├── components/       # Componentes React
 │   ├── layout/      # Header, Footer
-│   ├── sections/    # Secciones de pagina
+│   ├── sections/    # Secciones de página
 │   └── ui/          # Componentes UI
 ├── lib/             # Utilidades
 │   ├── api.ts       # Cliente API
-│   └── data.ts      # Datos estaticos
+│   └── data.ts      # Datos estáticos
 └── hooks/           # Custom hooks
     └── use-websocket.ts
 ```
 
 **Ventajas:**
-- Desarrollo rapido con componentes reutilizables
+- Desarrollo rápido con componentes reutilizables
 - Performance optimizado con SSR/SSG
 - TypeScript previene errores en tiempo de desarrollo
-- Hot reload para desarrollo agil
-- Build optimizado para produccion
+- Hot reload para desarrollo ágil
+- Build optimizado para producción
 
-#### Flutter 3.9+ (Aplicacion Movil)
-**Caracteristicas:**
+#### Flutter 3.9+ (Aplicación Móvil)
+**Características:**
 - Material Design 3
-- Provider para gestion de estado
-- fl_chart para graficos interactivos
-- Google Fonts para tipografia
-- Navegacion con go_router
+- Provider para gestión de estado
+- fl_chart para gráficos interactivos
+- Google Fonts para tipografía
+- Navegación con go_router
 - Soporte multiplataforma (Windows, Web, Android, iOS)
 
 **Estructura:**
@@ -773,53 +782,53 @@ medusse_app/lib/
 ```
 
 **Ventajas:**
-- Una sola base de codigo para multiples plataformas
+- Una sola base de código para múltiples plataformas
 - Performance nativo
-- Hot reload para desarrollo rapido
-- Amplia libreria de widgets
-- Comunidad activa y documentacion extensa
+- Hot reload para desarrollo rápido
+- Amplia librería de widgets
+- Comunidad activa y documentación extensa
 
 ---
 
 ### Reto 14: Diseño Web Avanzado
 **Estado:** Completado ✅
 
-**Descripcion:** Implementar diseño web moderno con tecnicas avanzadas.
+**Descripción:** Implementar diseño web moderno con técnicas avanzadas.
 
-**Implementacion:**
+**Implementación:**
 
 #### Responsive Design
-- **Mobile First** - Diseño optimizado para movil primero
+- **Mobile First** - Diseño optimizado para móvil primero
 - **Breakpoints** - sm (640px), md (768px), lg (1024px), xl (1280px)
-- **Grid Adaptativo** - Cambia de 1 a 4 columnas segun pantalla
-- **Imagenes Responsive** - Optimizadas para cada dispositivo
-- **Navegacion Adaptativa** - Menu hamburguesa en movil
+- **Grid Adaptativo** - Cambia de 1 a 4 columnas según pantalla
+- **Imágenes Responsive** - Optimizadas para cada dispositivo
+- **Navegación Adaptativa** - Menú hamburguesa en móvil
 
 #### Animaciones con Framer Motion
 - **Scroll Animations** - Elementos aparecen al hacer scroll
-- **Hover Effects** - Efectos al pasar el raton
-- **Page Transitions** - Transiciones suaves entre paginas
+- **Hover Effects** - Efectos al pasar el ratón
+- **Page Transitions** - Transiciones suaves entre páginas
 - **Loading States** - Animaciones de carga
 - **Micro-interactions** - Feedback visual inmediato
 
 #### Optimizaciones de Performance
-- **Code Splitting** - Carga solo el codigo necesario
-- **Lazy Loading** - Imagenes y componentes bajo demanda
+- **Code Splitting** - Carga solo el código necesario
+- **Lazy Loading** - Imágenes y componentes bajo demanda
 - **Image Optimization** - Next.js Image component
 - **CSS Purging** - Tailwind elimina CSS no usado
-- **Minification** - Codigo minificado en produccion
+- **Minification** - Código minificado en producción
 
 #### Accesibilidad (WCAG 2.1)
-- **Contraste de Colores** - Ratio minimo 4.5:1
-- **Navegacion por Teclado** - Tab, Enter, Escape
+- **Contraste de Colores** - Ratio mínimo 4.5:1
+- **Navegación por Teclado** - Tab, Enter, Escape
 - **ARIA Labels** - Etiquetas para lectores de pantalla
 - **Focus Visible** - Indicador de foco claro
-- **Semantic HTML** - Etiquetas semanticas correctas
+- **Semantic HTML** - Etiquetas semánticas correctas
 
 #### SEO Optimizado
 - **Meta Tags** - Title, description, keywords
 - **Open Graph** - Previews en redes sociales
-- **Sitemap** - Generado automaticamente
+- **Sitemap** - Generado automáticamente
 - **Robots.txt** - Configurado para crawlers
 - **Structured Data** - Schema.org markup
 
@@ -828,27 +837,27 @@ medusse_app/lib/
 ### Reto 15: Framework Servidor
 **Estado:** Completado ✅
 
-**Descripcion:** Utilizar frameworks modernos para desarrollo del servidor.
+**Descripción:** Utilizar frameworks modernos para desarrollo del servidor.
 
-**Implementacion:**
+**Implementación:**
 
 #### Express 4.18.2 (Node.js)
-**Caracteristicas:**
+**Características:**
 - Routing flexible y potente
 - Middleware para funcionalidades comunes
 - Manejo de errores centralizado
-- Soporte para multiples formatos (JSON, CSV)
-- Integracion con bases de datos
+- Soporte para múltiples formatos (JSON, CSV)
+- Integración con bases de datos
 - WebSocket integrado
 
 **Estructura:**
 ```
 api/
 ├── server.js           # Servidor principal
-├── db.js              # Conexion MySQL
-├── auth.js            # Logica de autenticacion
-├── auth-routes.js     # Rutas de autenticacion
-├── admin-routes.js    # Rutas de administracion
+├── db.js              # Conexión MySQL
+├── auth.js            # Lógica de autenticación
+├── auth-routes.js     # Rutas de autenticación
+├── admin-routes.js    # Rutas de administración
 ├── package.json       # Dependencias
 └── .env              # Variables de entorno
 ```
@@ -857,61 +866,61 @@ api/
 - **CORS** - Permite peticiones cross-origin
 - **express.json()** - Parsea body JSON
 - **Error Handler** - Manejo centralizado de errores
-- **Auth Middleware** - Validacion de tokens
+- **Auth Middleware** - Validación de tokens
 - **Logger** - Registro de peticiones
 
 **Ventajas:**
-- Desarrollo rapido con middleware
+- Desarrollo rápido con middleware
 - Escalable y mantenible
 - Gran ecosistema de paquetes
 - Performance excelente
 - Comunidad muy activa
 
-#### Docker Compose (Orquestacion)
+#### Docker Compose (Orquestación)
 **Servicios Implementados:**
 1. **Mosquitto** - Broker MQTT
 2. **InfluxDB** - Base de datos series temporales
 3. **Telegraf** - Pipeline de datos
-4. **Grafana** - Visualizacion
+4. **Grafana** - Visualización
 5. **MySQL** - Base de datos relacional
 
-**Configuracion:**
+**Configuración:**
 - Networking interno optimizado
-- Volumenes persistentes
+- Volúmenes persistentes
 - Variables de entorno
-- Restart policies automaticas
+- Restart policies automáticas
 - Health checks
 
 **Ventajas:**
 - Despliegue con un comando
 - Entorno reproducible
 - Aislamiento de servicios
-- Facil escalado
+- Fácil escalado
 - Portabilidad total
 
 ---
 
-### Reto 16: Documentacion Final
-**Estado:** En Progreso
+### Reto 16: Documentación Final
+**Estado:** Completado ✅
 
-**Descripcion:** Documentar completamente el proyecto para presentacion y mantenimiento.
+**Descripción:** Documentar completamente el proyecto para presentación y mantenimiento.
 
-**Documentacion Implementada:**
+**Documentación Implementada:**
 
 #### README.md Principal
-- Descripcion completa del proyecto
+- Descripción completa del proyecto
 - Arquitectura del sistema
-- Instrucciones de instalacion
-- Guias de uso
+- Instrucciones de instalación
+- Guías de uso
 - Soluciones a problemas comunes
-- Informacion de contacto
+- Información de contacto
 
-#### Documentacion Tecnica
-- **api/README.md** - Documentacion completa de la API
+#### Documentación Técnica
+- **api/README.md** - Documentación completa de la API
 - **docker/mysql/DATABASE_DOCUMENTATION.md** - Esquema de base de datos
-- **medusse_app/README.md** - Documentacion de la app Flutter
-- **documentacion/INSTALACION.md** - Guias de instalacion detalladas
-- **documentacion/MIGRACION.md** - Guia de migracion a LoRa Mesh
+- **medusse_app/README.md** - Documentación de la app Flutter
+- **documentacion/INSTALACION.md** - Guías de instalación detalladas
+- **documentacion/MIGRACION.md** - Guía de migración a LoRa Mesh
 - **documentacion/VERCEL_DEPLOYMENT.md** - Deployment en Vercel
 
 #### CHANGELOG.md
@@ -921,17 +930,17 @@ api/
 - Correcciones de errores
 - Mejoras de rendimiento
 
-#### Comentarios en Codigo
+#### Comentarios en Código
 - Todos los comentarios en español
-- Explicaciones de logica compleja
-- Documentacion de funciones
+- Explicaciones de lógica compleja
+- Documentación de funciones
 - TODOs para mejoras futuras
 
 **Este Documento:**
-- Documentacion general del proyecto
-- Explicacion detallada de los 16 retos
-- Informacion tecnica completa
-- Guia para presentacion
+- Documentación general del proyecto
+- Explicación detallada de los 16 retos
+- Información técnica completa
+- Guía para presentación
 
 ---
 
@@ -1031,7 +1040,7 @@ sistema_completo.bat
 | API REST | http://localhost:3001 | - |
 | Web Next.js | http://localhost:3003 | - |
 | InfluxDB | http://localhost:8086 | admin / medusse2025 |
-| MySQL | localhost:3306 | medusse_user / medusse2025 |
+| MySQL | localhost:3307 | medusse_user / medusse2025 |
 
 ---
 
@@ -1219,5 +1228,5 @@ La implementacion de 18 tipos de sensores, incluyendo gestion de energia solar, 
 ---
 
 **Documento generado:** Noviembre 2025  
-**Version del Proyecto:** 2.7.1  
+**Version del Proyecto:** 2.7.7  
 **Estado:** Documentacion General para Presentacion TFG

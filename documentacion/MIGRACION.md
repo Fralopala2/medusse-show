@@ -581,57 +581,163 @@ sudo reboot
 
 ### 5.1 Conexiones ESP32 + Módulo LoRa SX1276
 
-```
-ESP32          SX1276
------          ------
-3.3V     -->   VCC
-GND      -->   GND
-GPIO5    -->   SCK
-GPIO19   -->   MISO
-GPIO27   -->   MOSI
-GPIO18   -->   NSS (CS)
-GPIO26   -->   DIO0
-GPIO14   -->   RST
-GPIO33   -->   DIO1
+```mermaid
+graph LR
+    subgraph ESP32["ESP32"]
+        E1[3.3V]
+        E2[GND]
+        E3[GPIO5]
+        E4[GPIO19]
+        E5[GPIO27]
+        E6[GPIO18]
+        E7[GPIO26]
+        E8[GPIO14]
+        E9[GPIO33]
+    end
+    
+    subgraph SX1276["SX1276 LoRa"]
+        L1[VCC]
+        L2[GND]
+        L3[SCK]
+        L4[MISO]
+        L5[MOSI]
+        L6[NSS CS]
+        L7[DIO0]
+        L8[RST]
+        L9[DIO1]
+    end
+    
+    E1 --> L1
+    E2 --> L2
+    E3 --> L3
+    E4 --> L4
+    E5 --> L5
+    E6 --> L6
+    E7 --> L7
+    E8 --> L8
+    E9 --> L9
+    
+    style ESP32 fill:#3b82f6,stroke:#1e40af,stroke-width:2px,color:#fff
+    style SX1276 fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff
 ```
 
 ### 5.2 Conexiones Sensores (por nodo)
 
+**DHT22 (Temperatura y Humedad):**
+
+```mermaid
+graph LR
+    subgraph ESP32_DHT["ESP32"]
+        ED1[3.3V]
+        ED2[GND]
+        ED3[GPIO4]
+    end
+    
+    subgraph DHT22["DHT22"]
+        D1[VCC]
+        D2[GND]
+        D3[DATA]
+    end
+    
+    ED1 --> D1
+    ED2 --> D2
+    ED3 --> D3
+    
+    style ESP32_DHT fill:#3b82f6,stroke:#1e40af,stroke-width:2px,color:#fff
+    style DHT22 fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
 ```
-ESP32          DHT22
------          -----
-3.3V     -->   VCC
-GND      -->   GND
-GPIO4    -->   DATA
 
-ESP32          BME280
------          ------
-3.3V     -->   VCC
-GND      -->   GND
-GPIO21   -->   SDA
-GPIO22   -->   SCL
+**BME280 (Presión, Temperatura, Humedad):**
 
-ESP32          MQ-135
------          ------
-3.3V     -->   VCC
-GND      -->   GND
-A0       -->   AOUT
+```mermaid
+graph LR
+    subgraph ESP32_BME["ESP32"]
+        EB1[3.3V]
+        EB2[GND]
+        EB3[GPIO21]
+        EB4[GPIO22]
+    end
+    
+    subgraph BME280["BME280"]
+        B1[VCC]
+        B2[GND]
+        B3[SDA]
+        B4[SCL]
+    end
+    
+    EB1 --> B1
+    EB2 --> B2
+    EB3 --> B3
+    EB4 --> B4
+    
+    style ESP32_BME fill:#3b82f6,stroke:#1e40af,stroke-width:2px,color:#fff
+    style BME280 fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#fff
+```
+
+**MQ-135 (Sensor de Gas/CO2):**
+
+```mermaid
+graph LR
+    subgraph ESP32_MQ["ESP32"]
+        EM1[3.3V]
+        EM2[GND]
+        EM3[A0]
+    end
+    
+    subgraph MQ135["MQ-135"]
+        M1[VCC]
+        M2[GND]
+        M3[AOUT]
+    end
+    
+    EM1 --> M1
+    EM2 --> M2
+    EM3 --> M3
+    
+    style ESP32_MQ fill:#3b82f6,stroke:#1e40af,stroke-width:2px,color:#fff
+    style MQ135 fill:#ef4444,stroke:#dc2626,stroke-width:2px,color:#fff
 ```
 
 ### 5.3 Conexiones Raspberry Pi + SX1276
 
-```
-RPi Pin        SX1276
--------        ------
-3.3V     -->   VCC
-GND      -->   GND
-GPIO11   -->   SCK
-GPIO9    -->   MISO
-GPIO10   -->   MOSI
-GPIO8    -->   NSS
-GPIO25   -->   DIO0
-GPIO24   -->   RST
-GPIO23   -->   DIO1
+```mermaid
+graph LR
+    subgraph RPI["Raspberry Pi"]
+        R1[3.3V]
+        R2[GND]
+        R3[GPIO11]
+        R4[GPIO9]
+        R5[GPIO10]
+        R6[GPIO8]
+        R7[GPIO25]
+        R8[GPIO24]
+        R9[GPIO23]
+    end
+    
+    subgraph SX1276_RPI["SX1276 LoRa"]
+        S1[VCC]
+        S2[GND]
+        S3[SCK]
+        S4[MISO]
+        S5[MOSI]
+        S6[NSS]
+        S7[DIO0]
+        S8[RST]
+        S9[DIO1]
+    end
+    
+    R1 --> S1
+    R2 --> S2
+    R3 --> S3
+    R4 --> S4
+    R5 --> S5
+    R6 --> S6
+    R7 --> S7
+    R8 --> S8
+    R9 --> S9
+    
+    style RPI fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
+    style SX1276_RPI fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff
 ```
 
 ---

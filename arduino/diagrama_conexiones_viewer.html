@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagrama de Conexiones - Arduino Nano ESP32 Medusse IoT</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #ffffff;
+            font-weight: bold;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 1;
+            color: #ecf0f1;
+            font-weight: 500;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .diagram-container {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 40px;
+            border: 2px solid #ecf0f1;
+        }
+        
+        .diagram-container svg {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+        
+        .diagram-container svg text {
+            fill: #000000 !important;
+            font-weight: 500;
+        }
+        
+        .diagram-container svg .title {
+            fill: #ffffff !important;
+        }
+        
+        .diagram-container svg .section-title {
+            fill: #1a202c !important;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .info-card {
+            background: #f8f9fa;
+            border-left: 4px solid;
+            padding: 20px;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .info-card.blue {
+            border-left-color: #3498db;
+        }
+        
+        .info-card.green {
+            border-left-color: #27ae60;
+        }
+        
+        .info-card.orange {
+            border-left-color: #f39c12;
+        }
+        
+        .info-card h3 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+            font-size: 1.1em;
+        }
+        
+        .info-card p {
+            color: #34495e;
+            font-size: 0.95em;
+            line-height: 1.6;
+            margin-bottom: 5px;
+        }
+        
+        .download-section {
+            background: linear-gradient(135deg, #ecf0f1 0%, #d5dbdb 100%);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .download-section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        
+        .download-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+        }
+        
+        .btn-primary {
+            background: #3498db;
+            color: white;
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+        }
+        
+        .btn-primary:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(52, 152, 219, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #27ae60;
+            color: white;
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.2);
+        }
+        
+        .btn-secondary:hover {
+            background: #229954;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(39, 174, 96, 0.4);
+        }
+        
+        .notes {
+            background: #fff9e6;
+            border: 2px solid #f39c12;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .notes h3 {
+            color: #c4980d;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        
+        .notes ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .notes li {
+            color: #5d4e37;
+            margin-bottom: 10px;
+            padding-left: 30px;
+            position: relative;
+            line-height: 1.6;
+        }
+        
+        .notes li:before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+        }
+        
+        .footer {
+            background: #2c3e50;
+            color: #ecf0f1;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.95em;
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .download-section {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Diagrama de Conexiones</h1>
+            <p>Arduino Nano ESP32 - Sistema IoT Medusse</p>
+        </div>
+        
+        <div class="content">
+            <div class="download-section">
+                <h2>📥 Descargar Diagrama</h2>
+                <div class="download-buttons">
+                    <button class="btn btn-primary" onclick="descargarSVG()">📄 Descargar SVG (Editable)</button>
+                    <button class="btn btn-primary" onclick="imprimirDiagrama()">🖨️ Imprimir Diagrama</button>
+                    <button class="btn btn-secondary" onclick="copiarAlPortapapeles()">📋 Copiar al Portapapeles</button>
+                </div>
+            </div>
+            
+            <div class="info-grid">
+                <div class="info-card blue">
+                    <h3>🌡️ Sensores Ambientales</h3>
+                    <p><strong>Protocolo:</strong> I2C</p>
+                    <p><strong>Pines:</strong> D21 (SDA), D22 (SCL)</p>
+                    <p><strong>Componentes:</strong> BME680, DHT22, SGP30</p>
+                </div>
+                
+                <div class="info-card green">
+                    <h3>💧 Agua y Suelo</h3>
+                    <p><strong>Protocolo:</strong> ADC (Analógico)</p>
+                    <p><strong>Pines:</strong> A0-A5</p>
+                    <p><strong>Voltaje:</strong> Máximo 3.3V</p>
+                </div>
+                
+                <div class="info-card orange">
+                    <h3>⚡ Energía y Otros</h3>
+                    <p><strong>Protocolo:</strong> SPI/ADC</p>
+                    <p><strong>Pines:</strong> D5-D8, D10-D13, A0</p>
+                    <p><strong>Alimentación:</strong> Panel Solar, LiPo</p>
+                </div>
+            </div>
+            
+            <div class="diagram-container" id="diagramContainer">
+                <!-- SVG will be loaded here -->
+            </div>
+            
+            <div class="notes">
+                <h3>Notas Importantes</h3>
+                <ul>
+                    <li>Los pines analógicos (A0-A5) aceptan máximo 3.3V</li>
+                    <li>Para sensores de 5V, usar conversor de nivel lógico</li>
+                    <li>Los sensores I2C (D21/D22) pueden estar en paralelo si tienen direcciones I2C únicas</li>
+                    <li>Las conexiones de poder y tierra deben ser lo más cortas posible</li>
+                    <li>Se recomienda usar una protoboard de laboratorio con cables de calidad</li>
+                    <li>El sensor YF-S201 puede requerir 5V para mejor funcionamiento</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Proyecto Medusse IoT - Diagrama de Conexiones | Creado para Arduino Nano ESP32</p>
+        </div>
+    </div>
+    
+    <script>
+        // Load SVG on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            cargarSVG();
+        });
+        
+        function cargarSVG() {
+            const container = document.getElementById('diagramContainer');
+            fetch('diagrama_conexiones_medusse.svg')
+                .then(response => response.text())
+                .then(data => {
+                    container.innerHTML = data;
+                })
+                .catch(error => {
+                    console.error('Error cargando SVG:', error);
+                    container.innerHTML = '<p style="color: red;">Error: No se pudo cargar el diagrama SVG</p>';
+                });
+        }
+        
+        function descargarSVG() {
+            const enlace = document.createElement('a');
+            enlace.href = 'diagrama_conexiones_medusse.svg';
+            enlace.download = 'diagrama_conexiones_medusse.svg';
+            document.body.appendChild(enlace);
+            enlace.click();
+            document.body.removeChild(enlace);
+        }
+        
+        function imprimirDiagrama() {
+            window.print();
+        }
+        
+        function copiarAlPortapapeles() {
+            const svg = document.querySelector('#diagramContainer svg');
+            if (svg) {
+                const htmlSnippet = svg.outerHTML;
+                navigator.clipboard.writeText(htmlSnippet)
+                    .then(() => alert('✅ Diagrama copiado al portapapeles!'))
+                    .catch(err => alert('❌ Error: ' + err));
+            }
+        }
+    </script>
+</body>
+</html>

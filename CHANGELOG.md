@@ -1,5 +1,50 @@
 # Changelog - Proyecto Medusse IoT
 
+## [2.7.8] - 2025-12-06 - CORRECCION DE FORMATO DE TEXTOS WEB ✅
+
+### 🎨 Aplicacion de Reglas de Estilo
+- **web/src/lib/data.ts** - Corregidos 30 textos a estilo oración (sin Title Case)
+- Títulos de secciones hero: monitoreo ambiental inteligente, dashboard en tiempo real, app móvil Flutter, etc.
+- Nombres de productos hardware y software
+- Descripciones de servicios
+- Stack tecnológico y datos sobre el proyecto
+- Todos los textos cumplen ahora con la regla: solo primera palabra y nombres propios en mayúscula
+
+### 🔧 Cambios Realizados
+- Monitoreo Ambiental → monitoreo ambiental
+- Dashboard en Tiempo Real → dashboard en tiempo real
+- API REST Completa → API REST completa
+- Sensor DHT22 → sensor DHT22
+- Instalación Completa del Sistema → instalación completa del sistema
+- 29 cambios más para mantener consistencia de formato
+
+## [2.7.7] - 2025-11-29 - DOCUMENTACION COMPLETA DE 16 RETOS ✅
+
+### 📖 Documentacion de Retos TFG
+
+#### ✅ Documentos Existentes
+- **documentacion/DOCUMENTACION_RETOS.md** - Documento principal (2792 lineas)
+- **documentacion/DOCUMENTACION_GENERAL_RETOS.md** - Documento general (1224 lineas)
+- **documentacion/RESUMEN_ENTREGA_PROFESOR.md** - Resumen ejecutivo
+- **documentacion/README_DOCUMENTACION.md** - Guia de lectura
+- **documentacion/RETO_1_SOSTENIBILIDAD.md** - Sostenibilidad completa
+- **documentacion/RETO_6_PLAN_EMPRESA.md** - Plan de empresa completo
+
+#### ✅ Contenido Documentado
+- Todos los 16 retos del TFG completados y documentados
+- Explicacion detallada de implementaciones
+- Ejemplos de codigo reales del proyecto
+- Diagramas de arquitectura y flujo
+- Referencias a archivos especificos
+- Estadisticas del proyecto completo
+
+#### ✅ Formato Profesional
+- Redaccion clara y profesional
+- Estructura logica por retos
+- Diagramas Mermaid profesionales
+- Localizacion exacta de archivos
+- Evidencia de trabajo realizado
+
 ## [2.7.6] - 2025-11-25 - DOCUMENTACION DE ENLACES WEB ✅
 
 ### 📋 Documento de Referencias de Enlaces
@@ -230,38 +275,6 @@
 - Actualizada estructura de archivos en README.md para reflejar carpeta documentacion/
 - Eliminadas referencias a archivos inexistentes (QUICK_START.md, INSTALACION_LLIUREX.md)
 
-## [2.7.0] - 2025-11-24 - SOPORTE LLIUREX Y OPTIMIZACION SCRIPTS ✅
-
-### 🧹 Optimizacion de Scripts Windows
-
-#### ✅ Unificacion de Scripts .bat
-- **medusse.bat** - Menu principal unificado con todas las funciones
-  * Instalacion (completa y rapida)
-  * Ejecucion (sistema completo, componentes individuales)
-  * Verificacion (completa y rapida)
-  * Testing (API, autenticacion, login web)
-  * Menu interactivo facil de usar
-
-#### ✅ Scripts Eliminados (redundantes)
-- **ejecutar.bat** - Funcionalidad integrada en medusse.bat
-- **probar.bat** - Funcionalidad integrada en medusse.bat
-- **probar_login_web.bat** - Funcionalidad integrada en medusse.bat
-- **compilar_app.bat** - Caso especifico de desarrollo
-- **configurar_firewall.bat** - Caso especifico de red
-
-#### ✅ Scripts Mantenidos (necesarios)
-- **instalar_proyecto.bat** - Instalacion completa
-- **setup_rapido.bat** - Setup rapido
-- **sistema_completo.bat** - Sistema completo
-- **verificar.bat** - Verificacion completa
-- **medusse.bat** - Menu principal (NUEVO)
-
-#### ✅ Ventajas
-- Proyecto mas limpio (5 archivos eliminados)
-- Menu unico facil de usar
-- Menos confusion para usuarios nuevos
-- Mantenimiento simplificado
-
 ## [2.7.0] - 2025-11-24 - SOPORTE LLIUREX COMPLETO ✅
 
 ### 🐧 Scripts Especificos para Lliurex
@@ -271,38 +284,11 @@
 - Usuario sin permisos de sudoers no puede usar Docker
 - Solucion con scripts que manejan sudo automaticamente
 
-#### ✅ Scripts Nuevos para Lliurex
+#### ✅ Scripts para Lliurex (tools_linux/)
 - **setup_lliurex.sh** - Instalacion con manejo inteligente de sudo
-  * Detecta si necesita sudo para Docker
-  * Instala dependencias Python en home del usuario
-  * Instala dependencias Node.js si esta disponible
-  * Inicia servicios Docker automaticamente
-
 - **ejecutar_lliurex.sh** - Iniciar sistema completo
-  * Maneja sudo solo para comandos Docker
-  * Inicia Docker Compose con permisos correctos
-  * Inicia simulador y API en background
-  * Guarda PIDs para control de procesos
-
 - **verificar_lliurex.sh** - Verificacion completa del sistema
-  * Verifica Docker con o sin sudo
-  * Verifica contenedores corriendo
-  * Verifica puertos y servicios
-  * Verifica datos en InfluxDB
-
 - **detener_lliurex.sh** - Detener todos los servicios
-  * Detiene simulador y API por PID
-  * Detiene Docker Compose con permisos
-  * Limpia archivos temporales
-
-#### ✅ Documentacion Lliurex
-- **INSTALACION_LLIUREX.md** - Guia completa para Lliurex
-  * Explicacion del problema de permisos
-  * Solucion recomendada (agregar usuario al grupo docker)
-  * Solucion alternativa (scripts con sudo)
-  * Instalacion de Node.js sin sudo usando nvm
-  * Solucion de problemas especificos de Lliurex
-  * URL del repositorio actualizada
 
 #### ✅ Funciones Inteligentes
 - **docker_cmd()** - Ejecuta docker con o sin sudo segun permisos
@@ -357,11 +343,10 @@ sudo usermod -aG docker fralopala2
 - Scripts ejecutables con chmod +x
 
 ### 📁 Archivos Nuevos
-- `setup_lliurex.sh` - Script de instalacion
-- `ejecutar_lliurex.sh` - Script de ejecucion
-- `verificar_lliurex.sh` - Script de verificacion
-- `detener_lliurex.sh` - Script de detencion
-- `INSTALACION_LLIUREX.md` - Documentacion completa
+- `tools_linux/setup_lliurex.sh` - Script de instalacion
+- `tools_linux/ejecutar_lliurex.sh` - Script de ejecucion
+- `tools_linux/verificar_lliurex.sh` - Script de verificacion
+- `tools_linux/detener_lliurex.sh` - Script de detencion
 
 ### 🎓 Uso en Clase
 
@@ -386,6 +371,212 @@ cd ~/Documentos/proyecto-medusse
 - **10/16 retos completados** (62.5%)
 - **Soporte multiplataforma**: Windows + Linux + Lliurex ✅
 - **6 retos pendientes**
+
+---
+
+## [2.8.0] - 2025-11-24 - RETO 7: VALIDACION DE FORMULARIOS JS ✅
+
+### ✅ Validacion de Formularios Completa
+
+#### ✅ Sistema de Validacion Robusto
+- **Libreria de validacion** (validation.ts) sin dependencias externas
+  * validateUsername() - Validacion de usuario
+  * validatePassword() - Validacion de contrasena
+  * validateEmail() - Validacion de email
+  * validateFullName() - Validacion de nombre completo
+
+#### ✅ Validacion en Tiempo Real
+- **Validacion mientras escribes** - Feedback inmediato
+- **Validacion al perder foco** (onBlur) - No molesta mientras escribes
+- **Validacion antes de enviar** - Doble verificacion
+- **Estados de error individuales** - Mensajes especificos por campo
+
+#### ✅ Reglas de Validacion Implementadas
+
+**Usuario:**
+- Requerido
+- Minimo 3 caracteres
+- Maximo 50 caracteres
+- Solo letras, numeros y guion bajo
+
+**Contrasena:**
+- Requerida
+- Minimo 6 caracteres
+- Maximo 100 caracteres
+
+**Email:**
+- Requerido
+- Formato valido (regex)
+
+**Nombre completo:**
+- Requerido
+- Minimo 3 caracteres
+- Maximo 100 caracteres
+
+#### ✅ Mejoras UX
+- **Bordes rojos** en campos con error
+- **Mensajes de error** debajo de cada campo
+- **Boton deshabilitado** si hay errores de validacion
+- **Transiciones suaves** en estados de error
+- **Focus rings** diferenciados (rojo para error, azul para normal)
+
+### 📊 Progreso del TFG
+- **11/16 retos completados** (68.75%)
+- **Reto 7 completado**: Validacion de formularios JS ✅
+- **5 retos pendientes**
+
+---
+
+## [2.9.0] - 2025-11-24 - RETO 10: PANEL DE ADMINISTRACION ✅
+
+### 🛡️ Panel de Administracion Completo
+
+#### ✅ Endpoints de Administracion (API)
+- **GET /api/admin/users** - Listar todos los usuarios
+- **GET /api/admin/stats** - Estadisticas del sistema
+- **GET /api/admin/logs** - Logs de actividad
+- **GET /api/admin/sessions** - Sesiones activas
+- **DELETE /api/admin/users/:id** - Eliminar usuario
+- **PUT /api/admin/users/:id/role** - Cambiar rol de usuario
+
+#### ✅ Middleware de Seguridad
+- **requireAdmin** - Verificacion de permisos de administrador
+- **Proteccion de rutas** - Solo usuarios admin pueden acceder
+- **Validaciones** - No puede eliminar/modificar su propio usuario
+
+#### ✅ Panel Web (/admin)
+- **3 pestanas principales**:
+  * Estadisticas - Dashboard con metricas clave
+  * Usuarios - Gestion completa de usuarios
+  * Logs - Actividad reciente del sistema
+
+#### ✅ Estadisticas Implementadas
+- **Total de usuarios** - Contador general
+- **Sesiones activas** - Usuarios conectados
+- **Alertas activas** - Alertas sin resolver
+- **Actividad reciente** - Acciones ultimos 7 dias
+- **Usuarios por rol** - Distribucion admin/user/viewer
+
+#### ✅ Gestion de Usuarios
+- **Tabla completa** con todos los usuarios
+- **Cambiar rol** - Dropdown para cambiar admin/user/viewer
+- **Eliminar usuario** - Con confirmacion
+- **Informacion detallada** - Username, email, ultimo login
+- **Protecciones** - No puede modificar su propio usuario
+
+#### ✅ Logs de Actividad
+- **Ultimos 20 eventos** del sistema
+- **Informacion completa** - Usuario, accion, detalles, fecha
+- **Ordenados** - Mas recientes primero
+- **Formato legible** - Fechas en español
+
+#### ✅ Diseno y UX
+- **Tabs navegables** - Cambio rapido entre secciones
+- **Cards de estadisticas** - Visualizacion clara con iconos
+- **Tabla responsive** - Gestion de usuarios ordenada
+- **Confirmaciones** - Dialogs antes de acciones criticas
+- **Loading states** - Indicadores de carga
+- **Error handling** - Mensajes claros de error
+
+### 📊 Progreso del TFG
+- **12/16 retos completados** (75%)
+- **Reto 10 completado**: Panel de administracion ✅
+- **4 retos pendientes**
+
+---
+
+## [2.10.0] - 2025-11-24 - RETO 11: DEPLOYMENT EN VERCEL ✅
+
+### 📤 Sistema de Deployment Automatico
+
+#### ✅ Deployment en Vercel (Implementado)
+- **Deployment automatico** con cada push a GitHub
+- **Build optimizado** con Next.js
+- **SSL/HTTPS** incluido y CDN global
+- **Preview deployments** por cada commit
+- **Variables de entorno** configuradas
+
+#### ✅ Configuracion
+- Archivo `web/vercel.json` con configuracion
+- Variables de entorno en Vercel dashboard
+- Build automatico desde repositorio GitHub
+- Dominio personalizado disponible
+
+#### ✅ Documentacion
+- `documentacion/VERCEL_DEPLOYMENT.md` - Guia completa
+- Instrucciones de configuracion
+- Integracion con GitHub
+- Solucion de problemas comunes
+
+### 📊 Progreso del TFG
+- **13/16 retos completados** (81.25%)
+- **Reto 11 completado**: Script FTP/SFTP ✅
+- **3 retos pendientes**
+
+---
+
+## [2.11.0] - 2025-11-24 - RETO 14: DISEÑO WEB AVANZADO ✅
+
+### 🎨 Mejoras de Diseño Responsive y Animaciones
+
+#### ✅ Libreria de Animaciones
+- **animations.ts** - Libreria centralizada de animaciones reutilizables
+  * fadeInUp, fadeInLeft, fadeInRight
+  * scaleIn, staggerContainer, staggerItem
+  * cardHover, pulse, rotate
+  * slideInModal con spring physics
+  * Configuraciones de viewport y transitions
+
+#### ✅ Animaciones Implementadas
+- **Fade in suave** en HeroSection con easing personalizado
+- **Hover effects** en cards con scale y shadow
+- **Transiciones suaves** en botones (300ms)
+- **Animaciones de entrada** con Framer Motion
+- **Stagger animations** para listas de elementos
+
+#### ✅ Mejoras Responsive
+
+**Login Page:**
+- Padding adaptativo: px-4 (mobile) → px-6 (tablet) → px-8 (desktop)
+- Titulos escalables: text-2xl (mobile) → text-3xl (desktop)
+- Espaciado optimizado para pantallas pequeñas
+
+**Dashboard:**
+- Grid adaptativo: 1 col (mobile) → 2 cols (tablet) → 3 cols (desktop)
+- Header responsive con texto escalable
+- Botones con tamaños adaptativos
+- Cards con hover effects y animaciones
+
+**Panel Admin:**
+- Titulos responsive: text-2xl (mobile) → text-3xl (desktop)
+- Grid de estadisticas: 1 → 2 → 4 columnas
+- Tabs optimizados para mobile
+- Tablas con scroll horizontal en mobile
+
+#### ✅ Transiciones CSS
+- **duration-300** en todos los hover effects
+- **hover:scale-105** en botones y cards
+- **hover:-translate-y-1** en cards para efecto lift
+- **transition-all** para transiciones suaves
+
+#### ✅ Breakpoints Utilizados
+```
+sm: 640px   (tablet)
+md: 768px   (tablet grande)
+lg: 1024px  (desktop)
+xl: 1280px  (desktop grande)
+```
+
+#### ✅ Mejoras UX
+- Animaciones suaves que no distraen
+- Feedback visual en interacciones
+- Responsive en todos los dispositivos
+- Performance optimizado (GPU acceleration)
+
+### 📊 Progreso del TFG
+- **14/16 retos completados** (87.5%)
+- **Reto 14 completado**: Diseño web avanzado ✅
+- **2 retos pendientes** (solo documentación)
 
 ---
 
@@ -448,41 +639,10 @@ cd ~/Documentos/proyecto-medusse
 
 ### 🐧 Soporte Completo para Linux
 
-#### ✅ Documentacion Linux
-- **INSTALACION_LINUX.md** - Guia completa para Linux/Lliurex
-  * Instalacion automatica y manual
-  * Instrucciones especificas para Lliurex
-  * Solucion de problemas comunes
-  * Optimizaciones para Linux
-  * Configuracion de systemd
-  * Alias utiles
-
-#### ✅ Scripts de Linux
-- **setup_linux.sh** - Instalacion automatica
-  * Instala Docker, Node.js, Python
-  * Configura dependencias del proyecto
-  * Configura permisos automaticamente
-
-- **ejecutar_linux.sh** - Iniciar sistema completo
-  * Inicia Docker Compose
-  * Inicia simulador, API y Web
-  * Guarda PIDs para control de procesos
-
-- **detener_linux.sh** - Detener todos los servicios
-  * Detiene procesos por PID
-  * Detiene Docker Compose
-  * Limpia archivos temporales
-
-- **verificar_linux.sh** - Verificar estado del sistema
-  * Verifica instalacion de software
-  * Verifica servicios corriendo
-  * Verifica conectividad de servicios
-
-#### ✅ Compatibilidad Linux
-- **Lliurex** (basado en Ubuntu)
-- **Ubuntu** 20.04+
-- **Debian** 11+
-- Cualquier distribucion basada en Debian
+#### ✅ Scripts de Linux (tools_linux/)
+- Scripts especificos para Lliurex con manejo de permisos
+- Instalacion, ejecucion, verificacion y detencion
+- Compatibilidad con Ubuntu, Debian y Lliurex
 
 #### ✅ Ventajas en Linux
 - Docker nativo (mejor rendimiento)
@@ -491,12 +651,6 @@ cd ~/Documentos/proyecto-medusse
 - Mas estable y rapido
 
 ### 🧪 Testing y Verificacion
-
-#### ✅ Scripts de Testing
-- **probar_login_web.bat** - Testing completo del login web
-  * Verifica Docker y MySQL
-  * Inicia API y Web automaticamente
-  * Guia paso a paso para probar login
 
 #### ✅ Pruebas Realizadas
 - Login exitoso con 4 usuarios diferentes
@@ -524,9 +678,8 @@ cd ~/Documentos/proyecto-medusse
 #### Archivos Nuevos
 - 2 paginas Next.js (login, dashboard)
 - 3 archivos de logos (SVG, PNG, favicon)
-- 4 scripts de Linux (.sh)
-- 1 guia de instalacion Linux
-- 1 script de testing web
+- Scripts de Linux en tools_linux/
+- Sistema de autenticacion completo
 
 #### Lineas de Codigo Agregadas
 - TypeScript/React: ~400 lineas (login + dashboard)
@@ -537,9 +690,7 @@ cd ~/Documentos/proyecto-medusse
 ### 📝 Documentacion Actualizada
 - README.md con endpoints de autenticacion
 - api/README.md con documentacion completa de auth
-- GUIA_AUTENTICACION.md con instrucciones de prueba
-- INSTALACION_LINUX.md para sistemas Linux
-- SCRIPTS.md con documentacion de scripts
+- Documentacion de instalacion y uso en README.md
 
 ### 🎯 Progreso del TFG
 - **10/16 retos completados** (62.5%)
@@ -575,8 +726,7 @@ cd ~/Documentos/proyecto-medusse
 - **Control de acceso** por roles (admin/user/viewer)
 
 #### ✅ Testing Automatizado
-- **Script de testing** (test-auth.js) con 8 tests
-- **Script batch** (probar_autenticacion.bat) para Windows
+- **Script de testing** (api/test-auth.js) con 8 tests
 - **Tests de login** con credenciales correctas/incorrectas
 - **Tests de validacion** de sesion
 - **Tests de logout** y expiracion de sesion
@@ -809,21 +959,21 @@ cd ~/Documentos/proyecto-medusse
 
 #### ✅ Telegraf Pipeline Optimizado
 - **Parsing inteligente** de topics MQTT
-- **Agregación temporal** cada 30 segundos
-- **Múltiples consumers** para raw data y sensores específicos
-- **Procesamiento de timestamps** automático
+- **Agregacion temporal** cada 30 segundos
+- **Multiples consumers** para raw data y sensores especificos
+- **Procesamiento de timestamps** automatico
 
 #### ✅ Grafana Dashboard Profesional
 - **Branding personalizado** con logo Medusse
 - **Header estilizado** con iconos de sensores
-- **Colores diferenciados** por ubicación (Rojo, Azul, Verde)
+- **Colores diferenciados** por ubicacion (Rojo, Purpura, Naranja, Verde)
 - **Umbrales de CO2** con sistema de alertas visual
 
-#### ✅ Configuración Docker Productiva
-- **Volúmenes persistentes** para todos los servicios
+#### ✅ Configuracion Docker Productiva
+- **Volumenes persistentes** para todos los servicios
 - **Networking interno** optimizado (medusse_network)
-- **Variables de entorno** configuradas para producción
-- **Restart policies** automáticas
+- **Variables de entorno** configuradas para produccion
+- **Restart policies** automaticas
 
 ### 🔧 Mejoras Técnicas
 
@@ -959,8 +1109,8 @@ cd ~/Documentos/proyecto-medusse
 ### 📁 Archivos Nuevos
 - `api/` - Directorio completo API REST
 - `medusse_app/` - Directorio completo Flutter
-- `README_FLUTTER.md` - Documentación app móvil
-- Scripts de ejecución y testing
+- `medusse_app/README.md` - Documentacion app movil
+- Scripts de ejecucion y testing
 
 ### 📦 Dependencias Completas Configuradas
 
@@ -1104,236 +1254,6 @@ demo.bat         # Ejecutar demo completa
 
 ---
 
-*Desarrollado para IES José Rodrigo Botet - Curso 2026/2026*
+*Desarrollado para IES José Rodrigo Botet - Curso 2025/2026*
 *Autor: Francisco Manuel López Alarte*
-
-## [
-2.8.0] - 2025-11-24 - RETO 7: VALIDACION DE FORMULARIOS JS ✅
-
-### ✅ Validacion de Formularios Completa
-
-#### ✅ Sistema de Validacion Robusto
-- **Libreria de validacion** (validation.ts) sin dependencias externas
-  * validateUsername() - Validacion de usuario
-  * validatePassword() - Validacion de contrasena
-  * validateEmail() - Validacion de email
-  * validateFullName() - Validacion de nombre completo
-
-#### ✅ Validacion en Tiempo Real
-- **Validacion mientras escribes** - Feedback inmediato
-- **Validacion al perder foco** (onBlur) - No molesta mientras escribes
-- **Validacion antes de enviar** - Doble verificacion
-- **Estados de error individuales** - Mensajes especificos por campo
-
-#### ✅ Reglas de Validacion Implementadas
-
-**Usuario:**
-- Requerido
-- Minimo 3 caracteres
-- Maximo 50 caracteres
-- Solo letras, numeros y guion bajo
-
-**Contrasena:**
-- Requerida
-- Minimo 6 caracteres
-- Maximo 100 caracteres
-
-**Email:**
-- Requerido
-- Formato valido (regex)
-
-**Nombre completo:**
-- Requerido
-- Minimo 3 caracteres
-- Maximo 100 caracteres
-
-#### ✅ Mejoras UX
-- **Bordes rojos** en campos con error
-- **Mensajes de error** debajo de cada campo
-- **Boton deshabilitado** si hay errores de validacion
-- **Transiciones suaves** en estados de error
-- **Focus rings** diferenciados (rojo para error, azul para normal)
-
-### 📊 Progreso del TFG
-- **11/16 retos completados** (68.75%)
-- **Reto 7 completado**: Validacion de formularios JS ✅
-- **5 retos pendientes**
-
----
-
-
-
-## [2.9.0] - 2025-11-24 - RETO 10: PANEL DE ADMINISTRACION ✅
-
-### 🛡️ Panel de Administracion Completo
-
-#### ✅ Endpoints de Administracion (API)
-- **GET /api/admin/users** - Listar todos los usuarios
-- **GET /api/admin/stats** - Estadisticas del sistema
-- **GET /api/admin/logs** - Logs de actividad
-- **GET /api/admin/sessions** - Sesiones activas
-- **DELETE /api/admin/users/:id** - Eliminar usuario
-- **PUT /api/admin/users/:id/role** - Cambiar rol de usuario
-
-#### ✅ Middleware de Seguridad
-- **requireAdmin** - Verificacion de permisos de administrador
-- **Proteccion de rutas** - Solo usuarios admin pueden acceder
-- **Validaciones** - No puede eliminar/modificar su propio usuario
-
-#### ✅ Panel Web (/admin)
-- **3 pestanas principales**:
-  * Estadisticas - Dashboard con metricas clave
-  * Usuarios - Gestion completa de usuarios
-  * Logs - Actividad reciente del sistema
-
-#### ✅ Estadisticas Implementadas
-- **Total de usuarios** - Contador general
-- **Sesiones activas** - Usuarios conectados
-- **Alertas activas** - Alertas sin resolver
-- **Actividad reciente** - Acciones ultimos 7 dias
-- **Usuarios por rol** - Distribucion admin/user/viewer
-
-#### ✅ Gestion de Usuarios
-- **Tabla completa** con todos los usuarios
-- **Cambiar rol** - Dropdown para cambiar admin/user/viewer
-- **Eliminar usuario** - Con confirmacion
-- **Informacion detallada** - Username, email, ultimo login
-- **Protecciones** - No puede modificar su propio usuario
-
-#### ✅ Logs de Actividad
-- **Ultimos 20 eventos** del sistema
-- **Informacion completa** - Usuario, accion, detalles, fecha
-- **Ordenados** - Mas recientes primero
-- **Formato legible** - Fechas en español
-
-#### ✅ Diseno y UX
-- **Tabs navegables** - Cambio rapido entre secciones
-- **Cards de estadisticas** - Visualizacion clara con iconos
-- **Tabla responsive** - Gestion de usuarios ordenada
-- **Confirmaciones** - Dialogs antes de acciones criticas
-- **Loading states** - Indicadores de carga
-- **Error handling** - Mensajes claros de error
-
-### 📊 Progreso del TFG
-- **12/16 retos completados** (75%)
-- **Reto 10 completado**: Panel de administracion ✅
-- **4 retos pendientes**
-
----
-
-
-
-## [2.10.0] - 2025-11-24 - RETO 11: SCRIPT FTP/SFTP ✅
-
-### 📤 Sistema de Deployment Automatico
-
-#### ✅ Deployment en Vercel (Implementado)
-- **URL Produccion**: https://medusse-web.vercel.app
-- **Deployment automatico** con cada push a GitHub
-- **Build en 20-30 segundos** con optimizacion automatica
-- **SSL/HTTPS** incluido y CDN global
-- **Preview deployments** por cada commit
-
-#### ✅ Scripts FTP Implementados (Alternativa)
-- **deploy-ftp.bat** - Script Windows para deployment FTP
-- **deploy-ftp.js** - Script Node.js con FTP basico
-- **deploy-sftp.js** - Script Node.js con SFTP seguro
-
-#### ✅ Funcionalidades
-- **Upload automatico** de directorios al servidor
-- **Exclusion inteligente** de node_modules, .git, .env
-- **Logs detallados** de progreso y errores
-- **Soporte FTP y SFTP** (seguro)
-- **Configuracion por variables de entorno**
-
-#### ✅ Directorios Incluidos
-- `web/.next` → Build de Next.js
-- `api` → API Node.js
-- `docker` → Configuracion Docker
-
-#### ✅ Seguridad
-- Variables de entorno para credenciales
-- Archivo .env.ftp.example como plantilla
-- Soporte para claves SSH en SFTP
-- Exclusion automatica de archivos sensibles
-
-#### ✅ Documentacion
-- **FTP_DEPLOYMENT.md** - Guia completa de uso
-- Ejemplos de configuracion
-- Integracion con CI/CD (GitHub Actions)
-- Solucion de problemas comunes
-
-### 📊 Progreso del TFG
-- **13/16 retos completados** (81.25%)
-- **Reto 11 completado**: Script FTP/SFTP ✅
-- **3 retos pendientes**
-
----
-
-
-
-## [2.11.0] - 2025-11-24 - RETO 14: DISEÑO WEB AVANZADO ✅
-
-### 🎨 Mejoras de Diseño Responsive y Animaciones
-
-#### ✅ Libreria de Animaciones
-- **animations.ts** - Libreria centralizada de animaciones reutilizables
-  * fadeInUp, fadeInLeft, fadeInRight
-  * scaleIn, staggerContainer, staggerItem
-  * cardHover, pulse, rotate
-  * slideInModal con spring physics
-  * Configuraciones de viewport y transitions
-
-#### ✅ Animaciones Implementadas
-- **Fade in suave** en HeroSection con easing personalizado
-- **Hover effects** en cards con scale y shadow
-- **Transiciones suaves** en botones (300ms)
-- **Animaciones de entrada** con Framer Motion
-- **Stagger animations** para listas de elementos
-
-#### ✅ Mejoras Responsive
-
-**Login Page:**
-- Padding adaptativo: px-4 (mobile) → px-6 (tablet) → px-8 (desktop)
-- Titulos escalables: text-2xl (mobile) → text-3xl (desktop)
-- Espaciado optimizado para pantallas pequeñas
-
-**Dashboard:**
-- Grid adaptativo: 1 col (mobile) → 2 cols (tablet) → 3 cols (desktop)
-- Header responsive con texto escalable
-- Botones con tamaños adaptativos
-- Cards con hover effects y animaciones
-
-**Panel Admin:**
-- Titulos responsive: text-2xl (mobile) → text-3xl (desktop)
-- Grid de estadisticas: 1 → 2 → 4 columnas
-- Tabs optimizados para mobile
-- Tablas con scroll horizontal en mobile
-
-#### ✅ Transiciones CSS
-- **duration-300** en todos los hover effects
-- **hover:scale-105** en botones y cards
-- **hover:-translate-y-1** en cards para efecto lift
-- **transition-all** para transiciones suaves
-
-#### ✅ Breakpoints Utilizados
-```
-sm: 640px   (tablet)
-md: 768px   (tablet grande)
-lg: 1024px  (desktop)
-xl: 1280px  (desktop grande)
-```
-
-#### ✅ Mejoras UX
-- Animaciones suaves que no distraen
-- Feedback visual en interacciones
-- Responsive en todos los dispositivos
-- Performance optimizado (GPU acceleration)
-
-### 📊 Progreso del TFG
-- **14/16 retos completados** (87.5%)
-- **Reto 14 completado**: Diseño web avanzado ✅
-- **2 retos pendientes** (solo documentación)
-
----
 

@@ -1,0 +1,193 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="2000" viewBox="0 0 1600 2000" role="img" aria-label="Diagrama de conexiones - Arduino central y sensores alrededor">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#222"/>
+    </marker>
+    <filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000" flood-opacity="0.15"/>
+    </filter>
+    <style>
+      .arduino { fill:#0b5fa5; stroke:#062f4a; stroke-width:6; filter:url(#softShadow); }
+      .pin { font-family:Arial, Helvetica, sans-serif; font-size:18px; fill:#111; }
+      .block { rx:12; ry:12; stroke-width:3; filter:url(#softShadow); }
+      .label { font-family:Arial, Helvetica, sans-serif; font-size:16px; fill:#fff; font-weight:700; pointer-events:none; }
+      .desc { font-family:Arial, Helvetica, sans-serif; font-size:13px; fill:#222; }
+      .conn { stroke:#333; stroke-width:3; fill:none; marker-end:url(#arrow); }
+      .power { stroke:#b33; stroke-width:3; }
+      .ground { stroke:#444; stroke-width:3; stroke-dasharray:6 4; }
+      .table { font-family:Arial, Helvetica, sans-serif; font-size:14px; fill:#111; }
+      .table-header { font-weight:700; font-size:15px; fill:#fff; }
+      .bg { fill:#f7f7f9; }
+      .block-sensor { fill:#1e90ff; stroke:#0f5f9a; }
+      .block-gas { fill:#ff7f50; stroke:#b3472e; }
+      .block-ph { fill:#8a2be2; stroke:#5a1a9a; }
+      .block-tds { fill:#32cd32; stroke:#197a19; }
+      .block-water { fill:#00bfff; stroke:#0a7fa6; }
+      .block-weather { fill:#ffcc00; stroke:#b38900; }
+      .block-comm { fill:#6c757d; stroke:#3d4146; }
+      .block-power { fill:#f25c54; stroke:#8f231f; }
+      .note { font-family:Arial, Helvetica, sans-serif; font-size:12px; fill:#222; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="1600" height="2000" class="bg"/>
+
+  <!-- Center: ARDUINO -->
+  <g transform="translate(800,550)">
+    <circle cx="0" cy="0" r="110" class="arduino"/>
+    <text x="0" y="-10" class="label" text-anchor="middle" font-size="20">Arduino Nano ESP32</text>
+    <text x="0" y="20" class="label" text-anchor="middle" font-size="14">A0-A5 · D4-D8 · 3V3 · 5V · GND</text>
+
+    <!-- Pin labels around Arduino -->
+    <g transform="translate(-150,-150)" >
+      <text class="pin" x="0" y="0">A0</text>
+      <text class="pin" x="0" y="30">A1</text>
+      <text class="pin" x="0" y="60">A2</text>
+      <text class="pin" x="0" y="90">A3</text>
+    </g>
+    <g transform="translate(110,-150)">
+      <text class="pin" x="0" y="0" text-anchor="end">A4</text>
+      <text class="pin" x="0" y="30" text-anchor="end">A5</text>
+      <text class="pin" x="0" y="60" text-anchor="end">D4</text>
+      <text class="pin" x="0" y="90" text-anchor="end">D5</text>
+    </g>
+    <g transform="translate(-150,110)">
+      <text class="pin" x="0" y="0">3V3</text>
+      <text class="pin" x="0" y="30">5V</text>
+      <text class="pin" x="0" y="60">GND</text>
+    </g>
+  </g>
+
+  <!-- Sensors arranged radially (positions chosen to avoid crossings) -->
+  <!-- Top (North) -->
+  <g id="env-i2c" transform="translate(800,140)">
+    <rect x="-120" y="-50" width="240" height="100" class="block block-sensor"/>
+    <text x="0" y="-2" class="label" text-anchor="middle">Sensores Ambientales I2C</text>
+    <text x="0" y="20" class="desc" text-anchor="middle">BME680 (Temperatura, Humedad, Presión, VOC)</text>
+  </g>
+  <path d="M800 440 L800 220" class="conn"/>
+
+  <!-- North-East -->
+  <g id="gas" transform="translate(1140,260)">
+    <rect x="-140" y="-48" width="280" height="96" class="block block-gas"/>
+    <text x="0" y="-6" class="label" text-anchor="middle">Sensor Gas</text>
+    <text x="0" y="18" class="desc" text-anchor="middle">MQ-135 · VOC / CO2 (analógico)</text>
+    <text x="0" y="36" class="desc" text-anchor="middle">(A0 / D)</text>
+  </g>
+  <path d="M850 680 L1150 300" class="conn"/>
+
+  <!-- East -->
+  <g id="ph" transform="translate(1270,560)">
+    <rect x="-160" y="-52" width="320" height="104" class="block block-ph"/>
+    <text x="0" y="-6" class="label" text-anchor="middle">Sensor pH</text>
+    <text x="0" y="18" class="desc" text-anchor="middle">Electrodo pH + Shield</text>
+    <text x="0" y="36" class="desc" text-anchor="middle">Interfaz A0 - A5</text>
+  </g>
+  <path d="M895 650 L1110 600" class="conn"/>
+
+  <!-- South-East -->
+  <g id="tds" transform="translate(1140,920)">
+    <rect x="-130" y="-50" width="260" height="100" class="block block-tds"/>
+    <text x="0" y="-6" class="label" text-anchor="middle">TDS Sensor</text>
+    <text x="0" y="18" class="desc" text-anchor="middle">Conductividad / TDS (A1/A2)</text>
+  </g>
+  <path d="M950 650 L1030 840" class="conn"/>
+
+  <!-- South (Bottom) -->
+  <g id="waterflow" transform="translate(800,1020)">
+    <rect x="-160" y="-56" width="320" height="112" class="block block-water"/>
+    <text x="0" y="-8" class="label" text-anchor="middle">YF-S201 (Flujo agua)</text>
+    <text x="0" y="18" class="desc" text-anchor="middle">Salida de pulso → D6</text>
+    <text x="0" y="36" class="desc" text-anchor="middle">(Sensor caudal)</text>
+  </g>
+  <path d="M800 660 L800 960" class="conn"/>
+
+  <!-- South-West -->
+  <g id="battery-solar" transform="translate(460,920)">
+    <rect x="-150" y="-56" width="300" height="112" class="block block-power"/>
+    <text x="0" y="-8" class="label" text-anchor="middle">Alimentación</text>
+    <text x="0" y="18" class="desc" text-anchor="middle">Solar 3.7V · BAT-0058 · Regulador 5V / 3V3</text>
+    <text x="0" y="36" class="desc" text-anchor="middle">GND común</text>
+  </g>
+  <path d="M800 660 L620 840" class="conn power"/>
+
+  <!-- West -->
+  <g id="wind" transform="translate(200,560)">
+    <rect x="-160" y="-52" width="320" height="104" class="block block-weather"/>
+    <text x="0" y="-6" class="label" text-anchor="middle">Viento (Veleta / Anemómetro)</text>
+    <text x="0" y="18" class="desc" text-anchor="middle">Velocidad (m/s) · Dirección (grados)</text>
+    <text x="0" y="36" class="desc" text-anchor="middle">Salida digital / analógica</text>
+  </g>
+  <path d="M690 560 L360 560" class="conn"/>
+
+  <!-- North-West -->
+  <g id="temp-humi" transform="translate(460,260)">
+    <rect x="-130" y="-48" width="260" height="96" class="block block-sensor"/>
+    <text x="0" y="-6" class="label" text-anchor="middle">AM2302 / DHT22</text>
+    <text x="0" y="18" class="desc" text-anchor="middle">Temperatura y Humedad (digital)</text>
+    <text x="0" y="36" class="desc" text-anchor="middle">I/O digital → D7</text>
+  </g>
+  <path d="M620 440 L540 330" class="conn"/>
+
+  <!-- Comunicación: LoRa Gateway / WisGate -->
+  <g id="lora" transform="translate(1090,120)">
+    <rect x="-140" y="-40" width="280" height="80" class="block block-comm"/>
+    <text x="0" y="-4" class="label" text-anchor="middle">WisGate Edge Pro</text>
+    <text x="0" y="16" class="desc" text-anchor="middle">LoRa Gateway (Concentrador)</text>
+  </g>
+  <path d="M800 480 L980 160" class="conn"/>
+
+  <!-- Shield SPI (for SD / RTC / display) -->
+  <g id="shield" transform="translate(1090,420)">
+    <rect x="-100" y="-42" width="200" height="84" class="block block-comm"/>
+    <text x="0" y="-4" class="label" text-anchor="middle">Shield SPI</text>
+    <text x="0" y="16" class="desc" text-anchor="middle">SD / RTC / Display</text>
+  </g>
+  <path d="M1020 400 L890 550" class="conn"/>
+
+  <!-- Ground and power trunk lines (visual) -->
+  <line x1="800" y1="660" x2="800" y2="1200" class="ground"/>
+  <text x="820" y="860" class="note">GND común</text>
+  <line x1="600" y1="840" x2="1000" y2="840" class="power"/>
+  <text x="1005" y="860" class="note">5V / 3V3 (regulado)</text>
+
+  <!-- Table at bottom: bloques lógicos -->
+  <g transform="translate(120,1350)">
+    <rect x="0" y="0" width="1360" height="510" rx="12" ry="12" fill="#ffffff" stroke="#d0d3d8" stroke-width="2"/>
+    <text x="20" y="30" class="table-header">Organización por bloques lógicos</text>
+
+    <!-- Sensors column -->
+    <rect x="20" y="50" width="420" height="380" rx="10" ry="10" fill="#f0f7ff" stroke="#c6e0ff"/>
+    <text x="40" y="80" class="table-header">Sensores</text>
+    <text x="40" y="110" class="table">BME680 — Sensores Ambientales (I2C)</text>
+    <text x="40" y="135" class="table">MQ-135 — Sensor Gas (VOC / CO₂)</text>
+    <text x="40" y="160" class="table">AM2302 / DHT22 — Temp + Hum</text>
+    <text x="40" y="185" class="table">Sensor pH — Electrodo pH (A0)</text>
+    <text x="40" y="210" class="table">TDS Sensor — Conductividad</text>
+    <text x="40" y="235" class="table">YF-S201 — Flujo Agua (pulso)</text>
+    <text x="40" y="260" class="table">Anemómetro / Veleta — Viento (vel/dir)</text>
+
+    <!-- Actuadores / Power column -->
+    <rect x="470" y="50" width="420" height="380" rx="10" ry="10" fill="#fff8f0" stroke="#ffd3b3"/>
+    <text x="490" y="80" class="table-header">Actuadores / Alimentación</text>
+    <text x="490" y="110" class="table">Relés / Válvulas (salidas digitales)</text>
+    <text x="490" y="135" class="table">Bomba / Válvula de Agua (D4-D5)</text>
+    <text x="490" y="160" class="table">Solar 3.7V · BAT-0058 (batería)</text>
+    <text x="490" y="185" class="table">Regulador 5V / 3V3 · GND común</text>
+    <text x="490" y="210" class="table">Indicadores / LEDs</text>
+
+    <!-- Comunicación column -->
+    <rect x="920" y="50" width="420" height="380" rx="10" ry="10" fill="#f3f3f5" stroke="#d0d0d5"/>
+    <text x="940" y="80" class="table-header">Comunicación</text>
+    <text x="940" y="110" class="table">WisGate Edge Pro — LoRa Gateway</text>
+    <text x="940" y="135" class="table">Shield SPI — SD card, RTC, Display</text>
+    <text x="940" y="160" class="table">I2C — BME680</text>
+    <text x="940" y="185" class="table">UART / Serial — Depuración</text>
+    <text x="940" y="210" class="table">MQTT / Backend (gateway → cloud)</text>
+
+    <!-- Footnote -->
+    <text x="20" y="460" class="note">Notas: Los pines analógicos A0..A5 y digitales D4..D8 se muestran en el Arduino central. GND y alimentación deben compartirse entre módulos.</text> 
+    <text x="20" y="480" class="note">Las conexiones están organizadas radialmente para evitar cruces y mantener correspondencia funcional con el diagrama original.</text>
+  </g>
+</svg>

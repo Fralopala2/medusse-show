@@ -1,0 +1,382 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 2000" width="1600" height="2000">
+  <!-- Version 2.1 - Contraste corregido -->
+  <defs>
+    <style>
+      .title { font-size: 32px; font-weight: bold; fill: #ffffff; }
+      .subtitle { font-size: 14px; fill: #ffffff; }
+      .section-title { font-size: 18px; font-weight: bold; }
+      .sensor-name { font-size: 12px; font-weight: bold; fill: #1a202c; }
+      .pin-text { font-size: 10px; fill: #2d3748; }
+      .pin-text-light { font-size: 10px; fill: #ffffff; }
+      .connection-label { font-size: 9px; fill: #4a5568; font-weight: 500; }
+      .note-text { font-size: 10px; fill: #2d3748; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1600" height="2000" fill="#f8f9fa"/>
+
+  <!-- Title Section -->
+  <rect x="0" y="0" width="1600" height="80" fill="#2c3e50" rx="0"/>
+  <text x="800" y="45" text-anchor="middle" class="title">Arduino Nano ESP32 - Diagrama de conexiones</text>
+  <text x="800" y="65" text-anchor="middle" class="subtitle">Medusse IoT - 18 sensores y módulos</text>
+
+  <!-- PARTE 1: ARDUINO BOARD CENTRAL -->
+  <g id="arduino-board">
+    <!-- Board -->
+    <rect x="500" y="120" width="600" height="500" fill="#34495e" stroke="#2c3e50" stroke-width="3" rx="8"/>
+    
+    <!-- Board label -->
+    <text x="800" y="160" text-anchor="middle" class="sensor-name" fill="white" font-size="16">Arduino Nano ESP32</text>
+    
+    <!-- Left pin column -->
+    <g id="left-pins">
+      <!-- 3V3 Power (Red) -->
+      <circle cx="550" cy="220" r="5" fill="#e74c3c"/>
+      <text x="535" y="225" text-anchor="end" class="pin-text-light">3V3</text>
+      
+      <!-- GND (Black) -->
+      <circle cx="550" cy="280" r="5" fill="#000000"/>
+      <text x="535" y="285" text-anchor="end" class="pin-text-light">GND</text>
+      
+      <!-- D4 (Blue) -->
+      <circle cx="550" cy="340" r="5" fill="#3498db"/>
+      <text x="535" y="345" text-anchor="end" class="pin-text-light">D4</text>
+      
+      <!-- D5 (Green) -->
+      <circle cx="550" cy="400" r="5" fill="#27ae60"/>
+      <text x="535" y="405" text-anchor="end" class="pin-text-light">D5</text>
+      
+      <!-- D6 (Green) -->
+      <circle cx="550" cy="460" r="5" fill="#27ae60"/>
+      <text x="535" y="465" text-anchor="end" class="pin-text-light">D6</text>
+      
+      <!-- D7 (Green) -->
+      <circle cx="550" cy="520" r="5" fill="#27ae60"/>
+      <text x="535" y="525" text-anchor="end" class="pin-text-light">D7</text>
+      
+      <!-- D8 (Green) -->
+      <circle cx="550" cy="580" r="5" fill="#27ae60"/>
+      <text x="535" y="585" text-anchor="end" class="pin-text-light">D8</text>
+    </g>
+
+    <!-- Center pin column -->
+    <g id="center-pins">
+      <!-- D21 I2C SDA (Blue) -->
+      <circle cx="800" cy="220" r="5" fill="#3498db"/>
+      <text x="800" y="205" text-anchor="middle" class="pin-text-light">D21 (SDA)</text>
+      
+      <!-- D22 I2C SCL (Blue) -->
+      <circle cx="800" cy="280" r="5" fill="#3498db"/>
+      <text x="800" y="265" text-anchor="middle" class="pin-text-light">D22 (SCL)</text>
+    </g>
+
+    <!-- Right pin column -->
+    <g id="right-pins">
+      <!-- A0 (Orange) -->
+      <circle cx="1050" cy="220" r="5" fill="#f39c12"/>
+      <text x="1065" y="225" text-anchor="start" class="pin-text-light">A0</text>
+      
+      <!-- A1 (Green) -->
+      <circle cx="1050" cy="280" r="5" fill="#27ae60"/>
+      <text x="1065" y="285" text-anchor="start" class="pin-text-light">A1</text>
+      
+      <!-- A2 (Green) -->
+      <circle cx="1050" cy="340" r="5" fill="#27ae60"/>
+      <text x="1065" y="345" text-anchor="start" class="pin-text-light">A2</text>
+      
+      <!-- A3 (Green) -->
+      <circle cx="1050" cy="400" r="5" fill="#27ae60"/>
+      <text x="1065" y="405" text-anchor="start" class="pin-text-light">A3</text>
+      
+      <!-- A4 (Green) -->
+      <circle cx="1050" cy="460" r="5" fill="#27ae60"/>
+      <text x="1065" y="465" text-anchor="start" class="pin-text-light">A4</text>
+      
+      <!-- A5 (Green) -->
+      <circle cx="1050" cy="520" r="5" fill="#27ae60"/>
+      <text x="1065" y="525" text-anchor="start" class="pin-text-light">A5</text>
+      
+      <!-- D10-D13 SPI (Orange) -->
+      <circle cx="1050" cy="600" r="5" fill="#f39c12"/>
+      <text x="1065" y="605" text-anchor="start" class="pin-text-light">D10-D13</text>
+    </g>
+  </g>
+
+  <!-- PARTE 2: SENSORES AMBIENTALES (AZUL) - Top Left -->
+  <g id="environmental">
+    <text x="100" y="690" class="section-title" fill="#3498db">🌡️ SENSORES AMBIENTALES</text>
+    
+    <!-- BME680 -->
+    <rect x="50" y="720" width="160" height="100" fill="#e8f4f8" stroke="#3498db" stroke-width="2" rx="5"/>
+    <text x="130" y="750" text-anchor="middle" class="sensor-name">BME680</text>
+    <text x="130" y="770" text-anchor="middle" class="pin-text">Temperatura</text>
+    <text x="130" y="785" text-anchor="middle" class="pin-text">Humedad</text>
+    <text x="130" y="800" text-anchor="middle" class="pin-text">Presión, VOC</text>
+    <line x1="130" y1="720" x2="800" y2="220" stroke="#3498db" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="465" y="465" class="connection-label" fill="#3498db" font-weight="bold">D21/D22 (I2C)</text>
+    
+    <!-- DHT22 -->
+    <rect x="230" y="720" width="160" height="100" fill="#e8f4f8" stroke="#3498db" stroke-width="2" rx="5"/>
+    <text x="310" y="750" text-anchor="middle" class="sensor-name">DHT22</text>
+    <text x="310" y="770" text-anchor="middle" class="pin-text">Temperatura</text>
+    <text x="310" y="785" text-anchor="middle" class="pin-text">Humedad</text>
+    <text x="310" y="800" text-anchor="middle" class="pin-text">(AM2302)</text>
+    <line x1="310" y1="720" x2="550" y2="340" stroke="#3498db" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="430" y="520" class="connection-label" fill="#3498db" font-weight="bold">D4</text>
+    
+    <!-- SGP30 -->
+    <rect x="410" y="720" width="160" height="100" fill="#e8f4f8" stroke="#3498db" stroke-width="2" rx="5"/>
+    <text x="490" y="750" text-anchor="middle" class="sensor-name">SGP30</text>
+    <text x="490" y="770" text-anchor="middle" class="pin-text">VOC / CO2</text>
+    <text x="490" y="785" text-anchor="middle" class="pin-text">Calidad Aire</text>
+    <text x="490" y="800" text-anchor="middle" class="pin-text">(I2C)</text>
+    <line x1="490" y1="720" x2="800" y2="280" stroke="#3498db" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="645" y="490" class="connection-label" fill="#3498db" font-weight="bold">D21/D22</text>
+  </g>
+
+  <!-- PARTE 3: SENSORES DE AGUA Y SUELO (VERDE) - Top Center/Right -->
+  <g id="water-soil">
+    <text x="650" y="690" class="section-title" fill="#27ae60">💧 SENSORES DE AGUA Y SUELO</text>
+    
+    <!-- Humedad Suelo Capacitivo -->
+    <rect x="600" y="720" width="140" height="100" fill="#e8f8f0" stroke="#27ae60" stroke-width="2" rx="5"/>
+    <text x="670" y="745" text-anchor="middle" class="sensor-name" font-size="11">Humedad Suelo</text>
+    <text x="670" y="762" text-anchor="middle" class="pin-text">Capacitivo</text>
+    <text x="670" y="777" text-anchor="middle" class="pin-text">SEN-0180</text>
+    <text x="670" y="792" text-anchor="middle" class="pin-text">(Analógico)</text>
+    <line x1="670" y1="720" x2="1050" y2="280" stroke="#27ae60" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="860" y="490" class="connection-label" fill="#27ae60" font-weight="bold">A1</text>
+    
+    <!-- Humedad Suelo Anticorrosión -->
+    <rect x="760" y="720" width="140" height="100" fill="#e8f8f0" stroke="#27ae60" stroke-width="2" rx="5"/>
+    <text x="830" y="745" text-anchor="middle" class="sensor-name" font-size="11">Humedad Suelo</text>
+    <text x="830" y="762" text-anchor="middle" class="pin-text">Anticorrosión</text>
+    <text x="830" y="777" text-anchor="middle" class="pin-text">SEN-0083</text>
+    <text x="830" y="792" text-anchor="middle" class="pin-text">(Analógico)</text>
+    <line x1="830" y1="720" x2="1050" y2="340" stroke="#27ae60" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="940" y="530" class="connection-label" fill="#27ae60" font-weight="bold">A2</text>
+    
+    <!-- Sensor de Flujo de Agua -->
+    <rect x="920" y="720" width="140" height="100" fill="#e8f8f0" stroke="#27ae60" stroke-width="2" rx="5"/>
+    <text x="990" y="745" text-anchor="middle" class="sensor-name" font-size="11">Flujo de Agua</text>
+    <text x="990" y="762" text-anchor="middle" class="pin-text">YF-S201</text>
+    <text x="990" y="777" text-anchor="middle" class="pin-text">Pulsos</text>
+    <text x="990" y="792" text-anchor="middle" class="pin-text">(0.5-2.5L/min)</text>
+    <line x1="990" y1="720" x2="550" y2="400" stroke="#27ae60" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="770" y="560" class="connection-label" fill="#27ae60" font-weight="bold">D5</text>
+    
+    <!-- Sensor de pH -->
+    <rect x="1080" y="720" width="140" height="100" fill="#e8f8f0" stroke="#27ae60" stroke-width="2" rx="5"/>
+    <text x="1150" y="750" text-anchor="middle" class="sensor-name">Sensor pH</text>
+    <text x="1150" y="767" text-anchor="middle" class="pin-text">Analógico</text>
+    <text x="1150" y="782" text-anchor="middle" class="pin-text">Profesional</text>
+    <text x="1150" y="797" text-anchor="middle" class="pin-text">(6.2-7.8)</text>
+    <line x1="1150" y1="720" x2="1050" y2="400" stroke="#27ae60" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="1100" y="560" class="connection-label" fill="#27ae60" font-weight="bold">A3</text>
+  </g>
+
+  <!-- PARTE 4: SENSORES DE AGUA Y SUELO (continuación VERDE) - Bottom Left -->
+  <g id="water-soil-2">
+    <!-- Sensor TDS -->
+    <rect x="50" y="900" width="140" height="100" fill="#e8f8f0" stroke="#27ae60" stroke-width="2" rx="5"/>
+    <text x="120" y="925" text-anchor="middle" class="sensor-name">TDS Sensor</text>
+    <text x="120" y="942" text-anchor="middle" class="pin-text">Gravity</text>
+    <text x="120" y="957" text-anchor="middle" class="pin-text">Analógico</text>
+    <text x="120" y="972" text-anchor="middle" class="pin-text">(50-200ppm)</text>
+    <line x1="120" y1="900" x2="1050" y2="460" stroke="#27ae60" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="585" y="680" class="connection-label" fill="#27ae60" font-weight="bold">A4</text>
+    
+    <!-- Oxígeno Disuelto -->
+    <rect x="210" y="900" width="140" height="100" fill="#e8f8f0" stroke="#27ae60" stroke-width="2" rx="5"/>
+    <text x="280" y="920" text-anchor="middle" class="sensor-name" font-size="11">Oxígeno Disuelto</text>
+    <text x="280" y="937" text-anchor="middle" class="pin-text">Gravity</text>
+    <text x="280" y="952" text-anchor="middle" class="pin-text">Analógico</text>
+    <text x="280" y="967" text-anchor="middle" class="pin-text">(7.2-8.8mg/L)</text>
+    <line x1="280" y1="900" x2="1050" y2="520" stroke="#27ae60" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="665" y="710" class="connection-label" fill="#27ae60" font-weight="bold">A5</text>
+  </g>
+
+  <!-- PARTE 5: ESTACIÓN METEOROLÓGICA (VERDE CLARO) - Bottom Center -->
+  <g id="weather">
+    <text x="450" y="1090" class="section-title" fill="#16a34a">🌍 KIT ESTACIÓN METEOROLÓGICA</text>
+    
+    <!-- Anemometer -->
+    <rect x="380" y="1120" width="140" height="90" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" rx="5"/>
+    <text x="450" y="1150" text-anchor="middle" class="sensor-name">Anemómetro</text>
+    <text x="450" y="1167" text-anchor="middle" class="pin-text">Velocidad</text>
+    <text x="450" y="1182" text-anchor="middle" class="pin-text">Viento (m/s)</text>
+    <line x1="450" y1="1120" x2="550" y2="460" stroke="#16a34a" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="500" y="790" class="connection-label" fill="#16a34a" font-weight="bold">D6</text>
+    
+    <!-- Pluviometer -->
+    <rect x="540" y="1120" width="140" height="90" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" rx="5"/>
+    <text x="610" y="1150" text-anchor="middle" class="sensor-name">Pluviómetro</text>
+    <text x="610" y="1167" text-anchor="middle" class="pin-text">Lluvia</text>
+    <text x="610" y="1182" text-anchor="middle" class="pin-text">Precipitación (mm)</text>
+    <line x1="610" y1="1120" x2="550" y2="520" stroke="#16a34a" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="580" y="820" class="connection-label" fill="#16a34a" font-weight="bold">D7</text>
+    
+    <!-- Wind Vane -->
+    <rect x="700" y="1120" width="140" height="90" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" rx="5"/>
+    <text x="770" y="1150" text-anchor="middle" class="sensor-name">Veleta</text>
+    <text x="770" y="1167" text-anchor="middle" class="pin-text">Dirección</text>
+    <text x="770" y="1182" text-anchor="middle" class="pin-text">Viento (grados)</text>
+    <line x1="770" y1="1120" x2="550" y2="580" stroke="#16a34a" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="660" y="850" class="connection-label" fill="#16a34a" font-weight="bold">D8</text>
+  </g>
+
+  <!-- PARTE 6: SENSORES DE ENERGÍA Y OTROS (NARANJA) - Bottom Right -->
+  <g id="energy">
+    <text x="1100" y="1090" class="section-title" fill="#f39c12">⚡ SENSORES DE ENERGÍA Y OTROS</text>
+    
+    <!-- Gas Sensor -->
+    <rect x="1000" y="1120" width="140" height="90" fill="#fff9e6" stroke="#f39c12" stroke-width="2" rx="5"/>
+    <text x="1070" y="1150" text-anchor="middle" class="sensor-name">Sensor Gas</text>
+    <text x="1070" y="1167" text-anchor="middle" class="pin-text">Analógico</text>
+    <text x="1070" y="1182" text-anchor="middle" class="pin-text">(MQ-135)</text>
+    <line x1="1070" y1="1120" x2="1050" y2="220" stroke="#f39c12" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="1060" y="670" class="connection-label" fill="#f39c12" font-weight="bold">A0</text>
+    
+    <!-- Data Logger Shield -->
+    <rect x="1160" y="1120" width="140" height="90" fill="#fff9e6" stroke="#f39c12" stroke-width="2" rx="5"/>
+    <text x="1230" y="1145" text-anchor="middle" class="sensor-name" font-size="11">Data Logger</text>
+    <text x="1230" y="1162" text-anchor="middle" class="pin-text">Shield SPI</text>
+    <text x="1230" y="1177" text-anchor="middle" class="pin-text">MicroSD Card</text>
+    <line x1="1230" y1="1120" x2="1050" y2="600" stroke="#f39c12" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="1140" y="860" class="connection-label" fill="#f39c12" font-weight="bold">D10-D13</text>
+  </g>
+
+  <!-- PARTE 7: ENERGÍA Y ALMACENAMIENTO (NARANJA) - Separate section -->
+  <g id="power-storage">
+    <text x="1100" y="1320" class="section-title" fill="#e67e22">🔋 FUENTES DE ENERGÍA</text>
+    
+    <!-- Solar Panel -->
+    <rect x="1000" y="1350" width="140" height="90" fill="#ffe6cc" stroke="#e67e22" stroke-width="2" rx="5"/>
+    <text x="1070" y="1375" text-anchor="middle" class="sensor-name">Panel Solar</text>
+    <text x="1070" y="1392" text-anchor="middle" class="pin-text">6V (3W)</text>
+    <text x="1070" y="1407" text-anchor="middle" class="pin-text">SOL-0007</text>
+    
+    <!-- LiPo Charger -->
+    <rect x="1160" y="1350" width="140" height="90" fill="#ffe6cc" stroke="#e67e22" stroke-width="2" rx="5"/>
+    <text x="1230" y="1375" text-anchor="middle" class="sensor-name">Cargador LiPo</text>
+    <text x="1230" y="1392" text-anchor="middle" class="pin-text">Solar 3.7V</text>
+    <text x="1230" y="1407" text-anchor="middle" class="pin-text">BAT-0058</text>
+  </g>
+
+  <!-- PARTE 8: TABLA DE CONEXIONES - Bottom section -->
+  <g id="connections-table">
+    <rect x="40" y="1550" width="1520" height="400" fill="#ecf0f1" stroke="#34495e" stroke-width="2" rx="5"/>
+    
+    <text x="800" y="1580" text-anchor="middle" class="section-title" fill="#2c3e50">📋 TABLA DE CONEXIONES RESUMIDA</text>
+    
+    <!-- Table header -->
+    <rect x="50" y="1600" width="1500" height="30" fill="#34495e" rx="3"/>
+    <text x="150" y="1625" class="sensor-name" fill="white" font-size="11">Tipo de Sensor</text>
+    <text x="450" y="1625" class="sensor-name" fill="white" font-size="11">Pines Arduino</text>
+    <text x="850" y="1625" class="sensor-name" fill="white" font-size="11">Alimentación</text>
+    <text x="1200" y="1625" class="sensor-name" fill="white" font-size="11">Protocolo</text>
+    
+    <!-- Row 1 -->
+    <rect x="50" y="1635" width="1500" height="25" fill="white" stroke="#bdc3c7" stroke-width="1"/>
+    <text x="150" y="1653" class="note-text">BME680, SGP30</text>
+    <text x="450" y="1653" class="note-text">D21 (SDA), D22 (SCL)</text>
+    <text x="850" y="1653" class="note-text">3V3 + GND</text>
+    <text x="1200" y="1653" class="note-text" fill="#3498db">I2C</text>
+    
+    <!-- Row 2 -->
+    <rect x="50" y="1665" width="1500" height="25" fill="#f0f0f0" stroke="#bdc3c7" stroke-width="1"/>
+    <text x="150" y="1683" class="note-text">DHT22</text>
+    <text x="450" y="1683" class="note-text">D4</text>
+    <text x="850" y="1683" class="note-text">3V3 + GND</text>
+    <text x="1200" y="1683" class="note-text" fill="#3498db">GPIO Digital</text>
+    
+    <!-- Row 3 -->
+    <rect x="50" y="1695" width="1500" height="25" fill="white" stroke="#bdc3c7" stroke-width="1"/>
+    <text x="150" y="1713" class="note-text">YF-S201 (Flujo Agua)</text>
+    <text x="450" y="1713" class="note-text">D5</text>
+    <text x="850" y="1713" class="note-text">5V + GND</text>
+    <text x="1200" y="1713" class="note-text" fill="#27ae60">Pulsos (GPIO)</text>
+    
+    <!-- Row 4 -->
+    <rect x="50" y="1725" width="1500" height="25" fill="#f0f0f0" stroke="#bdc3c7" stroke-width="1"/>
+    <text x="150" y="1743" class="note-text">Anemómetro, Pluviómetro, Veleta</text>
+    <text x="450" y="1743" class="note-text">D6, D7, D8</text>
+    <text x="850" y="1743" class="note-text">3V3 + GND</text>
+    <text x="1200" y="1743" class="note-text" fill="#16a34a">Pulsos/Analógico</text>
+    
+    <!-- Row 5 -->
+    <rect x="50" y="1755" width="1500" height="25" fill="white" stroke="#bdc3c7" stroke-width="1"/>
+    <text x="150" y="1773" class="note-text">Sensores Analógicos (pH, TDS, O2, Suelo)</text>
+    <text x="450" y="1773" class="note-text">A0-A5</text>
+    <text x="850" y="1773" class="note-text">3V3 + GND</text>
+    <text x="1200" y="1773" class="note-text" fill="#27ae60">ADC Analógico</text>
+    
+    <!-- Row 6 -->
+    <rect x="50" y="1785" width="1500" height="25" fill="#f0f0f0" stroke="#bdc3c7" stroke-width="1"/>
+    <text x="150" y="1803" class="note-text">Sensor Gas (MQ-135)</text>
+    <text x="450" y="1803" class="note-text">A0</text>
+    <text x="850" y="1803" class="note-text">5V + GND</text>
+    <text x="1200" y="1803" class="note-text" fill="#f39c12">ADC Analógico</text>
+    
+    <!-- Row 7 -->
+    <rect x="50" y="1815" width="1500" height="25" fill="white" stroke="#bdc3c7" stroke-width="1"/>
+    <text x="150" y="1833" class="note-text">Data Logger Shield (SPI)</text>
+    <text x="450" y="1833" class="note-text">D10, D11, D12, D13</text>
+    <text x="850" y="1833" class="note-text">3V3 + GND</text>
+    <text x="1200" y="1833" class="note-text" fill="#f39c12">SPI</text>
+    
+    <!-- Row 8 -->
+    <rect x="50" y="1845" width="1500" height="25" fill="#f0f0f0" stroke="#bdc3c7" stroke-width="1"/>
+    <text x="150" y="1863" class="note-text">Panel Solar + Cargador LiPo</text>
+    <text x="450" y="1863" class="note-text">-</text>
+    <text x="850" y="1863" class="note-text">Entrada Sistema</text>
+    <text x="1200" y="1863" class="note-text" fill="#e67e22">Alimentación</text>
+    
+    <!-- Row 9 -->
+    <rect x="50" y="1875" width="1500" height="25" fill="white" stroke="#bdc3c7" stroke-width="1"/>
+    <text x="150" y="1893" class="note-text">WisGate Edge Pro (LoRa Gateway)</text>
+    <text x="450" y="1893" class="note-text">-</text>
+    <text x="850" y="1893" class="note-text">Red Externa</text>
+    <text x="1200" y="1893" class="note-text" fill="#9b59b6">Comunicación</text>
+  </g>
+
+  <!-- PARTE 9: NOTAS IMPORTANTES - Footer -->
+  <g id="notes-footer">
+    <rect x="40" y="1930" width="1520" height="60" fill="#fff9e6" stroke="#f39c12" stroke-width="2" rx="5"/>
+    <text x="50" y="1952" class="note-text" fill="#b8860b" font-weight="bold">⚠️ Nota:</text>
+    <text x="120" y="1952" class="note-text" fill="#2d3748">Los pines A0-A5 aceptan máximo 3.3V. Para sensores de 5V, usar conversor de nivel lógico.</text>
+    <text x="120" y="1972" class="note-text" fill="#2d3748">Sensores I2C (D21/D22) pueden estar en paralelo si tienen direcciones I2C únicas.</text>
+  </g>
+
+  <!-- LEYENDA DE COLORES - Top Right -->
+  <g id="legend">
+    <rect x="1200" y="120" width="350" height="400" fill="#f9f9f9" stroke="#2c3e50" stroke-width="2" rx="5"/>
+    <text x="1375" y="155" text-anchor="middle" class="section-title" fill="#2c3e50">LEYENDA DE COLORES</text>
+    
+    <!-- Color legend items -->
+    <circle cx="1220" cy="190" r="6" fill="#3498db"/>
+    <text x="1240" y="195" class="note-text" fill="#2c3e50">Sensores Ambientales I2C</text>
+    
+    <circle cx="1220" cy="225" r="6" fill="#27ae60"/>
+    <text x="1240" y="230" class="note-text" fill="#2c3e50">Sensores Agua/Suelo Analógicos</text>
+    
+    <circle cx="1220" cy="260" r="6" fill="#16a34a"/>
+    <text x="1240" y="265" class="note-text" fill="#2c3e50">Estación Meteorológica</text>
+    
+    <circle cx="1220" cy="295" r="6" fill="#f39c12"/>
+    <text x="1240" y="300" class="note-text" fill="#2c3e50">Energía y Otros (SPI/ADC)</text>
+    
+    <circle cx="1220" cy="330" r="6" fill="#e74c3c"/>
+    <text x="1240" y="335" class="note-text" fill="#2c3e50">Alimentación 3.3V</text>
+    
+    <circle cx="1220" cy="365" r="6" fill="#000000"/>
+    <text x="1240" y="370" class="note-text" fill="#2c3e50">Tierra / GND</text>
+    
+    <circle cx="1220" cy="400" r="6" fill="#e67e22"/>
+    <text x="1240" y="405" class="note-text" fill="#2c3e50">Fuentes de Energía</text>
+    
+    <circle cx="1220" cy="435" r="6" fill="#9b59b6"/>
+    <text x="1240" y="440" class="note-text" fill="#2c3e50">Comunicación (LoRa, etc)</text>
+  </g>
+</svg>
