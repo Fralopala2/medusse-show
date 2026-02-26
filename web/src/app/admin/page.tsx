@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { API_BASE_URL } from '@/lib/api';
 
 interface User {
   user_id: number;
@@ -96,7 +97,7 @@ export default function AdminPage() {
         console.log('Loading admin data with token:', token?.substring(0, 10) + '...');
         
         // Cargar estadisticas
-        const statsRes = await fetch('http://localhost:3001/api/admin/stats', {
+        const statsRes = await fetch(`${API_BASE_URL}/api/admin/stats`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const statsData = await statsRes.json();
@@ -109,7 +110,7 @@ export default function AdminPage() {
         if (statsData.success) setStats(statsData.stats);
         
         // Cargar usuarios
-        const usersRes = await fetch('http://localhost:3001/api/admin/users', {
+        const usersRes = await fetch(`${API_BASE_URL}/api/admin/users`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const usersData = await usersRes.json();
@@ -122,7 +123,7 @@ export default function AdminPage() {
         if (usersData.success) setUsers(usersData.users);
         
         // Cargar logs
-        const logsRes = await fetch('http://localhost:3001/api/admin/logs?limit=20', {
+        const logsRes = await fetch(`${API_BASE_URL}/api/admin/logs?limit=20`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const logsData = await logsRes.json();
@@ -136,20 +137,20 @@ export default function AdminPage() {
         
         // Cargar alertas (solo para admin)
         if (user.role === 'admin') {
-          const alertsRes = await fetch('http://localhost:3001/api/admin/alerts', {
+          const alertsRes = await fetch(`${API_BASE_URL}/api/admin/alerts`, {
             headers: { 'Authorization': `Bearer ${token}` }
           });
           const alertsData = await alertsRes.json();
           if (alertsData.success) setAlerts(alertsData.alerts);
           
           // Cargar ubicaciones y sensores para formularios
-          const locationsRes = await fetch('http://localhost:3001/api/admin/locations', {
+          const locationsRes = await fetch(`${API_BASE_URL}/api/admin/locations`, {
             headers: { 'Authorization': `Bearer ${token}` }
           });
           const locationsData = await locationsRes.json();
           if (locationsData.success) setLocations(locationsData.locations);
           
-          const sensorsRes = await fetch('http://localhost:3001/api/admin/sensors', {
+          const sensorsRes = await fetch(`${API_BASE_URL}/api/admin/sensors`, {
             headers: { 'Authorization': `Bearer ${token}` }
           });
           const sensorsData = await sensorsRes.json();
@@ -173,7 +174,7 @@ export default function AdminPage() {
     const token = localStorage.getItem('sessionToken');
     
     try {
-      const res = await fetch(`http://localhost:3001/api/admin/users/${userId}`, {
+      const res = await fetch(`${API_BASE_URL}/api/admin/users/${userId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -194,7 +195,7 @@ export default function AdminPage() {
     const token = localStorage.getItem('sessionToken');
     
     try {
-      const res = await fetch(`http://localhost:3001/api/admin/users/${userId}/role`, {
+      const res = await fetch(`${API_BASE_URL}/api/admin/users/${userId}/role`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -223,7 +224,7 @@ export default function AdminPage() {
     const token = localStorage.getItem('sessionToken');
     
     try {
-      const res = await fetch('http://localhost:3001/api/admin/users', {
+      const res = await fetch(`${API_BASE_URL}/api/admin/users`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -258,7 +259,7 @@ export default function AdminPage() {
     const token = localStorage.getItem('sessionToken');
     
     try {
-      const res = await fetch('http://localhost:3001/api/admin/alerts', {
+      const res = await fetch(`${API_BASE_URL}/api/admin/alerts`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -292,7 +293,7 @@ export default function AdminPage() {
     const token = localStorage.getItem('sessionToken');
     
     try {
-      const res = await fetch(`http://localhost:3001/api/admin/alerts/${alertId}/resolve`, {
+      const res = await fetch(`${API_BASE_URL}/api/admin/alerts/${alertId}/resolve`, {
         method: 'PUT',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -317,7 +318,7 @@ export default function AdminPage() {
     const token = localStorage.getItem('sessionToken');
     
     try {
-      const res = await fetch(`http://localhost:3001/api/admin/alerts/${alertId}`, {
+      const res = await fetch(`${API_BASE_URL}/api/admin/alerts/${alertId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });

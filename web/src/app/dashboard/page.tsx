@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { API_BASE_URL } from '@/lib/api';
 
 interface User {
   id: number;
@@ -27,7 +28,7 @@ export default function DashboardPage() {
     }
 
     // Validar token con el servidor
-    fetch('http://localhost:3001/api/auth/validate', {
+    fetch(`${API_BASE_URL}/api/auth/validate`, {
       headers: {
         'Authorization': `Bearer ${token}`,
       },
@@ -57,7 +58,7 @@ export default function DashboardPage() {
     
     if (token) {
       try {
-        await fetch('http://localhost:3001/api/auth/logout', {
+        await fetch(`${API_BASE_URL}/api/auth/logout`, {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -165,7 +166,7 @@ export default function DashboardPage() {
           </a>
 
           <a
-            href="http://localhost:3001/health"
+            href={`${API_BASE_URL}/health`}
             target="_blank"
             rel="noopener noreferrer"
             className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow"
