@@ -5,7 +5,16 @@
 
 import { useEffect, useState, useRef, useCallback } from 'react';
 
-const WS_URL = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:3002';
+const getWsUrl = () => {
+  if (process.env.NEXT_PUBLIC_WS_URL) return process.env.NEXT_PUBLIC_WS_URL;
+  if (typeof window !== 'undefined') {
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    return `${protocol}//${window.location.hostname}:3002`;
+  }
+  return 'ws://127.0.0.1:3002';
+};
+
+const WS_URL = getWsUrl();
 
 export interface WebSocketData {
   location?: string;

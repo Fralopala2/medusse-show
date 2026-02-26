@@ -3,7 +3,15 @@
  * Cliente para comunicación con la API REST del proyecto Medusse
  */
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+const getApiUrl = () => {
+  if (process.env.NEXT_PUBLIC_API_URL) return process.env.NEXT_PUBLIC_API_URL;
+  if (typeof window !== 'undefined') {
+    return `${window.location.protocol}//${window.location.hostname}:3001`;
+  }
+  return 'http://127.0.0.1:3001';
+};
+
+const API_BASE_URL = getApiUrl();
 
 // ============================================================================
 // TIPOS DE DATOS
