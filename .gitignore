@@ -4,6 +4,9 @@
 *.swp
 *.swo
 *~
+.antigravityignore
+.kiro/*
+
 
 # OS generated files
 .DS_Store

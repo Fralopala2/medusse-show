@@ -1,3 +1,4 @@
+name: proyecto-medusse
 
 services:
   # MQTT Broker
