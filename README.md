@@ -41,7 +41,7 @@ The **full source code** and **deployment stack** are not public yet, because th
 ## Screenshots / Capturas
 
 <details>
-  <summary><strong>Web (click to expand)</strong></summary>
+  <summary><strong>Web (clic para desplegar / click to expand)</strong></summary>
 
 1) `web1.png` (más importante)
 
@@ -62,7 +62,7 @@ The **full source code** and **deployment stack** are not public yet, because th
 </details>
 
 <details>
-  <summary><strong>Dashboards (Grafana / Web) (click to expand)</strong></summary>
+  <summary><strong>Dashboards (Grafana / Web) (clic para desplegar /click to expand)</strong></summary>
 
 1) `Dash1.png` (más importante)
 
@@ -79,7 +79,7 @@ The **full source code** and **deployment stack** are not public yet, because th
 </details>
 
 <details>
-  <summary><strong>Grafana (click to expand)</strong></summary>
+  <summary><strong>Grafana (clic para desplegar / click to expand)</strong></summary>
 
 1) `Graf1.png` (más importante)
 
@@ -92,23 +92,14 @@ The **full source code** and **deployment stack** are not public yet, because th
 </details>
 
 <details>
-  <summary><strong>Mobile app (Flutter) (click to expand)</strong></summary>
+  <summary><strong>Mobile app (Flutter) (clic para desplegar / click to expand)</strong></summary>
 
-1) `app1.jpg` (más importante)
-
-![App 1](assets/app1.jpg)
-
-2) `app2.jpg`
-
-![App 2](assets/app2.jpg)
-
-3) `app3.jpg`
-
-![App 3](assets/app3.jpg)
-
-4) `app4.jpg`
-
-![App 4](assets/app4.jpg)
+<div style="display:flex; gap:12px; flex-wrap:wrap;">
+  <img src="assets/app1.jpg" width="220" alt="App 1" />
+  <img src="assets/app2.jpg" width="220" alt="App 2" />
+  <img src="assets/app3.jpg" width="220" alt="App 3" />
+  <img src="assets/app4.jpg" width="220" alt="App 4" />
+</div>
 
 </details>
 
