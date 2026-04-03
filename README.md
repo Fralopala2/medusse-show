@@ -39,12 +39,49 @@ The **full source code** and **deployment stack** are not public yet, because th
 ---
 
 ## Screenshots / Capturas
-> Añade imágenes en `assets/` y actualiza estos enlaces.
 
-- Web Home: `assets/web-home.png`
-- Web Dashboard: `assets/web-dashboard.png`
-- Grafana Dashboard: `assets/grafana-dashboard.png`
-- Flutter App: `assets/flutter-home.png`
+### Web
+1) `web1.png` (más importante)
+![Web 1](assets/web1.png)
+
+2) `web2.png`
+![Web 2](assets/web2.png)
+
+3) `web3.png`
+![Web 3](assets/web3.png)
+
+4) `web4.png`
+![Web 4](assets/web4.png)
+
+### Dashboards (Grafana / Web)
+1) `Dash1.png` (más importante)
+![Dash 1](assets/Dash1.png)
+
+2) `Dash2.png`
+![Dash 2](assets/Dash2.png)
+
+3) `Dash3.png`
+![Dash 3](assets/Dash3.png)
+
+### Grafana
+1) `Graf1.png` (más importante)
+![Graf 1](assets/Graf1.png)
+
+2) `Graf2.png`
+![Graf 2](assets/Graf2.png)
+
+### Mobile app (Flutter)
+1) `app1.jpg` (más importante)
+![App 1](assets/app1.jpg)
+
+2) `app2.jpg`
+![App 2](assets/app2.jpg)
+
+3) `app3.jpg`
+![App 3](assets/app3.jpg)
+
+4) `app4.jpg`
+![App 4](assets/app4.jpg)
 
 ---
 
