@@ -1,3 +1,7 @@
+<p align="center">
+  <img width="300" height="300" alt="meduse" src="https://github.com/user-attachments/assets/85c75066-09b4-435a-a48c-f828e673410b" />
+</p>
+
 # Medusse IoT — Public Showcase / Escaparate público
 
 ## ES — Visión general
