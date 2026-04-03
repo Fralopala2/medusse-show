@@ -40,7 +40,9 @@ The **full source code** and **deployment stack** are not public yet, because th
 
 ## Screenshots / Capturas
 
-### Web
+<details>
+  <summary><strong>Web (click to expand)</strong></summary>
+
 1) `web1.png` (más importante)
 
 ![Web 1](assets/web1.png)
@@ -57,7 +59,11 @@ The **full source code** and **deployment stack** are not public yet, because th
 
 ![Web 4](assets/web4.png)
 
-### Dashboards (Grafana / Web)
+</details>
+
+<details>
+  <summary><strong>Dashboards (Grafana / Web) (click to expand)</strong></summary>
+
 1) `Dash1.png` (más importante)
 
 ![Dash 1](assets/Dash1.png)
@@ -70,7 +76,11 @@ The **full source code** and **deployment stack** are not public yet, because th
 
 ![Dash 3](assets/Dash3.png)
 
-### Grafana
+</details>
+
+<details>
+  <summary><strong>Grafana (click to expand)</strong></summary>
+
 1) `Graf1.png` (más importante)
 
 ![Graf 1](assets/Graf1.png)
@@ -79,7 +89,11 @@ The **full source code** and **deployment stack** are not public yet, because th
 
 ![Graf 2](assets/Graf2.png)
 
-### Mobile app (Flutter)
+</details>
+
+<details>
+  <summary><strong>Mobile app (Flutter) (click to expand)</strong></summary>
+
 1) `app1.jpg` (más importante)
 
 ![App 1](assets/app1.jpg)
@@ -96,7 +110,7 @@ The **full source code** and **deployment stack** are not public yet, because th
 
 ![App 4](assets/app4.jpg)
 
----
+</details>
 
 ## Docs
 - [ARCHITECTURE](docs/ARCHITECTURE.md)
