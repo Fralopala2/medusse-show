@@ -1,17 +1,17 @@
 <p align="center">
-  <img width="300" height="300" alt="meduse" src="https://github.com/user-attachments/assets/85c75066-09b4-435a-a48c-f828e673410b" />
+  <img width="300" height="300" alt="medusse" src="https://github.com/user-attachments/assets/85c75066-09b4-435a-a48c-f828e673410b" />
 </p>
 
 # Medusse IoT — Public Showcase / Escaparate público
 
 ## ES — Visión general
-**Medusse IoT** es un ecosistema completo de monitorización ambiental (IoT + microservicios). Integra simulación de sensores, canalización de datos en tiempo real y visualización profesional.
+**Medusse IoT** es un ecosistema completo de monitorización ambiental (IoT + microservicios) desarrollado como TFG (curso 2025/2026). Integra simulación de sensores, canalización de datos en tiempo real y visualización profesional.
 
 **Demo pública (solo lectura):** Próximamente.  
 **Grafana:** No se expone públicamente (solo capturas).
 
 ## EN — Overview
-**Medusse IoT** is a full environmental monitoring ecosystem (IoT + microservices). It combines sensor simulation, real-time data pipeline, and professional visualization.
+**Medusse IoT** is a full environmental monitoring ecosystem (IoT + microservices) built as a final degree project (academic year 2025/2026). It combines sensor simulation, real-time data pipeline, and professional visualization.
 
 **Public read-only demo:** Coming soon.  
 **Grafana:** Not publicly exposed (screenshots only).
@@ -42,54 +42,67 @@ The **full source code** and **deployment stack** are not public yet, because th
 
 ### Web
 1) `web1.png` (más importante)
+
 ![Web 1](assets/web1.png)
 
 2) `web2.png`
+
 ![Web 2](assets/web2.png)
 
 3) `web3.png`
+
 ![Web 3](assets/web3.png)
 
 4) `web4.png`
+
 ![Web 4](assets/web4.png)
 
 ### Dashboards (Grafana / Web)
 1) `Dash1.png` (más importante)
+
 ![Dash 1](assets/Dash1.png)
 
 2) `Dash2.png`
+
 ![Dash 2](assets/Dash2.png)
 
 3) `Dash3.png`
+
 ![Dash 3](assets/Dash3.png)
 
 ### Grafana
 1) `Graf1.png` (más importante)
+
 ![Graf 1](assets/Graf1.png)
 
 2) `Graf2.png`
+
 ![Graf 2](assets/Graf2.png)
 
 ### Mobile app (Flutter)
 1) `app1.jpg` (más importante)
+
 ![App 1](assets/app1.jpg)
 
 2) `app2.jpg`
+
 ![App 2](assets/app2.jpg)
 
 3) `app3.jpg`
+
 ![App 3](assets/app3.jpg)
 
 4) `app4.jpg`
+
 ![App 4](assets/app4.jpg)
 
 ---
 
 ## Docs
-- `docs/ARCHITECTURE.md`
-- `docs/DATA_FLOW.md`
-- `docs/STACK.md`
-- `docs/FEATURES.md`
+- [ARCHITECTURE](docs/ARCHITECTURE.md)
+- [DATA FLOW](docs/DATA_FLOW.md)
+- [STACK](docs/STACK.md)
+- [FEATURES](docs/FEATURES.md)
 
 ---
 
