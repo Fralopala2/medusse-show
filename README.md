@@ -1,24 +1,57 @@
-# Medusse IoT — Public Showcase (Demo)
+# Medusse IoT — Public Showcase / Escaparate público
 
-This repository is the **public showcase** for **Medusse IoT**, a complete environmental monitoring ecosystem (IoT + microservices) built as a final degree project (TFG) during the 2025/2026 academic year.
+## ES — Visión general
+**Medusse IoT** es un ecosistema completo de monitorización ambiental (IoT + microservicios) desarrollado como TFG (curso 2025/2026). Integra simulación de sensores, canalización de datos en tiempo real y visualización profesional.
 
-- **Live demo:** (add link)
-- **Grafana (optional):** (add link)
+**Demo pública (solo lectura):** Próximamente.  
+**Grafana:** No se expone públicamente (solo capturas).
 
-## What you can find here
-- Product overview and architecture
-- Data flow diagrams
-- Screenshots / media
-- Public demo links
+## EN — Overview
+**Medusse IoT** is a full environmental monitoring ecosystem (IoT + microservices) built as a final degree project (academic year 2025/2026). It combines sensor simulation, real-time data pipeline, and professional visualization.
 
-## What you will NOT find here
-The full source code and deployment stack are **not public yet**, because the project is intended for future distribution.
-
-## Contact
-Francisco Manuel López Alarte — pacoaldev@gmail.com
+**Public read-only demo:** Coming soon.  
+**Grafana:** Not publicly exposed (screenshots only).
 
 ---
 
-## Quick links
-- Main project repo (private): not linked publicly
-  
+## ES — Qué encontrarás aquí
+- Descripción del proyecto y alcance
+- Diagramas de arquitectura y flujo de datos
+- Capturas (web, dashboard, grafana, app)
+- Enlaces públicos (cuando la demo esté online)
+
+## EN — What you will find here
+- Project overview and scope
+- Architecture and data-flow diagrams
+- Screenshots (web, dashboard, grafana, app)
+- Public links (once the demo is online)
+
+## ES — Qué NO encontrarás aquí
+El **código fuente completo** y los **archivos de despliegue** no son públicos todavía porque el proyecto está pensado para **distribución futura**.
+
+## EN — What you will NOT find here
+The **full source code** and **deployment stack** are not public yet, because the project is intended for **future distribution**.
+
+---
+
+## Screenshots / Capturas
+> Añade imágenes en `assets/` y actualiza estos enlaces.
+
+- Web Home: `assets/web-home.png`
+- Web Dashboard: `assets/web-dashboard.png`
+- Grafana Dashboard: `assets/grafana-dashboard.png`
+- Flutter App: `assets/flutter-home.png`
+
+---
+
+## Docs
+- `docs/ARCHITECTURE.md`
+- `docs/DATA_FLOW.md`
+- `docs/STACK.md`
+- `docs/FEATURES.md`
+
+---
+
+## Contact / Contacto
+Francisco Manuel López Alarte  
+Email: pacoaldev@gmail.com
