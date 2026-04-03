@@ -1,13 +1,13 @@
 # Medusse IoT — Public Showcase / Escaparate público
 
 ## ES — Visión general
-**Medusse IoT** es un ecosistema completo de monitorización ambiental (IoT + microservicios) desarrollado como TFG (curso 2025/2026). Integra simulación de sensores, canalización de datos en tiempo real y visualización profesional.
+**Medusse IoT** es un ecosistema completo de monitorización ambiental (IoT + microservicios). Integra simulación de sensores, canalización de datos en tiempo real y visualización profesional.
 
 **Demo pública (solo lectura):** Próximamente.  
 **Grafana:** No se expone públicamente (solo capturas).
 
 ## EN — Overview
-**Medusse IoT** is a full environmental monitoring ecosystem (IoT + microservices) built as a final degree project (academic year 2025/2026). It combines sensor simulation, real-time data pipeline, and professional visualization.
+**Medusse IoT** is a full environmental monitoring ecosystem (IoT + microservices). It combines sensor simulation, real-time data pipeline, and professional visualization.
 
 **Public read-only demo:** Coming soon.  
 **Grafana:** Not publicly exposed (screenshots only).
