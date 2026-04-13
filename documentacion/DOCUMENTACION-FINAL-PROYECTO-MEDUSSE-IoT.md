@@ -151,7 +151,7 @@ El proyecto contribuye directamente a la **sostenibilidad ambiental** con:
 | **Institución** | IES José Rodrigo Botet |
 | **Curso Académico** | 2025/2026 |
 | **Versión** | 2.7.9 |
-| **Fecha de Entrega** | Noviembre 2025 |
+| **Fecha de Entrega** | Diciembre 2025 |
 | **Licencia** | All Rights Reserved |
 | **Repositorio** | [https://github.com/Fralopala2/proyecto-medusse](https://github.com/Fralopala2/proyecto-medusse) |
 | **Rama Principal** | clase |
@@ -301,7 +301,7 @@ Desarrollar un **sistema completo de monitorización ambiental IoT** que permita
 - **Reto 1:** Alineación con 5 ODS, impacto medible, 15 KPIs de sostenibilidad  
 - **Reto 6:** Modelo de negocio, 3 paquetes comerciales, proyecciones financieras
 
-#### Categoría 2: Bases de datos (Retos 2, 3\)
+#### Categoría 2: bases de datos (Retos 2, 3\)
 
 - **Reto 2:** InfluxDB 2.7 \+ MySQL 8.0 con 9 tablas  
 - **Reto 3:** 10 procedimientos almacenados en MySQL
@@ -317,7 +317,7 @@ Desarrollar un **sistema completo de monitorización ambiental IoT** que permita
 - **Reto 7:** Validación de formularios con JavaScript  
 - **Reto 13:** Next.js 16 \+ Flutter 3.9+ como frameworks cliente
 
-#### Categoría 5: Desarrollo backend (Retos 8, 9, 10, 15\)
+#### Categoría 5: desarrollo backend (Retos 8, 9, 10, 15\)
 
 - **Reto 8:** API REST con 11 endpoints  
 - **Reto 9:** Sistema de autenticación con bcrypt y tokens UUID  
@@ -329,7 +329,7 @@ Desarrollar un **sistema completo de monitorización ambiental IoT** que permita
 - **Reto 11:** Deployment en Vercel  
 - **Reto 12:** WebSocket \+ MQTT para comunicación asíncrona
 
-#### Categoría 7: Documentación (Reto 16\)
+#### Categoría 7: documentación (Reto 16\)
 
 - **Reto 16:** 7000+ líneas de documentación técnica completa
 
@@ -1483,7 +1483,7 @@ mosquitto:
 - Persistencia: Volumen para logs y datos  
 - Restart policy: `unless-stopped`
 
-#### Servicio 2: InfluxDB (Base de Datos Series Temporales)
+#### Servicio 2: InfluxDB (base de datos de series temporales)
 
 influxdb:
     image: influxdb:2.7
@@ -1512,7 +1512,7 @@ influxdb:
 - Token de admin pre-configurado  
 - Volúmenes persistentes para datos y configuración
 
-#### Servicio 3: Telegraf (Pipeline de Datos)
+#### Servicio 3: Telegraf (pipeline de datos)
 
 telegraf:
     image: telegraf:1.28
@@ -1547,7 +1547,7 @@ telegraf:
   bucket = "sensors"
 ```
 
-#### Servicio 4: Grafana (Visualización)
+#### Servicio 4: Grafana (visualización)
 
 grafana:
     image: grafana/grafana:10.2.0
@@ -1575,7 +1575,7 @@ grafana:
 - Dashboard pre-cargado desde archivo JSON  
 - Puerto: 3000
 
-#### Servicio 5: MySQL (Base de Datos Relacional)
+#### Servicio 5: MySQL (base de datos relacional)
 
 mysql:
     image: mysql:8.0
@@ -1695,7 +1695,7 @@ docker-compose \-f docker/docker-compose.yml down \-v
 
 # Parte III \- los 16 retos documentados
 
-## Reto 1: Proyecto de Sostenibilidad
+## Reto 1: Proyectos de sostenibilidad
 
 ### Descripción del Reto
 
@@ -1922,7 +1922,7 @@ Desarrollar un proyecto tecnológico que contribuya activamente a la sostenibili
 
 ### Casos de Uso Implementados
 
-#### Caso 1: Gestión Inteligente de Aulas
+#### Caso 1: gestión inteligente de aulas
 
 **Problema:** Aulas con ventilación inadecuada y climatización ineficiente
 
@@ -1940,7 +1940,7 @@ Desarrollar un proyecto tecnológico que contribuya activamente a la sostenibili
 - ✅ Reducción de ausentismo por enfermedades  
 - ✅ Mejora del rendimiento académico
 
-#### Caso 2: Riego Inteligente
+#### Caso 2: riego inteligente
 
 **Problema:** Riego excesivo o insuficiente de áreas verdes escolares
 
@@ -1958,7 +1958,7 @@ Desarrollar un proyecto tecnológico que contribuya activamente a la sostenibili
 - ✅ Reducción de costes de mantenimiento  
 - ✅ Educación sobre uso responsable del agua
 
-#### Caso 3: Monitorización de Instalaciones Solares
+#### Caso 3: monitorización de instalaciones solares
 
 **Problema:** Falta de visibilidad sobre producción y consumo de energía solar
 
@@ -2005,7 +2005,7 @@ Desarrollar un proyecto tecnológico que contribuya activamente a la sostenibili
 
 ---
 
-## Reto 2: Base de Datos
+## Reto 2: Base de datos
 
 ### Descripción del Reto
 
@@ -2437,7 +2437,7 @@ erDiagram
 
 ---
 
-## Reto 3: Procedimientos Almacenados
+## Reto 3: Procedimientos almacenados
 
 ### Descripción del Reto
 
@@ -2772,7 +2772,7 @@ async function authenticateUser(username, password, ipAddress, userAgent) {
 
 ---
 
-## Reto 4: Diseño de Bocetos
+## Reto 4: Diseño de bocetos
 
 ### Descripción del Reto
 
@@ -2997,7 +2997,7 @@ from(bucket: "sensors")
 
 #### 3\. Aplicación Móvil Flutter \- Diseño Material 3
 
-##### Pantalla 1: Home (HomeScreen)
+##### Pantalla 1: home (HomeScreen)
 
 **Estructura:**
 
@@ -3028,7 +3028,7 @@ from(bucket: "sensors")
   - Tab 2: Alertas (icon: notifications)  
   - Tab 3: Gráficos (icon: show\_chart)
 
-##### Pantalla 2: Detalle de Ubicación (LocationDetailScreen)
+##### Pantalla 2: detalle de ubicación (LocationDetailScreen)
 
 **Estructura:**
 
@@ -3053,7 +3053,7 @@ from(bucket: "sensors")
   - Separadores entre sensores  
   - Sombra suave en cada item
 
-##### Pantalla 3: Gráficos Históricos (SensorChartsScreen)
+##### Pantalla 3: gráficos históricos (SensorChartsScreen)
 
 **Estructura:**
 
@@ -3211,7 +3211,7 @@ from(bucket: "sensors")
 
 ---
 
-## Reto 5: interfaces HTML/CSS
+## Reto 5: Interfaces HTML/CSS
 
 ### Descripción del Reto
 
@@ -3725,7 +3725,7 @@ export default function Alert({ type, message }: AlertProps) {
 
 ---
 
-## Reto 6: Plan de Empresa
+## Reto 6: Plan de empresa
 
 ### Descripción del Reto
 
@@ -4008,7 +4008,7 @@ Desarrollar un plan de negocio completo que incluya modelo de negocio, proyeccio
 
 #### 5\. Hoja de Ruta (18 Meses)
 
-##### Fase 1: Preparación (Meses 0-3)
+##### Fase 1: preparación (Meses 0-3)
 
 **Mes 1-2:**
 
@@ -4031,7 +4031,7 @@ Desarrollar un plan de negocio completo que incluya modelo de negocio, proyeccio
 - ✅ Web lanzada  
 - ✅ Primeros casos de estudio
 
-##### Fase 2: Lanzamiento (Meses 4-6)
+##### Fase 2: lanzamiento (Meses 4-6)
 
 **Mes 4:**
 
@@ -4054,7 +4054,7 @@ Desarrollar un plan de negocio completo que incluya modelo de negocio, proyeccio
 - ✅ 2 distribuidores activos  
 - ✅ Proceso de ventas optimizado
 
-##### Fase 3: Crecimiento (Meses 7-12)
+##### Fase 3: crecimiento (Meses 7-12)
 
 **Mes 7-9:**
 
@@ -4077,7 +4077,7 @@ Desarrollar un plan de negocio completo que incluya modelo de negocio, proyeccio
 - ✅ Presencia en 3 comunidades  
 - ✅ Break-even operativo
 
-##### Fase 4: Expansión (Meses 13-18)
+##### Fase 4: expansión (Meses 13-18)
 
 **Mes 13-15:**
 
@@ -4131,7 +4131,7 @@ Desarrollar un plan de negocio completo que incluya modelo de negocio, proyeccio
 
 ---
 
-## Reto 7: validación de formularios JS
+## Reto 7: Validación de formularios JS
 
 ### Descripción del Reto
 
@@ -4574,7 +4574,7 @@ try {
 
 ---
 
-## Reto 8: conexión a base de datos JS
+## Reto 8: Conexión a base de datos JS
 
 ### Descripción del Reto
 
@@ -5130,7 +5130,7 @@ INFLUX_BUCKET=sensors
 
 ---
 
-## Reto 9: Acceso Restringido y Sesiones
+## Reto 9: Acceso restringido y sesiones
 
 ### Descripción del Reto
 
@@ -5670,7 +5670,7 @@ app.use(helmet({
 
 ---
 
-## Reto 10: web services SOAP
+## Reto 10: Web services SOAP
 
 ### Descripción del Reto
 
@@ -6039,7 +6039,7 @@ security:
 
 #### Comparativa: REST vs SOAP en el proyecto
 
-##### Ejemplo: Obtener Datos de Sensor
+##### Ejemplo: obtener datos de sensor
 
 **REST (Implementado):**
 
@@ -6173,7 +6173,7 @@ message SensorData {
 
 ---
 
-## Reto 12: Presentación Multimedia
+## Reto 12: Presentación multimedia
 
 ### Descripción del Reto
 
@@ -6220,7 +6220,7 @@ Crear una presentación profesional del proyecto con contenido multimedia, demos
 
 ---
 
-## Reto 13: Testing y Calidad de Código
+## Reto 13: Testing y calidad de código
 
 ### Descripción del Reto
 
@@ -6274,7 +6274,7 @@ Implementar pruebas y asegurar la calidad del código.
 
 ---
 
-## Reto 14: Aplicación Móvil
+## Reto 14: Aplicación móvil
 
 ### Descripción del Reto
 
@@ -6408,7 +6408,7 @@ flutter build apk \--release
 
 ## Próximos Pasos
 
-### Fase 2: Migración a Hardware Real
+### Fase 2: migración a hardware real
 
 1. ESP32 con módulos LoRa  
 2. Sensores físicos (DHT22, MQ-135)  
