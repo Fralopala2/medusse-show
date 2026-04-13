@@ -43,63 +43,63 @@
 
 ## Índice de contenidos
 
-### Parte I \- presentación del proyecto
+### Parte I \- Presentación del proyecto
 
-1. [Resumen Ejecutivo](#resumen-ejecutivo)  
-2. [Información del Proyecto](#informacion-del-proyecto)  
-3. [Objetivos y Alcance](#objetivos-y-alcance)  
-4. [Estado de los 16 Retos](#estado-de-los-16-retos)
+1. [Resumen ejecutivo](#resumen-ejecutivo)
+2. [Información del proyecto](#informacion-del-proyecto)
+3. [Objetivos y alcance](#objetivos-y-alcance)
+4. [Estado de los 16 retos](#estado-de-los-16-retos)
 
-### Parte II \- arquitectura y tecnologías
+### Parte II \- Arquitectura y tecnologías
 
-5. [Arquitectura del Sistema](#arquitectura-del-sistema)  
-6. [Stack Tecnológico](#stack-tecnologico)  
-7. [Ubicaciones y Sensores](#ubicaciones-y-sensores)  
-8. [Flujo de Datos](#flujo-de-datos)  
+5. [Arquitectura del sistema](#arquitectura-del-sistema)  
+6. [Stack tecnológico](#stack-tecnologico)  
+7. [Ubicaciones y sensores](#ubicaciones-y-sensores)  
+8. [Flujo de datos](#flujo-de-datos)  
 9. [Infraestructura Docker](#infraestructura-docker)
 
-### Parte III \- los 16 retos documentados
+### Parte III \- Los 16 retos documentados
 
-10. [Reto 1: Proyecto de Sostenibilidad](#reto-1-proyecto-de-sostenibilidad)  
-11. [Reto 2: Base de Datos](#reto-2-base-de-datos)  
-12. [Reto 3: Procedimientos Almacenados](#reto-3-procedimientos-almacenados)  
-13. [Reto 4: Diseño de Bocetos](#reto-4-diseno-de-bocetos)  
+10. [Reto 1: Proyectos de sostenibilidad](#reto-1-proyecto-de-sostenibilidad)  
+11. [Reto 2: Base de datos](#reto-2-base-de-datos)  
+12. [Reto 3: Procedimientos almacenados](#reto-3-procedimientos-almacenados)  
+13. [Reto 4: Diseño de bocetos](#reto-4-diseno-de-bocetos)  
 14. [Reto 5: Interfaces HTML/CSS](#reto-5-interfaces-htmlcss)  
-15. [Reto 6: Plan de Empresa](#reto-6-plan-de-empresa)  
-16. [Reto 7: Validación de Formularios JS](#reto-7-validacion-de-formularios-js)  
+15. [Reto 6: Plan de empresa](#reto-6-plan-de-empresa)  
+16. [Reto 7: Validación de formularios JS](#reto-7-validacion-de-formularios-js)  
 17. [Reto 8: Transferencia Front-end/Back-end](#reto-8-transferencia-frontend-backend)  
-18. [Reto 9: Gestión de Usuarios con Sesiones](#reto-9-gestion-de-usuarios-con-sesiones)  
-19. [Reto 10: Panel de Administración](#reto-10-panel-de-administracion)  
+18. [Reto 9: Gestión de usuarios con sesiones](#reto-9-gestion-de-usuarios-con-sesiones)  
+19. [Reto 10: Panel de administración](#reto-10-panel-de-administracion)  
 20. [Reto 11: Script FTP/SFTP](#reto-11-script-ftpsftp)  
-21. [Reto 12: Comunicación Asíncrona](#reto-12-comunicacion-asincrona)  
-22. [Reto 13: Framework Cliente](#reto-13-framework-cliente)  
-23. [Reto 14: Diseño Web Avanzado](#reto-14-diseno-web-avanzado)  
-24. [Reto 15: Framework Servidor](#reto-15-framework-servidor)  
-25. [Reto 16: Documentación Final](#reto-16-documentacion-final)
+21. [Reto 12: Comunicación asíncrona](#reto-12-comunicacion-asincrona)  
+22. [Reto 13: Framework cliente](#reto-13-framework-cliente)  
+23. [Reto 14: Diseño web avanzado](#reto-14-diseno-web-avanzado)  
+24. [Reto 15: Framework servidor](#reto-15-framework-servidor)  
+25. [Reto 16: Documentación final](#reto-16-documentacion-final)
 
-### Parte IV \- retos destacados en profundidad
+### Parte IV \- Retos destacados en profundidad
 
-26. [Sostenibilidad y Objetivos de Desarrollo Sostenible](#sostenibilidad-y-ods)  
-27. [Plan de Empresa y Modelo de Negocio](#plan-de-empresa-detallado)
+26. [Sostenibilidad y objetivos de desarrollo sostenible](#sostenibilidad-y-ods)  
+27. [Plan de empresa y modelo de negocio](#plan-de-empresa-detallado)
 
-### Parte V \- guías técnicas
+### Parte V \- Guías técnicas
 
-28. [Instalación y Configuración](#instalacion-y-configuracion)  
-29. [Verificación del Sistema](#verificacion-del-sistema)  
-30. [Acceso a Servicios](#acceso-a-servicios)  
-31. [Migración a Hardware Real LoRa Mesh](#migracion-a-lora-mesh)
+28. [Instalación y configuración](#instalacion-y-configuracion)  
+29. [Verificación del sistema](#verificacion-del-sistema)  
+30. [Acceso a servicios](#acceso-a-servicios)  
+31. [Migración a hardware real LoRa Mesh](#migracion-a-lora-mesh)
 
-### Parte VI \- conclusiones y anexos
+### Parte VI \- Conclusiones y anexos
 
-32. [Resultados Alcanzados](#resultados-alcanzados)  
-33. [Competencias Desarrolladas](#competencias-desarrolladas)  
-34. [Estadísticas del Proyecto](#estadisticas-del-proyecto)  
-35. [Referencias y Recursos](#referencias-y-recursos)  
-36. [Información de Contacto](#informacion-de-contacto)
+32. [Resultados alcanzados](#resultados-alcanzados)  
+33. [Competencias desarrolladas](#competencias-desarrolladas)  
+34. [Estadísticas del proyecto](#estadisticas-del-proyecto)  
+35. [Referencias y recursos](#referencias-y-recursos)  
+36. [Información de contacto](#informacion-de-contacto)
 
 ---
 
-# Parte I \- presentación del proyecto
+# Parte I \- Presentación del proyecto
 
 ## Resumen ejecutivo
 
@@ -335,7 +335,7 @@ Desarrollar un **sistema completo de monitorización ambiental IoT** que permita
 
 ---
 
-# Parte II \- arquitectura y tecnologías
+# Parte II \- Arquitectura y tecnologías
 
 ## Arquitectura del sistema
 
@@ -1322,9 +1322,9 @@ El sistema Medusse IoT monitorea **4 ubicaciones diferentes**, cada una con cara
 
 ---
 
-## Flujo de Datos
+## Flujo de datos
 
-### Diagrama de Flujo Detallado
+### Diagrama de flujo detallado
 
 ```mermaid
 graph LR
@@ -1693,7 +1693,7 @@ docker-compose \-f docker/docker-compose.yml down \-v
 
 ---
 
-# Parte III \- los 16 retos documentados
+# Parte III \- Los 16 retos documentados
 
 ## Reto 1: Proyectos de sostenibilidad
 

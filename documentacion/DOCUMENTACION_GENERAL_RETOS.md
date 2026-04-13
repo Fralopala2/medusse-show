@@ -1,24 +1,24 @@
-# Documentación General del Proyecto - Medusse IoT
+# Documentación general del proyecto - Medusse IoT
 
-**Sistema IoT de Monitoreo Ambiental con Arquitectura de Microservicios**
+**Sistema IoT de monitoreo ambiental con arquitectura de microservicios**
 
 ---
 
-## Información del Proyecto
+## Información del proyecto
 
-**Título:** Sistema IoT de Monitoreo Ambiental con Arquitectura de Microservicios  
+**Título:** Sistema IoT de monitoreo ambiental con arquitectura de microservicios  
 **Autor:** Francisco Manuel López Alarte  
 **Email:** pacoaldev@gmail.com  
 **Institución:** IES José Rodrigo Botet  
 **Curso Académico:** 2025/2026  
-**Versión:** 2.7.7  
+**Versión:** 2.7.9  
 **Fecha:** Noviembre 2025  
 **Licencia:** All Rights Reserved  
 **Estado:** 16/16 Retos Completados (100%) ✅
 
 ---
 
-## Resumen Ejecutivo
+## Resumen ejecutivo
 
 Medusse IoT es un ecosistema completo de monitoreo ambiental que integra hardware ESP32, comunicación MQTT, bases de datos de series temporales, visualización profesional y aplicaciones cliente multiplataforma. El sistema monitorea 18 tipos de sensores distribuidos en 4 ubicaciones, proporcionando datos en tiempo real a través de múltiples interfaces: dashboard Grafana, API REST, aplicación web Next.js y aplicación móvil Flutter.
 
@@ -26,9 +26,9 @@ El proyecto demuestra la implementación práctica de una arquitectura de micros
 
 ---
 
-## Arquitectura del Sistema
+## Arquitectura del sistema
 
-### Diagrama de Arquitectura
+### Diagrama de arquitectura
 
 ```mermaid
 flowchart LR
@@ -49,7 +49,7 @@ flowchart LR
     style GRAF fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#fff
 ```
 
-### Componentes Principales
+### Componentes principales
 
 1. **Capa de Sensores (IoT Layer)**
    - 4 nodos ESP32 simulados (preparados para hardware real)
@@ -1228,5 +1228,5 @@ La implementacion de 18 tipos de sensores, incluyendo gestion de energia solar, 
 ---
 
 **Documento generado:** Noviembre 2025  
-**Version del Proyecto:** 2.7.7  
+**Version del Proyecto:** 2.7.9
 **Estado:** Documentacion General para Presentacion TFG
