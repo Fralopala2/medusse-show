@@ -4,9 +4,20 @@
 
 </div>
 
-# MEDUSSE IoT
+<p align="right">
+  <a href="https://github.com/Fralopala2/proyecto-medusse" target="_blank" rel="noopener noreferrer">
+    <img
+      src="https://api.qrserver.com/v1/create-qr-code/?size=96x96&data=https%3A%2F%2Fgithub.com%2FFralopala2%2Fproyecto-medusse"
+      alt="QR del repositorio"
+      width="96"
+      height="96"
+    />
+  </a>
+</p>
 
-## Sistema de monitoreo ambiental con arquitectura de aicroservicios
+# Medusse IoT
+
+## Sistema de monitoreo ambiental con arquitectura de microservicios
 
 ### Documentación final del trabajo de fin de grado
 
@@ -16,7 +27,7 @@
 **Email:** [pacoaldev@gmail.com](mailto:pacoaldev@gmail.com)  
 **Institución:** IES José Rodrigo Botet  
 **Curso Académico:** 2025/2026  
-**Versión del Proyecto:** 2.7.7  
+**Versión del Proyecto:** 2.7.9  
 **Fecha de Entrega:** Diciembre 2025  
 **Estado:** 16/16 Retos Completados (100%) ✅
 
@@ -30,16 +41,16 @@
 
 ---
 
-## Índice de Contenidos
+## Índice de contenidos
 
-### PARTE I \- PRESENTACIÓN DEL PROYECTO
+### Parte I \- presentación del proyecto
 
 1. [Resumen Ejecutivo](#resumen-ejecutivo)  
 2. [Información del Proyecto](#informacion-del-proyecto)  
 3. [Objetivos y Alcance](#objetivos-y-alcance)  
 4. [Estado de los 16 Retos](#estado-de-los-16-retos)
 
-### PARTE II \- ARQUITECTURA Y TECNOLOGÍAS
+### Parte II \- arquitectura y tecnologías
 
 5. [Arquitectura del Sistema](#arquitectura-del-sistema)  
 6. [Stack Tecnológico](#stack-tecnologico)  
@@ -47,7 +58,7 @@
 8. [Flujo de Datos](#flujo-de-datos)  
 9. [Infraestructura Docker](#infraestructura-docker)
 
-### PARTE III \- LOS 16 RETOS DOCUMENTADOS
+### Parte III \- los 16 retos documentados
 
 10. [Reto 1: Proyecto de Sostenibilidad](#reto-1-proyecto-de-sostenibilidad)  
 11. [Reto 2: Base de Datos](#reto-2-base-de-datos)  
@@ -66,19 +77,19 @@
 24. [Reto 15: Framework Servidor](#reto-15-framework-servidor)  
 25. [Reto 16: Documentación Final](#reto-16-documentacion-final)
 
-### PARTE IV \- RETOS DESTACADOS EN PROFUNDIDAD
+### Parte IV \- retos destacados en profundidad
 
 26. [Sostenibilidad y Objetivos de Desarrollo Sostenible](#sostenibilidad-y-ods)  
 27. [Plan de Empresa y Modelo de Negocio](#plan-de-empresa-detallado)
 
-### PARTE V \- GUÍAS TÉCNICAS
+### Parte V \- guías técnicas
 
 28. [Instalación y Configuración](#instalacion-y-configuracion)  
 29. [Verificación del Sistema](#verificacion-del-sistema)  
 30. [Acceso a Servicios](#acceso-a-servicios)  
 31. [Migración a Hardware Real LoRa Mesh](#migracion-a-lora-mesh)
 
-### PARTE VI \- CONCLUSIONES Y ANEXOS
+### Parte VI \- conclusiones y anexos
 
 32. [Resultados Alcanzados](#resultados-alcanzados)  
 33. [Competencias Desarrolladas](#competencias-desarrolladas)  
@@ -88,13 +99,13 @@
 
 ---
 
-# PARTE I \- PRESENTACIÓN DEL PROYECTO
+# Parte I \- presentación del proyecto
 
-## Resumen Ejecutivo
+## Resumen ejecutivo
 
 **Medusse IoT** es un ecosistema completo de monitoreo ambiental que integra hardware ESP32, comunicación MQTT, bases de datos de series temporales, visualización profesional y aplicaciones cliente multiplataforma. El sistema monitorea **18 tipos de sensores** distribuidos en **4 ubicaciones**, proporcionando datos en tiempo real a través de múltiples interfaces: dashboard Grafana, API REST, aplicación web Next.js y aplicación móvil Flutter.
 
-### Visión General
+### Visión general
 
 El proyecto demuestra la implementación práctica de una **arquitectura de microservicios moderna**, con énfasis en escalabilidad, rendimiento y preparación para despliegue en hardware real con comunicación LoRa Mesh.
 
@@ -108,7 +119,7 @@ Este sistema permite:
 - **Toma de decisiones basada en datos** mediante dashboards profesionales y alertas automáticas  
 - **Educación ambiental** con datos reales en instituciones educativas
 
-### Logros Principales
+### Logros principales
 
 ✅ **16/16 Retos Completados** (100% de cumplimiento)  
 ✅ **6100+ líneas de código** en 6 lenguajes de programación  
@@ -116,7 +127,7 @@ Este sistema permite:
 ✅ **Sistema completamente funcional** con demo en vivo  
 ✅ **Preparado para producción** con hardware ESP32 real
 
-### Impacto Esperado
+### Impacto esperado
 
 El proyecto contribuye directamente a la **sostenibilidad ambiental** con:
 
@@ -127,9 +138,9 @@ El proyecto contribuye directamente a la **sostenibilidad ambiental** con:
 
 ---
 
-## Información del Proyecto
+## Información del proyecto
 
-### Datos del Proyecto
+### Datos del proyecto
 
 | Campo | Valor |
 | :---- | :---- |
@@ -139,13 +150,13 @@ El proyecto contribuye directamente a la **sostenibilidad ambiental** con:
 | **Email** | [pacoaldev@gmail.com](mailto:pacoaldev@gmail.com) |
 | **Institución** | IES José Rodrigo Botet |
 | **Curso Académico** | 2025/2026 |
-| **Versión** | 2.7.7 |
+| **Versión** | 2.7.9 |
 | **Fecha de Entrega** | Noviembre 2025 |
 | **Licencia** | All Rights Reserved |
 | **Repositorio** | [https://github.com/Fralopala2/proyecto-medusse](https://github.com/Fralopala2/proyecto-medusse) |
 | **Rama Principal** | clase |
 
-### Datos del Autor
+### Datos del autor
 
 | Campo | Valor |
 | :---- | :---- |
@@ -156,7 +167,7 @@ El proyecto contribuye directamente a la **sostenibilidad ambiental** con:
 | **GitHub** | [https://github.com/Fralopala2](https://github.com/Fralopala2) |
 | **Formación** | 2º de Desarrollo de Aplicaciones Web (DAW) |
 
-### Contexto Académico
+### Contexto académico
 
 Este proyecto se desarrolla como **Trabajo de Fin de Grado** para la titulación de Desarrollo de Aplicaciones Web en el IES José Rodrigo Botet durante el curso académico 2025/2026.
 
@@ -173,15 +184,15 @@ El proyecto integra conocimientos de:
 
 ---
 
-## Objetivos y Alcance
+## Objetivos y alcance
 
-### Objetivo General
+### Objetivo general
 
 Desarrollar un **sistema completo de monitorización ambiental IoT** que permita recopilar, almacenar, visualizar y analizar datos de sensores en tiempo real, con énfasis en sostenibilidad, eficiencia energética y calidad del aire.
 
-### Objetivos Específicos
+### Objetivos específicos
 
-#### 1\. Desarrollo Técnico
+#### 1\. Desarrollo técnico
 
 - ✅ Implementar arquitectura de microservicios escalable  
 - ✅ Integrar 18 tipos de sensores diferentes  
@@ -189,14 +200,14 @@ Desarrollar un **sistema completo de monitorización ambiental IoT** que permita
 - ✅ Crear API REST completa con 11 endpoints  
 - ✅ Implementar comunicación en tiempo real con WebSocket
 
-#### 2\. Bases de Datos
+#### 2\. Bases de datos
 
 - ✅ Diseñar e implementar base de datos de series temporales (InfluxDB)  
 - ✅ Crear esquema relacional completo (MySQL con 9 tablas)  
 - ✅ Desarrollar 10 procedimientos almacenados  
 - ✅ Implementar sistema de usuarios y autenticación
 
-#### 3\. Interfaces de Usuario
+#### 3\. Interfaces de usuario
 
 - ✅ Diseñar y desarrollar dashboard profesional con Grafana  
 - ✅ Crear aplicación web moderna con Next.js 16 \+ TypeScript  
@@ -210,7 +221,7 @@ Desarrollar un **sistema completo de monitorización ambiental IoT** que permita
 - ✅ Desarrollar sistema de alertas para optimización de recursos  
 - ✅ Calcular impacto medible (ahorro energético, reducción CO2, ahorro agua)
 
-#### 5\. Viabilidad Comercial
+#### 5\. Viabilidad comercial
 
 - ✅ Desarrollar plan de empresa completo  
 - ✅ Definir 3 paquetes comerciales (STARTER, STANDARD, PREMIUM)  
@@ -224,9 +235,9 @@ Desarrollar un **sistema completo de monitorización ambiental IoT** que permita
 - ✅ Desarrollar documentación técnica completa  
 - ✅ Preparar plan de migración a hardware real
 
-### Alcance del Proyecto
+### Alcance del proyecto
 
-#### Incluido en el Proyecto
+#### Incluido en el proyecto
 
 ✅ **Simulador completo** de 18 sensores con datos realistas  
 ✅ **Infraestructura Docker** con 5 servicios (Mosquitto, InfluxDB, Telegraf, Grafana, MySQL)  
@@ -239,14 +250,14 @@ Desarrollar un **sistema completo de monitorización ambiental IoT** que permita
 ✅ **Scripts de instalación** automatizados para Windows y Linux  
 ✅ **Plan de migración** a hardware ESP32 real con LoRa Mesh
 
-#### Fuera del Alcance (Fase 2\)
+#### Fuera del alcance (fase 2\)
 
 ⏳ Despliegue en hardware ESP32 real (preparado, pendiente de adquisición)  
 ⏳ Implementación de red LoRa Mesh (documentado, pendiente de hardware)  
 ⏳ Aplicación móvil para Android/iOS (código completo, pendiente de compilación nativa)  
 ⏳ Hosting en producción (preparado para Vercel, pendiente de despliegue final)
 
-### Límites y Restricciones
+### Límites y restricciones
 
 **Tiempo:** Proyecto desarrollado en 4 meses (Agosto \- Noviembre 2025\)  
 **Presupuesto:** Proyecto académico sin financiación externa (simulación en lugar de hardware real)  
@@ -255,9 +266,9 @@ Desarrollar un **sistema completo de monitorización ambiental IoT** que permita
 
 ---
 
-## Estado de los 16 Retos
+## Estado de los 16 retos
 
-### Resumen General
+### Resumen general
 
 **Estado Final:** ✅ **16/16 Retos Completados (100%)**
 
@@ -283,37 +294,37 @@ Desarrollar un **sistema completo de monitorización ambiental IoT** que permita
 **Total Líneas de Código:** 6100+ líneas  
 **Total Archivos:** 100+ archivos
 
-### Desglose por Categorías
+### Desglose por categorías
 
-#### Categoría 1: Sostenibilidad y Planificación (Retos 1, 6\)
+#### Categoría 1: sostenibilidad y planificación (Retos 1, 6\)
 
 - **Reto 1:** Alineación con 5 ODS, impacto medible, 15 KPIs de sostenibilidad  
 - **Reto 6:** Modelo de negocio, 3 paquetes comerciales, proyecciones financieras
 
-#### Categoría 2: Bases de Datos (Retos 2, 3\)
+#### Categoría 2: Bases de datos (Retos 2, 3\)
 
 - **Reto 2:** InfluxDB 2.7 \+ MySQL 8.0 con 9 tablas  
 - **Reto 3:** 10 procedimientos almacenados en MySQL
 
-#### Categoría 3: Interfaces y Diseño (Retos 4, 5, 14\)
+#### Categoría 3: interfaces y diseño (Retos 4, 5, 14\)
 
 - **Reto 4:** Bocetos para Grafana, web Next.js y app Flutter  
 - **Reto 5:** Componentes HTML/CSS con Tailwind CSS  
 - **Reto 14:** Responsive design, animaciones, accesibilidad
 
-#### Categoría 4: Desarrollo Frontend (Retos 7, 13\)
+#### Categoría 4: desarrollo frontend (Retos 7, 13\)
 
 - **Reto 7:** Validación de formularios con JavaScript  
 - **Reto 13:** Next.js 16 \+ Flutter 3.9+ como frameworks cliente
 
-#### Categoría 5: Desarrollo Backend (Retos 8, 9, 10, 15\)
+#### Categoría 5: Desarrollo backend (Retos 8, 9, 10, 15\)
 
 - **Reto 8:** API REST con 11 endpoints  
 - **Reto 9:** Sistema de autenticación con bcrypt y tokens UUID  
 - **Reto 10:** Panel de administración con CRUD completo  
 - **Reto 15:** Express 4.18.2 \+ Docker Compose como framework servidor
 
-#### Categoría 6: Comunicación y Despliegue (Retos 11, 12\)
+#### Categoría 6: comunicación y despliegue (Retos 11, 12\)
 
 - **Reto 11:** Deployment en Vercel  
 - **Reto 12:** WebSocket \+ MQTT para comunicación asíncrona
@@ -324,11 +335,11 @@ Desarrollar un **sistema completo de monitorización ambiental IoT** que permita
 
 ---
 
-# PARTE II \- ARQUITECTURA Y TECNOLOGÍAS
+# Parte II \- arquitectura y tecnologías
 
-## Arquitectura del Sistema
+## Arquitectura del sistema
 
-### Diagrama de Arquitectura General
+### Diagrama de arquitectura general
 
 ```mermaid
 graph TD
@@ -413,9 +424,9 @@ graph TD
     classDef flutter fill:#E91E63,stroke:#C2185B,color:#fff,stroke-width:2px
 ```
 
-### Descripción de Capas
+### Descripción de capas
 
-#### 1\. Capa de Sensores (IoT Layer)
+#### 1\. Capa de sensores (IoT Layer)
 
 **Componentes:**
 
@@ -436,7 +447,7 @@ graph TD
 - **Agua:** Humedad suelo, pH, Flujo, TDS, O2 disuelto  
 - **Energía:** Voltaje batería, Voltaje solar, Porcentaje batería, Consumo, Estado carga, Modo bajo consumo, Wake-ups
 
-#### 2\. Capa de Comunicación (Message Broker)
+#### 2\. Capa de comunicación (Message Broker)
 
 **Mosquitto MQTT 2.0:**
 
@@ -447,7 +458,7 @@ graph TD
 - Retain deshabilitado  
 - Clean session habilitado
 
-#### 3\. Capa de Procesamiento (Data Pipeline)
+#### 3\. Capa de procesamiento (Data Pipeline)
 
 **Telegraf 1.28:**
 
@@ -457,7 +468,7 @@ graph TD
 - Escritura a InfluxDB  
 - Pipeline sin pérdidas con retry automático
 
-#### 4\. Capa de Almacenamiento (Data Storage)
+#### 4\. Capa de almacenamiento (Data Storage)
 
 **InfluxDB 2.7** (Series Temporales):
 
@@ -474,7 +485,7 @@ graph TD
 - 10 procedimientos almacenados  
 - 4 usuarios iniciales
 
-#### 5\. Capa de Visualización (Presentation Layer)
+#### 5\. Capa de visualización (Presentation Layer)
 
 **Grafana 10.2.0:**
 
@@ -490,7 +501,7 @@ graph TD
 - WebSocket para streaming en tiempo real  
 - Cache inteligente (30 segundos)
 
-#### 6\. Capa de Clientes (Client Applications)
+#### 6\. Capa de clientes (Client Applications)
 
 **Web Next.js 16:**
 
@@ -506,7 +517,7 @@ graph TD
 - Multiplataforma (Windows, Web, Android, iOS)  
 - Material Design 3
 
-### Flujo de Datos Completo
+### Flujo de datos completo
 
 1. **Generación:** Simulador Python genera datos de 18 sensores cada 15 segundos  
 2. **Publicación:** Datos publicados en MQTT topics estructurados  
@@ -517,7 +528,7 @@ graph TD
 7. **API:** Express sirve datos a clientes con cache de 30 segundos  
 8. **Clientes:** Web y móvil actualizan UI en tiempo real vía WebSocket
 
-### Ventajas de la Arquitectura
+### Ventajas de la arquitectura
 
 ✅ **Escalabilidad:** Fácil agregar nuevas ubicaciones y sensores  
 ✅ **Desacoplamiento:** Cada capa es independiente  
@@ -528,9 +539,9 @@ graph TD
 
 ---
 
-## Stack Tecnológico
+## Stack tecnológico
 
-### Lenguajes de Programación
+### Lenguajes de programación
 
 | Lenguaje | Uso | Líneas |
 | :---- | :---- | :---- |
@@ -543,7 +554,7 @@ graph TD
 
 **Total:** \~6100 líneas de código
 
-### Backend y Servicios
+### Backend y servicios
 
 #### Node.js \+ Express
 
@@ -580,7 +591,7 @@ graph TD
 
 - `arduino/medusse_simulator.py` \- Simulador completo de sensores
 
-### Bases de Datos
+### Bases de datos
 
 #### InfluxDB 2.7
 
@@ -616,7 +627,7 @@ graph TD
 
 **Configuración:**
 
-- Host: `localhost:3306`  
+- Host: `localhost:3307`  
 - Base de datos: `medusse_db`  
 - Usuario: `medusse_user` / `medusse2025`
 
@@ -626,7 +637,7 @@ graph TD
 - 10 procedimientos almacenados  
 - Relaciones 1:N y N:M
 
-### Comunicación y Mensajería
+### Comunicación y mensajería
 
 #### Mosquitto MQTT 2.0
 
@@ -667,7 +678,7 @@ graph TD
 - Parsing: JSON  
 - Agregación: 30 segundos
 
-### Frontend Web
+### Frontend web
 
 #### Next.js 16
 
@@ -717,7 +728,7 @@ web/src/
 
 └── hooks/           \# Custom hooks
 
-### Frontend Móvil
+### Frontend móvil
 
 #### Flutter 3.9+
 
@@ -819,7 +830,7 @@ services:
 - Networking interno optimizado  
 - Volúmenes persistentes
 
-### Herramientas de Desarrollo
+### Herramientas de desarrollo
 
 | Herramienta | Versión | Uso |
 | :---- | :---- | :---- |
@@ -830,7 +841,7 @@ services:
 | **Postman** | 10+ | Testing de API |
 | **Docker Desktop** | 4.25+ | Gestión de contenedores |
 
-### Protocolos y Formatos
+### Protocolos y formatos
 
 | Protocolo/Formato | Uso |
 | :---- | :---- |
@@ -841,7 +852,7 @@ services:
 | **Flux** | Query language InfluxDB |
 | **SQL** | Query language MySQL |
 
-### Resumen del Stack
+### Resumen del stack
 
 **Total de tecnologías:** 20+ tecnologías integradas  
 **Lenguajes:** 6 (Python, JavaScript, TypeScript, Dart, SQL, Bash)  
@@ -852,9 +863,9 @@ services:
 
 ---
 
-## Ubicaciones y Sensores
+## Ubicaciones y sensores
 
-### Ubicaciones Monitoreadas
+### Ubicaciones monitoreadas
 
 El sistema Medusse IoT monitorea **4 ubicaciones diferentes**, cada una con características térmicas específicas y representadas por un color identificativo.
 
@@ -924,9 +935,9 @@ El sistema Medusse IoT monitorea **4 ubicaciones diferentes**, cada una con cara
 
 ---
 
-### Sensores Implementados (18 Tipos)
+### Sensores implementados (18 tipos)
 
-#### Tabla de Pines y Conexiones (Arduino Nano ESP32)
+#### Tabla de pines y conexiones (Arduino Nano ESP32)
 
 | Sensor / Módulo                                      | Señal/Pin Sensor         | Pin Arduino Nano ESP32 | Alimentación      | Notas                                               |
 |------------------------------------------------------|-------------------------|-----------------------|-------------------|-----------------------------------------------------|
@@ -950,7 +961,7 @@ El sistema Medusse IoT monitorea **4 ubicaciones diferentes**, cada una con cara
 
 > **Nota:** Los pines analógicos pueden variar según disponibilidad. Si algún sensor requiere 5V, verifica que el Nano ESP32 lo soporte y no dañe el pin.
 
-#### Sensores Ambientales (6 sensores)
+#### Sensores ambientales (6 sensores)
 
 ##### 1\. Temperatura (°C)
 
@@ -1011,7 +1022,7 @@ El sistema Medusse IoT monitorea **4 ubicaciones diferentes**, cada una con cara
 - 1500-2000 ppm: Deficiente (dolores de cabeza, fatiga)  
 - 2000 ppm: Peligroso (somnolencia, problemas respiratorios)
 
-##### 4\. Presión Atmosférica (hPa)
+##### 4\. Presión atmosférica (hPa)
 
 | Propiedad | Valor |
 | :---- | :---- |
@@ -1027,7 +1038,7 @@ El sistema Medusse IoT monitorea **4 ubicaciones diferentes**, cada una con cara
 - Detección de cambios de tiempo  
 - Correlación con síntomas físicos
 
-##### 5\. VOC \- Compuestos Orgánicos Volátiles (ppb)
+##### 5\. VOC \- compuestos orgánicos volátiles (ppb)
 
 | Propiedad | Valor |
 | :---- | :---- |
@@ -1052,7 +1063,7 @@ El sistema Medusse IoT monitorea **4 ubicaciones diferentes**, cada una con cara
 - Materiales de construcción  
 - Impresoras y fotocopiadoras
 
-##### 6\. IAQ \- Índice de Calidad del Aire Interior
+##### 6\. IAQ \- índice de calidad del aire interior
 
 | Propiedad | Valor |
 | :---- | :---- |
@@ -1071,9 +1082,9 @@ El sistema Medusse IoT monitorea **4 ubicaciones diferentes**, cada una con cara
 
 ---
 
-#### Sensores de Calidad de Agua y Suelo (5 sensores)
+#### Sensores de calidad de agua y suelo (5 sensores)
 
-##### 7\. Humedad del Suelo (%)
+##### 7\. Humedad del suelo (%)
 
 | Propiedad | Valor |
 | :---- | :---- |
@@ -1092,7 +1103,7 @@ El sistema Medusse IoT monitorea **4 ubicaciones diferentes**, cada una con cara
 
 **Ahorro estimado:** 30-50% en consumo de agua para riego
 
-##### 8\. pH del Agua
+##### 8\. pH del agua
 
 | Propiedad | Valor |
 | :---- | :---- |
@@ -1115,7 +1126,7 @@ El sistema Medusse IoT monitorea **4 ubicaciones diferentes**, cada una con cara
 - 6.5-7.5: Neutral (óptimo)  
 - 7.5: Alcalino (problemas de sabor)
 
-##### 9\. Flujo de Agua (L/min)
+##### 9\. Flujo de agua (L/min)
 
 | Propiedad | Valor |
 | :---- | :---- |
@@ -1134,7 +1145,7 @@ El sistema Medusse IoT monitorea **4 ubicaciones diferentes**, cada una con cara
 
 **Ahorro potencial:** Detección temprana de fugas puede ahorrar miles de litros al año
 
-##### 10\. TDS \- Sólidos Disueltos Totales (ppm)
+##### 10\. TDS \- sólidos disueltos totales (ppm)
 
 | Propiedad | Valor |
 | :---- | :---- |
@@ -1158,7 +1169,7 @@ El sistema Medusse IoT monitorea **4 ubicaciones diferentes**, cada una con cara
 - 150-300 ppm: Buena (potable)  
 - 300 ppm: Deficiente (revisar)
 
-##### 11\. Oxígeno Disuelto (mg/L)
+##### 11\. Oxígeno disuelto (mg/L)
 
 | Propiedad | Valor |
 | :---- | :---- |
@@ -1177,9 +1188,9 @@ El sistema Medusse IoT monitorea **4 ubicaciones diferentes**, cada una con cara
 
 ---
 
-#### Sistema de Energía Solar \- Fase 2 (7 sensores)
+#### Sistema de energía solar \- fase 2 (7 sensores)
 
-##### 12\. Voltaje de Batería (V)
+##### 12\. Voltaje de batería (V)
 
 | Propiedad | Valor |
 | :---- | :---- |
@@ -1448,7 +1459,7 @@ graph LR
 
 El sistema Medusse IoT utiliza **Docker Compose** para orquestar 5 servicios independientes que se comunican a través de una red interna optimizada.
 
-#### Servicio 1: Mosquitto (MQTT Broker)
+#### Servicio 1: Mosquitto (MQTT broker)
 
 mosquitto:
     image: eclipse-mosquitto:2.0
@@ -1682,7 +1693,7 @@ docker-compose \-f docker/docker-compose.yml down \-v
 
 ---
 
-# PARTE III \- LOS 16 RETOS DOCUMENTADOS
+# Parte III \- los 16 retos documentados
 
 ## Reto 1: Proyecto de Sostenibilidad
 
@@ -1694,7 +1705,7 @@ Desarrollar un proyecto tecnológico que contribuya activamente a la sostenibili
 
 #### Alineación con 5 Objetivos de Desarrollo Sostenible
 
-##### ODS 3 \- Salud y Bienestar
+##### ODS 3 \- salud y bienestar
 
 **Implementación:**
 
@@ -1710,7 +1721,7 @@ Desarrollar un proyecto tecnológico que contribuya activamente a la sostenibili
 - Identificación de espacios con mala ventilación  
 - Datos para optimizar sistemas de ventilación
 
-##### ODS 6 \- Agua Limpia y Saneamiento
+##### ODS 6 \- agua limpia y saneamiento
 
 **Implementación:**
 
@@ -1726,7 +1737,7 @@ Desarrollar un proyecto tecnológico que contribuya activamente a la sostenibili
 - Identificación de fugas y consumo excesivo  
 - Protección de ecosistemas acuáticos
 
-##### ODS 7 \- Energía Asequible y Limpia
+##### ODS 7 \- energía asequible y limpia
 
 **Implementación:**
 
@@ -1744,7 +1755,7 @@ Desarrollar un proyecto tecnológico que contribuya activamente a la sostenibili
 - Datos para evaluar viabilidad de sistemas autónomos  
 - Fomento de fuentes de energía limpia
 
-##### ODS 11 \- Ciudades y Comunidades Sostenibles
+##### ODS 11 \- ciudades y comunidades sostenibles
 
 **Implementación:**
 
@@ -1760,7 +1771,7 @@ Desarrollar un proyecto tecnológico que contribuya activamente a la sostenibili
 - Datos para políticas de gestión de espacios  
 - Mejora del confort y eficiencia en aulas
 
-##### ODS 13 \- Acción por el Clima
+##### ODS 13 \- acción por el clima
 
 **Implementación:**
 
@@ -1802,9 +1813,9 @@ Desarrollar un proyecto tecnológico que contribuya activamente a la sostenibili
 - CO2 evitado: 1-1.5 toneladas/año  
 - Equivalente: Plantar 50-75 árboles/año
 
-### 15 KPIs de Sostenibilidad
+### 15 KPIs de sostenibilidad
 
-#### KPIs Energéticos
+#### KPIs energéticos
 
 1. **Reducción de Consumo Energético**  
      
@@ -1832,7 +1843,7 @@ Desarrollar un proyecto tecnológico que contribuya activamente a la sostenibili
    - Métrica: Porcentaje de tiempo en modo bajo consumo  
    - Objetivo: 40-60% del tiempo
 
-#### KPIs de Calidad del Aire
+#### KPIs de calidad del aire
 
 5. **Tiempo con CO2 Saludable**  
      
@@ -1853,7 +1864,7 @@ Desarrollar un proyecto tecnológico que contribuya activamente a la sostenibili
    - Métrica: Índice promedio de calidad del aire  
    - Objetivo: Mantener IAQ \<100 (bueno)
 
-#### KPIs de Recursos Hídricos
+#### KPIs de recursos hídricos
 
 8. **Reducción de Consumo de Agua**  
      
@@ -1874,7 +1885,7 @@ Desarrollar un proyecto tecnológico que contribuya activamente a la sostenibili
     - Métrica: % tiempo con pH óptimo (6.5-7.5)  
     - Objetivo: 95% del tiempo
 
-#### KPIs de Respuesta y Acción
+#### KPIs de respuesta y acción
 
 11. **Tiempo de Respuesta a Alertas**  
       
@@ -1895,7 +1906,7 @@ Desarrollar un proyecto tecnológico que contribuya activamente a la sostenibili
     - Métrica: Número de instalaciones replicadas  
     - Objetivo: 5 centros en 2 años
 
-#### KPIs Educativos
+#### KPIs educativos
 
 14. **Concienciación Ambiental**  
       
@@ -2056,7 +2067,7 @@ from(bucket: "sensors")
 
 **Configuración:**
 
-- Host: `localhost:3306`  
+- Host: `localhost:3307`  
 - Base de datos: `medusse_db`  
 - Usuario: `medusse_user` / `medusse2025`  
 - Charset: `utf8mb4`  
@@ -2084,10 +2095,10 @@ CREATE TABLE users (
 );
 ```
 
-**4 usuarios iniciales:**
+**Usuarios iniciales de referencia (según seed activo):**
 
 - `admin` / `medusse2025` - Rol: `admin`  
-- `paco` / `medusse2025` - Rol: `admin`  
+- `paco` / `medusse2025` - Rol: `admin` (puede variar según seed)  
 - `profesor` / `medusse2025` - Rol: `user`  
 - `alumno` / `medusse2025` - Rol: `viewer`
 
@@ -3200,7 +3211,7 @@ from(bucket: "sensors")
 
 ---
 
-## Reto 5: Interfaces HTML/CSS
+## Reto 5: interfaces HTML/CSS
 
 ### Descripción del Reto
 
@@ -3492,7 +3503,7 @@ export default function DashboardSection() {
 }
 ```
 
-#### 3. Estilos CSS Avanzados
+#### 3. Estilos CSS avanzados
 
 ##### Responsive Design con Tailwind
 
@@ -3673,7 +3684,7 @@ export default function Alert({ type, message }: AlertProps) {
 - `web/src/app/globals.css` \- Estilos globales (100 líneas)  
 - `web/tailwind.config.ts` \- Configuración Tailwind (80 líneas)
 
-### Características CSS Implementadas
+### Características CSS implementadas
 
 #### 1\. Responsive Design
 
@@ -3968,7 +3979,7 @@ Desarrollar un plan de negocio completo que incluya modelo de negocio, proyeccio
 - Newsletter mensual  
 - Casos de estudio
 
-#### 4\. ROI para el Cliente
+#### 4\. ROI para el cliente
 
 ##### Ahorro Anual Estimado
 
@@ -4120,7 +4131,7 @@ Desarrollar un plan de negocio completo que incluya modelo de negocio, proyeccio
 
 ---
 
-## Reto 7: Validación de Formularios JS
+## Reto 7: validación de formularios JS
 
 ### Descripción del Reto
 
@@ -4325,7 +4336,7 @@ export default function LoginPage() {
 
 **Ubicación:** `web/src/app/login/page.tsx` (150 líneas)
 
-#### 2. Validación en Cliente API (Backend)
+#### 2. Validación en cliente API (backend)
 
 ##### Validación de Parámetros de Endpoints
 
@@ -4449,7 +4460,7 @@ app.get('/api/endpoint', async (req, res) => {
 });
 ```
 
-#### 4. Respuestas HTTP Apropiadas
+#### 4. Respuestas HTTP apropiadas
 
 **Códigos de estado implementados:**
 
@@ -4563,7 +4574,7 @@ try {
 
 ---
 
-## Reto 8: Conexión a Base de Datos JS
+## Reto 8: conexión a base de datos JS
 
 ### Descripción del Reto
 
@@ -4582,11 +4593,11 @@ const mysql = require('mysql2/promise');
 
 // Configuración del pool de conexiones
 const pool = mysql.createPool({
-  host: process.env.DB_HOST || 'localhost',
-  port: process.env.DB_PORT || 3306,
-  user: process.env.DB_USER || 'medusse_user',
-  password: process.env.DB_PASSWORD || 'medusse2025',
-  database: process.env.DB_NAME || 'medusse_db',
+  host: process.env.MYSQL_HOST || 'localhost',
+  port: process.env.MYSQL_PORT || 3307,
+  user: process.env.MYSQL_USER || 'medusse_user',
+  password: process.env.MYSQL_PASSWORD || 'medusse2025',
+  database: process.env.MYSQL_DATABASE || 'medusse_db',
   connectionLimit: 10, // Máximo 10 conexiones simultáneas
   queueLimit: 0, // Sin límite de cola
   waitForConnections: true,
@@ -4868,7 +4879,7 @@ async function getSensorStats(location, sensor, hours = 24) {
 }
 ```
 
-#### 4. Implementación en Endpoints API
+#### 4. Implementación en endpoints API
 
 ##### Endpoint: GET /api/latest/:location
 
@@ -5050,15 +5061,15 @@ async function createUserWithPreferences(userData, preferences) {
 ```sql
 # MySQL
 
-DB_HOST=localhost
+MYSQL_HOST=localhost
 
-DB_PORT=3306
+MYSQL_PORT=3307
 
-DB_USER=medusse_user
+MYSQL_USER=medusse_user
 
-DB_PASSWORD=medusse2025
+MYSQL_PASSWORD=medusse2025
 
-DB_NAME=medusse_db
+MYSQL_DATABASE=medusse_db
 
 # InfluxDB
 
@@ -5344,7 +5355,7 @@ function requireRole(...allowedRoles) {
 
 #### 3. Protección de Endpoints
 
-##### Endpoint Protegido: GET /api/dashboard
+##### Endpoint protegido: GET /api/dashboard
 
 ```javascript
 // Solo usuarios autenticados
@@ -5367,7 +5378,7 @@ app.get('/api/dashboard', requireAuth, async (req, res) => {
 });
 ```
 
-##### Endpoint Protegido: GET /api/admin/users (Solo Admin)
+##### Endpoint protegido: GET /api/admin/users (solo admin)
 
 ```javascript
 // Solo usuarios con rol 'admin'
@@ -5385,7 +5396,7 @@ app.get('/api/admin/users', requireAuth, requireRole('admin'), async (req, res) 
 });
 ```
 
-##### Endpoint Protegido: POST /api/admin/alerts/resolve (Admin o User)
+##### Endpoint protegido: POST /api/admin/alerts/resolve (admin o user)
 
 // Solo usuarios con rol 'admin' o 'user' (viewer no puede)
 
@@ -5442,7 +5453,7 @@ app.post('/api/auth/logout', requireAuth, async (req, res) => {
 });
 ```
 
-##### Endpoint: GET /api/auth/sessions (Mis Sesiones Activas)
+##### Endpoint: GET /api/auth/sessions (mis sesiones activas)
 
 ```javascript
 app.get('/api/auth/sessions', requireAuth, async (req, res) => {
@@ -5472,7 +5483,7 @@ app.get('/api/auth/sessions', requireAuth, async (req, res) => {
 });
 ```
 
-##### Endpoint: DELETE /api/auth/sessions/:token (Cerrar Sesión Específica)
+##### Endpoint: DELETE /api/auth/sessions/:token (cerrar sesión específica)
 
 ```javascript
 app.delete('/api/auth/sessions/:token', requireAuth, async (req, res) => {
@@ -5505,7 +5516,7 @@ app.delete('/api/auth/sessions/:token', requireAuth, async (req, res) => {
 });
 ```
 
-#### 5\. Control de Acceso Basado en Roles (RBAC)
+#### 5\. Control de acceso basado en roles (RBAC)
 
 ##### Matriz de Permisos
 
@@ -5566,7 +5577,7 @@ app.post('/api/auth/login', loginLimiter, async (req, res) => {
 });
 ```
 
-##### CORS Configurado
+##### CORS configurado
 
 ```javascript
 const cors = require('cors');
@@ -5659,7 +5670,7 @@ app.use(helmet({
 
 ---
 
-## Reto 10: Web Services SOAP
+## Reto 10: web services SOAP
 
 ### Descripción del Reto
 
@@ -5673,7 +5684,7 @@ Implementar servicios web SOAP con WSDL para la interoperabilidad con sistemas l
 
 #### Justificación de No Implementación
 
-##### 1\. Arquitectura Moderna REST vs SOAP
+##### 1\. Arquitectura moderna REST vs SOAP
 
 **REST (Implementado):**
 
@@ -5692,7 +5703,7 @@ Implementar servicios web SOAP con WSDL para la interoperabilidad con sistemas l
 - ❌ Debugging más complicado  
 - ❌ No es estándar en ecosistema JavaScript/Node.js
 
-##### 2\. Casos de Uso de SOAP vs REST
+##### 2\. Casos de uso de SOAP vs REST
 
 **SOAP es necesario cuando:**
 
@@ -5735,7 +5746,7 @@ En lugar de SOAP, el proyecto implementa:
 - HTTP/2 (multiplexing)  
 - Typed contracts (como WSDL pero moderno)
 
-#### Documentación API con OpenAPI (Alternativa a WSDL)
+#### Documentación API con OpenAPI (alternativa a WSDL)
 
 ##### Especificación OpenAPI 3.0
 
@@ -6026,7 +6037,7 @@ security:
 | **Adopción** | ✅ Estándar de facto | ❌ Declinando |
 | **Tamaño** | Compacto | Extenso |
 
-#### Comparativa: REST vs SOAP en el Proyecto
+#### Comparativa: REST vs SOAP en el proyecto
 
 ##### Ejemplo: Obtener Datos de Sensor
 
@@ -6439,6 +6450,6 @@ Diciembre 2025
 
 ---
 
-# FIN DEL DOCUMENTO
+# Fin del documento
 
 ---
