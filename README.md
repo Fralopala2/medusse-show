@@ -111,11 +111,8 @@ proyecto-medusse/
 ├── Scripts Windows (raíz):  # Scripts de automatización
 │   ├── medusse.bat          # 🎯 Menú principal unificado
 │   ├── sistema_completo.bat # 🚀 Sistema completo
-│   ├── iniciar_api.bat      # 🔌 API REST + WebSocket
-│   ├── ejecutar_flutter.bat # 📱 App móvil Flutter
-│   ├── ejecutar_web.bat     # 🌐 Web Next.js
 │   ├── verificar.bat        # 🔍 Verificación completa
-│   ├── setup_rapido.bat     # ⚡ Setup rápido
+│   ├── full_setup.bat       # ⚙️ Setup inicial automático
 │   └── detener.bat          # 🛑 Detener servicios
 ├── CHANGELOG.md             # Historial de cambios (1340+ líneas)
 ├── README.md                # Esta documentación
@@ -186,8 +183,8 @@ proyecto-medusse/
 ### ✅ Funcionalidades Implementadas
 
 **🤖 Automatización Total:**
-- **Instalación en un clic** para equipos nuevos (`instalar_proyecto.bat`)
-- **Setup rápido** para equipos con Docker (`setup_rapido.bat`)
+- **Setup inicial automático** (`full_setup.bat`)
+- **Menú principal unificado** (`medusse.bat`)
 - **Verificación automática** con diagnósticos (`verificar.bat`)
 - **Ecosistema completo** con monitoreo (`sistema_completo.bat`)
 
@@ -218,17 +215,11 @@ proyecto-medusse/
 
 #### Windows
 
-**Para equipos nuevos (instala Docker automáticamente):**
+**Setup inicial recomendado:**
 ```cmd
-instalar_proyecto.bat
+full_setup.bat
 ```
-*Instala Docker Desktop, Python, dependencias y configura todo automáticamente.*
-
-**Para equipos con Docker ya instalado:**
-```cmd
-setup_rapido.bat
-```
-*Setup completo en menos de 2 minutos.*
+*Instala dependencias Python/Node y levanta el stack Docker base.*
 
 #### Linux / Lliurex
 
@@ -277,8 +268,9 @@ verificar.bat              # Verificación completa
 |----------|-----|--------------|
 | **Grafana Dashboard** | http://localhost:3000 | admin / medusse2025 |
 | **API REST** | http://localhost:3001 | - |
+| **Web Next.js** | http://localhost:3003 | - |
 | **InfluxDB** | http://localhost:8086 | admin / medusse2025 |
-| **App Flutter** | Ejecutar con script | - |
+| **App Flutter** | Ejecutar manualmente (`flutter run -d windows`) | - |
 
 ## 📊 Servicios y Tecnologías
 
@@ -436,7 +428,8 @@ verificar.bat
 
 ### Uso
 ```cmd
-ejecutar_flutter.bat
+cd medusse_app
+flutter run -d windows
 ```
 
 ### Capturas de Pantalla
@@ -466,7 +459,7 @@ Ver documentación completa en: [medusse_app/README.md](medusse_app/README.md)
 | `/api/summary` | GET | Resumen general de todas las ubicaciones | - |
 | `/api/latest/:location` | GET | Últimos valores por ubicación | `location` |
 | `/api/data/:location/:sensor` | GET | Datos históricos con filtros | `location`, `sensor`, `?hours`, `?interval` |
-| `/api/stats/:location/:sensor` | GET | Estadísticas (min/max/avg) | `location`, `sensor` |
+| `/api/stats/:location/:sensor` | GET | Estadísticas por sensor (`location`, `sensor`, `hours`, `stats`) | `location`, `sensor` |
 
 ### 🔐 Endpoints de Autenticación (Reto 9)
 | Endpoint | Método | Descripción | Autenticación |
@@ -491,9 +484,9 @@ Ver documentación completa en: [medusse_app/README.md](medusse_app/README.md)
 
 ### 📊 Uso y Testing
 ```cmd
-iniciar_api.bat              # Iniciar servidor API + WebSocket
-probar_api.bat               # Testing automático de endpoints de datos
-probar_autenticacion.bat     # Testing de autenticación (Reto 9)
+node api/server.js           # Iniciar API + WebSocket
+node api/test-api.js         # Testing de endpoints de datos
+node api/test-auth.js        # Testing de autenticacion y permisos
 ```
 
 ### 🔐 Sistema de Autenticación
@@ -502,12 +495,9 @@ probar_autenticacion.bat     # Testing de autenticación (Reto 9)
 - **Login web** con Next.js y React
 - **Dashboard protegido** con validación de sesión
 - **Middleware de protección** para rutas privadas
-- **4 usuarios iniciales** configurados (admin, paco, profesor, alumno)
+- **Usuarios iniciales** configurados desde seed SQL (ejecutar `node api/test-auth.js` para validarlos)
 
-**Probar login web:**
-```cmd
-probar_login_web.bat
-```
+**Probar login web:** abrir `http://localhost:3003/login` con API y MySQL activos.
 
 Ver documentación completa en: [api/README.md](api/README.md)
 

@@ -9,7 +9,7 @@ inclusion: always
 
 ## Información del Proyecto
 - **Nombre**: Medusse IoT - Sistema de Monitoreo Ambiental Completo
-- **Versión**: 2.3.0
+- **Versión**: 2.7.x (API 2.7.1 en `api/server.js`)
 - **Autor**: Francisco Manuel López Alarte
 - **Institución**: IES José Rodrigo Botet
 - **Curso**: 2025/2026
@@ -158,23 +158,19 @@ ESP32 Simulators → MQTT → Telegraf → InfluxDB → Grafana Dashboard
 
 ### Scripts de Instalación
 ```cmd
-instalar_proyecto.bat      # Instalación completa automática (equipos nuevos)
-setup_rapido.bat          # Setup rápido (Docker ya instalado)
+full_setup.bat             # Instalacion automatizada (Python/Node + Docker)
 ```
 
 ### Scripts de Ejecución
 ```cmd
+medusse.bat               # Menu principal del proyecto
 sistema_completo.bat      # Ecosistema completo (recomendado)
-demo.bat                  # Solo Dashboard Grafana
-iniciar_api.bat          # Solo API REST + WebSocket
-ejecutar_flutter.bat     # Solo App móvil Flutter
 ```
 
 ### Scripts de Verificación
 ```cmd
-verificar.bat            # Verificación completa del sistema
-verificar_rapido.bat     # Verificación rápida (30 segundos)
-probar_api.bat          # Testing automático de API
+verificar.bat             # Verificacion completa del sistema
+detener.bat               # Detiene procesos del ecosistema
 ```
 
 ### Comandos Docker
@@ -233,6 +229,7 @@ flutter run -d windows
 | **API Health** | http://localhost:3001/health | - |
 | **API Summary** | http://localhost:3001/api/summary | - |
 | **WebSocket** | ws://localhost:3002 | - |
+| **Web Next.js** | http://localhost:3003 | - |
 | **InfluxDB** | http://localhost:8086 | admin / medusse2025 |
 
 ## Endpoints API REST
@@ -243,7 +240,7 @@ flutter run -d windows
 - `GET /api/summary` - Resumen general de todas las ubicaciones
 - `GET /api/latest/:location` - Últimos valores por ubicación
 - `GET /api/data/:location/:sensor` - Datos históricos con filtros
-- `GET /api/stats/:location/:sensor` - Estadísticas (min/max/avg)
+- `GET /api/stats/:location/:sensor` - Estadisticas por sensor (respuesta con `location`, `sensor`, `hours`, `stats`)
 
 ### Endpoints de Energía (FASE 2)
 - `GET /api/energy/:location` - Datos de energía por ubicación
@@ -257,10 +254,26 @@ flutter run -d windows
 ```json
 {
   "value": 24.5,
-  "sensor": "dht22",
+  "sensor": "temperature",
   "node_id": "ESP32_NODE_01",
   "timestamp": 1759948845541,
   "location": "aula20"
+}
+```
+
+### Formato JSON de Estadisticas (API)
+```json
+{
+  "location": "aula20",
+  "sensor": "temperature",
+  "hours": 24,
+  "stats": {
+    "min": 20.8,
+    "max": 26.1,
+    "avg": 23.4,
+    "mean": 23.4,
+    "count": 24
+  }
 }
 ```
 
@@ -417,6 +430,11 @@ docker compose -f docker/docker-compose.yml up -d
 - **CAMBIAR credenciales en producción**
 - Considerar autenticación en API para producción
 - Implementar HTTPS en producción
+
+### Steering operativo (obligatorio)
+- Este archivo se considera la guia de steering activa del proyecto.
+- Antes de proponer o implementar cambios, validar decisiones contra estas reglas.
+- Si cambia arquitectura, contratos API, scripts o puertos, actualizar este archivo en la misma tarea.
 
 ### Performance
 - Cache inteligente en API (30s)

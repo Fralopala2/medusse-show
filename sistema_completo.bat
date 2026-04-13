@@ -104,7 +104,7 @@ echo [OK] Python OK
 REM Iniciar servicios Docker
 echo.
 echo [4/5] Iniciando servicios Docker
-echo Iniciando contenedores: MQTT, InfluxDB, Grafana, Telegraf
+echo Iniciando contenedores: MQTT, InfluxDB, Grafana, Telegraf, MySQL
 
 docker compose -f docker/docker-compose.yml up -d
 if errorlevel 1 (

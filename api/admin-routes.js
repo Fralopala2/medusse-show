@@ -4,6 +4,19 @@ const router = express.Router();
 const auth = require('./auth');
 const db = require('./db');
 
+function parsePositiveInt(value, fallback, max) {
+  const parsed = parseInt(value, 10);
+  if (Number.isNaN(parsed) || parsed < 0) return fallback;
+  if (typeof max === 'number') return Math.min(parsed, max);
+  return parsed;
+}
+
+function parseEntityId(value) {
+  const parsed = parseInt(value, 10);
+  if (Number.isNaN(parsed) || parsed <= 0) return null;
+  return parsed;
+}
+
 // Middleware para verificar que el usuario es admin
 const requireAdmin = async (req, res, next) => {
   if (!req.user || req.user.role !== 'admin') {
@@ -94,16 +107,16 @@ router.get('/stats', auth.requireAuth, requireAdmin, async (req, res) => {
 // Obtener logs de actividad
 router.get('/logs', auth.requireAuth, requireAdmin, async (req, res) => {
   try {
-    const limit = parseInt(req.query.limit) || 50;
-    const offset = parseInt(req.query.offset) || 0;
-    
-    // Usar template string en lugar de placeholders para LIMIT y OFFSET
+    const limit = parsePositiveInt(req.query.limit, 50, 200);
+    const offset = parsePositiveInt(req.query.offset, 0, 10000);
+
     const [logs] = await db.query(
-      `SELECT al.*, u.username 
-       FROM activity_log al 
-       LEFT JOIN users u ON al.user_id = u.id 
-       ORDER BY al.created_at DESC 
-       LIMIT ${limit} OFFSET ${offset}`
+      `SELECT al.*, u.username
+       FROM activity_log al
+       LEFT JOIN users u ON al.user_id = u.id
+       ORDER BY al.created_at DESC
+       LIMIT ? OFFSET ?`,
+      [limit, offset]
     );
     
     res.json({
@@ -147,7 +160,13 @@ router.get('/sessions', auth.requireAuth, requireAdmin, async (req, res) => {
 // Eliminar usuario
 router.delete('/users/:userId', auth.requireAuth, requireAdmin, async (req, res) => {
   try {
-    const { userId } = req.params;
+    const userId = parseEntityId(req.params.userId);
+    if (!userId) {
+      return res.status(400).json({
+        error: 'Identificador invalido',
+        message: 'El userId debe ser un numero entero positivo'
+      });
+    }
     
     // No permitir eliminar el propio usuario
     if (parseInt(userId) === req.user.id) {
@@ -157,7 +176,13 @@ router.delete('/users/:userId', auth.requireAuth, requireAdmin, async (req, res)
       });
     }
     
-    await db.query('DELETE FROM users WHERE id = ?', [userId]);
+    const [result] = await db.query('DELETE FROM users WHERE id = ?', [userId]);
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        error: 'Usuario no encontrado',
+        message: 'No existe un usuario con ese identificador'
+      });
+    }
     
     res.json({
       success: true,
@@ -175,7 +200,13 @@ router.delete('/users/:userId', auth.requireAuth, requireAdmin, async (req, res)
 // Actualizar rol de usuario
 router.put('/users/:userId/role', auth.requireAuth, requireAdmin, async (req, res) => {
   try {
-    const { userId } = req.params;
+    const userId = parseEntityId(req.params.userId);
+    if (!userId) {
+      return res.status(400).json({
+        error: 'Identificador invalido',
+        message: 'El userId debe ser un numero entero positivo'
+      });
+    }
     const { role } = req.body;
     
     if (!['admin', 'user', 'viewer'].includes(role)) {
@@ -193,7 +224,13 @@ router.put('/users/:userId/role', auth.requireAuth, requireAdmin, async (req, re
       });
     }
     
-    await db.query('UPDATE users SET role = ? WHERE id = ?', [role, userId]);
+    const [result] = await db.query('UPDATE users SET role = ? WHERE id = ?', [role, userId]);
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        error: 'Usuario no encontrado',
+        message: 'No existe un usuario con ese identificador'
+      });
+    }
     
     res.json({
       success: true,
@@ -211,13 +248,24 @@ router.put('/users/:userId/role', auth.requireAuth, requireAdmin, async (req, re
 // Crear nuevo usuario (admin y user pueden crear)
 router.post('/users', auth.requireAuth, requireAdminOrUser, async (req, res) => {
   try {
-    const { username, email, password, full_name, role } = req.body;
+    const username = (req.body.username || '').trim();
+    const email = (req.body.email || '').trim();
+    const password = req.body.password || '';
+    const full_name = (req.body.full_name || '').trim();
+    const role = req.body.role;
     
     // Validaciones
     if (!username || !email || !password || !full_name) {
       return res.status(400).json({
         error: 'Datos incompletos',
         message: 'Se requieren username, email, password y full_name'
+      });
+    }
+
+    if (password.length < 8) {
+      return res.status(400).json({
+        error: 'Password invalida',
+        message: 'La contraseña debe tener al menos 8 caracteres'
       });
     }
     
@@ -307,7 +355,12 @@ router.get('/alerts', auth.requireAuth, requireAdmin, async (req, res) => {
 // Crear alerta manualmente (solo admin)
 router.post('/alerts', auth.requireAuth, requireAdmin, async (req, res) => {
   try {
-    const { location_id, sensor_id, alert_type, message, value, threshold } = req.body;
+    const location_id = parseEntityId(req.body.location_id);
+    const sensor_id = parseEntityId(req.body.sensor_id);
+    const alert_type = (req.body.alert_type || '').trim();
+    const message = (req.body.message || '').trim();
+    const value = req.body.value;
+    const threshold = req.body.threshold;
     
     if (!location_id || !sensor_id || !alert_type || !message) {
       return res.status(400).json({
@@ -344,12 +397,24 @@ router.post('/alerts', auth.requireAuth, requireAdmin, async (req, res) => {
 // Resolver alerta (solo admin)
 router.put('/alerts/:alertId/resolve', auth.requireAuth, requireAdmin, async (req, res) => {
   try {
-    const { alertId } = req.params;
+    const alertId = parseEntityId(req.params.alertId);
+    if (!alertId) {
+      return res.status(400).json({
+        error: 'Identificador invalido',
+        message: 'El alertId debe ser un numero entero positivo'
+      });
+    }
     
-    await db.query(
+    const [result] = await db.query(
       'UPDATE alerts SET is_resolved = TRUE, resolved_at = NOW(), resolved_by = ? WHERE id = ?',
       [req.user.id, alertId]
     );
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        error: 'Alerta no encontrada',
+        message: 'No existe una alerta con ese identificador'
+      });
+    }
     
     // Registrar actividad
     await db.query(
@@ -373,9 +438,21 @@ router.put('/alerts/:alertId/resolve', auth.requireAuth, requireAdmin, async (re
 // Eliminar alerta (solo admin)
 router.delete('/alerts/:alertId', auth.requireAuth, requireAdmin, async (req, res) => {
   try {
-    const { alertId } = req.params;
+    const alertId = parseEntityId(req.params.alertId);
+    if (!alertId) {
+      return res.status(400).json({
+        error: 'Identificador invalido',
+        message: 'El alertId debe ser un numero entero positivo'
+      });
+    }
     
-    await db.query('DELETE FROM alerts WHERE id = ?', [alertId]);
+    const [result] = await db.query('DELETE FROM alerts WHERE id = ?', [alertId]);
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        error: 'Alerta no encontrada',
+        message: 'No existe una alerta con ese identificador'
+      });
+    }
     
     // Registrar actividad
     await db.query(

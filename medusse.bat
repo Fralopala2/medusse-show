@@ -236,7 +236,7 @@ curl -s http://localhost:3001/health >nul 2>&1
 if %errorlevel% neq 0 (
     echo ❌ API no esta corriendo
     echo.
-    echo Inicia la API primero (opcion 5)
+    echo Inicia la API primero (opcion 3)
     pause
     goto menu
 )
@@ -319,7 +319,7 @@ if %errorlevel% neq 0 (
     timeout /t 5 /nobreak >nul
 )
 
-curl -s http://localhost:3100 >nul 2>&1
+curl -s http://localhost:3003 >nul 2>&1
 if %errorlevel% neq 0 (
     echo 🚀 Iniciando Web...
     cd web

@@ -2,6 +2,14 @@
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const db = require('./db');
+require('dotenv').config();
+
+const SESSION_DURATION_HOURS = parseInt(process.env.SESSION_DURATION_HOURS, 10) || 24;
+const UUID_V4_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+function isValidSessionToken(sessionToken) {
+  return typeof sessionToken === 'string' && UUID_V4_REGEX.test(sessionToken.trim());
+}
 
 // Autenticar usuario (login)
 async function authenticateUser(username, password, ipAddress = null, userAgent = null) {
@@ -49,11 +57,17 @@ async function authenticateUser(username, password, ipAddress = null, userAgent 
       
       // Generar token de sesion
       const sessionToken = crypto.randomUUID();
+
+      // Limpiar sesiones expiradas del usuario para mantener tabla controlada
+      await connection.execute(
+        'DELETE FROM sessions WHERE user_id = ? AND expires_at <= NOW()',
+        [user.id]
+      );
       
       // Crear sesion
       await connection.execute(
-        'INSERT INTO sessions (user_id, session_token, ip_address, user_agent, expires_at) VALUES (?, ?, ?, ?, DATE_ADD(NOW(), INTERVAL 24 HOUR))',
-        [user.id, sessionToken, ipAddress, userAgent]
+        'INSERT INTO sessions (user_id, session_token, ip_address, user_agent, expires_at) VALUES (?, ?, ?, ?, DATE_ADD(NOW(), INTERVAL ? HOUR))',
+        [user.id, sessionToken, ipAddress, userAgent, SESSION_DURATION_HOURS]
       );
       
       // Actualizar ultimo login
@@ -96,6 +110,13 @@ async function authenticateUser(username, password, ipAddress = null, userAgent 
 // Validar sesion
 async function validateSession(sessionToken) {
   try {
+    if (!isValidSessionToken(sessionToken)) {
+      return {
+        valid: false,
+        message: 'Token de sesion invalido'
+      };
+    }
+
     console.log(`🔍 Validating session token: ${sessionToken.substring(0, 8)}...`);
     
     const connection = await db.getConnection();
@@ -143,6 +164,13 @@ async function validateSession(sessionToken) {
 // Cerrar sesion (logout)
 async function logoutUser(sessionToken) {
   try {
+    if (!isValidSessionToken(sessionToken)) {
+      return {
+        success: false,
+        message: 'Token de sesion invalido'
+      };
+    }
+
     console.log(`🚪 Logging out session: ${sessionToken.substring(0, 8)}...`);
     
     const connection = await db.getConnection();
@@ -155,6 +183,7 @@ async function logoutUser(sessionToken) {
       );
       
       if (result.affectedRows > 0) {
+        await connection.execute('DELETE FROM sessions WHERE expires_at <= NOW()');
         console.log(`✅ Logout successful`);
         return {
           success: true,
@@ -189,7 +218,13 @@ function requireAuth(req, res, next) {
     });
   }
   
-  const sessionToken = authHeader.substring(7); // Remover "Bearer "
+  const sessionToken = authHeader.substring(7).trim(); // Remover "Bearer "
+  if (!isValidSessionToken(sessionToken)) {
+    return res.status(401).json({
+      error: 'No autorizado',
+      message: 'Token de sesion invalido'
+    });
+  }
   
   validateSession(sessionToken)
     .then(result => {

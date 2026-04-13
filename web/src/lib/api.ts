@@ -187,7 +187,9 @@ export async function fetchStats(
     `${API_BASE_URL}/api/stats/${location}/${sensor}?hours=${hours}`
   );
   if (!response.ok) throw new Error('Failed to fetch stats');
-  return response.json();
+  const payload = await response.json();
+  // Compatibility: backend may return flat stats or wrapped { stats }
+  return (payload?.stats ?? payload) as Stats;
 }
 
 // ============================================================================

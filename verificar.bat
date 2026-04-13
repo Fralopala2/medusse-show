@@ -104,9 +104,17 @@ if errorlevel 1 (
 echo Verificando API REST (timeout 3s)...
 powershell -Command "try { $response = Invoke-WebRequest -Uri 'http://localhost:3001/health' -TimeoutSec 3 -UseBasicParsing; exit 0 } catch { exit 1 }" >nul 2>&1
 if errorlevel 1 (
-    echo API REST: NO ACCESIBLE (ejecutar: iniciar_api.bat)
+    echo API REST: NO ACCESIBLE (usar medusse.bat opcion 3 o sistema_completo.bat)
 ) else (
     echo API REST: ACCESIBLE
+)
+
+echo Verificando Web Next.js (timeout 3s)...
+powershell -Command "try { $response = Invoke-WebRequest -Uri 'http://localhost:3003' -TimeoutSec 3 -UseBasicParsing; exit 0 } catch { exit 1 }" >nul 2>&1
+if errorlevel 1 (
+    echo Web Next.js: NO ACCESIBLE (usar medusse.bat opcion 4 o sistema_completo.bat)
+) else (
+    echo Web Next.js: ACCESIBLE
 )
 
 echo.
@@ -148,14 +156,15 @@ echo ========================================
 echo.
 echo SISTEMA DISPONIBLE:
 echo.
-echo 📊 Core IoT (Grafana):     demo.bat
-echo 🌐 API REST:               iniciar_api.bat
-echo 📱 App Flutter:            ejecutar_flutter.bat
-echo 🚀 Sistema Completo:       sistema_completo.bat
+echo 🧭 Menu principal:          medusse.bat
+echo 🚀 Sistema Completo:        sistema_completo.bat
+echo 🔎 Verificacion:            verificar.bat
+echo 🛑 Detener servicios:       detener.bat
 echo.
 echo ACCESO WEB:
 echo - Grafana: http://localhost:3000 (admin/medusse2025)
 echo - API REST: http://localhost:3001
+echo - Web Next.js: http://localhost:3003
 echo - InfluxDB: http://localhost:8086 (admin/medusse2025)
 echo.
 pause

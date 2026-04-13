@@ -1,5 +1,43 @@
 # Changelog - Proyecto Medusse IoT
 
+## [2.7.9] - 2026-04-13 - ESTABILIDAD Y SEGURIDAD API/SCRIPTS ✅
+
+### ✅ Estabilidad de contratos y scripts
+- **`api/server.js`**: `/api/stats/:location/:sensor` ahora responde con `{ location, sensor, hours, stats }`.
+- **Compatibilidad de estadisticas**: `stats` incluye `avg` y `mean` para clientes web y Flutter.
+- **Parsing Influx corregido** en endpoints de energia (`/api/energy/:location` y `/api/energy/:location/history`), evitando lectura incorrecta de CSV.
+- **`medusse.bat`**: corregido check web de `3100` a `3003` y mensaje de opcion API (3).
+- **`verificar.bat`**: referencias actualizadas a scripts reales y check añadido para `http://localhost:3003`.
+- **`sistema_completo.bat`**: mensaje de arranque Docker alineado con servicios reales (incluye MySQL).
+
+### 🔐 Refuerzo de seguridad backend
+- **`api/server.js`**: configuracion por entorno para `PORT` e `INFLUXDB_*` con fallback seguro.
+- **Eliminadas rutas auth duplicadas** en `server.js`; se mantiene `auth-routes.js` como punto unico.
+- **`api/admin-routes.js`**:
+  - `LIMIT/OFFSET` parametrizados para `/api/admin/logs` (sin interpolacion directa).
+  - validacion estricta de IDs (`userId`, `alertId`), con respuestas `400` para formato invalido.
+  - respuestas `404` en operaciones sobre recursos inexistentes.
+  - validacion minima de password al crear usuario (>= 8).
+- **`api/auth.js`**:
+  - validacion de token de sesion con formato UUID v4.
+  - rechazo temprano de token malformado en middleware auth (`401`).
+  - duracion de sesion configurable (`SESSION_DURATION_HOURS`, default 24h).
+  - limpieza de sesiones expiradas durante login/logout.
+
+### 🧪 Verificacion con evidencia real
+- Ejecutado **`node api/test-auth.js`** con MySQL + API levantados localmente.
+- Casos validados:
+  - login correcto / incorrecto
+  - validacion de sesion y logout
+  - **401** sin token en rutas protegidas
+  - **401** con token malformado
+  - **403** para rol `viewer` en `/api/admin/stats`
+
+### 📱 Documentacion Flutter alineada
+- **`medusse_app/README.md`** reemplazado desde plantilla por documentacion real de la app.
+- Añadidos requisitos, ejecucion rapida, endpoints consumidos y contrato actual de `/api/stats`.
+- Incluida nota de compatibilidad `mean`/`avg` en cliente Flutter.
+
 ## [2.7.8] - 2025-12-06 - CORRECCION DE FORMATO DE TEXTOS WEB ✅
 
 ### 🎨 Aplicacion de Reglas de Estilo

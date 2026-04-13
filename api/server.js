@@ -2,18 +2,19 @@ const express = require('express');
 const cors = require('cors');
 const WebSocket = require('ws');
 const http = require('http');
+require('dotenv').config();
 const db = require('./db');
 const authRoutes = require('./auth-routes');
 
 const app = express();
-const PORT = 3001;
+const PORT = parseInt(process.env.PORT, 10) || 3001;
 
 // Configuración de InfluxDB
 const INFLUX_CONFIG = {
-  url: 'http://localhost:8086',
-  token: 'medusse-admin-token-2025',
-  org: 'iescelia',
-  bucket: 'sensors'
+  url: process.env.INFLUXDB_URL || 'http://localhost:8086',
+  token: process.env.INFLUXDB_TOKEN || 'medusse-admin-token-2025',
+  org: process.env.INFLUXDB_ORG || 'iescelia',
+  bucket: process.env.INFLUXDB_BUCKET || 'sensors'
 };
 
 console.log('🔗 Starting stable server with InfluxDB integration...');
@@ -161,117 +162,15 @@ app.get('/api/stats/:location/:sensor', async (req, res) => {
     console.log(`📊 Getting stats: ${sensor} in ${location} for ${hours}h`);
     
     const stats = await getStatsData(location, sensor, hours);
-    res.json(stats);
+    res.json({
+      location,
+      sensor,
+      hours,
+      stats
+    });
   } catch (error) {
     console.error('❌ Error getting stats:', error.message);
     res.status(500).json({ error: 'Error fetching stats' });
-  }
-});
-
-// ===== AUTHENTICATION ENDPOINTS (RETO 9) =====
-
-// Login - Autenticar usuario
-app.post('/api/auth/login', async (req, res) => {
-  try {
-    const { username, password } = req.body;
-    
-    if (!username || !password) {
-      return res.status(400).json({
-        error: 'Datos incompletos',
-        message: 'Usuario y contraseña son requeridos'
-      });
-    }
-    
-    const ipAddress = req.ip || req.connection.remoteAddress;
-    const userAgent = req.headers['user-agent'];
-    
-    console.log(`🔐 Login attempt for user: ${username}`);
-    
-    const result = await auth.authenticateUser(username, password, ipAddress, userAgent);
-    
-    if (result.success) {
-      res.json({
-        success: true,
-        message: result.message,
-        sessionToken: result.sessionToken,
-        user: result.user
-      });
-    } else {
-      res.status(401).json({
-        success: false,
-        message: result.message
-      });
-    }
-  } catch (error) {
-    console.error('❌ Error in login:', error.message);
-    res.status(500).json({
-      error: 'Error de autenticacion',
-      message: 'Error al procesar la solicitud de login'
-    });
-  }
-});
-
-// Logout - Cerrar sesion
-app.post('/api/auth/logout', async (req, res) => {
-  try {
-    const authHeader = req.headers.authorization;
-    
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      return res.status(400).json({
-        error: 'Token requerido',
-        message: 'Token de sesion requerido en el header Authorization'
-      });
-    }
-    
-    const sessionToken = authHeader.substring(7);
-    
-    console.log(`🚪 Logout attempt for token: ${sessionToken.substring(0, 8)}...`);
-    
-    const result = await auth.logoutUser(sessionToken);
-    
-    res.json(result);
-  } catch (error) {
-    console.error('❌ Error in logout:', error.message);
-    res.status(500).json({
-      error: 'Error al cerrar sesion',
-      message: 'Error al procesar la solicitud de logout'
-    });
-  }
-});
-
-// Validar sesion - Verificar si el token es valido
-app.get('/api/auth/validate', async (req, res) => {
-  try {
-    const authHeader = req.headers.authorization;
-    
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      return res.status(401).json({
-        valid: false,
-        message: 'Token de sesion requerido'
-      });
-    }
-    
-    const sessionToken = authHeader.substring(7);
-    
-    const result = await auth.validateSession(sessionToken);
-    
-    if (result.valid) {
-      res.json({
-        valid: true,
-        user: result.user
-      });
-    } else {
-      res.status(401).json({
-        valid: false,
-        message: result.message
-      });
-    }
-  } catch (error) {
-    console.error('❌ Error in validate:', error.message);
-    res.status(500).json({
-      valid: false,
-      message: 'Error al validar la sesion'
-    });
   }
 });
 
@@ -357,10 +256,12 @@ app.get('/api/energy/:location/history', async (req, res) => {
 async function queryInfluxDB(fluxQuery) {
   return new Promise((resolve, reject) => {
     const postData = fluxQuery;
+    const influxUrl = new URL(INFLUX_CONFIG.url);
+    const influxPort = influxUrl.port || (influxUrl.protocol === 'https:' ? 443 : 80);
     
     const options = {
-      hostname: 'localhost',
-      port: 8086,
+      hostname: influxUrl.hostname,
+      port: influxPort,
       path: `/api/v2/query?org=${INFLUX_CONFIG.org}`,
       method: 'POST',
       headers: {
@@ -592,10 +493,12 @@ async function getStatsData(location, sensor, hours) {
     const values = rows.map(row => parseFloat(row._value)).filter(v => !isNaN(v));
     
     if (values.length > 0) {
+      const avg = values.reduce((a, b) => a + b, 0) / values.length;
       return {
         min: Math.min(...values),
         max: Math.max(...values),
-        avg: values.reduce((a, b) => a + b, 0) / values.length,
+        avg,
+        mean: avg,
         count: values.length
       };
     }
@@ -604,10 +507,12 @@ async function getStatsData(location, sensor, hours) {
   }
   
   // Fallback stats
+  const fallbackAvg = Math.random() * 50 + 25;
   return {
     min: Math.random() * 50,
     max: Math.random() * 50 + 50,
-    avg: Math.random() * 50 + 25,
+    avg: fallbackAvg,
+    mean: fallbackAvg,
     count: Math.floor(Math.random() * 1000) + 100
   };
 }
@@ -757,13 +662,14 @@ async function getEnergyDataForLocation(location) {
       `;
       
       try {
-        const result = await queryInfluxDB(fluxQuery);
-        if (result && result.length > 0) {
-          const record = result[0];
+        const csvData = await queryInfluxDB(fluxQuery);
+        const rows = parseInfluxCSV(csvData);
+        if (rows.length > 0) {
+          const record = rows[0];
           energyData[sensor] = {
-            value: record._value,
+            value: parseFloat(record._value) || 0,
             sensor: sensor,
-            time: record._time,
+            time: record._time || new Date().toISOString(),
             location: location
           };
         }
@@ -886,14 +792,17 @@ async function getEnergyHistory(location, hours, interval) {
       `;
       
       try {
-        const result = await queryInfluxDB(fluxQuery);
-        if (result && result.length > 0) {
-          history[sensor] = result.map(record => ({
+        const csvData = await queryInfluxDB(fluxQuery);
+        const rows = parseInfluxCSV(csvData);
+        if (rows.length > 0) {
+          history[sensor] = rows
+            .map(record => ({
             time: record._time,
-            value: record._value,
+            value: parseFloat(record._value),
             location: location,
             sensor: sensor
-          }));
+          }))
+            .filter(record => !isNaN(record.value));
         } else {
           history[sensor] = generateMockEnergyHistory(sensor, location, hours);
         }

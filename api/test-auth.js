@@ -240,6 +240,90 @@ async function runTests() {
       log(`❌ Error: ${error.message}`, 'red');
     }
   }
+
+  log('');
+
+  // Test 8b: Token malformado en validate
+  try {
+    log('📝 Test 8b: Validar sesion con token malformado', 'blue');
+    const response = await makeRequest('GET', '/api/auth/validate', null, {
+      'Authorization': 'Bearer token-no-valido'
+    });
+
+    if (response.statusCode === 401) {
+      log('✅ Token malformado rechazado correctamente', 'green');
+    } else {
+      log(`❌ Respuesta inesperada: ${response.statusCode}`, 'red');
+    }
+  } catch (error) {
+    log(`❌ Error: ${error.message}`, 'red');
+  }
+
+  log('');
+
+  // Test 9: Endpoint admin sin autenticacion
+  try {
+    log('📝 Test 9: Acceso a /api/admin/stats sin autenticacion', 'blue');
+    const response = await makeRequest('GET', '/api/admin/stats');
+
+    if (response.statusCode === 401) {
+      log('✅ Endpoint admin protegido (401 sin token)', 'green');
+    } else {
+      log(`❌ Respuesta inesperada: ${response.statusCode}`, 'red');
+    }
+  } catch (error) {
+    log(`❌ Error: ${error.message}`, 'red');
+  }
+
+  log('');
+
+  // Test 10: Endpoint admin con rol viewer (debe denegar)
+  try {
+    log('📝 Test 10: Acceso admin con usuario viewer (alumno)', 'blue');
+    const loginViewer = await makeRequest('POST', '/api/auth/login', {
+      username: 'alumno',
+      password: 'medusse2025'
+    });
+
+    if (loginViewer.statusCode === 200 && loginViewer.data.success) {
+      const viewerToken = loginViewer.data.sessionToken;
+      const adminResponse = await makeRequest('GET', '/api/admin/stats', null, {
+        'Authorization': `Bearer ${viewerToken}`
+      });
+
+      if (adminResponse.statusCode === 403) {
+        log('✅ Control de rol correcto (viewer sin acceso admin)', 'green');
+      } else {
+        log(`❌ Respuesta inesperada en control de rol: ${adminResponse.statusCode}`, 'red');
+      }
+
+      await makeRequest('POST', '/api/auth/logout', null, {
+        'Authorization': `Bearer ${viewerToken}`
+      });
+    } else {
+      log('⚠️ No se pudo autenticar usuario viewer para el test de rol', 'yellow');
+    }
+  } catch (error) {
+    log(`❌ Error: ${error.message}`, 'red');
+  }
+
+  log('');
+
+  // Test 11: Endpoint admin con token malformado
+  try {
+    log('📝 Test 11: Acceso admin con token malformado', 'blue');
+    const response = await makeRequest('GET', '/api/admin/stats', null, {
+      'Authorization': 'Bearer token-no-valido'
+    });
+
+    if (response.statusCode === 401) {
+      log('✅ Token malformado rechazado en endpoint admin', 'green');
+    } else {
+      log(`❌ Respuesta inesperada: ${response.statusCode}`, 'red');
+    }
+  } catch (error) {
+    log(`❌ Error: ${error.message}`, 'red');
+  }
   
   log('\n✅ TESTS COMPLETADOS\n', 'cyan');
 }

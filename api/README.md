@@ -21,8 +21,6 @@ INFLUXDB_URL=http://localhost:8086
 INFLUXDB_TOKEN=medusse-admin-token-2025
 INFLUXDB_ORG=iescelia
 INFLUXDB_BUCKET=sensors
-MQTT_BROKER=localhost
-MQTT_PORT=1883
 
 # MySQL Configuration
 MYSQL_HOST=localhost
@@ -30,6 +28,9 @@ MYSQL_PORT=3307
 MYSQL_DATABASE=medusse_db
 MYSQL_USER=medusse_user
 MYSQL_PASSWORD=medusse2025
+
+# Session configuration
+SESSION_DURATION_HOURS=24
 ```
 
 **Nota importante:** MySQL usa el puerto **3307** (no 3306) porque está mapeado así en docker-compose.yml para evitar conflictos con instalaciones locales de MySQL.
@@ -74,7 +75,7 @@ Respuesta:
 
 ```json
 {
-  "locations": ["aula20", "aula21", "laboratorio"]
+  "locations": ["aula20", "aula21", "gimnasio", "laboratorio"]
 }
 ```
 
@@ -180,7 +181,9 @@ Respuesta:
   "stats": {
     "min": 22.1,
     "max": 26.8,
-    "mean": 24.3
+    "avg": 24.3,
+    "mean": 24.3,
+    "count": 12
   }
 }
 ```
@@ -193,14 +196,9 @@ Conectar a: `ws://localhost:3002`
 
 ```json
 {
-  "topic": "iescelia/aula20/temperature",
-  "data": {
-    "value": 24.5,
-    "sensor": "dht22",
-    "node_id": "ESP32_NODE_01",
-    "timestamp": 1641902400000,
-    "location": "aula20"
-  },
+  "location": "aula20",
+  "sensor": "temperature",
+  "value": 24.5,
   "timestamp": "2025-01-11T10:30:00.000Z"
 }
 ```
@@ -373,12 +371,12 @@ Respuesta:
 }
 ```
 
-### Usuarios Disponibles
+### Usuarios de Prueba
 
 | Username | Password | Role | Descripción |
 |----------|----------|------|-------------|
 | admin | medusse2025 | admin | Administrador del sistema |
-| paco | medusse2025 | admin | Autor del proyecto |
+| paco | medusse2025 | admin | Puede variar segun seed activo |
 | profesor | medusse2025 | user | Usuario estándar |
 | alumno | medusse2025 | viewer | Solo lectura |
 
@@ -404,20 +402,18 @@ app.get('/api/admin', auth.requireAuth, auth.requireRole('admin'), (req, res) =>
 ### Seguridad Implementada
 
 - **Tokens UUID** para sesiones seguras
-- **Expiración automática** de sesiones (24 horas)
+- **Validacion de formato UUID v4** en tokens de sesion
+- **Expiración automática** de sesiones (configurable con `SESSION_DURATION_HOURS`)
 - **Registro de IP y User-Agent** en cada sesión
-- **Validación con procedimientos almacenados** MySQL
+- **Limpieza de sesiones expiradas** durante login/logout
 - **Control de acceso por roles** (admin/user/viewer)
-- **Protección contra ataques** de fuerza bruta
+- **Rechazo de token malformado** con respuesta `401`
 
 ### Testing de Autenticación
 
 ```bash
 # Ejecutar tests automaticos
 node test-auth.js
-
-# O usar el script batch (Windows)
-..\probar_autenticacion.bat
 ```
 
 ## 🔒 Seguridad
