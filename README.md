@@ -2,6 +2,17 @@
   <img width="300" height="300" alt="meduse" src="https://github.com/user-attachments/assets/85c75066-09b4-435a-a48c-f828e673410b" />
 </p>
 
+<p align="right">
+  <a href="https://github.com/Fralopala2/proyecto-medusse" target="_blank" rel="noopener noreferrer">
+    <img
+      src="https://api.qrserver.com/v1/create-qr-code/?size=96x96&data=https%3A%2F%2Fgithub.com%2FFralopala2%2Fproyecto-medusse"
+      alt="QR del repositorio"
+      width="96"
+      height="96"
+    />
+  </a>
+</p>
+
 # Proyecto Medusse IoT
 
 **Ecosistema IoT completo y profesional** para monitoreo ambiental con ESP32, MQTT, InfluxDB, Grafana, API REST, Web Next.js y App móvil Flutter. **Instalación automática en un solo clic.**
