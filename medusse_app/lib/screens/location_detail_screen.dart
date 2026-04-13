@@ -41,6 +41,12 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.sizeOf(context).width;
+    final textScale = MediaQuery.textScalerOf(context).scale(1.0);
+    final isCompactScreen = screenWidth < 400;
+    final gridChildAspectRatio =
+        isCompactScreen || textScale > 1.0 ? 0.72 : 0.82;
+
     if (currentLocation.isEmpty) {
       return Scaffold(
         appBar: AppBar(title: const Text('Error')),
@@ -164,9 +170,9 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
                   padding: const EdgeInsets.all(16),
                   sliver: SliverGrid(
                     gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
+                        SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          childAspectRatio: 0.85,
+                          childAspectRatio: gridChildAspectRatio,
                           crossAxisSpacing: 12,
                           mainAxisSpacing: 12,
                         ),
