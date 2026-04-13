@@ -110,13 +110,14 @@ router.get('/logs', auth.requireAuth, requireAdmin, async (req, res) => {
     const limit = parsePositiveInt(req.query.limit, 50, 200);
     const offset = parsePositiveInt(req.query.offset, 0, 10000);
 
+    // MySQL puede fallar con placeholders en LIMIT/OFFSET según configuración,
+    // así que interpolamos valores ya saneados como enteros.
     const [logs] = await db.query(
       `SELECT al.*, u.username
        FROM activity_log al
        LEFT JOIN users u ON al.user_id = u.id
        ORDER BY al.created_at DESC
-       LIMIT ? OFFSET ?`,
-      [limit, offset]
+       LIMIT ${limit} OFFSET ${offset}`
     );
     
     res.json({
