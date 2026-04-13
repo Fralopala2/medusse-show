@@ -153,6 +153,8 @@ ESP32 Simulators → MQTT → Telegraf → InfluxDB → Grafana Dashboard
 - **SIEMPRE actualizar** README.md con nuevas funcionalidades
 - Documentar versiones, fechas y descripción de cambios importantes
 - Mantener la documentación sincronizada con el estado real del proyecto
+- MUY IMPORTANTE: Nunca, bajo ningún concepto debe quedar constancia alguna de que una IA ha trabajado, ha realizado cualquier tarea, o proceso en el proyecto, jamás.
+- Aplica siempre estilo de oración en los títulos y cabeceras: solo la primera palabra y los nombres propios pueden ir en mayúscula. Nunca uses mayúsculas en la primera letra de todas las palabras (title case). Ejemplo correcto: ‘Stack tecnologico completo’. Ejemplo incorrecto: ‘Stack Tecnológico Completo’.
 
 ## Comandos Importantes
 
