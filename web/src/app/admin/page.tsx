@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect, Suspense } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { API_BASE_URL } from '@/lib/api';
 
 interface User {
@@ -58,19 +58,28 @@ interface Sensor {
   unit: string;
 }
 
-export default function AdminPage() {
+function AdminContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const tabParam = searchParams.get('tab') as 'users' | 'stats' | 'logs' | 'alerts' | null;
+  
   const [users, setUsers] = useState<User[]>([]);
   const [stats, setStats] = useState<Stats | null>(null);
   const [logs, setLogs] = useState<Log[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [activeTab, setActiveTab] = useState<'users' | 'stats' | 'logs' | 'alerts'>('stats');
+  const [activeTab, setActiveTab] = useState<'users' | 'stats' | 'logs' | 'alerts'>(tabParam || 'stats');
   const [showCreateUserModal, setShowCreateUserModal] = useState(false);
   const [showCreateAlertModal, setShowCreateAlertModal] = useState(false);
   const [alerts, setAlerts] = useState<Alert[]>([]);
   const [locations, setLocations] = useState<Location[]>([]);
   const [sensors, setSensors] = useState<Sensor[]>([]);
+
+  // Actualizar URL cuando cambia la pestaña
+  const handleTabChange = (tab: 'users' | 'stats' | 'logs' | 'alerts') => {
+    setActiveTab(tab);
+    router.push(`/admin?tab=${tab}`, { scroll: false });
+  };
 
   useEffect(() => {
     // Verificar autenticacion y permisos
@@ -382,7 +391,7 @@ export default function AdminPage() {
         <div className="border-b border-gray-200">
           <nav className="-mb-px flex space-x-8">
             <button
-              onClick={() => setActiveTab('stats')}
+              onClick={() => handleTabChange('stats')}
               className={`${
                 activeTab === 'stats'
                   ? 'border-indigo-500 text-indigo-600'
@@ -392,7 +401,7 @@ export default function AdminPage() {
               Estadisticas
             </button>
             <button
-              onClick={() => setActiveTab('users')}
+              onClick={() => handleTabChange('users')}
               className={`${
                 activeTab === 'users'
                   ? 'border-indigo-500 text-indigo-600'
@@ -402,7 +411,7 @@ export default function AdminPage() {
               Usuarios ({users.length})
             </button>
             <button
-              onClick={() => setActiveTab('logs')}
+              onClick={() => handleTabChange('logs')}
               className={`${
                 activeTab === 'logs'
                   ? 'border-indigo-500 text-indigo-600'
@@ -414,7 +423,7 @@ export default function AdminPage() {
             {/* Solo admin puede ver alertas */}
             {JSON.parse(localStorage.getItem('user') || '{}').role === 'admin' && (
               <button
-                onClick={() => setActiveTab('alerts')}
+                onClick={() => handleTabChange('alerts')}
                 className={`${
                   activeTab === 'alerts'
                     ? 'border-indigo-500 text-indigo-600'
@@ -868,5 +877,20 @@ export default function AdminPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function AdminPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Cargando...</p>
+        </div>
+      </div>
+    }>
+      <AdminContent />
+    </Suspense>
   );
 }

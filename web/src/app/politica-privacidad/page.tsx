@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Footer } from "@/components/layout/Footer";
 
 export default function PoliticaPrivacidadPage() {
   return (
@@ -249,19 +250,7 @@ export default function PoliticaPrivacidadPage() {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-white border-t mt-12">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-600">
-            <p>© 2025 Medusse IoT - Francisco Manuel López Alarte</p>
-            <div className="flex gap-6">
-              <Link href="/aviso-legal" className="hover:text-indigo-600">Aviso Legal</Link>
-              <Link href="/politica-privacidad" className="hover:text-indigo-600">Privacidad</Link>
-              <Link href="/mapa-sitio" className="hover:text-indigo-600">Mapa del Sitio</Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+       <Footer />
     </div>
   );
 }

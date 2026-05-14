@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Footer } from "@/components/layout/Footer";
 
 export default function MapaSitioPage() {
   return (
@@ -40,9 +41,13 @@ export default function MapaSitioPage() {
                 <h3 className="font-semibold text-gray-900 mb-1">Inicio</h3>
                 <p className="text-sm text-gray-600">Página principal del proyecto con información general</p>
               </Link>
-              <Link href="/login" className="block p-4 bg-gray-50 rounded-lg hover:bg-indigo-50 hover:shadow transition-all">
+               <Link href="/login" className="block p-4 bg-gray-50 rounded-lg hover:bg-indigo-50 hover:shadow transition-all">
                 <h3 className="font-semibold text-gray-900 mb-1">Iniciar Sesión</h3>
                 <p className="text-sm text-gray-600">Acceso al sistema para usuarios registrados</p>
+              </Link>
+              <Link href="/capturas" className="block p-4 bg-gray-50 rounded-lg hover:bg-indigo-50 hover:shadow transition-all">
+                <h3 className="font-semibold text-gray-900 mb-1">Capturas de Pantalla</h3>
+                <p className="text-sm text-gray-600">Galería de imágenes de la aplicación móvil</p>
               </Link>
             </div>
           </section>
@@ -58,10 +63,10 @@ export default function MapaSitioPage() {
                 <h3 className="font-semibold text-gray-900 mb-1">Dashboard Principal</h3>
                 <p className="text-sm text-gray-600">Panel de control personal del usuario</p>
               </Link>
-              <div className="block p-4 bg-gray-50 rounded-lg opacity-75">
+               <Link href="/dashboard" className="block p-4 bg-gray-50 rounded-lg hover:bg-indigo-50 hover:shadow transition-all">
                 <h3 className="font-semibold text-gray-900 mb-1">Perfil de Usuario</h3>
                 <p className="text-sm text-gray-600">Ver y editar información personal (requiere autenticación)</p>
-              </div>
+              </Link>
             </div>
           </section>
 
@@ -76,18 +81,18 @@ export default function MapaSitioPage() {
                 <h3 className="font-semibold text-gray-900 mb-1">Panel Admin</h3>
                 <p className="text-sm text-gray-600">Gestión completa del sistema (solo administradores)</p>
               </Link>
-              <div className="block p-4 bg-gray-50 rounded-lg opacity-75">
+               <Link href="/admin?tab=users" className="block p-4 bg-gray-50 rounded-lg hover:bg-indigo-50 hover:shadow transition-all">
                 <h3 className="font-semibold text-gray-900 mb-1">Gestión de Usuarios</h3>
                 <p className="text-sm text-gray-600">Crear, editar y eliminar usuarios (solo administradores)</p>
-              </div>
-              <div className="block p-4 bg-gray-50 rounded-lg opacity-75">
+              </Link>
+              <Link href="/admin?tab=stats" className="block p-4 bg-gray-50 rounded-lg hover:bg-indigo-50 hover:shadow transition-all">
                 <h3 className="font-semibold text-gray-900 mb-1">Estadísticas del Sistema</h3>
                 <p className="text-sm text-gray-600">Métricas y análisis del sistema (solo administradores)</p>
-              </div>
-              <div className="block p-4 bg-gray-50 rounded-lg opacity-75">
+              </Link>
+              <Link href="/admin?tab=logs" className="block p-4 bg-gray-50 rounded-lg hover:bg-indigo-50 hover:shadow transition-all">
                 <h3 className="font-semibold text-gray-900 mb-1">Logs de Actividad</h3>
                 <p className="text-sm text-gray-600">Registro de acciones del sistema (solo administradores)</p>
-              </div>
+              </Link>
             </div>
           </section>
 
@@ -130,14 +135,14 @@ export default function MapaSitioPage() {
                 </h3>
                 <p className="text-sm text-gray-600">Verificar el estado de la API REST</p>
               </a>
-              <a href="http://localhost:3001/api" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 rounded-lg hover:bg-indigo-50 hover:shadow transition-all">
+               <a href="https://github.com/Fralopala2/proyecto-medusse/blob/clase/api/README.md" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 rounded-lg hover:bg-indigo-50 hover:shadow transition-all">
                 <h3 className="font-semibold text-gray-900 mb-1 flex items-center">
                   Documentación API
                   <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>
                 </h3>
-                <p className="text-sm text-gray-600">Endpoints y documentación de la API</p>
+                <p className="text-sm text-gray-600">Endpoints y documentación de la API en GitHub</p>
               </a>
             </div>
           </section>
@@ -176,10 +181,15 @@ export default function MapaSitioPage() {
                 </h3>
                 <p className="text-sm text-gray-600">Términos de la licencia Open Source</p>
               </a>
-              <div className="block p-4 bg-gray-50 rounded-lg opacity-75">
-                <h3 className="font-semibold text-gray-900 mb-1">Documentación Técnica</h3>
-                <p className="text-sm text-gray-600">Guías técnicas y arquitectura del sistema</p>
-              </div>
+               <a href="https://github.com/Fralopala2/proyecto-medusse/blob/clase/documentacion/DOCUMENTACION_RETOS.md" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 rounded-lg hover:bg-indigo-50 hover:shadow transition-all">
+                <h3 className="font-semibold text-gray-900 mb-1 flex items-center">
+                  Documentación Técnica
+                  <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </h3>
+                <p className="text-sm text-gray-600">Guías técnicas y arquitectura del sistema en GitHub</p>
+              </a>
             </div>
           </section>
 
@@ -294,19 +304,7 @@ export default function MapaSitioPage() {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-white border-t mt-12">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-600">
-            <p>© 2025 Medusse IoT - Francisco Manuel López Alarte</p>
-            <div className="flex gap-6">
-              <Link href="/aviso-legal" className="hover:text-indigo-600">Aviso Legal</Link>
-              <Link href="/politica-privacidad" className="hover:text-indigo-600">Privacidad</Link>
-              <Link href="/mapa-sitio" className="hover:text-indigo-600">Mapa del Sitio</Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+       <Footer />
     </div>
   );
 }

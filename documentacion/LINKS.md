@@ -128,9 +128,9 @@
 - **Destino:** Archivo de licencia en GitHub
 
 **Enlace: "Privacidad"**
-- **URL:** `https://github.com/Fralopala2/proyecto-medusse/blob/clase/LICENSE`
-- **Tipo:** Enlace externo (nueva pestaña)
-- **Destino:** Archivo de licencia en GitHub (mismo que licencia)
+- **URL:** `/politica-privacidad`
+- **Tipo:** Enlace interno
+- **Destino:** Página de política de privacidad del sitio web
 
 ---
 
