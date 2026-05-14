@@ -349,50 +349,12 @@ Desarrollar un **sistema completo de monitorización ambiental IoT** que permita
 - **Agua:** Humedad suelo, pH, Flujo, TDS, O2 disuelto  
 - **Energía:** Voltaje batería, Voltaje solar, Porcentaje batería, Consumo, Estado carga, Modo bajo consumo, Wake-ups
 
-##### *Mapa de Instalación (Arquitectura del Nodo)*
+##### *Mapa de Instalación (Infografía de Pinout Técnico)*
 
-Este diagrama describe la organización física de los sensores en torno al núcleo de procesamiento:
+Este diagrama detalla la conexión física de cada sensor al núcleo **Arduino Nano ESP32**, optimizando el uso de buses I2C, UART y entradas analógicas/digitales para las 18 métricas:
 
-```mermaid
-graph TD
-    subgraph "Nodo IoT Medusse (ESP32)"
-        MCU[Arduino Nano ESP32]
-        
-        subgraph "Bloque Ambiental (I2C / UART)"
-            S1[BME680: Temp, Hum, Pres, VOC, IAQ]
-            S2[MH-Z19B: CO2]
-        end
-        
-        subgraph "Bloque Agua (Analógico / Pulso)"
-            S3[Sensor Humedad Suelo]
-            S4[Sonda pH]
-            S5[Caudalímetro YF-S201]
-            S6[Sensor TDS]
-            S7[Sensor Oxígeno Disuelto]
-        end
-        
-        subgraph "Bloque Energía (Analógico / Digital)"
-            S8[Divisor Voltaje: Batería]
-            S9[Divisor Voltaje: Panel Solar]
-            S10[Sensor Corriente ACS712]
-            S11[Controlador Carga TP4056]
-        end
-    end
+![Mapa de Instalación y Pinout Detallado (18 Métricas)](../assets/mapa_instalacion_medusse_18_metricas.png)
 
-    MCU --- S1
-    MCU --- S2
-    MCU --- S3
-    MCU --- S4
-    MCU --- S5
-    MCU --- S6
-    MCU --- S7
-    MCU --- S8
-    MCU --- S9
-    MCU --- S10
-    MCU --- S11
-
-    MCU -->|WiFi/LoRa| GW[Gateway / Mosquitto]
-```
 
 ##### *Tabla de Pines y Conexiones (Arduino Nano ESP32)*
 
