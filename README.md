@@ -104,11 +104,8 @@ proyecto-medusse/
 │   ├── MIGRACION.md                    # Migración a LoRa Mesh
 │   ├── VERCEL_DEPLOYMENT.md            # Deployment en Vercel
 │   └── LINKS.md                        # Enlaces web
-├── tools_linux/             # Herramientas para Linux/Lliurex
-│   ├── setup_lliurex.sh     # 🐧 Instalación para Lliurex
-│   ├── ejecutar_lliurex.sh  # 🐧 Ejecutar en Lliurex
-│   ├── verificar_lliurex.sh # 🐧 Verificar en Lliurex
-│   └── detener_lliurex.sh   # 🐧 Detener en Lliurex
+├── tools_linux/             # Herramientas para Linux/Lliurex (no incluidas en este fork)
+│   └── (En este repositorio solo se incluyen scripts de Windows en la raíz)
 ├── Scripts Windows (raíz):  # Scripts de automatización
 │   ├── medusse.bat          # 🎯 Menú principal unificado
 │   ├── sistema_completo.bat # 🚀 Sistema completo
@@ -197,14 +194,14 @@ proyecto-medusse/
 - **Simulador inteligente** con datos realistas por ubicación
 
 **🔌 API REST & Mobile Avanzados:**
-- **API REST Node.js** con 6 endpoints y caché inteligente
+- **API REST Node.js** con 11 endpoints y caché inteligente
 - **WebSocket Server** para streaming en tiempo real (puerto 3002)
 - **App Flutter completa** con 3 pantallas y gráficos interactivos
 - **Sistema de alertas** automático por umbrales de CO2
 - **Arquitectura híbrida** HTTP + WebSocket para mejor UX
 
 **⚙️ Infraestructura Productiva:**
-- **4 contenedores Docker** con networking interno optimizado
+- **5 contenedores Docker** con networking interno optimizado
 - **Volúmenes persistentes** para todos los servicios
 - **Configuración InfluxDB v2** con tokens y organización
 - **MQTT Mosquitto 2.0** con WebSocket habilitado
@@ -246,21 +243,23 @@ sistema_completo.bat       # Sistema completo
 verificar.bat              # Verificación completa
 ```
 
-#### Linux / Lliurex
+#### Windows (scripts incluidos en la raíz)
+
+Este repositorio contiene los scripts de automatización para Windows en la raíz del proyecto. No hay scripts Linux incluidos.
 
 **1. Verificar Sistema:**
-```bash
-./verificar_lliurex.sh     # Verificación completa
+```powershell
+verificar.bat     # Verificación completa
 ```
 
 **2. Ejecutar Sistema Completo:**
-```bash
-./ejecutar_lliurex.sh      # Dashboard + API + Simulador
+```powershell
+sistema_completo.bat      # Dashboard + API + Simulador
 ```
 
 **3. Detener Sistema:**
-```bash
-./detener_lliurex.sh       # Detener todos los servicios
+```powershell
+detener.bat       # Detener todos los servicios
 ```
 
 ### Acceso a Interfaces
@@ -603,7 +602,7 @@ La web estará disponible en: http://localhost:3003
 ✅ **Reto 7**: Validación de formularios JS (validación en tiempo real)
 ✅ **Reto 8**: Transferencia Front-end/Back-end (API REST completa)
 ✅ **Reto 9**: Gestión de usuarios con sesiones (MySQL + bcrypt)
-✅ **Reto 10**: Panel de administración (gestión usuarios, estadísticas, logs)
+⚠️ **Reto 10**: Web Services SOAP — NO IMPLEMENTADO (decisión arquitectónica)
 ✅ **Reto 11**: Script FTP/SFTP (deployment automático)
 ✅ **Reto 12**: Comunicación asíncrona (WebSocket + Fetch API)
 ✅ **Reto 13**: Framework cliente (Flutter + Next.js)
@@ -624,7 +623,7 @@ La web estará disponible en: http://localhost:3003
 
 ## 🔧 Integración de Componentes
 
-### Web Next.js (Fase 1 y 2 Completadas)
+### Web Next.js (Fase 1, 2 y 3 Completadas)
 
 **Fase 1 - Branding**: ✅ Completado
 - Metadata actualizada a Medusse IoT
@@ -639,11 +638,11 @@ La web estará disponible en: http://localhost:3003
 - Sistema de alertas visual (CO2, batería)
 - 18 tipos de sensores mostrados
 
-**Fase 3 - Autenticación**: ⏳ Pendiente
-- Formularios de login/registro
-- Validación con react-hook-form + zod
-- Integración con MySQL
-- Protección de rutas
+**Fase 3 - Autenticación**: ✅ Completado
+- Formularios de login/registro implementados
+- Validación y manejo de sesiones implementados (bcrypt + MySQL)
+- Integración completa con MySQL en endpoints de auth
+- Protección de rutas y middleware de autorización
 
 ### Base de Datos MySQL (Reto 2 y 3 Completados)
 
