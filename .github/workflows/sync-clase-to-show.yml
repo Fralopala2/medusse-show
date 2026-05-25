@@ -42,6 +42,25 @@ jobs:
           git remote add target "$TARGET_REPO_URL" || true
           git push --force target HEAD:refs/heads/$TARGET_BRANCH
 
+      - name: Create PR on target repo (if missing)
+        env:
+          TARGET_REPO_PAT: "${{ secrets.TARGET_REPO_PAT }}"
+          TARGET_BRANCH: "${{ github.event.inputs.target_branch }}"
+        run: |
+          OWNER="Fralopala2"
+          REPO="medusse-show"
+          if [ -z "$TARGET_BRANCH" ] || [ "$TARGET_BRANCH" = "null" ]; then TARGET_BRANCH="clase"; fi
+          echo "Checking for existing PR from $OWNER:$TARGET_BRANCH -> main"
+          EXISTING_PR=$(curl -s -H "Authorization: token $TARGET_REPO_PAT" "https://api.github.com/repos/$OWNER/$REPO/pulls?head=$OWNER:$TARGET_BRANCH&base=main" | jq -r '.[0].html_url // empty')
+          if [ -n "$EXISTING_PR" ]; then
+            echo "PR already exists: $EXISTING_PR"
+          else
+            echo "Creating PR..."
+            PAYLOAD=$(jq -n --arg t "Sync from proyecto-medusse:$TARGET_BRANCH" --arg h "$TARGET_BRANCH" --arg b "main" --arg bd "Automatic sync from proyecto-medusse '$TARGET_BRANCH' branch" '{title:$t, head:$h, base:$b, body:$bd}')
+            RESPONSE=$(curl -s -X POST -H "Authorization: token $TARGET_REPO_PAT" -H "Content-Type: application/json" -d "$PAYLOAD" "https://api.github.com/repos/$OWNER/$REPO/pulls")
+            echo "$RESPONSE" | jq -r '.html_url // .message'
+          fi
+
       - name: Done
         run: |
           echo "Branch 'clase' synchronized to Fralopala2/medusse-show (branch: ${{ github.event.inputs.target_branch }})"
