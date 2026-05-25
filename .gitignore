@@ -6,7 +6,8 @@
 *~
 .antigravityignore
 .kiro/*
-.github/
+.github/ISSUE_TEMPLATE/*
+.github/CONTRIBUTING.md
 
 # OS generated files
 .DS_Store
