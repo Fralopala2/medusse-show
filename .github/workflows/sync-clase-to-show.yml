@@ -43,4 +43,5 @@ jobs:
           git push --force target HEAD:refs/heads/$TARGET_BRANCH
 
       - name: Done
-        run: echo "Branch 'clase' synchronized to Fralopala2/medusse-show (branch: ${{ github.event.inputs.target_branch }})"
+        run: |
+          echo "Branch 'clase' synchronized to Fralopala2/medusse-show (branch: ${{ github.event.inputs.target_branch }})"
