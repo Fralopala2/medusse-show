@@ -1,5 +1,8 @@
 <p align="center">
-  <img width="300" height="300" alt="meduse" src="https://github.com/user-attachments/assets/85c75066-09b4-435a-a48c-f828e673410b" />
+  <picture>
+    <source srcset="https://github-production-user-asset-6210df.s3.amazonaws.com/184574372/516561483-85c75066-09b4-435a-a48c-f828e673410b.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20260525%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260525T215418Z&X-Amz-Expires=300&X-Amz-Signature=756adc09f457828587c57ca5abc289a9bd36f63b8ddba2c9ca9d824bc987c665&X-Amz-SignedHeaders=host&response-content-type=image%2Fpng">
+    <img src="web/public/images/medusse-logo.svg" alt="meduse" width="220" />
+  </picture>
 </p>
 
 
@@ -593,29 +596,32 @@ La web estará disponible en: http://localhost:3003
 
 ### Retos Completados (16/16 - 100%) ✅
 
-✅ **Reto 1**: Proyecto de sostenibilidad (ODS, impacto medible, casos de uso)
-✅ **Reto 2**: Base de datos (InfluxDB + MySQL)
-✅ **Reto 3**: Procedimientos almacenados (10 procedimientos)
-✅ **Reto 4**: Diseño de bocetos (estructura de componentes)
-✅ **Reto 5**: Interfaces HTML/CSS (Next.js + Tailwind)
-✅ **Reto 6**: Plan de empresa (modelo de negocio, proyecciones, estrategia)
-✅ **Reto 7**: Validación de formularios JS (validación en tiempo real)
-✅ **Reto 8**: Transferencia Front-end/Back-end (API REST completa)
-✅ **Reto 9**: Gestión de usuarios con sesiones (MySQL + bcrypt)
-⚠️ **Reto 10**: Web Services SOAP — NO IMPLEMENTADO (decisión arquitectónica)
-✅ **Reto 11**: Script FTP/SFTP (deployment automático)
-✅ **Reto 12**: Comunicación asíncrona (WebSocket + Fetch API)
-✅ **Reto 13**: Framework cliente (Flutter + Next.js)
-✅ **Reto 14**: Diseño web avanzado (responsive + animaciones Framer Motion)
-✅ **Reto 15**: Framework servidor (Express + Docker)
-✅ **Reto 16**: Documentación final (completa y profesional)
+| Reto | Estado |
+| ---: | :--- |
+| **Reto 1** | ✅ Proyecto de sostenibilidad (ODS, impacto medible, casos de uso) |
+| **Reto 2** | ✅ Base de datos (InfluxDB + MySQL) |
+| **Reto 3** | ✅ Procedimientos almacenados (10 procedimientos) |
+| **Reto 4** | ✅ Diseño de bocetos (estructura de componentes) |
+| **Reto 5** | ✅ Interfaces HTML/CSS (Next.js + Tailwind) |
+| **Reto 6** | ✅ Plan de empresa (modelo de negocio, proyecciones, estrategia) |
+| **Reto 7** | ✅ Validación de formularios JS (validación en tiempo real) |
+| **Reto 8** | ✅ Transferencia Front-end/Back-end (API REST completa) |
+| **Reto 9** | ✅ Gestión de usuarios con sesiones (MySQL + bcrypt) |
+| **Reto 10** | ⚠️ NO IMPLEMENTADO — Web Services SOAP (decisión arquitectónica) |
+| **Reto 11** | ✅ Script FTP/SFTP (deployment automático) |
+| **Reto 12** | ✅ Comunicación asíncrona (WebSocket + Fetch API) |
+| **Reto 13** | ✅ Framework cliente (Flutter + Next.js) |
+| **Reto 14** | ✅ Diseño web avanzado (responsive + animaciones Framer Motion) |
+| **Reto 15** | ✅ Framework servidor (Express + Docker) |
+| **Reto 16** | ✅ Documentación final (completa y profesional) |
+
+*Leyenda:* ✅ completado · ⚠️ pendiente / no implementado
 
 ### Documentación de Retos
 
 📖 **Documentación Detallada (Principal):** `documentacion/DOCUMENTACION_RETOS.md` (2792 líneas)  
-📖 **Documentación General:** `documentacion/DOCUMENTACION_GENERAL_RETOS.md` (1224 líneas)  
 📖 **Guía de Documentación:** `documentacion/README_DOCUMENTACION.md`  
-📖 **Resumen Ejecutivo:** `documentacion/RESUMEN_ENTREGA_PROFESOR.md`  
+📖 **Resumen Ejecutivo:** `documentacion/DOCUMENTACION_TFG.md`  
 📖 **Reto 1 - Sostenibilidad:** `documentacion/RETO_1_SOSTENIBILIDAD.md`  
 📖 **Reto 6 - Plan de Empresa:** `documentacion/RETO_6_PLAN_EMPRESA.md`
 
