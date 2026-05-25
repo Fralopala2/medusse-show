@@ -38,15 +38,19 @@ jobs:
           TARGET_REPO_URL: "https://x-access-token:${{ secrets.TARGET_REPO_PAT }}@github.com/Fralopala2/medusse-show.git"
           TARGET_BRANCH: "${{ github.event.inputs.target_branch }}"
         run: |
+          set -euo pipefail
           if [ -z "$TARGET_BRANCH" ]; then TARGET_BRANCH=clase; fi
           WORKDIR="$(mktemp -d)"
-          git archive --format=tar HEAD | tar -x -C "$WORKDIR"
-          rm -rf "$WORKDIR/.github/workflows" "$WORKDIR/.git"
+          echo "Preparing export in $WORKDIR"
+          rsync -a --exclude='.git' --exclude='.github/workflows' ./ "$WORKDIR/"
           cd "$WORKDIR"
-          git init -b "$TARGET_BRANCH"
+          git init
+          git checkout -b "$TARGET_BRANCH"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
+          echo "Files to push:"
+          git status --short
           git commit -m "Sync from proyecto-medusse: $TARGET_BRANCH"
           git remote add target "$TARGET_REPO_URL"
           git push --force target HEAD:refs/heads/$TARGET_BRANCH
