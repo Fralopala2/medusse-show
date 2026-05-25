@@ -2,7 +2,7 @@
   <img width="300" height="300" alt="meduse" src="https://github.com/user-attachments/assets/85c75066-09b4-435a-a48c-f828e673410b" />
 </p>
 
-<p align="right">
+<!--<p align="right">
   <a href="https://github.com/Fralopala2/proyecto-medusse" target="_blank" rel="noopener noreferrer">
     <img
       src="https://api.qrserver.com/v1/create-qr-code/?size=96x96&data=https%3A%2F%2Fgithub.com%2FFralopala2%2Fproyecto-medusse"
@@ -11,7 +11,7 @@
       height="96"
     />
   </a>
-</p>
+</p>-->
 
 # Proyecto Medusse IoT
 
