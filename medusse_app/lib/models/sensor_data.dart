@@ -205,13 +205,15 @@ class SensorStats {
 
   factory SensorStats.fromJson(Map<String, dynamic> json) {
     final stats = json['stats'] as Map<String, dynamic>? ?? {};
+    final source = stats.isNotEmpty ? stats : json;
+    final meanValue = source['mean'] ?? source['avg'];
     return SensorStats(
       location: json['location'] ?? '',
       sensor: json['sensor'] ?? '',
       hours: json['hours'] ?? 24,
-      min: stats['min']?.toDouble(),
-      max: stats['max']?.toDouble(),
-      mean: stats['mean']?.toDouble(),
+      min: source['min']?.toDouble(),
+      max: source['max']?.toDouble(),
+      mean: (meanValue as num?)?.toDouble(),
     );
   }
 }

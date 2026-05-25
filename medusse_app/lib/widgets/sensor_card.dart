@@ -33,7 +33,7 @@ class SensorCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Header con icono, nombre, valor y Last *
+              // Header con icono y alerta
               Row(
                 children: [
                   Container(
@@ -48,36 +48,33 @@ class SensorCard extends StatelessWidget {
                       size: 24,
                     ),
                   ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          sensorType.displayName,
-                          style: Theme.of(context).textTheme.titleMedium
-                              ?.copyWith(fontWeight: FontWeight.w600),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        if (hasData)
-                          Text(
-                            // Compact single-line meta: value + unit · time
-                            '${_formatValue(value!)} ${sensorType.unit} · ${_formatTimestamp(timestamp!)}',
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: Theme.of(context).textTheme.bodySmall
-                                ?.copyWith(color: Colors.grey[600]),
-                          ),
-                      ],
-                    ),
-                  ),
-                  if (showAlert) ...[
-                    const SizedBox(width: 8),
+                  const Spacer(),
+                  if (showAlert)
                     Icon(Icons.warning, color: Colors.orange[700], size: 20),
-                  ],
                 ],
               ),
+
+              const SizedBox(height: 8),
+
+              // Nombre del sensor
+              Text(
+                sensorType.displayName,
+                style: Theme.of(
+                  context,
+                ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+
+              if (hasData)
+                Text(
+                  '${_formatValue(value!)} ${sensorType.unit} · ${_formatTimestamp(timestamp!)}',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodySmall?.copyWith(color: Colors.grey[600]),
+                ),
 
               const SizedBox(height: 16),
 

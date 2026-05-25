@@ -1,5 +1,877 @@
 # Changelog - Proyecto Medusse IoT
 
+## [2.7.9] - 2026-04-13 - ESTABILIDAD Y SEGURIDAD API/SCRIPTS ✅
+
+### ✅ Estabilidad de contratos y scripts
+- **`api/server.js`**: `/api/stats/:location/:sensor` ahora responde con `{ location, sensor, hours, stats }`.
+- **Compatibilidad de estadisticas**: `stats` incluye `avg` y `mean` para clientes web y Flutter.
+- **Parsing Influx corregido** en endpoints de energia (`/api/energy/:location` y `/api/energy/:location/history`), evitando lectura incorrecta de CSV.
+- **`medusse.bat`**: corregido check web de `3100` a `3003` y mensaje de opcion API (3).
+- **`verificar.bat`**: referencias actualizadas a scripts reales y check añadido para `http://localhost:3003`.
+- **`sistema_completo.bat`**: mensaje de arranque Docker alineado con servicios reales (incluye MySQL).
+
+### 🔐 Refuerzo de seguridad backend
+- **`api/server.js`**: configuracion por entorno para `PORT` e `INFLUXDB_*` con fallback seguro.
+- **Eliminadas rutas auth duplicadas** en `server.js`; se mantiene `auth-routes.js` como punto unico.
+- **`api/admin-routes.js`**:
+  - `LIMIT/OFFSET` parametrizados para `/api/admin/logs` (sin interpolacion directa).
+  - validacion estricta de IDs (`userId`, `alertId`), con respuestas `400` para formato invalido.
+  - respuestas `404` en operaciones sobre recursos inexistentes.
+  - validacion minima de password al crear usuario (>= 8).
+- **`api/auth.js`**:
+  - validacion de token de sesion con formato UUID v4.
+  - rechazo temprano de token malformado en middleware auth (`401`).
+  - duracion de sesion configurable (`SESSION_DURATION_HOURS`, default 24h).
+  - limpieza de sesiones expiradas durante login/logout.
+
+### 🧪 Verificacion con evidencia real
+- Ejecutado **`node api/test-auth.js`** con MySQL + API levantados localmente.
+- Casos validados:
+  - login correcto / incorrecto
+  - validacion de sesion y logout
+  - **401** sin token en rutas protegidas
+  - **401** con token malformado
+  - **403** para rol `viewer` en `/api/admin/stats`
+
+### 📱 Documentacion Flutter alineada
+- **`medusse_app/README.md`** reemplazado desde plantilla por documentacion real de la app.
+- Añadidos requisitos, ejecucion rapida, endpoints consumidos y contrato actual de `/api/stats`.
+- Incluida nota de compatibilidad `mean`/`avg` en cliente Flutter.
+
+## [2.7.8] - 2025-12-06 - CORRECCION DE FORMATO DE TEXTOS WEB ✅
+
+### 🎨 Aplicacion de Reglas de Estilo
+- **web/src/lib/data.ts** - Corregidos 30 textos a estilo oración (sin Title Case)
+- Títulos de secciones hero: monitoreo ambiental inteligente, dashboard en tiempo real, app móvil Flutter, etc.
+- Nombres de productos hardware y software
+- Descripciones de servicios
+- Stack tecnológico y datos sobre el proyecto
+- Todos los textos cumplen ahora con la regla: solo primera palabra y nombres propios en mayúscula
+
+### 🔧 Cambios Realizados
+- Monitoreo Ambiental → monitoreo ambiental
+- Dashboard en Tiempo Real → dashboard en tiempo real
+- API REST Completa → API REST completa
+- Sensor DHT22 → sensor DHT22
+- Instalación Completa del Sistema → instalación completa del sistema
+- 29 cambios más para mantener consistencia de formato
+
+## [2.7.7] - 2025-11-29 - DOCUMENTACION COMPLETA DE 16 RETOS ✅
+
+### 📖 Documentacion de Retos TFG
+
+#### ✅ Documentos Existentes
+- **documentacion/DOCUMENTACION_RETOS.md** - Documento principal (2792 lineas)
+- **documentacion/DOCUMENTACION_GENERAL_RETOS.md** - Documento general (1224 lineas)
+- **documentacion/RESUMEN_ENTREGA_PROFESOR.md** - Resumen ejecutivo
+- **documentacion/README_DOCUMENTACION.md** - Guia de lectura
+- **documentacion/RETO_1_SOSTENIBILIDAD.md** - Sostenibilidad completa
+- **documentacion/RETO_6_PLAN_EMPRESA.md** - Plan de empresa completo
+
+#### ✅ Contenido Documentado
+- Todos los 16 retos del TFG completados y documentados
+- Explicacion detallada de implementaciones
+- Ejemplos de codigo reales del proyecto
+- Diagramas de arquitectura y flujo
+- Referencias a archivos especificos
+- Estadisticas del proyecto completo
+
+#### ✅ Formato Profesional
+- Redaccion clara y profesional
+- Estructura logica por retos
+- Diagramas Mermaid profesionales
+- Localizacion exacta de archivos
+- Evidencia de trabajo realizado
+
+## [2.7.6] - 2025-11-25 - DOCUMENTACION DE ENLACES WEB ✅
+
+### 📋 Documento de Referencias de Enlaces
+
+#### ✅ Archivo LINKS.md Creado
+- **Documentacion completa de enlaces de la web Next.js**
+- 12 botones documentados con sus URLs
+- 9 URLs unicas identificadas y categorizadas
+- Enlaces internos (scroll), locales (servicios) y externos (GitHub)
+- Notas de mantenimiento y verificacion
+- Historial de cambios incluido
+
+#### ✅ Contenido del Documento
+- Enlaces por seccion (6 hero sections)
+- Enlaces del footer y contacto
+- Resumen de URLs unicas
+- Comandos de verificacion
+- Guia de actualizacion
+- Solucion de problemas comunes
+
+#### ✅ Utilidad
+- Referencia rapida para mantenimiento
+- Documentacion para actualizaciones
+- Verificacion de enlaces rotos
+- Guia para nuevos desarrolladores
+
+## [2.7.5] - 2025-11-25 - TODOS LOS RETOS COMPLETADOS 16/16 (100%) 🎉
+
+### 🎓 Proyecto TFG Completado al 100%
+
+#### ✅ Actualizacion de Documentacion General
+- **Estado actualizado:** 16/16 retos completados (100%)
+- Reto 1 y Reto 6 integrados en DOCUMENTACION_GENERAL_RETOS.md
+- README.md actualizado con estado completo
+- Version actualizada a 2.7.4
+
+#### ✅ Resumen de Retos Completados
+1. **Reto 1:** Proyecto de sostenibilidad (ODS, impacto medible)
+2. **Reto 2:** Base de datos (InfluxDB + MySQL)
+3. **Reto 3:** Procedimientos almacenados (10 procedimientos)
+4. **Reto 4:** Diseño de bocetos
+5. **Reto 5:** Interfaces HTML/CSS (Next.js + Tailwind)
+6. **Reto 6:** Plan de empresa (modelo negocio, proyecciones)
+7. **Reto 7:** Validacion de formularios JS
+8. **Reto 8:** Transferencia Front-end/Back-end
+9. **Reto 9:** Gestion de usuarios con sesiones
+10. **Reto 10:** Panel de administracion
+11. **Reto 11:** Script FTP/SFTP
+12. **Reto 12:** Comunicacion asincrona
+13. **Reto 13:** Framework cliente (Flutter + Next.js)
+14. **Reto 14:** Diseño web avanzado
+15. **Reto 15:** Framework servidor (Express + Docker)
+16. **Reto 16:** Documentacion final
+
+#### ✅ Documentacion Completa
+- `documentacion/DOCUMENTACION_GENERAL_RETOS.md` - Documento general
+- `documentacion/RETO_1_SOSTENIBILIDAD.md` - Sostenibilidad completa
+- `documentacion/RETO_6_PLAN_EMPRESA.md` - Plan de empresa completo
+- README.md actualizado con estado 100%
+
+#### 🎉 Hito Alcanzado
+- **Proyecto completo y listo para presentacion TFG**
+- Todos los retos documentados profesionalmente
+- Sistema funcional y desplegable
+- Documentacion tecnica y comercial completa
+
+## [2.7.4] - 2025-11-25 - RETO 6 PLAN DE EMPRESA COMPLETADO ✅
+
+### 📊 Plan de Negocio Completo
+
+#### ✅ Documento RETO_6_PLAN_EMPRESA.md
+- **Plan de empresa completo y profesional**
+- Modelo de negocio con 3 paquetes comerciales (STARTER, STANDARD, PREMIUM)
+- Estructura de costes y margenes detallada
+- Proyecciones financieras para 3 escenarios (conservador, esperado, ambicioso)
+- Estrategia de comercializacion Go-to-Market completa
+- Analisis de riesgos y mitigacion (9 riesgos identificados)
+- Requerimientos financieros: 50.000€ con uso detallado
+- Hoja de ruta de 18 meses en 4 fases
+- 15 KPIs de negocio y metricas operacionales
+- Analisis competitivo y estrategia de salida
+
+#### ✅ Contenido del Documento
+- Vision, mision y valores de la empresa
+- 3 paquetes comerciales: 1.200€, 2.750€, 3.580€
+- Proyeccion año 1: 5-30 clientes, 12.500€-75.000€ ingresos
+- Break-even: 39-53 clientes
+- Canales de venta directos e indirectos
+- Equipo inicial de 4 personas (62.000€/año)
+- Estrategias de marketing y conversion
+- ROI para cliente: 40% año 1, payback 2.5 años
+- Comparativa de paquetes y plantillas comerciales
+
+#### ✅ Formato Profesional
+- 15 secciones completas
+- Analisis financiero detallado
+- Estrategia comercial ejecutable
+- Anexos con calculos y plantillas
+- Listo para presentacion a inversores
+
+#### ✅ Estado del Reto 6
+- **COMPLETADO** - Plan de empresa completo
+- Modelo de negocio viable y escalable
+- Proyecciones financieras realistas
+- Estrategia de comercializacion clara
+
+## [2.7.3] - 2025-11-25 - RETO 1 SOSTENIBILIDAD COMPLETADO ✅
+
+### 📖 Documentacion Completa del Reto 1
+
+#### ✅ Documento RETO_1_SOSTENIBILIDAD.md
+- **Proyecto de sostenibilidad completo y argumentado**
+- Alineacion con 5 Objetivos de Desarrollo Sostenible (ODS)
+- Explicacion detallada de por que Medusse es sostenible
+- Relevancia de cada uno de los 18 sensores para sostenibilidad
+- 5 casos de uso practicos con resultados esperados
+- 15 KPIs para medir impacto ambiental y energetico
+- Plan completo de despliegue y demostracion (9 semanas)
+- 7 recomendaciones para aumentar sostenibilidad
+- Impacto esperado con escenarios conservador y optimista
+
+#### ✅ Contenido del Documento
+- Alineacion con ODS 3, 6, 7, 11 y 13
+- Monitorizacion integral de 18 sensores
+- Datos en tiempo real con sistema de alertas
+- Gestion de energia solar y autonomia
+- Escalabilidad eficiente con LoRa Mesh
+- Educacion y replicabilidad en centros educativos
+- KPIs energeticos, calidad del aire y recursos hidricos
+- Casos de uso: aulas, riego, solar, agua, educacion
+- Ahorro estimado: 25-35% energia, 40-60% agua
+- Reduccion de 1-1.5 toneladas CO2/año
+
+#### ✅ Formato Profesional
+- Redaccion clara sin marcas de AI
+- Estructura logica con 15 secciones
+- Datos tecnicos y estimaciones realistas
+- Anexos con comandos y plantillas
+- Listo para presentacion de TFG
+
+#### ✅ Estado del Reto 1
+- **COMPLETADO** - Documentacion completa
+- Argumentacion solida de sostenibilidad
+- Impacto medible y cuantificable
+- Plan de implementacion detallado
+
+## [2.7.2] - 2025-11-25 - DOCUMENTACION GENERAL RETOS TFG ✅
+
+### 📖 Documentacion Completa para Presentacion
+
+#### ✅ Documento DOCUMENTACION_GENERAL_RETOS.md
+- **Documentacion completa de los 16 retos del TFG**
+- Explicacion detallada de cada reto con implementacion
+- Arquitectura completa del sistema
+- Stack tecnologico utilizado
+- Estadisticas del proyecto (6100+ lineas de codigo)
+- Guias de instalacion y configuracion
+- Casos de uso y demostracion del sistema
+- Escalabilidad y mejoras futuras
+- Referencias y recursos
+
+#### ✅ Contenido del Documento
+- Informacion academica completa
+- Resumen ejecutivo del proyecto
+- Diagrama de arquitectura
+- 18 tipos de sensores documentados
+- 4 ubicaciones monitoreadas
+- Estado de los 16 retos (14 completados, 2 pendientes)
+- Implementacion tecnica de cada reto
+- Flujo de datos completo
+- Preparacion para hardware real con LoRa Mesh
+
+#### ✅ Formato Profesional
+- Redaccion clara y profesional
+- Sin marcas de AI o generacion automatica
+- Estructura logica y organizada
+- Lenguaje tecnico apropiado
+- Listo para presentacion de TFG
+
+## [2.7.1] - 2025-11-25 - MEJORAS WEB NEXT.JS ✅
+
+### 🌐 Funcionalidad de Botones Web
+
+#### ✅ Botones Interactivos Implementados
+- **Hero Principal (Medusse IoT)**
+  * "Ver Dashboard" - Scroll suave a seccion #dashboard
+  * "Documentacion" - Abre README.md en GitHub
+  
+- **Dashboard en Tiempo Real**
+  * "Acceder a Grafana" - Abre http://localhost:3000 en nueva pestana
+  * "Ver Demo" - Scroll a seccion #dashboard
+  * Imagen de fondo actualizada con captura real del dashboard Raspberry Pi
+
+- **App Movil Flutter**
+  * "Descargar App" - Enlace a documentacion en GitHub
+  * "Ver Capturas" - Scroll a seccion dashboard
+
+- **18 Tipos de Sensores**
+  * "Ver Sensores" - Scroll a seccion dashboard
+  * "Especificaciones" - Enlace a README.md en GitHub
+
+- **API REST Completa**
+  * "Ver API Docs" - Abre documentacion API en GitHub (api/README.md)
+  * "Probar Endpoints" - Abre http://localhost:3001/api/summary
+
+- **LoRa Mesh**
+  * "Ver Migracion" - Abre MIGRACION.md en GitHub
+  * "Hardware Necesario" - Scroll a seccion #precios
+
+- **Seccion About**
+  * "Contactar" - Abre cliente de correo con pacoaldev@gmail.com pre-rellenado
+
+#### ✅ Mejoras Tecnicas
+- Sistema de navegacion con scroll suave entre secciones
+- Enlaces externos abren en nueva pestana
+- Formulario de contacto integrado con mailto
+- Imagen personalizada del dashboard Raspberry Pi
+- Enlaces directos a documentacion especifica en GitHub
+
+#### ✅ Enlaces a GitHub Configurados
+- README principal: https://github.com/Fralopala2/proyecto-medusse/blob/clase/README.md
+- API Docs: https://github.com/Fralopala2/proyecto-medusse/blob/clase/api/README.md
+- Migracion: https://github.com/Fralopala2/proyecto-medusse/blob/clase/documentacion/MIGRACION.md
+
+#### ✅ Correccion de Enlaces Rotos
+- Actualizado enlace de MIGRACION.md a documentacion/MIGRACION.md en web Next.js
+- Corregido enlace de README_FLUTTER.md a medusse_app/README.md en README principal
+- Actualizada estructura de archivos en README.md para reflejar carpeta documentacion/
+- Eliminadas referencias a archivos inexistentes (QUICK_START.md, INSTALACION_LLIUREX.md)
+
+## [2.7.0] - 2025-11-24 - SOPORTE LLIUREX COMPLETO ✅
+
+### 🐧 Scripts Especificos para Lliurex
+
+#### ✅ Problema Resuelto
+- **Permisos de Docker** en entornos educativos Lliurex
+- Usuario sin permisos de sudoers no puede usar Docker
+- Solucion con scripts que manejan sudo automaticamente
+
+#### ✅ Scripts para Lliurex (tools_linux/)
+- **setup_lliurex.sh** - Instalacion con manejo inteligente de sudo
+- **ejecutar_lliurex.sh** - Iniciar sistema completo
+- **verificar_lliurex.sh** - Verificacion completa del sistema
+- **detener_lliurex.sh** - Detener todos los servicios
+
+#### ✅ Funciones Inteligentes
+- **docker_cmd()** - Ejecuta docker con o sin sudo segun permisos
+- **docker_compose_cmd()** - Ejecuta docker compose con permisos correctos
+- **Deteccion automatica** - Scripts detectan si necesitan sudo
+- **Mensajes claros** - Informa cuando pide permisos de admin
+
+### 🎯 Casos de Uso
+
+#### Caso 1: Usuario sin permisos de grupo docker
+```bash
+# Los scripts piden sudo solo para comandos Docker
+./setup_lliurex.sh        # Pide password admin cuando sea necesario
+./ejecutar_lliurex.sh     # Funciona con sudo automatico
+```
+
+#### Caso 2: Usuario agregado al grupo docker (recomendado)
+```bash
+# Admin ejecuta una sola vez:
+sudo usermod -aG docker fralopala2
+
+# Despues de logout/login, funciona sin sudo:
+./setup_lliurex.sh        # Sin pedir password
+./ejecutar_lliurex.sh     # Sin pedir password
+```
+
+### 📊 Compatibilidad
+
+#### ✅ Sistemas Soportados
+- **Lliurex** (IES Jose Rodrigo Botet)
+- **Ubuntu** 20.04+
+- **Debian** 11+
+- Cualquier distribucion basada en Debian
+
+#### ✅ Requisitos
+- Docker Desktop instalado (ya disponible en clase)
+- Python 3 (incluido en Lliurex)
+- Node.js (opcional, se puede instalar con nvm)
+
+### 🔧 Mejoras Tecnicas
+
+#### ✅ Manejo de Permisos
+- Deteccion automatica de permisos Docker
+- Uso minimo de sudo (solo donde es necesario)
+- Mensajes informativos cuando pide permisos
+- Funciona con o sin permisos de grupo docker
+
+#### ✅ Instalacion Flexible
+- Instalacion en home del usuario (sin tocar sistema)
+- Dependencias Python con --user flag
+- Node.js opcional con nvm (sin sudo)
+- Scripts ejecutables con chmod +x
+
+### 📁 Archivos Nuevos
+- `tools_linux/setup_lliurex.sh` - Script de instalacion
+- `tools_linux/ejecutar_lliurex.sh` - Script de ejecucion
+- `tools_linux/verificar_lliurex.sh` - Script de verificacion
+- `tools_linux/detener_lliurex.sh` - Script de detencion
+
+### 🎓 Uso en Clase
+
+#### Preparacion (una sola vez)
+```bash
+cd ~/Documentos
+git clone https://github.com/Fralopala2/proyecto-medusse.git
+cd proyecto-medusse
+chmod +x *.sh
+./setup_lliurex.sh
+```
+
+#### Uso Diario
+```bash
+cd ~/Documentos/proyecto-medusse
+./ejecutar_lliurex.sh
+# Abrir navegador: http://localhost:3000
+# Ctrl+C para detener o usar ./detener_lliurex.sh
+```
+
+### 📊 Progreso del TFG
+- **10/16 retos completados** (62.5%)
+- **Soporte multiplataforma**: Windows + Linux + Lliurex ✅
+- **6 retos pendientes**
+
+---
+
+## [2.8.0] - 2025-11-24 - RETO 7: VALIDACION DE FORMULARIOS JS ✅
+
+### ✅ Validacion de Formularios Completa
+
+#### ✅ Sistema de Validacion Robusto
+- **Libreria de validacion** (validation.ts) sin dependencias externas
+  * validateUsername() - Validacion de usuario
+  * validatePassword() - Validacion de contrasena
+  * validateEmail() - Validacion de email
+  * validateFullName() - Validacion de nombre completo
+
+#### ✅ Validacion en Tiempo Real
+- **Validacion mientras escribes** - Feedback inmediato
+- **Validacion al perder foco** (onBlur) - No molesta mientras escribes
+- **Validacion antes de enviar** - Doble verificacion
+- **Estados de error individuales** - Mensajes especificos por campo
+
+#### ✅ Reglas de Validacion Implementadas
+
+**Usuario:**
+- Requerido
+- Minimo 3 caracteres
+- Maximo 50 caracteres
+- Solo letras, numeros y guion bajo
+
+**Contrasena:**
+- Requerida
+- Minimo 6 caracteres
+- Maximo 100 caracteres
+
+**Email:**
+- Requerido
+- Formato valido (regex)
+
+**Nombre completo:**
+- Requerido
+- Minimo 3 caracteres
+- Maximo 100 caracteres
+
+#### ✅ Mejoras UX
+- **Bordes rojos** en campos con error
+- **Mensajes de error** debajo de cada campo
+- **Boton deshabilitado** si hay errores de validacion
+- **Transiciones suaves** en estados de error
+- **Focus rings** diferenciados (rojo para error, azul para normal)
+
+### 📊 Progreso del TFG
+- **11/16 retos completados** (68.75%)
+- **Reto 7 completado**: Validacion de formularios JS ✅
+- **5 retos pendientes**
+
+---
+
+## [2.9.0] - 2025-11-24 - RETO 10: PANEL DE ADMINISTRACION ✅
+
+### 🛡️ Panel de Administracion Completo
+
+#### ✅ Endpoints de Administracion (API)
+- **GET /api/admin/users** - Listar todos los usuarios
+- **GET /api/admin/stats** - Estadisticas del sistema
+- **GET /api/admin/logs** - Logs de actividad
+- **GET /api/admin/sessions** - Sesiones activas
+- **DELETE /api/admin/users/:id** - Eliminar usuario
+- **PUT /api/admin/users/:id/role** - Cambiar rol de usuario
+
+#### ✅ Middleware de Seguridad
+- **requireAdmin** - Verificacion de permisos de administrador
+- **Proteccion de rutas** - Solo usuarios admin pueden acceder
+- **Validaciones** - No puede eliminar/modificar su propio usuario
+
+#### ✅ Panel Web (/admin)
+- **3 pestanas principales**:
+  * Estadisticas - Dashboard con metricas clave
+  * Usuarios - Gestion completa de usuarios
+  * Logs - Actividad reciente del sistema
+
+#### ✅ Estadisticas Implementadas
+- **Total de usuarios** - Contador general
+- **Sesiones activas** - Usuarios conectados
+- **Alertas activas** - Alertas sin resolver
+- **Actividad reciente** - Acciones ultimos 7 dias
+- **Usuarios por rol** - Distribucion admin/user/viewer
+
+#### ✅ Gestion de Usuarios
+- **Tabla completa** con todos los usuarios
+- **Cambiar rol** - Dropdown para cambiar admin/user/viewer
+- **Eliminar usuario** - Con confirmacion
+- **Informacion detallada** - Username, email, ultimo login
+- **Protecciones** - No puede modificar su propio usuario
+
+#### ✅ Logs de Actividad
+- **Ultimos 20 eventos** del sistema
+- **Informacion completa** - Usuario, accion, detalles, fecha
+- **Ordenados** - Mas recientes primero
+- **Formato legible** - Fechas en español
+
+#### ✅ Diseno y UX
+- **Tabs navegables** - Cambio rapido entre secciones
+- **Cards de estadisticas** - Visualizacion clara con iconos
+- **Tabla responsive** - Gestion de usuarios ordenada
+- **Confirmaciones** - Dialogs antes de acciones criticas
+- **Loading states** - Indicadores de carga
+- **Error handling** - Mensajes claros de error
+
+### 📊 Progreso del TFG
+- **12/16 retos completados** (75%)
+- **Reto 10 completado**: Panel de administracion ✅
+- **4 retos pendientes**
+
+---
+
+## [2.10.0] - 2025-11-24 - RETO 11: DEPLOYMENT EN VERCEL ✅
+
+### 📤 Sistema de Deployment Automatico
+
+#### ✅ Deployment en Vercel (Implementado)
+- **Deployment automatico** con cada push a GitHub
+- **Build optimizado** con Next.js
+- **SSL/HTTPS** incluido y CDN global
+- **Preview deployments** por cada commit
+- **Variables de entorno** configuradas
+
+#### ✅ Configuracion
+- Archivo `web/vercel.json` con configuracion
+- Variables de entorno en Vercel dashboard
+- Build automatico desde repositorio GitHub
+- Dominio personalizado disponible
+
+#### ✅ Documentacion
+- `documentacion/VERCEL_DEPLOYMENT.md` - Guia completa
+- Instrucciones de configuracion
+- Integracion con GitHub
+- Solucion de problemas comunes
+
+### 📊 Progreso del TFG
+- **13/16 retos completados** (81.25%)
+- **Reto 11 completado**: Script FTP/SFTP ✅
+- **3 retos pendientes**
+
+---
+
+## [2.11.0] - 2025-11-24 - RETO 14: DISEÑO WEB AVANZADO ✅
+
+### 🎨 Mejoras de Diseño Responsive y Animaciones
+
+#### ✅ Libreria de Animaciones
+- **animations.ts** - Libreria centralizada de animaciones reutilizables
+  * fadeInUp, fadeInLeft, fadeInRight
+  * scaleIn, staggerContainer, staggerItem
+  * cardHover, pulse, rotate
+  * slideInModal con spring physics
+  * Configuraciones de viewport y transitions
+
+#### ✅ Animaciones Implementadas
+- **Fade in suave** en HeroSection con easing personalizado
+- **Hover effects** en cards con scale y shadow
+- **Transiciones suaves** en botones (300ms)
+- **Animaciones de entrada** con Framer Motion
+- **Stagger animations** para listas de elementos
+
+#### ✅ Mejoras Responsive
+
+**Login Page:**
+- Padding adaptativo: px-4 (mobile) → px-6 (tablet) → px-8 (desktop)
+- Titulos escalables: text-2xl (mobile) → text-3xl (desktop)
+- Espaciado optimizado para pantallas pequeñas
+
+**Dashboard:**
+- Grid adaptativo: 1 col (mobile) → 2 cols (tablet) → 3 cols (desktop)
+- Header responsive con texto escalable
+- Botones con tamaños adaptativos
+- Cards con hover effects y animaciones
+
+**Panel Admin:**
+- Titulos responsive: text-2xl (mobile) → text-3xl (desktop)
+- Grid de estadisticas: 1 → 2 → 4 columnas
+- Tabs optimizados para mobile
+- Tablas con scroll horizontal en mobile
+
+#### ✅ Transiciones CSS
+- **duration-300** en todos los hover effects
+- **hover:scale-105** en botones y cards
+- **hover:-translate-y-1** en cards para efecto lift
+- **transition-all** para transiciones suaves
+
+#### ✅ Breakpoints Utilizados
+```
+sm: 640px   (tablet)
+md: 768px   (tablet grande)
+lg: 1024px  (desktop)
+xl: 1280px  (desktop grande)
+```
+
+#### ✅ Mejoras UX
+- Animaciones suaves que no distraen
+- Feedback visual en interacciones
+- Responsive en todos los dispositivos
+- Performance optimizado (GPU acceleration)
+
+### 📊 Progreso del TFG
+- **14/16 retos completados** (87.5%)
+- **Reto 14 completado**: Diseño web avanzado ✅
+- **2 retos pendientes** (solo documentación)
+
+---
+
+## [2.6.0] - 2025-11-24 - LOGIN WEB, LOGOS Y SOPORTE LINUX ✅
+
+### 🌐 Sistema de Login Web Completo
+
+#### ✅ Paginas Implementadas
+- **Pagina de Login** (/login)
+  * Formulario de autenticacion con validacion
+  * Integracion con API REST
+  * Mensajes de error claros
+  * Logo de Medusse integrado
+  * Informacion de usuarios de prueba
+
+- **Dashboard Protegido** (/dashboard)
+  * Validacion de sesion en tiempo real
+  * Informacion del usuario logueado
+  * Permisos diferenciados por rol (admin/user/viewer)
+  * Enlaces a Grafana y API
+  * Boton de logout funcional
+  * Logo en header
+
+#### ✅ Flujo de Autenticacion
+- Login → Validacion → Dashboard → Logout
+- Redireccion automatica si no hay sesion
+- Token guardado en localStorage
+- Validacion de sesion al cargar dashboard
+
+### 🎨 Integracion de Logos
+
+#### ✅ Logos Agregados
+- **logoMedusse.svg** - Logo vectorial (formato SVG)
+- **LogoMedusse.png** - Logo rasterizado (formato PNG)
+- **favicon.png** - Icono del navegador
+
+#### ✅ Ubicaciones de Logos
+- **Pagina de Login**: Logo grande (128x128px) encima del formulario
+- **Dashboard**: Logo en header (48x48px) junto al titulo
+- **Header Principal**: Logo pequeño (32x32px) en navegacion
+- **Favicon**: Icono en pestaña del navegador
+
+#### ✅ Carpeta de Logos
+- `web/public/logos/` con README de documentacion
+- Logos accesibles desde `/logos/` en la web
+
+### 👤 Actualizaciones de Usuario
+
+#### ✅ Cambios en Base de Datos
+- Usuario "francisco" renombrado a "paco"
+- Nombres completos sin acentos para evitar problemas de codificacion:
+  * admin: Administrador del Sistema
+  * paco: Francisco Manuel Lopez Alarte
+  * profesor: Profesor del Centro
+  * alumno: Alumno Observador
+
+#### ✅ Footer Actualizado
+- Copyright cambiado a "Pacoaldev 2025"
+- Email de contacto: pacoaldev@gmail.com
+
+### 🐧 Soporte Completo para Linux
+
+#### ✅ Scripts de Linux (tools_linux/)
+- Scripts especificos para Lliurex con manejo de permisos
+- Instalacion, ejecucion, verificacion y detencion
+- Compatibilidad con Ubuntu, Debian y Lliurex
+
+#### ✅ Ventajas en Linux
+- Docker nativo (mejor rendimiento)
+- Sin WSL2 (menos overhead)
+- Comandos nativos (Bash)
+- Mas estable y rapido
+
+### 🧪 Testing y Verificacion
+
+#### ✅ Pruebas Realizadas
+- Login exitoso con 4 usuarios diferentes
+- Validacion de sesion funcionando
+- Dashboard con permisos por rol
+- Logout e invalidacion de sesion
+- Grafana con datos en tiempo real
+
+### 🔧 Mejoras Tecnicas
+
+#### ✅ Correccion de Errores
+- Problema de codificacion UTF-8 resuelto
+- Nombres sin acentos en base de datos
+- API y Web en puertos correctos (3001 y 3003)
+- Simulador funcionando correctamente
+
+#### ✅ Optimizaciones
+- Queries SQL directas en lugar de procedimientos (mejor compatibilidad)
+- Comparacion de contraseñas con bcrypt
+- Tokens UUID para sesiones
+- Cache de datos en API (30 segundos)
+
+### 📊 Estadisticas de la Version
+
+#### Archivos Nuevos
+- 2 paginas Next.js (login, dashboard)
+- 3 archivos de logos (SVG, PNG, favicon)
+- Scripts de Linux en tools_linux/
+- Sistema de autenticacion completo
+
+#### Lineas de Codigo Agregadas
+- TypeScript/React: ~400 lineas (login + dashboard)
+- Bash: ~300 lineas (scripts Linux)
+- Documentacion: ~500 lineas (guia Linux)
+- Total: ~1200 lineas nuevas
+
+### 📝 Documentacion Actualizada
+- README.md con endpoints de autenticacion
+- api/README.md con documentacion completa de auth
+- Documentacion de instalacion y uso en README.md
+
+### 🎯 Progreso del TFG
+- **10/16 retos completados** (62.5%)
+- **Reto 9**: Gestion de usuarios con sesiones ✅
+- **6 retos pendientes**
+
+---
+
+## [2.5.0] - 2025-11-24 - SISTEMA DE AUTENTICACION COMPLETO ✅
+
+### 🔐 Gestion de Usuarios con Sesiones (Reto 9)
+
+#### ✅ Backend de Autenticacion
+- **Modulo MySQL** (db.js) con pool de conexiones
+- **Modulo de autenticacion** (auth.js) con bcrypt
+- **4 endpoints REST** para autenticacion completa
+- **Middleware de proteccion** para rutas privadas
+- **Middleware de roles** para control de acceso
+- **Integracion con procedimientos almacenados** MySQL
+
+#### ✅ Endpoints de Autenticacion
+- **POST /api/auth/login**: Autenticar usuario y crear sesion
+- **POST /api/auth/logout**: Cerrar sesion activa
+- **GET /api/auth/validate**: Validar token de sesion
+- **GET /api/auth/profile**: Obtener perfil del usuario autenticado
+
+#### ✅ Seguridad Implementada
+- **Tokens UUID** para sesiones seguras
+- **Expiracion automatica** de sesiones (24 horas)
+- **Registro de IP y User-Agent** en sesiones
+- **Validacion de credenciales** con procedimientos almacenados
+- **Proteccion de rutas** con Bearer Token
+- **Control de acceso** por roles (admin/user/viewer)
+
+#### ✅ Testing Automatizado
+- **Script de testing** (api/test-auth.js) con 8 tests
+- **Tests de login** con credenciales correctas/incorrectas
+- **Tests de validacion** de sesion
+- **Tests de logout** y expiracion de sesion
+- **Tests con 4 usuarios** diferentes (admin, paco, profesor, alumno)
+
+#### ✅ Dependencias Agregadas
+- **mysql2**: Cliente MySQL para Node.js (v3.6.5)
+- **bcrypt**: Hashing de contraseñas (v5.1.1)
+
+#### 📊 Progreso de Retos TFG
+- **Reto 9 completado**: Gestion de usuarios con sesiones ✅
+- **10/16 retos completados** (62.5%)
+- **6 retos pendientes**
+
+---
+
+## [2.4.0] - 2025-11-24 - BASE DE DATOS MYSQL Y WEB NEXT.JS ✅
+
+### 🗄️ Base de Datos MySQL Completa
+
+#### ✅ Esquema de Base de Datos (Reto 2)
+- **MySQL 8.0** integrado en Docker Compose
+- **9 tablas** con relaciones y claves foraneas
+- **users**: Gestion de usuarios con roles (admin/user/viewer)
+- **sessions**: Tokens UUID con expiracion automatica
+- **user_preferences**: Configuracion personalizada por usuario
+- **locations**: 4 ubicaciones con colores corporativos
+- **sensors**: 18 tipos de sensores con umbrales
+- **alerts**: Sistema de alertas con resolucion
+- **user_alerts**: Notificaciones N:M
+- **activity_log**: Auditoria completa del sistema
+- **system_config**: Configuracion clave-valor
+
+#### ✅ Procedimientos Almacenados (Reto 3)
+- **10 procedimientos** para logica de negocio
+- **Autenticacion**: sp_authenticate_user, sp_validate_session, sp_logout_user
+- **Alertas**: sp_create_alert, sp_resolve_alert, sp_get_user_alerts, sp_mark_alert_read
+- **Estadisticas**: sp_get_system_stats, sp_get_location_stats
+- **Mantenimiento**: sp_cleanup_expired_sessions
+
+#### ✅ Datos Iniciales
+- **4 usuarios** con roles diferenciados
+- **4 ubicaciones** configuradas (Aula 20, 21, Gimnasio, Lab)
+- **18 sensores** con umbrales de warning/danger
+- **20+ configuraciones** del sistema
+
+### 🌐 Aplicacion Web Next.js
+
+#### ✅ Fase 1 - Adaptacion de Branding (Reto 4 y 5)
+- **Next.js 16** con TypeScript y Tailwind CSS 4
+- **Metadata** actualizada a Medusse IoT
+- **6 hero sections** con informacion del proyecto
+- **Colores corporativos** configurados (4 ubicaciones)
+- **Contenido adaptado**: productos hardware/software, servicios, tecnologia
+- **Variables de entorno** configuradas (.env.local)
+
+#### ✅ Fase 2 - Integracion API REST (Reto 8 y 12)
+- **Cliente API TypeScript** (400+ lineas, 10+ funciones)
+- **Hook WebSocket** con reconexion automatica (5 intentos)
+- **Dashboard en tiempo real** con 4 ubicaciones
+- **Sistema de alertas** visual (CO2, bateria)
+- **18 tipos de sensores** mostrados con iconos
+- **Indicador de conexion** WebSocket
+- **Auto-refresh** cada 30 segundos
+
+### 🔧 Mejoras Tecnicas
+
+#### ✅ Integracion Docker
+- **Servicio MySQL** añadido a docker-compose.yml
+- **Puerto 3306** expuesto
+- **Volumen persistente** para datos
+- **Auto-inicializacion** con scripts SQL
+- **Red interna** medusse_network
+
+#### ✅ Documentacion
+- **DATABASE_DOCUMENTATION.md**: Documentacion tecnica completa de MySQL
+- **README.md**: Consolidacion de toda la documentacion general
+- **CHANGELOG.md**: Actualizacion con cambios significativos
+- **Eliminacion** de archivos de documentacion redundantes
+
+### 📊 Estadisticas de Version
+
+#### Archivos Creados
+- `docker/mysql/init/01-schema.sql` (350+ lineas)
+- `docker/mysql/init/02-seed-data.sql` (150+ lineas)
+- `docker/mysql/init/03-stored-procedures.sql` (400+ lineas)
+- `docker/mysql/DATABASE_DOCUMENTATION.md` (600+ lineas)
+- `web/src/lib/api.ts` (400+ lineas)
+- `web/src/hooks/use-websocket.ts` (200+ lineas)
+- `web/src/components/sections/DashboardSection.tsx` (300+ lineas)
+
+#### Retos TFG Completados
+- ✅ **Reto 2**: Base de datos (InfluxDB + MySQL)
+- ✅ **Reto 3**: Procedimientos almacenados
+- ✅ **Reto 4**: Diseno de bocetos
+- ✅ **Reto 5**: Interfaces HTML/CSS
+- ✅ **Reto 8**: Transferencia Front-end/Back-end
+- ✅ **Reto 12**: Comunicacion asincrona
+
+#### Progreso Total
+- **9 de 16 retos completados** (56.25%)
+- **~6100 lineas de codigo** en total
+- **50+ archivos de codigo**
+- **10+ scripts de automatizacion**
+
+---
+
 ## [2.3.0] - 2025-10-14 - DASHBOARD PROFESIONAL CON FILTROS AVANZADOS ✅
 
 ### 📊 Dashboard Reorganizado y Optimizado
@@ -117,30 +989,29 @@
 - **Pipeline de datos** sin pérdidas con retry automático
 
 #### ✅ Documentación Completa Actualizada
-- **`INSTALACION.md`** - Guías de instalación detalladas
-- **`QUICK_START.md`** - Inicio rápido en menos de 5 minutos
-- **`MIGRACION.md`** - Preparación para migración a LoRa Mesh
+- **`documentacion/INSTALACION.md`** - Guias de instalacion detalladas
+- **`documentacion/MIGRACION.md`** - Preparacion para migracion a LoRa Mesh
 - **Troubleshooting** avanzado para problemas comunes
 
 ### 📊 Configuraciones Avanzadas Implementadas
 
 #### ✅ Telegraf Pipeline Optimizado
 - **Parsing inteligente** de topics MQTT
-- **Agregación temporal** cada 30 segundos
-- **Múltiples consumers** para raw data y sensores específicos
-- **Procesamiento de timestamps** automático
+- **Agregacion temporal** cada 30 segundos
+- **Multiples consumers** para raw data y sensores especificos
+- **Procesamiento de timestamps** automatico
 
 #### ✅ Grafana Dashboard Profesional
 - **Branding personalizado** con logo Medusse
 - **Header estilizado** con iconos de sensores
-- **Colores diferenciados** por ubicación (Rojo, Azul, Verde)
+- **Colores diferenciados** por ubicacion (Rojo, Purpura, Naranja, Verde)
 - **Umbrales de CO2** con sistema de alertas visual
 
-#### ✅ Configuración Docker Productiva
-- **Volúmenes persistentes** para todos los servicios
+#### ✅ Configuracion Docker Productiva
+- **Volumenes persistentes** para todos los servicios
 - **Networking interno** optimizado (medusse_network)
-- **Variables de entorno** configuradas para producción
-- **Restart policies** automáticas
+- **Variables de entorno** configuradas para produccion
+- **Restart policies** automaticas
 
 ### 🔧 Mejoras Técnicas
 
@@ -276,8 +1147,8 @@
 ### 📁 Archivos Nuevos
 - `api/` - Directorio completo API REST
 - `medusse_app/` - Directorio completo Flutter
-- `README_FLUTTER.md` - Documentación app móvil
-- Scripts de ejecución y testing
+- `medusse_app/README.md` - Documentacion app movil
+- Scripts de ejecucion y testing
 
 ### 📦 Dependencias Completas Configuradas
 
@@ -421,5 +1292,6 @@ demo.bat         # Ejecutar demo completa
 
 ---
 
-*Desarrollado para IES José Rodrigo Botet - Curso 2026/2026*
+*Desarrollado para IES José Rodrigo Botet - Curso 2025/2026*
 *Autor: Francisco Manuel López Alarte*
+

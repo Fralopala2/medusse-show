@@ -1,0 +1,896 @@
+'use client';
+
+import { useState, useEffect, Suspense } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { API_BASE_URL } from '@/lib/api';
+
+interface User {
+  user_id: number;
+  username: string;
+  full_name: string;
+  email: string;
+  role: string;
+  created_at: string;
+  last_login: string | null;
+}
+
+interface Stats {
+  totalUsers: number;
+  activeSessions: number;
+  activeAlerts: number;
+  recentActivity: number;
+  usersByRole: { role: string; count: number }[];
+}
+
+interface Log {
+  id: number;
+  username: string;
+  action: string;
+  details: string;
+  created_at: string;
+}
+
+interface Alert {
+  id: number;
+  location_id: number;
+  sensor_id: number;
+  location_name: string;
+  sensor_name: string;
+  alert_type: string;
+  message: string;
+  value: number | null;
+  threshold: number | null;
+  is_resolved: boolean;
+  resolved_at: string | null;
+  created_at: string;
+}
+
+interface Location {
+  id: number;
+  name: string;
+  display_name: string;
+}
+
+interface Sensor {
+  id: number;
+  sensor_type: string;
+  display_name: string;
+  unit: string;
+}
+
+function AdminContent() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const tabParam = searchParams.get('tab') as 'users' | 'stats' | 'logs' | 'alerts' | null;
+  
+  const [users, setUsers] = useState<User[]>([]);
+  const [stats, setStats] = useState<Stats | null>(null);
+  const [logs, setLogs] = useState<Log[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [activeTab, setActiveTab] = useState<'users' | 'stats' | 'logs' | 'alerts'>(tabParam || 'stats');
+  const [showCreateUserModal, setShowCreateUserModal] = useState(false);
+  const [showCreateAlertModal, setShowCreateAlertModal] = useState(false);
+  const [alerts, setAlerts] = useState<Alert[]>([]);
+  const [locations, setLocations] = useState<Location[]>([]);
+  const [sensors, setSensors] = useState<Sensor[]>([]);
+
+  // Actualizar URL cuando cambia la pestaña
+  const handleTabChange = (tab: 'users' | 'stats' | 'logs' | 'alerts') => {
+    setActiveTab(tab);
+    router.push(`/admin?tab=${tab}`, { scroll: false });
+  };
+
+  useEffect(() => {
+    // Verificar autenticacion y permisos
+    const token = localStorage.getItem('sessionToken');
+    const userData = localStorage.getItem('user');
+    
+    if (!token || !userData) {
+      router.push('/login');
+      return;
+    }
+    
+    const user = JSON.parse(userData);
+    if (user.role !== 'admin') {
+      setTimeout(() => {
+        setError('Acceso denegado - Se requieren permisos de administrador');
+        router.push('/dashboard');
+      }, 100);
+      return;
+    }
+    
+    // Cargar datos
+    const loadData = async () => {
+      try {
+        console.log('Loading admin data with token:', token?.substring(0, 10) + '...');
+        
+        // Cargar estadisticas
+        const statsRes = await fetch(`${API_BASE_URL}/api/admin/stats`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const statsData = await statsRes.json();
+        console.log('Stats response:', statsData);
+        
+        if (!statsRes.ok) {
+          throw new Error(statsData.message || 'Error al cargar estadisticas');
+        }
+        
+        if (statsData.success) setStats(statsData.stats);
+        
+        // Cargar usuarios
+        const usersRes = await fetch(`${API_BASE_URL}/api/admin/users`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const usersData = await usersRes.json();
+        console.log('Users response:', usersData);
+        
+        if (!usersRes.ok) {
+          throw new Error(usersData.message || 'Error al cargar usuarios');
+        }
+        
+        if (usersData.success) setUsers(usersData.users);
+        
+        // Cargar logs
+        const logsRes = await fetch(`${API_BASE_URL}/api/admin/logs?limit=20`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const logsData = await logsRes.json();
+        console.log('Logs response:', logsData);
+        
+        if (!logsRes.ok) {
+          throw new Error(logsData.message || 'Error al cargar logs');
+        }
+        
+        if (logsData.success) setLogs(logsData.logs);
+        
+        // Cargar alertas (solo para admin)
+        if (user.role === 'admin') {
+          const alertsRes = await fetch(`${API_BASE_URL}/api/admin/alerts`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+          const alertsData = await alertsRes.json();
+          if (alertsData.success) setAlerts(alertsData.alerts);
+          
+          // Cargar ubicaciones y sensores para formularios
+          const locationsRes = await fetch(`${API_BASE_URL}/api/admin/locations`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+          const locationsData = await locationsRes.json();
+          if (locationsData.success) setLocations(locationsData.locations);
+          
+          const sensorsRes = await fetch(`${API_BASE_URL}/api/admin/sensors`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+          const sensorsData = await sensorsRes.json();
+          if (sensorsData.success) setSensors(sensorsData.sensors);
+        }
+        
+        setLoading(false);
+      } catch (error) {
+        console.error('Error loading admin data:', error);
+        setError(error instanceof Error ? error.message : 'Error al cargar datos del panel');
+        setLoading(false);
+      }
+    };
+    
+    loadData();
+  }, [router]);
+
+  const handleDeleteUser = async (userId: number) => {
+    if (!confirm('¿Estas seguro de eliminar este usuario?')) return;
+    
+    const token = localStorage.getItem('sessionToken');
+    
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/admin/users/${userId}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      
+      const data = await res.json();
+      if (data.success) {
+        setUsers(users.filter(u => u.user_id !== userId));
+      } else {
+        alert(data.message || 'Error al eliminar usuario');
+      }
+    } catch (error) {
+      console.error('Error deleting user:', error);
+      alert('Error al eliminar usuario');
+    }
+  };
+
+  const handleChangeRole = async (userId: number, newRole: string) => {
+    const token = localStorage.getItem('sessionToken');
+    
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/admin/users/${userId}/role`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ role: newRole })
+      });
+      
+      const data = await res.json();
+      if (data.success) {
+        setUsers(users.map(u => 
+          u.user_id === userId ? { ...u, role: newRole } : u
+        ));
+      } else {
+        alert(data.message || 'Error al cambiar rol');
+      }
+    } catch (error) {
+      console.error('Error changing role:', error);
+      alert('Error al cambiar rol');
+    }
+  };
+
+  const handleCreateUser = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const token = localStorage.getItem('sessionToken');
+    
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/admin/users`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username: formData.get('username'),
+          email: formData.get('email'),
+          password: formData.get('password'),
+          full_name: formData.get('full_name'),
+          role: formData.get('role')
+        })
+      });
+      
+      const data = await res.json();
+      if (data.success) {
+        alert('Usuario creado correctamente');
+        setShowCreateUserModal(false);
+        window.location.reload();
+      } else {
+        alert(data.message || 'Error al crear usuario');
+      }
+    } catch (error) {
+      console.error('Error creating user:', error);
+      alert('Error al crear usuario');
+    }
+  };
+
+  const handleCreateAlert = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const token = localStorage.getItem('sessionToken');
+    
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/admin/alerts`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          location_id: formData.get('location_id'),
+          sensor_id: formData.get('sensor_id'),
+          alert_type: formData.get('alert_type'),
+          message: formData.get('message'),
+          value: formData.get('value') || null,
+          threshold: formData.get('threshold') || null
+        })
+      });
+      
+      const data = await res.json();
+      if (data.success) {
+        alert('Alerta creada correctamente');
+        setShowCreateAlertModal(false);
+        window.location.reload();
+      } else {
+        alert(data.message || 'Error al crear alerta');
+      }
+    } catch (error) {
+      console.error('Error creating alert:', error);
+      alert('Error al crear alerta');
+    }
+  };
+
+  const handleResolveAlert = async (alertId: number) => {
+    const token = localStorage.getItem('sessionToken');
+    
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/admin/alerts/${alertId}/resolve`, {
+        method: 'PUT',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      
+      const data = await res.json();
+      if (data.success) {
+        setAlerts(alerts.map(a => 
+          a.id === alertId ? { ...a, is_resolved: true, resolved_at: new Date().toISOString() } : a
+        ));
+      } else {
+        alert(data.message || 'Error al resolver alerta');
+      }
+    } catch (error) {
+      console.error('Error resolving alert:', error);
+      alert('Error al resolver alerta');
+    }
+  };
+
+  const handleDeleteAlert = async (alertId: number) => {
+    if (!confirm('¿Estas seguro de eliminar esta alerta?')) return;
+    
+    const token = localStorage.getItem('sessionToken');
+    
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/admin/alerts/${alertId}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      
+      const data = await res.json();
+      if (data.success) {
+        setAlerts(alerts.filter(a => a.id !== alertId));
+      } else {
+        alert(data.message || 'Error al eliminar alerta');
+      }
+    } catch (error) {
+      console.error('Error deleting alert:', error);
+      alert('Error al eliminar alerta');
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Cargando panel de administracion...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md">
+          <h2 className="text-red-800 font-semibold text-lg mb-2">Error</h2>
+          <p className="text-red-600">{error}</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <div className="bg-white shadow">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex justify-between items-center">
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Panel de Administracion</h1>
+              <p className="mt-1 text-xs sm:text-sm text-gray-500">Gestion del sistema Medusse IoT</p>
+            </div>
+            <button
+              onClick={() => router.push('/dashboard')}
+              className="px-3 py-2 sm:px-4 border border-gray-300 rounded-md text-xs sm:text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-all duration-300 hover:scale-105"
+            >
+              Volver al Dashboard
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Tabs */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+        <div className="border-b border-gray-200">
+          <nav className="-mb-px flex space-x-8">
+            <button
+              onClick={() => handleTabChange('stats')}
+              className={`${
+                activeTab === 'stats'
+                  ? 'border-indigo-500 text-indigo-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
+            >
+              Estadisticas
+            </button>
+            <button
+              onClick={() => handleTabChange('users')}
+              className={`${
+                activeTab === 'users'
+                  ? 'border-indigo-500 text-indigo-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
+            >
+              Usuarios ({users.length})
+            </button>
+            <button
+              onClick={() => handleTabChange('logs')}
+              className={`${
+                activeTab === 'logs'
+                  ? 'border-indigo-500 text-indigo-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
+            >
+              Logs ({logs.length})
+            </button>
+            {/* Solo admin puede ver alertas */}
+            {JSON.parse(localStorage.getItem('user') || '{}').role === 'admin' && (
+              <button
+                onClick={() => handleTabChange('alerts')}
+                className={`${
+                  activeTab === 'alerts'
+                    ? 'border-indigo-500 text-indigo-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
+              >
+                Alertas ({alerts.length})
+              </button>
+            )}
+          </nav>
+        </div>
+
+        {/* Content */}
+        <div className="mt-6 pb-12">
+          {/* Estadisticas */}
+          {activeTab === 'stats' && stats && (
+            <div className="space-y-6">
+              {/* Cards de estadisticas */}
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="bg-white overflow-hidden shadow rounded-lg">
+                  <div className="p-5">
+                    <div className="flex items-center">
+                      <div className="flex-shrink-0">
+                        <svg className="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                      </div>
+                      <div className="ml-5 w-0 flex-1">
+                        <dl>
+                          <dt className="text-sm font-medium text-gray-500 truncate">Total Usuarios</dt>
+                          <dd className="text-3xl font-semibold text-gray-900">{stats.totalUsers}</dd>
+                        </dl>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white overflow-hidden shadow rounded-lg">
+                  <div className="p-5">
+                    <div className="flex items-center">
+                      <div className="flex-shrink-0">
+                        <svg className="h-6 w-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      </div>
+                      <div className="ml-5 w-0 flex-1">
+                        <dl>
+                          <dt className="text-sm font-medium text-gray-500 truncate">Sesiones Activas</dt>
+                          <dd className="text-3xl font-semibold text-gray-900">{stats.activeSessions}</dd>
+                        </dl>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white overflow-hidden shadow rounded-lg">
+                  <div className="p-5">
+                    <div className="flex items-center">
+                      <div className="flex-shrink-0">
+                        <svg className="h-6 w-6 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                      </div>
+                      <div className="ml-5 w-0 flex-1">
+                        <dl>
+                          <dt className="text-sm font-medium text-gray-500 truncate">Alertas Activas</dt>
+                          <dd className="text-3xl font-semibold text-gray-900">{stats.activeAlerts}</dd>
+                        </dl>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white overflow-hidden shadow rounded-lg">
+                  <div className="p-5">
+                    <div className="flex items-center">
+                      <div className="flex-shrink-0">
+                        <svg className="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                      </div>
+                      <div className="ml-5 w-0 flex-1">
+                        <dl>
+                          <dt className="text-sm font-medium text-gray-500 truncate">Actividad (7 dias)</dt>
+                          <dd className="text-3xl font-semibold text-gray-900">{stats.recentActivity}</dd>
+                        </dl>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Usuarios por rol */}
+              <div className="bg-white shadow rounded-lg p-6">
+                <h3 className="text-lg font-medium text-gray-900 mb-4">Usuarios por Rol</h3>
+                <div className="space-y-3">
+                  {stats.usersByRole.map((item) => (
+                    <div key={item.role} className="flex items-center justify-between">
+                      <span className="text-sm font-medium text-gray-700 capitalize">{item.role}</span>
+                      <span className="text-sm text-gray-500">{item.count} usuarios</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Usuarios */}
+          {activeTab === 'users' && (
+            <div className="bg-white shadow rounded-lg overflow-hidden">
+              <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                <h3 className="text-lg font-medium text-gray-900">Gestión de Usuarios</h3>
+                <button
+                  onClick={() => setShowCreateUserModal(true)}
+                  className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors text-sm font-medium"
+                >
+                  + Crear Usuario
+                </button>
+              </div>
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Usuario</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rol</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ultimo Login</th>
+                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {users.map((user) => (
+                    <tr key={user.user_id}>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm font-medium text-gray-900">{user.username}</div>
+                        <div className="text-sm text-gray-500">{user.full_name}</div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{user.email}</td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <select
+                          value={user.role}
+                          onChange={(e) => handleChangeRole(user.user_id, e.target.value)}
+                          className="text-sm border-gray-300 rounded-md"
+                        >
+                          <option value="admin">Admin</option>
+                          <option value="user">User</option>
+                          <option value="viewer">Viewer</option>
+                        </select>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {user.last_login ? new Date(user.last_login).toLocaleString('es-ES') : 'Nunca'}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <button
+                          onClick={() => handleDeleteUser(user.user_id)}
+                          className="text-red-600 hover:text-red-900"
+                        >
+                          Eliminar
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          {/* Alertas */}
+          {activeTab === 'alerts' && (
+            <div className="bg-white shadow rounded-lg overflow-hidden">
+              <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                <h3 className="text-lg font-medium text-gray-900">Gestión de Alertas</h3>
+                <button
+                  onClick={() => setShowCreateAlertModal(true)}
+                  className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors text-sm font-medium"
+                >
+                  + Crear Alerta
+                </button>
+              </div>
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ubicación</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sensor</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipo</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mensaje</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
+                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {alerts.map((alert) => (
+                    <tr key={alert.id}>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{alert.location_name}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{alert.sensor_name}</td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <span className={`px-2 py-1 text-xs rounded-full ${
+                          alert.alert_type === 'danger' ? 'bg-red-100 text-red-800' :
+                          alert.alert_type === 'warning' ? 'bg-yellow-100 text-yellow-800' :
+                          'bg-blue-100 text-blue-800'
+                        }`}>
+                          {alert.alert_type}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 text-sm text-gray-500">{alert.message}</td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {alert.is_resolved ? (
+                          <span className="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">Resuelta</span>
+                        ) : (
+                          <span className="px-2 py-1 text-xs rounded-full bg-red-100 text-red-800">Activa</span>
+                        )}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
+                        {!alert.is_resolved && (
+                          <button
+                            onClick={() => handleResolveAlert(alert.id)}
+                            className="text-green-600 hover:text-green-900"
+                          >
+                            Resolver
+                          </button>
+                        )}
+                        <button
+                          onClick={() => handleDeleteAlert(alert.id)}
+                          className="text-red-600 hover:text-red-900"
+                        >
+                          Eliminar
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          {/* Logs */}
+          {activeTab === 'logs' && (
+            <div className="bg-white shadow rounded-lg overflow-hidden">
+              <div className="px-6 py-4 border-b border-gray-200">
+                <h3 className="text-lg font-medium text-gray-900">Actividad Reciente</h3>
+              </div>
+              <div className="divide-y divide-gray-200">
+                {logs.map((log, index) => {
+                  // Parsear detalles si es JSON string
+                  let detailsText = '';
+                  if (log.details) {
+                    try {
+                      const parsed = typeof log.details === 'string' ? JSON.parse(log.details) : log.details;
+                      detailsText = parsed.message || JSON.stringify(parsed);
+                    } catch {
+                      detailsText = log.details;
+                    }
+                  }
+                  
+                  return (
+                    <div key={log.id || index} className="px-6 py-4">
+                      <div className="flex items-center justify-between">
+                        <div className="flex-1">
+                          <p className="text-sm font-medium text-gray-900">
+                            {log.username || 'Sistema'} - {log.action}
+                          </p>
+                          {detailsText && (
+                            <p className="text-sm text-gray-500 mt-1">{detailsText}</p>
+                          )}
+                        </div>
+                        <div className="ml-4 flex-shrink-0">
+                          <p className="text-xs text-gray-400">
+                            {new Date(log.created_at).toLocaleString('es-ES')}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Modal Crear Usuario */}
+      {showCreateUserModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <h3 className="text-lg font-medium text-gray-900 mb-4">Crear Nuevo Usuario</h3>
+            <form onSubmit={handleCreateUser} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Nombre de usuario</label>
+                <input
+                  type="text"
+                  name="username"
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Nombre completo</label>
+                <input
+                  type="text"
+                  name="full_name"
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+                <input
+                  type="password"
+                  name="password"
+                  required
+                  minLength={6}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Rol</label>
+                <select
+                  name="role"
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                  {JSON.parse(localStorage.getItem('user') || '{}').role === 'admin' ? (
+                    <>
+                      <option value="viewer">Alumno (Viewer)</option>
+                      <option value="user">Profesor (User)</option>
+                      <option value="admin">Administrador (Admin)</option>
+                    </>
+                  ) : (
+                    <option value="viewer">Alumno (Viewer)</option>
+                  )}
+                </select>
+              </div>
+              <div className="flex gap-3 pt-4">
+                <button
+                  type="submit"
+                  className="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors"
+                >
+                  Crear Usuario
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowCreateUserModal(false)}
+                  className="flex-1 px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors"
+                >
+                  Cancelar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Modal Crear Alerta */}
+      {showCreateAlertModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <h3 className="text-lg font-medium text-gray-900 mb-4">Crear Nueva Alerta</h3>
+            <form onSubmit={handleCreateAlert} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Ubicación</label>
+                <select
+                  name="location_id"
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                  <option value="">Seleccionar ubicación</option>
+                  {locations.map((loc) => (
+                    <option key={loc.id} value={loc.id}>{loc.display_name}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Sensor</label>
+                <select
+                  name="sensor_id"
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                  <option value="">Seleccionar sensor</option>
+                  {sensors.map((sensor) => (
+                    <option key={sensor.id} value={sensor.id}>{sensor.display_name}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Tipo de Alerta</label>
+                <select
+                  name="alert_type"
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                  <option value="info">Información</option>
+                  <option value="warning">Advertencia</option>
+                  <option value="danger">Peligro</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Mensaje</label>
+                <textarea
+                  name="message"
+                  required
+                  rows={3}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Valor (opcional)</label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    name="value"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Umbral (opcional)</label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    name="threshold"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  />
+                </div>
+              </div>
+              <div className="flex gap-3 pt-4">
+                <button
+                  type="submit"
+                  className="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors"
+                >
+                  Crear Alerta
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowCreateAlertModal(false)}
+                  className="flex-1 px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors"
+                >
+                  Cancelar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default function AdminPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Cargando...</p>
+        </div>
+      </div>
+    }>
+      <AdminContent />
+    </Suspense>
+  );
+}

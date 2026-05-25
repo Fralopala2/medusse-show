@@ -5,6 +5,13 @@ allprojects {
     }
 }
 
+plugins {
+    id("com.android.application") apply false
+    id("com.android.library") apply false
+    id("dev.flutter.flutter-gradle-plugin") apply false
+    id("kotlin-android") apply false
+}
+
 val newBuildDir: Directory =
     rootProject.layout.buildDirectory
         .dir("../../build")

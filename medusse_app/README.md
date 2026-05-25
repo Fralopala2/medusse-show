@@ -1,16 +1,70 @@
-# medusse_app
+# Medusse App (Flutter)
 
-A new Flutter project.
+Aplicacion movil/multiplataforma del proyecto Medusse IoT para visualizar sensores en tiempo real y consultar historico por ubicacion y tipo de sensor.
 
-## Getting Started
+## Requisitos
 
-This project is a starting point for a Flutter application.
+- Flutter instalado (`flutter doctor` sin errores criticos).
+- API Medusse activa en `http://localhost:3001`.
+- WebSocket API activo en `ws://localhost:3002`.
 
-A few resources to get you started if this is your first Flutter project:
+## Ejecucion rapida (Windows)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Desde la raiz del proyecto:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```cmd
+cd medusse_app
+flutter pub get
+flutter run -d windows
+```
+
+## Configuracion de backend
+
+La app consume URLs desde `ConfigService`:
+
+- API base por defecto: `http://localhost:3001`
+- WebSocket por defecto: `ws://localhost:3002`
+
+Si cambias host/puertos, actualiza la configuracion de la app antes de ejecutar.
+
+## Funcionalidad principal
+
+- Resumen por ubicacion (`aula20`, `aula21`, `gimnasio`, `laboratorio`).
+- Actualizacion en tiempo real por WebSocket.
+- Consulta de historicos por sensor y ventana temporal.
+- Indicadores de alerta por umbrales de cada sensor.
+
+## Contrato API relevante
+
+- `GET /api/summary`
+- `GET /api/latest/:location`
+- `GET /api/data/:location/:sensor?hours=&interval=`
+- `GET /api/stats/:location/:sensor?hours=`
+
+Respuesta esperada de stats:
+
+```json
+{
+  "location": "aula20",
+  "sensor": "temperature",
+  "hours": 24,
+  "stats": {
+    "min": 20.8,
+    "max": 26.1,
+    "avg": 23.4,
+    "mean": 23.4,
+    "count": 24
+  }
+}
+```
+
+La app soporta compatibilidad si el backend devolviera `mean` o `avg`.
+
+## Testing basico recomendado
+
+1. Iniciar MySQL + API (`medusse.bat` opcion 1 o 3).
+2. Ejecutar app Flutter.
+3. Verificar:
+   - carga de ubicaciones y resumen,
+   - actualizacion de valores en tiempo real,
+   - carga de historicos y estadisticas.

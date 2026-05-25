@@ -2,16 +2,19 @@ const express = require('express');
 const cors = require('cors');
 const WebSocket = require('ws');
 const http = require('http');
+require('dotenv').config();
+const db = require('./db');
+const authRoutes = require('./auth-routes');
 
 const app = express();
-const PORT = 3001;
+const PORT = parseInt(process.env.PORT, 10) || 3001;
 
 // Configuración de InfluxDB
 const INFLUX_CONFIG = {
-  url: 'http://localhost:8086',
-  token: 'medusse-admin-token-2025',
-  org: 'iescelia',
-  bucket: 'sensors'
+  url: process.env.INFLUXDB_URL || 'http://localhost:8086',
+  token: process.env.INFLUXDB_TOKEN || 'medusse-admin-token-2025',
+  org: process.env.INFLUXDB_ORG || 'iescelia',
+  bucket: process.env.INFLUXDB_BUCKET || 'sensors'
 };
 
 console.log('🔗 Starting stable server with InfluxDB integration...');
@@ -22,10 +25,56 @@ console.log(`🏢 Organization: ${INFLUX_CONFIG.org}`);
 app.use(cors());
 app.use(express.json());
 
+// Inicializar MySQL
+db.initPool();
+db.testConnection().then(connected => {
+  if (connected) {
+    console.log('✅ MySQL ready for authentication');
+  } else {
+    console.warn('⚠️  MySQL not available - Authentication disabled');
+  }
+});
+
+// Rutas de autenticacion (Reto 9)
+app.use('/api/auth', authRoutes);
+
+// Rutas de administracion (Reto 10)
+const adminRoutes = require('./admin-routes');
+app.use('/api/admin', adminRoutes);
+
 // Cache para datos recientes
 let cachedSummary = {};
 let lastCacheUpdate = 0;
 const CACHE_DURATION = 30000; // 30 segundos
+
+// Ruta raiz - Informacion de la API
+app.get('/', (req, res) => {
+  res.json({
+    name: 'Medusse IoT API',
+    version: '2.7.1',
+    description: 'API REST para sistema de monitoreo ambiental',
+    endpoints: {
+      health: '/health',
+      locations: '/api/locations',
+      summary: '/api/summary',
+      latest: '/api/latest/:location',
+      data: '/api/data/:location/:sensor',
+      stats: '/api/stats/:location/:sensor',
+      auth: {
+        login: '/api/auth/login',
+        logout: '/api/auth/logout',
+        validate: '/api/auth/validate',
+        profile: '/api/auth/profile'
+      },
+      admin: {
+        users: '/api/admin/users',
+        stats: '/api/admin/stats',
+        logs: '/api/admin/logs'
+      }
+    },
+    documentation: 'https://github.com/Fralopala2/proyecto-medusse/blob/clase/api/README.md'
+  });
+});
 
 // Routes
 app.get('/health', (req, res) => {
@@ -113,7 +162,12 @@ app.get('/api/stats/:location/:sensor', async (req, res) => {
     console.log(`📊 Getting stats: ${sensor} in ${location} for ${hours}h`);
     
     const stats = await getStatsData(location, sensor, hours);
-    res.json(stats);
+    res.json({
+      location,
+      sensor,
+      hours,
+      stats
+    });
   } catch (error) {
     console.error('❌ Error getting stats:', error.message);
     res.status(500).json({ error: 'Error fetching stats' });
@@ -202,10 +256,12 @@ app.get('/api/energy/:location/history', async (req, res) => {
 async function queryInfluxDB(fluxQuery) {
   return new Promise((resolve, reject) => {
     const postData = fluxQuery;
+    const influxUrl = new URL(INFLUX_CONFIG.url);
+    const influxPort = influxUrl.port || (influxUrl.protocol === 'https:' ? 443 : 80);
     
     const options = {
-      hostname: 'localhost',
-      port: 8086,
+      hostname: influxUrl.hostname,
+      port: influxPort,
       path: `/api/v2/query?org=${INFLUX_CONFIG.org}`,
       method: 'POST',
       headers: {
@@ -437,10 +493,12 @@ async function getStatsData(location, sensor, hours) {
     const values = rows.map(row => parseFloat(row._value)).filter(v => !isNaN(v));
     
     if (values.length > 0) {
+      const avg = values.reduce((a, b) => a + b, 0) / values.length;
       return {
         min: Math.min(...values),
         max: Math.max(...values),
-        avg: values.reduce((a, b) => a + b, 0) / values.length,
+        avg,
+        mean: avg,
         count: values.length
       };
     }
@@ -449,10 +507,12 @@ async function getStatsData(location, sensor, hours) {
   }
   
   // Fallback stats
+  const fallbackAvg = Math.random() * 50 + 25;
   return {
     min: Math.random() * 50,
     max: Math.random() * 50 + 50,
-    avg: Math.random() * 50 + 25,
+    avg: fallbackAvg,
+    mean: fallbackAvg,
     count: Math.floor(Math.random() * 1000) + 100
   };
 }
@@ -602,13 +662,14 @@ async function getEnergyDataForLocation(location) {
       `;
       
       try {
-        const result = await queryInfluxDB(fluxQuery);
-        if (result && result.length > 0) {
-          const record = result[0];
+        const csvData = await queryInfluxDB(fluxQuery);
+        const rows = parseInfluxCSV(csvData);
+        if (rows.length > 0) {
+          const record = rows[0];
           energyData[sensor] = {
-            value: record._value,
+            value: parseFloat(record._value) || 0,
             sensor: sensor,
-            time: record._time,
+            time: record._time || new Date().toISOString(),
             location: location
           };
         }
@@ -731,14 +792,17 @@ async function getEnergyHistory(location, hours, interval) {
       `;
       
       try {
-        const result = await queryInfluxDB(fluxQuery);
-        if (result && result.length > 0) {
-          history[sensor] = result.map(record => ({
+        const csvData = await queryInfluxDB(fluxQuery);
+        const rows = parseInfluxCSV(csvData);
+        if (rows.length > 0) {
+          history[sensor] = rows
+            .map(record => ({
             time: record._time,
-            value: record._value,
+            value: parseFloat(record._value),
             location: location,
             sensor: sensor
-          }));
+          }))
+            .filter(record => !isNaN(record.value));
         } else {
           history[sensor] = generateMockEnergyHistory(sensor, location, hours);
         }

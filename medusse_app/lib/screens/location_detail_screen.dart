@@ -41,6 +41,12 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.sizeOf(context).width;
+    final textScale = MediaQuery.textScalerOf(context).scale(1.0);
+    final isCompactScreen = screenWidth < 400;
+    final gridChildAspectRatio =
+        isCompactScreen || textScale > 1.0 ? 0.72 : 0.82;
+
     if (currentLocation.isEmpty) {
       return Scaffold(
         appBar: AppBar(title: const Text('Error')),
@@ -163,12 +169,13 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
                 SliverPadding(
                   padding: const EdgeInsets.all(16),
                   sliver: SliverGrid(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, // siempre 2 columnas
-                      childAspectRatio: 1.1,
-                      crossAxisSpacing: 12,
-                      mainAxisSpacing: 12,
-                    ),
+                    gridDelegate:
+                        SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: gridChildAspectRatio,
+                          crossAxisSpacing: 12,
+                          mainAxisSpacing: 12,
+                        ),
                     delegate: SliverChildListDelegate([
                       SensorCard(
                         sensorType: SensorType.temperature,
@@ -198,14 +205,22 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
                         onTap: () => _navigateToChart(SensorType.co2),
                       ),
                       SensorCard(
-                        sensorType: SensorType.batteryPercentage,
-                        data: summary.batteryPercentage,
+                        sensorType: SensorType.pressure,
+                        data: summary.pressure,
                         showAlert: provider.hasAlert(
                           currentLocation,
-                          SensorType.batteryPercentage,
+                          SensorType.pressure,
                         ),
-                        onTap: () =>
-                            _navigateToChart(SensorType.batteryPercentage),
+                        onTap: () => _navigateToChart(SensorType.pressure),
+                      ),
+                      SensorCard(
+                        sensorType: SensorType.voc,
+                        data: summary.voc,
+                        showAlert: provider.hasAlert(
+                          currentLocation,
+                          SensorType.voc,
+                        ),
+                        onTap: () => _navigateToChart(SensorType.voc),
                       ),
                       SensorCard(
                         sensorType: SensorType.iaq,
@@ -215,6 +230,81 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
                           SensorType.iaq,
                         ),
                         onTap: () => _navigateToChart(SensorType.iaq),
+                      ),
+                      SensorCard(
+                        sensorType: SensorType.soilMoisture,
+                        data: summary.soilMoisture,
+                        showAlert: provider.hasAlert(
+                          currentLocation,
+                          SensorType.soilMoisture,
+                        ),
+                        onTap: () => _navigateToChart(SensorType.soilMoisture),
+                      ),
+                      SensorCard(
+                        sensorType: SensorType.phLevel,
+                        data: summary.phLevel,
+                        showAlert: provider.hasAlert(
+                          currentLocation,
+                          SensorType.phLevel,
+                        ),
+                        onTap: () => _navigateToChart(SensorType.phLevel),
+                      ),
+                      SensorCard(
+                        sensorType: SensorType.waterFlow,
+                        data: summary.waterFlow,
+                        showAlert: provider.hasAlert(
+                          currentLocation,
+                          SensorType.waterFlow,
+                        ),
+                        onTap: () => _navigateToChart(SensorType.waterFlow),
+                      ),
+                      SensorCard(
+                        sensorType: SensorType.tdsPpm,
+                        data: summary.tdsPpm,
+                        showAlert: provider.hasAlert(
+                          currentLocation,
+                          SensorType.tdsPpm,
+                        ),
+                        onTap: () => _navigateToChart(SensorType.tdsPpm),
+                      ),
+                      SensorCard(
+                        sensorType: SensorType.dissolvedOxygen,
+                        data: summary.dissolvedOxygen,
+                        showAlert: provider.hasAlert(
+                          currentLocation,
+                          SensorType.dissolvedOxygen,
+                        ),
+                        onTap: () =>
+                            _navigateToChart(SensorType.dissolvedOxygen),
+                      ),
+                      SensorCard(
+                        sensorType: SensorType.batteryVoltage,
+                        data: summary.batteryVoltage,
+                        showAlert: provider.hasAlert(
+                          currentLocation,
+                          SensorType.batteryVoltage,
+                        ),
+                        onTap: () =>
+                            _navigateToChart(SensorType.batteryVoltage),
+                      ),
+                      SensorCard(
+                        sensorType: SensorType.solarVoltage,
+                        data: summary.solarVoltage,
+                        showAlert: provider.hasAlert(
+                          currentLocation,
+                          SensorType.solarVoltage,
+                        ),
+                        onTap: () => _navigateToChart(SensorType.solarVoltage),
+                      ),
+                      SensorCard(
+                        sensorType: SensorType.batteryPercentage,
+                        data: summary.batteryPercentage,
+                        showAlert: provider.hasAlert(
+                          currentLocation,
+                          SensorType.batteryPercentage,
+                        ),
+                        onTap: () =>
+                            _navigateToChart(SensorType.batteryPercentage),
                       ),
                       SensorCard(
                         sensorType: SensorType.powerConsumption,
@@ -296,30 +386,43 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
   void _showAllCharts() {
     showModalBottomSheet(
       context: context,
-      builder: (context) => Container(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'Seleccionar Sensor',
-              style: Theme.of(
-                context,
-              ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 16),
-            ...SensorType.values.map(
-              (sensorType) => ListTile(
-                leading: Icon(sensorType.icon, color: sensorType.color),
-                title: Text(sensorType.displayName),
-                trailing: const Icon(Icons.chevron_right),
-                onTap: () {
-                  Navigator.pop(context);
-                  _navigateToChart(sensorType);
-                },
+      isScrollControlled: true,
+      builder: (context) => DraggableScrollableSheet(
+        initialChildSize: 0.7,
+        minChildSize: 0.5,
+        maxChildSize: 0.9,
+        expand: false,
+        builder: (context, scrollController) => Container(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              Text(
+                'Seleccionar Sensor',
+                style: Theme.of(
+                  context,
+                ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
               ),
-            ),
-          ],
+              const SizedBox(height: 16),
+              Expanded(
+                child: ListView.builder(
+                  controller: scrollController,
+                  itemCount: SensorType.values.length,
+                  itemBuilder: (context, index) {
+                    final sensorType = SensorType.values[index];
+                    return ListTile(
+                      leading: Icon(sensorType.icon, color: sensorType.color),
+                      title: Text(sensorType.displayName),
+                      trailing: const Icon(Icons.chevron_right),
+                      onTap: () {
+                        Navigator.pop(context);
+                        _navigateToChart(sensorType);
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
