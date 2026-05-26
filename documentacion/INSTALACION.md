@@ -201,8 +201,8 @@ Si no es posible modificar los permisos, usar los scripts especiales para Lliure
 ```bash
 # 1. Clonar o copiar el proyecto
 cd ~/Documentos
-git clone https://github.com/Fralopala2/proyecto-medusse.git
-cd proyecto-medusse
+git clone https://github.com/Fralopala2/medusse-show.git
+cd medusse-show
 git checkout clase
 
 # 2. Dar permisos de ejecucion

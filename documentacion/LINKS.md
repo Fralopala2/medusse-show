@@ -145,10 +145,10 @@
 2. `http://localhost:3001/api/summary` - API Summary Endpoint
 
 ### URLs GitHub (Documentacion)
-1. `https://github.com/Fralopala2/proyecto-medusse/blob/clase/README.md` - README principal
-2. `https://github.com/Fralopala2/proyecto-medusse/blob/clase/api/README.md` - Documentacion API
-3. `https://github.com/Fralopala2/proyecto-medusse/blob/clase/documentacion/MIGRACION.md` - Guia migracion
-4. `https://github.com/Fralopala2/proyecto-medusse/blob/clase/LICENSE` - Licencia
+1. `https://github.com/Fralopala2/medusse-show/blob/clase/README.md` - README principal
+2. `https://github.com/Fralopala2/medusse-show/blob/clase/api/README.md` - Documentacion API
+3. `https://github.com/Fralopala2/medusse-show/blob/clase/documentacion/MIGRACION.md` - Guia migracion
+4. `https://github.com/Fralopala2/medusse-show/blob/clase/LICENSE` - Licencia
 
 ### URLs de Contacto
 1. `mailto:pacoaldev@gmail.com` - Email de contacto

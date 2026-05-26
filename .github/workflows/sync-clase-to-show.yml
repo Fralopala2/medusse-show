@@ -51,7 +51,7 @@ jobs:
           git add -A
           echo "Files to push:"
           git status --short
-          git commit -m "Sync from proyecto-medusse: $TARGET_BRANCH"
+          git commit -m "Sync from medusse-show: $TARGET_BRANCH"
           git remote add target "$TARGET_REPO_URL"
           git push --force target HEAD:refs/heads/$TARGET_BRANCH
 
@@ -69,7 +69,7 @@ jobs:
             echo "PR already exists: $EXISTING_PR"
           else
             echo "Creating PR..."
-            PAYLOAD=$(jq -n --arg t "Sync from proyecto-medusse:$TARGET_BRANCH" --arg h "$TARGET_BRANCH" --arg b "main" --arg bd "Automatic sync from proyecto-medusse '$TARGET_BRANCH' branch" '{title:$t, head:$h, base:$b, body:$bd}')
+            PAYLOAD=$(jq -n --arg t "Sync from medusse-show:$TARGET_BRANCH" --arg h "$TARGET_BRANCH" --arg b "main" --arg bd "Automatic sync from medusse-show '$TARGET_BRANCH' branch" '{title:$t, head:$h, base:$b, body:$bd}')
             RESPONSE=$(curl -s -X POST -H "Authorization: token $TARGET_REPO_PAT" -H "Content-Type: application/json" -d "$PAYLOAD" "https://api.github.com/repos/$OWNER/$REPO/pulls")
             echo "$RESPONSE" | jq -r '.html_url // .message'
           fi
