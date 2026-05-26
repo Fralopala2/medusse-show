@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 import { registerGsapPlugins } from "@/lib/gsap/register";
 import { refreshScrollTrigger } from "@/lib/gsap/scroll-effects";
+import { scrollToHash } from "@/lib/scroll-to-hash";
 
 interface SmoothScrollProviderProps {
   children: React.ReactNode;
@@ -19,6 +20,11 @@ export function SmoothScrollProvider({
   useEffect(() => {
     registerGsapPlugins();
     const timer = setTimeout(() => refreshScrollTrigger(), 100);
+
+    if (window.location.hash) {
+      requestAnimationFrame(() => scrollToHash(window.location.hash));
+    }
+
     return () => clearTimeout(timer);
   }, []);
 

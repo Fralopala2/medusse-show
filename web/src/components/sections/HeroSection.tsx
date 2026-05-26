@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { ExpandOnScrollImage } from "@/components/motion/ExpandOnScrollImage";
 import { RevealGroup } from "@/components/motion/RevealGroup";
 import { cn } from "@/lib/utils";
+import { scrollToHash } from "@/lib/scroll-to-hash";
 
 interface HeroSectionProps {
   title: string;
@@ -28,7 +29,7 @@ function handleCtaAction(action?: string) {
   if (action.startsWith("http")) {
     window.open(action, "_blank");
   } else if (action.startsWith("#")) {
-    document.querySelector(action)?.scrollIntoView({ behavior: "smooth" });
+    scrollToHash(action);
   } else if (action.startsWith("/")) {
     window.location.href = action;
   }
@@ -58,7 +59,7 @@ export function HeroSection({
 
       <div className="absolute inset-0 z-[2] noise-overlay pointer-events-none" />
 
-      <Container className="relative z-10 flex flex-col items-center text-center min-h-[100svh] justify-center pt-20 px-4 sm:px-6 lg:px-8">
+      <Container className="relative z-10 flex flex-col items-center text-center min-h-[100svh] justify-center pt-20 px-4 sm:px-6 lg:px-8 touch-manipulation">
         <RevealGroup className="flex flex-col items-center gap-4 max-w-4xl">
           <p
             data-reveal

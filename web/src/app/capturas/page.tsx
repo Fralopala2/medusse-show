@@ -3,7 +3,7 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Container } from "@/components/ui/Container";
-import { Button } from "@/components/ui/Button";
+import { buttonVariants } from "@/components/ui/Button";
 import { SmoothScrollProvider } from "@/components/motion/SmoothScrollProvider";
 import { ExpandOnScrollImage } from "@/components/motion/ExpandOnScrollImage";
 import { RevealGroup } from "@/components/motion/RevealGroup";
@@ -188,13 +188,16 @@ export default function CapturasPage() {
               <Link
                 href="https://github.com/Fralopala2/medusse-show/tree/clase/medusse_app"
                 target="_blank"
+                rel="noopener noreferrer"
+                className={buttonVariants({ size: "lg" })}
               >
-                <Button size="lg">Ver código en GitHub</Button>
+                Ver código en GitHub
               </Link>
-              <Link href="/">
-                <Button variant="outline" size="lg">
-                  Volver al inicio
-                </Button>
+              <Link
+                href="/"
+                className={buttonVariants({ variant: "outline", size: "lg" })}
+              >
+                Volver al inicio
               </Link>
             </div>
           </RevealGroup>

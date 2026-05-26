@@ -45,6 +45,10 @@
     min-height: 100vh;
   }
 
+  .theme-cinematic [id] {
+    scroll-margin-top: 5rem;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;

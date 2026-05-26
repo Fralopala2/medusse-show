@@ -5,9 +5,18 @@ import Lenis from "lenis";
 import { gsap, registerGsapPlugins, ScrollTrigger } from "@/lib/gsap/register";
 import { prefersReducedMotion, refreshScrollTrigger } from "@/lib/gsap/scroll-effects";
 
+function shouldUseLenis(): boolean {
+  if (typeof window === "undefined") return false;
+  if (prefersReducedMotion()) return false;
+  // Lenis rompe clics y anclas en móvil/táctil
+  if (window.matchMedia("(pointer: coarse)").matches) return false;
+  if (window.matchMedia("(max-width: 768px)").matches) return false;
+  return true;
+}
+
 export function useSmoothScroll(enabled = true) {
   useEffect(() => {
-    if (!enabled || prefersReducedMotion()) return;
+    if (!enabled || !shouldUseLenis()) return;
 
     registerGsapPlugins();
 

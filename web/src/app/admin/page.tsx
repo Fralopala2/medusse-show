@@ -375,15 +375,15 @@ function AdminContent() {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Panel de Administracion</h1>
+              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">Panel de Administracion</h1>
               <p className="mt-1 text-xs sm:text-sm text-gray-500">Gestion del sistema Medusse IoT</p>
             </div>
             <button
               onClick={() => router.push('/dashboard')}
-              className="px-3 py-2 sm:px-4 border border-gray-300 rounded-md text-xs sm:text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-all duration-300 hover:scale-105"
+              className="w-full sm:w-auto px-3 py-2 sm:px-4 border border-gray-300 rounded-md text-xs sm:text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-all duration-300 hover:scale-105 text-center"
             >
               Volver al Dashboard
             </button>
@@ -392,9 +392,9 @@ function AdminContent() {
       </div>
 
       {/* Tabs */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
-        <div className="border-b border-gray-200">
-          <nav className="-mb-px flex space-x-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 sm:mt-6">
+        <div className="border-b border-gray-200 overflow-x-auto no-scrollbar">
+          <nav className="-mb-px flex space-x-4 sm:space-x-8 min-w-max">
             <button
               onClick={() => handleTabChange('stats')}
               className={`${
@@ -553,12 +553,13 @@ function AdminContent() {
                 <h3 className="text-lg font-medium text-gray-900">Gestión de Usuarios</h3>
                 <button
                   onClick={() => setShowCreateUserModal(true)}
-                  className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors text-sm font-medium"
+                  className="px-3 py-1.5 sm:px-4 sm:py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors text-xs sm:text-sm font-medium"
                 >
                   + Crear Usuario
                 </button>
               </div>
-              <table className="min-w-full divide-y divide-gray-200">
+              <div className="overflow-x-auto">
+                <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Usuario</th>
@@ -603,20 +604,22 @@ function AdminContent() {
                 </tbody>
               </table>
             </div>
+          </div>
           )}
 
-          {/* Alertas */}
-          {activeTab === 'alerts' && (
-            <div className="bg-white shadow rounded-lg overflow-hidden">
-              <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
-                <h3 className="text-lg font-medium text-gray-900">Gestión de Alertas</h3>
-                <button
-                  onClick={() => setShowCreateAlertModal(true)}
-                  className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors text-sm font-medium"
-                >
-                  + Crear Alerta
-                </button>
-              </div>
+        {/* Alertas */}
+        {activeTab === 'alerts' && (
+          <div className="bg-white shadow rounded-lg overflow-hidden">
+            <div className="px-4 py-3 sm:px-6 sm:py-4 border-b border-gray-200 flex justify-between items-center">
+              <h3 className="text-base sm:text-lg font-medium text-gray-900">Gestión de Alertas</h3>
+              <button
+                onClick={() => setShowCreateAlertModal(true)}
+                className="px-3 py-1.5 sm:px-4 sm:py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors text-xs sm:text-sm font-medium"
+              >
+                + Crear Alerta
+              </button>
+            </div>
+            <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
@@ -671,9 +674,10 @@ function AdminContent() {
                 </tbody>
               </table>
             </div>
-          )}
+          </div>
+        )}
 
-          {/* Logs */}
+        {/* Logs */}
           {activeTab === 'logs' && (
             <div className="bg-white shadow rounded-lg overflow-hidden">
               <div className="px-6 py-4 border-b border-gray-200">

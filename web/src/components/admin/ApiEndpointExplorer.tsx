@@ -203,13 +203,13 @@ export function ApiEndpointExplorer() {
         </p>
       </div>
 
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2 overflow-x-auto no-scrollbar pb-1">
         {API_ENDPOINT_CATEGORIES.map((cat) => (
           <button
             key={cat}
             type="button"
             onClick={() => handleCategoryChange(cat)}
-            className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+            className={`px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-colors whitespace-nowrap ${
               category === cat
                 ? "bg-indigo-600 text-white"
                 : "bg-white text-gray-600 border border-gray-300 hover:bg-gray-50"
@@ -220,8 +220,8 @@ export function ApiEndpointExplorer() {
         ))}
       </div>
 
-      <div className="grid lg:grid-cols-5 gap-6">
-        <div className="lg:col-span-2 space-y-2 max-h-[520px] overflow-y-auto pr-1">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+        <div className="lg:col-span-2 space-y-2 max-h-[300px] lg:max-h-[520px] overflow-y-auto pr-1">
           {filteredEndpoints.map((endpoint) => (
             <button
               key={endpoint.id}
