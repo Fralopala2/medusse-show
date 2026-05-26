@@ -46,7 +46,7 @@ export function TechnologySection({ data, id }: TechnologySectionProps) {
           <Button 
             variant="outline" 
             className="text-white border-white hover:bg-white hover:text-black"
-            onClick={() => window.open('/README.md', '_blank')}
+            onClick={() => window.open('https://github.com/Fralopala2/medusse-show/blob/clase/README.md', '_blank')}
           >
             Descargar documentación técnica
           </Button>

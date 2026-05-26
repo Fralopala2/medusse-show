@@ -99,7 +99,7 @@ export const heroSections = [
       {
         primary: "Ver API Docs",
         secondary: "Probar Endpoints",
-        primaryAction: "/api/README.md",
+        primaryAction: "https://github.com/Fralopala2/medusse-show/blob/clase/api/README.md",
         secondaryAction: "http://localhost:3001/api/summary",
       },
     ],
@@ -116,7 +116,7 @@ export const heroSections = [
       {
         primary: "Ver Migración",
         secondary: "Hardware Necesario",
-        primaryAction: "/documentacion/MIGRACION.md",
+        primaryAction: "https://github.com/Fralopala2/medusse-show/blob/clase/documentacion/MIGRACION.md",
         secondaryAction: "#precios",
       },
     ],
