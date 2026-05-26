@@ -2,6 +2,8 @@
 
 **Sistema IoT de monitoreo ambiental con arquitectura de microservicios**
 
+Documento unificado de presentación del TFG: resume el proyecto, integra los 16 retos y concentra la información útil para evaluación y exposición.
+
 ---
 
 ## Información del proyecto

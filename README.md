@@ -97,8 +97,7 @@ proyecto-medusse/
 │   ├── pubspec.yaml         # Dependencias Flutter
 │   └── README.md            # Documentación Flutter
 ├── documentacion/           # 📖 Documentación completa del proyecto
-│   ├── DOCUMENTACION_RETOS.md          # 16 retos detallados (2792 líneas)
-│   ├── DOCUMENTACION_GENERAL_RETOS.md  # Resumen general (1224 líneas)
+│   ├── DOCUMENTACION_GENERAL_RETOS.md  # Documento unificado de presentación
 │   ├── README_DOCUMENTACION.md         # Guía de documentación
 │   ├── RESUMEN_ENTREGA_PROFESOR.md     # Resumen ejecutivo
 │   ├── RETO_1_SOSTENIBILIDAD.md        # Reto 1 completo
@@ -619,7 +618,7 @@ La web estará disponible en: http://localhost:3003
 
 ### Documentación de Retos
 
-📖 **Documentación Detallada (Principal):** `documentacion/DOCUMENTACION_RETOS.md` (2792 líneas)  
+📖 **Documentación del Proyecto (Principal):** `documentacion/DOCUMENTACION_GENERAL_RETOS.md`  
 📖 **Guía de Documentación:** `documentacion/README_DOCUMENTACION.md`  
 📖 **Resumen Ejecutivo:** `documentacion/DOCUMENTACION_TFG.md`  
 📖 **Reto 1 - Sostenibilidad:** `documentacion/RETO_1_SOSTENIBILIDAD.md`  
@@ -679,7 +678,7 @@ La web estará disponible en: http://localhost:3003
 - **Total**: ~6100 líneas de código
 
 ### Documentación Generada
-- **Documentación de retos**: 2300+ líneas (DOCUMENTACION_RETOS.md)
+- **Documentación unificada del proyecto**: 1200+ líneas (DOCUMENTACION_GENERAL_RETOS.md)
 - **Documentación técnica**: 2500+ líneas (varios archivos)
 - **Documentación general**: 1500+ líneas (README, CHANGELOG, etc.)
 - **Comentarios en código**: 1000+ líneas

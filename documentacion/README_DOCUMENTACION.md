@@ -6,36 +6,19 @@
 
 ## Documentos Principales para Entrega
 
-### 1. Documentación Detallada de los 16 Retos
+### 1. Documentación Unificada del Proyecto
 
 **Archivo Principal:**
-- `DOCUMENTACION_RETOS.md` (2792 líneas)
-  * Los 16 retos documentados en profundidad
-  * Explicación detallada con ejemplos de código
-  * Localización exacta en archivos del proyecto
-  * Diagramas Mermaid profesionales
-  * Tabla resumen final
-
-**Contenido de cada Reto:**
-- Descripción del reto
-- Implementación en el proyecto
-- Archivos involucrados con líneas específicas
-- Ejemplos de código concretos
-- Diagramas de flujo y arquitectura Mermaid
-- Resultados y métricas
-
-### 2. Documentación General
-
-**Archivo:**
-- `DOCUMENTACION_GENERAL_RETOS.md` (1224 líneas)
+- `DOCUMENTACION_GENERAL_RETOS.md`
   * Resumen ejecutivo del proyecto
   * Arquitectura completa del sistema
   * Stack tecnológico utilizado
+  * Retos 1 al 16 integrados en un solo documento
   * Estadísticas del proyecto
   * Guías de instalación
   * Casos de uso y demostración
 
-### 3. Documentación Específica de Retos
+### 2. Documentación Específica de Retos
 
 **Reto 1 - Sostenibilidad:**
 - `RETO_1_SOSTENIBILIDAD.md` (860+ líneas)
@@ -54,7 +37,7 @@
   * Análisis de riesgos (9 riesgos identificados)
   * Hoja de ruta 18 meses en 4 fases
 
-### 4. Documentación Técnica
+### 3. Documentación Técnica
 
 **Instalación y Configuración:**
 - `INSTALACION.md` - Guías de instalación detalladas
@@ -80,8 +63,7 @@
 ```
 documentacion/
 ├── README_DOCUMENTACION.md              # Este archivo (guia)
-├── DOCUMENTACION_RETOS.md               # ⭐ PRINCIPAL - Los 16 retos
-├── DOCUMENTACION_GENERAL_RETOS.md       # Resumen general
+├── DOCUMENTACION_GENERAL_RETOS.md       # ⭐ PRINCIPAL - Documento unificado
 ├── RETO_1_SOSTENIBILIDAD.md             # Reto 1 detallado
 ├── RETO_6_PLAN_EMPRESA.md               # Reto 6 detallado
 ├── RESUMEN_ENTREGA_PROFESOR.md          # Resumen ejecutivo
@@ -97,16 +79,15 @@ documentacion/
 
 ### Para Evaluación Rápida (30 minutos)
 
-1. **DOCUMENTACION_RETOS.md** - Leer los 16 retos completos
+1. **DOCUMENTACION_GENERAL_RETOS.md** - Documento unificado para evaluación
 2. **Tabla resumen final** - Ver estado de 16/16 retos
 
 ### Para Evaluación Completa (2 horas)
 
-1. **DOCUMENTACION_RETOS.md** - Los 16 retos completos
-2. **DOCUMENTACION_GENERAL_RETOS.md** - Contexto general del proyecto
-3. **RETO_1_SOSTENIBILIDAD.md** - Profundizar en sostenibilidad
-4. **RETO_6_PLAN_EMPRESA.md** - Profundizar en plan de empresa
-5. **README.md principal** - Visión general del proyecto
+1. **DOCUMENTACION_GENERAL_RETOS.md** - Documento unificado del TFG
+2. **RETO_1_SOSTENIBILIDAD.md** - Profundizar en sostenibilidad
+3. **RETO_6_PLAN_EMPRESA.md** - Profundizar en plan de empresa
+4. **README.md principal** - Visión general del proyecto
 
 ### Para Verificación Técnica (1 hora)
 
@@ -121,22 +102,22 @@ documentacion/
 
 | # | Reto | Estado | Documento Principal |
 |---|------|--------|---------------------|
-| 1 | Sostenibilidad | ✅ | DOCUMENTACION_RETOS.md |
-| 2 | Base de Datos | ✅ | DOCUMENTACION_RETOS.md |
-| 3 | Procedimientos | ✅ | DOCUMENTACION_RETOS.md |
-| 4 | Bocetos | ✅ | DOCUMENTACION_RETOS.md |
-| 5 | HTML/CSS | ✅ | DOCUMENTACION_RETOS.md |
-| 6 | Plan Empresa | ✅ | DOCUMENTACION_RETOS.md |
-| 7 | Validacion JS | ✅ | DOCUMENTACION_RETOS.md |
-| 8 | Front-Back | ✅ | DOCUMENTACION_RETOS.md |
-| 9 | Usuarios | ✅ | DOCUMENTACION_RETOS.md |
-| 10 | Admin Panel | ✅ | DOCUMENTACION_RETOS.md |
-| 11 | FTP/SFTP | ✅ | DOCUMENTACION_RETOS.md |
-| 12 | Asincrona | ✅ | DOCUMENTACION_RETOS.md |
-| 13 | Framework Cliente | ✅ | DOCUMENTACION_RETOS.md |
-| 14 | Diseño Avanzado | ✅ | DOCUMENTACION_RETOS.md |
-| 15 | Framework Servidor | ✅ | DOCUMENTACION_RETOS.md |
-| 16 | Documentacion | ✅ | DOCUMENTACION_RETOS.md |
+| 1 | Sostenibilidad | ✅ | DOCUMENTACION_GENERAL_RETOS.md |
+| 2 | Base de Datos | ✅ | DOCUMENTACION_GENERAL_RETOS.md |
+| 3 | Procedimientos | ✅ | DOCUMENTACION_GENERAL_RETOS.md |
+| 4 | Bocetos | ✅ | DOCUMENTACION_GENERAL_RETOS.md |
+| 5 | HTML/CSS | ✅ | DOCUMENTACION_GENERAL_RETOS.md |
+| 6 | Plan Empresa | ✅ | DOCUMENTACION_GENERAL_RETOS.md |
+| 7 | Validacion JS | ✅ | DOCUMENTACION_GENERAL_RETOS.md |
+| 8 | Front-Back | ✅ | DOCUMENTACION_GENERAL_RETOS.md |
+| 9 | Usuarios | ✅ | DOCUMENTACION_GENERAL_RETOS.md |
+| 10 | Admin Panel | ✅ | DOCUMENTACION_GENERAL_RETOS.md |
+| 11 | FTP/SFTP | ✅ | DOCUMENTACION_GENERAL_RETOS.md |
+| 12 | Asincrona | ✅ | DOCUMENTACION_GENERAL_RETOS.md |
+| 13 | Framework Cliente | ✅ | DOCUMENTACION_GENERAL_RETOS.md |
+| 14 | Diseño Avanzado | ✅ | DOCUMENTACION_GENERAL_RETOS.md |
+| 15 | Framework Servidor | ✅ | DOCUMENTACION_GENERAL_RETOS.md |
+| 16 | Documentacion | ✅ | DOCUMENTACION_GENERAL_RETOS.md |
 
 **Estado Final: 16/16 Retos Completados (100%) ✅**
 
@@ -182,14 +163,13 @@ documentacion/
 
 El documento principal que contiene toda la información de los 16 retos es:
 
-1. **DOCUMENTACION_RETOS.md** (2792 líneas) - Documento completo con los 16 retos
+1. **DOCUMENTACION_GENERAL_RETOS.md** - Documento unificado con la presentación y los 16 retos
 
 Documentos complementarios:
 
-2. **DOCUMENTACION_GENERAL_RETOS.md** (1224 líneas) - Resumen general del proyecto
-3. **RESUMEN_ENTREGA_PROFESOR.md** - Resumen ejecutivo para evaluación rápida
-4. **RETO_1_SOSTENIBILIDAD.md** - Reto 1 en profundidad
-5. **RETO_6_PLAN_EMPRESA.md** - Reto 6 en profundidad
+2. **RESUMEN_ENTREGA_PROFESOR.md** - Resumen ejecutivo para evaluación rápida
+3. **RETO_1_SOSTENIBILIDAD.md** - Reto 1 en profundidad
+4. **RETO_6_PLAN_EMPRESA.md** - Reto 6 en profundidad
 
 Estos documentos incluyen:
 - Explicación detallada de cada reto
