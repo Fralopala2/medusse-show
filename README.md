@@ -16,24 +16,9 @@
 
 ## 🏗️ Arquitectura Completa
 
-```mermaid
-flowchart LR
-    ESP[ESP32<br/>Simulators] --> MQTT[MQTT<br/>Broker]
-    MQTT --> TEL[Telegraf]
-    TEL --> INFLUX[InfluxDB]
-    INFLUX --> GRAF[Grafana<br/>Dashboard]
-    MQTT --> API[API REST]
-    INFLUX --> API
-    API --> MYSQL[MySQL<br/>Database]
-    API --> WEB[Web<br/>Next.js]
-    API --> WS[WebSocket<br/>Real-time]
-    WS --> FLUTTER[Flutter<br/>Mobile App]
-    
-    style ESP fill:#3b82f6,stroke:#1e40af,stroke-width:2px,color:#fff
-    style MQTT fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff
-    style INFLUX fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
-    style GRAF fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#fff
-```
+<p align="center">
+   <img src="https://github.com/user-attachments/assets/79836c85-868f-495e-a32d-41b25f71af3b" alt="Diagrama proyecto Medusse" style="max-width:100%;height:auto;">
+</p>
 
 ## 📁 Estructura del Proyecto
 
@@ -604,7 +589,7 @@ La web estará disponible en: http://localhost:3003
 | **Reto 7** | ✅ Validación de formularios JS (validación en tiempo real) |
 | **Reto 8** | ✅ Transferencia Front-end/Back-end (API REST completa) |
 | **Reto 9** | ✅ Gestión de usuarios con sesiones (MySQL + bcrypt) |
-| **Reto 10** | ⚠️ NO IMPLEMENTADO — Web Services SOAP (decisión arquitectónica) |
+| **Reto 10** | ✅ Panel de administración |
 | **Reto 11** | ✅ Script FTP/SFTP (deployment automático) |
 | **Reto 12** | ✅ Comunicación asíncrona (WebSocket + Fetch API) |
 | **Reto 13** | ✅ Framework cliente (Flutter + Next.js) |
@@ -738,4 +723,4 @@ Para consultas de licencia o permisos, contacta al autor
 
 ---
 
-_**Versión actual:** 2.7.7 (Noviembre 2025)_
+_**Versión actual:** 2.7.9 (Noviembre 2025)_
