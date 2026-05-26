@@ -3,7 +3,7 @@
 **Sistema IoT de monitoreo ambiental con arquitectura de microservicios**
  
 <p align="center">
-   <img src="./images/diagrama_proyecto_medusse.png" alt="Diagrama proyecto Medusse" style="max-width:100%;height:auto;">
+   <img src="https://github.com/user-attachments/assets/79836c85-868f-495e-a32d-41b25f71af3b" alt="Diagrama proyecto Medusse" style="max-width:100%;height:auto;">
 </p>
 
 Documento unificado de presentación del TFG: resume el proyecto, integra los 16 retos y concentra la información útil para evaluación y exposición.
