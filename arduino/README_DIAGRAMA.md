@@ -182,7 +182,7 @@ El diagrama incluye:
 ## 📚 Información Adicional
 
 Para más detalles sobre los sensores, consulta:
-- `documentacion/DOCUMENTACION-FINAL-PROYECTO-MEDUSSE-IoT.md`
+- `documentacion/DOCUMENTACION_GENERAL_RETOS.md`
 - `documentacion/DOCUMENTACION_GENERAL_RETOS.md`
 
 ---
