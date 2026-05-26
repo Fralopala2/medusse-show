@@ -30,7 +30,7 @@ export default function AvisoLegalPage() {
               <p><strong>Proyecto:</strong> Medusse IoT - Sistema de Monitoreo Ambiental</p>
               <p><strong>Institución:</strong> IES José Rodrigo Botet</p>
               <p><strong>Correo electrónico:</strong> <a href="mailto:pacoaldev@gmail.com" className="text-indigo-600 hover:text-indigo-700">pacoaldev@gmail.com</a></p>
-              <p><strong>Repositorio:</strong> <a href="https://github.com/Fralopala2/proyecto-medusse" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-700">github.com/Fralopala2/proyecto-medusse</a></p>
+              <p><strong>Repositorio:</strong> <a href="https://github.com/Fralopala2/medusse-show" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-700">github.com/Fralopala2/medusse-show</a></p>
             </div>
           </section>
 

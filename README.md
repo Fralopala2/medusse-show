@@ -38,7 +38,7 @@ flowchart LR
 ## 📁 Estructura del Proyecto
 
 ```
-proyecto-medusse/
+medusse-show/
 ├── arduino/                    # Simuladores y firmware ESP32
 │   ├── medusse_simulator.py   # Simulador principal (4 ubicaciones, 18 sensores)
 │   ├── src/                   # Código ESP32 real (preparado para LoRa)

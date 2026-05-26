@@ -198,6 +198,6 @@ verificar.bat
 
 ### Repositorio
 
-**GitHub:** https://github.com/Fralopala2/proyecto-medusse  
+**GitHub:** https://github.com/Fralopala2/medusse-show  
 **Rama:** clase
 

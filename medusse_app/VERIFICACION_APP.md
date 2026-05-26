@@ -439,7 +439,7 @@ flutter test
 
 **Autor:** Francisco Manuel Lopez Alarte  
 **Email:** pacoaldev@gmail.com  
-**Repositorio:** https://github.com/Fralopala2/proyecto-medusse  
+**Repositorio:** https://github.com/Fralopala2/medusse-show  
 **Rama:** clase
 
 ---

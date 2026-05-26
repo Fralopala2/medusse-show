@@ -79,8 +79,8 @@ verificar.bat              # Verificacion completa
 ```bash
 # 1. Clonar el repositorio
 cd ~
-git clone https://github.com/Fralopala2/proyecto-medusse.git
-cd proyecto-medusse
+git clone https://github.com/Fralopala2/medusse-show.git
+cd medusse-show
 git checkout clase
 
 # 2. Dar permisos y ejecutar
@@ -437,7 +437,7 @@ instalar_proyecto.bat
 - **Docker**: https://docs.docker.com/get-docker/
 - **Node.js**: https://nodejs.org/
 - **Python**: https://www.python.org/
-- **Repositorio**: https://github.com/Fralopala2/proyecto-medusse
+- **Repositorio**: https://github.com/Fralopala2/medusse-show
 
 ---
 

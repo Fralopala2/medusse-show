@@ -113,7 +113,7 @@ export default function CapturasPage() {
 
           <div className="flex gap-4 justify-center">
             <Link
-              href="https://github.com/Fralopala2/proyecto-medusse/tree/clase/medusse_app"
+              href="https://github.com/Fralopala2/medusse-show/tree/clase/medusse_app"
               target="_blank"
               className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
             >

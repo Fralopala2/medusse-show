@@ -14,7 +14,7 @@ Este documento explica como esta configurado el deployment automatico del proyec
 
 - **Plataforma**: Vercel
 - **Framework**: Next.js 16.0.3
-- **Repositorio**: github.com/Fralopala2/proyecto-medusse
+- **Repositorio**: github.com/Fralopala2/medusse-show
 - **Rama de produccion**: clase
 - **Root Directory**: web
 - **Region**: Washington D.C. (iad1)
@@ -144,7 +144,7 @@ Vercel detecta el push a GitHub automaticamente:
    - Autorizacion de acceso al repositorio
 
 2. **Importar proyecto**
-   - Seleccionar repositorio: Fralopala2/proyecto-medusse
+   - Seleccionar repositorio: Fralopala2/medusse-show
    - Configurar rama: clase
    - Root Directory: web
 

@@ -14,7 +14,7 @@ Este documento explica como esta configurado el deployment automatico del proyec
 
 - **Plataforma**: Vercel
 - **Framework**: Next.js 16.0.3
-- **Repositorio**: github.com/Fralopala2/proyecto-medusse
+- **Repositorio**: github.com/Fralopala2/medusse-show
 - **Rama de produccion**: clase
 - **Root Directory**: web
 - **Region**: Washington D.C. (iad1)

@@ -1217,7 +1217,7 @@ La implementacion de 18 tipos de sensores, incluyendo gestion de energia solar, 
 - **Express:** https://expressjs.com/
 
 ### Repositorio del Proyecto
-- **GitHub:** https://github.com/Fralopala2/proyecto-medusse
+- **GitHub:** https://github.com/Fralopala2/medusse-show
 - **Rama:** clase
 
 ### Contacto

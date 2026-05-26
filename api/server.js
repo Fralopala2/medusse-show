@@ -72,7 +72,7 @@ app.get('/', (req, res) => {
         logs: '/api/admin/logs'
       }
     },
-    documentation: 'https://github.com/Fralopala2/proyecto-medusse/blob/clase/api/README.md'
+    documentation: 'https://github.com/Fralopala2/medusse-show/blob/clase/api/README.md'
   });
 });
 

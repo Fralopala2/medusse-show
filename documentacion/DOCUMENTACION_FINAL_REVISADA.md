@@ -19,7 +19,7 @@
 ---
 
 **Repositorio GitHub:**  
-[https://github.com/Fralopala2/proyecto-medusse](https://github.com/Fralopala2/proyecto-medusse)  
+[https://github.com/Fralopala2/medusse-show](https://github.com/Fralopala2/medusse-show)  
 **Rama:** clase
 
 **Licencia:** All Rights Reserved / Todos los derechos reservados.
@@ -138,7 +138,7 @@ El proyecto contribuye directamente a la **sostenibilidad ambiental** con:
 | **Versión** | 2.7.7 |
 | **Fecha de Entrega** | Diciembre 2025 |
 | **Licencia** | *Todos los derechos reservados* |
-| **Repositorio** | [https://github.com/Fralopala2/proyecto-medusse](https://github.com/Fralopala2/proyecto-medusse) |
+| **Repositorio** | [https://github.com/Fralopala2/medusse-show](https://github.com/Fralopala2/medusse-show) |
 
 ### Datos del Autor
 
@@ -4130,7 +4130,7 @@ Estudiante 2º DAW \- IES José Rodrigo Botet
 
 Manises, Valencia // Diciembre 2025
 
-**GitHub:** [Repositorio del proyecto Medusse](https://github.com/Fralopala2/proyecto-medusse) // **Email:** [pacoaldev@gmail.com](mailto:pacoaldev@gmail.com)
+**GitHub:** [Repositorio del proyecto Medusse](https://github.com/Fralopala2/medusse-show) // **Email:** [pacoaldev@gmail.com](mailto:pacoaldev@gmail.com)
 
 # FIN DEL DOCUMENTO
 

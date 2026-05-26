@@ -154,7 +154,7 @@ export default function MapaSitioPage() {
               Recursos del Proyecto
             </h2>
             <div className="grid md:grid-cols-2 gap-4">
-              <a href="https://github.com/Fralopala2/proyecto-medusse" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 rounded-lg hover:bg-indigo-50 hover:shadow transition-all">
+              <a href="https://github.com/Fralopala2/medusse-show" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 rounded-lg hover:bg-indigo-50 hover:shadow transition-all">
                 <h3 className="font-semibold text-gray-900 mb-1 flex items-center">
                   Repositorio GitHub
                   <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -181,7 +181,7 @@ export default function MapaSitioPage() {
                 </h3>
                 <p className="text-sm text-gray-600">Términos de la licencia Open Source</p>
               </a>
-               <a href="https://github.com/Fralopala2/proyecto-medusse/blob/clase/documentacion/DOCUMENTACION_GENERAL_RETOS.md" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 rounded-lg hover:bg-indigo-50 hover:shadow transition-all">
+               <a href="https://github.com/Fralopala2/medusse-show/blob/clase/documentacion/DOCUMENTACION_GENERAL_RETOS.md" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 rounded-lg hover:bg-indigo-50 hover:shadow transition-all">
                 <h3 className="font-semibold text-gray-900 mb-1 flex items-center">
                   Documentación Técnica
                   <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">

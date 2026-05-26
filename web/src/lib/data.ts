@@ -59,7 +59,7 @@ export const heroSections = [
       {
         primary: "Descargar App",
         secondary: "Ver Capturas",
-        primaryAction: "https://github.com/Fralopala2/proyecto-medusse/tree/clase/medusse_app",
+        primaryAction: "https://github.com/Fralopala2/medusse-show/tree/clase/medusse_app",
         secondaryAction: "/capturas",
       },
     ],
