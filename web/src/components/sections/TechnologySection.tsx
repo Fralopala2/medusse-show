@@ -1,10 +1,16 @@
 "use client";
 
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { motion } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
+import { ExpandOnScrollImage } from "@/components/motion/ExpandOnScrollImage";
+import { RevealGroup } from "@/components/motion/RevealGroup";
+import { sectionImages } from "@/lib/data";
+import { registerGsapPlugins } from "@/lib/gsap/register";
+import { createParallax } from "@/lib/gsap/scroll-effects";
 
 interface TechnologySectionProps {
   data: {
@@ -16,55 +22,92 @@ interface TechnologySectionProps {
 }
 
 export function TechnologySection({ data, id }: TechnologySectionProps) {
+  const sectionRef = useRef<HTMLElement>(null);
+  const visualRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      const section = sectionRef.current;
+      const visual = visualRef.current;
+      if (!section || !visual) return;
+      registerGsapPlugins();
+      return createParallax(visual, section, -12);
+    },
+    { scope: sectionRef }
+  );
+
   return (
-    <Section id={id} className="bg-soleares-black text-white flex items-center justify-center">
-      <Container className="flex flex-col md:flex-row items-center gap-12">
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="flex-1"
-        >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-white">{data.title}</h2>
-          <p className="text-lg sm:text-xl text-gray-300 mb-8">{data.subtitle}</p>
-          
-          <ul className="space-y-4 mb-8">
+    <Section
+      ref={sectionRef}
+      id={id}
+      className="bg-cinematic-surface py-24 flex items-center"
+    >
+      <Container className="flex flex-col lg:flex-row items-center gap-14">
+        <RevealGroup className="flex-1">
+          <p
+            data-reveal
+            className="text-cinematic-accent text-sm uppercase tracking-widest mb-3"
+          >
+            Arquitectura
+          </p>
+          <h2
+            data-reveal
+            className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-white"
+          >
+            {data.title}
+          </h2>
+          <p data-reveal className="text-lg text-medusse-gray mb-8">
+            {data.subtitle}
+          </p>
+
+          <ul className="space-y-4 mb-10">
             {data.points.map((point, index) => (
-              <motion.li
+              <li
                 key={index}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="flex items-center gap-3 text-base sm:text-lg text-gray-100"
+                data-reveal
+                className="flex items-center gap-3 text-base text-white/85"
               >
-                <CheckCircle2 className="text-green-400 w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0" />
+                <CheckCircle2 className="text-cinematic-accent w-5 h-5 shrink-0" />
                 {point}
-              </motion.li>
+              </li>
             ))}
           </ul>
 
-          <Button 
-            variant="outline" 
-            className="text-white border-white hover:bg-white hover:text-black"
-            onClick={() => window.open('https://github.com/Fralopala2/medusse-show/blob/clase/README.md', '_blank')}
-          >
-            Descargar documentación técnica
-          </Button>
-        </motion.div>
+          <div data-reveal>
+            <Button
+              variant="outline"
+              onClick={() =>
+                window.open(
+                  "https://github.com/Fralopala2/medusse-show/blob/clase/README.md",
+                  "_blank"
+                )
+              }
+            >
+              Descargar documentación técnica
+            </Button>
+          </div>
+        </RevealGroup>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8 }}
-          className="flex-1 w-full h-[400px] bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl flex items-center justify-center relative overflow-hidden"
+        <div
+          ref={visualRef}
+          className="flex-1 w-full min-h-[400px] rounded-2xl overflow-hidden relative glass-card"
         >
-           {/* Placeholder for tech visualization */}
-           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-30 mix-blend-overlay" />
-           <div className="z-10 text-center p-8">
-             <div className="text-5xl sm:text-6xl font-mono font-bold text-blue-400 mb-2">MQTT</div>
-             <div className="text-xs sm:text-sm text-gray-300 uppercase tracking-widest">Protocolo Seguro</div>
-           </div>
-        </motion.div>
+          <ExpandOnScrollImage
+            src={sectionImages.technology}
+            alt="Stack tecnológico"
+            className="relative !absolute inset-0 rounded-2xl"
+          />
+          <div className="absolute inset-0 z-10 flex items-center justify-center">
+            <div className="text-center p-8 glass-card rounded-xl">
+              <div className="font-mono text-5xl sm:text-6xl font-bold text-gradient-iot mb-2">
+                MQTT
+              </div>
+              <div className="text-xs text-medusse-gray uppercase tracking-[0.25em]">
+                Protocolo IoT
+              </div>
+            </div>
+          </div>
+        </div>
       </Container>
     </Section>
   );

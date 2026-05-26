@@ -3,14 +3,23 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Container } from "@/components/ui/Container";
+import { Button } from "@/components/ui/Button";
+import { SmoothScrollProvider } from "@/components/motion/SmoothScrollProvider";
+import { ExpandOnScrollImage } from "@/components/motion/ExpandOnScrollImage";
+import { RevealGroup } from "@/components/motion/RevealGroup";
+import { sectionImages } from "@/lib/data";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
+import { createRevealStagger, prefersReducedMotion } from "@/lib/gsap/scroll-effects";
 
 const screenshots = [
   {
     title: "Pantalla Principal",
-    description: "Vista general con 4 ubicaciones monitoreadas en tiempo real",
+    description:
+      "Vista general con 4 ubicaciones monitoreadas en tiempo real",
     image: "/images/app-home.jpg",
   },
   {
@@ -20,7 +29,8 @@ const screenshots = [
   },
   {
     title: "Visualización de Alarmas",
-    description: "Sistema de alertas inteligentes con notificaciones en tiempo real",
+    description:
+      "Sistema de alertas inteligentes con notificaciones en tiempo real",
     image: "/images/app-charts.jpg",
   },
   {
@@ -32,130 +42,197 @@ const screenshots = [
 
 export default function CapturasPage() {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, []);
 
+  useGSAP(
+    () => {
+      if (!gridRef.current) return;
+      registerGsapPlugins();
+      return createRevealStagger(gridRef.current, "[data-capture]");
+    },
+    { scope: gridRef }
+  );
+
+  const handleCardHover = (el: HTMLElement, entering: boolean) => {
+    if (prefersReducedMotion()) return;
+    gsap.to(el, {
+      y: entering ? -8 : 0,
+      duration: 0.35,
+      ease: "power2.out",
+    });
+  };
+
   return (
-    <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      <Header />
-      
-      <Container className="py-20 pt-24">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            App Móvil Flutter
-          </h1>
-          <p className="text-xl text-gray-600 mb-8">
-            Multiplataforma • Tiempo Real • Material Design 3
-          </p>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <span className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
-              Windows
-            </span>
-            <span className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium">
-              Android
-            </span>
-            <span className="px-4 py-2 bg-orange-100 text-orange-700 rounded-full text-sm font-medium">
-              Web
-            </span>
-          </div>
-        </div>
+    <SmoothScrollProvider className="bg-cinematic-bg min-h-screen">
+      <main>
+        <Header />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          {screenshots.map((screenshot, index) => (
+        <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
+          <ExpandOnScrollImage
+            src={sectionImages.capturasHero}
+            alt="App móvil Flutter"
+          />
+          <Container className="relative z-10 pt-28 pb-16 text-center">
+            <RevealGroup>
+              <p
+                data-reveal
+                className="text-cinematic-accent text-sm uppercase tracking-widest mb-4"
+              >
+                Flutter · Multiplataforma
+              </p>
+              <h1
+                data-reveal
+                className="font-display text-4xl md:text-6xl font-bold text-white mb-4"
+              >
+                App Móvil Flutter
+              </h1>
+              <p data-reveal className="text-xl text-white/75 mb-8">
+                Tiempo real · Material Design 3 · WebSocket
+              </p>
+              <div
+                data-reveal
+                className="flex gap-3 justify-center flex-wrap"
+              >
+                {["Windows", "Android", "Web"].map((platform) => (
+                  <span
+                    key={platform}
+                    className="glass-card px-4 py-2 rounded-full text-sm text-white/90"
+                  >
+                    {platform}
+                  </span>
+                ))}
+              </div>
+            </RevealGroup>
+          </Container>
+        </section>
+
+        <Container className="py-20">
+          <div
+            ref={gridRef}
+            className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20"
+          >
+            {screenshots.map((screenshot, index) => (
+              <div
+                key={index}
+                data-capture
+                className="glass-card rounded-2xl overflow-hidden cursor-pointer group"
+                onClick={() => setSelectedImage(index)}
+                onMouseEnter={(e) => handleCardHover(e.currentTarget, true)}
+                onMouseLeave={(e) => handleCardHover(e.currentTarget, false)}
+              >
+                <div className="relative h-80 bg-cinematic-surface">
+                  <Image
+                    src={screenshot.image}
+                    alt={screenshot.title}
+                    fill
+                    className="object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="p-6 border-t border-white/10">
+                  <h3 className="font-display text-xl font-bold text-white mb-2">
+                    {screenshot.title}
+                  </h3>
+                  <p className="text-medusse-gray text-sm">
+                    {screenshot.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <RevealGroup>
+            <h2
+              data-reveal
+              className="font-display text-2xl font-bold text-center text-white mb-10"
+            >
+              Características principales
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+              {[
+                {
+                  icon: "📊",
+                  title: "Datos en Tiempo Real",
+                  text: "WebSocket para actualizaciones automáticas cada 15 segundos",
+                },
+                {
+                  icon: "📈",
+                  title: "Gráficos Interactivos",
+                  text: "Visualización con fl_chart, zoom, pan y tooltips",
+                },
+                {
+                  icon: "🔔",
+                  title: "Sistema de Alertas",
+                  text: "Notificaciones inteligentes por umbrales de CO₂ y batería",
+                },
+              ].map((feat) => (
+                <div
+                  key={feat.title}
+                  data-reveal
+                  className="glass-card rounded-xl p-6 text-center"
+                >
+                  <div className="text-3xl mb-3">{feat.icon}</div>
+                  <h3 className="font-semibold text-white mb-2">{feat.title}</h3>
+                  <p className="text-sm text-medusse-gray">{feat.text}</p>
+                </div>
+              ))}
+            </div>
+
             <div
-              key={index}
-              className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer"
-              onClick={() => setSelectedImage(index)}
+              data-reveal
+              className="flex flex-col sm:flex-row gap-4 justify-center"
             >
-              <div className="relative h-96 bg-gray-100">
-                <Image
-                  src={screenshot.image}
-                  alt={screenshot.title}
-                  fill
-                  className="object-contain p-4"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">{screenshot.title}</h3>
-                <p className="text-gray-600">{screenshot.description}</p>
-              </div>
+              <Link
+                href="https://github.com/Fralopala2/medusse-show/tree/clase/medusse_app"
+                target="_blank"
+              >
+                <Button size="lg">Ver código en GitHub</Button>
+              </Link>
+              <Link href="/">
+                <Button variant="outline" size="lg">
+                  Volver al inicio
+                </Button>
+              </Link>
             </div>
-          ))}
-        </div>
+          </RevealGroup>
+        </Container>
 
-        <div className="text-center">
-          <h2 className="text-2xl font-bold mb-6">Características Principales</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div className="p-6 bg-blue-50 rounded-lg">
-              <div className="text-3xl mb-2">📊</div>
-              <h3 className="font-bold mb-2">Datos en Tiempo Real</h3>
-              <p className="text-sm text-gray-600">
-                WebSocket para actualizaciones automáticas cada 15 segundos
-              </p>
-            </div>
-            <div className="p-6 bg-green-50 rounded-lg">
-              <div className="text-3xl mb-2">📈</div>
-              <h3 className="font-bold mb-2">Gráficos Interactivos</h3>
-              <p className="text-sm text-gray-600">
-                Visualización con fl_chart, zoom, pan y tooltips
-              </p>
-            </div>
-            <div className="p-6 bg-purple-50 rounded-lg">
-              <div className="text-3xl mb-2">🔔</div>
-              <h3 className="font-bold mb-2">Sistema de Alertas</h3>
-              <p className="text-sm text-gray-600">
-                Notificaciones inteligentes por umbrales de CO2 y batería
-              </p>
-            </div>
-          </div>
+        <Footer />
 
-          <div className="flex gap-4 justify-center">
-            <Link
-              href="https://github.com/Fralopala2/medusse-show/tree/clase/medusse_app"
-              target="_blank"
-              className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
-            >
-              Ver Código en GitHub
-            </Link>
-            <Link
-              href="/"
-              className="px-8 py-3 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors font-medium"
-            >
-              Volver al Inicio
-            </Link>
-          </div>
-        </div>
-      </Container>
-
-      <Footer />
-
-      {selectedImage !== null && (
-        <div 
-          className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4"
-          onClick={() => setSelectedImage(null)}
-        >
-          <button
-            className="absolute top-4 right-4 text-white text-4xl hover:text-gray-300"
+        {selectedImage !== null && (
+          <div
+            className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4"
             onClick={() => setSelectedImage(null)}
           >
-            ×
-          </button>
-          <div className="relative w-full h-full max-w-5xl max-h-[90vh]">
-            <Image
-              src={screenshots[selectedImage].image}
-              alt={screenshots[selectedImage].title}
-              fill
-              className="object-contain"
-            />
+            <button
+              className="absolute top-4 right-4 text-white text-4xl hover:text-white/70 z-10"
+              onClick={() => setSelectedImage(null)}
+              aria-label="Cerrar"
+            >
+              ×
+            </button>
+            <div className="relative w-full h-full max-w-5xl max-h-[90vh]">
+              <Image
+                src={screenshots[selectedImage].image}
+                alt={screenshots[selectedImage].title}
+                fill
+                className="object-contain"
+              />
+            </div>
+            <div className="absolute bottom-8 left-0 right-0 text-center text-white px-4">
+              <h3 className="font-display text-2xl font-bold mb-2">
+                {screenshots[selectedImage].title}
+              </h3>
+              <p className="text-medusse-gray">
+                {screenshots[selectedImage].description}
+              </p>
+            </div>
           </div>
-          <div className="absolute bottom-8 left-0 right-0 text-center text-white">
-            <h3 className="text-2xl font-bold mb-2">{screenshots[selectedImage].title}</h3>
-            <p className="text-lg">{screenshots[selectedImage].description}</p>
-          </div>
-        </div>
-      )}
-    </main>
+        )}
+      </main>
+    </SmoothScrollProvider>
   );
 }

@@ -3,15 +3,25 @@
  * Cliente para comunicación con la API REST del proyecto Medusse
  */
 
-export const getApiUrl = () => {
-  if (process.env.NEXT_PUBLIC_API_URL) return process.env.NEXT_PUBLIC_API_URL;
+/**
+ * Resuelve la URL de la API en cada petición (evita URL fijada en build/SSR).
+ */
+export function getApiBaseUrl(): string {
+  const fromEnv = process.env.NEXT_PUBLIC_API_URL;
+  if (fromEnv) return fromEnv.replace(/\/$/, '');
+
   if (typeof window !== 'undefined') {
     return `${window.location.protocol}//${window.location.hostname}:3001`;
   }
-  return 'http://127.0.0.1:3001';
-};
 
-export const API_BASE_URL = getApiUrl();
+  return 'http://127.0.0.1:3001';
+}
+
+/** @deprecated Usar getApiBaseUrl() en cliente para URL actualizada */
+export const getApiUrl = getApiBaseUrl;
+
+/** @deprecated Usar getApiBaseUrl() — puede quedar desactualizada si se evalúa en build */
+export const API_BASE_URL = 'http://127.0.0.1:3001';
 
 // ============================================================================
 // TIPOS DE DATOS
@@ -127,7 +137,7 @@ export const SENSOR_TYPES = {
  * Verifica el estado de salud de la API y servicios
  */
 export async function fetchHealth(): Promise<HealthStatus> {
-  const response = await fetch(`${API_BASE_URL}/health`);
+  const response = await fetch(`${getApiBaseUrl()}/health`);
   if (!response.ok) throw new Error('Failed to fetch health status');
   return response.json();
 }
@@ -136,7 +146,7 @@ export async function fetchHealth(): Promise<HealthStatus> {
  * Obtiene la lista de ubicaciones disponibles
  */
 export async function fetchLocations(): Promise<{ locations: string[] }> {
-  const response = await fetch(`${API_BASE_URL}/api/locations`);
+  const response = await fetch(`${getApiBaseUrl()}/api/locations`);
   if (!response.ok) throw new Error('Failed to fetch locations');
   return response.json();
 }
@@ -145,7 +155,19 @@ export async function fetchLocations(): Promise<{ locations: string[] }> {
  * Obtiene el resumen de todos los sensores de todas las ubicaciones
  */
 export async function fetchSummary(): Promise<{ summary: Summary }> {
-  const response = await fetch(`${API_BASE_URL}/api/summary`);
+  const url = `${getApiBaseUrl()}/api/summary`;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 8000);
+  let response: Response;
+  try {
+    response = await fetch(url, { signal: controller.signal });
+  } catch {
+    throw new Error(
+      `No se pudo conectar con la API (${url}). Comprueba que el servidor esté en marcha en el puerto 3001.`
+    );
+  } finally {
+    clearTimeout(timeout);
+  }
   if (!response.ok) throw new Error('Failed to fetch summary');
   return response.json();
 }
@@ -154,7 +176,7 @@ export async function fetchSummary(): Promise<{ summary: Summary }> {
  * Obtiene los últimos datos de sensores para una ubicación específica
  */
 export async function fetchLatestData(location: string): Promise<{ location: string; data: any }> {
-  const response = await fetch(`${API_BASE_URL}/api/latest/${location}`);
+  const response = await fetch(`${getApiBaseUrl()}/api/latest/${location}`);
   if (!response.ok) throw new Error(`Failed to fetch data for ${location}`);
   return response.json();
 }
@@ -169,7 +191,7 @@ export async function fetchHistoricalData(
   interval: string = '5m'
 ): Promise<{ data: HistoricalDataPoint[] }> {
   const response = await fetch(
-    `${API_BASE_URL}/api/data/${location}/${sensor}?hours=${hours}&interval=${interval}`
+    `${getApiBaseUrl()}/api/data/${location}/${sensor}?hours=${hours}&interval=${interval}`
   );
   if (!response.ok) throw new Error('Failed to fetch historical data');
   return response.json();
@@ -184,7 +206,7 @@ export async function fetchStats(
   hours: number = 24
 ): Promise<Stats> {
   const response = await fetch(
-    `${API_BASE_URL}/api/stats/${location}/${sensor}?hours=${hours}`
+    `${getApiBaseUrl()}/api/stats/${location}/${sensor}?hours=${hours}`
   );
   if (!response.ok) throw new Error('Failed to fetch stats');
   const payload = await response.json();
@@ -200,7 +222,7 @@ export async function fetchStats(
  * Obtiene datos de energía para una ubicación específica
  */
 export async function fetchEnergyData(location: string): Promise<{ location: string; energy: EnergyData; timestamp: string }> {
-  const response = await fetch(`${API_BASE_URL}/api/energy/${location}`);
+  const response = await fetch(`${getApiBaseUrl()}/api/energy/${location}`);
   if (!response.ok) throw new Error('Failed to fetch energy data');
   return response.json();
 }
@@ -209,7 +231,7 @@ export async function fetchEnergyData(location: string): Promise<{ location: str
  * Obtiene resumen de energía de todas las ubicaciones
  */
 export async function fetchEnergySummary(): Promise<{ summary: { [location: string]: EnergyData }; timestamp: string }> {
-  const response = await fetch(`${API_BASE_URL}/api/energy/summary`);
+  const response = await fetch(`${getApiBaseUrl()}/api/energy/summary`);
   if (!response.ok) throw new Error('Failed to fetch energy summary');
   return response.json();
 }
@@ -218,7 +240,7 @@ export async function fetchEnergySummary(): Promise<{ summary: { [location: stri
  * Obtiene alertas de energía del sistema
  */
 export async function fetchEnergyAlerts(): Promise<{ alerts: EnergyAlert[]; timestamp: string }> {
-  const response = await fetch(`${API_BASE_URL}/api/energy/alerts`);
+  const response = await fetch(`${getApiBaseUrl()}/api/energy/alerts`);
   if (!response.ok) throw new Error('Failed to fetch energy alerts');
   return response.json();
 }
@@ -232,7 +254,7 @@ export async function fetchEnergyHistory(
   interval: string = '15m'
 ): Promise<{ location: string; history: any; timestamp: string }> {
   const response = await fetch(
-    `${API_BASE_URL}/api/energy/${location}/history?hours=${hours}&interval=${interval}`
+    `${getApiBaseUrl()}/api/energy/${location}/history?hours=${hours}&interval=${interval}`
   );
   if (!response.ok) throw new Error('Failed to fetch energy history');
   return response.json();

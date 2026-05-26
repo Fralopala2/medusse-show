@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 @theme {
-  /* Colores Soleares (compatibilidad) */
   --color-soleares-black: #1a1a1a;
   --color-soleares-white: #ffffff;
   --color-soleares-blue: #3b82f6;
@@ -9,52 +8,106 @@
   --color-soleares-gray: #171717;
   --color-soleares-gray-light: #f5f5f5;
   --color-soleares-gray-dark: #333333;
-  
-  /* Colores Medusse IoT */
-  --color-medusse-blue: #2196F3;
-  --color-medusse-darkblue: #1976D2;
-  --color-medusse-red: #E53E3E;
-  --color-medusse-purple: #805AD5;
-  --color-medusse-orange: #FF9800;
-  --color-medusse-green: #38A169;
-  --color-medusse-black: #1a1a1a;
-  --color-medusse-white: #ffffff;
-  --color-medusse-gray: #171717;
-  --color-medusse-gray-light: #f5f5f5;
-}
 
-@utility snap-y-mandatory {
-  scroll-snap-type: y mandatory;
-}
+  --color-medusse-blue: #2196f3;
+  --color-medusse-darkblue: #1976d2;
+  --color-medusse-red: #e53e3e;
+  --color-medusse-purple: #805ad5;
+  --color-medusse-orange: #ff9800;
+  --color-medusse-green: #38a169;
+  --color-medusse-black: #0a0e17;
+  --color-medusse-white: #f0f4f8;
+  --color-medusse-gray: #94a3b8;
+  --color-medusse-gray-light: #111827;
 
-@utility snap-center {
-  scroll-snap-align: center;
-}
-
-@utility snap-start {
-  scroll-snap-align: start;
-}
-
-@utility no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* For webkit scrollbar hiding, we might need standard CSS as @utility doesn't support pseudo-elements easily in the same block sometimes, but let's try standard css for that specific part if needed. 
-   Actually, let's just use a standard class for the scrollbar hiding to be safe.
-*/
-
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
+  --color-cinematic-bg: #0a0e17;
+  --color-cinematic-surface: #121a2b;
+  --color-cinematic-accent: #00d4aa;
+  --color-cinematic-glow: #2196f3;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
   }
-  
+
   body {
-    @apply bg-soleares-white text-soleares-black antialiased;
+    @apply antialiased;
+    background-color: var(--color-cinematic-bg);
+    color: var(--color-medusse-white);
     overflow-x: hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-outfit), system-ui, sans-serif;
+  }
+
+  .font-body {
+    font-family: var(--font-dm-sans), system-ui, sans-serif;
+  }
+
+  .text-gradient-iot {
+    background: linear-gradient(135deg, #00d4aa 0%, #2196f3 50%, #805ad5 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glass-card {
+    background: rgba(18, 26, 43, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  }
+
+  .glass-header {
+    background: rgba(10, 14, 23, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .grid-pattern {
+    background-image: linear-gradient(
+        rgba(33, 150, 243, 0.06) 1px,
+        transparent 1px
+      ),
+      linear-gradient(90deg, rgba(33, 150, 243, 0.06) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .noise-overlay::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 }

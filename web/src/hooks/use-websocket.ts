@@ -5,16 +5,14 @@
 
 import { useEffect, useState, useRef, useCallback } from 'react';
 
-const getWsUrl = () => {
+export function getWsUrl(): string {
   if (process.env.NEXT_PUBLIC_WS_URL) return process.env.NEXT_PUBLIC_WS_URL;
   if (typeof window !== 'undefined') {
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
     return `${protocol}//${window.location.hostname}:3002`;
   }
   return 'ws://127.0.0.1:3002';
-};
-
-const WS_URL = getWsUrl();
+}
 
 export interface WebSocketData {
   location?: string;
@@ -49,9 +47,10 @@ export function useWebSocket(): UseWebSocketReturn {
   // Función de conexión sin useCallback para evitar problemas de dependencias
   const connect = () => {
     try {
-      console.log('🔌 Intentando conectar WebSocket:', WS_URL);
-      
-      const ws = new WebSocket(WS_URL);
+      const wsUrl = getWsUrl();
+      console.log('🔌 Intentando conectar WebSocket:', wsUrl);
+
+      const ws = new WebSocket(wsUrl);
       wsRef.current = ws;
 
       ws.onopen = () => {

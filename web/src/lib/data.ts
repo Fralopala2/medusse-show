@@ -1,10 +1,24 @@
 export const companyData = {
   name: "Medusse IoT",
-  claim: "Sistema de monitoreo ambiental en tiempo real con 18 tipos de sensores, visualización profesional y gestión inteligente de energía solar.",
+  claim:
+    "Sistema de monitoreo ambiental en tiempo real con 18 tipos de sensores, visualización profesional y gestión inteligente de energía solar.",
   contact: {
     email: "pacoaldev@gmail.com",
     copyright: "© Medusse IoT 2025 - IES José Rodrigo Botet",
   },
+};
+
+export const sectionImages = {
+  hardware:
+    "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop",
+  software:
+    "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop",
+  technology:
+    "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
+  about:
+    "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070&auto=format&fit=crop",
+  capturasHero:
+    "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop",
 };
 
 export const heroSections = [
@@ -12,7 +26,8 @@ export const heroSections = [
     id: "hero-main",
     title: "Medusse IoT",
     subtitle: "Monitoreo ambiental inteligente",
-    description: "Sistema IoT completo con 18 tipos de sensores, visualización en tiempo real, gestión de energía solar y arquitectura de microservicios",
+    description:
+      "Sistema IoT completo con 18 tipos de sensores, visualización en tiempo real, gestión de energía solar y arquitectura de microservicios",
     ctas: [
       {
         primary: "Ver Dashboard",
@@ -22,7 +37,7 @@ export const heroSections = [
       },
     ],
     backgroundImage:
-      "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?q=80&w=2070&auto=format&fit=crop", // IoT sensors
+      "https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?q=80&w=2070&auto=format&fit=crop",
   },
   {
     id: "hero-dashboard",
@@ -42,7 +57,7 @@ export const heroSections = [
         secondaryAction: "#dashboard",
       },
     ],
-    backgroundImage: "/dashboard-raspberry.png", // Dashboard Raspberry Pi
+    backgroundImage: "/dashboard-raspberry.png",
     darkText: false,
   },
   {
@@ -59,12 +74,13 @@ export const heroSections = [
       {
         primary: "Descargar App",
         secondary: "Ver Capturas",
-        primaryAction: "https://github.com/Fralopala2/medusse-show/tree/clase/medusse_app",
+        primaryAction:
+          "https://github.com/Fralopala2/medusse-show/tree/clase/medusse_app",
         secondaryAction: "/capturas",
       },
     ],
     backgroundImage:
-      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop", // Mobile app
+      "https://images.unsplash.com/photo-1526498460520-4c123789a6b0?q=80&w=2070&auto=format&fit=crop",
   },
   {
     id: "hero-sensors",
@@ -87,7 +103,7 @@ export const heroSections = [
       },
     ],
     backgroundImage:
-      "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=2070&auto=format&fit=crop", // Solar/sensors
+      "https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=2070&auto=format&fit=crop",
   },
   {
     id: "hero-api",
@@ -99,12 +115,13 @@ export const heroSections = [
       {
         primary: "Ver API Docs",
         secondary: "Probar Endpoints",
-        primaryAction: "https://github.com/Fralopala2/medusse-show/blob/clase/api/README.md",
+        primaryAction:
+          "https://github.com/Fralopala2/medusse-show/blob/clase/api/README.md",
         secondaryAction: "http://localhost:3001/api/summary",
       },
     ],
     backgroundImage:
-      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop", // Network/API
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop",
   },
   {
     id: "hero-lora",
@@ -116,12 +133,13 @@ export const heroSections = [
       {
         primary: "Ver Migración",
         secondary: "Hardware Necesario",
-        primaryAction: "https://github.com/Fralopala2/medusse-show/blob/clase/documentacion/MIGRACION.md",
+        primaryAction:
+          "https://github.com/Fralopala2/medusse-show/blob/clase/documentacion/MIGRACION.md",
         secondaryAction: "#precios",
       },
     ],
     backgroundImage:
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop", // Industrial/tech
+      "https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop",
   },
 ];
 

@@ -6,6 +6,7 @@ import { ProductGrid } from "@/components/sections/ProductGrid";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
 import { TechnologySection } from "@/components/sections/TechnologySection";
 import { AboutSection } from "@/components/sections/AboutSection";
+import { SmoothScrollProvider } from "@/components/motion/SmoothScrollProvider";
 import {
   heroSections,
   hardwareProducts,
@@ -13,46 +14,47 @@ import {
   technologyData,
   servicesData,
   aboutData,
+  sectionImages,
 } from "@/lib/data";
 
 export default function Home() {
   return (
-    <main className="snap-y-mandatory w-full">
-      <Header />
+    <SmoothScrollProvider className="bg-cinematic-bg">
+      <main className="w-full">
+        <Header />
 
-      {/* Hero Sections */}
-      {heroSections.map((hero) => (
-        <HeroSection key={hero.id} {...hero} />
-      ))}
+        {heroSections.map((hero) => (
+          <HeroSection key={hero.id} {...hero} id={hero.id} />
+        ))}
 
-      {/* Dashboard en Tiempo Real - NUEVO */}
-      <DashboardSection />
+        <DashboardSection />
 
-      {/* Hardware Grid */}
-      <div id="precios">
-        <ProductGrid title="Productos Hardware" products={hardwareProducts} />
-      </div>
+        <div id="precios">
+          <ProductGrid
+            title="Productos Hardware"
+            products={hardwareProducts}
+            sectionImage={sectionImages.hardware}
+          />
+        </div>
 
-      {/* Software Grid */}
-      <ProductGrid title="Módulos Software" products={softwareModules} />
+        <ProductGrid
+          title="Módulos Software"
+          products={softwareModules}
+          sectionImage={sectionImages.software}
+        />
 
-      {/* Technology Section */}
-      <div id="tecnologia">
-        <TechnologySection data={technologyData} />
-      </div>
+        <div id="tecnologia">
+          <TechnologySection data={technologyData} />
+        </div>
 
-      {/* Services Section */}
-      <div id="soluciones">
-        <ServicesGrid services={servicesData} />
-      </div>
+        <div id="soluciones">
+          <ServicesGrid services={servicesData} />
+        </div>
 
-      {/* About Section */}
-      <AboutSection data={aboutData} />
+        <AboutSection data={aboutData} />
 
-      {/* Footer */}
-      <div id="contacto">
         <Footer />
-      </div>
-    </main>
+      </main>
+    </SmoothScrollProvider>
   );
 }

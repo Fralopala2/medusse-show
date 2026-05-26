@@ -1,68 +1,86 @@
 "use client";
 
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import { Section } from '@/components/ui/Section';
-import { Container } from '@/components/ui/Container';
-import { Button } from '@/components/ui/Button';
-import { 
-  fetchSummary, 
-  Summary, 
-  LOCATIONS, 
-  formatLocationName, 
+import { useEffect, useState, useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import { Section } from "@/components/ui/Section";
+import { Container } from "@/components/ui/Container";
+import { Button } from "@/components/ui/Button";
+import {
+  fetchSummary,
+  getApiBaseUrl,
+  Summary,
+  LOCATIONS,
+  formatLocationName,
   formatSensorValue,
   getSensorInfo,
   getCO2AlertLevel,
-  getBatteryAlertLevel
-} from '@/lib/api';
-import { useWebSocket } from '@/hooks/use-websocket';
-import { RefreshCw, Activity, AlertCircle } from 'lucide-react';
+  getBatteryAlertLevel,
+} from "@/lib/api";
+import { useWebSocket } from "@/hooks/use-websocket";
+import { RefreshCw, Activity, AlertCircle } from "lucide-react";
+import { RevealGroup } from "@/components/motion/RevealGroup";
+import { registerGsapPlugins } from "@/lib/gsap/register";
+import { createRevealStagger } from "@/lib/gsap/scroll-effects";
 
 export function DashboardSection() {
   const [summary, setSummary] = useState<Summary | null>(null);
   const [loading, setLoading] = useState(true);
+  const [fetchError, setFetchError] = useState<string | null>(null);
   const [lastUpdate, setLastUpdate] = useState<Date>(new Date());
-  const { data: wsData, isConnected, error: wsError, reconnect } = useWebSocket();
+  const { data: wsData, isConnected, error: wsError, reconnect } =
+    useWebSocket();
+  const gridRef = useRef<HTMLDivElement>(null);
 
-  // Cargar datos iniciales
   useEffect(() => {
     async function loadData() {
       try {
         setLoading(true);
+        setFetchError(null);
         const result = await fetchSummary();
         setSummary(result.summary);
         setLastUpdate(new Date());
       } catch (error) {
-        console.error('Error loading summary:', error);
+        const message =
+          error instanceof Error
+            ? error.message
+            : "No se pudo cargar el dashboard";
+        setFetchError(message);
+        console.error("Error loading summary:", error);
       } finally {
         setLoading(false);
       }
     }
 
     loadData();
-    
-    // Refresh cada 30 segundos
     const interval = setInterval(loadData, 30000);
     return () => clearInterval(interval);
   }, []);
 
-  // Actualizar con datos de WebSocket
   useEffect(() => {
     if (wsData && summary) {
-      console.log('Updating with WebSocket data:', wsData);
-      // Aquí podrías actualizar el summary con los datos del WebSocket
-      // Por ahora solo actualizamos el timestamp
       setLastUpdate(new Date());
     }
   }, [wsData, summary]);
 
+  useGSAP(
+    () => {
+      if (!gridRef.current || loading) return;
+      registerGsapPlugins();
+      return createRevealStagger(gridRef.current, "[data-card]");
+    },
+    { dependencies: [loading, summary] }
+  );
+
   if (loading) {
     return (
-      <Section className="bg-medusse-gray-light">
+      <Section className="bg-cinematic-bg flex items-center">
+        <div className="absolute inset-0 grid-pattern opacity-50" />
         <Container>
           <div className="text-center py-20">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-medusse-blue"></div>
-            <p className="text-xl mt-4 text-medusse-gray">Cargando datos...</p>
+            <div className="inline-block h-12 w-12 rounded-full border-2 border-cinematic-accent border-t-transparent animate-spin" />
+            <p className="text-xl mt-4 text-medusse-gray font-display">
+              Cargando datos en tiempo real...
+            </p>
           </div>
         </Container>
       </Section>
@@ -70,35 +88,43 @@ export function DashboardSection() {
   }
 
   return (
-    <Section id="dashboard" className="bg-medusse-gray-light pt-24">
-      <Container>
-        <div className="space-y-8">
-          {/* Header */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+    <Section id="dashboard" className="bg-cinematic-bg py-24 flex items-center">
+      <div className="absolute inset-0 grid-pattern opacity-40" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-medusse-blue/10 rounded-full blur-[120px] pointer-events-none" />
+
+      <Container className="relative z-10">
+        <RevealGroup className="space-y-10">
+          <div
+            data-reveal
+            className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+          >
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-medusse-black">
+              <p className="text-cinematic-accent text-sm uppercase tracking-widest mb-2">
+                En vivo
+              </p>
+              <h2 className="font-display text-3xl md:text-5xl font-bold text-white">
                 Dashboard en Tiempo Real
               </h2>
-              <p className="text-medusse-gray mt-2">
-                Última actualización: {lastUpdate.toLocaleTimeString('es-ES')}
+              <p className="text-medusse-gray mt-2 font-mono text-sm">
+                Última actualización:{" "}
+                {lastUpdate.toLocaleTimeString("es-ES")}
               </p>
             </div>
 
             <div className="flex items-center gap-4">
-              {/* Indicador de conexión WebSocket */}
-              <div className="flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow-sm">
+              <div className="glass-card flex items-center gap-2 px-4 py-2 rounded-full">
                 <div
-                  className={`h-3 w-3 rounded-full ${
-                    isConnected ? 'bg-green-500 animate-pulse' : 'bg-red-500'
-                  }`}
+                  className={`h-2.5 w-2.5 rounded-full ${
+                    isConnected ? "bg-medusse-green" : "bg-medusse-red"
+                  } ${isConnected ? "animate-pulse" : ""}`}
                 />
-                <span className="text-sm font-medium">
-                  {isConnected ? 'Conectado' : 'Desconectado'}
+                <span className="text-sm font-medium text-white">
+                  {isConnected ? "WebSocket activo" : "Desconectado"}
                 </span>
                 {!isConnected && (
                   <button
                     onClick={reconnect}
-                    className="ml-2 text-medusse-blue hover:text-medusse-darkblue"
+                    className="ml-1 text-cinematic-accent hover:text-white"
                     title="Reconectar"
                   >
                     <RefreshCw className="h-4 w-4" />
@@ -106,7 +132,6 @@ export function DashboardSection() {
                 )}
               </div>
 
-              {/* Botón de refresh manual */}
               <Button
                 variant="outline"
                 size="sm"
@@ -119,22 +144,54 @@ export function DashboardSection() {
             </div>
           </div>
 
-          {/* Error de WebSocket */}
-          {wsError && (
-            <div className="bg-red-50 border border-red-200 rounded-lg p-4 flex items-start gap-3">
-              <AlertCircle className="h-5 w-5 text-red-500 flex-shrink-0 mt-0.5" />
-              <div>
-                <p className="font-medium text-red-800">Error de conexión</p>
-                <p className="text-sm text-red-600 mt-1">{wsError}</p>
+          {fetchError && (
+            <div
+              data-reveal
+              className="glass-card border-medusse-orange/40 rounded-xl p-5 flex items-start gap-3"
+            >
+              <AlertCircle className="h-5 w-5 text-medusse-orange shrink-0 mt-0.5" />
+              <div className="space-y-2">
+                <p className="font-medium text-white">API no disponible</p>
+                <p className="text-sm text-medusse-gray">{fetchError}</p>
+                <p className="text-sm text-medusse-gray">
+                  URL esperada:{" "}
+                  <code className="text-cinematic-accent font-mono text-xs">
+                    {getApiBaseUrl()}/api/summary
+                  </code>
+                </p>
+                <p className="text-xs text-medusse-gray">
+                  En otra terminal:{" "}
+                  <code className="text-white/80">cd api && npm start</code>
+                  {" · "}
+                  Docker:{" "}
+                  <code className="text-white/80">
+                    cd docker && docker compose up -d
+                  </code>
+                </p>
               </div>
             </div>
           )}
 
-          {/* Grid de ubicaciones */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {wsError && (
+            <div
+              data-reveal
+              className="glass-card border-medusse-red/30 rounded-xl p-4 flex items-start gap-3"
+            >
+              <AlertCircle className="h-5 w-5 text-medusse-red shrink-0 mt-0.5" />
+              <div>
+                <p className="font-medium text-medusse-red">WebSocket</p>
+                <p className="text-sm text-medusse-gray mt-1">{wsError}</p>
+              </div>
+            </div>
+          )}
+
+          <div
+            ref={gridRef}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          >
             {LOCATIONS.map((location) => {
               const locationData = summary?.[location.name];
-              
+
               if (!locationData) {
                 return (
                   <LocationCardSkeleton
@@ -154,112 +211,109 @@ export function DashboardSection() {
             })}
           </div>
 
-          {/* Mensaje si no hay datos */}
-          {!summary || Object.keys(summary).length === 0 && (
-            <div className="text-center py-12 bg-white rounded-lg shadow-sm">
+          {(!summary || Object.keys(summary).length === 0) && (
+            <div
+              data-reveal
+              className="text-center py-16 glass-card rounded-2xl"
+            >
               <Activity className="h-12 w-12 text-medusse-gray mx-auto mb-4" />
-              <p className="text-lg text-medusse-gray">
-                No hay datos disponibles
-              </p>
+              <p className="text-lg text-white">No hay datos disponibles</p>
               <p className="text-sm text-medusse-gray mt-2">
                 Asegúrate de que el simulador y la API estén ejecutándose
               </p>
             </div>
           )}
-        </div>
+        </RevealGroup>
       </Container>
     </Section>
   );
 }
 
-// Componente para cada tarjeta de ubicación
-function LocationCard({ location, data }: { location: typeof LOCATIONS[0]; data: Summary[string] }) {
+function LocationCard({
+  location,
+  data,
+}: {
+  location: (typeof LOCATIONS)[0];
+  data: Summary[string];
+}) {
   const { temperature, humidity, co2, pressure, battery_percentage } = data;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="bg-white rounded-lg shadow-lg p-6 border-t-4 hover:shadow-xl transition-shadow"
-      style={{ borderTopColor: location.color }}
+    <div
+      data-card
+      className="glass-card rounded-2xl p-6 hover:shadow-xl hover:shadow-medusse-blue/10 transition-shadow duration-300"
+      style={{
+        borderTop: `3px solid ${location.color}`,
+      }}
     >
-      {/* Header */}
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-xl font-bold text-medusse-black">
+      <div className="flex items-center justify-between mb-5">
+        <h3 className="font-display text-lg font-bold text-white">
           {formatLocationName(location.name)}
         </h3>
-        <span className="text-xs text-medusse-gray">{location.node}</span>
+        <span className="text-xs text-medusse-gray font-mono">
+          {location.node}
+        </span>
       </div>
 
-      {/* Sensores principales */}
-      <div className="space-y-3">
-        {/* Temperatura */}
+      <div className="space-y-2">
         {temperature && (
           <SensorDisplay
-            icon={getSensorInfo('temperature').icon}
+            icon={getSensorInfo("temperature").icon}
             label="Temperatura"
-            value={formatSensorValue(temperature.value, 'temperature')}
+            value={formatSensorValue(temperature.value, "temperature")}
             color={location.color}
           />
         )}
-
-        {/* Humedad */}
         {humidity && (
           <SensorDisplay
-            icon={getSensorInfo('humidity').icon}
+            icon={getSensorInfo("humidity").icon}
             label="Humedad"
-            value={formatSensorValue(humidity.value, 'humidity')}
+            value={formatSensorValue(humidity.value, "humidity")}
             color={location.color}
           />
         )}
-
-        {/* CO2 con alerta */}
         {co2 && (
           <SensorDisplay
-            icon={getSensorInfo('co2').icon}
+            icon={getSensorInfo("co2").icon}
             label="CO₂"
-            value={formatSensorValue(co2.value, 'co2')}
+            value={formatSensorValue(co2.value, "co2")}
             color={location.color}
             alert={getCO2AlertLevel(co2.value)}
           />
         )}
-
-        {/* Presión */}
         {pressure && (
           <SensorDisplay
-            icon={getSensorInfo('pressure').icon}
+            icon={getSensorInfo("pressure").icon}
             label="Presión"
-            value={formatSensorValue(pressure.value, 'pressure')}
+            value={formatSensorValue(pressure.value, "pressure")}
             color={location.color}
           />
         )}
-
-        {/* Batería */}
         {battery_percentage && (
           <SensorDisplay
-            icon={getSensorInfo('battery_percentage').icon}
+            icon={getSensorInfo("battery_percentage").icon}
             label="Batería"
-            value={formatSensorValue(battery_percentage.value, 'battery_percentage')}
+            value={formatSensorValue(
+              battery_percentage.value,
+              "battery_percentage"
+            )}
             color={location.color}
             alert={getBatteryAlertLevel(battery_percentage.value)}
           />
         )}
       </div>
 
-      {/* Footer con timestamp */}
       {temperature && (
-        <div className="mt-4 pt-4 border-t border-gray-100">
-          <p className="text-xs text-medusse-gray">
-            Actualizado: {new Date(temperature.time).toLocaleTimeString('es-ES')}
+        <div className="mt-4 pt-4 border-t border-white/10">
+          <p className="text-xs text-medusse-gray font-mono">
+            {new Date(temperature.time).toLocaleTimeString("es-ES")}
           </p>
         </div>
       )}
-    </motion.div>
+    </div>
   );
 }
 
-// Componente para mostrar un sensor individual
 function SensorDisplay({
   icon,
   label,
@@ -271,44 +325,48 @@ function SensorDisplay({
   label: string;
   value: string;
   color: string;
-  alert?: 'good' | 'warning' | 'danger';
+  alert?: "good" | "warning" | "danger";
 }) {
-  const alertColors = {
-    good: 'bg-green-50 border-green-200',
-    warning: 'bg-yellow-50 border-yellow-200',
-    danger: 'bg-red-50 border-red-200',
+  const alertStyles = {
+    good: "bg-medusse-green/10 border-medusse-green/30",
+    warning: "bg-medusse-orange/10 border-medusse-orange/30",
+    danger: "bg-medusse-red/10 border-medusse-red/30",
   };
 
   return (
     <div
-      className={`flex items-center justify-between p-2 rounded ${
-        alert ? alertColors[alert] + ' border' : ''
+      className={`flex items-center justify-between p-2.5 rounded-lg ${
+        alert ? `${alertStyles[alert]} border` : "bg-white/5"
       }`}
     >
       <div className="flex items-center gap-2">
-        <span className="text-lg">{icon}</span>
+        <span className="text-base">{icon}</span>
         <span className="text-sm text-medusse-gray">{label}</span>
       </div>
-      <span className="text-lg font-bold" style={{ color }}>
+      <span className="text-base font-bold font-mono" style={{ color }}>
         {value}
       </span>
     </div>
   );
 }
 
-// Skeleton para cuando no hay datos
-function LocationCardSkeleton({ location }: { location: typeof LOCATIONS[0] }) {
+function LocationCardSkeleton({
+  location,
+}: {
+  location: (typeof LOCATIONS)[0];
+}) {
   return (
     <div
-      className="bg-white rounded-lg shadow-lg p-6 border-t-4 animate-pulse"
-      style={{ borderTopColor: location.color }}
+      data-card
+      className="glass-card rounded-2xl p-6 animate-pulse"
+      style={{ borderTop: `3px solid ${location.color}` }}
     >
-      <div className="h-6 bg-gray-200 rounded w-3/4 mb-4"></div>
+      <div className="h-6 bg-white/10 rounded w-3/4 mb-5" />
       <div className="space-y-3">
         {[1, 2, 3, 4].map((i) => (
-          <div key={i} className="flex items-center justify-between">
-            <div className="h-4 bg-gray-200 rounded w-1/2"></div>
-            <div className="h-4 bg-gray-200 rounded w-1/4"></div>
+          <div key={i} className="flex justify-between">
+            <div className="h-4 bg-white/10 rounded w-1/2" />
+            <div className="h-4 bg-white/10 rounded w-1/4" />
           </div>
         ))}
       </div>

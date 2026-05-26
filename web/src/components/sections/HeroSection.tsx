@@ -3,7 +3,8 @@
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { motion } from "framer-motion";
+import { ExpandOnScrollImage } from "@/components/motion/ExpandOnScrollImage";
+import { RevealGroup } from "@/components/motion/RevealGroup";
 import { cn } from "@/lib/utils";
 
 interface HeroSectionProps {
@@ -11,7 +12,7 @@ interface HeroSectionProps {
   subtitle?: string;
   description?: string;
   backgroundImage?: string;
-  darkText?: boolean; // If true, text is black (for light backgrounds)
+  darkText?: boolean;
   ctas?: {
     primary: string;
     secondary?: string;
@@ -20,6 +21,17 @@ interface HeroSectionProps {
   }[];
   features?: string[];
   id?: string;
+}
+
+function handleCtaAction(action?: string) {
+  if (!action) return;
+  if (action.startsWith("http")) {
+    window.open(action, "_blank");
+  } else if (action.startsWith("#")) {
+    document.querySelector(action)?.scrollIntoView({ behavior: "smooth" });
+  } else if (action.startsWith("/")) {
+    window.location.href = action;
+  }
 }
 
 export function HeroSection({
@@ -34,111 +46,121 @@ export function HeroSection({
 }: HeroSectionProps) {
   return (
     <Section id={id} className="flex items-center justify-center">
-      {/* Background */}
-      <div
-        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: backgroundImage ? `url(${backgroundImage})` : undefined,
-          backgroundColor: !backgroundImage ? "#f5f5f5" : undefined,
-        }}
-      />
-      
-      {/* Overlay for better text readability if needed */}
-      {backgroundImage && !darkText && (
-        <div className="absolute inset-0 bg-black/30 z-0" />
+      {backgroundImage ? (
+        <ExpandOnScrollImage
+          src={backgroundImage}
+          alt={title}
+          darkText={darkText}
+        />
+      ) : (
+        <div className="absolute inset-0 z-0 bg-cinematic-surface grid-pattern" />
       )}
 
-      <Container className="relative z-10 flex flex-col items-center text-center h-full justify-center pt-20 px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className={cn(
-            "flex flex-col items-center gap-4 max-w-3xl",
-            darkText ? "text-soleares-black" : "text-white"
-          )}
-        >
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
-            {title}
+      <div className="absolute inset-0 z-[2] noise-overlay pointer-events-none" />
+
+      <Container className="relative z-10 flex flex-col items-center text-center min-h-[100svh] justify-center pt-20 px-4 sm:px-6 lg:px-8">
+        <RevealGroup className="flex flex-col items-center gap-4 max-w-4xl">
+          <p
+            data-reveal
+            className="text-xs uppercase tracking-[0.3em] text-cinematic-accent font-medium"
+          >
+            Medusse IoT · TFG 2025/2026
+          </p>
+          <h1
+            data-reveal
+            className={cn(
+              "font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight",
+              darkText ? "text-cinematic-bg" : "text-white"
+            )}
+          >
+            {title === "Medusse IoT" ? (
+              <span className="text-gradient-iot">{title}</span>
+            ) : (
+              title
+            )}
           </h1>
-          
+
           {subtitle && (
-            <p className="text-xl md:text-2xl font-medium opacity-90">
+            <p
+              data-reveal
+              className={cn(
+                "text-xl md:text-2xl font-medium",
+                darkText ? "text-cinematic-bg/80" : "text-white/90"
+              )}
+            >
               {subtitle}
             </p>
           )}
 
           {description && (
-            <p className="text-sm md:text-base opacity-80 max-w-xl mt-2">
+            <p
+              data-reveal
+              className={cn(
+                "text-sm md:text-lg max-w-2xl mt-2 leading-relaxed",
+                darkText ? "text-cinematic-bg/70" : "text-white/75"
+              )}
+            >
               {description}
             </p>
           )}
 
           {features && features.length > 0 && (
-            <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 text-left text-sm md:text-base">
+            <ul
+              data-reveal
+              className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-3 text-left text-sm md:text-base max-w-2xl"
+            >
               {features.map((feature, i) => (
-                <li key={i} className="flex items-center gap-2">
-                  <span className={cn("h-1.5 w-1.5 rounded-full", darkText ? "bg-soleares-blue" : "bg-white")} />
-                  {feature}
+                <li key={i} className="flex items-center gap-3">
+                  <span
+                    className={cn(
+                      "h-2 w-2 rounded-full shrink-0",
+                      darkText ? "bg-medusse-blue" : "bg-cinematic-accent"
+                    )}
+                  />
+                  <span
+                    className={
+                      darkText ? "text-cinematic-bg/90" : "text-white/85"
+                    }
+                  >
+                    {feature}
+                  </span>
                 </li>
               ))}
             </ul>
           )}
-        </motion.div>
 
-        {/* CTAs - Pushed to bottom or just below text */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="mt-10 flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
-        >
-          {ctas?.map((cta, i) => {
-            const handlePrimaryClick = () => {
-              if (cta.primaryAction?.startsWith('http')) {
-                window.open(cta.primaryAction, '_blank');
-              } else if (cta.primaryAction?.startsWith('#')) {
-                document.querySelector(cta.primaryAction)?.scrollIntoView({ behavior: 'smooth' });
-              }
-            };
-
-            const handleSecondaryClick = () => {
-              if (cta.secondaryAction?.startsWith('http')) {
-                window.open(cta.secondaryAction, '_blank');
-              } else if (cta.secondaryAction?.startsWith('#')) {
-                document.querySelector(cta.secondaryAction)?.scrollIntoView({ behavior: 'smooth' });
-              } else if (cta.secondaryAction?.startsWith('/')) {
-                window.location.href = cta.secondaryAction;
-              }
-            };
-
-            return (
-              <div key={i} className="flex gap-4">
+          <div
+            data-reveal
+            className="mt-12 flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center"
+          >
+          {ctas?.map((cta, i) => (
+            <div key={i} className="flex flex-col sm:flex-row gap-4">
+              <Button
+                variant={darkText ? "dark" : "default"}
+                size="lg"
+                className="w-full sm:w-auto min-w-[180px]"
+                onClick={() => handleCtaAction(cta.primaryAction)}
+              >
+                {cta.primary}
+              </Button>
+              {cta.secondary && (
                 <Button
-                  variant={darkText ? "default" : "secondary"}
+                  variant="outline"
                   size="lg"
-                  className="w-full sm:w-auto min-w-[160px]"
-                  onClick={handlePrimaryClick}
+                  className={cn(
+                    "w-full sm:w-auto min-w-[180px]",
+                    darkText &&
+                      "border-cinematic-bg/30 text-cinematic-bg hover:bg-cinematic-bg/10"
+                  )}
+                  onClick={() => handleCtaAction(cta.secondaryAction)}
                 >
-                  {cta.primary}
+                  {cta.secondary}
                 </Button>
-                {cta.secondary && (
-                  <Button
-                    variant={darkText ? "outline" : "outline"}
-                    size="lg"
-                    className={cn(
-                      "w-full sm:w-auto min-w-[160px]",
-                      darkText ? "border-soleares-black text-soleares-black hover:bg-soleares-black hover:text-white" : "text-white border-white hover:bg-white hover:text-black"
-                    )}
-                    onClick={handleSecondaryClick}
-                  >
-                    {cta.secondary}
-                  </Button>
-                )}
-              </div>
-            );
-          })}
-        </motion.div>
+              )}
+            </div>
+          ))}
+          </div>
+        </RevealGroup>
       </Container>
     </Section>
   );

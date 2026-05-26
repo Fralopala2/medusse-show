@@ -23,14 +23,20 @@ const config: Config = {
         medusse: {
           blue: "#2196F3",
           darkblue: "#1976D2",
-          red: "#E53E3E",        // Aula 20
-          purple: "#805AD5",     // Aula 21
-          orange: "#FF9800",     // Gimnasio
-          green: "#38A169",      // Laboratorio
-          black: "#1a1a1a",
-          white: "#ffffff",
-          gray: "#171717",
-          "gray-light": "#f5f5f5",
+          red: "#E53E3E",
+          purple: "#805AD5",
+          orange: "#FF9800",
+          green: "#38A169",
+          black: "#0a0e17",
+          white: "#f0f4f8",
+          gray: "#94a3b8",
+          "gray-light": "#111827",
+        },
+        cinematic: {
+          bg: "#0a0e17",
+          surface: "#121a2b",
+          accent: "#00d4aa",
+          glow: "#2196f3",
         },
       },
       backgroundImage: {
