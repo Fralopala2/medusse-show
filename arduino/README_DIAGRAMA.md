@@ -183,7 +183,6 @@ El diagrama incluye:
 
 Para más detalles sobre los sensores, consulta:
 - `documentacion/DOCUMENTACION_GENERAL_RETOS.md`
-- `documentacion/DOCUMENTACION_GENERAL_RETOS.md`
 
 ---
 
