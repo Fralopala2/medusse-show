@@ -22,8 +22,8 @@
 - **Tipo:** Scroll interno
 - **Destino:** Seccion dashboard de la misma pagina
 
-**Boton Secundario: "Documentacion"**
-- **URL:** `https://github.com/Fralopala2/proyecto-medusse/blob/clase/README.md`
+- **Boton Secundario: "Documentacion"**
+- **URL:** `https://github.com/Fralopala2/medusse-show/blob/clase/README.md`
 - **Tipo:** Enlace externo (nueva pestaña)
 - **Destino:** README principal del proyecto en GitHub
 
@@ -46,8 +46,8 @@
 
 ### App Movil Flutter
 
-**Boton Primario: "Descargar App"**
-- **URL:** `https://github.com/Fralopala2/proyecto-medusse/blob/clase/README.md`
+- **Boton Primario: "Descargar App"**
+- **URL:** `https://github.com/Fralopala2/medusse-show/blob/clase/README.md`
 - **Tipo:** Enlace externo (nueva pestaña)
 - **Destino:** README principal con informacion de la app Flutter
 
@@ -65,8 +65,8 @@
 - **Tipo:** Scroll interno
 - **Destino:** Seccion dashboard con datos de sensores
 
-**Boton Secundario: "Especificaciones"**
-- **URL:** `https://github.com/Fralopala2/proyecto-medusse/blob/clase/README.md`
+- **Boton Secundario: "Especificaciones"**
+- **URL:** `https://github.com/Fralopala2/medusse-show/blob/clase/README.md`
 - **Tipo:** Enlace externo (nueva pestaña)
 - **Destino:** README principal con especificaciones tecnicas
 
@@ -74,8 +74,8 @@
 
 ### API REST Completa
 
-**Boton Primario: "Ver API Docs"**
-- **URL:** `https://github.com/Fralopala2/proyecto-medusse/blob/clase/api/README.md`
+- **Boton Primario: "Ver API Docs"**
+- **URL:** `https://github.com/Fralopala2/medusse-show/blob/clase/api/README.md`
 - **Tipo:** Enlace externo (nueva pestaña)
 - **Destino:** Documentacion completa de la API en GitHub
 
@@ -88,8 +88,8 @@
 
 ### Preparado para LoRa Mesh
 
-**Boton Primario: "Ver Migracion"**
-- **URL:** `https://github.com/Fralopala2/proyecto-medusse/blob/clase/documentacion/MIGRACION.md`
+- **Boton Primario: "Ver Migracion"**
+- **URL:** `https://github.com/Fralopala2/medusse-show/blob/clase/documentacion/MIGRACION.md`
 - **Tipo:** Enlace externo (nueva pestaña)
 - **Destino:** Guia de migracion a LoRa Mesh en GitHub
 
@@ -115,15 +115,15 @@
 
 ### Navegacion Principal
 
-**Enlace: "Documentacion"**
-- **URL:** `https://github.com/Fralopala2/proyecto-medusse/blob/clase/README.md`
+- **Enlace: "Documentacion"**
+- **URL:** `https://github.com/Fralopala2/medusse-show/blob/clase/README.md`
 - **Tipo:** Enlace externo (nueva pestaña)
 - **Destino:** README principal del proyecto
 
 ### Enlaces Legales
 
-**Enlace: "Licencia"**
-- **URL:** `https://github.com/Fralopala2/proyecto-medusse/blob/clase/LICENSE`
+- **Enlace: "Licencia"**
+- **URL:** `https://github.com/Fralopala2/medusse-show/blob/clase/LICENSE`
 - **Tipo:** Enlace externo (nueva pestaña)
 - **Destino:** Archivo de licencia en GitHub
 
