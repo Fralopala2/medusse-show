@@ -190,7 +190,7 @@ flowchart TD
 - Alertas en tiempo real
 - Dashboard profesional con Grafana
 - API REST para integración
-- App móvil multiplataforma
+- App móvil para Android
 
 **Impacto Esperado:**
 - Reducción 25-35% consumo energético

@@ -135,7 +135,7 @@ Vercel detecta el push a GitHub automaticamente:
 
 ---
 
-## 🔧 Configuracion Inicial (Ya Completada)
+## 🔧 Configuracion Inicial (Completada)
 
 ### Pasos que se siguieron:
 

@@ -8,6 +8,7 @@
 .kiro/*
 .github/ISSUE_TEMPLATE/*
 .github/CONTRIBUTING.md
+CHANGELOG.md
 
 # OS generated files
 .DS_Store

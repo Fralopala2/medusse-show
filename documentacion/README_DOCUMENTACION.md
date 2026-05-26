@@ -167,11 +167,11 @@ documentacion/
 
 ## Contacto
 
-**Autor:** Francisco Manuel López Alarte  
-**Email:** pacoaldev@gmail.com  
-**Institución:** IES José Rodrigo Botet  
-**Curso:** 2025/2026  
-**Versión:** 2.7.7  
+**Autor:** Francisco Manuel López Alarte
+**Email:** pacoaldev@gmail.com
+**Institución:** IES José Rodrigo Botet
+**Curso:** 2025/2026
+**Versión:** 2.7.7
 **Fecha:** 30 Noviembre 2025
 
 ---
