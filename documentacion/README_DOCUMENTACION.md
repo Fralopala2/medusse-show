@@ -66,7 +66,6 @@ documentacion/
 ├── DOCUMENTACION_GENERAL_RETOS.md       # ⭐ PRINCIPAL - Documento unificado
 ├── RETO_1_SOSTENIBILIDAD.md             # Reto 1 detallado
 ├── RETO_6_PLAN_EMPRESA.md               # Reto 6 detallado
-├── RESUMEN_ENTREGA_PROFESOR.md          # Resumen ejecutivo
 ├── INSTALACION.md                       # Guias instalacion
 ├── MIGRACION.md                         # Migracion LoRa
 ├── VERCEL_DEPLOYMENT.md                 # Deployment

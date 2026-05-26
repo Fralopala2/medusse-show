@@ -18,7 +18,7 @@ export const heroSections = [
         primary: "Ver Dashboard",
         secondary: "Documentación",
         primaryAction: "#dashboard",
-        secondaryAction: "https://github.com/Fralopala2/proyecto-medusse/blob/clase/README.md",
+        secondaryAction: "/documentacion/DOCUMENTACION_GENERAL_RETOS.md",
       },
     ],
     backgroundImage:
@@ -83,7 +83,7 @@ export const heroSections = [
         primary: "Ver Sensores",
         secondary: "Especificaciones",
         primaryAction: "#dashboard",
-        secondaryAction: "https://github.com/Fralopala2/proyecto-medusse/blob/clase/README.md",
+        secondaryAction: "/documentacion/DOCUMENTACION_GENERAL_RETOS.md",
       },
     ],
     backgroundImage:
@@ -99,7 +99,7 @@ export const heroSections = [
       {
         primary: "Ver API Docs",
         secondary: "Probar Endpoints",
-        primaryAction: "https://github.com/Fralopala2/proyecto-medusse/blob/clase/api/README.md",
+        primaryAction: "/api/README.md",
         secondaryAction: "http://localhost:3001/api/summary",
       },
     ],
@@ -116,7 +116,7 @@ export const heroSections = [
       {
         primary: "Ver Migración",
         secondary: "Hardware Necesario",
-        primaryAction: "https://github.com/Fralopala2/proyecto-medusse/blob/clase/documentacion/MIGRACION.md",
+        primaryAction: "/documentacion/MIGRACION.md",
         secondaryAction: "#precios",
       },
     ],

@@ -135,7 +135,7 @@ export default function MapaSitioPage() {
                 </h3>
                 <p className="text-sm text-gray-600">Verificar el estado de la API REST</p>
               </a>
-               <a href="https://github.com/Fralopala2/proyecto-medusse/blob/clase/api/README.md" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 rounded-lg hover:bg-indigo-50 hover:shadow transition-all">
+               <a href="/api/README.md" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 rounded-lg hover:bg-indigo-50 hover:shadow transition-all">
                 <h3 className="font-semibold text-gray-900 mb-1 flex items-center">
                   Documentación API
                   <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -163,7 +163,7 @@ export default function MapaSitioPage() {
                 </h3>
                 <p className="text-sm text-gray-600">Código fuente completo del proyecto</p>
               </a>
-              <a href="https://github.com/Fralopala2/proyecto-medusse/blob/clase/README.md" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 rounded-lg hover:bg-indigo-50 hover:shadow transition-all">
+              <a href="/README.md" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 rounded-lg hover:bg-indigo-50 hover:shadow transition-all">
                 <h3 className="font-semibold text-gray-900 mb-1 flex items-center">
                   Documentación README
                   <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -172,7 +172,7 @@ export default function MapaSitioPage() {
                 </h3>
                 <p className="text-sm text-gray-600">Guía de instalación y uso del proyecto</p>
               </a>
-              <a href="https://github.com/Fralopala2/proyecto-medusse/blob/clase/LICENSE" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 rounded-lg hover:bg-indigo-50 hover:shadow transition-all">
+              <a href="/LICENSE" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 rounded-lg hover:bg-indigo-50 hover:shadow transition-all">
                 <h3 className="font-semibold text-gray-900 mb-1 flex items-center">
                   Licencia del Proyecto
                   <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">

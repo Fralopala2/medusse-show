@@ -99,7 +99,6 @@ proyecto-medusse/
 ├── documentacion/           # 📖 Documentación completa del proyecto
 │   ├── DOCUMENTACION_GENERAL_RETOS.md  # Documento unificado de presentación
 │   ├── README_DOCUMENTACION.md         # Guía de documentación
-│   ├── RESUMEN_ENTREGA_PROFESOR.md     # Resumen ejecutivo
 │   ├── RETO_1_SOSTENIBILIDAD.md        # Reto 1 completo
 │   ├── RETO_6_PLAN_EMPRESA.md          # Plan de empresa
 │   ├── INSTALACION.md                  # Guías de instalación
@@ -114,7 +113,6 @@ proyecto-medusse/
 │   ├── verificar.bat        # 🔍 Verificación completa
 │   ├── full_setup.bat       # ⚙️ Setup inicial automático
 │   └── detener.bat          # 🛑 Detener servicios
-├── CHANGELOG.md             # Historial de cambios (1340+ líneas)
 ├── README.md                # Esta documentación
 ├── requirements.txt         # Dependencias Python
 └── Medusse.code-workspace   # Workspace de VS Code
