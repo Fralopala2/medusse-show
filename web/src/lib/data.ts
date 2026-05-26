@@ -8,6 +8,9 @@ export const companyData = {
   },
 };
 
+export const DOCS_GENERAL_URL =
+  "https://github.com/Fralopala2/medusse-show/blob/clase/documentacion/DOCUMENTACION_GENERAL_RETOS.md";
+
 export const sectionImages = {
   hardware:
     "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop",
@@ -33,7 +36,7 @@ export const heroSections = [
         primary: "Ver Dashboard",
         secondary: "Documentación",
         primaryAction: "#dashboard",
-        secondaryAction: "/documentacion/DOCUMENTACION_GENERAL_RETOS.md",
+        secondaryAction: DOCS_GENERAL_URL,
       },
     ],
     backgroundImage:
@@ -99,7 +102,7 @@ export const heroSections = [
         primary: "Ver Sensores",
         secondary: "Especificaciones",
         primaryAction: "#dashboard",
-        secondaryAction: "/documentacion/DOCUMENTACION_GENERAL_RETOS.md",
+        secondaryAction: DOCS_GENERAL_URL,
       },
     ],
     backgroundImage:
