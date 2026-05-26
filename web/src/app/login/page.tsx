@@ -120,7 +120,7 @@ export default function LoginPage() {
                 value={username}
                 onChange={(e) => handleUsernameChange(e.target.value)}
                 onBlur={() => setTouched({ ...touched, username: true })}
-                className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+                className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 ${
                   usernameError 
                     ? 'border-red-300 focus:ring-red-500 focus:border-red-500' 
                     : 'border-gray-300 focus:ring-indigo-500 focus:border-indigo-500'
@@ -145,7 +145,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => handlePasswordChange(e.target.value)}
                 onBlur={() => setTouched({ ...touched, password: true })}
-                className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+                className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 ${
                   passwordError 
                     ? 'border-red-300 focus:ring-red-500 focus:border-red-500' 
                     : 'border-gray-300 focus:ring-indigo-500 focus:border-indigo-500'

@@ -33,9 +33,16 @@
 
   body {
     @apply antialiased;
+    background-color: #ffffff;
+    color: #171717;
+    overflow-x: hidden;
+  }
+
+  /* Solo landing y capturas: tema oscuro cinematográfico */
+  .theme-cinematic {
     background-color: var(--color-cinematic-bg);
     color: var(--color-medusse-white);
-    overflow-x: hidden;
+    min-height: 100vh;
   }
 
   @media (prefers-reduced-motion: reduce) {

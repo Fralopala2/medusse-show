@@ -67,7 +67,7 @@ export default function CapturasPage() {
   };
 
   return (
-    <SmoothScrollProvider className="bg-cinematic-bg min-h-screen">
+    <SmoothScrollProvider className="theme-cinematic">
       <main>
         <Header />
 

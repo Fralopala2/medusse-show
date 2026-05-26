@@ -19,7 +19,7 @@ import {
 
 export default function Home() {
   return (
-    <SmoothScrollProvider className="bg-cinematic-bg">
+    <SmoothScrollProvider className="theme-cinematic">
       <main className="w-full">
         <Header />
 
