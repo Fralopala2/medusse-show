@@ -3,6 +3,7 @@
 import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { getApiBaseUrl } from '@/lib/api';
+import { ApiEndpointExplorer } from '@/components/admin/ApiEndpointExplorer';
 
 interface User {
   user_id: number;
@@ -61,14 +62,14 @@ interface Sensor {
 function AdminContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const tabParam = searchParams.get('tab') as 'users' | 'stats' | 'logs' | 'alerts' | null;
+  const tabParam = searchParams.get('tab') as 'users' | 'stats' | 'logs' | 'alerts' | 'api' | null;
   
   const [users, setUsers] = useState<User[]>([]);
   const [stats, setStats] = useState<Stats | null>(null);
   const [logs, setLogs] = useState<Log[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [activeTab, setActiveTab] = useState<'users' | 'stats' | 'logs' | 'alerts'>(tabParam || 'stats');
+  const [activeTab, setActiveTab] = useState<'users' | 'stats' | 'logs' | 'alerts' | 'api'>(tabParam || 'stats');
   const [showCreateUserModal, setShowCreateUserModal] = useState(false);
   const [showCreateAlertModal, setShowCreateAlertModal] = useState(false);
   const [alerts, setAlerts] = useState<Alert[]>([]);
@@ -76,10 +77,14 @@ function AdminContent() {
   const [sensors, setSensors] = useState<Sensor[]>([]);
 
   // Actualizar URL cuando cambia la pestaña
-  const handleTabChange = (tab: 'users' | 'stats' | 'logs' | 'alerts') => {
+  const handleTabChange = (tab: 'users' | 'stats' | 'logs' | 'alerts' | 'api') => {
     setActiveTab(tab);
     router.push(`/admin?tab=${tab}`, { scroll: false });
   };
+
+  useEffect(() => {
+    if (tabParam) setActiveTab(tabParam);
+  }, [tabParam]);
 
   useEffect(() => {
     // Verificar autenticacion y permisos
@@ -433,6 +438,16 @@ function AdminContent() {
                 Alertas ({alerts.length})
               </button>
             )}
+            <button
+              onClick={() => handleTabChange('api')}
+              className={`${
+                activeTab === 'api'
+                  ? 'border-indigo-500 text-indigo-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
+            >
+              Probar API
+            </button>
           </nav>
         </div>
 
@@ -700,6 +715,8 @@ function AdminContent() {
               </div>
             </div>
           )}
+
+          {activeTab === 'api' && <ApiEndpointExplorer />}
         </div>
       </div>
 

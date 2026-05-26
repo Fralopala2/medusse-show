@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { useScroll } from "@/hooks/use-scroll";
+import { useAuth } from "@/hooks/use-auth";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User } from "lucide-react";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 
@@ -12,9 +13,9 @@ export function Header() {
   const scrolled = useScroll(50);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { user, isLoading, isAuthenticated } = useAuth();
   const isHomePage = pathname === "/";
-  const isMarketing =
-    pathname === "/" || pathname === "/capturas";
+  const isMarketing = pathname === "/" || pathname === "/capturas";
 
   const navLinks = [
     { name: "Dashboard", href: isHomePage ? "#dashboard" : "/#dashboard" },
@@ -23,6 +24,34 @@ export function Header() {
     { name: "Precios", href: isHomePage ? "#precios" : "/#precios" },
     { name: "Contacto", href: isHomePage ? "#contacto" : "/#contacto" },
   ];
+
+  const authButton = isAuthenticated && user ? (
+    <Link href="/dashboard">
+      <Button
+        variant={isMarketing ? "outline" : "default"}
+        size="sm"
+        className={cn(
+          "hidden sm:flex items-center gap-2",
+          isMarketing && "border-cinematic-accent/50 text-white hover:bg-white/10"
+        )}
+      >
+        <User className="h-4 w-4" />
+        {user.username}
+      </Button>
+    </Link>
+  ) : (
+    !isLoading && (
+      <Link href="/login">
+        <Button
+          variant={isMarketing ? "default" : scrolled ? "default" : "outline"}
+          size="sm"
+          className="hidden sm:flex"
+        >
+          Iniciar sesión
+        </Button>
+      </Link>
+    )
+  );
 
   return (
     <header
@@ -63,15 +92,7 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-4">
-          <Link href="/login">
-            <Button
-              variant={isMarketing ? "default" : scrolled ? "default" : "outline"}
-              size="sm"
-              className="hidden sm:flex"
-            >
-              Iniciar sesión
-            </Button>
-          </Link>
+          {authButton}
 
           <button
             className="md:hidden text-white"
@@ -101,9 +122,18 @@ export function Header() {
                 Contactar
               </Button>
             </Link>
-            <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
-              <Button className="w-full mt-2">Iniciar sesión</Button>
-            </Link>
+            {isAuthenticated && user ? (
+              <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)}>
+                <Button className="w-full mt-2 flex items-center justify-center gap-2">
+                  <User className="h-4 w-4" />
+                  {user.username}
+                </Button>
+              </Link>
+            ) : (
+              <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
+                <Button className="w-full mt-2">Iniciar sesión</Button>
+              </Link>
+            )}
           </div>
         </div>
       )}

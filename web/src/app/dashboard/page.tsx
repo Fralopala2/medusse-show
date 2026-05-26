@@ -1,8 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { getApiBaseUrl } from '@/lib/api';
+import { notifyAuthChange } from '@/hooks/use-auth';
 
 interface User {
   id: number;
@@ -72,7 +74,8 @@ export default function DashboardPage() {
     // Limpiar localStorage
     localStorage.removeItem('sessionToken');
     localStorage.removeItem('user');
-    
+    notifyAuthChange();
+
     // Redirigir a login
     router.push('/login');
   };
@@ -109,12 +112,20 @@ export default function DashboardPage() {
                 <p className="text-xs sm:text-sm text-gray-600">Bienvenido, {user.fullName}</p>
               </div>
             </div>
-            <button
-              onClick={handleLogout}
-              className="px-3 py-2 sm:px-4 text-sm sm:text-base bg-red-600 text-white rounded-md hover:bg-red-700 transition-all duration-300 hover:scale-105"
-            >
-              Cerrar sesion
-            </button>
+            <div className="flex items-center gap-2 sm:gap-3">
+              <Link
+                href="/"
+                className="px-3 py-2 sm:px-4 text-sm sm:text-base border border-gray-300 text-gray-700 bg-white rounded-md hover:bg-gray-50 transition-all duration-300 hover:scale-105"
+              >
+                Ir al inicio
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="px-3 py-2 sm:px-4 text-sm sm:text-base bg-red-600 text-white rounded-md hover:bg-red-700 transition-all duration-300 hover:scale-105"
+              >
+                Cerrar sesion
+              </button>
+            </div>
           </div>
         </div>
       </header>

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { validateUsername, validatePassword } from '@/lib/validation';
 import { getApiBaseUrl } from '@/lib/api';
+import { notifyAuthChange } from '@/hooks/use-auth';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -72,7 +73,8 @@ export default function LoginPage() {
         // Guardar token en localStorage
         localStorage.setItem('sessionToken', data.sessionToken);
         localStorage.setItem('user', JSON.stringify(data.user));
-        
+        notifyAuthChange();
+
         // Redirigir al dashboard
         router.push('/dashboard');
       } else {
