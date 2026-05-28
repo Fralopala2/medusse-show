@@ -1,6 +1,7 @@
 @echo off
 title Detener Medusse IoT
 color 0C
+cd /d "%~dp0"
 
 echo ========================================
 echo   DETENER MEDUSSE IoT

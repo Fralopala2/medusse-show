@@ -1,6 +1,7 @@
 @echo off
 title VERIFICACION PROYECTO MEDUSSE
 color 0B
+cd /d "%~dp0"
 
 echo ========================================
 echo   VERIFICACION PROYECTO MEDUSSE

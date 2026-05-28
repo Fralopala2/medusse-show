@@ -8,7 +8,7 @@ echo ========================================
 echo.
 
 echo [1/4] Instalando dependencias de Python...
-python -m pip install paho-mqtt requests
+python -m pip install -r requirements.txt
 if %errorlevel% neq 0 (
     echo ❌ Error instalando dependencias de Python
 ) else (

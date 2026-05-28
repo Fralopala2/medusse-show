@@ -2,6 +2,7 @@
 chcp 65001 >nul
 title Medusse IoT - Menu Principal
 color 0B
+cd /d "%~dp0"
 
 :menu
 cls

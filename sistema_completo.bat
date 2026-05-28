@@ -1,6 +1,7 @@
 @echo off
 title SISTEMA COMPLETO MEDUSSE IoT
 color 0B
+cd /d "%~dp0"
 
 echo ==========================================
 echo   SISTEMA COMPLETO MEDUSSE IoT
@@ -100,6 +101,18 @@ if errorlevel 1 (
     exit /b 1
 )
 echo [OK] Python OK
+
+python -c "import paho.mqtt.client as mqtt; import requests" >nul 2>&1
+if errorlevel 1 (
+    echo [INFO] Instalando dependencias Python del simulador
+    python -m pip install -r requirements.txt
+    if errorlevel 1 (
+        echo [ERROR] No se pudieron instalar las dependencias Python
+        echo    Ejecuta manualmente: python -m pip install -r requirements.txt
+        pause
+        exit /b 1
+    )
+)
 
 REM Iniciar servicios Docker
 echo.
