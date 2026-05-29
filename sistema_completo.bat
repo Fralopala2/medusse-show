@@ -159,9 +159,7 @@ if "%API_AVAILABLE%"=="true" (
     curl -s http://localhost:3001/health >nul 2>&1
     if errorlevel 1 (
         echo [API] Iniciando API REST
-        cd api
-        start "Medusse API" cmd /k "node server.js"
-        cd ..
+        wscript //nologo "%~dp0scripts\start-api.vbs"
         timeout /t 5 >nul
         echo [API] API REST: http://localhost:3001
     ) else (
@@ -172,9 +170,7 @@ if "%API_AVAILABLE%"=="true" (
     curl -s http://localhost:3003 >nul 2>&1
     if errorlevel 1 (
         echo [WEB] Iniciando Web Next.js
-        cd web
-        start "Medusse Web" cmd /k "npm run dev"
-        cd ..
+        wscript //nologo "%~dp0scripts\start-web.vbs"
         timeout /t 15 >nul
         echo [WEB] Web Next.js: http://localhost:3003
     ) else (
@@ -182,7 +178,7 @@ if "%API_AVAILABLE%"=="true" (
     )
     
     echo [NAVEGADOR] Abriendo Web Next.js
-    start "" "http://localhost:3003"
+    start http://localhost:3003/control
 )
 
 echo.
@@ -205,16 +201,17 @@ echo       Para ejecutarla: cd medusse_app ^&^& flutter run -d windows
 echo.
 echo [STOP] Para detener todo: ejecutar detener.bat
 echo.
-echo [SIMULADOR] Iniciando datos de sensores
-echo Presiona Ctrl+C para detener
-echo.
-
-REM Ejecutar simulador (bloquea hasta Ctrl+C)
-python arduino/medusse_simulator.py
+echo [SIMULADOR] Iniciando simulador en segundo plano
+if not exist logs mkdir logs
+wscript //nologo "%~dp0scripts\start-simulator.vbs"
 
 echo.
-echo [INFO] Simulador detenido
+echo [PORTAL] Abriendo centro de control
+start http://localhost:3003/control
+
 echo.
-echo Para detener todo el sistema:
-echo detener.bat
+echo Sistema en marcha. Portal: http://localhost:3003/control
+echo Logs en carpeta logs\
+echo Para detener: detener.bat
+echo.
 pause

@@ -48,7 +48,7 @@ if "%opcion%"=="9" goto test_login_web
 if "%opcion%"=="10" goto detener
 
 echo.
-echo ❌ Opcion invalida
+echo ? Opcion invalida
 timeout /t 2 >nul
 goto menu
 
@@ -59,7 +59,7 @@ echo ========================================
 echo   SISTEMA COMPLETO
 echo ========================================
 echo.
-call sistema_completo.bat
+call iniciar.bat
 pause
 goto menu
 
@@ -74,25 +74,26 @@ echo.
 REM Verificar Docker
 docker ps >nul 2>&1
 if %errorlevel% neq 0 (
-    echo ❌ Docker Desktop no esta corriendo
+    echo ? Docker Desktop no esta corriendo
     echo Por favor inicia Docker Desktop primero
     pause
     goto menu
 )
 
-echo 🚀 Iniciando servicios Docker...
+echo ?? Iniciando servicios Docker...
 docker compose -f docker/docker-compose.yml up -d
 
 echo.
-echo ⏳ Esperando 15 segundos...
+echo ? Esperando 15 segundos...
 timeout /t 15 /nobreak >nul
 
 echo.
-echo 🚀 Iniciando simulador...
-start "Medusse Simulator" cmd /k "python arduino/medusse_simulator.py"
+echo ?? Iniciando simulador...
+if not exist logs mkdir logs
+wscript //nologo "%~dp0scripts\start-simulator.vbs"
 
 echo.
-echo ✅ Dashboard disponible en: http://localhost:3000
+echo ? Dashboard disponible en: http://localhost:3000
 echo    Usuario: admin / medusse2025
 echo.
 pause
@@ -109,26 +110,26 @@ echo.
 REM Verificar Docker
 docker ps >nul 2>&1
 if %errorlevel% neq 0 (
-    echo ❌ Docker Desktop no esta corriendo
+    echo ? Docker Desktop no esta corriendo
     pause
     goto menu
 )
 
-echo 🚀 Iniciando MySQL...
+echo ?? Iniciando MySQL...
 docker compose -f docker/docker-compose.yml up -d mysql
 
 echo.
-echo ⏳ Esperando 10 segundos...
+echo ? Esperando 10 segundos...
 timeout /t 10 /nobreak >nul
 
 echo.
-echo 🚀 Iniciando API REST...
+echo ?? Iniciando API REST...
 cd api
-start "Medusse API" cmd /k "node server.js"
+wscript //nologo "%~dp0scripts\start-api.vbs"
 cd ..
 
 echo.
-echo ✅ API disponible en: http://localhost:3001
+echo ? API disponible en: http://localhost:3001
 echo.
 pause
 goto menu
@@ -143,18 +144,18 @@ echo.
 
 where node >nul 2>&1
 if %errorlevel% neq 0 (
-    echo ❌ Node.js no esta instalado
+    echo ? Node.js no esta instalado
     pause
     goto menu
 )
 
-echo 🚀 Iniciando Web Next.js...
+echo ?? Iniciando Web Next.js...
 cd web
-start "Medusse Web" cmd /k "npm run dev"
+wscript //nologo "%~dp0scripts\start-web.vbs"
 cd ..
 
 echo.
-echo ✅ Web disponible en: http://localhost:3003
+echo ? Web disponible en: http://localhost:3003
 echo.
 pause
 goto menu
@@ -178,50 +179,50 @@ echo   VERIFICACION RAPIDA
 echo ========================================
 echo.
 
-echo 🔍 Verificando Docker...
+echo ?? Verificando Docker...
 docker --version >nul 2>&1
 if %errorlevel% neq 0 (
-    echo ❌ Docker no instalado
+    echo ? Docker no instalado
 ) else (
-    echo ✅ Docker instalado
+    echo ? Docker instalado
 )
 
 docker ps >nul 2>&1
 if %errorlevel% neq 0 (
-    echo ❌ Docker no corriendo
+    echo ? Docker no corriendo
 ) else (
-    echo ✅ Docker corriendo
+    echo ? Docker corriendo
 )
 
 echo.
-echo 🔍 Verificando servicios...
+echo ?? Verificando servicios...
 docker ps --format "{{.Names}}" | findstr medusse >nul 2>&1
 if %errorlevel% neq 0 (
-    echo ⚠️  Servicios no corriendo
+    echo ??  Servicios no corriendo
 ) else (
-    echo ✅ Servicios corriendo
+    echo ? Servicios corriendo
 )
 
 echo.
-echo 🔍 Verificando Node.js...
+echo ?? Verificando Node.js...
 where node >nul 2>&1
 if %errorlevel% neq 0 (
-    echo ❌ Node.js no instalado
+    echo ? Node.js no instalado
 ) else (
-    echo ✅ Node.js instalado
+    echo ? Node.js instalado
 )
 
 echo.
-echo 🔍 Verificando Python...
+echo ?? Verificando Python...
 where python >nul 2>&1
 if %errorlevel% neq 0 (
-    echo ❌ Python no instalado
+    echo ? Python no instalado
 ) else (
-    echo ✅ Python instalado
+    echo ? Python instalado
 )
 
 echo.
-echo ✅ Verificacion completada
+echo ? Verificacion completada
 pause
 goto menu
 
@@ -235,16 +236,16 @@ echo.
 
 curl -s http://localhost:3001/health >nul 2>&1
 if %errorlevel% neq 0 (
-    echo ❌ API no esta corriendo
+    echo ? API no esta corriendo
     echo.
     echo Inicia la API primero (opcion 3)
     pause
     goto menu
 )
 
-echo ✅ API corriendo
+echo ? API corriendo
 echo.
-echo 🧪 Ejecutando tests...
+echo ?? Ejecutando tests...
 echo.
 
 cd api
@@ -265,21 +266,21 @@ echo.
 
 curl -s http://localhost:3001/health >nul 2>&1
 if %errorlevel% neq 0 (
-    echo ❌ API no esta corriendo
+    echo ? API no esta corriendo
     pause
     goto menu
 )
 
 docker ps | findstr medusse_mysql >nul 2>&1
 if %errorlevel% neq 0 (
-    echo ❌ MySQL no esta corriendo
+    echo ? MySQL no esta corriendo
     pause
     goto menu
 )
 
-echo ✅ API y MySQL corriendo
+echo ? API y MySQL corriendo
 echo.
-echo 🧪 Ejecutando tests de autenticacion...
+echo ?? Ejecutando tests de autenticacion...
 echo.
 
 cd api
@@ -301,47 +302,47 @@ echo.
 REM Verificar y arrancar servicios si es necesario
 docker ps >nul 2>&1
 if %errorlevel% neq 0 (
-    echo ❌ Docker no esta corriendo
+    echo ? Docker no esta corriendo
     pause
     goto menu
 )
 
 docker ps | findstr medusse_mysql >nul 2>&1
 if %errorlevel% neq 0 (
-    echo 🚀 Iniciando MySQL...
+    echo ?? Iniciando MySQL...
     docker compose -f docker/docker-compose.yml up -d mysql
     timeout /t 10 /nobreak >nul
 )
 
 curl -s http://localhost:3001/health >nul 2>&1
 if %errorlevel% neq 0 (
-    echo 🚀 Iniciando API...
-    start "Medusse API" cmd /k "cd api && node server.js"
+    echo ?? Iniciando API...
+    wscript //nologo "%~dp0scripts\start-api.vbs"
     timeout /t 5 /nobreak >nul
 )
 
 curl -s http://localhost:3003 >nul 2>&1
 if %errorlevel% neq 0 (
-    echo 🚀 Iniciando Web...
+    echo ?? Iniciando Web...
     cd web
-    start "Medusse Web" cmd /k "npm run dev"
+    wscript //nologo "%~dp0scripts\start-web.vbs"
     cd ..
     timeout /t 10 /nobreak >nul
 )
 
 echo.
-echo ✅ Sistema listo
+echo ? Sistema listo
 echo.
-echo 📝 USUARIOS DE PRUEBA:
-echo    • admin / medusse2025 (Administrador)
-echo    • paco / medusse2025 (Administrador)
-echo    • profesor / medusse2025 (Usuario)
-echo    • alumno / medusse2025 (Viewer)
+echo ?? USUARIOS DE PRUEBA:
+echo    ? admin / medusse2025 (Administrador)
+echo    ? paco / medusse2025 (Administrador)
+echo    ? profesor / medusse2025 (Usuario)
+echo    ? alumno / medusse2025 (Viewer)
 echo.
-echo 🌐 Login: http://localhost:3003/login
+echo ?? Login: http://localhost:3003/login
 echo.
 
-set /p abrir="¿Abrir navegador? (S/N): "
+set /p abrir="?Abrir navegador? (S/N): "
 if /i "%abrir%"=="S" start "" "http://localhost:3003/login"
 
 pause
