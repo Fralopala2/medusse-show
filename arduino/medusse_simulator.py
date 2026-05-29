@@ -57,10 +57,36 @@ import json
 import time
 import random
 import math
+import sys
+import io
 from datetime import datetime
 import paho.mqtt.client as mqtt
 
+
+def configure_console_utf8():
+    """Evita UnicodeEncodeError en Windows cuando stdout va a log (cp1252)."""
+    for name in ("stdout", "stderr"):
+        stream = getattr(sys, name, None)
+        if stream is None:
+            continue
+        try:
+            if hasattr(stream, "reconfigure"):
+                stream.reconfigure(encoding="utf-8", errors="replace")
+            elif hasattr(stream, "buffer"):
+                wrapper = io.TextIOWrapper(
+                    stream.buffer,
+                    encoding="utf-8",
+                    errors="replace",
+                    line_buffering=True,
+                )
+                setattr(sys, name, wrapper)
+        except (OSError, ValueError, AttributeError):
+            pass
+
+
 def main():
+    configure_console_utf8()
+
     # Conectar a MQTT
     client = mqtt.Client(callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
     

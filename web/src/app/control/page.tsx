@@ -18,9 +18,12 @@ export default function ControlPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [stopping, setStopping] = useState(false);
-  const [stopMessage, setStopMessage] = useState<string | null>(null);
+  const [systemStopped, setSystemStopped] = useState(false);
+  const [stopError, setStopError] = useState<string | null>(null);
 
   const refresh = useCallback(async () => {
+    if (systemStopped) return;
+
     try {
       const data = await fetchDevStatus();
       setStatus(data);
@@ -30,23 +33,29 @@ export default function ControlPage() {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [systemStopped]);
 
   useEffect(() => {
+    if (systemStopped) return;
+
     refresh();
     const interval = setInterval(refresh, 3000);
     return () => clearInterval(interval);
-  }, [refresh]);
+  }, [refresh, systemStopped]);
 
   async function handleStop() {
     if (!confirm("Detener todo el sistema Medusse?")) return;
+
     setStopping(true);
-    setStopMessage(null);
+    setStopError(null);
+
     try {
-      const result = await stopSystem();
-      setStopMessage(result.message);
+      await stopSystem();
+      setSystemStopped(true);
+      setError(null);
+      setStatus(null);
     } catch (err) {
-      setStopMessage(err instanceof Error ? err.message : "Error al detener");
+      setStopError(err instanceof Error ? err.message : "Error al detener");
     } finally {
       setStopping(false);
     }
@@ -68,28 +77,32 @@ export default function ControlPage() {
             </div>
 
             <div className="flex flex-wrap items-center gap-2">
-              {status && (
+              {status && !systemStopped && (
                 <span className="text-sm px-3 py-1.5 rounded-full bg-white/5 border border-white/10">
                   {status.summary.up}/{status.summary.total} servicios activos
                 </span>
               )}
-              <button
-                type="button"
-                onClick={refresh}
-                className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-white/10 hover:bg-white/5 text-sm"
-              >
-                <RefreshCw className="w-4 h-4" />
-                Actualizar
-              </button>
-              <button
-                type="button"
-                onClick={handleStop}
-                disabled={stopping}
-                className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-red-600/80 hover:bg-red-600 text-sm disabled:opacity-50"
-              >
-                <Power className="w-4 h-4" />
-                {stopping ? "Deteniendo..." : "Detener sistema"}
-              </button>
+              {!systemStopped && (
+                <>
+                  <button
+                    type="button"
+                    onClick={refresh}
+                    className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-white/10 hover:bg-white/5 text-sm"
+                  >
+                    <RefreshCw className="w-4 h-4" />
+                    Actualizar
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleStop}
+                    disabled={stopping}
+                    className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-red-600/80 hover:bg-red-600 text-sm disabled:opacity-50"
+                  >
+                    <Power className="w-4 h-4" />
+                    {stopping ? "Deteniendo..." : "Detener sistema"}
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </Container>
@@ -97,52 +110,70 @@ export default function ControlPage() {
 
       <main className="py-8">
         <Container className="space-y-8">
-          <div className="flex flex-wrap gap-2">
-            <a
-              href="http://localhost:3000"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-white/10 hover:bg-white/5 text-sm"
-            >
-              Grafana <ExternalLink className="w-3 h-3" />
-            </a>
-            <a
-              href="http://localhost:3003"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-white/10 hover:bg-white/5 text-sm"
-            >
-              Web publica <ExternalLink className="w-3 h-3" />
-            </a>
-            <Link
-              href="/login"
-              className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-white/10 hover:bg-white/5 text-sm"
-            >
-              Login
-            </Link>
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-white/10 hover:bg-white/5 text-sm"
-            >
-              Inicio
-            </Link>
-          </div>
+          {!systemStopped && (
+            <div className="flex flex-wrap gap-2">
+              <a
+                href="http://localhost:3000"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-white/10 hover:bg-white/5 text-sm"
+              >
+                Grafana <ExternalLink className="w-3 h-3" />
+              </a>
+              <a
+                href="http://localhost:3003"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-white/10 hover:bg-white/5 text-sm"
+              >
+                Web publica <ExternalLink className="w-3 h-3" />
+              </a>
+              <Link
+                href="/login"
+                className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-white/10 hover:bg-white/5 text-sm"
+              >
+                Login
+              </Link>
+              <Link
+                href="/"
+                className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-white/10 hover:bg-white/5 text-sm"
+              >
+                Inicio
+              </Link>
+            </div>
+          )}
 
-          {loading && !status && (
+          {systemStopped && (
+            <div className="rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-6 py-8 text-center space-y-3">
+              <p className="text-2xl font-semibold text-emerald-300">Sistema detenido</p>
+              <p className="text-medusse-gray max-w-lg mx-auto">
+                API, Web, simulador y contenedores Docker se han apagado correctamente.
+              </p>
+              <p className="text-sm text-medusse-gray">
+                Para volver a arrancar, ejecuta{" "}
+                <code className="px-2 py-1 rounded bg-black/30 text-emerald-300">iniciar.bat</code>{" "}
+                en la carpeta del proyecto.
+              </p>
+            </div>
+          )}
+
+          {stopError && (
+            <div className="rounded-lg border border-red-500/40 bg-red-500/10 px-4 py-3 text-red-200 text-sm">
+              {stopError}
+            </div>
+          )}
+
+          {loading && !status && !systemStopped && (
             <p className="text-medusse-gray">Conectando con la API...</p>
           )}
-          {error && (
+
+          {error && !systemStopped && (
             <div className="rounded-lg border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-amber-200 text-sm">
               {error}. Asegurate de que la API este corriendo en el puerto 3001.
             </div>
           )}
-          {stopMessage && (
-            <div className="rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-sm">
-              {stopMessage}
-            </div>
-          )}
 
-          {status && (
+          {status && !systemStopped && (
             <ServiceStatusGrid
               services={status.services}
               docker={status.docker}
@@ -150,12 +181,16 @@ export default function ControlPage() {
             />
           )}
 
-          <section>
-            <h2 className="text-lg font-semibold text-white mb-3">Logs en vivo</h2>
-            <LogViewer />
-          </section>
+          {!systemStopped && (
+            <>
+              <section>
+                <h2 className="text-lg font-semibold text-white mb-3">Logs en vivo</h2>
+                <LogViewer />
+              </section>
 
-          <SensorActivityPanel />
+              <SensorActivityPanel />
+            </>
+          )}
         </Container>
       </main>
     </div>

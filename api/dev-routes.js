@@ -217,14 +217,18 @@ router.post('/stop', (req, res) => {
     return res.status(500).json({ error: 'detener.bat not found' });
   }
 
-  const child = exec(`cmd /c "${detenerBat}" /silent`, {
-    cwd: PROJECT_ROOT,
-    windowsHide: true,
+  res.json({
+    ok: true,
+    message: 'Sistema detenido correctamente.',
   });
 
-  child.unref();
-
-  res.json({ ok: true, message: 'Deteniendo sistema Medusse...' });
+  // Dar tiempo a que la respuesta HTTP llegue al navegador antes de matar node.exe
+  setTimeout(() => {
+    exec(`cmd /c "${detenerBat}" /silent`, {
+      cwd: PROJECT_ROOT,
+      windowsHide: true,
+    }).unref();
+  }, 1500);
 });
 
 module.exports = router;
