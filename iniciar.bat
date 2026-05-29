@@ -3,7 +3,7 @@ setlocal enabledelayedexpansion
 chcp 65001 >nul
 cd /d "%~dp0"
 
-echo [Medusse] Iniciando sistema completo (sin terminales)...
+echo [Medusse] Iniciando sistema completo sin terminales...
 
 docker --version >nul 2>&1
 if errorlevel 1 (
@@ -11,30 +11,8 @@ if errorlevel 1 (
     exit /b 1
 )
 
-docker info >nul 2>&1
-if not errorlevel 1 goto docker_ok
-
-echo [INFO] Iniciando Docker Desktop...
-start "" "C:\Program Files\Docker\Docker\Docker Desktop.exe" >nul 2>&1
-if errorlevel 1 (
-    start "" "%ProgramFiles%\Docker\Docker\Docker Desktop.exe" >nul 2>&1
-)
-
-set /a contador=0
-
-:wait_docker
-timeout /t 10 /nobreak >nul
-docker info >nul 2>&1
-if not errorlevel 1 goto docker_ok
-
-set /a contador+=1
-if !contador! lss 12 goto wait_docker
-
-echo [ERROR] Docker Desktop no disponible
-echo Abre Docker Desktop manualmente y vuelve a ejecutar iniciar.bat
-exit /b 1
-
-:docker_ok
+call :ensure_docker
+if errorlevel 1 exit /b 1
 
 node --version >nul 2>&1
 if errorlevel 1 (
@@ -51,7 +29,7 @@ if errorlevel 1 (
 if not exist logs mkdir logs
 
 echo [1/4] Docker compose...
-docker compose -f docker/docker-compose.yml up -d
+docker compose -f "%~dp0docker\docker-compose.yml" up -d
 if errorlevel 1 exit /b 1
 
 docker ps | findstr "medusse_grafana" | findstr "Up" >nul 2>&1
@@ -60,20 +38,20 @@ if errorlevel 1 (
     timeout /t 15 /nobreak >nul
 )
 
-echo [2/4] API REST (segundo plano)...
+echo [2/4] API REST en segundo plano...
 curl -s http://localhost:3001/health >nul 2>&1
 if errorlevel 1 (
     wscript //nologo "%~dp0scripts\start-api.vbs"
     timeout /t 5 /nobreak >nul
 )
 
-echo [3/4] Web Next.js (segundo plano)...
+echo [3/4] Web Next.js en segundo plano...
 curl -s http://localhost:3003 >nul 2>&1
 if errorlevel 1 (
     wscript //nologo "%~dp0scripts\start-web.vbs"
 )
 
-echo [4/4] Simulador (segundo plano)...
+echo [4/4] Simulador en segundo plano...
 wscript //nologo "%~dp0scripts\start-simulator.vbs"
 
 echo [WAIT] Esperando servicios web...
@@ -84,3 +62,25 @@ if errorlevel 1 (
 
 start http://localhost:3003/control
 exit /b 0
+
+:ensure_docker
+docker info >nul 2>&1
+if not errorlevel 1 exit /b 0
+
+echo [INFO] Iniciando Docker Desktop...
+start "" "C:\Program Files\Docker\Docker\Docker Desktop.exe" >nul 2>&1
+start "" "%ProgramFiles%\Docker\Docker\Docker Desktop.exe" >nul 2>&1
+
+set /a contador=0
+
+:wait_docker_loop
+timeout /t 10 /nobreak >nul
+docker info >nul 2>&1
+if not errorlevel 1 exit /b 0
+
+set /a contador+=1
+if !contador! lss 12 goto wait_docker_loop
+
+echo [ERROR] Docker Desktop no disponible
+echo Abre Docker Desktop manualmente y vuelve a ejecutar iniciar.bat
+exit /b 1
