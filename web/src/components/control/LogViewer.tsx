@@ -28,7 +28,7 @@ export function LogViewer() {
   const [mtime, setMtime] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [autoScroll, setAutoScroll] = useState(true);
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -57,9 +57,10 @@ export function LogViewer() {
   }, [active]);
 
   useEffect(() => {
-    if (autoScroll) {
-      bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-    }
+    if (!autoScroll) return;
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    container.scrollTo({ top: container.scrollHeight, behavior: "smooth" });
   }, [lines, autoScroll]);
 
   return (
@@ -92,7 +93,10 @@ export function LogViewer() {
         </label>
       </div>
 
-      <div className="h-72 overflow-y-auto p-4 font-mono text-xs leading-relaxed">
+      <div
+        ref={scrollContainerRef}
+        className="h-72 overflow-y-auto p-4 font-mono text-xs leading-relaxed overscroll-contain"
+      >
         {error && <p className="text-red-400">{error}</p>}
         {!error && !exists && (
           <p className="text-medusse-gray">Esperando log de {active}...</p>
@@ -103,7 +107,6 @@ export function LogViewer() {
               {line || " "}
             </div>
           ))}
-        <div ref={bottomRef} />
       </div>
 
       {mtime && (
