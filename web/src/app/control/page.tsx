@@ -125,15 +125,19 @@ export default function ControlPage() {
               </a>
               <Link
                 href="/login"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-white/10 hover:bg-white/5 text-sm"
               >
-                Login
+                Login <ExternalLink className="w-3 h-3" />
               </Link>
               <Link
                 href="/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-white/10 hover:bg-white/5 text-sm"
               >
-                Inicio
+                Inicio <ExternalLink className="w-3 h-3" />
               </Link>
             </div>
           )}
