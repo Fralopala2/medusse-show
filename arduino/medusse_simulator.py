@@ -57,18 +57,43 @@ import json
 import time
 import random
 import math
+import sys
+import io
 from datetime import datetime
 import paho.mqtt.client as mqtt
 
+
+def configure_console_utf8():
+    """Evita UnicodeEncodeError en Windows cuando stdout va a log (cp1252)."""
+    for name in ("stdout", "stderr"):
+        stream = getattr(sys, name, None)
+        if stream is None:
+            continue
+        try:
+            if hasattr(stream, "reconfigure"):
+                stream.reconfigure(encoding="utf-8", errors="replace")
+            elif hasattr(stream, "buffer"):
+                wrapper = io.TextIOWrapper(
+                    stream.buffer,
+                    encoding="utf-8",
+                    errors="replace",
+                    line_buffering=True,
+                )
+                setattr(sys, name, wrapper)
+        except (OSError, ValueError, AttributeError):
+            pass
+
+
 def main():
+    configure_console_utf8()
+
     # Conectar a MQTT
     client = mqtt.Client(callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
     
     try:
         client.connect("localhost", 1883, 60)
-        print("✅ Conectado a MQTT broker")
-        print("🔄 Generando datos para 4 ubicaciones con 11 tipos de sensores... (Ctrl+C para parar)")
-        print("📊 Sensores: temp, humedad, CO2, presión, VOC, IAQ, suelo, pH, flujo, TDS, O2")
+        print("Conectado a MQTT broker", flush=True)
+        print("Generando datos para 4 ubicaciones (Ctrl+C para parar)", flush=True)
         
         locations = [
             {"name": "aula20", "node": "ESP32_NODE_01", "temp_base": 22, "battery_percent": 85, "wake_count": 0},
@@ -314,13 +339,12 @@ def main():
                 for topic, data in topics_data:
                     payload = json.dumps(data)
                     client.publish(topic, payload)
-                    print(f"📤 {topic}: {payload}")
             
             # Actualizar tiempo para próxima iteración
             last_update_time = time.time()
             
             i += 1
-            print(f"\n--- Ciclo {i} completado ---\n")
+            print(f"--- Ciclo {i} completado ---", flush=True)
             time.sleep(15)  # Esperar 15 segundos entre ciclos
             
     except KeyboardInterrupt:

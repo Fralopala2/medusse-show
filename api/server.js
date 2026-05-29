@@ -42,6 +42,10 @@ app.use('/api/auth', authRoutes);
 const adminRoutes = require('./admin-routes');
 app.use('/api/admin', adminRoutes);
 
+// Portal de control local (dev)
+const devRoutes = require('./dev-routes');
+app.use('/api/dev', devRoutes);
+
 // Cache para datos recientes
 let cachedSummary = {};
 let lastCacheUpdate = 0;
