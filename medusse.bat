@@ -342,7 +342,7 @@ echo 🌐 Login: http://localhost:3003/login
 echo.
 
 set /p abrir="¿Abrir navegador? (S/N): "
-if /i "%abrir%"=="S" start http://localhost:3003/login
+if /i "%abrir%"=="S" start "" "http://localhost:3003/login"
 
 pause
 goto menu

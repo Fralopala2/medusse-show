@@ -182,7 +182,7 @@ if "%API_AVAILABLE%"=="true" (
     )
     
     echo [NAVEGADOR] Abriendo Web Next.js
-    start http://localhost:3003
+    start "" "http://localhost:3003"
 )
 
 echo.
