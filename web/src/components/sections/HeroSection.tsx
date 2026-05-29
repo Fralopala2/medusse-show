@@ -27,7 +27,19 @@ interface HeroSectionProps {
 function handleCtaAction(action?: string) {
   if (!action) return;
   if (action.startsWith("http")) {
-    window.open(action, "_blank");
+    let url = action;
+    try {
+      const u = new URL(action);
+      if (u.hostname === "localhost" || u.hostname === "127.0.0.1") {
+        // Replace localhost with the current page host so mobile devices
+        // opening the site can reach the Grafana instance on the server.
+        u.hostname = window.location.hostname;
+        url = u.toString();
+      }
+    } catch (e) {
+      // ignore and use original action
+    }
+    window.open(url, "_blank");
   } else if (action.startsWith("#")) {
     scrollToHash(action);
   } else if (action.startsWith("/")) {

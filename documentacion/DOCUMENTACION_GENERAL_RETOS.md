@@ -1,7 +1,11 @@
 # Documentación general del proyecto - Medusse IoT
 
-**Sistema IoT de monitoreo ambiental con arquitectura de microservicios**
- 
+
+<p align="center">
+   <strong>Sistema IoT de monitoreo ambiental con arquitectura de microservicios</strong>
+</p>
+
+
 <p align="center">
   <picture>
     <source srcset="https://github-production-user-asset-6210df.s3.amazonaws.com/184574372/516561483-85c75066-09b4-435a-a48c-f828e673410b.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20260525%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260525T215418Z&X-Amz-Expires=300&X-Amz-Signature=756adc09f457828587c57ca5abc289a9bd36f63b8ddba2c9ca9d824bc987c665&X-Amz-SignedHeaders=host&response-content-type=image%2Fpng">
@@ -9,9 +13,6 @@
   </picture>
 </p>
 
-Documento especifico para la presentación del TFG: resume el proyecto, integra los 16 retos y concentra la información útil para evaluación y exposición.
-
----
 
 ## Información del proyecto
 

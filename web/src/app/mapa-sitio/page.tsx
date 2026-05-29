@@ -1,5 +1,31 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Footer } from "@/components/layout/Footer";
+
+function ClientGrafanaLink({ className }: { className?: string }) {
+  const [url, setUrl] = useState("http://localhost:3000");
+  useEffect(() => {
+    try {
+      setUrl(`http://${window.location.hostname}:3000`);
+    } catch (e) {
+      // leave default
+    }
+  }, []);
+
+  return (
+    <a href={url} target="_blank" rel="noopener noreferrer" className={className}>
+      <h3 className="font-semibold text-gray-900 mb-1 flex items-center">
+        Dashboard Grafana
+        <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+        </svg>
+      </h3>
+      <p className="text-sm text-gray-600">Visualización en tiempo real de datos de sensores</p>
+    </a>
+  );
+}
 
 export default function MapaSitioPage() {
   return (
@@ -103,15 +129,7 @@ export default function MapaSitioPage() {
               Visualización de Datos
             </h2>
             <div className="grid md:grid-cols-2 gap-4">
-              <a href="http://localhost:3000" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 rounded-lg hover:bg-indigo-50 hover:shadow transition-all">
-                <h3 className="font-semibold text-gray-900 mb-1 flex items-center">
-                  Dashboard Grafana
-                  <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                </h3>
-                <p className="text-sm text-gray-600">Visualización en tiempo real de datos de sensores</p>
-              </a>
+              <ClientGrafanaLink className="block p-4 bg-gray-50 rounded-lg hover:bg-indigo-50 hover:shadow transition-all" />
               <div className="block p-4 bg-gray-50 rounded-lg opacity-75">
                 <h3 className="font-semibold text-gray-900 mb-1">Datos Históricos</h3>
                 <p className="text-sm text-gray-600">Consulta de datos históricos de sensores</p>

@@ -55,9 +55,7 @@ export const heroSections = [
     ctas: [
       {
         primary: "Acceder a Grafana",
-        secondary: "Ver Demo",
         primaryAction: "http://localhost:3000",
-        secondaryAction: "#dashboard",
       },
     ],
     backgroundImage: "/dashboard-raspberry.png",

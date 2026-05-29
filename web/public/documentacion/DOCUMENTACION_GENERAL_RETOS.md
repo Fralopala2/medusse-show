@@ -1,6 +1,8 @@
 # Documentación general del proyecto - Medusse IoT
 
-**Sistema IoT de monitoreo ambiental con arquitectura de microservicios**
+<p align="center">
+   <strong>Sistema IoT de monitoreo ambiental con arquitectura de microservicios</strong>
+</p>
  
 <p align="center">
   <picture>
