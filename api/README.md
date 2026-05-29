@@ -1,6 +1,10 @@
 # Medusse API REST
 
-API REST para el proyecto Medusse IoT que proporciona acceso a datos de sensores desde InfluxDB y streaming en tiempo real vía WebSocket/MQTT.
+API REST para el proyecto Medusse IoT que proporciona acceso a datos de sensores desde InfluxDB, autenticacion basada en sesiones y streaming en tiempo real via WebSocket/MQTT.
+
+## Endpoints expuestos
+
+La API expone 11 endpoints principales: 7 de datos y 4 de autenticacion.
 
 ## 🚀 Instalación y Uso
 

@@ -43,6 +43,8 @@ export default function ControlPage() {
     return () => clearInterval(interval);
   }, [refresh, systemStopped]);
 
+  const grafanaUrl = typeof window !== 'undefined' ? `http://${window.location.hostname}:3000` : 'http://localhost:3000';
+
   async function handleStop() {
     if (!confirm("Detener todo el sistema Medusse?")) return;
 
@@ -108,7 +110,7 @@ export default function ControlPage() {
           {!systemStopped && (
             <div className="flex flex-wrap gap-2">
               <a
-                href="http://localhost:3000"
+                href={grafanaUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-white/10 hover:bg-white/5 text-sm"
