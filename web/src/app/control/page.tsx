@@ -200,7 +200,7 @@ export default function ControlPage() {
                 <SensorActivityPanel />
               </div>
 
-              <aside className="xl:sticky xl:top-8 self-start">
+              <aside className="xl:sticky xl:top-8 xl:mt-8 self-start">
                 <ServiceAccessSummary services={status.services} hostIp={status.hostIp} />
               </aside>
             </div>
