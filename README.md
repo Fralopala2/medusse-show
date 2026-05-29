@@ -58,7 +58,8 @@ medusse-show/
 │   │   ├── app/             # App Router de Next.js
 │   │   │   ├── page.tsx     # Página principal
 │   │   │   ├── login/       # Página de login
-│   │   │   └── dashboard/   # Dashboard protegido
+│   │   │   ├── dashboard/   # Dashboard protegido (usuarios)
+│   │   │   └── control/     # Centro de control (arranque local)
 │   │   ├── components/      # Componentes React
 │   │   │   ├── layout/      # Header, Footer
 │   │   │   ├── sections/    # Hero sections
@@ -92,12 +93,19 @@ medusse-show/
 │   └── LINKS.md                        # Enlaces web
 ├── tools_linux/             # Herramientas para Linux/Lliurex (no incluidas en este fork)
 │   └── (En este repositorio solo se incluyen scripts de Windows en la raíz)
+├── scripts/                 # Arranque en segundo plano (sin ventanas cmd)
+│   ├── start-api.vbs        # API Node oculta → logs/api.log
+│   ├── start-web.vbs        # Next.js oculto → logs/web.log
+│   ├── start-simulator.vbs  # Simulador Python oculto → logs/simulator.log
+│   └── wait-for-url.ps1     # Espera a API y Web antes de abrir el portal
+├── logs/                    # Logs de servicios (generado al arrancar, en .gitignore)
 ├── Scripts Windows (raíz):  # Scripts de automatización
-│   ├── medusse.bat          # 🎯 Menú principal unificado
-│   ├── sistema_completo.bat # 🚀 Sistema completo
+│   ├── iniciar.bat          # ⭐ Arranque recomendado (1 clic, sin terminales)
+│   ├── medusse.bat          # 🎯 Menú interactivo (tests y opciones avanzadas)
+│   ├── sistema_completo.bat # 🚀 Sistema completo (consola + portal)
 │   ├── verificar.bat        # 🔍 Verificación completa
 │   ├── full_setup.bat       # ⚙️ Setup inicial automático
-│   └── detener.bat          # 🛑 Detener servicios
+│   └── detener.bat          # 🛑 Detener todos los servicios
 ├── README.md                # Esta documentación
 ├── requirements.txt         # Dependencias Python
 └── Medusse.code-workspace   # Workspace de VS Code
@@ -107,6 +115,8 @@ medusse-show/
 
 ### 🤖 Automatización Avanzada
 - **Instalación automática** de Docker y dependencias
+- **Arranque en un clic** con `iniciar.bat` (sin ventanas de terminal)
+- **Centro de control** web en `/control` (estado, logs en vivo, IoT)
 - **Scripts de verificación** con diagnósticos inteligentes
 - **Setup completo** en un solo comando
 - **Detección automática** de problemas y soluciones
@@ -166,10 +176,11 @@ medusse-show/
 ### ✅ Funcionalidades Implementadas
 
 **🤖 Automatización Total:**
+- **Arranque silencioso** (`iniciar.bat`) + **Centro de control** (`http://localhost:3003/control`)
 - **Setup inicial automático** (`full_setup.bat`)
-- **Menú principal unificado** (`medusse.bat`)
+- **Menú principal unificado** (`medusse.bat`) para tests y opciones parciales
 - **Verificación automática** con diagnósticos (`verificar.bat`)
-- **Ecosistema completo** con monitoreo (`sistema_completo.bat`)
+- **Ecosistema completo** (`sistema_completo.bat`) con consola de progreso
 
 **🏗️ Core IoT System:**
 - **4 ubicaciones monitoreadas:** Aula 20 (22°C), Aula 21 (24°C), Gimnasio (23°C), Laboratorio (21°C)
@@ -213,47 +224,72 @@ chmod +x setup_lliurex.sh
 ```
 *Maneja permisos de Docker automáticamente. Ver INSTALACION_LLIUREX.md para más detalles.*
 
-### ⚡ Ejecución del Sistema
+### ⚡ Ejecución del Sistema (Windows)
 
-#### Windows
+Este repositorio incluye scripts de automatización en la raíz. **No hay scripts Linux** en este fork.
 
-**Menú Principal Unificado (Recomendado):**
+#### Arranque recomendado (sin terminales)
+
 ```cmd
-medusse.bat                # Menú interactivo con todas las opciones
+iniciar.bat
 ```
 
-**O ejecutar directamente:**
+Qué hace `iniciar.bat`:
+
+1. Comprueba Docker, Node.js y Python (e intenta abrir Docker Desktop si hace falta).
+2. Levanta el stack Docker (`docker compose up -d`).
+3. Inicia **API**, **Web Next.js** y **simulador** en segundo plano (scripts VBS en `scripts/`).
+4. Escribe los logs en la carpeta `logs/` (`api.log`, `web.log`, `simulator.log`).
+5. Abre el navegador en el **Centro de control**: http://localhost:3003/control
+
+No se abren ventanas `cmd` de API, Web ni simulador: todo se supervisa desde el portal.
+
+#### Detener el sistema
+
 ```cmd
-sistema_completo.bat       # Sistema completo
-verificar.bat              # Verificación completa
+detener.bat
 ```
 
-#### Windows (scripts incluidos en la raíz)
+También puedes usar el botón **Detener sistema** en el Centro de control (para Docker, Python y Node en el orden correcto).
 
-Este repositorio contiene los scripts de automatización para Windows en la raíz del proyecto. No hay scripts Linux incluidos.
+Modo silencioso (toast de Windows, sin consola):
 
-**1. Verificar Sistema:**
-```powershell
-verificar.bat     # Verificación completa
+```cmd
+detener.bat /silent
 ```
 
-**2. Ejecutar Sistema Completo:**
-```powershell
-sistema_completo.bat      # Dashboard + API + Simulador
-```
+#### Otras opciones
 
-**3. Detener Sistema:**
-```powershell
-detener.bat       # Detener todos los servicios
-```
+| Script | Uso |
+|--------|-----|
+| `medusse.bat` | Menú interactivo: sistema completo, servicios sueltos, tests |
+| `sistema_completo.bat` | Igual que antes, con mensajes en consola y apertura de `/control` |
+| `verificar.bat` | Diagnóstico de Docker, Node, Python y servicios |
+| `full_setup.bat` | Primera instalación (dependencias + Docker base) |
+
+### Centro de control (`/control`)
+
+Portal de desarrollo en Next.js que sustituye las terminales al arrancar el stack local.
+
+| Zona | Descripción |
+|------|-------------|
+| **Servicios** | Estado de API, Web, Grafana, InfluxDB, MQTT, MySQL y simulador |
+| **Docker** | Contenedores `medusse_*` en ejecución |
+| **Logs en vivo** | Pestañas API / Web / Simulador (lectura desde `logs/`) |
+| **Actividad IoT** | WebSocket y resumen de sensores |
+| **Acciones** | Enlaces a Grafana, web pública, login; botón detener sistema |
+
+Requisitos: API en el puerto **3001** (endpoints `/api/dev/*` solo en entorno local, no producción).
 
 ### Acceso a Interfaces
 
 | Servicio | URL | Credenciales |
 |----------|-----|--------------|
+| **Centro de control** | http://localhost:3003/control | Sin login (local) |
 | **Grafana Dashboard** | http://localhost:3000 | admin / medusse2025 |
 | **API REST** | http://localhost:3001 | - |
 | **Web Next.js** | http://localhost:3003 | - |
+| **Login web** | http://localhost:3003/login | Ver usuarios en sección MySQL |
 | **InfluxDB** | http://localhost:8086 | admin / medusse2025 |
 | **App Flutter** | Ejecutar manualmente (`flutter run -d windows`) | - |
 
@@ -501,6 +537,7 @@ El sistema está **completamente preparado** para migración a hardware real:
 
 ### Características
 - **Next.js 16** con TypeScript y Tailwind CSS
+- **Centro de control** (`/control`) para arranque local: servicios, logs y sensores
 - **Dashboard en tiempo real** con datos de 4 ubicaciones
 - **Integración API REST** con 10+ funciones
 - **WebSocket** para actualización automática
@@ -519,13 +556,27 @@ El sistema está **completamente preparado** para migración a hardware real:
 - **Contactar** - Abre cliente de correo con pacoaldev@gmail.com
 
 ### Uso
+
+Arranque completo (recomendado):
+
 ```cmd
-ejecutar_web.bat
+iniciar.bat
 ```
 
-La web estará disponible en: http://localhost:3003
+Solo la web (con Docker y API ya levantados):
 
-**Nota**: Usamos puerto 3003 para evitar conflicto con Grafana (puerto 3000)
+```cmd
+wscript //nologo scripts\start-web.vbs
+```
+
+| URL | Descripción |
+|-----|-------------|
+| http://localhost:3003/control | Centro de control (desarrollo) |
+| http://localhost:3003 | Web pública |
+| http://localhost:3003/login | Login de usuarios |
+| http://localhost:3003/dashboard | Panel tras autenticación |
+
+**Nota**: El puerto **3003** evita conflicto con Grafana (puerto 3000).
 
 ---
 
@@ -637,7 +688,7 @@ La web estará disponible en: http://localhost:3003
 **Implementación**: ✅ Completado
 - 9 tablas con relaciones e índices
 - 10 procedimientos almacenados
-- 4 usuarios iniciales con roles
+- 3 usuarios iniciales con roles
 - 4 ubicaciones y 18 sensores configurados
 - Sistema de alertas y notificaciones
 - Documentación técnica completa
@@ -723,4 +774,4 @@ Para consultas de licencia o permisos, contacta al autor
 
 ---
 
-_**Versión actual:** 2.7.9 (Noviembre 2025)_
+_**Versión actual:** 2.7.9 (Mayo 2026)_
