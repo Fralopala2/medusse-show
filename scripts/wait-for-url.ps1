@@ -3,26 +3,32 @@ param(
     [int]$IntervalSec = 2
 )
 
-$urls = @(
+$pending = @(
     "http://localhost:3001/health",
     "http://localhost:3003"
 )
 
 $deadline = (Get-Date).AddSeconds($TimeoutSec)
-$pending = [System.Collections.Generic.List[string]]::new($urls)
 
 while ($pending.Count -gt 0 -and (Get-Date) -lt $deadline) {
-    foreach ($url in @($pending.ToArray())) {
+    $stillPending = @()
+
+    foreach ($url in $pending) {
         try {
             $response = Invoke-WebRequest -Uri $url -UseBasicParsing -TimeoutSec 3 -ErrorAction Stop
             if ($response.StatusCode -ge 200 -and $response.StatusCode -lt 500) {
                 Write-Host "[OK] $url"
-                [void]$pending.Remove($url)
+            } else {
+                Write-Host "[WAIT] $url"
+                $stillPending += $url
             }
         } catch {
             Write-Host "[WAIT] $url"
+            $stillPending += $url
         }
     }
+
+    $pending = $stillPending
 
     if ($pending.Count -gt 0) {
         Start-Sleep -Seconds $IntervalSec

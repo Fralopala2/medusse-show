@@ -9,6 +9,7 @@ export interface DevService {
   status: ServiceStatus;
   latencyMs?: number | null;
   lastLogAt?: string | null;
+  processRunning?: boolean;
 }
 
 export interface DockerContainer {

@@ -49,9 +49,12 @@ export function ServiceStatusGrid({ services, docker, lastCheck }: Props) {
               {service.latencyMs != null && (
                 <p className="text-xs text-medusse-gray mt-3">{service.latencyMs} ms</p>
               )}
+              {service.id === "simulator" && service.processRunning && (
+                <p className="text-xs text-emerald-400/80 mt-1">Proceso en ejecucion</p>
+              )}
               {service.lastLogAt && (
                 <p className="text-xs text-medusse-gray mt-1 truncate">
-                  Log: {new Date(service.lastLogAt).toLocaleTimeString("es-ES")}
+                  Ultimo log: {new Date(service.lastLogAt).toLocaleTimeString("es-ES")}
                 </p>
               )}
             </div>

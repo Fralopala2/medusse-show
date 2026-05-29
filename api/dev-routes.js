@@ -126,18 +126,53 @@ function tailLogFile(filename, lineCount = 80) {
   };
 }
 
-function getSimulatorStatus() {
+async function isSimulatorProcessRunning() {
+  try {
+    const { stdout } = await execAsync(
+      'powershell -NoProfile -Command "Get-CimInstance Win32_Process -Filter \\"Name=\'python.exe\'\\" | ForEach-Object { $_.CommandLine }"',
+      { timeout: 8000, windowsHide: true }
+    );
+    return stdout.toLowerCase().includes('medusse_simulator');
+  } catch {
+    try {
+      const { stdout } = await execAsync(
+        'wmic process where "name=\'python.exe\'" get CommandLine 2>nul',
+        { timeout: 8000, windowsHide: true }
+      );
+      return stdout.toLowerCase().includes('medusse_simulator');
+    } catch {
+      return false;
+    }
+  }
+}
+
+async function getSimulatorStatus() {
   const log = tailLogFile(LOG_FILES.simulator, 5);
-  if (!log.exists) {
-    return { status: 'unknown', lastLogAt: null };
+  const processRunning = await isSimulatorProcessRunning();
+
+  if (!log.exists && !processRunning) {
+    return { status: 'unknown', lastLogAt: null, processRunning: false };
   }
 
-  const ageMs = Date.now() - new Date(log.mtime).getTime();
-  const active = ageMs < 30000;
+  let logFresh = false;
+  if (log.exists && log.mtime) {
+    const ageMs = Date.now() - new Date(log.mtime).getTime();
+    // Ciclo cada 15s; margen por buffering en Windows
+    logFresh = ageMs < 90000;
+  }
+
+  if (processRunning || logFresh) {
+    return {
+      status: 'active',
+      lastLogAt: log.mtime,
+      processRunning,
+    };
+  }
 
   return {
-    status: active ? 'active' : 'idle',
+    status: 'idle',
     lastLogAt: log.mtime,
+    processRunning: false,
   };
 }
 
@@ -224,13 +259,19 @@ router.get('/status', async (req, res) => {
       });
     }
 
-    const simulator = getSimulatorStatus();
+    const simulator = await getSimulatorStatus();
     services.push({
       id: 'simulator',
       label: 'Simulador Python',
       port: null,
-      status: simulator.status === 'active' ? 'up' : simulator.status === 'idle' ? 'degraded' : 'unknown',
+      status:
+        simulator.status === 'active'
+          ? 'up'
+          : simulator.status === 'idle'
+            ? 'down'
+            : 'unknown',
       lastLogAt: simulator.lastLogAt,
+      processRunning: simulator.processRunning,
     });
 
     const docker = await getDockerContainers();
