@@ -3,10 +3,13 @@
 **Sistema IoT de monitoreo ambiental con arquitectura de microservicios**
  
 <p align="center">
-   <img src="https://github.com/user-attachments/assets/79836c85-868f-495e-a32d-41b25f71af3b" alt="Diagrama proyecto Medusse" style="max-width:100%;height:auto;">
+  <picture>
+    <source srcset="https://github-production-user-asset-6210df.s3.amazonaws.com/184574372/516561483-85c75066-09b4-435a-a48c-f828e673410b.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20260525%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260525T215418Z&X-Amz-Expires=300&X-Amz-Signature=756adc09f457828587c57ca5abc289a9bd36f63b8ddba2c9ca9d824bc987c665&X-Amz-SignedHeaders=host&response-content-type=image%2Fpng">
+    <img src="web/public/images/medusse-logo.svg" alt="meduse" width="220" />
+  </picture>
 </p>
 
-Documento unificado de presentación del TFG: resume el proyecto, integra los 16 retos y concentra la información útil para evaluación y exposición.
+Documento especifico para la presentación del TFG: resume el proyecto, integra los 16 retos y concentra la información útil para evaluación y exposición.
 
 ---
 
@@ -18,7 +21,7 @@ Documento unificado de presentación del TFG: resume el proyecto, integra los 16
 **Institución:** IES José Rodrigo Botet  
 **Curso Académico:** 2025/2026  
 **Versión:** 2.7.9  
-**Fecha:** Noviembre 2025  
+**Fecha presentación:** Junio 2026  
 **Licencia:** All Rights Reserved  
 **Estado:** 16/16 Retos Completados (100%) ✅
 
@@ -34,26 +37,10 @@ El proyecto demuestra la implementación práctica de una arquitectura de micros
 
 ## Arquitectura del sistema
 
-### Diagrama de arquitectura
 
-```mermaid
-flowchart LR
-    ESP[ESP32<br/>Simulators] --> MQTT[MQTT<br/>Broker]
-    MQTT --> TEL[Telegraf]
-    TEL --> INFLUX[InfluxDB]
-    INFLUX --> GRAF[Grafana<br/>Dashboard]
-    MQTT --> API[API REST]
-    INFLUX --> API
-    API --> MYSQL[MySQL<br/>Database]
-    API --> WEB[Web<br/>Next.js]
-    API --> WS[WebSocket<br/>Real-time]
-    WS --> FLUTTER[Flutter<br/>Mobile App]
-    
-    style ESP fill:#3b82f6,stroke:#1e40af,stroke-width:2px,color:#fff
-    style MQTT fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff
-    style INFLUX fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
-    style GRAF fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#fff
-```
+<p align="center">
+   <img src="https://github.com/user-attachments/assets/79836c85-868f-495e-a32d-41b25f71af3b" alt="Diagrama proyecto Medusse" style="max-width:100%;height:auto;">
+</p>
 
 ### Componentes principales
 
@@ -519,7 +506,7 @@ Usuario: admin / medusse2025
 
 **Implementación:**
 
-#### API REST (7 endpoints)
+#### API REST (11 endpoints totales: 7 de datos + 4 de autenticacion)
 1. **GET /** - Información de la API
 2. **GET /health** - Estado de servicios
 3. **GET /api/locations** - Lista de ubicaciones
@@ -999,21 +986,11 @@ api/
 
 #### Windows
 ```cmd
-# Instalacion completa (equipos nuevos)
-instalar_proyecto.bat
-
-# Setup rapido (Docker ya instalado)
-setup_rapido.bat
+# Setup inicial recomendado
+full_setup.bat
 ```
 
-#### Linux/Lliurex
-```bash
-# Dar permisos de ejecucion
-chmod +x setup_lliurex.sh
-
-# Ejecutar instalacion
-./setup_lliurex.sh
-```
+> Este fork solo incluye scripts de Windows en la raiz. Los scripts Linux/Lliurex no forman parte de este repositorio.
 
 ### Ejecucion del Sistema
 
@@ -1024,18 +1001,8 @@ medusse.bat
 
 # O ejecutar directamente
 sistema_completo.bat
-```
-
-#### Linux/Lliurex
-```bash
-# Ejecutar sistema completo
-./ejecutar_lliurex.sh
-
-# Verificar estado
-./verificar_lliurex.sh
-
-# Detener sistema
-./detener_lliurex.sh
+verificar.bat
+detener.bat
 ```
 
 ### Acceso a Servicios

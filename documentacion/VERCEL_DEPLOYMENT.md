@@ -91,7 +91,7 @@ Vercel detecta el push a GitHub automaticamente:
 ```
 12:40:39.240 Running build in Washington, D.C., USA (East) – iad1
 12:40:39.241 Build machine configuration: 2 cores, 8 GB
-12:40:39.384 Cloning github.com/Fralopala2/medusse-web (Branch: clase, Commit: f226022)
+12:40:39.384 Cloning github.com/Fralopala2/medusse-show (Branch: clase, Commit: f226022)
 12:40:39.702 Cloning completed: 318.000ms
 12:40:40.111 Running "vercel build"
 12:40:40.554 Vercel CLI 48.10.5

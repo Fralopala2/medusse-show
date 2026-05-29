@@ -1,6 +1,6 @@
 # Instalación Proyecto Medusse IoT
 
-Guía completa de instalación para **Windows**, **Linux** y **Lliurex**.
+Guía de instalación centrada en **Windows** para este fork. La raiz del proyecto solo incluye scripts de automatizacion para Windows.
 
 ---
 
@@ -24,7 +24,7 @@ Guía completa de instalación para **Windows**, **Linux** y **Lliurex**.
 
 #### Para Equipos Nuevos (Sin Docker)
 ```cmd
-instalar_proyecto.bat
+full_setup.bat
 ```
 
 **Este script instala automáticamente:**
@@ -35,7 +35,7 @@ instalar_proyecto.bat
 
 #### Para Equipos con Docker Ya Instalado
 ```cmd
-setup_rapido.bat
+full_setup.bat
 ```
 
 ### Opción 2: Instalación Manual
@@ -68,11 +68,14 @@ verificar.bat
 medusse.bat                # Menu principal unificado
 sistema_completo.bat       # Sistema completo
 verificar.bat              # Verificacion completa
+detener.bat                # Detener servicios
 ```
 
 ---
 
 ## 🐧 Instalación en Linux (Ubuntu/Debian)
+
+> Esta seccion se mantiene solo como referencia. Este fork no incluye scripts automáticos para Linux/Lliurex.
 
 ### Opción 1: Instalación Automática (Recomendada)
 
@@ -300,13 +303,13 @@ curl http://localhost:3000
 **Solución:**
 1. Instalar Docker Desktop manualmente
 2. Reiniciar el equipo
-3. Ejecutar `setup_rapido.bat`
+3. Ejecutar `full_setup.bat`
 
 #### Error: "Python no encontrado"
 **Solución:**
 1. Instalar Python desde Microsoft Store
 2. Reiniciar terminal
-3. Ejecutar script de nuevo
+3. Ejecutar `full_setup.bat`
 
 #### Servicios no funcionan
 ```cmd
@@ -316,6 +319,8 @@ docker compose -f docker/docker-compose.yml up -d
 ```
 
 ### Linux / Lliurex
+
+> Esta seccion se mantiene solo como referencia. Este fork no incluye scripts automáticos para Linux/Lliurex.
 
 #### Docker no inicia
 ```bash
@@ -383,7 +388,7 @@ sudo ufw status
 
 **Windows:**
 ```cmd
-instalar_proyecto.bat
+full_setup.bat
 ```
 
 **Linux/Lliurex:**
@@ -412,7 +417,7 @@ instalar_proyecto.bat
 
 | Sistema | Archivos |
 |---------|----------|
-| **Windows** | `instalar_proyecto.bat`, `setup_rapido.bat`, `medusse.bat` |
+| **Windows** | `full_setup.bat`, `medusse.bat`, `sistema_completo.bat`, `verificar.bat`, `detener.bat` |
 | **Linux** | `setup_linux.sh`, `ejecutar_linux.sh`, `verificar_linux.sh` |
 | **Lliurex** | `setup_lliurex.sh`, `ejecutar_lliurex.sh`, `verificar_lliurex.sh` |
 
