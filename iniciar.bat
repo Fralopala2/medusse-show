@@ -1,4 +1,5 @@
 @echo off
+setlocal enabledelayedexpansion
 chcp 65001 >nul
 cd /d "%~dp0"
 
@@ -11,20 +12,29 @@ if errorlevel 1 (
 )
 
 docker info >nul 2>&1
+if not errorlevel 1 goto docker_ok
+
+echo [INFO] Iniciando Docker Desktop...
+start "" "C:\Program Files\Docker\Docker\Docker Desktop.exe" >nul 2>&1
 if errorlevel 1 (
-    echo [INFO] Iniciando Docker Desktop...
-    start "" "C:\Program Files\Docker\Docker\Docker Desktop.exe" >nul 2>&1
-    set /a contador=0
-    :wait_docker
-    timeout /t 10 >nul
-    docker info >nul 2>&1
-    if not errorlevel 1 goto docker_ready
-    set /a contador+=1
-    if %contador% lss 12 goto wait_docker
-    echo [ERROR] Docker Desktop no disponible
-    exit /b 1
-    :docker_ready
+    start "" "%ProgramFiles%\Docker\Docker\Docker Desktop.exe" >nul 2>&1
 )
+
+set /a contador=0
+
+:wait_docker
+timeout /t 10 /nobreak >nul
+docker info >nul 2>&1
+if not errorlevel 1 goto docker_ok
+
+set /a contador+=1
+if !contador! lss 12 goto wait_docker
+
+echo [ERROR] Docker Desktop no disponible
+echo Abre Docker Desktop manualmente y vuelve a ejecutar iniciar.bat
+exit /b 1
+
+:docker_ok
 
 node --version >nul 2>&1
 if errorlevel 1 (
@@ -67,7 +77,7 @@ echo [4/4] Simulador (segundo plano)...
 wscript //nologo "%~dp0scripts\start-simulator.vbs"
 
 echo [WAIT] Esperando servicios web...
-powershell -NoProfile -ExecutionPolicy Bypass -File %~dp0scripts\wait-for-url.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0scripts\wait-for-url.ps1"
 if errorlevel 1 (
     echo [WARN] Algunos servicios tardan mas. Abriendo portal igualmente...
 )
