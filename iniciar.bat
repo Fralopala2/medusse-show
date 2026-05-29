@@ -3,7 +3,7 @@ setlocal enabledelayedexpansion
 chcp 65001 >nul
 cd /d "%~dp0"
 
-echo [Medusse] Iniciando sistema completo sin terminales...
+echo [Medusse] Iniciando sistema completo...
 
 docker --version >nul 2>&1
 if errorlevel 1 (

@@ -171,9 +171,9 @@ medusse-show/
 - **Provider pattern** para gestión de estado reactiva
 - **Multiplataforma:** Windows, Web, Android
 
-## 🎉 Estado: ECOSISTEMA COMPLETO ✅
+## 🎉 Estado: ECOSISTEMA COMPLETO
 
-### ✅ Funcionalidades Implementadas
+### Funcionalidades Implementadas
 
 **🤖 Automatización Total:**
 - **Arranque silencioso** (`iniciar.bat`) + **Centro de control** (`http://localhost:3003/control`)
@@ -228,7 +228,7 @@ chmod +x setup_lliurex.sh
 
 Este repositorio incluye scripts de automatización en la raíz. **No hay scripts Linux** en este fork.
 
-#### Arranque recomendado (sin terminales)
+#### Arranque recomendado
 
 ```cmd
 iniciar.bat
