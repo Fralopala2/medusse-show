@@ -141,6 +141,56 @@ function getSimulatorStatus() {
   };
 }
 
+function ensureLogsDir() {
+  if (!fs.existsSync(LOGS_DIR)) {
+    fs.mkdirSync(LOGS_DIR, { recursive: true });
+  }
+}
+
+function appendStopLog(message) {
+  ensureLogsDir();
+  const logPath = path.join(LOGS_DIR, 'stop.log');
+  fs.appendFileSync(logPath, `[${new Date().toISOString()}] ${message}\n`);
+}
+
+async function runStopCommand(command, label) {
+  appendStopLog(`> ${label}: ${command}`);
+  try {
+    const { stdout, stderr } = await execAsync(command, {
+      cwd: PROJECT_ROOT,
+      timeout: 120000,
+      windowsHide: true,
+      maxBuffer: 10 * 1024 * 1024,
+    });
+    if (stdout?.trim()) appendStopLog(stdout.trim());
+    if (stderr?.trim()) appendStopLog(stderr.trim());
+    appendStopLog(`OK: ${label}`);
+    return true;
+  } catch (error) {
+    appendStopLog(`ERROR ${label}: ${error.message}`);
+    if (error.stdout) appendStopLog(String(error.stdout).trim());
+    if (error.stderr) appendStopLog(String(error.stderr).trim());
+    return false;
+  }
+}
+
+async function stopMedusseStack() {
+  appendStopLog('--- Inicio stop desde portal ---');
+
+  const composeFile = path.join(PROJECT_ROOT, 'docker', 'docker-compose.yml');
+
+  await runStopCommand('taskkill /F /IM python.exe', 'python');
+  await runStopCommand(`docker compose -f "${composeFile}" down`, 'docker');
+
+  await runStopCommand(
+    'powershell -NoProfile -Command "Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show(\'Todos los servicios Medusse han sido detenidos.\',\'Medusse IoT\',[System.Windows.Forms.MessageBoxButtons]::OK,[System.Windows.Forms.MessageBoxIcon]::Information)"',
+    'toast'
+  );
+
+  appendStopLog('Deteniendo Node.js (API y Web)...');
+  await runStopCommand('taskkill /F /IM node.exe', 'node');
+}
+
 router.use(devOnly);
 
 router.get('/status', async (req, res) => {
@@ -211,24 +261,17 @@ router.get('/logs', (req, res) => {
 });
 
 router.post('/stop', (req, res) => {
-  const detenerBat = path.join(PROJECT_ROOT, 'detener.bat');
-
-  if (!fs.existsSync(detenerBat)) {
-    return res.status(500).json({ error: 'detener.bat not found' });
-  }
-
   res.json({
     ok: true,
     message: 'Sistema detenido correctamente.',
   });
 
-  // Dar tiempo a que la respuesta HTTP llegue al navegador antes de matar node.exe
+  // Responder al navegador antes de apagar la API y Docker
   setTimeout(() => {
-    exec(`cmd /c "${detenerBat}" /silent`, {
-      cwd: PROJECT_ROOT,
-      windowsHide: true,
-    }).unref();
-  }, 1500);
+    stopMedusseStack().catch((error) => {
+      appendStopLog(`Fatal stop: ${error.message}`);
+    });
+  }, 1000);
 });
 
 module.exports = router;

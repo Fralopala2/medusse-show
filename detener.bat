@@ -23,11 +23,13 @@ if %errorlevel% equ 0 (
 
 if "%SILENT%"=="0" echo.
 echo [2/4] Deteniendo servicios Docker
-docker compose -f docker/docker-compose.yml down >nul 2>&1
+if not exist logs mkdir logs
+docker compose -f "%~dp0docker\docker-compose.yml" down >> "%~dp0logs\detener.log" 2>&1
 if %errorlevel% equ 0 (
     if "%SILENT%"=="0" echo [OK] Servicios Docker detenidos
 ) else (
     if "%SILENT%"=="0" echo [WARN] Error al detener servicios Docker
+    if "%SILENT%"=="1" echo [%date% %time%] ERROR docker compose down >> "%~dp0logs\detener.log"
 )
 
 if "%SILENT%"=="0" echo.
