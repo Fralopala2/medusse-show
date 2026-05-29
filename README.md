@@ -117,6 +117,8 @@ medusse-show/
 - **Instalación automática** de Docker y dependencias
 - **Arranque en un clic** con `iniciar.bat` (sin ventanas de terminal)
 - **Centro de control** web en `/control` (estado, logs en vivo, IoT)
+- **Sumario lateral de accesos** con IP numerica y puertos activos para Web, Grafana, API e infraestructura
+- **Mejora prevista**: version mas compacta del panel de accesos para vistas mobile
 - **Scripts de verificación** con diagnósticos inteligentes
 - **Setup completo** en un solo comando
 - **Detección automática** de problemas y soluciones
