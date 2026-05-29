@@ -67,13 +67,8 @@ export default function ControlPage() {
         <Container className="py-5">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
             <div className="flex items-center gap-4">
-              <img src="/logos/logoMedusse.svg" alt="Medusse" className="h-10 w-10" />
-              <div>
-                <h1 className="text-xl font-bold text-white">Centro de control</h1>
-                <p className="text-sm text-medusse-gray">
-                  Portal de desarrollo — sustituye las terminales del stack local
-                </p>
-              </div>
+              <img src="/logos/logoMedusse.svg" alt="Medusse" className="h-10 w-10 shrink-0" />
+              <h1 className="text-xl font-bold text-white leading-none">Centro de control</h1>
             </div>
 
             <div className="flex flex-wrap items-center gap-2">
