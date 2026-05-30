@@ -497,6 +497,7 @@ flutter run -d windows
       <br/>
       <sub>Vista general con 4 ubicaciones monitoreadas en tiempo real</sub>
     </td>
+    <td width="20"></td>
     <td align="center" valign="top" width="240">
       <img src="web/public/images/app-detail.jpg" alt="Detalle de Ubicación" width="220"/>
       <br/>
@@ -505,6 +506,7 @@ flutter run -d windows
       <sub>18 sensores con valores actuales y alertas inteligentes</sub>
     </td>
   </tr>
+  <tr height="20"></tr>
   <tr>
     <td align="center" valign="top" width="240">
       <img src="web/public/images/app-charts.jpg" alt="Visualización de Alarmas" width="220"/>
@@ -513,6 +515,7 @@ flutter run -d windows
       <br/>
       <sub>Sistema de alertas con notificaciones en tiempo real</sub>
     </td>
+    <td width="20"></td>
     <td align="center" valign="top" width="240">
       <img src="web/public/images/app-settings.jpg" alt="Configuración" width="220"/>
       <br/>
