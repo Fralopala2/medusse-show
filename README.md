@@ -9,7 +9,7 @@
 
 ## 📋 Descripción
 
-**Sistema IoT de nivel profesional** que incluye simulación realista de sensores ESP32, pipeline de datos moderno, dashboard web con branding personalizado, API REST robusta, aplicación web Next.js y aplicación móvil Flutter multiplataforma. **18 tipos de sensores monitoreados** incluyendo ambientales, calidad de agua, energía solar y gestión de batería. **Completamente automatizado** con scripts de instalación y verificación. Sistema preparado para migración directa a hardware real con comunicación LoRa Mesh.
+Proyecto IoT profesional que combina un simulador realista de sensores ESP32, una canalización de datos moderna, un panel web con identidad propia, una API REST fiable, una interfaz en Next.js y una app móvil en Flutter. Monitoriza 18 sensores —desde variables ambientales y calidad del agua hasta energía solar y estado de batería— y llega totalmente automatizado con scripts de instalación y verificación. Está diseñado para migrar fácilmente a hardware real, incluyendo soporte para comunicación LoRa Mesh.
 
 ## 🏗️ Arquitectura Completa
 
@@ -17,11 +17,12 @@
    <img src="https://github.com/user-attachments/assets/79836c85-868f-495e-a32d-41b25f71af3b" alt="Diagrama proyecto Medusse" style="max-width:100%;height:auto;">
 </p>
 
+
 ## 📁 Estructura del Proyecto
 
 ```
 medusse-show/
-├── arduino/                    # Simuladores y firmware ESP32
+├── arduino/                   # Simuladores y firmware ESP32
 │   ├── medusse_simulator.py   # Simulador principal (4 ubicaciones, 18 sensores)
 │   ├── src/                   # Código ESP32 real (preparado para LoRa)
 │   └── node2/                 # Configuración nodo secundario
@@ -41,7 +42,7 @@ medusse-show/
 │   │   │   └── 03-stored-procedures.sql # 10 procedimientos
 │   │   └── DATABASE_DOCUMENTATION.md    # Documentación técnica
 │   └── influxdb/             # Configuración InfluxDB
-├── api/                       # API REST Node.js + Express
+├── api/                      # API REST Node.js + Express
 │   ├── server.js             # Servidor principal (1075 líneas)
 │   ├── db.js                 # Conexión MySQL
 │   ├── auth.js               # Lógica de autenticación
@@ -50,7 +51,7 @@ medusse-show/
 │   ├── package.json          # Dependencias Node.js
 │   ├── .env                  # Variables de entorno
 │   └── README.md             # Documentación API completa
-├── web/                       # Aplicación Web Next.js 16
+├── web/                      # Aplicación Web Next.js 16
 │   ├── src/                  # Código fuente TypeScript
 │   │   ├── app/             # App Router de Next.js
 │   │   │   ├── page.tsx     # Página principal
@@ -69,7 +70,7 @@ medusse-show/
 │   ├── public/              # Recursos estáticos
 │   ├── tailwind.config.ts   # Configuración Tailwind
 │   └── package.json         # Dependencias
-├── medusse_app/              # Aplicación Móvil Flutter
+├── medusse_app/             # Aplicación Móvil Flutter
 │   ├── lib/                 # Código fuente Dart
 │   │   ├── main.dart        # Entry point
 │   │   ├── models/          # Modelos de datos
@@ -112,7 +113,7 @@ medusse-show/
 
 ### 🤖 Automatización Avanzada
 - **Instalación automática** de Docker y dependencias
-- **Arranque en un clic** con `iniciar.bat` (sin ventanas de terminal)
+- **Arranque en un clic** con `iniciar.bat` (eliminadas ventanas de terminal)
 - **Centro de control** web en `/control` (estado, logs en vivo, IoT)
 - **Sumario lateral de accesos** con IP numerica y puertos activos para Web, Grafana, API e infraestructura
 - **Mejora prevista**: version mas compacta del panel de accesos para vistas mobile
@@ -216,12 +217,7 @@ full_setup.bat
 
 #### Linux / Lliurex
 
-**Instalación completa:**
-```bash
-chmod +x setup_lliurex.sh
-./setup_lliurex.sh
-```
-*Maneja permisos de Docker automáticamente. Ver INSTALACION_LLIUREX.md para más detalles.*
+En esta rama no están operativas las instrucciones para instalar o ejecutar el proyecto en Linux/Lliurex. Este fork incluye únicamente los scripts y automatizaciones para Windows (`iniciar.bat`, `full_setup.bat`, etc.).
 
 ### ⚡ Ejecución del Sistema (Windows)
 
