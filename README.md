@@ -286,19 +286,19 @@ Requisitos: API en el puerto **3001** (endpoints `/api/dev/*` solo en entorno lo
 <table>
   <tr>
     <td align="center" valign="top" width="260">
-      <img src="web/public/images/cc1.png" alt="Consola de Logs e IoT" width="240"/>
-      <br/>
-      <b>Logs y Actividad IoT</b>
-      <br/>
-      <sub>Consola en tiempo real de API, Web y Simulador</sub>
-    </td>
-    <td align="center" valign="top" width="260">
       <img src="web/public/images/cc2.png" alt="Servicios e Infraestructura" width="240"/>
       <br/>
       <b>Estado de Servicios</b>
       <br/>
       <sub>Supervisión de contenedores y servicios activos</sub>
     </td>
+    <td align="center" valign="top" width="260">
+      <img src="web/public/images/cc1.png" alt="Consola de Logs e IoT" width="240"/>
+      <br/>
+      <b>Logs y Actividad IoT</b>
+      <br/>
+      <sub>Consola en tiempo real de API, Web y Simulador</sub>
+    </td>    
     <td align="center" valign="top" width="260">
       <img src="web/public/images/cc-detencion.png" alt="Detención del Sistema" width="240"/>
       <br/>
