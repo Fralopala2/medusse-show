@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+import { ServiceAccessSummary } from "@/components/control/ServiceAccessSummary";
 import { ServiceStatusGrid } from "@/components/control/ServiceStatusGrid";
 import { LogViewer } from "@/components/control/LogViewer";
 import { SensorActivityPanel } from "@/components/control/SensorActivityPanel";
@@ -43,7 +44,15 @@ export default function ControlPage() {
     return () => clearInterval(interval);
   }, [refresh, systemStopped]);
 
-  const grafanaUrl = typeof window !== 'undefined' ? `http://${window.location.hostname}:3000` : 'http://localhost:3000';
+  const accessHost =
+    status?.hostIp && status.hostIp !== "127.0.0.1"
+      ? status.hostIp
+      : typeof window !== "undefined"
+        ? window.location.hostname
+        : "localhost";
+
+  const grafanaUrl = `http://${accessHost}:3000`;
+  const webUrl = `http://${accessHost}:3003`;
 
   async function handleStop() {
     if (!confirm("Detener todo el sistema Medusse?")) return;
@@ -118,7 +127,7 @@ export default function ControlPage() {
                 Grafana <ExternalLink className="w-3 h-3" />
               </a>
               <a
-                href="http://localhost:3003"
+                href={webUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-white/10 hover:bg-white/5 text-sm"
@@ -175,22 +184,26 @@ export default function ControlPage() {
           )}
 
           {status && !systemStopped && (
-            <ServiceStatusGrid
-              services={status.services}
-              docker={status.docker}
-              lastCheck={status.timestamp}
-            />
-          )}
+            <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_340px] xl:items-start">
+              <div className="space-y-8">
+                <ServiceStatusGrid
+                  services={status.services}
+                  docker={status.docker}
+                  lastCheck={status.timestamp}
+                />
 
-          {!systemStopped && (
-            <>
-              <section>
-                <h2 className="text-lg font-semibold text-white mb-3">Logs en vivo</h2>
-                <LogViewer />
-              </section>
+                <section>
+                  <h2 className="text-lg font-semibold text-white mb-3">Logs en vivo</h2>
+                  <LogViewer />
+                </section>
 
-              <SensorActivityPanel />
-            </>
+                <SensorActivityPanel />
+              </div>
+
+              <aside className="xl:sticky xl:top-9 xl:mt-9 self-start">
+                <ServiceAccessSummary services={status.services} hostIp={status.hostIp} />
+              </aside>
+            </div>
           )}
         </Container>
       </main>

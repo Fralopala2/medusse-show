@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const http = require('http');
 const net = require('net');
+const os = require('os');
 const { exec } = require('child_process');
 const { promisify } = require('util');
 const db = require('./db');
@@ -83,6 +84,36 @@ function checkHttp(url, timeoutMs = 2500) {
       resolve({ up: false, latencyMs: Date.now() - started });
     });
   });
+}
+
+function getPrimaryIpAddress() {
+  const interfaces = os.networkInterfaces();
+  const preferredNames = ['wi-fi', 'wifi', 'wlan', 'wireless', 'en0', 'eth0'];
+
+  for (const name of Object.keys(interfaces)) {
+    const entries = interfaces[name] || [];
+    const normalizedName = name.toLowerCase();
+    const isPreferred = preferredNames.some((prefix) => normalizedName.includes(prefix));
+    const address = entries.find(
+      (entry) => entry && entry.family === 'IPv4' && !entry.internal
+    );
+
+    if (isPreferred && address) {
+      return address.address;
+    }
+  }
+
+  for (const entries of Object.values(interfaces)) {
+    const address = (entries || []).find(
+      (entry) => entry && entry.family === 'IPv4' && !entry.internal
+    );
+
+    if (address) {
+      return address.address;
+    }
+  }
+
+  return '127.0.0.1';
 }
 
 async function getDockerContainers() {
@@ -231,6 +262,7 @@ router.use(devOnly);
 router.get('/status', async (req, res) => {
   try {
     const services = [];
+    const hostIp = getPrimaryIpAddress();
 
     for (const service of SERVICE_CHECKS) {
       let status = 'down';
@@ -279,6 +311,7 @@ router.get('/status', async (req, res) => {
 
     res.json({
       timestamp: new Date().toISOString(),
+      hostIp,
       summary: { up: upCount, total: services.length },
       services,
       docker,

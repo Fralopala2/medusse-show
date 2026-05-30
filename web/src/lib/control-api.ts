@@ -20,6 +20,7 @@ export interface DockerContainer {
 
 export interface DevStatusResponse {
   timestamp: string;
+  hostIp: string;
   summary: { up: number; total: number };
   services: DevService[];
   docker: DockerContainer[];
