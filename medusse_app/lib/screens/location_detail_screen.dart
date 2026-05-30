@@ -363,8 +363,12 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
                   ),
                 ),
 
-                // Espacio adicional
-                const SliverToBoxAdapter(child: SizedBox(height: 80)),
+                // Espacio adicional (evita superposición con navbar/FAB)
+                SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: MediaQuery.of(context).padding.bottom + 80,
+                  ),
+                ),
               ],
             ),
           );
