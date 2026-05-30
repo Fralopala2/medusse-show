@@ -283,6 +283,32 @@ Portal de desarrollo en Next.js que sustituye las terminales al arrancar el stac
 
 Requisitos: API en el puerto **3001** (endpoints `/api/dev/*` solo en entorno local, no producción).
 
+<table>
+  <tr>
+    <td align="center" valign="top" width="260">
+      <img src="web/public/images/cc1.png" alt="Consola de Logs e IoT" width="240"/>
+      <br/>
+      <b>Logs y Actividad IoT</b>
+      <br/>
+      <sub>Consola en tiempo real de API, Web y Simulador</sub>
+    </td>
+    <td align="center" valign="top" width="260">
+      <img src="web/public/images/cc2.png" alt="Servicios e Infraestructura" width="240"/>
+      <br/>
+      <b>Estado de Servicios</b>
+      <br/>
+      <sub>Supervisión de contenedores y servicios activos</sub>
+    </td>
+    <td align="center" valign="top" width="260">
+      <img src="web/public/images/cc-detencion.png" alt="Detención del Sistema" width="240"/>
+      <br/>
+      <b>Detención del Sistema</b>
+      <br/>
+      <sub>Confirmación de apagado seguro de todo el ecosistema</sub>
+    </td>
+  </tr>
+</table>
+
 ### Acceso a Interfaces
 
 | Servicio | URL | Credenciales |
@@ -378,7 +404,15 @@ docker logs medusse_telegraf
 - **Responsive design:** Adaptable a cualquier pantalla
 - **Filtrado eficiente:** Consultas optimizadas sin impacto en rendimiento
 
-<img width="960" height="465" alt="dashboard" src="https://github.com/user-attachments/assets/5bf163d6-6181-49fd-bcd1-c4f810237f97" />
+<p align="left">
+  <img src="web/public/images/graf1.png" alt="Dashboard Principal - Panel de Resumen y Gráficos" width="900" />
+</p>
+
+<br/>
+
+<p align="left">
+  <img src="web/public/images/graf2.png" alt="Dashboard Principal - Detalle de Sensores y Métricas" width="900" />
+</p>
 
 
 ## 🔧 Configuración Avanzada
@@ -457,17 +491,40 @@ flutter run -d windows
 
 ### Capturas de Pantalla
 
-<div align="center">
-  <img src="web/public/images/app-home.jpg" alt="Pantalla Principal" width="200"/>
-  <img src="web/public/images/app-detail.jpg" alt="Detalle de Ubicación" width="200"/>
-  <img src="web/public/images/app-charts.jpg" alt="Visualización de Alarmas" width="200"/>
-  <img src="web/public/images/app-settings.jpg" alt="Configuración" width="200"/>
-</div>
-
-**Pantalla Principal**: Vista general con 4 ubicaciones monitoreadas en tiempo real  
-**Detalle de Ubicación**: 18 sensores con valores actuales y alertas inteligentes  
-**Visualización de Alarmas**: Sistema de alertas con notificaciones en tiempo real  
-**Configuración**: Ajustes de servidor y conexión con test integrado
+<table>
+  <tr>
+    <td align="center" valign="top" width="240">
+      <img src="web/public/images/app-home.jpg" alt="Pantalla Principal" width="220"/>
+      <br/>
+      <b>Pantalla Principal</b>
+      <br/>
+      <sub>Vista general con 4 ubicaciones monitoreadas en tiempo real</sub>
+    </td>
+    <td align="center" valign="top" width="240">
+      <img src="web/public/images/app-detail.jpg" alt="Detalle de Ubicación" width="220"/>
+      <br/>
+      <b>Detalle de Ubicación</b>
+      <br/>
+      <sub>18 sensores con valores actuales y alertas inteligentes</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="top" width="240">
+      <img src="web/public/images/app-charts.jpg" alt="Visualización de Alarmas" width="220"/>
+      <br/>
+      <b>Visualización de Alarmas</b>
+      <br/>
+      <sub>Sistema de alertas con notificaciones en tiempo real</sub>
+    </td>
+    <td align="center" valign="top" width="240">
+      <img src="web/public/images/app-settings.jpg" alt="Configuración" width="220"/>
+      <br/>
+      <b>Configuración</b>
+      <br/>
+      <sub>Ajustes de servidor y conexión con test integrado</sub>
+    </td>
+  </tr>
+</table>
 
 Ver documentación completa en: [medusse_app/README.md](medusse_app/README.md)
 
