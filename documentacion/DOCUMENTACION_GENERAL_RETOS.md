@@ -1198,6 +1198,6 @@ La implementacion de 18 tipos de sensores, incluyendo gestion de energia solar, 
 
 ---
 
-**Documento generado:** Noviembre 2025  
+**Finalizacion proyecto:** Noviembre 2025
 **Version del Proyecto:** 2.7.9
 **Estado:** Documentacion General para Presentacion TFG
