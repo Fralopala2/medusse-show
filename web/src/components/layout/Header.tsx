@@ -61,6 +61,20 @@ export function Header() {
     [closeMobileMenu, isHomePage, pathname, router]
   );
 
+  const handleBrandNav = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>) => {
+      if (!isHomePage) {
+        closeMobileMenu();
+        return;
+      }
+
+      e.preventDefault();
+      closeMobileMenu();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    },
+    [closeMobileMenu, isHomePage]
+  );
+
   const authLinkClass = cn(
     buttonVariants({
       variant: isMarketing ? "outline" : "default",
@@ -89,7 +103,7 @@ export function Header() {
           <Link
             href="/"
             className="flex items-center gap-2 group relative z-[110]"
-            onClick={closeMobileMenu}
+            onClick={handleBrandNav}
           >
             <img
               src="/logos/logoMedusse.svg"

@@ -69,8 +69,10 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
           ),
         ],
       ),
-      body: Consumer<SensorProvider>(
-        builder: (context, provider, child) {
+      body: SafeArea(
+        bottom: true,
+        child: Consumer<SensorProvider>(
+          builder: (context, provider, child) {
           final summary = provider.summary[currentLocation];
 
           if (provider.isLoading && summary == null) {
@@ -362,11 +364,12 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
                 ),
 
                 // Espacio adicional
-                const SliverToBoxAdapter(child: SizedBox(height: 32)),
+                const SliverToBoxAdapter(child: SizedBox(height: 80)),
               ],
             ),
           );
-        },
+          },
+        ),
       ),
     );
   }

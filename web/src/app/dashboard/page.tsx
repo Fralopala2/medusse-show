@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { getApiBaseUrl } from '@/lib/api';
@@ -14,10 +14,27 @@ interface User {
   role: string;
 }
 
+interface Location {
+  id: number;
+  name: string;
+  display_name: string;
+}
+
+interface Sensor {
+  id: number;
+  sensor_type: string;
+  display_name: string;
+  unit: string;
+}
+
 export default function DashboardPage() {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [locations, setLocations] = useState<Location[]>([]);
+  const [sensors, setSensors] = useState<Sensor[]>([]);
+  const [creatingAlert, setCreatingAlert] = useState(false);
+  const [alertNotice, setAlertNotice] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   useEffect(() => {
     // Verificar autenticacion
@@ -54,6 +71,89 @@ export default function DashboardPage() {
         setLoading(false);
       });
   }, [router]);
+
+  useEffect(() => {
+    if (!user || user.role === 'viewer') return;
+
+    const token = localStorage.getItem('sessionToken');
+    if (!token) return;
+
+    const loadAlertOptions = async () => {
+      try {
+        const [locationsRes, sensorsRes] = await Promise.all([
+          fetch(`${getApiBaseUrl()}/api/admin/locations`, {
+            headers: { 'Authorization': `Bearer ${token}` },
+          }),
+          fetch(`${getApiBaseUrl()}/api/admin/sensors`, {
+            headers: { 'Authorization': `Bearer ${token}` },
+          }),
+        ]);
+
+        const locationsData = await locationsRes.json();
+        const sensorsData = await sensorsRes.json();
+
+        if (locationsRes.ok && locationsData.success) {
+          setLocations(locationsData.locations || []);
+        }
+
+        if (sensorsRes.ok && sensorsData.success) {
+          setSensors(sensorsData.sensors || []);
+        }
+      } catch (error) {
+        console.error('Error loading alert options:', error);
+      }
+    };
+
+    loadAlertOptions();
+  }, [user]);
+
+  const handleCreateAlert = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    const token = localStorage.getItem('sessionToken');
+    if (!token) {
+      setAlertNotice({ type: 'error', message: 'Tu sesión ha caducado. Vuelve a iniciar sesión.' });
+      return;
+    }
+
+    const formData = new FormData(form);
+
+    setCreatingAlert(true);
+    setAlertNotice(null);
+
+    try {
+      const res = await fetch(`${getApiBaseUrl()}/api/admin/alerts`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          location_id: formData.get('location_id'),
+          sensor_id: formData.get('sensor_id'),
+          alert_type: formData.get('alert_type'),
+          message: formData.get('message'),
+          value: formData.get('value') || null,
+          threshold: formData.get('threshold') || null,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setAlertNotice({ type: 'success', message: 'Alerta creada correctamente.' });
+        form.reset();
+      } else {
+        setAlertNotice({ type: 'error', message: data.message || 'Error al crear la alerta.' });
+      }
+    } catch (error) {
+      console.error('Error creating alert:', error);
+      setAlertNotice({ type: 'error', message: 'Error al crear la alerta.' });
+    } finally {
+      setCreatingAlert(false);
+    }
+  };
 
   const handleLogout = async () => {
     const token = localStorage.getItem('sessionToken');
@@ -196,6 +296,129 @@ export default function DashboardPage() {
           </div>
         </div>
 
+        {(user.role === 'admin' || user.role === 'user') && (
+          <div className="mt-6 bg-white rounded-lg shadow p-6">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between mb-4">
+              <div>
+                <h2 className="text-xl font-semibold text-gray-900">Crear alerta</h2>
+                <p className="text-sm text-gray-600">
+                  {user.role === 'admin'
+                    ? 'Admin puede crear y gestionar alertas del sistema.'
+                    : 'Profesor puede crear alertas, pero no gestionar usuarios.'}
+                </p>
+              </div>
+              <span className="inline-flex w-fit rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">
+                Disponible para {user.role === 'admin' ? 'admin' : 'user'}
+              </span>
+            </div>
+
+            {alertNotice && (
+              <div className={`mb-4 rounded-md px-4 py-3 text-sm ${
+                alertNotice.type === 'success'
+                  ? 'bg-green-50 text-green-700 border border-green-200'
+                  : 'bg-red-50 text-red-700 border border-red-200'
+              }`}>
+                {alertNotice.message}
+              </div>
+            )}
+
+            <form onSubmit={handleCreateAlert} className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Ubicación</label>
+                <select
+                  name="location_id"
+                  required
+                  disabled={locations.length === 0}
+                  className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:bg-gray-100"
+                >
+                  <option value="">Seleccionar ubicación</option>
+                  {locations.map((location) => (
+                    <option key={location.id} value={location.id}>
+                      {location.display_name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Sensor</label>
+                <select
+                  name="sensor_id"
+                  required
+                  disabled={sensors.length === 0}
+                  className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:bg-gray-100"
+                >
+                  <option value="">Seleccionar sensor</option>
+                  {sensors.map((sensor) => (
+                    <option key={sensor.id} value={sensor.id}>
+                      {sensor.display_name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Tipo de alerta</label>
+                <select
+                  name="alert_type"
+                  required
+                  className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                  <option value="info">Información</option>
+                  <option value="warning">Advertencia</option>
+                  <option value="danger">Peligro</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Valor</label>
+                <input
+                  type="number"
+                  step="0.01"
+                  name="value"
+                  className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  placeholder="Opcional"
+                />
+              </div>
+
+              <div className="md:col-span-2">
+                <label className="block text-sm font-medium text-gray-700 mb-1">Mensaje</label>
+                <textarea
+                  name="message"
+                  required
+                  rows={3}
+                  className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  placeholder="Describe la alerta"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Umbral</label>
+                <input
+                  type="number"
+                  step="0.01"
+                  name="threshold"
+                  className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  placeholder="Opcional"
+                />
+              </div>
+
+              <div className="flex items-end gap-3 md:col-span-2">
+                <button
+                  type="submit"
+                  disabled={creatingAlert || locations.length === 0 || sensors.length === 0}
+                  className="rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-indigo-700 disabled:cursor-not-allowed disabled:bg-indigo-300"
+                >
+                  {creatingAlert ? 'Creando...' : 'Crear alerta'}
+                </button>
+                <p className="text-xs text-gray-500">
+                  Si no ves ubicaciones o sensores, revisa que la sesión siga activa.
+                </p>
+              </div>
+            </form>
+          </div>
+        )}
+
         {/* Panel de admin (solo para admins) */}
         {user.role === 'admin' && (
           <div className="mt-6">
@@ -249,7 +472,7 @@ export default function DashboardPage() {
                 </div>
                 <div className="flex items-center text-gray-400">
                   <span className="mr-2">✗</span>
-                  <span>Gestion de usuarios (solo admin)</span>
+                  <span>Gestionar usuarios (solo admin)</span>
                 </div>
               </>
             )}

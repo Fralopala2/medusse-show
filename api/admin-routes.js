@@ -353,8 +353,8 @@ router.get('/alerts', auth.requireAuth, requireAdmin, async (req, res) => {
   }
 });
 
-// Crear alerta manualmente (solo admin)
-router.post('/alerts', auth.requireAuth, requireAdmin, async (req, res) => {
+// Crear alerta manualmente (admin y profesor/user)
+router.post('/alerts', auth.requireAuth, requireAdminOrUser, async (req, res) => {
   try {
     const location_id = parseEntityId(req.body.location_id);
     const sensor_id = parseEntityId(req.body.sensor_id);
