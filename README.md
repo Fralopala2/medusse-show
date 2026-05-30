@@ -262,6 +262,8 @@ detener.bat /silent
 | `verificar.bat` | Diagnóstico de Docker, Node, Python y servicios |
 | `full_setup.bat` | Primera instalación (dependencias + Docker base) |
 
+---
+
 ### Centro de control (`/control`)
 
 Portal de desarrollo en Next.js que sustituye las terminales al arrancar el stack local.
@@ -276,31 +278,11 @@ Portal de desarrollo en Next.js que sustituye las terminales al arrancar el stac
 
 Requisitos: API en el puerto **3001** (endpoints `/api/dev/*` solo en entorno local, no producción).
 
-<table>
-  <tr>
-    <td align="center" valign="top" width="260">
-      <img src="web/public/images/cc2.png" alt="Servicios e Infraestructura" width="240"/>
-      <br/>
-      <b>Estado de Servicios</b>
-      <br/>
-      <sub>Supervisión de contenedores y servicios activos</sub>
-    </td>
-    <td align="center" valign="top" width="260">
-      <img src="web/public/images/cc1.png" alt="Consola de Logs e IoT" width="240"/>
-      <br/>
-      <b>Logs y Actividad IoT</b>
-      <br/>
-      <sub>Consola en tiempo real de API, Web y Simulador</sub>
-    </td>    
-    <td align="center" valign="top" width="260">
-      <img src="web/public/images/cc-detencion.png" alt="Detención del Sistema" width="240"/>
-      <br/>
-      <b>Detención del Sistema</b>
-      <br/>
-      <sub>Confirmación de apagado seguro de todo el ecosistema</sub>
-    </td>
-  </tr>
-</table>
+<p align="center">
+   <img src="web/public/images/CentroCon1.png" alt="Centro de control" style="max-width:100%;height:300;">
+</p>
+
+---
 
 ### Acceso a Interfaces
 
