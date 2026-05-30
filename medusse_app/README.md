@@ -34,6 +34,10 @@ Si cambias host/puertos, actualiza la configuracion de la app antes de ejecutar.
 - Consulta de historicos por sensor y ventana temporal.
 - Indicadores de alerta por umbrales de cada sensor.
 
+## Notas recientes
+
+- La pantalla de historicos y graficos respeta ahora el area segura inferior en Android para evitar que el contenido quede bajo la barra de navegacion.
+
 ## Contrato API relevante
 
 - `GET /api/summary`

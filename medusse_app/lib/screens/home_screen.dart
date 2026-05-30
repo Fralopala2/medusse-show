@@ -178,9 +178,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
 
-                  // Espacio adicional al final
-                  // Espacio adicional al final (más alto para evitar superposición con navbar/FAB)
-                  const SliverToBoxAdapter(child: SizedBox(height: 48)),
+                  // Espacio adicional al final (evita superposición con navbar/FAB)
+                  SliverToBoxAdapter(
+                    child: SizedBox(
+                      height: MediaQuery.of(context).padding.bottom + 80,
+                    ),
+                  ),
                 ],
               ),
             );
