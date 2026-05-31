@@ -21,7 +21,7 @@
 **Versión:** 2.7.9  
 **Fecha presentación:** Junio 2026  
 **Licencia:** All Rights Reserved  
-**Estado:** 16/16 Retos Completados (100%) ✅
+**Estado:** 16/16 Retos Completados (100%)
 
 ---
 
@@ -232,15 +232,16 @@ Usuario: admin / medusse2025
 - **Base de datos:** medusse_db
 - **Usuario:** medusse_user / medusse2025
 - **9 Tablas implementadas:**
-  1. users - Gestión de usuarios
-  2. sessions - Tokens de sesión
-  3. user_preferences - Configuración personalizada
-  4. locations - 4 ubicaciones
-  5. sensors - 18 tipos de sensores
-  6. alerts - Sistema de alertas
-  7. user_alerts - Notificaciones
-  8. activity_log - Auditoría
-  9. system_config - Configuración del sistema
+```
+1. users -> Gestión de usuarios.
+2. sessions -> Tokens de sesión.
+3. user_preferences -> Configuración personalizada.
+4. locations -> 4 ubicaciones.
+5. sensors -> 18 tipos de sensores.
+6. alerts -> Sistema de alertas.
+7. user_alerts -> Notificaciones.
+8. activity_log -> Auditoría.
+9. system_config -> Configuración del sistema.
 
 **Relaciones:**
 - users ← sessions (1:N)
@@ -248,9 +249,7 @@ Usuario: admin / medusse2025
 - users ← user_alerts (N:M)
 - locations ← sensors (1:N)
 - alerts ← user_alerts (N:M)
-
----
-
+```
 ### Reto 3: Procedimientos Almacenados
 **Estado:** Completado ✅
 
@@ -587,7 +586,7 @@ Usuario: admin / medusse2025
 ### Reto 10: Panel de Administración
 **Estado:** Completado ✅
 
-**Descripción:** Crear panel de administración para gestión del sistema.
+**Descripción:** Crear panel de administración para gestión del sistema y otro interno en la web.
 
 **Implementación:**
 
@@ -613,6 +612,12 @@ Usuario: admin / medusse2025
 - Validación de permisos en cada operación
 - Registro de todas las acciones administrativas
 - Confirmación para operaciones críticas
+
+---
+
+<p align="center">
+   <img src="https://github.com/user-attachments/assets/5c46aab4-ac50-4622-ab50-babadd0d6e7a" alt="Centro de control" style="max-width:100%;height:300;">
+</p>
 
 ---
 
@@ -1195,9 +1200,3 @@ La implementacion de 18 tipos de sensores, incluyendo gestion de energia solar, 
 **Email:** pacoaldev@gmail.com  
 **Institucion:** IES Jose Rodrigo Botet  
 **Curso:** 2025/2026
-
----
-
-**Finalizacion proyecto:** Noviembre 2025
-**Version del Proyecto:** 2.7.9
-**Estado:** Documentacion General para Presentacion TFG
