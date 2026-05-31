@@ -279,7 +279,7 @@ Portal de desarrollo en Next.js que sustituye las terminales al arrancar el stac
 Requisitos: API en el puerto **3001** (endpoints `/api/dev/*` solo en entorno local, no producción).
 
 <p align="center">
-   <img src="web/public/images/CentroCon1.png" alt="Centro de control" style="max-width:100%;height:300;">
+   <img src="web/public/images/CentroCon1.png" alt="Centro de control" style="max-width:100%;height:400;">
 </p>
 
 ---
@@ -466,45 +466,29 @@ flutter run -d windows
 
 ### Capturas de Pantalla
 
-<table>
-  <tr>
-    <td align="center" valign="top" width="240">
-      <img src="web/public/images/app-home.jpg" alt="Pantalla Principal" width="220"/>
-      <br/>
-      <b>Pantalla Principal</b>
-      <br/>
-      <sub>Vista general con 4 ubicaciones monitoreadas en tiempo real</sub>
-    </td>
-    <td width="20"></td>
-    <td align="center" valign="top" width="240">
-      <img src="web/public/images/app-detail.jpg" alt="Detalle de Ubicación" width="220"/>
-      <br/>
-      <b>Detalle de Ubicación</b>
-      <br/>
-      <sub>18 sensores con valores actuales y alertas inteligentes</sub>
-    </td>
-  </tr>
-  <tr height="20"></tr>
-  <tr>
-    <td align="center" valign="top" width="240">
-      <img src="web/public/images/app-charts.jpg" alt="Visualización de Alarmas" width="220"/>
-      <br/>
-      <b>Visualización de Alarmas</b>
-      <br/>
-      <sub>Sistema de alertas con notificaciones en tiempo real</sub>
-    </td>
-    <td width="20"></td>
-    <td align="center" valign="top" width="240">
-      <img src="web/public/images/app-settings.jpg" alt="Configuración" width="220"/>
-      <br/>
-      <b>Configuración</b>
-      <br/>
-      <sub>Ajustes de servidor y conexión con test integrado</sub>
-    </td>
-  </tr>
-</table>
+<div style="display:flex;flex-wrap:wrap;gap:18px;justify-content:center;align-items:flex-start;">
+  <figure style="width:240px;margin:0;text-align:center;">
+    <img src="web/public/images/app-home.jpg" alt="Pantalla Principal" style="width:220px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.25);"/>
+    <figcaption style="margin-top:8px;font-size:14px;line-height:1.2;"><strong>Pantalla Principal</strong><br/><sub>Vista general con 4 ubicaciones monitoreadas en tiempo real</sub></figcaption>
+  </figure>
 
-Ver documentación completa en: [medusse_app/README.md](medusse_app/README.md)
+  <figure style="width:240px;margin:0;text-align:center;">
+    <img src="web/public/images/app-detail.jpg" alt="Detalle de Ubicación" style="width:220px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.25);"/>
+    <figcaption style="margin-top:8px;font-size:14px;line-height:1.2;"><strong>Detalle de Ubicación</strong><br/><sub>18 sensores con valores actuales y alertas inteligentes</sub></figcaption>
+  </figure>
+
+  <figure style="width:240px;margin:0;text-align:center;">
+    <img src="web/public/images/app-charts.jpg" alt="Visualización de Alarmas" style="width:220px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.25);"/>
+    <figcaption style="margin-top:8px;font-size:14px;line-height:1.2;"><strong>Visualización de Alarmas</strong><br/><sub>Sistema de alertas con notificaciones en tiempo real</sub></figcaption>
+  </figure>
+
+  <figure style="width:240px;margin:0;text-align:center;">
+    <img src="web/public/images/app-settings.jpg" alt="Configuración" style="width:220px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.25);"/>
+    <figcaption style="margin-top:8px;font-size:14px;line-height:1.2;"><strong>Configuración</strong><br/><sub>Ajustes de servidor y conexión con test integrado</sub></figcaption>
+  </figure>
+</div>
+
+<p style="margin-top:29px;text-align:center;">Ver documentación completa en: <a href="medusse_app/README.md">medusse_app/README.md</a></p>
 
 ## 🌐 API REST Robusta
 
