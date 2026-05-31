@@ -2,9 +2,11 @@
   <img src="web/public/images/medusse-logo.svg" alt="medusse logo" width="220">
 </p>
 
-# Proyecto Medusse IoT
+<h1 align="center">Proyecto Medusse IoT</h1>
 
-**Ecosistema IoT completo y profesional** para monitoreo ambiental con ESP32, MQTT, InfluxDB, Grafana, API REST, Web Next.js y App móvil Flutter. **Instalación automática en un solo clic.**
+<p align="center"><strong>Sistema IoT de monitoreo ambiental con arquitectura de microservicios</strong></p>
+
+****
 
 ## 📋 Descripción
 
