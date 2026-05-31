@@ -1,9 +1,6 @@
-<p align="center">
-  <img src="web/public/images/medusse-logo.svg" alt="meduse" style="max-width:220px;width:100%;height:auto;" />
-</p>
+![medusse logo](web/public/images/medusse-logo.svg)
 
-
-<h1 align="center">Proyecto Medusse IoT</h1>
+# Proyecto Medusse IoT
 
 **Ecosistema IoT completo y profesional** para monitoreo ambiental con ESP32, MQTT, InfluxDB, Grafana, API REST, Web Next.js y App móvil Flutter. **Instalación automática en un solo clic.**
 
@@ -13,9 +10,7 @@ Proyecto IoT profesional que combina un simulador realista de sensores ESP32, un
 
 ## 🏗️ Arquitectura Completa
 
-<p align="center">
-   <img src="https://github.com/user-attachments/assets/79836c85-868f-495e-a32d-41b25f71af3b" alt="Diagrama proyecto Medusse" style="max-width:100%;height:auto;">
-</p>
+![Diagrama proyecto Medusse](https://github.com/user-attachments/assets/79836c85-868f-495e-a32d-41b25f71af3b)
 
 
 ## 📁 Estructura del Proyecto
@@ -278,9 +273,7 @@ Portal de desarrollo en Next.js que sustituye las terminales al arrancar el stac
 
 Requisitos: API en el puerto **3001** (endpoints `/api/dev/*` solo en entorno local, no producción).
 
-<p align="center">
-   <img src="web/public/images/CentroCon1.png" alt="Centro de control" style="max-width:100%;height:400;">
-</p>
+![Centro de control](web/public/images/CentroCon1.png)
 
 ---
 
@@ -298,16 +291,13 @@ Requisitos: API en el puerto **3001** (endpoints `/api/dev/*` solo en entorno lo
 
 ## 📊 Servicios y Tecnologías
 
-| Servicio        | Puerto | Descripción                        | Versión |
-| --------------- | ------ | ---------------------------------- | ------- |
-| **Grafana**     | 3000   | Dashboard profesional con branding personalizado | 10.2.0 |
-| **InfluxDB**    | 8086   | Base de datos series temporales con configuración v2 | 2.7 |
-| **MQTT Broker** | 1883   | Mosquitto con WebSocket habilitado | 2.0 |
-| **WebSocket MQTT** | 9001 | Comunicación web en tiempo real | 2.0 |
-| **Telegraf**    | -      | Pipeline optimizado con múltiples consumers | 1.28 |
-| **API REST**    | 3001   | Node.js con caché inteligente y 6 endpoints | Express 4.18.2 |
-| **WebSocket**   | 3002   | Streaming datos en tiempo real para Flutter | ws 8.14.2 |
-| **Flutter App** | -      | App multiplataforma con Material Design 3 | Flutter 3.9+ |
+- **Grafana:** Puerto `3000`. Dashboard profesional con branding personalizado. Versión: `10.2.0`.
+- **InfluxDB:** Puerto `8086`. Base de datos de series temporales. Versión: `2.7`.
+- **MQTT Broker (Mosquitto):** Puerto `1883` (MQTT) y `9001` (WebSocket). Versión: `2.0`.
+- **Telegraf:** Pipeline optimizado con múltiples consumers. Versión: `1.28`.
+- **API REST (Node.js):** Puerto `3001`. Express 4.18.2, caché inteligente.
+- **WebSocket (server):** Puerto `3002`. Streaming de datos en tiempo real (ws 8.14.2).
+- **Flutter App:** App multiplataforma con Material Design 3 (Flutter 3.9+).
 
 ### 🔧 Stack Tecnológico Completo
 - **Backend:** Node.js + Express + InfluxDB Client
@@ -379,15 +369,9 @@ docker logs medusse_telegraf
 - **Responsive design:** Adaptable a cualquier pantalla
 - **Filtrado eficiente:** Consultas optimizadas sin impacto en rendimiento
 
-<p align="left">
-  <img src="web/public/images/graf1.png" alt="Dashboard Principal - Panel de Resumen y Gráficos" width="900" />
-</p>
+![Dashboard Principal - Panel de Resumen y Gráficos](web/public/images/graf1.png)
 
-<br/>
-
-<p align="left">
-  <img src="web/public/images/graf2.png" alt="Dashboard Principal - Detalle de Sensores y Métricas" width="900" />
-</p>
+![Dashboard Principal - Detalle de Sensores y Métricas](web/public/images/graf2.png)
 
 
 ## 🔧 Configuración Avanzada
@@ -466,29 +450,23 @@ flutter run -d windows
 
 ### Capturas de Pantalla
 
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;justify-items:center;align-items:start;">
-  <figure style="width:100%;max-width:240px;margin:0;text-align:center;">
-    <img src="web/public/images/app-home.jpg" alt="Pantalla Principal" style="max-width:100%;height:auto;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.25);"/>
-    <figcaption style="margin-top:8px;font-size:14px;line-height:1.2;"><strong>Pantalla Principal</strong><br/><sub>Vista general con 4 ubicaciones monitoreadas en tiempo real</sub></figcaption>
-  </figure>
+- **Pantalla Principal**  
+  ![Pantalla Principal](web/public/images/app-home.jpg)  
+  Vista general con 4 ubicaciones monitoreadas en tiempo real
 
-  <figure style="width:100%;max-width:240px;margin:0;text-align:center;">
-    <img src="web/public/images/app-detail.jpg" alt="Detalle de Ubicación" style="max-width:100%;height:auto;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.25);"/>
-    <figcaption style="margin-top:8px;font-size:14px;line-height:1.2;"><strong>Detalle de Ubicación</strong><br/><sub>18 sensores con valores actuales y alertas inteligentes</sub></figcaption>
-  </figure>
+- **Detalle de Ubicación**  
+  ![Detalle de Ubicación](web/public/images/app-detail.jpg)  
+  18 sensores con valores actuales y alertas inteligentes
 
-  <figure style="width:100%;max-width:240px;margin:0;text-align:center;">
-    <img src="web/public/images/app-charts.jpg" alt="Visualización de Alarmas" style="max-width:100%;height:auto;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.25);"/>
-    <figcaption style="margin-top:8px;font-size:14px;line-height:1.2;"><strong>Visualización de Alarmas</strong><br/><sub>Sistema de alertas con notificaciones en tiempo real</sub></figcaption>
-  </figure>
+- **Visualización de Alarmas**  
+  ![Visualización de Alarmas](web/public/images/app-charts.jpg)  
+  Sistema de alertas con notificaciones en tiempo real
 
-  <figure style="width:100%;max-width:240px;margin:0;text-align:center;">
-    <img src="web/public/images/app-settings.jpg" alt="Configuración" style="max-width:100%;height:auto;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.25);"/>
-    <figcaption style="margin-top:8px;font-size:14px;line-height:1.2;"><strong>Configuración</strong><br/><sub>Ajustes de servidor y conexión con test integrado</sub></figcaption>
-  </figure>
-</div>
+- **Configuración**  
+  ![Configuración](web/public/images/app-settings.jpg)  
+  Ajustes de servidor y conexión con test integrado
 
-<p style="margin-top:29px;text-align:center;">Ver documentación completa en: <a href="medusse_app/README.md">medusse_app/README.md</a></p>
+Ver documentación completa en: [medusse_app/README.md](medusse_app/README.md)
 
 ## 🌐 API REST Robusta
 

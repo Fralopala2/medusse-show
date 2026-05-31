@@ -1,14 +1,8 @@
-<h1 align="center">Documentación general del proyecto - Medusse IoT</h1>
+![medusse logo](../web/public/images/medusse-logo.svg)
 
+# Documentación general del proyecto - Medusse IoT
 
-<p align="center">
-   <strong>Sistema IoT de monitoreo ambiental con arquitectura de microservicios</strong>
-</p>
-
-
-<p align="center">
-   <img src="../web/public/images/medusse-logo.svg" alt="meduse" style="max-width:220px;width:100%;height:auto;" />
-</p>
+**Sistema IoT de monitoreo ambiental con arquitectura de microservicios**
 
 
 ## Información del proyecto
@@ -36,9 +30,7 @@ El proyecto demuestra la implementación práctica de una arquitectura de micros
 ## Arquitectura del sistema
 
 
-<p align="center">
-   <img src="https://github.com/user-attachments/assets/79836c85-868f-495e-a32d-41b25f71af3b" alt="Diagrama proyecto Medusse" style="max-width:100%;height:auto;">
-</p>
+![Diagrama proyecto Medusse](https://github.com/user-attachments/assets/79836c85-868f-495e-a32d-41b25f71af3b)
 
 ### Componentes principales
 
@@ -615,9 +607,7 @@ Usuario: admin / medusse2025
 
 ---
 
-<p align="center">
-   <img src="https://github.com/user-attachments/assets/5c46aab4-ac50-4622-ab50-babadd0d6e7a" alt="Centro de control" style="max-width:100%;height:auto;" />
-</p>
+![Centro de control](https://github.com/user-attachments/assets/5c46aab4-ac50-4622-ab50-babadd0d6e7a)
 
 ---
 
