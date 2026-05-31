@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="web/public/images/medusse-logo.svg" alt="meduse" width="220" />
+  <img src="web/public/images/medusse-logo.svg" alt="meduse" style="max-width:220px;width:100%;height:auto;" />
 </p>
 
 
@@ -466,24 +466,24 @@ flutter run -d windows
 
 ### Capturas de Pantalla
 
-<div style="display:flex;flex-wrap:wrap;gap:18px;justify-content:center;align-items:flex-start;">
-  <figure style="width:240px;margin:0;text-align:center;">
-    <img src="web/public/images/app-home.jpg" alt="Pantalla Principal" style="width:220px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.25);"/>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;justify-items:center;align-items:start;">
+  <figure style="width:100%;max-width:240px;margin:0;text-align:center;">
+    <img src="web/public/images/app-home.jpg" alt="Pantalla Principal" style="max-width:100%;height:auto;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.25);"/>
     <figcaption style="margin-top:8px;font-size:14px;line-height:1.2;"><strong>Pantalla Principal</strong><br/><sub>Vista general con 4 ubicaciones monitoreadas en tiempo real</sub></figcaption>
   </figure>
 
-  <figure style="width:240px;margin:0;text-align:center;">
-    <img src="web/public/images/app-detail.jpg" alt="Detalle de Ubicación" style="width:220px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.25);"/>
+  <figure style="width:100%;max-width:240px;margin:0;text-align:center;">
+    <img src="web/public/images/app-detail.jpg" alt="Detalle de Ubicación" style="max-width:100%;height:auto;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.25);"/>
     <figcaption style="margin-top:8px;font-size:14px;line-height:1.2;"><strong>Detalle de Ubicación</strong><br/><sub>18 sensores con valores actuales y alertas inteligentes</sub></figcaption>
   </figure>
 
-  <figure style="width:240px;margin:0;text-align:center;">
-    <img src="web/public/images/app-charts.jpg" alt="Visualización de Alarmas" style="width:220px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.25);"/>
+  <figure style="width:100%;max-width:240px;margin:0;text-align:center;">
+    <img src="web/public/images/app-charts.jpg" alt="Visualización de Alarmas" style="max-width:100%;height:auto;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.25);"/>
     <figcaption style="margin-top:8px;font-size:14px;line-height:1.2;"><strong>Visualización de Alarmas</strong><br/><sub>Sistema de alertas con notificaciones en tiempo real</sub></figcaption>
   </figure>
 
-  <figure style="width:240px;margin:0;text-align:center;">
-    <img src="web/public/images/app-settings.jpg" alt="Configuración" style="width:220px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.25);"/>
+  <figure style="width:100%;max-width:240px;margin:0;text-align:center;">
+    <img src="web/public/images/app-settings.jpg" alt="Configuración" style="max-width:100%;height:auto;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.25);"/>
     <figcaption style="margin-top:8px;font-size:14px;line-height:1.2;"><strong>Configuración</strong><br/><sub>Ajustes de servidor y conexión con test integrado</sub></figcaption>
   </figure>
 </div>

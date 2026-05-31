@@ -7,7 +7,7 @@
 
 
 <p align="center">
-  <img src="../web/public/images/medusse-logo.svg" alt="meduse" width="220" />
+   <img src="../web/public/images/medusse-logo.svg" alt="meduse" style="max-width:220px;width:100%;height:auto;" />
 </p>
 
 
@@ -616,7 +616,7 @@ Usuario: admin / medusse2025
 ---
 
 <p align="center">
-   <img src="https://github.com/user-attachments/assets/5c46aab4-ac50-4622-ab50-babadd0d6e7a" alt="Centro de control" style="max-width:100%;height:300;">
+   <img src="https://github.com/user-attachments/assets/5c46aab4-ac50-4622-ab50-babadd0d6e7a" alt="Centro de control" style="max-width:100%;height:auto;" />
 </p>
 
 ---
