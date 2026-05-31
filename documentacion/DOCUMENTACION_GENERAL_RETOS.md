@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="web/public/images/medusse-logo.svg" alt="medusse logo" width="220">
+  <img src="../web/public/images/medusse-logo.svg" alt="medusse logo" width="220">
 </p>
 
 # Documentación general del proyecto - Medusse IoT
