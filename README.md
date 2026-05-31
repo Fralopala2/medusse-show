@@ -6,7 +6,7 @@
 
 ## 📋 Descripción
 
-Proyecto IoT profesional que combina un simulador realista de sensores ESP32, una canalización de datos moderna, un panel web con identidad propia, una API REST fiable, una interfaz en Next.js y una app móvil en Flutter. Monitoriza 18 sensores —desde variables ambientales y calidad del agua hasta energía solar y estado de batería— y llega totalmente automatizado con scripts de instalación y verificación. Está diseñado para migrar fácilmente a hardware real, incluyendo soporte para comunicación LoRa Mesh.
+Medusse es una plataforma IoT integral que combina simulación ESP32, procesamiento de datos, dashboard web, API REST, interfaz Next.js y app Flutter. Vigila 18 sensores —ambientales, de calidad de agua y energía—, se instala automáticamente y está lista para migrar a dispositivos reales con LoRa Mesh.
 
 ## 🏗️ Arquitectura Completa
 

@@ -21,9 +21,7 @@
 
 ## Resumen ejecutivo
 
-Medusse IoT es un ecosistema completo de monitoreo ambiental que integra hardware ESP32, comunicación MQTT, bases de datos de series temporales, visualización profesional y aplicaciones cliente multiplataforma. El sistema monitorea 18 tipos de sensores distribuidos en 4 ubicaciones, proporcionando datos en tiempo real a través de múltiples interfaces: dashboard Grafana, API REST, aplicación web Next.js y aplicación móvil Flutter.
-
-El proyecto demuestra la implementación práctica de una arquitectura de microservicios moderna, con énfasis en escalabilidad, rendimiento y preparación para despliegue en hardware real con comunicación LoRa Mesh.
+Medusse es una plataforma IoT integral que combina simulación ESP32, procesamiento de datos, dashboard web, API REST, interfaz Next.js y app Flutter. Vigila 18 sensores —ambientales, de calidad de agua y energía entre otros tantos—, se instala automáticamente y está lista para migrar a dispositivos reales con LoRa Mesh.
 
 ---
 
