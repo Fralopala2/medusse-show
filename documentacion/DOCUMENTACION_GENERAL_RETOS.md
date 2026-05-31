@@ -2,9 +2,9 @@
   <img src="../web/public/images/medusse-logo.svg" alt="medusse logo" width="220">
 </p>
 
-# Documentación general del proyecto - Medusse IoT
+<h1 align="center">Documentacion general del proyecto - Medusse IoT</h1>
 
-**Sistema IoT de monitoreo ambiental con arquitectura de microservicios**
+<p align="center"><strong>Sistema IoT de monitoreo ambiental con arquitectura de microservicios</strong></p>
 
 
 ## Información del proyecto
