@@ -1,4 +1,6 @@
-![medusse logo](web/public/images/medusse-logo.svg)
+<p align="center">
+  <img src="web/public/images/medusse-logo.svg" alt="medusse logo" width="220">
+</p>
 
 # Proyecto Medusse IoT
 
