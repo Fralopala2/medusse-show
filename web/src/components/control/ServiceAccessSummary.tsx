@@ -35,8 +35,8 @@ function buildAccessItems(hostname: string, services: DevService[]): AccessItem[
     {
       id: "grafana",
       label: "Grafana",
-      href: `http://${hostname}:3600`,
-      display: `${hostname}:3600`,
+      href: `http://${hostname}:4000`,
+      display: `${hostname}:4000`,
       active: serviceMap.get("grafana")?.status === "up",
       note: "Dashboards y metricas",
     },

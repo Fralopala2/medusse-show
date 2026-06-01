@@ -12,7 +12,7 @@ echo - Servicios Docker (MQTT, InfluxDB, Grafana, MySQL)
 echo - Simulador de datos
 echo - API REST (puerto 4001)
 echo - Web Next.js (puerto 4003)
-echo - Dashboard Grafana (puerto 3600)
+echo - Dashboard Grafana (puerto 4000)
 echo.
 echo NOTA: La app Flutter debe ejecutarse manualmente
 echo       con: flutter run -d windows en medusse_app/
@@ -186,7 +186,7 @@ echo ========================================
 echo   SISTEMA INICIADO CORRECTAMENTE
 echo ========================================
 echo.
-echo [GRAFANA] Dashboard: http://localhost:3600
+echo [GRAFANA] Dashboard: http://localhost:4000
 echo    Usuario: admin / Contrasena: medusse2025
 echo.
 if "%API_AVAILABLE%"=="true" (

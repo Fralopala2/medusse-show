@@ -23,7 +23,7 @@ const LOG_FILES = {
 const SERVICE_CHECKS = [
   { id: 'api', label: 'API REST', port: 4001, path: '/health' },
   { id: 'web', label: 'Web Next.js', port: 4003, path: '/' },
-  { id: 'grafana', label: 'Grafana', port: 3600, path: '/login' },
+  { id: 'grafana', label: 'Grafana', port: 4000, path: '/login' },
   { id: 'influxdb', label: 'InfluxDB', port: 8086, path: '/health' },
   { id: 'mqtt', label: 'MQTT', port: 1883, tcp: true },
   { id: 'mysql', label: 'MySQL', port: 13306, db: true },

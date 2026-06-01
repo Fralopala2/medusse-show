@@ -95,7 +95,7 @@ if errorlevel 1 (
 echo.
 echo [8/8] Verificando servicios web...
 echo Verificando Grafana (timeout 3s)...
-powershell -Command "try { $response = Invoke-WebRequest -Uri 'http://localhost:3600' -TimeoutSec 3 -UseBasicParsing; exit 0 } catch { exit 1 }" >nul 2>&1
+powershell -Command "try { $response = Invoke-WebRequest -Uri 'http://localhost:4000' -TimeoutSec 3 -UseBasicParsing; exit 0 } catch { exit 1 }" >nul 2>&1
 if errorlevel 1 (
     echo Grafana: NO ACCESIBLE (ejecutar: demo.bat o sistema_completo.bat)
 ) else (
@@ -163,7 +163,7 @@ echo 🔎 Verificacion:            verificar.bat
 echo 🛑 Detener servicios:       detener.bat
 echo.
 echo ACCESO WEB:
-echo - Grafana: http://localhost:3600 (admin/medusse2025)
+echo - Grafana: http://localhost:4000 (admin/medusse2025)
 echo - API REST: http://localhost:4001
 echo - Web Next.js: http://localhost:4003
 echo - InfluxDB: http://localhost:8086 (admin/medusse2025)

@@ -93,7 +93,7 @@ if not exist logs mkdir logs
 wscript //nologo "%~dp0scripts\start-simulator.vbs"
 
 echo.
-echo ? Dashboard disponible en: http://localhost:3600
+echo ? Dashboard disponible en: http://localhost:4000
 echo    Usuario: admin / medusse2025
 echo.
 pause

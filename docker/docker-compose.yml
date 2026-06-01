@@ -56,7 +56,7 @@ services:
       - GF_USERS_ALLOW_SIGN_UP=false
       - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource
     ports:
-      - "3600:3000"  # 3600: fuera del rango reservado por Hyper-V en Windows (2951-3050)
+      - "4000:3000"  # 4000: fuera de rangos reservados por Hyper-V (p. ej. 3551-3650 incluía 3600)
     volumes:
       - ./grafana/data:/var/lib/grafana
       - ./grafana/provisioning:/etc/grafana/provisioning
@@ -91,6 +91,6 @@ networks:
 
 # Quick Start:
 # 1. docker-compose up -d
-# 2. Access Grafana: http://localhost:3600 (admin/medusse2025)
+# 2. Access Grafana: http://localhost:4000 (admin/medusse2025)
 # 3. Access InfluxDB: http://localhost:8086 (admin/medusse2025)
 # 4. MQTT Broker: localhost:1883

@@ -9,7 +9,7 @@ En **Windows con Hyper-V / Docker Desktop**, varios rangos TCP están reservados
 | **Web Next.js** | http://localhost:4003 | 4003 | Portal, login, centro de control (`/control`) |
 | **API REST** | http://localhost:4001 | 4001 | Health: `/health` |
 | **WebSocket** | ws://localhost:4002 | 4002 | `PORT + 1` en `api/server.js` |
-| **Grafana** | http://localhost:3600 | 3600 | admin / medusse2025 |
+| **Grafana** | http://localhost:4000 | 4000 | admin / medusse2025 |
 | **InfluxDB** | http://localhost:8086 | 8086 | admin / medusse2025 |
 | **MySQL** | localhost:13306 | 13306 | medusse_user / medusse2025 |
 | **MQTT** | localhost:1883 | 1883 | Mosquitto |
@@ -29,7 +29,7 @@ MYSQL_PORT=13306
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:4001
 NEXT_PUBLIC_WS_URL=ws://localhost:4002
-NEXT_PUBLIC_GRAFANA_URL=http://localhost:3600
+NEXT_PUBLIC_GRAFANA_URL=http://localhost:4000
 ```
 
 ## App Flutter (`medusse_app`)
@@ -50,7 +50,8 @@ netsh interface ipv4 show excludedportrange protocol=tcp
 | 3003 (web) | 4003 |
 | 3001 (API) | 4001 |
 | 3002 (WS) | 4002 |
-| 3000 (Grafana host) | 3600 |
+| 3000 (Grafana host) | 4000 |
+| 3600 (Grafana host, bloqueado por Hyper-V) | 4000 |
 | 3307 (MySQL host) | 13306 |
 
 ## Grafana muestra "No data"

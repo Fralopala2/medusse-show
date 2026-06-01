@@ -195,7 +195,7 @@ export default function DashboardPage() {
     return null;
   }
 
-  const grafanaUrl = typeof window !== 'undefined' ? `http://${window.location.hostname}:3600` : 'http://localhost:3600';
+  const grafanaUrl = typeof window !== 'undefined' ? `http://${window.location.hostname}:4000` : 'http://localhost:4000';
 
   return (
     <div className="min-h-screen bg-gray-50">

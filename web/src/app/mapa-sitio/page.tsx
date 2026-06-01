@@ -5,10 +5,10 @@ import Link from "next/link";
 import { Footer } from "@/components/layout/Footer";
 
 function ClientGrafanaLink({ className }: { className?: string }) {
-  const [url, setUrl] = useState("http://localhost:3600");
+  const [url, setUrl] = useState("http://localhost:4000");
   useEffect(() => {
     try {
-      setUrl(`http://${window.location.hostname}:3600`);
+      setUrl(`http://${window.location.hostname}:4000`);
     } catch (e) {
       // leave default
     }

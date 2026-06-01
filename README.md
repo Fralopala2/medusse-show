@@ -289,7 +289,7 @@ Requisitos: API en el puerto **4001** (endpoints `/api/dev/*` solo en entorno lo
 | Servicio | URL | Credenciales |
 |----------|-----|--------------|
 | **Centro de control** | http://localhost:4003/control | Sin login (local) |
-| **Grafana Dashboard** | http://localhost:3600 | admin / medusse2025 |
+| **Grafana Dashboard** | http://localhost:4000 | admin / medusse2025 |
 | **API REST** | http://localhost:4001 | - |
 | **Web Next.js** | http://localhost:4003 | - |
 | **Login web** | http://localhost:4003/login | Ver usuarios en sección MySQL |
@@ -298,7 +298,7 @@ Requisitos: API en el puerto **4001** (endpoints `/api/dev/*` solo en entorno lo
 
 ## 📊 Servicios y Tecnologías
 
-- **Grafana:** Puerto `3600` (host; contenedor interno 3000). Dashboard profesional con branding personalizado. Versión: `10.2.0`.
+- **Grafana:** Puerto `4000` (host; contenedor interno 3000). Dashboard profesional con branding personalizado. Versión: `10.2.0`.
 - **InfluxDB:** Puerto `8086`. Base de datos de series temporales. Versión: `2.7`.
 - **MQTT Broker (Mosquitto):** Puerto `1883` (MQTT) y `9001` (WebSocket). Versión: `2.0`.
 - **Telegraf:** Pipeline optimizado con múltiples consumers. Versión: `1.28`.
@@ -564,7 +564,7 @@ El sistema está **completamente preparado** para migración a hardware real:
 
 ### Botones Funcionales
 - **Ver Dashboard** - Scroll a sección dashboard
-- **Acceder a Grafana** - Abre http://localhost:3600
+- **Acceder a Grafana** - Abre http://localhost:4000
 - **Documentación** - Enlace a README.md en GitHub
 - **Ver API Docs** - Enlace a documentación API
 - **Ver Migración** - Enlace a MIGRACION.md
@@ -591,7 +591,7 @@ wscript //nologo scripts\start-web.vbs
 | http://localhost:4003/login | Login de usuarios |
 | http://localhost:4003/dashboard | Panel tras autenticación |
 
-**Puertos en Windows:** Hyper-V reserva el rango 2951–3550; por eso la web usa **4003**, la API **4001** y Grafana **3600**. Ver [documentacion/PUERTOS.md](documentacion/PUERTOS.md).
+**Puertos en Windows:** Hyper-V reserva varios rangos (p. ej. 3551–3650); la web usa **4003**, la API **4001**, WebSocket **4002** y Grafana **4000**. Ver [documentacion/PUERTOS.md](documentacion/PUERTOS.md).
 
 ---
 

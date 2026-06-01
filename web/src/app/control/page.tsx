@@ -51,7 +51,7 @@ export default function ControlPage() {
         ? window.location.hostname
         : "localhost";
 
-  const grafanaUrl = `http://${accessHost}:3600`;
+  const grafanaUrl = `http://${accessHost}:4000`;
   const webUrl = `http://${accessHost}:4003`;
 
   async function handleStop() {
