@@ -98,6 +98,67 @@ def configure_console_utf8():
             pass
 
 
+def drift_value(current, step, min_val, max_val, decimals=1):
+    """Random walk acotado: cambios graduales y realistas entre lecturas."""
+    next_value = current + random.uniform(-step, step)
+    next_value = max(min_val, min(max_val, next_value))
+    return round(next_value, decimals)
+
+
+def drift_toward(current, target, pull, noise, min_val, max_val, decimals=1):
+    """Deriva hacia un objetivo lento (p. ej. temperatura según hora del día)."""
+    next_value = current + (target - current) * pull + random.uniform(-noise, noise)
+    next_value = max(min_val, min(max_val, next_value))
+    return round(next_value, decimals)
+
+
+def school_temperature_offset(hour):
+    """Pequeña variación diurna en un instituto (clases, calefacción, etc.)."""
+    if 8 <= hour <= 16:
+        return math.sin((hour - 8) * math.pi / 8) * 1.2
+    return -0.8 if hour < 8 else -1.0
+
+
+def init_location_state(loc):
+    """Estado persistente por ubicación para evitar saltos bruscos entre lecturas."""
+    soil_base = {"aula20": 30, "aula21": 35, "gimnasio": 25, "laboratorio": 40}
+    flow_base = {"aula20": 0.5, "aula21": 1.2, "gimnasio": 2.1, "laboratorio": 0.8}
+    loc["state"] = {
+        "temperature": float(loc["temp_base"]),
+        "humidity": 48.0,
+        "co2": 450.0,
+        "pressure": 1013.0,
+        "voc": 55.0,
+        "iaq": 50.0,
+        "soil_moisture": float(soil_base.get(loc["name"], 30)),
+        "ph_level": 7.0,
+        "water_flow": float(flow_base.get(loc["name"], 1.0)),
+        "tds": 120.0,
+        "dissolved_oxygen": 8.0,
+    }
+
+
+def update_location_state(loc):
+    """Actualiza sensores con variaciones suaves y coherentes con el entorno."""
+    hour = datetime.now().hour
+    state = loc["state"]
+    temp_target = loc["temp_base"] + school_temperature_offset(hour)
+
+    state["temperature"] = drift_toward(
+        state["temperature"], temp_target, pull=0.12, noise=0.08, min_val=18, max_val=28
+    )
+    state["humidity"] = drift_value(state["humidity"], step=0.6, min_val=35, max_val=65)
+    state["co2"] = drift_value(state["co2"], step=12, min_val=400, max_val=900, decimals=0)
+    state["pressure"] = drift_value(state["pressure"], step=0.15, min_val=1008, max_val=1018)
+    state["voc"] = drift_value(state["voc"], step=2.5, min_val=25, max_val=110)
+    state["iaq"] = drift_value(state["iaq"], step=4, min_val=15, max_val=120, decimals=0)
+    state["soil_moisture"] = drift_value(state["soil_moisture"], step=0.8, min_val=15, max_val=55)
+    state["ph_level"] = drift_value(state["ph_level"], step=0.04, min_val=6.4, max_val=7.6, decimals=2)
+    state["water_flow"] = drift_value(state["water_flow"], step=0.08, min_val=0.2, max_val=2.8)
+    state["tds"] = drift_value(state["tds"], step=3, min_val=70, max_val=190)
+    state["dissolved_oxygen"] = drift_value(state["dissolved_oxygen"], step=0.08, min_val=7.0, max_val=9.0)
+
+
 def main():
     configure_console_utf8()
     mqtt = load_mqtt_client_module()
@@ -117,14 +178,19 @@ def main():
             {"name": "laboratorio", "node": "ESP32_NODE_04", "temp_base": 21, "battery_percent": 88, "wake_count": 0}
         ]
         
+        for loc in locations:
+            init_location_state(loc)
+        
         last_update_time = time.time()
         
         i = 0
         while True:  # Generar datos continuamente
             for loc in locations:
-                # Generar datos para cada ubicación
+                update_location_state(loc)
+                state = loc["state"]
+
                 temp_data = {
-                    "value": round(loc["temp_base"] + random.uniform(-2, 4), 1),
+                    "value": state["temperature"],
                     "sensor": "dht22",
                     "node_id": loc["node"],
                     "timestamp": int(time.time() * 1000),
@@ -132,7 +198,7 @@ def main():
                 }
                 
                 humidity_data = {
-                    "value": round(45 + random.uniform(-10, 15), 1),
+                    "value": state["humidity"],
                     "sensor": "dht22",
                     "node_id": loc["node"],
                     "timestamp": int(time.time() * 1000),
@@ -140,7 +206,7 @@ def main():
                 }
                 
                 co2_data = {
-                    "value": random.randint(400, 600),
+                    "value": int(state["co2"]),
                     "sensor": "gas",
                     "node_id": loc["node"],
                     "timestamp": int(time.time() * 1000),
@@ -148,7 +214,7 @@ def main():
                 }
                 
                 pressure_data = {
-                    "value": round(1013 + random.uniform(-5, 5), 1),
+                    "value": state["pressure"],
                     "sensor": "bme680",  # Upgraded from bme280
                     "node_id": loc["node"],
                     "timestamp": int(time.time() * 1000),
@@ -157,7 +223,7 @@ def main():
                 
                 # VOC data (BME680 upgrade)
                 voc_data = {
-                    "value": round(random.uniform(20, 100), 1),  # VOC resistance in KOhms
+                    "value": state["voc"],
                     "sensor": "bme680",
                     "node_id": loc["node"],
                     "timestamp": int(time.time() * 1000),
@@ -166,17 +232,15 @@ def main():
                 
                 # Air Quality Index based on VOC
                 iaq_data = {
-                    "value": random.randint(10, 150),  # IAQ 0-500 scale
+                    "value": int(state["iaq"]),
                     "sensor": "bme680",
                     "node_id": loc["node"],
                     "timestamp": int(time.time() * 1000),
                     "location": loc["name"]
                 }
                 
-                # Soil moisture (varies by location type)
-                soil_base = {"aula20": 30, "aula21": 35, "gimnasio": 25, "laboratorio": 40}
                 soil_data = {
-                    "value": round(soil_base.get(loc["name"], 30) + random.uniform(-10, 15), 1),
+                    "value": state["soil_moisture"],
                     "sensor": "soil",
                     "node_id": loc["node"],
                     "timestamp": int(time.time() * 1000),
@@ -185,17 +249,15 @@ def main():
                 
                 # pH level (slightly acidic to neutral)
                 ph_data = {
-                    "value": round(random.uniform(6.2, 7.8), 2),
+                    "value": state["ph_level"],
                     "sensor": "ph",
                     "node_id": loc["node"],
                     "timestamp": int(time.time() * 1000),
                     "location": loc["name"]
                 }
                 
-                # Water flow (varies by location)
-                flow_base = {"aula20": 0.5, "aula21": 1.2, "gimnasio": 2.1, "laboratorio": 0.8}
                 flow_data = {
-                    "value": round(flow_base.get(loc["name"], 1.0) + random.uniform(-0.3, 0.5), 1),
+                    "value": state["water_flow"],
                     "sensor": "flow",
                     "node_id": loc["node"],
                     "timestamp": int(time.time() * 1000),
@@ -204,7 +266,7 @@ def main():
                 
                 # TDS (Total Dissolved Solids)
                 tds_data = {
-                    "value": round(random.uniform(50, 200), 1),
+                    "value": state["tds"],
                     "sensor": "tds",
                     "node_id": loc["node"],
                     "timestamp": int(time.time() * 1000),
@@ -213,7 +275,7 @@ def main():
                 
                 # Dissolved Oxygen
                 do_data = {
-                    "value": round(random.uniform(7.2, 8.8), 1),
+                    "value": state["dissolved_oxygen"],
                     "sensor": "dissolved_oxygen",
                     "node_id": loc["node"],
                     "timestamp": int(time.time() * 1000),
