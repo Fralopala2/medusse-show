@@ -484,7 +484,7 @@ flutter run -d windows
 
 Ver documentación completa en: [medusse_app/README.md](medusse_app/README.md)
 
-Link para descarga de la app: [Descargar](https://drive.google.com/file/d/1HH-hWyEuhQWpqfzIrgTKVrD842SIG5kn/view?usp=sharing)
+Link para descarga de la app: [Descargar](https://drive.google.com/file/d/1yoDJKyyOBwf0rZfmPR8SdrStyj4EGoez/view?usp=sharing)
 
 ## 🌐 API REST Robusta
 
