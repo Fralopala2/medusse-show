@@ -302,11 +302,13 @@
             "mode": "thresholds"
           },
           "mappings": [],
+          "min": 0,
+          "max": 100,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "red",
                 "value": null
               },
               {
@@ -314,8 +316,8 @@
                 "value": 20
               },
               {
-                "color": "red",
-                "value": 10
+                "color": "green",
+                "value": 50
               }
             ]
           },
@@ -381,10 +383,8 @@
       },
       "id": 104,
       "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "center",
-        "orientation": "auto",
+        "displayMode": "gradient",
+        "orientation": "vertical",
         "reduceOptions": {
           "values": false,
           "calcs": [
@@ -392,8 +392,10 @@
           ],
           "fields": ""
         },
-        "textMode": "value_and_name",
-        "wideLayout": true
+        "showUnfilled": true,
+        "minVizWidth": 0,
+        "minVizHeight": 0,
+        "valueMode": "color"
       },
       "pluginVersion": "10.2.0",
       "targets": [
@@ -407,7 +409,7 @@
         }
       ],
       "title": "% Batería",
-      "type": "stat"
+      "type": "bargauge"
     },
     {
       "datasource": {
