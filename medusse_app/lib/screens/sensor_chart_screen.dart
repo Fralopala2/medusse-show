@@ -333,7 +333,7 @@ class _SensorChartScreenState extends State<SensorChartScreen> {
               if (index >= 0 && index < data.length) {
                 final timestamp = data[index].timestamp;
                 return SideTitleWidget(
-                  axisSide: meta.axisSide,
+                  meta: meta,
                   child: Text(
                     DateFormat('HH:mm').format(timestamp),
                     style: const TextStyle(color: Colors.grey, fontSize: 12),
@@ -393,7 +393,7 @@ class _SensorChartScreenState extends State<SensorChartScreen> {
       lineTouchData: LineTouchData(
         enabled: true,
         touchTooltipData: LineTouchTooltipData(
-          tooltipBgColor: Colors.blueGrey.withValues(alpha: 0.8),
+          getTooltipColor: (_) => Colors.blueGrey.withValues(alpha: 0.8),
           getTooltipItems: (List<LineBarSpot> touchedBarSpots) {
             return touchedBarSpots.map((barSpot) {
               final index = barSpot.x.toInt();
