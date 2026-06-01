@@ -326,8 +326,8 @@ router.post('/users', auth.requireAuth, requireAdminOrUser, async (req, res) => 
   }
 });
 
-// Obtener todas las alertas (solo admin)
-router.get('/alerts', auth.requireAuth, requireAdmin, async (req, res) => {
+// Obtener alertas operativas (admin y profesor/user)
+router.get('/alerts', auth.requireAuth, requireAdminOrUser, async (req, res) => {
   try {
     const [alerts] = await db.query(
       `SELECT a.*, l.display_name as location_name, s.display_name as sensor_name, s.unit,

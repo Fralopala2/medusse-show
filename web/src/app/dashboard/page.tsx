@@ -27,6 +27,18 @@ interface Sensor {
   unit: string;
 }
 
+interface OperationalAlert {
+  id: number;
+  location_name: string;
+  sensor_name: string;
+  alert_type: string;
+  message: string;
+  value: number | null;
+  threshold: number | null;
+  is_resolved: boolean;
+  created_at: string;
+}
+
 export default function DashboardPage() {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
@@ -34,7 +46,26 @@ export default function DashboardPage() {
   const [locations, setLocations] = useState<Location[]>([]);
   const [sensors, setSensors] = useState<Sensor[]>([]);
   const [creatingAlert, setCreatingAlert] = useState(false);
+  const [loadingAlerts, setLoadingAlerts] = useState(false);
+  const [recentAlerts, setRecentAlerts] = useState<OperationalAlert[]>([]);
   const [alertNotice, setAlertNotice] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+
+  const loadRecentAlerts = async (token: string) => {
+    setLoadingAlerts(true);
+    try {
+      const res = await fetch(`${getApiBaseUrl()}/api/admin/alerts`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setRecentAlerts((data.alerts || []).slice(0, 10));
+      }
+    } catch (error) {
+      console.error('Error loading alerts:', error);
+    } finally {
+      setLoadingAlerts(false);
+    }
+  };
 
   useEffect(() => {
     // Verificar autenticacion
@@ -105,6 +136,7 @@ export default function DashboardPage() {
     };
 
     loadAlertOptions();
+    loadRecentAlerts(token);
   }, [user]);
 
   const handleCreateAlert = async (e: FormEvent<HTMLFormElement>) => {
@@ -142,8 +174,13 @@ export default function DashboardPage() {
       const data = await res.json();
 
       if (data.success) {
-        setAlertNotice({ type: 'success', message: 'Alerta creada correctamente.' });
+        setAlertNotice({
+          type: 'success',
+          message:
+            'Alerta guardada en el sistema (MySQL). Se muestra abajo y en Panel Admin → Alertas. Grafana solo muestra gráficos de sensores, no estas alertas manuales.',
+        });
         form.reset();
+        await loadRecentAlerts(token);
       } else {
         setAlertNotice({ type: 'error', message: data.message || 'Error al crear la alerta.' });
       }
@@ -275,7 +312,7 @@ export default function DashboardPage() {
           >
             <div className="text-3xl mb-2">📊</div>
             <h3 className="text-lg font-semibold text-gray-900 mb-2">Dashboard Grafana</h3>
-            <p className="text-sm text-gray-600">Ver visualizaciones en tiempo real</p>
+            <p className="text-sm text-gray-600">Gráficos de sensores en tiempo real (InfluxDB). No incluye alertas creadas aquí.</p>
           </a>
 
           <a
@@ -303,8 +340,8 @@ export default function DashboardPage() {
                 <h2 className="text-xl font-semibold text-gray-900">Crear alerta</h2>
                 <p className="text-sm text-gray-600">
                   {user.role === 'admin'
-                    ? 'Admin puede crear y gestionar alertas del sistema.'
-                    : 'Profesor puede crear alertas, pero no gestionar usuarios.'}
+                    ? 'Registro operativo en base de datos (no en Grafana). Gestión completa en Panel Admin → Alertas.'
+                    : 'Registro operativo en base de datos. Las verás en la lista inferior tras crearlas.'}
                 </p>
               </div>
               <span className="inline-flex w-fit rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">
@@ -416,6 +453,76 @@ export default function DashboardPage() {
                 </p>
               </div>
             </form>
+
+            <div className="mt-8 border-t border-gray-200 pt-6">
+              <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                <h3 className="text-lg font-semibold text-gray-900">Alertas registradas</h3>
+                {user.role === 'admin' && (
+                  <Link
+                    href="/admin?tab=alerts"
+                    className="text-sm font-medium text-indigo-600 hover:text-indigo-800"
+                  >
+                    Gestionar todas en Panel Admin →
+                  </Link>
+                )}
+              </div>
+              {loadingAlerts ? (
+                <p className="text-sm text-gray-500">Cargando alertas...</p>
+              ) : recentAlerts.length === 0 ? (
+                <p className="text-sm text-gray-500">
+                  Aún no hay alertas. Al crear una aparecerá aquí (no en Grafana).
+                </p>
+              ) : (
+                <div className="overflow-x-auto rounded-md border border-gray-200">
+                  <table className="min-w-full divide-y divide-gray-200 text-sm">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="px-3 py-2 text-left font-medium text-gray-600">Fecha</th>
+                        <th className="px-3 py-2 text-left font-medium text-gray-600">Ubicación</th>
+                        <th className="px-3 py-2 text-left font-medium text-gray-600">Sensor</th>
+                        <th className="px-3 py-2 text-left font-medium text-gray-600">Tipo</th>
+                        <th className="px-3 py-2 text-left font-medium text-gray-600">Mensaje</th>
+                        <th className="px-3 py-2 text-left font-medium text-gray-600">Estado</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200 bg-white">
+                      {recentAlerts.map((alert) => (
+                        <tr key={alert.id}>
+                          <td className="whitespace-nowrap px-3 py-2 text-gray-700">
+                            {new Date(alert.created_at).toLocaleString('es-ES')}
+                          </td>
+                          <td className="px-3 py-2 text-gray-900">{alert.location_name}</td>
+                          <td className="px-3 py-2 text-gray-900">{alert.sensor_name}</td>
+                          <td className="px-3 py-2">
+                            <span
+                              className={`rounded-full px-2 py-0.5 text-xs font-medium ${
+                                alert.alert_type === 'danger'
+                                  ? 'bg-red-100 text-red-800'
+                                  : alert.alert_type === 'warning'
+                                    ? 'bg-yellow-100 text-yellow-800'
+                                    : 'bg-blue-100 text-blue-800'
+                              }`}
+                            >
+                              {alert.alert_type}
+                            </span>
+                          </td>
+                          <td className="max-w-xs truncate px-3 py-2 text-gray-700" title={alert.message}>
+                            {alert.message}
+                          </td>
+                          <td className="px-3 py-2">
+                            {alert.is_resolved ? (
+                              <span className="text-xs text-green-700">Resuelta</span>
+                            ) : (
+                              <span className="text-xs font-medium text-red-700">Activa</span>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
           </div>
         )}
 
