@@ -54,6 +54,23 @@ netsh interface ipv4 show excludedportrange protocol=tcp
 | 3600 (Grafana host, bloqueado por Hyper-V) | 4000 |
 | 3307 (MySQL host) | 13306 |
 
+## Alertas del panel admin en Grafana
+
+Las alertas creadas en la web se envían a Grafana como **anotaciones** en el dashboard `medusse-clean`:
+
+1. Al crear → marca vertical «Alerta registrada».
+2. Si indicas **umbral** → la API comprueba InfluxDB cada ~30 s; al superarse → anotación «ALERTA ACTIVADA».
+
+En Grafana: abre el dashboard, pasa el ratón por la línea temporal o el icono de bandera. No es un popup del navegador; es la anotación nativa de Grafana.
+
+MySQL ya creado: aplicar migración:
+
+```powershell
+Get-Content docker\mysql\migrations\004_alerts_grafana.sql | docker exec -i medusse_mysql mysql -u medusse_user -pmedusse2025 medusse_db
+```
+
+Variables en `api/.env`: `GRAFANA_URL`, `GRAFANA_ADMIN_USER`, `GRAFANA_ADMIN_PASSWORD`.
+
 ## Grafana muestra "No data"
 
 1. Comprueba que Docker esté en marcha: `docker ps` debe listar `medusse_mosquitto`, `medusse_influxdb`, `medusse_telegraf`, `medusse_grafana`.

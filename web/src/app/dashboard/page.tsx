@@ -36,6 +36,7 @@ interface OperationalAlert {
   value: number | null;
   threshold: number | null;
   is_resolved: boolean;
+  triggered_at: string | null;
   created_at: string;
 }
 
@@ -177,7 +178,7 @@ export default function DashboardPage() {
         setAlertNotice({
           type: 'success',
           message:
-            'Alerta guardada en el sistema (MySQL). Se muestra abajo y en Panel Admin → Alertas. Grafana solo muestra gráficos de sensores, no estas alertas manuales.',
+            'Alerta guardada. Con umbral, se activará en Grafana cuando el sensor lo supere (anotación en el dashboard). Sin umbral, solo marca de registro.',
         });
         form.reset();
         await loadRecentAlerts(token);
@@ -312,7 +313,7 @@ export default function DashboardPage() {
           >
             <div className="text-3xl mb-2">📊</div>
             <h3 className="text-lg font-semibold text-gray-900 mb-2">Dashboard Grafana</h3>
-            <p className="text-sm text-gray-600">Gráficos de sensores en tiempo real (InfluxDB). No incluye alertas creadas aquí.</p>
+            <p className="text-sm text-gray-600">Gráficos + anotaciones de alertas (icono bandera en la línea temporal).</p>
           </a>
 
           <a
@@ -340,8 +341,8 @@ export default function DashboardPage() {
                 <h2 className="text-xl font-semibold text-gray-900">Crear alerta</h2>
                 <p className="text-sm text-gray-600">
                   {user.role === 'admin'
-                    ? 'Registro operativo en base de datos (no en Grafana). Gestión completa en Panel Admin → Alertas.'
-                    : 'Registro operativo en base de datos. Las verás en la lista inferior tras crearlas.'}
+                    ? 'Con umbral: anotación en Grafana al activarse. Gestión en Panel Admin → Alertas.'
+                    : 'Indica umbral para activación automática en Grafana (cada ~30 s).'}
                 </p>
               </div>
               <span className="inline-flex w-fit rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">
@@ -483,6 +484,7 @@ export default function DashboardPage() {
                         <th className="px-3 py-2 text-left font-medium text-gray-600">Tipo</th>
                         <th className="px-3 py-2 text-left font-medium text-gray-600">Mensaje</th>
                         <th className="px-3 py-2 text-left font-medium text-gray-600">Estado</th>
+                        <th className="px-3 py-2 text-left font-medium text-gray-600">Grafana</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 bg-white">
@@ -512,9 +514,14 @@ export default function DashboardPage() {
                           <td className="px-3 py-2">
                             {alert.is_resolved ? (
                               <span className="text-xs text-green-700">Resuelta</span>
+                            ) : alert.triggered_at ? (
+                              <span className="text-xs font-medium text-orange-700">Disparada</span>
                             ) : (
-                              <span className="text-xs font-medium text-red-700">Activa</span>
+                              <span className="text-xs font-medium text-blue-700">Vigilando</span>
                             )}
+                          </td>
+                          <td className="px-3 py-2 text-xs text-gray-600">
+                            {alert.triggered_at ? 'Anotación ACTIVADA' : alert.threshold ? 'Pendiente umbral' : 'Solo registro'}
                           </td>
                         </tr>
                       ))}

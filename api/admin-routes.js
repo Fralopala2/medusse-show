@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const auth = require('./auth');
 const db = require('./db');
+const grafana = require('./grafana');
 
 function parsePositiveInt(value, fallback, max) {
   const parsed = parseInt(value, 10);
@@ -380,11 +381,49 @@ router.post('/alerts', auth.requireAuth, requireAdminOrUser, async (req, res) =>
       'INSERT INTO activity_log (user_id, action, entity_type, entity_id, details) VALUES (?, ?, ?, ?, ?)',
       [req.user.id, 'create_alert', 'alert', result.insertId, JSON.stringify({ message, alert_type })]
     );
+
+    let grafanaStatus = 'omitido';
+    try {
+      const [meta] = await db.query(
+        `SELECT l.display_name AS location_label, s.display_name AS sensor_label
+         FROM locations l, sensors s
+         WHERE l.id = ? AND s.id = ?`,
+        [location_id, sensor_id]
+      );
+      const row = meta[0] || {};
+      const annotationText = [
+        'Alerta registrada (panel admin)',
+        `${row.location_label || 'Ubicación'} · ${row.sensor_label || 'Sensor'}`,
+        message,
+        threshold != null && threshold !== ''
+          ? `Umbral vigilado: ${threshold} (se marcará ACTIVADA en Grafana al superarse)`
+          : 'Sin umbral: solo anotación de registro',
+      ].join('\n');
+
+      const annotationId = await grafana.createDashboardAnnotation({
+        text: annotationText,
+        tags: ['medusse-alert', 'created', `alert-${result.insertId}`, alert_type],
+      });
+
+      try {
+        await db.query(
+          'UPDATE alerts SET grafana_annotation_created = ? WHERE id = ?',
+          [String(annotationId), result.insertId]
+        );
+      } catch (updateErr) {
+        if (updateErr.code !== 'ER_BAD_FIELD_ERROR') throw updateErr;
+      }
+      grafanaStatus = 'anotación creada';
+    } catch (grafanaErr) {
+      console.warn('Grafana (crear alerta):', grafanaErr.message);
+      grafanaStatus = 'no disponible';
+    }
     
     res.json({
       success: true,
       message: 'Alerta creada correctamente',
-      alertId: result.insertId
+      alertId: result.insertId,
+      grafana: grafanaStatus,
     });
   } catch (error) {
     console.error('Error creating alert:', error);

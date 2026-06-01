@@ -929,6 +929,9 @@ const server = app.listen(PORT, () => {
   console.log(`�🔗 Connected to InfluxDB: ${INFLUX_CONFIG.url}`);
   console.log(`📊 Using bucket: ${INFLUX_CONFIG.bucket}`);
   console.log(`🏢 Using organization: ${INFLUX_CONFIG.org}`);
+
+  const { startAlertMonitor } = require('./alert-monitor');
+  startAlertMonitor();
 });
 
 // WebSocket Server para datos en tiempo real
