@@ -22,4 +22,3 @@ if (-not (Test-Path $vbs)) {
 }
 
 wscript //nologo $vbs
-Write-Host "[OK] Simulador reiniciado. Espera ~20s y recarga Grafana (ultimos 5 min)."
