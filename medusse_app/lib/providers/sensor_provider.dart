@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import '../models/sensor_data.dart';
+import '../models/system_alert.dart';
 import '../services/api_service.dart';
 
 class SensorProvider with ChangeNotifier {
@@ -16,6 +17,7 @@ class SensorProvider with ChangeNotifier {
   Map<String, LocationSummary> _summary = {};
   final Map<String, List<SensorData>> _historicalData = {};
   final Map<String, SensorStats> _stats = {};
+  List<SystemAlert> _systemAlerts = [];
 
   // Stream para datos en tiempo real
   StreamSubscription? _realTimeSubscription;
@@ -28,6 +30,13 @@ class SensorProvider with ChangeNotifier {
   Map<String, LocationSummary> get summary => _summary;
   Map<String, List<SensorData>> get historicalData => _historicalData;
   Map<String, SensorStats> get stats => _stats;
+  List<SystemAlert> get systemAlerts => List.unmodifiable(_systemAlerts);
+
+  List<SystemAlert> systemAlertsForLocation(String location) {
+    return _systemAlerts
+        .where((a) => !a.isResolved && _locationMatches(a.locationName, location))
+        .toList();
+  }
 
   // Constructor
   SensorProvider() {
@@ -65,6 +74,8 @@ class SensorProvider with ChangeNotifier {
 
       // Cargar resumen
       _summary = await _apiService.getSummary();
+
+      await _loadSystemAlerts();
 
       _error = null;
     } catch (e) {
@@ -356,8 +367,35 @@ class SensorProvider with ChangeNotifier {
     }
   }
 
-  // Verificar si hay alertas (valores fuera de rango normal)
+  Future<void> _loadSystemAlerts() async {
+    try {
+      _systemAlerts = await _apiService.getSystemAlerts();
+    } catch (_) {
+      // No bloquear la app si falla la lista de alertas operativas
+      _systemAlerts = [];
+    }
+    notifyListeners();
+  }
+
+  bool _locationMatches(String alertLocation, String appLocation) {
+    return alertLocation.toLowerCase() == appLocation.toLowerCase();
+  }
+
+  bool hasSystemAlert(String location, SensorType sensorType) {
+    return _systemAlerts.any(
+      (a) =>
+          !a.isResolved &&
+          _locationMatches(a.locationName, location) &&
+          a.sensorType == sensorType.apiName,
+    );
+  }
+
+  // Verificar si hay alertas (umbrales locales o alertas del panel admin)
   bool hasAlert(String location, SensorType sensorType) {
+    if (hasSystemAlert(location, sensorType)) {
+      return true;
+    }
+
     final data = getLatestSensorValue(location, sensorType);
     if (data == null) return false;
 

@@ -46,6 +46,9 @@ app.use('/api/admin', adminRoutes);
 const devRoutes = require('./dev-routes');
 app.use('/api/dev', devRoutes);
 
+const systemAlertsRoutes = require('./system-alerts-routes');
+app.use('/api/system-alerts', systemAlertsRoutes);
+
 // Cache para datos recientes
 let cachedSummary = {};
 let lastCacheUpdate = 0;
@@ -61,6 +64,7 @@ app.get('/', (req, res) => {
       health: '/health',
       locations: '/api/locations',
       summary: '/api/summary',
+      systemAlerts: '/api/system-alerts',
       latest: '/api/latest/:location',
       data: '/api/data/:location/:sensor',
       stats: '/api/stats/:location/:sensor',

@@ -521,7 +521,7 @@ export default function DashboardPage() {
                             )}
                           </td>
                           <td className="px-3 py-2 text-xs text-gray-600">
-                            {alert.triggered_at ? 'Anotación ACTIVADA' : alert.threshold ? 'Pendiente umbral' : 'Solo registro'}
+                            {alert.triggered_at ? 'activada' : alert.threshold ? 'registrada' : 'solo registro'}
                           </td>
                         </tr>
                       ))}

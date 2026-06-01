@@ -4,6 +4,7 @@ import '../providers/sensor_provider.dart';
 import '../models/sensor_data.dart';
 import '../services/api_service.dart';
 import '../widgets/sensor_card.dart';
+import '../widgets/system_alerts_section.dart';
 import '../main.dart';
 import 'sensor_chart_screen.dart';
 
@@ -154,6 +155,14 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
                     ),
                   ),
                 ),
+
+                if (provider.systemAlertsForLocation(currentLocation).isNotEmpty)
+                  SliverToBoxAdapter(
+                    child: SystemAlertsSection(
+                      alerts: provider.systemAlertsForLocation(currentLocation),
+                      title: 'Alertas en esta ubicación',
+                    ),
+                  ),
 
                 // Tarjetas de sensores
                 SliverToBoxAdapter(

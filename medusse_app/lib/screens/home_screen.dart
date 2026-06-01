@@ -4,6 +4,7 @@ import '../providers/sensor_provider.dart';
 import '../models/sensor_data.dart';
 import '../widgets/location_card.dart';
 import '../widgets/connection_status.dart';
+import '../widgets/system_alerts_section.dart';
 import 'location_detail_screen.dart';
 import 'settings_screen.dart';
 
@@ -92,6 +93,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
 
+                  if (provider.systemAlerts.isNotEmpty)
+                    SliverToBoxAdapter(
+                      child: SystemAlertsSection(
+                        alerts: provider.systemAlerts,
+                      ),
+                    ),
+
                   // Resumen general
                   if (provider.summary.isNotEmpty) ...[
                     SliverToBoxAdapter(
@@ -134,6 +142,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: LocationCard(
                             location: location,
                             summary: summary,
+                            systemAlertCount: provider
+                                .systemAlertsForLocation(location)
+                                .length,
                             onTap: () =>
                                 _navigateToLocationDetail(context, location),
                           ),

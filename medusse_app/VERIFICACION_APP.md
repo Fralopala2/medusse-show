@@ -35,7 +35,8 @@ medusse_app/
 ├── lib/
 │   ├── main.dart                    # Entry point con tema Material 3
 │   ├── models/
-│   │   └── sensor_data.dart         # Modelos de datos
+│   │   ├── sensor_data.dart         # Modelos de datos
+│   │   └── system_alert.dart        # Alertas del panel admin (API)
 │   ├── providers/
 │   │   └── sensor_provider.dart     # Gestion de estado con Provider
 │   ├── screens/
@@ -48,8 +49,9 @@ medusse_app/
 │   │   └── config_service.dart      # Configuracion de URLs
 │   └── widgets/
 │       ├── connection_status.dart   # Indicador de conexion
-│       ├── location_card.dart       # Card de ubicacion
-│       └── sensor_card.dart         # Card de sensor
+│       ├── location_card.dart       # Card de ubicacion (badge de alertas)
+│       ├── sensor_card.dart         # Card de sensor
+│       └── system_alerts_section.dart  # Lista de alertas operativas
 ├── pubspec.yaml                     # Dependencias
 └── README.md
 ```
@@ -121,6 +123,11 @@ Puedes cambiar la configuracion desde la pantalla de Settings en la app.
 ✅ **Pull-to-refresh:**
 - Deslizar hacia abajo para actualizar
 
+✅ **Alertas del sistema (panel admin):**
+- Lista de alertas no resueltas bajo el estado de conexion
+- Badge en cada ubicacion con numero de alertas
+- Mas detalle en `README.md` (seccion «Alertas del sistema»)
+
 ### Pantalla Detalle (location_detail_screen.dart)
 
 ✅ **18 sensores monitoreados:**
@@ -133,6 +140,10 @@ Puedes cambiar la configuracion desde la pantalla de Settings en la app.
 - Unidad de medida
 - Icono diferenciado
 - Color por tipo
+- Resaltado si hay alerta del panel admin o umbral local superado
+
+✅ **Alertas en la ubicacion:**
+- Bloque «Alertas en esta ubicacion» cuando hay alertas activas
 
 ✅ **Navegacion:**
 - Tap en sensor para ver graficos historicos
@@ -258,6 +269,14 @@ curl http://localhost:4001/health
 3. Verificar que los valores cambien
 4. Pull-to-refresh para actualizar manualmente
 
+### 5. Verificar Alertas del Sistema
+
+1. API y MySQL en marcha; migracion `004_alerts_grafana.sql` aplicada
+2. Crear una alerta en el panel web (dashboard → Alertas)
+3. Comprobar API: `curl http://localhost:4001/api/system-alerts`
+4. En la app: Actualizar → debe aparecer «Alertas del sistema» en Home
+5. Entrar en la ubicacion de la alerta → lista filtrada y sensor resaltado
+
 ---
 
 ## Soluciones a Problemas Comunes
@@ -296,7 +315,7 @@ flutter config --enable-web
 **Solucion:**
 1. Verificar que el simulador este corriendo
 2. Esperar 15 segundos para que genere datos
-3. Verificar en Grafana que haya datos: http://localhost:3600
+3. Verificar en Grafana que haya datos: http://localhost:4000
 4. Pull-to-refresh en la app
 
 ### App muy lenta
@@ -338,6 +357,7 @@ flutter config --enable-web
 - 4 cards de ubicaciones con colores
 - Valores de temperatura, humedad, CO2
 - Indicador de conexion verde
+- Seccion «Alertas del sistema» (si hay alertas en MySQL)
 - Boton de refresh
 
 ### Location Detail Screen
@@ -405,7 +425,7 @@ flutter test
 ### Funcionalidades
 - **Ubicaciones:** 4 ubicaciones
 - **Sensores:** 18 tipos de sensores
-- **Endpoints API:** 7 endpoints consumidos
+- **Endpoints API:** 8 endpoints consumidos (incluye `/api/system-alerts`)
 - **WebSocket:** Tiempo real habilitado
 - **Graficos:** Interactivos con fl_chart
 
@@ -424,8 +444,8 @@ flutter test
 - [ ] Modo oscuro completo
 - [ ] Exportar datos a CSV
 - [ ] Graficos comparativos entre ubicaciones
-- [ ] Historial de alertas
-- [ ] Configuracion de umbrales personalizados
+- [x] Listado de alertas del panel admin en la app (ver `README.md`)
+- [ ] Configuracion de umbrales personalizados desde la app
 
 ### Deployment
 - [ ] Build para Android
@@ -444,7 +464,7 @@ flutter test
 
 ---
 
-**Ultima actualizacion:** Noviembre 2025  
+**Ultima actualizacion:** Junio 2026  
 **Version de la app:** 1.0.0  
 **Estado:** ✅ Completamente funcional y lista para probar
 

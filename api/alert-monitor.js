@@ -34,12 +34,28 @@ async function fetchPendingAlerts() {
   return rows;
 }
 
-async function markTriggered(alertId, annotationId) {
-  await db.query(
+/** Bloquea la alerta en BD antes de crear la anotación (evita duplicados por carrera). */
+async function claimAlertForTrigger(alertId) {
+  const [result] = await db.query(
     `UPDATE alerts
-     SET triggered_at = NOW(), grafana_annotation_fired = ?
-     WHERE id = ?`,
+     SET triggered_at = NOW()
+     WHERE id = ? AND is_resolved = FALSE AND triggered_at IS NULL`,
+    [alertId]
+  );
+  return result.affectedRows > 0;
+}
+
+async function saveFiredAnnotationId(alertId, annotationId) {
+  await db.query(
+    'UPDATE alerts SET grafana_annotation_fired = ? WHERE id = ?',
     [annotationId ? String(annotationId) : null, alertId]
+  );
+}
+
+async function releaseTriggerClaim(alertId) {
+  await db.query(
+    'UPDATE alerts SET triggered_at = NULL WHERE id = ? AND grafana_annotation_fired IS NULL',
+    [alertId]
   );
 }
 
@@ -64,21 +80,30 @@ async function evaluateAlerts() {
         continue;
       }
 
+      if (!(await claimAlertForTrigger(alert.id))) {
+        continue;
+      }
+
       const text = [
-        'ALERTA ACTIVADA',
+        'Alerta activada',
         `${alert.location_label} · ${alert.sensor_label}`,
         `Valor actual: ${current} (umbral: ${alert.threshold})`,
         alert.message,
       ].join('\n');
 
-      const annotationId = await grafana.createDashboardAnnotation({
-        text,
-        tags: ['medusse-alert', 'fired', `alert-${alert.id}`, alert.alert_type],
-        timeMs: Date.now(),
-      });
+      try {
+        const annotationId = await grafana.createDashboardAnnotation({
+          text,
+          tags: grafana.buildAlertTags(grafana.ALERT_TAG_ACTIVATED, alert.id, alert.alert_type),
+          timeMs: Date.now(),
+        });
 
-      await markTriggered(alert.id, annotationId);
-      console.log(`🚨 Alerta #${alert.id} activada → Grafana (anotación ${annotationId})`);
+        await saveFiredAnnotationId(alert.id, annotationId);
+        console.log(`🚨 Alerta #${alert.id} activada → Grafana (anotación ${annotationId})`);
+      } catch (annotationError) {
+        await releaseTriggerClaim(alert.id);
+        throw annotationError;
+      }
     } catch (error) {
       console.error(`❌ Error evaluando alerta #${alert.id}:`, error.message);
     }

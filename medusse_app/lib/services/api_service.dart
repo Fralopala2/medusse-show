@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:web_socket_channel/web_socket_channel.dart';
 import '../models/sensor_data.dart';
+import '../models/system_alert.dart';
 import 'config_service.dart';
 
 class ApiService {
@@ -95,6 +96,31 @@ class ApiService {
       }
     } catch (e) {
       throw Exception('Error loading locations: $e');
+    }
+  }
+
+  /// Alertas operativas del panel admin (MySQL), sin autenticación.
+  Future<List<SystemAlert>> getSystemAlerts({bool unresolvedOnly = true}) async {
+    try {
+      final url = await baseUrl;
+      final query = unresolvedOnly ? '?unresolved=true' : '?unresolved=false';
+      final response = await _client
+          .get(
+            Uri.parse('$url/api/system-alerts$query'),
+            headers: {'Content-Type': 'application/json'},
+          )
+          .timeout(const Duration(seconds: 10));
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body) as Map<String, dynamic>;
+        final list = data['alerts'] as List? ?? [];
+        return list
+            .map((item) => SystemAlert.fromJson(item as Map<String, dynamic>))
+            .toList();
+      }
+      throw Exception('Failed to load system alerts: ${response.statusCode}');
+    } catch (e) {
+      throw Exception('Error loading system alerts: $e');
     }
   }
 

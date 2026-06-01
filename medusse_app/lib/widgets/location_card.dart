@@ -7,12 +7,14 @@ class LocationCard extends StatelessWidget {
   final String location;
   final LocationSummary? summary;
   final VoidCallback? onTap;
+  final int systemAlertCount;
 
   const LocationCard({
     super.key,
     required this.location,
     this.summary,
     this.onTap,
+    this.systemAlertCount = 0,
   });
 
   String _getLocationDisplayName(String location) {
@@ -82,6 +84,20 @@ class LocationCard extends StatelessWidget {
                       ],
                     ),
                   ),
+                  if (systemAlertCount > 0)
+                    Padding(
+                      padding: const EdgeInsets.only(right: 4),
+                      child: Tooltip(
+                        message: '$systemAlertCount alerta(s) activa(s)',
+                        child: Badge(
+                          label: Text('$systemAlertCount'),
+                          child: Icon(
+                            Icons.notifications_active,
+                            color: Colors.orange[800],
+                          ),
+                        ),
+                      ),
+                    ),
                   Icon(Icons.chevron_right, color: Colors.grey[400]),
                 ],
               ),

@@ -396,13 +396,13 @@ router.post('/alerts', auth.requireAuth, requireAdminOrUser, async (req, res) =>
         `${row.location_label || 'Ubicación'} · ${row.sensor_label || 'Sensor'}`,
         message,
         threshold != null && threshold !== ''
-          ? `Umbral vigilado: ${threshold} (se marcará ACTIVADA en Grafana al superarse)`
+          ? `Umbral vigilado: ${threshold} (etiqueta «activada» en Grafana al superarse)`
           : 'Sin umbral: solo anotación de registro',
       ].join('\n');
 
       const annotationId = await grafana.createDashboardAnnotation({
         text: annotationText,
-        tags: ['medusse-alert', 'created', `alert-${result.insertId}`, alert_type],
+        tags: grafana.buildAlertTags(grafana.ALERT_TAG_REGISTERED, result.insertId, alert_type),
       });
 
       try {

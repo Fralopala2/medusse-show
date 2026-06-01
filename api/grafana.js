@@ -3,6 +3,14 @@ const GRAFANA_USER = process.env.GRAFANA_ADMIN_USER || 'admin';
 const GRAFANA_PASSWORD = process.env.GRAFANA_ADMIN_PASSWORD || 'medusse2025';
 const GRAFANA_DASHBOARD_UID = process.env.GRAFANA_DASHBOARD_UID || 'medusse-clean';
 
+const ALERT_TAG_SYSTEM = 'medusse-alert';
+const ALERT_TAG_REGISTERED = 'registrada';
+const ALERT_TAG_ACTIVATED = 'activada';
+
+function buildAlertTags(phase, alertId, alertType) {
+  return [ALERT_TAG_SYSTEM, phase, `alerta-${alertId}`, alertType];
+}
+
 function isEnabled() {
   return process.env.GRAFANA_INTEGRATION !== 'false';
 }
@@ -40,6 +48,9 @@ async function createDashboardAnnotation({ text, tags, timeMs }) {
 module.exports = {
   isEnabled,
   createDashboardAnnotation,
+  buildAlertTags,
+  ALERT_TAG_REGISTERED,
+  ALERT_TAG_ACTIVATED,
   GRAFANA_DASHBOARD_UID,
   GRAFANA_URL,
 };

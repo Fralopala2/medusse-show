@@ -58,8 +58,8 @@ netsh interface ipv4 show excludedportrange protocol=tcp
 
 Las alertas creadas en la web se envían a Grafana como **anotaciones** en el dashboard `medusse-clean`:
 
-1. Al crear → marca vertical «Alerta registrada».
-2. Si indicas **umbral** → la API comprueba InfluxDB cada ~30 s; al superarse → anotación «ALERTA ACTIVADA».
+1. Al crear → anotación con etiqueta `registrada`.
+2. Si indicas **umbral** → la API comprueba InfluxDB cada ~30 s; al superarse → una sola anotación con etiqueta `activada` (sin duplicados).
 
 En Grafana: abre el dashboard, pasa el ratón por la línea temporal o el icono de bandera. No es un popup del navegador; es la anotación nativa de Grafana.
 
