@@ -456,19 +456,19 @@ flutter run -d windows
 ### Capturas de Pantalla
 
 - **Pantalla Principal**  
-  ![Pantalla Principal](web/public/images/app-home.jpg)  
+  <img src="web/public/images/app-home.jpg" alt="Pantalla Principal" width="280">  
   Vista general con 4 ubicaciones monitoreadas en tiempo real
 
 - **Detalle de Ubicación**  
-  ![Detalle de Ubicación](web/public/images/app-detail.jpg)  
+  <img src="web/public/images/app-detail.jpg" alt="Detalle de Ubicación" width="280">  
   18 sensores con valores actuales y alertas inteligentes
 
 - **Visualización de Alarmas**  
-  ![Visualización de Alarmas](web/public/images/app-charts.jpg)  
+  <img src="web/public/images/app-charts.jpg" alt="Visualización de Alarmas" width="280">  
   Sistema de alertas con notificaciones en tiempo real
 
 - **Configuración**  
-  ![Configuración](web/public/images/app-settings.jpg)  
+  <img src="web/public/images/app-settings.jpg" alt="Configuración" width="280">  
   Ajustes de servidor y conexión con test integrado
 
 Ver documentación completa en: [medusse_app/README.md](medusse_app/README.md)
