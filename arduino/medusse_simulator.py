@@ -59,8 +59,22 @@ import random
 import math
 import sys
 import io
+import subprocess
+from pathlib import Path
 from datetime import datetime
-import paho.mqtt.client as mqtt
+
+
+def load_mqtt_client_module():
+    """Carga paho.mqtt y, si falta, instala las dependencias del proyecto."""
+    try:
+        import paho.mqtt.client as mqtt
+        return mqtt
+    except ModuleNotFoundError:
+        requirements_path = Path(__file__).resolve().parents[1] / "requirements.txt"
+        print("Falta la dependencia 'paho-mqtt'. Instalando requisitos del proyecto...", flush=True)
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "-r", str(requirements_path)])
+        import paho.mqtt.client as mqtt
+        return mqtt
 
 
 def configure_console_utf8():
@@ -86,6 +100,7 @@ def configure_console_utf8():
 
 def main():
     configure_console_utf8()
+    mqtt = load_mqtt_client_module()
 
     # Conectar a MQTT
     client = mqtt.Client(callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
