@@ -62,43 +62,74 @@ class _SystemAlertTile extends StatelessWidget {
 
   const _SystemAlertTile({required this.alert});
 
-  Color _statusColor(BuildContext context) {
-    if (alert.isResolved) return Colors.green;
-    if (alert.isActivated) return Colors.red;
-    return Colors.orange;
+  _AlertTileColors _colors(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    if (alert.isResolved) {
+      return _AlertTileColors(
+        card: scheme.primaryContainer.withValues(alpha: isDark ? 0.35 : 1),
+        title: scheme.onPrimaryContainer,
+        body: scheme.onPrimaryContainer.withValues(alpha: 0.9),
+        accent: scheme.primary,
+        icon: Icons.check_circle_outline,
+      );
+    }
+    if (alert.isActivated) {
+      return _AlertTileColors(
+        card: scheme.errorContainer,
+        title: scheme.onErrorContainer,
+        body: scheme.onErrorContainer.withValues(alpha: 0.88),
+        accent: scheme.error,
+        icon: Icons.warning_amber_rounded,
+      );
+    }
+    return _AlertTileColors(
+      card: isDark
+          ? Colors.orange.shade900.withValues(alpha: 0.45)
+          : Colors.orange.shade50,
+      title: isDark ? Colors.orange.shade100 : Colors.orange.shade900,
+      body: isDark ? Colors.orange.shade200 : Colors.orange.shade800,
+      accent: Colors.orange.shade700,
+      icon: Icons.info_outline,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final statusColor = _statusColor(context);
+    final colors = _colors(context);
 
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-      color: alert.isActivated
-          ? Colors.red.shade50
-          : Theme.of(context).cardColor,
+      color: colors.card,
       child: ListTile(
         leading: CircleAvatar(
-          backgroundColor: statusColor.withValues(alpha: 0.15),
-          child: Icon(
-            alert.isActivated ? Icons.warning_amber_rounded : Icons.info_outline,
-            color: statusColor,
-          ),
+          backgroundColor: colors.accent.withValues(alpha: 0.2),
+          child: Icon(colors.icon, color: colors.accent),
         ),
         title: Text(
           '${alert.locationLabel} · ${alert.sensorLabel}',
-          style: const TextStyle(fontWeight: FontWeight.w600),
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+            color: colors.title,
+          ),
         ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 4),
-            Text(alert.message),
+            Text(
+              alert.message,
+              style: TextStyle(color: colors.body, height: 1.35),
+            ),
             if (alert.threshold != null) ...[
               const SizedBox(height: 4),
               Text(
                 'Umbral: ${alert.threshold}${alert.sensorUnit.isNotEmpty ? ' ${alert.sensorUnit}' : ''}',
-                style: Theme.of(context).textTheme.bodySmall,
+                style: TextStyle(
+                  fontSize: 12,
+                  color: colors.body.withValues(alpha: 0.9),
+                ),
               ),
             ],
           ],
@@ -106,13 +137,35 @@ class _SystemAlertTile extends StatelessWidget {
         trailing: Chip(
           label: Text(
             alert.statusLabel,
-            style: TextStyle(fontSize: 11, color: statusColor, fontWeight: FontWeight.w600),
+            style: TextStyle(
+              fontSize: 11,
+              color: colors.accent,
+              fontWeight: FontWeight.w600,
+            ),
           ),
-          side: BorderSide(color: statusColor.withValues(alpha: 0.5)),
-          backgroundColor: statusColor.withValues(alpha: 0.08),
+          side: BorderSide(color: colors.accent.withValues(alpha: 0.6)),
+          backgroundColor: colors.accent.withValues(
+            alpha: Theme.of(context).brightness == Brightness.dark ? 0.15 : 0.12,
+          ),
         ),
         isThreeLine: true,
       ),
     );
   }
+}
+
+class _AlertTileColors {
+  final Color card;
+  final Color title;
+  final Color body;
+  final Color accent;
+  final IconData icon;
+
+  const _AlertTileColors({
+    required this.card,
+    required this.title,
+    required this.body,
+    required this.accent,
+    required this.icon,
+  });
 }
