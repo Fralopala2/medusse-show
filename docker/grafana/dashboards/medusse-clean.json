@@ -17,7 +17,7 @@
   },
   "editable": true,
   "fiscalYearStartMonth": 0,
-  "graphTooltip": 0,
+  "graphTooltip": 1,
   "id": 6,
   "links": [],
   "liveNow": false,
@@ -27,14 +27,14 @@
         "type": "text"
       },
       "gridPos": {
-        "h": 3,
+        "h": 2,
         "w": 24,
         "x": 0,
         "y": 0
       },
       "id": 100,
       "options": {
-        "content": "<div style=\"text-align: center; padding: 15px; background: linear-gradient(135deg, #2196F3, #1976D2); border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);\">\n  <div style=\"display: flex; align-items: center; justify-content: center; gap: 20px;\">\n    <div style=\"width: 50px; height: 50px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.2); background: white; display: flex; align-items: center; justify-content: center;\">\n      <!-- PLACEHOLDER: Aquí se insertará el icono real de app_icon.png -->\n      <img src=\"data:image/png;base64,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\" style=\"width: 100%; height: 100%; object-fit: cover;\" alt=\"Medusse Logo\" onerror=\"this.style.display='none'; this.nextElementSibling.style.display='flex';\">\n      <span style=\"color: #1976D2; font-size: 28px; font-weight: bold; font-family: 'Arial', sans-serif; display: none;\">M</span>\n    </div>\n    <div>\n      <h1 style=\"color: white; margin: 0; font-size: 32px; font-weight: bold; font-family: 'Arial', sans-serif; text-shadow: 0 2px 4px rgba(0,0,0,0.3);\">Medusse IoT</h1>\n      <p style=\"color: rgba(255,255,255,0.9); margin: 0; font-size: 16px; font-family: 'Arial', sans-serif;\">Sistema de Monitoreo Ambiental en Tiempo Real</p>\n    </div>\n    <div style=\"display: flex; gap: 12px; color: rgba(255,255,255,0.8); font-size: 11px;\">\n      <div style=\"text-align: center;\">\n        <div style=\"font-size: 16px;\">🌡️</div>\n        <div>Temperatura</div>\n      </div>\n      <div style=\"text-align: center;\">\n        <div style=\"font-size: 16px;\">💧</div>\n        <div>Humedad</div>\n      </div>\n      <div style=\"text-align: center;\">\n        <div style=\"font-size: 16px;\">🫁</div>\n        <div>CO2 & VOC</div>\n      </div>\n      <div style=\"text-align: center;\">\n        <div style=\"font-size: 16px;\">🌪️</div>\n        <div>Presión</div>\n      </div>\n      <div style=\"text-align: center;\">\n        <div style=\"font-size: 16px;\">🌱</div>\n        <div>Suelo</div>\n      </div>\n      <div style=\"text-align: center;\">\n        <div style=\"font-size: 16px;\">🧪</div>\n        <div>pH</div>\n      </div>\n      <div style=\"text-align: center;\">\n        <div style=\"font-size: 16px;\">🌊</div>\n        <div>Flujo</div>\n      </div>\n      <div style=\"text-align: center;\">\n        <div style=\"font-size: 16px;\">🐟</div>\n        <div>O2</div>\n      </div>\n    </div>\n  </div>\n</div>",
+        "content": "<div style=\"display:flex;align-items:center;justify-content:space-between;padding:16px 24px;background:linear-gradient(135deg,#1a1f2e 0%,#0d1117 100%);border:1px solid rgba(87,148,242,0.2);border-radius:8px;margin-bottom:4px;\">\n  <div style=\"display:flex;align-items:center;gap:16px;\">\n    <div style=\"width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#5794F2,#3274D9);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(87,148,242,0.35);\">\n      <span style=\"color:white;font-size:22px;font-weight:700;font-family:system-ui,sans-serif;\">M</span>\n    </div>\n    <div>\n      <h1 style=\"color:#E8EDF5;margin:0;font-size:26px;font-weight:600;font-family:system-ui,sans-serif;letter-spacing:-0.3px;\">Medusse IoT</h1>\n      <p style=\"color:#8B949E;margin:2px 0 0;font-size:13px;font-family:system-ui,sans-serif;\">Monitoreo ambiental en tiempo real</p>\n    </div>\n  </div>\n  <div style=\"display:flex;gap:20px;color:#8B949E;font-size:12px;font-family:system-ui,sans-serif;\">\n    <span style=\"display:flex;align-items:center;gap:6px;\"><span style=\"width:8px;height:8px;border-radius:50%;background:#5794F2;display:inline-block;\"></span>Aula 20</span>\n    <span style=\"display:flex;align-items:center;gap:6px;\"><span style=\"width:8px;height:8px;border-radius:50%;background:#B877D9;display:inline-block;\"></span>Aula 21</span>\n    <span style=\"display:flex;align-items:center;gap:6px;\"><span style=\"width:8px;height:8px;border-radius:50%;background:#FF9830;display:inline-block;\"></span>Gimnasio</span>\n    <span style=\"display:flex;align-items:center;gap:6px;\"><span style=\"width:8px;height:8px;border-radius:50%;background:#73BF69;display:inline-block;\"></span>Laboratorio</span>\n  </div>\n</div>",
         "mode": "html"
       },
       "pluginVersion": "10.2.0",
@@ -48,11 +48,11 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 3
+        "y": 2
       },
       "id": 101,
       "panels": [],
-      "title": "📊 Resumen",
+      "title": "Resumen",
       "type": "row"
     },
     {
@@ -84,28 +84,80 @@
             ]
           },
           "unit": "celsius",
-          "displayName": "${__field.labels.location}"
+          "decimals": 1
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula20.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Aula 20"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula21.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Aula 21"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*gimnasio.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Gimnasio"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*laboratorio.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Laboratorio"
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
-        "h": 7,
+        "h": 4,
         "w": 4,
-        "x": 2,
-        "y": 5
+        "x": 0,
+        "y": 3
       },
       "id": 102,
       "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
           "values": false,
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": ""
         },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "minVizWidth": 75,
-        "minVizHeight": 75
+        "textMode": "value_and_name",
+        "wideLayout": true
       },
       "pluginVersion": "10.2.0",
       "targets": [
@@ -118,8 +170,8 @@
           "refId": "A"
         }
       ],
-      "title": "🌡️ Temp. Actual",
-      "type": "gauge"
+      "title": "Temperatura",
+      "type": "stat"
     },
     {
       "datasource": {
@@ -150,28 +202,80 @@
             ]
           },
           "unit": "ppm",
-          "displayName": "${__field.labels.location}"
+          "decimals": 1
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula20.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Aula 20"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula21.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Aula 21"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*gimnasio.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Gimnasio"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*laboratorio.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Laboratorio"
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
-        "h": 7,
+        "h": 4,
         "w": 4,
-        "x": 6,
-        "y": 5
+        "x": 5,
+        "y": 3
       },
       "id": 103,
       "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
           "values": false,
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": ""
         },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "minVizWidth": 75,
-        "minVizHeight": 75
+        "textMode": "value_and_name",
+        "wideLayout": true
       },
       "pluginVersion": "10.2.0",
       "targets": [
@@ -184,8 +288,8 @@
           "refId": "A"
         }
       ],
-      "title": "🫁 CO₂ Actual",
-      "type": "gauge"
+      "title": "CO₂ Actual",
+      "type": "stat"
     },
     {
       "datasource": {
@@ -216,28 +320,80 @@
             ]
           },
           "unit": "percent",
-          "displayName": "${__field.labels.location}"
+          "decimals": 1
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula20.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Aula 20"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula21.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Aula 21"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*gimnasio.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Gimnasio"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*laboratorio.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Laboratorio"
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
-        "h": 7,
+        "h": 4,
         "w": 4,
         "x": 10,
-        "y": 5
+        "y": 3
       },
       "id": 104,
       "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
           "values": false,
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": ""
         },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "minVizWidth": 75,
-        "minVizHeight": 75
+        "textMode": "value_and_name",
+        "wideLayout": true
       },
       "pluginVersion": "10.2.0",
       "targets": [
@@ -250,8 +406,8 @@
           "refId": "A"
         }
       ],
-      "title": "🔋 % Batería",
-      "type": "gauge"
+      "title": "% Batería",
+      "type": "stat"
     },
     {
       "datasource": {
@@ -282,28 +438,80 @@
             ]
           },
           "unit": "ppm",
-          "displayName": "${__field.labels.location}"
+          "decimals": 1
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula20.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Aula 20"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula21.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Aula 21"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*gimnasio.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Gimnasio"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*laboratorio.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Laboratorio"
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
-        "h": 7,
+        "h": 4,
         "w": 4,
-        "x": 14,
-        "y": 5
+        "x": 15,
+        "y": 3
       },
       "id": 105,
       "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
           "values": false,
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": ""
         },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "minVizWidth": 75,
-        "minVizHeight": 75
+        "textMode": "value_and_name",
+        "wideLayout": true
       },
       "pluginVersion": "10.2.0",
       "targets": [
@@ -316,8 +524,8 @@
           "refId": "A"
         }
       ],
-      "title": "💧 TDS Actual",
-      "type": "gauge"
+      "title": "TDS Actual",
+      "type": "stat"
     },
     {
       "datasource": {
@@ -348,28 +556,80 @@
             ]
           },
           "unit": "mA",
-          "displayName": "${__field.labels.location}"
+          "decimals": 1
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula20.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Aula 20"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula21.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Aula 21"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*gimnasio.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Gimnasio"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*laboratorio.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Laboratorio"
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
-        "h": 7,
+        "h": 4,
         "w": 4,
-        "x": 18,
-        "y": 5
+        "x": 20,
+        "y": 3
       },
       "id": 106,
       "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
           "values": false,
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": ""
         },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "minVizWidth": 75,
-        "minVizHeight": 75
+        "textMode": "value_and_name",
+        "wideLayout": true
       },
       "pluginVersion": "10.2.0",
       "targets": [
@@ -382,21 +642,8 @@
           "refId": "A"
         }
       ],
-      "title": "⚡ Consumo mA",
-      "type": "gauge"
-    },
-    {
-      "collapsed": true,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 9
-      },
-      "id": 107,
-      "panels": [],
-      "title": "🌍 Ambiente",
-      "type": "row"
+      "title": "Consumo mA",
+      "type": "stat"
     },
     {
       "datasource": {
@@ -413,14 +660,14 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 10,
+            "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "vis": false
             },
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineWidth": 2,
             "pointSize": 5,
             "scaleDistribution": {
@@ -467,7 +714,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "red"
+                  "fixedColor": "#5794F2"
                 }
               }
             ]
@@ -486,7 +733,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "purple"
+                  "fixedColor": "#B877D9"
                 }
               }
             ]
@@ -505,7 +752,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "orange"
+                  "fixedColor": "#FF9830"
                 }
               }
             ]
@@ -524,83 +771,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "green"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*aula20.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Aula 20"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "red"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*aula21.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Aula 21"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "purple"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*laboratorio.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Laboratorio"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "green"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*gimnasio.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Gimnasio"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "orange"
+                  "fixedColor": "#73BF69"
                 }
               }
             ]
@@ -616,13 +787,16 @@
       "id": 1,
       "options": {
         "legend": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "displayMode": "table",
-          "placement": "right"
+          "placement": "right",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
-          "sort": "none"
+          "sort": "desc"
         }
       },
       "targets": [
@@ -635,7 +809,7 @@
           "refId": "A"
         }
       ],
-      "title": "🌡️ Temperatura por Ubicación",
+      "title": "Temperatura por Ubicación",
       "type": "timeseries"
     },
     {
@@ -653,14 +827,14 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
+            "fillOpacity": 12,
+            "gradientMode": "opacity",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "vis": false
             },
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineWidth": 2,
             "pointSize": 5,
             "scaleDistribution": {
@@ -711,7 +885,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "red"
+                  "fixedColor": "#5794F2"
                 }
               }
             ]
@@ -730,26 +904,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "purple"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*laboratorio.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Laboratorio"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "green"
+                  "fixedColor": "#B877D9"
                 }
               }
             ]
@@ -768,7 +923,26 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "orange"
+                  "fixedColor": "#FF9830"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*laboratorio.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Laboratorio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#73BF69"
                 }
               }
             ]
@@ -784,13 +958,16 @@
       "id": 2,
       "options": {
         "legend": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "displayMode": "table",
-          "placement": "right"
+          "placement": "right",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
-          "sort": "none"
+          "sort": "desc"
         }
       },
       "targets": [
@@ -803,120 +980,21 @@
           "refId": "A"
         }
       ],
-      "title": "🫁 Niveles de CO2 por Ubicación",
+      "title": "Niveles de CO2 por Ubicación",
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "influxdb-medusse"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 800
-              },
-              {
-                "color": "red",
-                "value": 1000
-              }
-            ]
-          },
-          "unit": "ppm"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*aula20.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Aula 20"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*aula21.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Aula 21"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*laboratorio.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Laboratorio"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*gimnasio.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Gimnasio"
-              }
-            ]
-          }
-        ]
-      },
+      "collapsed": true,
       "gridPos": {
-        "h": 8,
-        "w": 12,
+        "h": 1,
+        "w": 24,
         "x": 0,
-        "y": 16
+        "y": 7
       },
-      "id": 3,
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "values": false,
-          "calcs": ["lastNotNull"],
-          "fields": ""
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true
-      },
-      "pluginVersion": "10.2.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "influxdb-medusse"
-          },
-          "query": "from(bucket: \"sensors\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"co2\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> filter(fn: (r) => r[\"location\"] =~ /^(${location:regex})$/)\n  |> last()\n",
-          "refId": "A"
-        }
-      ],
-      "title": "🚨 CO2 Actual por Ubicación",
-      "type": "gauge"
+      "id": 107,
+      "panels": [],
+      "title": "Ambiente",
+      "type": "row"
     },
     {
       "datasource": {
@@ -933,14 +1011,14 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 10,
+            "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "vis": false
             },
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineWidth": 2,
             "pointSize": 5,
             "scaleDistribution": {
@@ -987,7 +1065,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "red"
+                  "fixedColor": "#5794F2"
                 }
               }
             ]
@@ -1006,26 +1084,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "purple"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*laboratorio.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Laboratorio"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "green"
+                  "fixedColor": "#B877D9"
                 }
               }
             ]
@@ -1044,7 +1103,26 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "orange"
+                  "fixedColor": "#FF9830"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*laboratorio.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Laboratorio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#73BF69"
                 }
               }
             ]
@@ -1054,19 +1132,22 @@
       "gridPos": {
         "h": 8,
         "w": 12,
-        "x": 12,
+        "x": 0,
         "y": 16
       },
       "id": 4,
       "options": {
         "legend": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "displayMode": "table",
-          "placement": "right"
+          "placement": "right",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
-          "sort": "none"
+          "sort": "desc"
         }
       },
       "targets": [
@@ -1079,7 +1160,7 @@
           "refId": "A"
         }
       ],
-      "title": "💧 Humedad por Ubicación",
+      "title": "Humedad por Ubicación",
       "type": "timeseries"
     },
     {
@@ -1097,14 +1178,14 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 10,
+            "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "vis": false
             },
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineWidth": 2,
             "pointSize": 5,
             "scaleDistribution": {
@@ -1151,7 +1232,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "red"
+                  "fixedColor": "#5794F2"
                 }
               }
             ]
@@ -1170,26 +1251,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "purple"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*laboratorio.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Laboratorio"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "green"
+                  "fixedColor": "#B877D9"
                 }
               }
             ]
@@ -1208,7 +1270,26 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "orange"
+                  "fixedColor": "#FF9830"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*laboratorio.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Laboratorio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#73BF69"
                 }
               }
             ]
@@ -1218,19 +1299,22 @@
       "gridPos": {
         "h": 8,
         "w": 12,
-        "x": 0,
-        "y": 24
+        "x": 12,
+        "y": 16
       },
       "id": 5,
       "options": {
         "legend": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "displayMode": "table",
-          "placement": "right"
+          "placement": "right",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
-          "sort": "none"
+          "sort": "desc"
         }
       },
       "targets": [
@@ -1243,7 +1327,7 @@
           "refId": "A"
         }
       ],
-      "title": "🌪️ Presión Atmosférica por Ubicación",
+      "title": "Presión Atmosférica por Ubicación",
       "type": "timeseries"
     },
     {
@@ -1254,35 +1338,8 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "vis": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "line"
-            }
+            "mode": "fixed",
+            "fixedColor": "green"
           },
           "mappings": [],
           "thresholds": {
@@ -1302,7 +1359,9 @@
               }
             ]
           },
-          "unit": "conc"
+          "unit": "conc",
+          "min": 0,
+          "max": 300
         },
         "overrides": [
           {
@@ -1319,7 +1378,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "red"
+                  "fixedColor": "#5794F2"
                 }
               }
             ]
@@ -1338,26 +1397,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "purple"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*laboratorio.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Laboratorio"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "green"
+                  "fixedColor": "#B877D9"
                 }
               }
             ]
@@ -1376,7 +1416,26 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "orange"
+                  "fixedColor": "#FF9830"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*laboratorio.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Laboratorio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#73BF69"
                 }
               }
             ]
@@ -1384,22 +1443,26 @@
         ]
       },
       "gridPos": {
-        "h": 8,
+        "h": 6,
         "w": 12,
         "x": 0,
         "y": 24
       },
       "id": 6,
       "options": {
-        "legend": {
-          "calcs": ["lastNotNull"],
-          "displayMode": "table",
-          "placement": "right"
+        "displayMode": "basic",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
         },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
+        "showUnfilled": true,
+        "minVizWidth": 0,
+        "minVizHeight": 0,
+        "valueMode": "color"
       },
       "targets": [
         {
@@ -1411,8 +1474,8 @@
           "refId": "A"
         }
       ],
-      "title": "🫁 Calidad del Aire (VOC) por Ubicación",
-      "type": "timeseries"
+      "title": "Calidad del Aire (VOC)",
+      "type": "bargauge"
     },
     {
       "datasource": {
@@ -1422,35 +1485,8 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "vis": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "line"
-            }
+            "mode": "fixed",
+            "fixedColor": "green"
           },
           "mappings": [],
           "thresholds": {
@@ -1462,64 +1498,118 @@
               },
               {
                 "color": "yellow",
-                "value": 30
+                "value": 20
               },
               {
                 "color": "green",
-                "value": 50
+                "value": 40
               }
             ]
           },
-          "unit": "percent"
+          "unit": "percent",
+          "min": 0,
+          "max": 100
         },
         "overrides": [
           {
-            "matcher": { "id": "byRegexp", "options": ".*aula20.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula20.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Aula 20" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "red" } }
+              {
+                "id": "displayName",
+                "value": "Aula 20"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#5794F2"
+                }
+              }
             ]
           },
           {
-            "matcher": { "id": "byRegexp", "options": ".*aula21.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula21.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Aula 21" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "purple" } }
+              {
+                "id": "displayName",
+                "value": "Aula 21"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#B877D9"
+                }
+              }
             ]
           },
           {
-            "matcher": { "id": "byRegexp", "options": ".*gimnasio.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*gimnasio.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Gimnasio" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "orange" } }
+              {
+                "id": "displayName",
+                "value": "Gimnasio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#FF9830"
+                }
+              }
             ]
           },
           {
-            "matcher": { "id": "byRegexp", "options": ".*laboratorio.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*laboratorio.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Laboratorio" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "green" } }
+              {
+                "id": "displayName",
+                "value": "Laboratorio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#73BF69"
+                }
+              }
             ]
           }
         ]
       },
       "gridPos": {
-        "h": 8,
+        "h": 6,
         "w": 12,
         "x": 12,
         "y": 24
       },
       "id": 7,
       "options": {
-        "legend": {
-          "calcs": ["lastNotNull"],
-          "displayMode": "table",
-          "placement": "right"
+        "displayMode": "basic",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
         },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
+        "showUnfilled": true,
+        "minVizWidth": 0,
+        "minVizHeight": 0,
+        "valueMode": "color"
       },
       "targets": [
         {
@@ -1531,8 +1621,8 @@
           "refId": "A"
         }
       ],
-      "title": "🌱 Humedad del Suelo por Ubicación",
-      "type": "timeseries"
+      "title": "Humedad del Suelo",
+      "type": "bargauge"
     },
     {
       "datasource": {
@@ -1542,35 +1632,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "vis": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "line"
-            }
+            "mode": "thresholds"
           },
           "mappings": [],
           "thresholds": {
@@ -1582,23 +1644,30 @@
               },
               {
                 "color": "yellow",
-                "value": 6
+                "value": 6.0
               },
               {
                 "color": "green",
                 "value": 6.5
               },
               {
-                "color": "yellow",
+                "color": "green",
                 "value": 7.5
               },
               {
+                "color": "yellow",
+                "value": 8.0
+              },
+              {
                 "color": "red",
-                "value": 8
+                "value": 8.5
               }
             ]
           },
-          "unit": "short"
+          "unit": "none",
+          "min": 5,
+          "max": 9,
+          "decimals": 1
         },
         "overrides": [
           {
@@ -1615,26 +1684,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "red"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*laboratorio.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Laboratorio"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "green"
+                  "fixedColor": "#5794F2"
                 }
               }
             ]
@@ -1653,7 +1703,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "purple"
+                  "fixedColor": "#B877D9"
                 }
               }
             ]
@@ -1672,7 +1722,26 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "orange"
+                  "fixedColor": "#FF9830"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*laboratorio.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Laboratorio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#73BF69"
                 }
               }
             ]
@@ -1680,22 +1749,25 @@
         ]
       },
       "gridPos": {
-        "h": 8,
+        "h": 6,
         "w": 12,
         "x": 0,
-        "y": 32
+        "y": 30
       },
       "id": 8,
       "options": {
-        "legend": {
-          "calcs": ["lastNotNull"],
-          "displayMode": "table",
-          "placement": "right"
+        "orientation": "auto",
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
         },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "minVizWidth": 75,
+        "minVizHeight": 75
       },
       "targets": [
         {
@@ -1707,8 +1779,8 @@
           "refId": "A"
         }
       ],
-      "title": "🧪 Nivel de pH por Ubicación",
-      "type": "timeseries"
+      "title": "Nivel de pH",
+      "type": "gauge"
     },
     {
       "datasource": {
@@ -1718,55 +1790,30 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "vis": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "line"
-            }
+            "mode": "fixed",
+            "fixedColor": "green"
           },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "red",
+                "color": "green",
                 "value": null
               },
               {
                 "color": "yellow",
-                "value": 1
+                "value": 2
               },
               {
-                "color": "green",
-                "value": 2
+                "color": "red",
+                "value": 2.5
               }
             ]
           },
-          "unit": "litre"
+          "unit": "litre",
+          "min": 0,
+          "max": 3
         },
         "overrides": [
           {
@@ -1783,26 +1830,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "red"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*laboratorio.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Laboratorio"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "green"
+                  "fixedColor": "#5794F2"
                 }
               }
             ]
@@ -1821,7 +1849,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "purple"
+                  "fixedColor": "#B877D9"
                 }
               }
             ]
@@ -1840,7 +1868,26 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "orange"
+                  "fixedColor": "#FF9830"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*laboratorio.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Laboratorio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#73BF69"
                 }
               }
             ]
@@ -1848,22 +1895,26 @@
         ]
       },
       "gridPos": {
-        "h": 8,
+        "h": 6,
         "w": 12,
         "x": 12,
-        "y": 32
+        "y": 30
       },
       "id": 9,
       "options": {
-        "legend": {
-          "calcs": ["lastNotNull"],
-          "displayMode": "table",
-          "placement": "right"
+        "displayMode": "basic",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
         },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
+        "showUnfilled": true,
+        "minVizWidth": 0,
+        "minVizHeight": 0,
+        "valueMode": "color"
       },
       "targets": [
         {
@@ -1875,8 +1926,8 @@
           "refId": "A"
         }
       ],
-      "title": "🌊 Flujo de Agua por Ubicación",
-      "type": "timeseries"
+      "title": "Flujo de Agua",
+      "type": "bargauge"
     },
     {
       "datasource": {
@@ -1886,35 +1937,8 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "vis": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "line"
-            }
+            "mode": "fixed",
+            "fixedColor": "green"
           },
           "mappings": [],
           "thresholds": {
@@ -1926,15 +1950,17 @@
               },
               {
                 "color": "yellow",
-                "value": 300
+                "value": 50
               },
               {
                 "color": "red",
-                "value": 600
+                "value": 100
               }
             ]
           },
-          "unit": "ppm"
+          "unit": "ppm",
+          "min": 0,
+          "max": 200
         },
         "overrides": [
           {
@@ -1951,26 +1977,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "red"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*laboratorio.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Laboratorio"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "green"
+                  "fixedColor": "#5794F2"
                 }
               }
             ]
@@ -1989,7 +1996,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "purple"
+                  "fixedColor": "#B877D9"
                 }
               }
             ]
@@ -2008,7 +2015,26 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "orange"
+                  "fixedColor": "#FF9830"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*laboratorio.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Laboratorio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#73BF69"
                 }
               }
             ]
@@ -2016,22 +2042,26 @@
         ]
       },
       "gridPos": {
-        "h": 8,
+        "h": 6,
         "w": 12,
         "x": 0,
-        "y": 40
+        "y": 36
       },
       "id": 10,
       "options": {
-        "legend": {
-          "calcs": ["lastNotNull"],
-          "displayMode": "table",
-          "placement": "right"
+        "displayMode": "basic",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
         },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
+        "showUnfilled": true,
+        "minVizWidth": 0,
+        "minVizHeight": 0,
+        "valueMode": "color"
       },
       "targets": [
         {
@@ -2043,8 +2073,8 @@
           "refId": "A"
         }
       ],
-      "title": "💧 TDS (Sólidos Disueltos) por Ubicación",
-      "type": "timeseries"
+      "title": "TDS (Sólidos Disueltos)",
+      "type": "bargauge"
     },
     {
       "datasource": {
@@ -2054,35 +2084,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "vis": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "line"
-            }
+            "mode": "thresholds"
           },
           "mappings": [],
           "thresholds": {
@@ -2094,15 +2096,18 @@
               },
               {
                 "color": "yellow",
-                "value": 5
+                "value": 4
               },
               {
                 "color": "green",
-                "value": 7
+                "value": 6
               }
             ]
           },
-          "unit": "ppm"
+          "unit": "mgdL",
+          "min": 0,
+          "max": 15,
+          "decimals": 1
         },
         "overrides": [
           {
@@ -2119,26 +2124,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "red"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*laboratorio.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Laboratorio"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed",
-                  "fixedColor": "green"
+                  "fixedColor": "#5794F2"
                 }
               }
             ]
@@ -2157,7 +2143,7 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "purple"
+                  "fixedColor": "#B877D9"
                 }
               }
             ]
@@ -2176,7 +2162,26 @@
                 "id": "color",
                 "value": {
                   "mode": "fixed",
-                  "fixedColor": "orange"
+                  "fixedColor": "#FF9830"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*laboratorio.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Laboratorio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#73BF69"
                 }
               }
             ]
@@ -2184,22 +2189,25 @@
         ]
       },
       "gridPos": {
-        "h": 8,
+        "h": 6,
         "w": 12,
         "x": 12,
-        "y": 40
+        "y": 36
       },
       "id": 11,
       "options": {
-        "legend": {
-          "calcs": ["lastNotNull"],
-          "displayMode": "table",
-          "placement": "right"
+        "orientation": "auto",
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
         },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "minVizWidth": 75,
+        "minVizHeight": 75
       },
       "targets": [
         {
@@ -2211,8 +2219,8 @@
           "refId": "A"
         }
       ],
-      "title": "🐟 Oxígeno Disuelto por Ubicación",
-      "type": "timeseries"
+      "title": "Oxígeno Disuelto",
+      "type": "gauge"
     },
     {
       "collapsed": true,
@@ -2220,11 +2228,11 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 41
+        "y": 42
       },
       "id": 19,
       "panels": [],
-      "title": "⚡ Energía",
+      "title": "Energía",
       "type": "row"
     },
     {
@@ -2242,14 +2250,14 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 10,
+            "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "vis": false
             },
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineWidth": 2,
             "pointSize": 5,
             "scaleDistribution": {
@@ -2279,49 +2287,115 @@
         },
         "overrides": [
           {
-            "matcher": { "id": "byRegexp", "options": ".*aula20.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula20.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Aula 20" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "red" } }
+              {
+                "id": "displayName",
+                "value": "Aula 20"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#5794F2"
+                }
+              }
             ]
           },
           {
-            "matcher": { "id": "byRegexp", "options": ".*aula21.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula21.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Aula 21" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "purple" } }
+              {
+                "id": "displayName",
+                "value": "Aula 21"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#B877D9"
+                }
+              }
             ]
           },
           {
-            "matcher": { "id": "byRegexp", "options": ".*gimnasio.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*gimnasio.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Gimnasio" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "orange" } }
+              {
+                "id": "displayName",
+                "value": "Gimnasio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#FF9830"
+                }
+              }
             ]
           },
           {
-            "matcher": { "id": "byRegexp", "options": ".*laboratorio.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*laboratorio.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Laboratorio" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "green" } }
+              {
+                "id": "displayName",
+                "value": "Laboratorio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#73BF69"
+                }
+              }
             ]
           }
         ]
       },
-      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 43 },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 43
+      },
       "id": 12,
       "options": {
-        "legend": { "calcs": ["lastNotNull"], "displayMode": "table", "placement": "right" },
-        "tooltip": { "mode": "multi", "sort": "none" }
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
       },
       "targets": [
         {
-          "datasource": { "type": "influxdb", "uid": "influxdb-medusse" },
+          "datasource": {
+            "type": "influxdb",
+            "uid": "influxdb-medusse"
+          },
           "query": "from(bucket: \"sensors\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"battery_voltage\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> filter(fn: (r) => r[\"location\"] =~ /^(${location:regex})$/)\n  |> aggregateWindow(every: 30s, fn: mean, createEmpty: false)\n\n",
           "refId": "A"
         }
       ],
-      "title": "🔋 Voltaje de Batería por Ubicación",
+      "title": "Voltaje de Batería por Ubicación",
       "type": "timeseries"
     },
     {
@@ -2339,14 +2413,14 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 10,
+            "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "vis": false
             },
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineWidth": 2,
             "pointSize": 5,
             "scaleDistribution": {
@@ -2376,49 +2450,115 @@
         },
         "overrides": [
           {
-            "matcher": { "id": "byRegexp", "options": ".*aula20.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula20.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Aula 20" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "red" } }
+              {
+                "id": "displayName",
+                "value": "Aula 20"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#5794F2"
+                }
+              }
             ]
           },
           {
-            "matcher": { "id": "byRegexp", "options": ".*aula21.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula21.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Aula 21" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "purple" } }
+              {
+                "id": "displayName",
+                "value": "Aula 21"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#B877D9"
+                }
+              }
             ]
           },
           {
-            "matcher": { "id": "byRegexp", "options": ".*gimnasio.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*gimnasio.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Gimnasio" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "orange" } }
+              {
+                "id": "displayName",
+                "value": "Gimnasio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#FF9830"
+                }
+              }
             ]
           },
           {
-            "matcher": { "id": "byRegexp", "options": ".*laboratorio.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*laboratorio.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Laboratorio" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "green" } }
+              {
+                "id": "displayName",
+                "value": "Laboratorio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#73BF69"
+                }
+              }
             ]
           }
         ]
       },
-      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 43 },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 43
+      },
       "id": 13,
       "options": {
-        "legend": { "calcs": ["lastNotNull"], "displayMode": "table", "placement": "right" },
-        "tooltip": { "mode": "multi", "sort": "none" }
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
       },
       "targets": [
         {
-          "datasource": { "type": "influxdb", "uid": "influxdb-medusse" },
+          "datasource": {
+            "type": "influxdb",
+            "uid": "influxdb-medusse"
+          },
           "query": "from(bucket: \"sensors\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"solar_voltage\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> filter(fn: (r) => r[\"location\"] =~ /^(${location:regex})$/)\n  |> aggregateWindow(every: 30s, fn: mean, createEmpty: false)\n\n",
           "refId": "A"
         }
       ],
-      "title": "☀️ Voltaje Solar por Ubicación",
+      "title": "Voltaje Solar por Ubicación",
       "type": "timeseries"
     },
     {
@@ -2429,94 +2569,144 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "vis": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+            "mode": "fixed",
+            "fixedColor": "green"
           },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "red",
                 "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 20
+              },
+              {
+                "color": "green",
+                "value": 50
               }
             ]
           },
-          "unit": "percent"
+          "unit": "percent",
+          "min": 0,
+          "max": 100
         },
         "overrides": [
           {
-            "matcher": { "id": "byRegexp", "options": ".*aula20.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula20.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Aula 20" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "red" } }
+              {
+                "id": "displayName",
+                "value": "Aula 20"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#5794F2"
+                }
+              }
             ]
           },
           {
-            "matcher": { "id": "byRegexp", "options": ".*aula21.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula21.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Aula 21" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "purple" } }
+              {
+                "id": "displayName",
+                "value": "Aula 21"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#B877D9"
+                }
+              }
             ]
           },
           {
-            "matcher": { "id": "byRegexp", "options": ".*gimnasio.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*gimnasio.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Gimnasio" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "orange" } }
+              {
+                "id": "displayName",
+                "value": "Gimnasio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#FF9830"
+                }
+              }
             ]
           },
           {
-            "matcher": { "id": "byRegexp", "options": ".*laboratorio.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*laboratorio.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Laboratorio" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "green" } }
+              {
+                "id": "displayName",
+                "value": "Laboratorio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#73BF69"
+                }
+              }
             ]
           }
         ]
       },
-      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 51 },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 51
+      },
       "id": 14,
       "options": {
-        "legend": { "calcs": ["lastNotNull"], "displayMode": "table", "placement": "right" },
-        "tooltip": { "mode": "multi", "sort": "none" }
+        "displayMode": "basic",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
+        },
+        "showUnfilled": true,
+        "minVizWidth": 0,
+        "minVizHeight": 0,
+        "valueMode": "color"
       },
       "targets": [
         {
-          "datasource": { "type": "influxdb", "uid": "influxdb-medusse" },
+          "datasource": {
+            "type": "influxdb",
+            "uid": "influxdb-medusse"
+          },
           "query": "from(bucket: \"sensors\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"battery_percentage\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> filter(fn: (r) => r[\"location\"] =~ /^(${location:regex})$/)\n  |> aggregateWindow(every: 30s, fn: mean, createEmpty: false)\n\n",
           "refId": "A"
         }
       ],
-      "title": "🔋 Nivel de Batería (%) por Ubicación",
-      "type": "timeseries"
+      "title": "Nivel de Batería",
+      "type": "bargauge"
     },
     {
       "datasource": {
@@ -2526,35 +2716,8 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "vis": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+            "mode": "fixed",
+            "fixedColor": "green"
           },
           "mappings": [],
           "thresholds": {
@@ -2563,57 +2726,134 @@
               {
                 "color": "green",
                 "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 10
+              },
+              {
+                "color": "red",
+                "value": 20
               }
             ]
           },
-          "unit": "mA"
+          "unit": "mA",
+          "min": 0,
+          "max": 30
         },
         "overrides": [
           {
-            "matcher": { "id": "byRegexp", "options": ".*aula20.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula20.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Aula 20" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "red" } }
+              {
+                "id": "displayName",
+                "value": "Aula 20"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#5794F2"
+                }
+              }
             ]
           },
           {
-            "matcher": { "id": "byRegexp", "options": ".*aula21.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula21.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Aula 21" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "purple" } }
+              {
+                "id": "displayName",
+                "value": "Aula 21"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#B877D9"
+                }
+              }
             ]
           },
           {
-            "matcher": { "id": "byRegexp", "options": ".*gimnasio.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*gimnasio.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Gimnasio" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "orange" } }
+              {
+                "id": "displayName",
+                "value": "Gimnasio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#FF9830"
+                }
+              }
             ]
           },
           {
-            "matcher": { "id": "byRegexp", "options": ".*laboratorio.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*laboratorio.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Laboratorio" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "green" } }
+              {
+                "id": "displayName",
+                "value": "Laboratorio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#73BF69"
+                }
+              }
             ]
           }
         ]
       },
-      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 51 },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 51
+      },
       "id": 15,
       "options": {
-        "legend": { "calcs": ["lastNotNull"], "displayMode": "table", "placement": "right" },
-        "tooltip": { "mode": "multi", "sort": "none" }
+        "displayMode": "basic",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
+        },
+        "showUnfilled": true,
+        "minVizWidth": 0,
+        "minVizHeight": 0,
+        "valueMode": "color"
       },
       "targets": [
         {
-          "datasource": { "type": "influxdb", "uid": "influxdb-medusse" },
+          "datasource": {
+            "type": "influxdb",
+            "uid": "influxdb-medusse"
+          },
           "query": "from(bucket: \"sensors\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"power_consumption\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> filter(fn: (r) => r[\"location\"] =~ /^(${location:regex})$/)\n  |> aggregateWindow(every: 30s, fn: mean, createEmpty: false)\n\n",
           "refId": "A"
         }
       ],
-      "title": "⚡ Consumo Eléctrico (mA) por Ubicación",
-      "type": "timeseries"
+      "title": "Consumo Eléctrico",
+      "type": "bargauge"
     },
     {
       "datasource": {
@@ -2629,16 +2869,16 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
+            "drawStyle": "bars",
+            "fillOpacity": 60,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "vis": false
             },
-            "lineInterpolation": "linear",
-            "lineWidth": 2,
+            "lineInterpolation": "smooth",
+            "lineWidth": 0,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
@@ -2667,49 +2907,115 @@
         },
         "overrides": [
           {
-            "matcher": { "id": "byRegexp", "options": ".*aula20.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula20.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Aula 20" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "red" } }
+              {
+                "id": "displayName",
+                "value": "Aula 20"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#5794F2"
+                }
+              }
             ]
           },
           {
-            "matcher": { "id": "byRegexp", "options": ".*aula21.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula21.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Aula 21" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "purple" } }
+              {
+                "id": "displayName",
+                "value": "Aula 21"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#B877D9"
+                }
+              }
             ]
           },
           {
-            "matcher": { "id": "byRegexp", "options": ".*gimnasio.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*gimnasio.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Gimnasio" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "orange" } }
+              {
+                "id": "displayName",
+                "value": "Gimnasio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#FF9830"
+                }
+              }
             ]
           },
           {
-            "matcher": { "id": "byRegexp", "options": ".*laboratorio.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*laboratorio.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Laboratorio" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "green" } }
+              {
+                "id": "displayName",
+                "value": "Laboratorio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#73BF69"
+                }
+              }
             ]
           }
         ]
       },
-      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 59 },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 57
+      },
       "id": 16,
       "options": {
-        "legend": { "calcs": ["lastNotNull"], "displayMode": "table", "placement": "right" },
-        "tooltip": { "mode": "multi", "sort": "none" }
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
       },
       "targets": [
         {
-          "datasource": { "type": "influxdb", "uid": "influxdb-medusse" },
+          "datasource": {
+            "type": "influxdb",
+            "uid": "influxdb-medusse"
+          },
           "query": "from(bucket: \"sensors\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"charging_status\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> filter(fn: (r) => r[\"location\"] =~ /^(${location:regex})$/)\n  |> aggregateWindow(every: 30s, fn: mean, createEmpty: false)\n\n",
           "refId": "A"
         }
       ],
-      "title": "🔌 Estado de Carga por Ubicación",
+      "title": "Estado de Carga por Ubicación",
       "type": "timeseries"
     },
     {
@@ -2726,16 +3032,16 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
+            "drawStyle": "bars",
+            "fillOpacity": 60,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "vis": false
             },
-            "lineInterpolation": "linear",
-            "lineWidth": 2,
+            "lineInterpolation": "smooth",
+            "lineWidth": 0,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
@@ -2764,49 +3070,115 @@
         },
         "overrides": [
           {
-            "matcher": { "id": "byRegexp", "options": ".*aula20.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula20.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Aula 20" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "red" } }
+              {
+                "id": "displayName",
+                "value": "Aula 20"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#5794F2"
+                }
+              }
             ]
           },
           {
-            "matcher": { "id": "byRegexp", "options": ".*aula21.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula21.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Aula 21" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "purple" } }
+              {
+                "id": "displayName",
+                "value": "Aula 21"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#B877D9"
+                }
+              }
             ]
           },
           {
-            "matcher": { "id": "byRegexp", "options": ".*gimnasio.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*gimnasio.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Gimnasio" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "orange" } }
+              {
+                "id": "displayName",
+                "value": "Gimnasio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#FF9830"
+                }
+              }
             ]
           },
           {
-            "matcher": { "id": "byRegexp", "options": ".*laboratorio.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*laboratorio.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Laboratorio" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "green" } }
+              {
+                "id": "displayName",
+                "value": "Laboratorio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#73BF69"
+                }
+              }
             ]
           }
         ]
       },
-      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 59 },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 57
+      },
       "id": 17,
       "options": {
-        "legend": { "calcs": ["lastNotNull"], "displayMode": "table", "placement": "right" },
-        "tooltip": { "mode": "multi", "sort": "none" }
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
       },
       "targets": [
         {
-          "datasource": { "type": "influxdb", "uid": "influxdb-medusse" },
+          "datasource": {
+            "type": "influxdb",
+            "uid": "influxdb-medusse"
+          },
           "query": "from(bucket: \"sensors\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"low_power_mode\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> filter(fn: (r) => r[\"location\"] =~ /^(${location:regex})$/)\n  |> aggregateWindow(every: 30s, fn: mean, createEmpty: false)\n\n",
           "refId": "A"
         }
       ],
-      "title": "🌙 Modo de Bajo Consumo por Ubicación",
+      "title": "Modo de Bajo Consumo por Ubicación",
       "type": "timeseries"
     },
     {
@@ -2817,35 +3189,8 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "vis": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+            "mode": "fixed",
+            "fixedColor": "green"
           },
           "mappings": [],
           "thresholds": {
@@ -2854,63 +3199,145 @@
               {
                 "color": "green",
                 "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 50
+              },
+              {
+                "color": "red",
+                "value": 80
               }
             ]
           },
-          "unit": "short"
+          "unit": "short",
+          "min": 0,
+          "max": 100
         },
         "overrides": [
           {
-            "matcher": { "id": "byRegexp", "options": ".*aula20.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula20.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Aula 20" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "red" } }
+              {
+                "id": "displayName",
+                "value": "Aula 20"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#5794F2"
+                }
+              }
             ]
           },
           {
-            "matcher": { "id": "byRegexp", "options": ".*aula21.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*aula21.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Aula 21" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "purple" } }
+              {
+                "id": "displayName",
+                "value": "Aula 21"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#B877D9"
+                }
+              }
             ]
           },
           {
-            "matcher": { "id": "byRegexp", "options": ".*gimnasio.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*gimnasio.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Gimnasio" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "orange" } }
+              {
+                "id": "displayName",
+                "value": "Gimnasio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#FF9830"
+                }
+              }
             ]
           },
           {
-            "matcher": { "id": "byRegexp", "options": ".*laboratorio.*" },
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*laboratorio.*"
+            },
             "properties": [
-              { "id": "displayName", "value": "Laboratorio" },
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "green" } }
+              {
+                "id": "displayName",
+                "value": "Laboratorio"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#73BF69"
+                }
+              }
             ]
           }
         ]
       },
-      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 67 },
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 63
+      },
       "id": 18,
       "options": {
-        "legend": { "calcs": ["lastNotNull"], "displayMode": "table", "placement": "right" },
-        "tooltip": { "mode": "multi", "sort": "none" }
+        "displayMode": "basic",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
+        },
+        "showUnfilled": true,
+        "minVizWidth": 0,
+        "minVizHeight": 0,
+        "valueMode": "color"
       },
       "targets": [
         {
-          "datasource": { "type": "influxdb", "uid": "influxdb-medusse" },
+          "datasource": {
+            "type": "influxdb",
+            "uid": "influxdb-medusse"
+          },
           "query": "from(bucket: \"sensors\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"wake_count\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> filter(fn: (r) => r[\"location\"] =~ /^(${location:regex})$/)\n  |> aggregateWindow(every: 30s, fn: mean, createEmpty: false)\n\n",
           "refId": "A"
         }
       ],
-      "title": "⏰ Conteo de Despertares por Ubicación",
-      "type": "timeseries"
+      "title": "Conteo de Despertares",
+      "type": "bargauge"
     }
   ],
   "refresh": "30s",
   "schemaVersion": 38,
   "style": "dark",
-  "tags": ["medusse", "iot", "sensors", "clean"],
+  "tags": [
+    "medusse",
+    "iot",
+    "sensors",
+    "clean"
+  ],
   "templating": {
     "list": [
       {
@@ -2921,8 +3348,12 @@
         "includeAll": true,
         "current": {
           "selected": true,
-          "text": ["All"],
-          "value": ["$__all"]
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
         },
         "options": [
           {
@@ -2960,7 +3391,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Medusse IoT - Dashboard Completo",
+  "title": "Medusse IoT — Monitoreo Ambiental",
   "uid": "medusse-clean",
   "version": 2,
   "weekStart": ""
