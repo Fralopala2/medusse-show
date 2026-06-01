@@ -11,6 +11,8 @@ class SensorProvider with ChangeNotifier {
   bool _isLoading = false;
   bool _isConnected = false;
   String? _error;
+  String? _warning;
+  String? _systemAlertsLoadError;
 
   // Datos
   List<String> _locations = [];
@@ -26,6 +28,8 @@ class SensorProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   bool get isConnected => _isConnected;
   String? get error => _error;
+  String? get warning => _warning;
+  static const Duration _staleDataThreshold = Duration(minutes: 3);
   List<String> get locations => _locations;
   Map<String, LocationSummary> get summary => _summary;
   Map<String, List<SensorData>> get historicalData => _historicalData;
@@ -76,6 +80,7 @@ class SensorProvider with ChangeNotifier {
       _summary = await _apiService.getSummary();
 
       await _loadSystemAlerts();
+      _recomputeWarnings();
 
       _error = null;
     } catch (e) {
@@ -201,6 +206,7 @@ class SensorProvider with ChangeNotifier {
         // Actualizar resumen con nuevo dato
         final sensorData = SensorData.fromJson(data);
         _updateSummaryWithNewData(location, sensorType, sensorData);
+        _recomputeWarnings();
         notifyListeners();
         return;
       }
@@ -219,6 +225,7 @@ class SensorProvider with ChangeNotifier {
           'node_id': message['node_id'] ?? '',
         });
         _updateSummaryWithNewData(flatLocation, flatSensor, sensorData);
+        _recomputeWarnings();
         notifyListeners();
         return;
       }
@@ -368,13 +375,99 @@ class SensorProvider with ChangeNotifier {
   }
 
   Future<void> _loadSystemAlerts() async {
+    _systemAlertsLoadError = null;
     try {
       _systemAlerts = await _apiService.getSystemAlerts();
-    } catch (_) {
-      // No bloquear la app si falla la lista de alertas operativas
+    } catch (e) {
       _systemAlerts = [];
+      _systemAlertsLoadError =
+          'No se pudieron cargar las alertas del panel (comprueba Docker/MySQL y pulsa Actualizar).';
     }
     notifyListeners();
+  }
+
+  DateTime? get latestDataTimestamp {
+    DateTime? latest;
+    for (final summary in _summary.values) {
+      final t = _newestTimestampInSummary(summary);
+      if (t != null && (latest == null || t.isAfter(latest))) {
+        latest = t;
+      }
+    }
+    return latest;
+  }
+
+  DateTime? latestDataTimestampForLocation(String location) {
+    final summary = _summary[location];
+    if (summary == null) return null;
+    return _newestTimestampInSummary(summary);
+  }
+
+  bool get isDataStale {
+    final latest = latestDataTimestamp;
+    if (latest == null) return false;
+    return DateTime.now().difference(latest) > _staleDataThreshold;
+  }
+
+  String? staleDataMessageForLocation(String location) {
+    final latest = latestDataTimestampForLocation(location) ??
+        latestDataTimestamp;
+    if (latest == null) return null;
+    final age = DateTime.now().difference(latest);
+    if (age <= _staleDataThreshold) return null;
+    return _formatStaleMessage(age);
+  }
+
+  DateTime? _newestTimestampInSummary(LocationSummary summary) {
+    DateTime? newest;
+    for (final reading in [
+      summary.temperature,
+      summary.humidity,
+      summary.co2,
+      summary.pressure,
+      summary.voc,
+      summary.iaq,
+      summary.soilMoisture,
+      summary.phLevel,
+      summary.waterFlow,
+      summary.tdsPpm,
+      summary.dissolvedOxygen,
+      summary.batteryVoltage,
+      summary.solarVoltage,
+      summary.batteryPercentage,
+      summary.powerConsumption,
+      summary.chargingStatus,
+      summary.lowPowerMode,
+      summary.wakeCount,
+    ]) {
+      if (reading == null) continue;
+      if (newest == null || reading.timestamp.isAfter(newest)) {
+        newest = reading.timestamp;
+      }
+    }
+    return newest;
+  }
+
+  String _formatStaleMessage(Duration age) {
+    if (age.inHours >= 1) {
+      return 'Datos desactualizados (hace ${age.inHours} h). En el PC ejecuta iniciar.bat o reinicia Docker y el simulador.';
+    }
+    if (age.inMinutes >= 1) {
+      return 'Datos desactualizados (hace ${age.inMinutes} min). En el PC ejecuta iniciar.bat o reinicia Docker y el simulador.';
+    }
+    return 'Datos desactualizados. Pulsa Actualizar o reinicia el stack en el PC.';
+  }
+
+  void _recomputeWarnings() {
+    final parts = <String>[];
+    if (isDataStale) {
+      final age = DateTime.now().difference(latestDataTimestamp!);
+      parts.add(_formatStaleMessage(age));
+    }
+    if (_systemAlertsLoadError != null) {
+      parts.add(_systemAlertsLoadError!);
+    }
+    _warning = parts.isEmpty ? null : parts.join('\n\n');
   }
 
   bool _locationMatches(String alertLocation, String appLocation) {

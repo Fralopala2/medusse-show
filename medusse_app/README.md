@@ -5,8 +5,71 @@ Aplicacion movil/multiplataforma del proyecto Medusse IoT para visualizar sensor
 ## Requisitos
 
 - Flutter instalado (`flutter doctor` sin errores criticos).
+- En este PC el SDK esta en `C:\src\flutter` (rama stable).
 - API Medusse activa en `http://localhost:4001`.
 - WebSocket API activo en `ws://localhost:4002`.
+
+## Flutter en Windows (PC nuevo)
+
+Si `flutter` no se reconoce en PowerShell aunque este instalado:
+
+1. **Cierra por completo** Cursor/VS Code y abre una terminal nueva (el PATH se carga al iniciar sesion).
+2. O usa el script local (no modifica PATH; evita conflicto con `flutter.cmd` en esta carpeta):
+
+```cmd
+cd medusse_app
+run-flutter.cmd --version
+run-flutter.cmd build apk --release
+```
+
+No uses `flutter.cmd` como nombre: PowerShell lo ejecuta antes que `C:\src\flutter\bin` y `flutter doctor` avisa.
+
+APK automatico:
+
+```powershell
+.\build-apk.ps1
+```
+
+Salida del APK: `build\app\outputs\flutter-apk\app-release.apk`
+
+Comprobar instalacion:
+
+```cmd
+C:\src\flutter\bin\flutter.bat doctor
+```
+
+### Android (APK en el movil)
+
+Si `flutter doctor` dice **cmdline-tools component is missing**:
+
+```powershell
+.\install-cmdline-tools.ps1
+flutter doctor --android-licenses
+```
+
+Si `flutter build apk` dice **No Android SDK found**:
+
+1. Instala [Android Studio](https://developer.android.com/studio) o en PowerShell (admin opcional):
+
+   ```powershell
+   winget install Google.AndroidStudio --accept-package-agreements --accept-source-agreements
+   ```
+
+2. Abre **Android Studio** una vez → asistente **Standard** → Finish (descarga el SDK a `%LOCALAPPDATA%\Android\Sdk`).
+
+3. En la carpeta `medusse_app`:
+
+   ```powershell
+   .\setup-android-sdk.ps1
+   ```
+
+4. Cierra y abre la terminal, luego:
+
+   ```cmd
+   flutter build apk --release
+   ```
+
+Variables que debe existir (el script las crea): `ANDROID_HOME` = `C:\Users\spano\AppData\Local\Android\Sdk`.
 
 ## Ejecucion rapida (Windows)
 

@@ -88,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   SliverToBoxAdapter(
                     child: ConnectionStatus(
                       isConnected: provider.isConnected,
-                      error: provider.error,
+                      error: provider.error ?? provider.warning,
                       onRetry: provider.refresh,
                     ),
                   ),

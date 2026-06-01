@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import '../providers/sensor_provider.dart';
 import '../models/sensor_data.dart';
 import '../services/api_service.dart';
+import '../widgets/connection_status.dart';
 
 class SensorChartScreen extends StatefulWidget {
   final String? location;
@@ -54,6 +55,7 @@ class _SensorChartScreenState extends State<SensorChartScreen> {
     setState(() => isLoading = true);
 
     final provider = context.read<SensorProvider>();
+    await provider.refresh();
     await provider.loadHistoricalData(
       currentLocation,
       currentSensorType,
@@ -97,6 +99,19 @@ class _SensorChartScreenState extends State<SensorChartScreen> {
         bottom: true,
         child: Column(
           children: [
+            Consumer<SensorProvider>(
+              builder: (context, provider, _) {
+                final stale = provider.staleDataMessageForLocation(
+                  currentLocation,
+                );
+                if (stale == null) return const SizedBox.shrink();
+                return ConnectionStatus(
+                  isConnected: true,
+                  error: stale,
+                  onRetry: _loadData,
+                );
+              },
+            ),
             // Selector de tiempo
             Container(
               padding: const EdgeInsets.all(16),
