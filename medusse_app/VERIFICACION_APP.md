@@ -81,17 +81,17 @@ medusse_app/
 ### URLs por Defecto (Localhost)
 
 ```dart
-API REST:   http://localhost:3001
-WebSocket:  ws://localhost:3002
+API REST:   http://localhost:4001
+WebSocket:  ws://localhost:4002
 ```
 
 ### Configuraciones Predefinidas
 
 La app incluye 3 configuraciones predefinidas:
 
-1. **Local (Docker)** - localhost:3001
-2. **Red Local** - 192.168.1.140:3001
-3. **Simulacion** - 127.0.0.1:3001
+1. **Local (Docker)** - localhost:4001
+2. **Red Local** - 192.168.1.140:4001
+3. **Simulacion** - 127.0.0.1:4001
 
 Puedes cambiar la configuracion desde la pantalla de Settings en la app.
 
@@ -223,7 +223,7 @@ flutter devices
 docker ps
 
 # API REST
-curl http://localhost:3001/health
+curl http://localhost:4001/health
 
 # WebSocket (desde la app)
 ```
@@ -279,7 +279,7 @@ flutter config --enable-web
 ### Error: "Failed to connect to API"
 
 **Solucion:**
-1. Verificar que la API este corriendo: `curl http://localhost:3001/health`
+1. Verificar que la API este corriendo: `curl http://localhost:4001/health`
 2. Verificar que Docker este corriendo: `docker ps`
 3. Iniciar servicios: `sistema_completo.bat`
 4. En la app, ir a Settings y probar conexion
@@ -287,7 +287,7 @@ flutter config --enable-web
 ### Error: "WebSocket connection failed"
 
 **Solucion:**
-1. Verificar que el puerto 3002 este libre
+1. Verificar que el puerto 4002 este libre
 2. Reiniciar la API: `cd api && npm start`
 3. En la app, cerrar y volver a abrir
 
@@ -296,7 +296,7 @@ flutter config --enable-web
 **Solucion:**
 1. Verificar que el simulador este corriendo
 2. Esperar 15 segundos para que genere datos
-3. Verificar en Grafana que haya datos: http://localhost:3000
+3. Verificar en Grafana que haya datos: http://localhost:3600
 4. Pull-to-refresh en la app
 
 ### App muy lenta

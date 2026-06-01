@@ -813,12 +813,12 @@ echo ✅ Esperando servicios...
 timeout /t 10 /nobreak > nul
 
 echo ✅ Abriendo Grafana...
-start http://localhost:3000
+start http://localhost:3600
 
 echo ✅ Gateway LoRa debe ejecutarse en Raspberry Pi:
 echo    python3 gateway/lora_gateway.py
 echo.
-echo 📊 Dashboard: http://localhost:3000
+echo 📊 Dashboard: http://localhost:3600
 echo 👤 Usuario: admin / Contraseña: medusse2025
 echo.
 echo ⏹️  Para parar: Ctrl+C en gateway y ejecutar 'docker compose down'
@@ -841,7 +841,7 @@ Actualizar `README.md` con información LoRa:
 1. **Programar nodos ESP32** con firmware LoRa
 2. **Iniciar servicios Docker** en PC: `docker compose up -d`
 3. **Ejecutar gateway LoRa** en RPi: `python3 gateway/lora_gateway.py`
-4. **Acceder dashboard**: http://localhost:3000
+4. **Acceder dashboard**: http://localhost:3600
 
 ### Configuración LoRa
 - Frecuencia: 868 MHz (EU)
@@ -947,8 +947,8 @@ sistema_completo.bat
 python3 gateway/lora_gateway.py
 
 # 3. Verificar todo funciona
-# - Grafana: http://localhost:3000
-# - API: http://localhost:3001/api/summary
+# - Grafana: http://localhost:3600
+# - API: http://localhost:4001/api/summary
 # - Flutter: ejecutar_flutter.bat
 ```
 

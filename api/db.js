@@ -5,7 +5,7 @@ require('dotenv').config();
 // Configuracion de la conexion
 const dbConfig = {
   host: process.env.MYSQL_HOST || 'localhost',
-  port: process.env.MYSQL_PORT || 3307,
+  port: process.env.MYSQL_PORT || 13306,
   user: process.env.MYSQL_USER || 'medusse_user',
   password: process.env.MYSQL_PASSWORD || 'medusse2025',
   database: process.env.MYSQL_DATABASE || 'medusse_db',

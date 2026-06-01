@@ -55,7 +55,7 @@ export const heroSections = [
     ctas: [
       {
         primary: "Acceder a Grafana",
-        primaryAction: "http://localhost:3000",
+        primaryAction: "http://localhost:3600",
       },
     ],
     backgroundImage: "/dashboard-raspberry.png",
@@ -118,7 +118,7 @@ export const heroSections = [
         secondary: "Probar Endpoints",
         primaryAction:
           "https://github.com/Fralopala2/medusse-show/blob/clase/api/README.md",
-        secondaryAction: "http://localhost:3001/api/summary",
+        secondaryAction: "http://localhost:4001/api/summary",
       },
     ],
     backgroundImage:

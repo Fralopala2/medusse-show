@@ -2,6 +2,8 @@
 
 Guía de instalación centrada en **Windows** para este fork. La raiz del proyecto solo incluye scripts de automatizacion para Windows.
 
+> **Puertos locales (Windows):** ver [PUERTOS.md](./PUERTOS.md) — Web `4003`, API `4001`, Grafana `3600`, MySQL `13306`.
+
 ---
 
 ## 📋 Requisitos del Sistema
@@ -252,10 +254,10 @@ Una vez todo esté corriendo:
 
 | Servicio | URL | Credenciales |
 |----------|-----|--------------|
-| **Grafana Dashboard** | http://localhost:3000 | admin / medusse2025 |
-| **Web Next.js** | http://localhost:3003 | - |
-| **Login Web** | http://localhost:3003/login | admin / medusse2025 |
-| **API REST** | http://localhost:3001 | - |
+| **Grafana Dashboard** | http://localhost:3600 | admin / medusse2025 |
+| **Web Next.js** | http://localhost:4003 | - |
+| **Login Web** | http://localhost:4003/login | admin / medusse2025 |
+| **API REST** | http://localhost:4001 | - |
 | **InfluxDB** | http://localhost:8086 | admin / medusse2025 |
 
 ---
@@ -289,8 +291,8 @@ python --version  # Windows
 python3 --version # Linux/Lliurex
 
 # Verificar servicios corriendo
-curl http://localhost:3001/health
-curl http://localhost:3000
+curl http://localhost:4001/health
+curl http://localhost:3600
 ```
 
 ---
@@ -345,8 +347,8 @@ newgrp docker
 
 #### Puerto ocupado
 ```bash
-# Ver que proceso usa el puerto 3000
-sudo lsof -i :3000
+# Ver que proceso usa el puerto 3600 (Grafana en host)
+sudo lsof -i :3600
 
 # Matar proceso (reemplaza PID)
 kill -9 PID
@@ -370,9 +372,9 @@ Si tienes firewall activo:
 ```bash
 # Abrir puertos necesarios
 sudo ufw allow 3000/tcp  # Grafana
-sudo ufw allow 3001/tcp  # API REST
+sudo ufw allow 4001/tcp  # API REST
 sudo ufw allow 3002/tcp  # WebSocket
-sudo ufw allow 3003/tcp  # Web Next.js
+sudo ufw allow 4003/tcp  # Web Next.js
 sudo ufw allow 8086/tcp  # InfluxDB
 sudo ufw allow 1883/tcp  # MQTT
 
@@ -402,7 +404,7 @@ full_setup.bat
 
 1. Verificar sistema
 2. Ejecutar proyecto completo
-3. Abrir http://localhost:3000 en el navegador
+3. Abrir http://localhost:3600 en el navegador
 4. Ver dashboard con datos en tiempo real
 
 ### Qué Verán
@@ -431,9 +433,9 @@ full_setup.bat
 - [ ] Repositorio clonado
 - [ ] Dependencias instaladas
 - [ ] Servicios Docker iniciados
-- [ ] Grafana accesible en http://localhost:3000
-- [ ] API REST respondiendo en http://localhost:3001
-- [ ] Web Next.js en http://localhost:3003
+- [ ] Grafana accesible en http://localhost:3600
+- [ ] API REST respondiendo en http://localhost:4001
+- [ ] Web Next.js en http://localhost:4003
 
 ---
 

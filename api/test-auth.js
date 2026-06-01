@@ -2,7 +2,7 @@
 const http = require('http');
 
 const API_URL = 'localhost';
-const API_PORT = 3001;
+const API_PORT = 4001;
 
 // Colores para consola
 const colors = {

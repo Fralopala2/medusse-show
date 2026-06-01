@@ -10,9 +10,9 @@ echo.
 echo Este script inicia el ecosistema completo:
 echo - Servicios Docker (MQTT, InfluxDB, Grafana, MySQL)
 echo - Simulador de datos
-echo - API REST (puerto 3001)
-echo - Web Next.js (puerto 3003)
-echo - Dashboard Grafana (puerto 3000)
+echo - API REST (puerto 4001)
+echo - Web Next.js (puerto 4003)
+echo - Dashboard Grafana (puerto 3600)
 echo.
 echo NOTA: La app Flutter debe ejecutarse manualmente
 echo       con: flutter run -d windows en medusse_app/
@@ -156,29 +156,29 @@ echo [5/5] Iniciando servicios web
 
 if "%API_AVAILABLE%"=="true" (
     echo [API] Verificando si API ya esta corriendo
-    curl -s http://localhost:3001/health >nul 2>&1
+    curl -s http://localhost:4001/health >nul 2>&1
     if errorlevel 1 (
         echo [API] Iniciando API REST
         wscript //nologo "%~dp0scripts\start-api.vbs"
         timeout /t 5 >nul
-        echo [API] API REST: http://localhost:3001
+        echo [API] API REST: http://localhost:4001
     ) else (
-        echo [API] API ya esta corriendo en http://localhost:3001
+        echo [API] API ya esta corriendo en http://localhost:4001
     )
     
     echo [WEB] Verificando si Web ya esta corriendo
-    curl -s http://localhost:3003 >nul 2>&1
+    curl -s http://localhost:4003 >nul 2>&1
     if errorlevel 1 (
         echo [WEB] Iniciando Web Next.js
         wscript //nologo "%~dp0scripts\start-web.vbs"
         timeout /t 15 >nul
-        echo [WEB] Web Next.js: http://localhost:3003
+        echo [WEB] Web Next.js: http://localhost:4003
     ) else (
-        echo [WEB] Web ya esta corriendo en http://localhost:3003
+        echo [WEB] Web ya esta corriendo en http://localhost:4003
     )
     
     echo [NAVEGADOR] Abriendo Web Next.js
-    start http://localhost:3003/control
+    start http://localhost:4003/control
 )
 
 echo.
@@ -186,14 +186,14 @@ echo ========================================
 echo   SISTEMA INICIADO CORRECTAMENTE
 echo ========================================
 echo.
-echo [GRAFANA] Dashboard: http://localhost:3000
+echo [GRAFANA] Dashboard: http://localhost:3600
 echo    Usuario: admin / Contrasena: medusse2025
 echo.
 if "%API_AVAILABLE%"=="true" (
-    echo [API] API REST: http://localhost:3001
-    echo [WS]  WebSocket: ws://localhost:3002
-    echo [WEB] Web Next.js: http://localhost:3003
-    echo    Login: http://localhost:3003/login
+    echo [API] API REST: http://localhost:4001
+    echo [WS]  WebSocket: ws://localhost:4002
+    echo [WEB] Web Next.js: http://localhost:4003
+    echo    Login: http://localhost:4003/login
     echo.
 )
 echo [INFO] App Flutter no se inicia automaticamente
@@ -207,10 +207,10 @@ wscript //nologo "%~dp0scripts\start-simulator.vbs"
 
 echo.
 echo [PORTAL] Abriendo centro de control
-start http://localhost:3003/control
+start http://localhost:4003/control
 
 echo.
-echo Sistema en marcha. Portal: http://localhost:3003/control
+echo Sistema en marcha. Portal: http://localhost:4003/control
 echo Logs en carpeta logs\
 echo Para detener: detener.bat
 echo.

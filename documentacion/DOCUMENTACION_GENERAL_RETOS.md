@@ -1002,11 +1002,11 @@ detener.bat
 
 | Servicio | URL | Credenciales |
 |----------|-----|--------------|
-| Grafana Dashboard | http://localhost:3000 | admin / medusse2025 |
-| API REST | http://localhost:3001 | - |
-| Web Next.js | http://localhost:3003 | - |
+| Grafana Dashboard | http://localhost:3600 | admin / medusse2025 |
+| API REST | http://localhost:4001 | - |
+| Web Next.js | http://localhost:4003 | - |
 | InfluxDB | http://localhost:8086 | admin / medusse2025 |
-| MySQL | localhost:3307 | medusse_user / medusse2025 |
+| MySQL | localhost:13306 | medusse_user / medusse2025 |
 
 ---
 
@@ -1055,13 +1055,13 @@ detener.bat
 ### Casos de Uso Demostrados
 
 #### Caso 1: Monitoreo en Tiempo Real
-1. Abrir Grafana (http://localhost:3000)
+1. Abrir Grafana (http://localhost:3600)
 2. Observar datos actualizandose cada 30 segundos
 3. Filtrar por ubicacion especifica
 4. Ver alertas de CO2 si supera umbrales
 
 #### Caso 2: Consulta de Datos Historicos
-1. Abrir Web Next.js (http://localhost:3003)
+1. Abrir Web Next.js (http://localhost:4003)
 2. Ver dashboard con 4 ubicaciones
 3. Observar datos en tiempo real via WebSocket
 4. Ver alertas de CO2 y bateria

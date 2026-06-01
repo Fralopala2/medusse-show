@@ -5,8 +5,8 @@ Aplicacion movil/multiplataforma del proyecto Medusse IoT para visualizar sensor
 ## Requisitos
 
 - Flutter instalado (`flutter doctor` sin errores criticos).
-- API Medusse activa en `http://localhost:3001`.
-- WebSocket API activo en `ws://localhost:3002`.
+- API Medusse activa en `http://localhost:4001`.
+- WebSocket API activo en `ws://localhost:4002`.
 
 ## Ejecucion rapida (Windows)
 
@@ -22,8 +22,8 @@ flutter run -d windows
 
 La app consume URLs desde `ConfigService`:
 
-- API base por defecto: `http://localhost:3001`
-- WebSocket por defecto: `ws://localhost:3002`
+- API base por defecto: `http://localhost:4001`
+- WebSocket por defecto: `ws://localhost:4002`
 
 Si cambias host/puertos, actualiza la configuracion de la app antes de ejecutar.
 

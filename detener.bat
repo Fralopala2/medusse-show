@@ -34,8 +34,8 @@ if %errorlevel% equ 0 (
 
 if "%SILENT%"=="0" echo.
 echo [3/4] Limpiando puertos ocupados
-for /f "tokens=5" %%a in ('netstat -ano ^| findstr ":3001"') do taskkill /F /PID %%a >nul 2>&1
-for /f "tokens=5" %%a in ('netstat -ano ^| findstr ":3003"') do taskkill /F /PID %%a >nul 2>&1
+for /f "tokens=5" %%a in ('netstat -ano ^| findstr ":4001"') do taskkill /F /PID %%a >nul 2>&1
+for /f "tokens=5" %%a in ('netstat -ano ^| findstr ":4003"') do taskkill /F /PID %%a >nul 2>&1
 
 if "%SILENT%"=="0" echo.
 echo [4/4] Deteniendo procesos Node.js (API y Web)

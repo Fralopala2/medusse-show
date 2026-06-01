@@ -85,9 +85,9 @@ INSERT INTO system_config (config_key, config_value, config_type, description, i
 ('alert_temp_danger', '35', 'number', 'Umbral de peligro temperatura (°C)', FALSE),
 
 -- Configuración de API
-('api_url', 'http://localhost:3001', 'string', 'URL de la API REST', TRUE),
-('websocket_url', 'ws://localhost:3002', 'string', 'URL del WebSocket', TRUE),
-('grafana_url', 'http://localhost:3000', 'string', 'URL de Grafana', TRUE),
+('api_url', 'http://localhost:4001', 'string', 'URL de la API REST', TRUE),
+('websocket_url', 'ws://localhost:4002', 'string', 'URL del WebSocket', TRUE),
+('grafana_url', 'http://localhost:3600', 'string', 'URL de Grafana', TRUE),
 ('influxdb_url', 'http://localhost:8086', 'string', 'URL de InfluxDB', FALSE),
 ('mqtt_url', 'mqtt://localhost:1883', 'string', 'URL del broker MQTT', FALSE),
 

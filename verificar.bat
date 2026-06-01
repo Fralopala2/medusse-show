@@ -95,7 +95,7 @@ if errorlevel 1 (
 echo.
 echo [8/8] Verificando servicios web...
 echo Verificando Grafana (timeout 3s)...
-powershell -Command "try { $response = Invoke-WebRequest -Uri 'http://localhost:3000' -TimeoutSec 3 -UseBasicParsing; exit 0 } catch { exit 1 }" >nul 2>&1
+powershell -Command "try { $response = Invoke-WebRequest -Uri 'http://localhost:3600' -TimeoutSec 3 -UseBasicParsing; exit 0 } catch { exit 1 }" >nul 2>&1
 if errorlevel 1 (
     echo Grafana: NO ACCESIBLE (ejecutar: demo.bat o sistema_completo.bat)
 ) else (
@@ -103,7 +103,7 @@ if errorlevel 1 (
 )
 
 echo Verificando API REST (timeout 3s)...
-powershell -Command "try { $response = Invoke-WebRequest -Uri 'http://localhost:3001/health' -TimeoutSec 3 -UseBasicParsing; exit 0 } catch { exit 1 }" >nul 2>&1
+powershell -Command "try { $response = Invoke-WebRequest -Uri 'http://localhost:4001/health' -TimeoutSec 3 -UseBasicParsing; exit 0 } catch { exit 1 }" >nul 2>&1
 if errorlevel 1 (
     echo API REST: NO ACCESIBLE (usar medusse.bat opcion 3 o sistema_completo.bat)
 ) else (
@@ -111,7 +111,7 @@ if errorlevel 1 (
 )
 
 echo Verificando Web Next.js (timeout 3s)...
-powershell -Command "try { $response = Invoke-WebRequest -Uri 'http://localhost:3003' -TimeoutSec 3 -UseBasicParsing; exit 0 } catch { exit 1 }" >nul 2>&1
+powershell -Command "try { $response = Invoke-WebRequest -Uri 'http://localhost:4003' -TimeoutSec 3 -UseBasicParsing; exit 0 } catch { exit 1 }" >nul 2>&1
 if errorlevel 1 (
     echo Web Next.js: NO ACCESIBLE (usar medusse.bat opcion 4 o sistema_completo.bat)
 ) else (
@@ -163,9 +163,9 @@ echo 🔎 Verificacion:            verificar.bat
 echo 🛑 Detener servicios:       detener.bat
 echo.
 echo ACCESO WEB:
-echo - Grafana: http://localhost:3000 (admin/medusse2025)
-echo - API REST: http://localhost:3001
-echo - Web Next.js: http://localhost:3003
+echo - Grafana: http://localhost:3600 (admin/medusse2025)
+echo - API REST: http://localhost:4001
+echo - Web Next.js: http://localhost:4003
 echo - InfluxDB: http://localhost:8086 (admin/medusse2025)
 echo.
 pause

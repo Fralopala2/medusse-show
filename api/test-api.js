@@ -7,8 +7,8 @@
 const http = require('http');
 const WebSocket = require('ws');
 
-const API_BASE = 'http://localhost:3001';
-const WS_URL = 'ws://localhost:3002';
+const API_BASE = 'http://localhost:4001';
+const WS_URL = 'ws://localhost:4002';
 
 // Función helper para hacer requests HTTP
 function makeRequest(path) {

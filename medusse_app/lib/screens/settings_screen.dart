@@ -186,7 +186,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               controller: _apiUrlController,
               decoration: const InputDecoration(
                 labelText: 'URL de la API',
-                hintText: 'http://192.168.1.100:3001',
+                hintText: 'http://192.168.1.100:4001',
                 prefixIcon: Icon(Icons.api),
                 border: OutlineInputBorder(),
               ),
@@ -205,7 +205,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               controller: _wsUrlController,
               decoration: const InputDecoration(
                 labelText: 'URL del WebSocket',
-                hintText: 'ws://192.168.1.100:3002',
+                hintText: 'ws://192.168.1.100:4002',
                 prefixIcon: Icon(Icons.settings_ethernet),
                 border: OutlineInputBorder(),
               ),

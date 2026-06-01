@@ -185,9 +185,9 @@ https://vercel.com/fralopala2s-projects/medusse-web
 Aunque la web funciona sin backend, estas son las variables configuradas:
 
 ```env
-NEXT_PUBLIC_API_URL=http://localhost:3001
-NEXT_PUBLIC_WS_URL=ws://localhost:3002
-NEXT_PUBLIC_GRAFANA_URL=http://localhost:3000
+NEXT_PUBLIC_API_URL=http://localhost:4001
+NEXT_PUBLIC_WS_URL=ws://localhost:4002
+NEXT_PUBLIC_GRAFANA_URL=http://localhost:3600
 ```
 
 **Nota**: Estas apuntan a localhost porque el backend no esta desplegado. La web muestra el diseño correctamente para Figma.

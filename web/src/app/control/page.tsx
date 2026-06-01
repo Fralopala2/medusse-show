@@ -51,8 +51,8 @@ export default function ControlPage() {
         ? window.location.hostname
         : "localhost";
 
-  const grafanaUrl = `http://${accessHost}:3000`;
-  const webUrl = `http://${accessHost}:3003`;
+  const grafanaUrl = `http://${accessHost}:3600`;
+  const webUrl = `http://${accessHost}:4003`;
 
   async function handleStop() {
     if (!confirm("Detener todo el sistema Medusse?")) return;
@@ -179,7 +179,7 @@ export default function ControlPage() {
 
           {error && !systemStopped && (
             <div className="rounded-lg border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-amber-200 text-sm">
-              {error}. Asegurate de que la API este corriendo en el puerto 3001.
+              {error}. Asegurate de que la API este corriendo en el puerto 4001.
             </div>
           )}
 

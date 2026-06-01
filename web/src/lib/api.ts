@@ -11,17 +11,17 @@ export function getApiBaseUrl(): string {
   if (fromEnv) return fromEnv.replace(/\/$/, '');
 
   if (typeof window !== 'undefined') {
-    return `${window.location.protocol}//${window.location.hostname}:3001`;
+    return `${window.location.protocol}//${window.location.hostname}:4001`;
   }
 
-  return 'http://127.0.0.1:3001';
+  return 'http://127.0.0.1:4001';
 }
 
 /** @deprecated Usar getApiBaseUrl() en cliente para URL actualizada */
 export const getApiUrl = getApiBaseUrl;
 
 /** @deprecated Usar getApiBaseUrl() — puede quedar desactualizada si se evalúa en build */
-export const API_BASE_URL = 'http://127.0.0.1:3001';
+export const API_BASE_URL = 'http://127.0.0.1:4001';
 
 // ============================================================================
 // TIPOS DE DATOS
@@ -163,7 +163,7 @@ export async function fetchSummary(): Promise<{ summary: Summary }> {
     response = await fetch(url, { signal: controller.signal });
   } catch {
     throw new Error(
-      `No se pudo conectar con la API (${url}). Comprueba que el servidor esté en marcha en el puerto 3001.`
+      `No se pudo conectar con la API (${url}). Comprueba que el servidor esté en marcha en el puerto 4001.`
     );
   } finally {
     clearTimeout(timeout);

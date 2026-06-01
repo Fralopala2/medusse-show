@@ -175,7 +175,7 @@ medusse-show/
 ### Funcionalidades Implementadas
 
 **🤖 Automatización Total:**
-- **Arranque silencioso** (`iniciar.bat`) + **Centro de control** (`http://localhost:3003/control`)
+- **Arranque silencioso** (`iniciar.bat`) + **Centro de control** (`http://localhost:4003/control`)
 - **Setup inicial automático** (`full_setup.bat`)
 - **Menú principal unificado** (`medusse.bat`) para tests y opciones parciales
 - **Verificación automática** con diagnósticos (`verificar.bat`)
@@ -190,7 +190,7 @@ medusse-show/
 
 **🔌 API REST & Mobile Avanzados:**
 - **API REST Node.js** con 11 endpoints y caché inteligente
-- **WebSocket Server** para streaming en tiempo real (puerto 3002)
+- **WebSocket Server** para streaming en tiempo real (puerto 4002)
 - **App Flutter completa** con 3 pantallas y gráficos interactivos
 - **Sistema de alertas** automático por umbrales de CO2
 - **Arquitectura híbrida** HTTP + WebSocket para mejor UX
@@ -203,6 +203,9 @@ medusse-show/
 - **Restart policies** automáticas para alta disponibilidad
 
 ## 🚀 Inicio Ultra Rápido
+
+> **Puertos (Windows):** [documentacion/PUERTOS.md](documentacion/PUERTOS.md) — no uses 3000/3001/3003/3307 en este equipo si Hyper-V los reserva.
+
 
 ### 🤖 Instalación Automática (Recomendada)
 
@@ -234,7 +237,7 @@ Qué hace `iniciar.bat`:
 2. Levanta el stack Docker (`docker compose up -d`).
 3. Inicia **API**, **Web Next.js** y **simulador** en segundo plano (scripts VBS en `scripts/`).
 4. Escribe los logs en la carpeta `logs/` (`api.log`, `web.log`, `simulator.log`).
-5. Abre el navegador en el **Centro de control**: http://localhost:3003/control
+5. Abre el navegador en el **Centro de control**: http://localhost:4003/control
 
 No se abren ventanas `cmd` de API, Web ni simulador: todo se supervisa desde el portal.
 
@@ -275,7 +278,7 @@ Portal de desarrollo en Next.js que sustituye las terminales al arrancar el stac
 | **Actividad IoT** | WebSocket y resumen de sensores |
 | **Acciones** | Enlaces a Grafana, web pública, login; botón detener sistema |
 
-Requisitos: API en el puerto **3001** (endpoints `/api/dev/*` solo en entorno local, no producción).
+Requisitos: API en el puerto **4001** (endpoints `/api/dev/*` solo en entorno local, no producción).
 
 ![Centro de control](web/public/images/CentroCon1.png)
 
@@ -285,22 +288,22 @@ Requisitos: API en el puerto **3001** (endpoints `/api/dev/*` solo en entorno lo
 
 | Servicio | URL | Credenciales |
 |----------|-----|--------------|
-| **Centro de control** | http://localhost:3003/control | Sin login (local) |
-| **Grafana Dashboard** | http://localhost:3000 | admin / medusse2025 |
-| **API REST** | http://localhost:3001 | - |
-| **Web Next.js** | http://localhost:3003 | - |
-| **Login web** | http://localhost:3003/login | Ver usuarios en sección MySQL |
+| **Centro de control** | http://localhost:4003/control | Sin login (local) |
+| **Grafana Dashboard** | http://localhost:3600 | admin / medusse2025 |
+| **API REST** | http://localhost:4001 | - |
+| **Web Next.js** | http://localhost:4003 | - |
+| **Login web** | http://localhost:4003/login | Ver usuarios en sección MySQL |
 | **InfluxDB** | http://localhost:8086 | admin / medusse2025 |
 | **App Flutter** | Ejecutar manualmente (`flutter run -d windows`) | - |
 
 ## 📊 Servicios y Tecnologías
 
-- **Grafana:** Puerto `3000`. Dashboard profesional con branding personalizado. Versión: `10.2.0`.
+- **Grafana:** Puerto `3600` (host; contenedor interno 3000). Dashboard profesional con branding personalizado. Versión: `10.2.0`.
 - **InfluxDB:** Puerto `8086`. Base de datos de series temporales. Versión: `2.7`.
 - **MQTT Broker (Mosquitto):** Puerto `1883` (MQTT) y `9001` (WebSocket). Versión: `2.0`.
 - **Telegraf:** Pipeline optimizado con múltiples consumers. Versión: `1.28`.
-- **API REST (Node.js):** Puerto `3001`. Express 4.18.2, caché inteligente.
-- **WebSocket (server):** Puerto `3002`. Streaming de datos en tiempo real (ws 8.14.2).
+- **API REST (Node.js):** Puerto `4001`. Express 4.18.2, caché inteligente.
+- **WebSocket (server):** Puerto `4002`. Streaming de datos en tiempo real (ws 8.14.2).
 - **Flutter App:** App multiplataforma con Material Design 3 (Flutter 3.9+).
 
 ### 🔧 Stack Tecnológico Completo
@@ -494,7 +497,7 @@ Ver documentación completa en: [medusse_app/README.md](medusse_app/README.md)
 | `/api/auth/profile` | GET | Obtener perfil del usuario | Bearer Token |
 
 ### ⚡ WebSocket Real-time
-- **Puerto:** `ws://localhost:3002`
+- **Puerto:** `ws://localhost:4002`
 - **Datos:** Streaming automático de todas las ubicaciones
 - **Formato:** JSON estructurado con timestamps
 - **Frecuencia:** Cada 15 segundos (sincronizado con simulador)
@@ -521,7 +524,7 @@ node api/test-auth.js        # Testing de autenticacion y permisos
 - **Middleware de protección** para rutas privadas
 - **Usuarios iniciales** configurados desde seed SQL (ejecutar `node api/test-auth.js` para validarlos)
 
-**Probar login web:** abrir `http://localhost:3003/login` con API y MySQL activos.
+**Probar login web:** abrir `http://localhost:4003/login` con API y MySQL activos.
 
 Ver documentación completa en: [api/README.md](api/README.md)
 
@@ -552,7 +555,7 @@ El sistema está **completamente preparado** para migración a hardware real:
 
 ### Botones Funcionales
 - **Ver Dashboard** - Scroll a sección dashboard
-- **Acceder a Grafana** - Abre http://localhost:3000
+- **Acceder a Grafana** - Abre http://localhost:3600
 - **Documentación** - Enlace a README.md en GitHub
 - **Ver API Docs** - Enlace a documentación API
 - **Ver Migración** - Enlace a MIGRACION.md
@@ -574,12 +577,12 @@ wscript //nologo scripts\start-web.vbs
 
 | URL | Descripción |
 |-----|-------------|
-| http://localhost:3003/control | Centro de control (desarrollo) |
-| http://localhost:3003 | Web pública |
-| http://localhost:3003/login | Login de usuarios |
-| http://localhost:3003/dashboard | Panel tras autenticación |
+| http://localhost:4003/control | Centro de control (desarrollo) |
+| http://localhost:4003 | Web pública |
+| http://localhost:4003/login | Login de usuarios |
+| http://localhost:4003/dashboard | Panel tras autenticación |
 
-**Nota**: El puerto **3003** evita conflicto con Grafana (puerto 3000).
+**Puertos en Windows:** Hyper-V reserva el rango 2951–3550; por eso la web usa **4003**, la API **4001** y Grafana **3600**. Ver [documentacion/PUERTOS.md](documentacion/PUERTOS.md).
 
 ---
 
@@ -587,11 +590,11 @@ wscript //nologo scripts\start-web.vbs
 
 ### Configuración
 - **MySQL 8.0** integrado en Docker
-- **Puerto**: 3307 (mapeado desde 3306 interno)
+- **Puerto**: 13306 (mapeado desde 3306 interno; evita rangos reservados por Hyper-V en Windows)
 - **Base de datos**: medusse_db
 - **Usuario**: medusse_user / medusse2025
 
-**Nota:** El puerto 3307 se usa para evitar conflictos con instalaciones locales de MySQL.
+**Nota:** MySQL en el host usa el puerto **13306** (mapeo desde 3306 del contenedor).
 
 ### Esquema (9 tablas)
 1. **users** - Usuarios del sistema (admin, user, viewer)

@@ -59,9 +59,42 @@ import random
 import math
 import sys
 import io
+import os
 import subprocess
+import threading
 from pathlib import Path
 from datetime import datetime
+
+PID_FILE = Path(__file__).resolve().parents[1] / "logs" / "simulator.pid"
+
+
+def stop_previous_simulator():
+    """Evita instancias zombie tras reinicios de Docker o de iniciar.bat."""
+    PID_FILE.parent.mkdir(parents=True, exist_ok=True)
+    if not PID_FILE.exists():
+        return
+    try:
+        old_pid = int(PID_FILE.read_text(encoding="utf-8").strip())
+    except (ValueError, OSError):
+        return
+    if old_pid == os.getpid():
+        return
+    if sys.platform == "win32":
+        subprocess.run(
+            ["taskkill", "/PID", str(old_pid), "/F"],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            check=False,
+        )
+    else:
+        try:
+            os.kill(old_pid, 15)
+        except OSError:
+            pass
+
+
+def write_simulator_pid():
+    PID_FILE.write_text(str(os.getpid()), encoding="utf-8")
 
 
 def load_mqtt_client_module():
@@ -75,6 +108,36 @@ def load_mqtt_client_module():
         subprocess.check_call([sys.executable, "-m", "pip", "install", "-r", str(requirements_path)])
         import paho.mqtt.client as mqtt
         return mqtt
+
+
+def setup_mqtt_client(mqtt, broker_host="localhost", broker_port=1883):
+    """Cliente MQTT con hilo de red y reconexion automatica tras reinicios de Docker."""
+    connected = threading.Event()
+    client = mqtt.Client(
+        callback_api_version=mqtt.CallbackAPIVersion.VERSION2,
+        client_id="medusse-simulator",
+    )
+    client.reconnect_delay_set(min_delay=1, max_delay=30)
+
+    def on_connect(cl, userdata, flags, reason_code, properties=None):
+        if reason_code == 0:
+            connected.set()
+            print("Conectado a MQTT broker", flush=True)
+        else:
+            print(f"Error al conectar MQTT (codigo {reason_code})", flush=True)
+
+    def on_disconnect(cl, userdata, disconnect_flags, reason_code, properties=None):
+        if reason_code != 0:
+            connected.clear()
+            print(f"MQTT desconectado (codigo {reason_code}), reconectando...", flush=True)
+
+    client.on_connect = on_connect
+    client.on_disconnect = on_disconnect
+    client.connect(broker_host, broker_port, 60)
+    client.loop_start()
+    if not connected.wait(timeout=15):
+        raise ConnectionError(f"No se pudo conectar a MQTT en {broker_host}:{broker_port}")
+    return client
 
 
 def configure_console_utf8():
@@ -161,14 +224,13 @@ def update_location_state(loc):
 
 def main():
     configure_console_utf8()
+    stop_previous_simulator()
+    write_simulator_pid()
     mqtt = load_mqtt_client_module()
 
-    # Conectar a MQTT
-    client = mqtt.Client(callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
-    
+    client = setup_mqtt_client(mqtt)
+
     try:
-        client.connect("localhost", 1883, 60)
-        print("Conectado a MQTT broker", flush=True)
         print("Generando datos para 4 ubicaciones (Ctrl+C para parar)", flush=True)
         
         locations = [
@@ -415,7 +477,9 @@ def main():
                 
                 for topic, data in topics_data:
                     payload = json.dumps(data)
-                    client.publish(topic, payload)
+                    result = client.publish(topic, payload, qos=1)
+                    if result.rc != 0:
+                        print(f"MQTT publish fallido en {topic} (rc={result.rc})", flush=True)
             
             # Actualizar tiempo para próxima iteración
             last_update_time = time.time()
@@ -429,8 +493,9 @@ def main():
     except Exception as e:
         print(f"❌ Error: {e}")
     finally:
+        client.loop_stop()
         client.disconnect()
-        print("👋 Desconectado")
+        print("Desconectado", flush=True)
 
 if __name__ == "__main__":
     main()

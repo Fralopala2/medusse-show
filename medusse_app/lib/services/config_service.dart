@@ -5,8 +5,8 @@ class ConfigService {
   static const String _wsUrlKey = 'websocket_url';
 
   // URLs por defecto (10.0.2.2 para emulador Android, localhost para otros)
-  static const String _defaultApiUrl = 'http://10.0.2.2:3001';
-  static const String _defaultWsUrl = 'ws://10.0.2.2:3002';
+  static const String _defaultApiUrl = 'http://10.0.2.2:4001';
+  static const String _defaultWsUrl = 'ws://10.0.2.2:4002';
 
   static ConfigService? _instance;
   SharedPreferences? _prefs;
@@ -53,16 +53,16 @@ class ConfigService {
   // Configuraciones predefinidas comunes
   static const Map<String, Map<String, String>> presetConfigs = {
     'Emulador Android': {
-      'api': 'http://10.0.2.2:3001',
-      'ws': 'ws://10.0.2.2:3002',
+      'api': 'http://10.0.2.2:4001',
+      'ws': 'ws://10.0.2.2:4002',
     },
     'Local (Windows/Chrome)': {
-      'api': 'http://localhost:3001',
-      'ws': 'ws://localhost:3002',
+      'api': 'http://localhost:4001',
+      'ws': 'ws://localhost:4002',
     },
     'Red Local (192.168.1.140)': {
-      'api': 'http://192.168.1.140:3001',
-      'ws': 'ws://192.168.1.140:3002',
+      'api': 'http://192.168.1.140:4001',
+      'ws': 'ws://192.168.1.140:4002',
     },
   };
 

@@ -511,7 +511,7 @@ python arduino/medusse_simulator.py
 ```
 
 **Verificacion:**
-- Acceder a Grafana: http://localhost:3000 (admin / medusse2025)
+- Acceder a Grafana: http://localhost:3600 (admin / medusse2025)
 - Verificar datos en dashboard
 - Probar alertas con umbrales de prueba
 
@@ -819,11 +819,11 @@ python arduino/medusse_simulator.py
 docker logs medusse_telegraf -f
 
 # 5. Acceder a Grafana
-# Navegador: http://localhost:3000
+# Navegador: http://localhost:3600
 # Usuario: admin / medusse2025
 
 # 6. Acceder a API
-# Navegador: http://localhost:3001/api/summary
+# Navegador: http://localhost:4001/api/summary
 
 # 7. Detener sistema
 docker compose -f docker/docker-compose.yml down

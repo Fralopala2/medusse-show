@@ -32,7 +32,7 @@
 ### Dashboard en Tiempo Real
 
 **Boton Primario: "Acceder a Grafana"**
-- **URL:** `http://localhost:3000`
+- **URL:** `http://localhost:3600`
 - **Tipo:** Enlace externo (nueva pestaña)
 - **Destino:** Dashboard Grafana local
 - **Credenciales:** admin / medusse2025
@@ -80,7 +80,7 @@
 - **Destino:** Documentacion completa de la API en GitHub
 
 **Boton Secundario: "Probar Endpoints"**
-- **URL:** `http://localhost:3001/api/summary`
+- **URL:** `http://localhost:4001/api/summary`
 - **Tipo:** Enlace externo (nueva pestaña)
 - **Destino:** Endpoint de resumen de la API local
 
@@ -141,8 +141,8 @@
 2. `#precios` - Seccion de precios
 
 ### URLs Locales (Servicios)
-1. `http://localhost:3000` - Grafana Dashboard
-2. `http://localhost:3001/api/summary` - API Summary Endpoint
+1. `http://localhost:3600` - Grafana Dashboard
+2. `http://localhost:4001/api/summary` - API Summary Endpoint
 
 ### URLs GitHub (Documentacion)
 1. `https://github.com/Fralopala2/medusse-show/blob/clase/README.md` - README principal
@@ -175,8 +175,8 @@
 **Comandos para verificar:**
 ```bash
 # Verificar servicios locales
-curl http://localhost:3000  # Grafana
-curl http://localhost:3001/api/summary  # API
+curl http://localhost:3600  # Grafana
+curl http://localhost:4001/api/summary  # API
 
 # Verificar archivos en repositorio
 ls README.md

@@ -7,7 +7,7 @@ const db = require('./db');
 const authRoutes = require('./auth-routes');
 
 const app = express();
-const PORT = parseInt(process.env.PORT, 10) || 3001;
+const PORT = parseInt(process.env.PORT, 10) || 4001;
 
 // Configuración de InfluxDB
 const INFLUX_CONFIG = {

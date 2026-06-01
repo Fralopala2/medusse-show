@@ -93,7 +93,7 @@ if not exist logs mkdir logs
 wscript //nologo "%~dp0scripts\start-simulator.vbs"
 
 echo.
-echo ? Dashboard disponible en: http://localhost:3000
+echo ? Dashboard disponible en: http://localhost:3600
 echo    Usuario: admin / medusse2025
 echo.
 pause
@@ -129,7 +129,7 @@ wscript //nologo "%~dp0scripts\start-api.vbs"
 cd ..
 
 echo.
-echo ? API disponible en: http://localhost:3001
+echo ? API disponible en: http://localhost:4001
 echo.
 pause
 goto menu
@@ -155,7 +155,7 @@ wscript //nologo "%~dp0scripts\start-web.vbs"
 cd ..
 
 echo.
-echo ? Web disponible en: http://localhost:3003
+echo ? Web disponible en: http://localhost:4003
 echo.
 pause
 goto menu
@@ -234,7 +234,7 @@ echo   TEST API REST
 echo ========================================
 echo.
 
-curl -s http://localhost:3001/health >nul 2>&1
+curl -s http://localhost:4001/health >nul 2>&1
 if %errorlevel% neq 0 (
     echo ? API no esta corriendo
     echo.
@@ -264,7 +264,7 @@ echo   TEST AUTENTICACION
 echo ========================================
 echo.
 
-curl -s http://localhost:3001/health >nul 2>&1
+curl -s http://localhost:4001/health >nul 2>&1
 if %errorlevel% neq 0 (
     echo ? API no esta corriendo
     pause
@@ -314,14 +314,14 @@ if %errorlevel% neq 0 (
     timeout /t 10 /nobreak >nul
 )
 
-curl -s http://localhost:3001/health >nul 2>&1
+curl -s http://localhost:4001/health >nul 2>&1
 if %errorlevel% neq 0 (
     echo ?? Iniciando API...
     wscript //nologo "%~dp0scripts\start-api.vbs"
     timeout /t 5 /nobreak >nul
 )
 
-curl -s http://localhost:3003 >nul 2>&1
+curl -s http://localhost:4003 >nul 2>&1
 if %errorlevel% neq 0 (
     echo ?? Iniciando Web...
     cd web
@@ -339,11 +339,11 @@ echo    ? paco / medusse2025 (Administrador)
 echo    ? profesor / medusse2025 (Usuario)
 echo    ? alumno / medusse2025 (Viewer)
 echo.
-echo ?? Login: http://localhost:3003/login
+echo ?? Login: http://localhost:4003/login
 echo.
 
 set /p abrir="?Abrir navegador? (S/N): "
-if /i "%abrir%"=="S" start "" "http://localhost:3003/login"
+if /i "%abrir%"=="S" start "" "http://localhost:4003/login"
 
 pause
 goto menu

@@ -5,10 +5,10 @@ import Link from "next/link";
 import { Footer } from "@/components/layout/Footer";
 
 function ClientGrafanaLink({ className }: { className?: string }) {
-  const [url, setUrl] = useState("http://localhost:3000");
+  const [url, setUrl] = useState("http://localhost:3600");
   useEffect(() => {
     try {
-      setUrl(`http://${window.location.hostname}:3000`);
+      setUrl(`http://${window.location.hostname}:3600`);
     } catch (e) {
       // leave default
     }
@@ -144,7 +144,7 @@ export default function MapaSitioPage() {
               API y Servicios
             </h2>
             <div className="grid md:grid-cols-2 gap-4">
-              <a href="http://localhost:3001/health" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 rounded-lg hover:bg-indigo-50 hover:shadow transition-all">
+              <a href="http://localhost:4001/health" target="_blank" rel="noopener noreferrer" className="block p-4 bg-gray-50 rounded-lg hover:bg-indigo-50 hover:shadow transition-all">
                 <h3 className="font-semibold text-gray-900 mb-1 flex items-center">
                   Estado de la API
                   <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">

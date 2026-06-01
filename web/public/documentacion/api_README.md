@@ -20,7 +20,7 @@ npm install
 Editar `.env` si es necesario (ya configurado para el proyecto Medusse):
 
 ```env
-PORT=3001
+PORT=4001
 INFLUXDB_URL=http://localhost:8086
 INFLUXDB_TOKEN=medusse-admin-token-2025
 INFLUXDB_ORG=iescelia
@@ -28,7 +28,7 @@ INFLUXDB_BUCKET=sensors
 
 # MySQL Configuration
 MYSQL_HOST=localhost
-MYSQL_PORT=3307
+MYSQL_PORT=13306
 MYSQL_DATABASE=medusse_db
 MYSQL_USER=medusse_user
 MYSQL_PASSWORD=medusse2025
@@ -37,7 +37,7 @@ MYSQL_PASSWORD=medusse2025
 SESSION_DURATION_HOURS=24
 ```
 
-**Nota importante:** MySQL usa el puerto **3307** (no 3306) porque está mapeado así en docker-compose.yml para evitar conflictos con instalaciones locales de MySQL.
+**Nota importante:** MySQL en el host usa el puerto **13306**. Ver [PUERTOS.md](./PUERTOS.md).
 
 ### 3. Iniciar la API
 
@@ -64,7 +64,7 @@ Respuesta:
   "services": {
     "influxdb": "http://localhost:8086",
     "mqtt": "localhost:1883",
-    "websocket": "ws://localhost:3002"
+    "websocket": "ws://localhost:4002"
   }
 }
 ```
@@ -194,7 +194,7 @@ Respuesta:
 
 ## 🔌 WebSocket (Tiempo Real)
 
-Conectar a: `ws://localhost:3002`
+Conectar a: `ws://localhost:4002`
 
 ### Mensajes recibidos:
 
@@ -213,22 +213,22 @@ Conectar a: `ws://localhost:3002`
 
 ```bash
 # Health check
-curl http://localhost:3001/health
+curl http://localhost:4001/health
 
 # Ubicaciones
-curl http://localhost:3001/api/locations
+curl http://localhost:4001/api/locations
 
 # Últimos datos del aula20
-curl http://localhost:3001/api/latest/aula20
+curl http://localhost:4001/api/latest/aula20
 
 # Datos históricos de temperatura (últimas 6 horas)
-curl "http://localhost:3001/api/data/aula20/temperature?hours=6&interval=15m"
+curl "http://localhost:4001/api/data/aula20/temperature?hours=6&interval=15m"
 ```
 
 ### Probar WebSocket
 
 ```javascript
-const ws = new WebSocket("ws://localhost:3002");
+const ws = new WebSocket("ws://localhost:4002");
 ws.onmessage = (event) => {
   console.log("Datos en tiempo real:", JSON.parse(event.data));
 };
@@ -249,12 +249,12 @@ La API está optimizada para Flutter con:
 ```dart
 // HTTP para datos históricos
 final response = await http.get(
-  Uri.parse('http://localhost:3001/api/latest/aula20')
+  Uri.parse('http://localhost:4001/api/latest/aula20')
 );
 
 // WebSocket para tiempo real
 final channel = WebSocketChannel.connect(
-  Uri.parse('ws://localhost:3002')
+  Uri.parse('ws://localhost:4002')
 );
 ```
 

@@ -4,8 +4,8 @@ param(
 )
 
 $pending = @(
-    "http://localhost:3001/health",
-    "http://localhost:3003"
+    "http://localhost:4001/health",
+    "http://localhost:4003"
 )
 
 $deadline = (Get-Date).AddSeconds($TimeoutSec)

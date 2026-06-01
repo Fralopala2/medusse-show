@@ -39,20 +39,20 @@ if errorlevel 1 (
 )
 
 echo [2/4] API REST en segundo plano...
-curl -s http://localhost:3001/health >nul 2>&1
+curl -s http://localhost:4001/health >nul 2>&1
 if errorlevel 1 (
     wscript //nologo "%~dp0scripts\start-api.vbs"
     timeout /t 5 /nobreak >nul
 )
 
 echo [3/4] Web Next.js en segundo plano...
-curl -s http://localhost:3003 >nul 2>&1
+curl -s http://localhost:4003 >nul 2>&1
 if errorlevel 1 (
     wscript //nologo "%~dp0scripts\start-web.vbs"
 )
 
 echo [4/4] Simulador en segundo plano...
-wscript //nologo "%~dp0scripts\start-simulator.vbs"
+powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0scripts\restart-simulator.ps1"
 
 echo [WAIT] Esperando servicios web...
 powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0scripts\wait-for-url.ps1"
@@ -60,7 +60,7 @@ if errorlevel 1 (
     echo [WARN] Algunos servicios tardan mas. Abriendo portal igualmente...
 )
 
-start http://localhost:3003/control
+start http://localhost:4003/control
 exit /b 0
 
 :ensure_docker

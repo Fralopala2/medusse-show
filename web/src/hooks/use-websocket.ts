@@ -9,9 +9,9 @@ export function getWsUrl(): string {
   if (process.env.NEXT_PUBLIC_WS_URL) return process.env.NEXT_PUBLIC_WS_URL;
   if (typeof window !== 'undefined') {
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    return `${protocol}//${window.location.hostname}:3002`;
+    return `${protocol}//${window.location.hostname}:4002`;
   }
-  return 'ws://127.0.0.1:3002';
+  return 'ws://127.0.0.1:4002';
 }
 
 export interface WebSocketData {

@@ -177,7 +177,7 @@ export function ApiEndpointExplorer() {
         error:
           err instanceof Error
             ? err.message
-            : "No se pudo conectar con la API. ¿Está en marcha en el puerto 3001?",
+            : "No se pudo conectar con la API. ¿Está en marcha en el puerto 4001?",
       });
     } finally {
       setLoading(false);
