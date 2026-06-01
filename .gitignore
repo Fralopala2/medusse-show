@@ -71,6 +71,7 @@ venv.bak/
 
 # Logs
 *.log
+logs/
 
 # Temporary files
 *.tmp
