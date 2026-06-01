@@ -1,0 +1,5 @@
+#!/bin/sh
+# Evita que Copilot u otros agentes aparezcan como coautores en el historial.
+sed -i.bak '/^Co-authored-by:.*Copilot/d' "$1" 2>/dev/null || \
+  sed -i '' '/^Co-authored-by:.*Copilot/d' "$1" 2>/dev/null
+rm -f "$1.bak"
