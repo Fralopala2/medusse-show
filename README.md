@@ -455,21 +455,32 @@ flutter run -d windows
 
 ### Capturas de Pantalla
 
-- **Pantalla Principal**  
-  <img src="web/public/images/app-home.jpg" alt="Pantalla Principal" width="280">  
-  Vista general con 4 ubicaciones monitoreadas en tiempo real
-
-- **Detalle de Ubicación**  
-  <img src="web/public/images/app-detail.jpg" alt="Detalle de Ubicación" width="280">  
-  18 sensores con valores actuales y alertas inteligentes
-
-- **Visualización de Alarmas**  
-  <img src="web/public/images/app-charts.jpg" alt="Visualización de Alarmas" width="280">  
-  Sistema de alertas con notificaciones en tiempo real
-
-- **Configuración**  
-  <img src="web/public/images/app-settings.jpg" alt="Configuración" width="280">  
-  Ajustes de servidor y conexión con test integrado
+<table>
+  <tr>
+    <td align="center" width="50%" valign="top">
+      <img src="web/public/images/app-home.jpg" alt="Pantalla Principal" width="240"><br>
+      <strong>Pantalla Principal</strong><br>
+      <sub>Vista general con 4 ubicaciones monitoreadas en tiempo real</sub>
+    </td>
+    <td align="center" width="50%" valign="top">
+      <img src="web/public/images/app-detail.jpg" alt="Detalle de Ubicación" width="240"><br>
+      <strong>Detalle de Ubicación</strong><br>
+      <sub>18 sensores con valores actuales y alertas inteligentes</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%" valign="top">
+      <img src="web/public/images/app-charts.jpg" alt="Visualización de Alarmas" width="240"><br>
+      <strong>Visualización de Alarmas</strong><br>
+      <sub>Sistema de alertas con notificaciones en tiempo real</sub>
+    </td>
+    <td align="center" width="50%" valign="top">
+      <img src="web/public/images/app-settings.jpg" alt="Configuración" width="240"><br>
+      <strong>Configuración</strong><br>
+      <sub>Ajustes de servidor y conexión con test integrado</sub>
+    </td>
+  </tr>
+</table>
 
 Ver documentación completa en: [medusse_app/README.md](medusse_app/README.md)
 
