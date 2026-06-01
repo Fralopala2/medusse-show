@@ -376,9 +376,7 @@ docker logs medusse_telegraf
 - **Responsive design:** Adaptable a cualquier pantalla
 - **Filtrado eficiente:** Consultas optimizadas sin impacto en rendimiento
 
-![Dashboard Principal - Panel de Resumen y Gráficos](web/public/images/graf1.png)
-
-![Dashboard Principal - Detalle de Sensores y Métricas](web/public/images/graf2.png)
+![Dashboard Principal - Panel de Resumen y Gráficos](web/public/images/Graf1.png)
 
 
 ## 🔧 Configuración Avanzada
