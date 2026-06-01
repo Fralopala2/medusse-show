@@ -205,13 +205,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
               controller: _wsUrlController,
               decoration: const InputDecoration(
                 labelText: 'URL del WebSocket',
-                hintText: 'ws://192.168.1.100:4002',
+                hintText: 'ws://192.168.1.148:4002',
+                helperText:
+                    'Puerto 4002 (no 4001). Si dejas http:// de la API, se corrige al guardar.',
                 prefixIcon: Icon(Icons.settings_ethernet),
                 border: OutlineInputBorder(),
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Por favor ingresa la URL del WebSocket';
+                  return null; // Se deriva de la URL de la API al guardar
+                }
+                if (value.startsWith('http://') || value.startsWith('https://')) {
+                  return 'No uses la URL de la API; usa ws://…:4002';
                 }
                 if (!ConfigService.isValidUrl(value)) {
                   return 'URL inválida (debe empezar con ws:// o wss://)';
@@ -272,10 +277,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
 
     try {
-      await _configService.setServerConfig(
-        _apiUrlController.text.trim(),
-        _wsUrlController.text.trim(),
-      );
+      final api = _apiUrlController.text.trim();
+      var ws = _wsUrlController.text.trim();
+      if (ws.isEmpty || ws.startsWith('http')) {
+        ws = ConfigService.deriveWebSocketUrl(api);
+        _wsUrlController.text = ws;
+      }
+
+      await _configService.setServerConfig(api, ws);
 
       // Reinicializar ApiService con la nueva configuración
       ApiService().updateConfiguration();
